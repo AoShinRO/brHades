@@ -483,9 +483,9 @@ AC_LANG([C++])
 
 CFLAGS="$CFLAGS -pipe -ffast-math -Wall"
 CPPFLAGS="$CPPFLAGS -I../common"
-CXXFLAGS="$CXXFLAGS -std=c++17"
-#CXXFLAGS="$CXXFLAGS -std=gnu++17"
-CXXFLAG_CLEARS="-std=c++17"
+CXXFLAGS="$CXXFLAGS -std=c++20"
+#CXXFLAGS="$CXXFLAGS -std=gnu++20"
+CXXFLAG_CLEARS="-std=c++20"
 
 AC_C_BIGENDIAN(
 	[AC_MSG_ERROR([[bigendian is not supported... stopping]])],
@@ -1355,7 +1355,7 @@ else
 	AC_MSG_RESULT([no])
 fi
 
-CXXFLAG_CLEARS="-std=c++17 $CPPFLAGS"
+CXXFLAG_CLEARS="-std=c++20 $CPPFLAGS"
 CFLAGS="$OPT_LTO $CFLAGS" 
 CFLAGS_AR="$OPT_LTO_AR $CFLAGS"
 AC_SUBST([CFLAGS_AR])

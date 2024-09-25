@@ -30,12 +30,12 @@
 #include "strlib.hpp"
 
 #ifndef DEPRECATED_COMPILER_SUPPORT
-	#if defined( _MSC_VER ) && _MSC_VER < 1914
-		#error "Visual Studio versions older than Visual Studio 2017 are not officially supported anymore"
-	#elif defined( __clang__ ) && __clang_major__ < 6
-		#error "clang versions older than clang 6.0 are not officially supported anymore"
-	#elif !defined( __clang__ ) && defined( __GNUC__ ) && __GNUC__ < 6
-		#error "GCC versions older than GCC 6 are not officially supported anymore"
+	#if defined( _MSC_VER ) && _MSC_VER < 1929  // Visual Studio 2019 versão 16.10 ou superior
+		#error "Visual Studio versions older than Visual Studio 2019 (v16.10) are not officially supported anymore for C++20"
+	#elif defined( __clang__ ) && __clang_major__ < 10  // Clang 10.0 ou superior para C++20
+		#error "clang versions older than clang 10.0 are not officially supported anymore for C++20"
+	#elif !defined( __clang__ ) && defined( __GNUC__ ) && __GNUC__ < 10  // GCC 10.0 ou superior para C++20
+		#error "GCC versions older than GCC 10 are not officially supported anymore for C++20"
 	#endif
 #endif
 
