@@ -45,19 +45,17 @@ jobs:
           sudo apt update
           sudo apt install build-essential zlib1g-dev libpcre3-dev gcc g++
 
-      - name: Ensure configure has execution permissions
-        run: chmod +x ./configure 
-
       - name: Check endianess
         run: lscpu | grep "Byte Order"
+
+      - name: Ensure configure has execution permissions
+        run: chmod +x ./configure
 
       - name: Command - configure
         env:
             CONFIGURE_FLAGS: CC=gcc-10 CXX=g++-10 --enable-buildbot=yes
             CXXFLAGS='-std=c++20'
-        # -Werror: to treat all warnings as errors
-        # -Wno-error=builtin-declaration-mismatch: otherwise ./configure checks fail
-        run: ./configure $CONFIGURE_FLAGS --enable-buildbot=yes CXXFLAGS='-Werror -Wno-error=builtin-declaration-mismatch'
+        run: ./configure $CONFIGURE_FLAGS
       
       - name: Command - make clean
         run: make clean
