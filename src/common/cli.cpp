@@ -18,7 +18,7 @@
 #include "showmsg.hpp"
 #include "timer.hpp"
 
-using namespace rathena::server_core;
+using namespace brhades::server_core;
 
 //map confs
 const char* MAP_CONF_NAME;

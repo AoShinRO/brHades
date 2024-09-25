@@ -58,7 +58,7 @@
 #include <map/skill.hpp>
 #include <map/storage.hpp>
 
-using namespace rathena;
+using namespace brhades;
 
 /// Uncomment this line to enable the ability for the conversion tools to automatically convert
 /// all files with no user interaction, whether it be from CSV to YAML or YAML to SQL.

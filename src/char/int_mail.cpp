@@ -18,7 +18,7 @@
 #include "char_mapif.hpp"
 #include "inter.hpp"
 
-using namespace rathena;
+using namespace brhades;
 
 bool mail_loadmessage(int mail_id, struct mail_message* msg);
 void mapif_Mail_return( int fd, uint32 char_id, int mail_id, uint32 account_id_receiver = 0, uint32 account_id_sender = 0 );

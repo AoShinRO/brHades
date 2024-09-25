@@ -59,7 +59,7 @@
 #include "unit.hpp"
 #include "vending.hpp"
 
-using namespace rathena;
+using namespace brhades;
 
 static inline uint32 client_tick( t_tick tick ){
 	return (uint32)tick;

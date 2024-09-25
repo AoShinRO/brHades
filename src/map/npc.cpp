@@ -35,7 +35,7 @@
 #include "pet.hpp"
 #include "script.hpp" // script_config
 
-using namespace rathena;
+using namespace brhades;
 
 struct npc_data* fake_nd;
 

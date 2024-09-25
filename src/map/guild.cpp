@@ -32,7 +32,7 @@
 #include "storage.hpp"
 #include "trade.hpp"
 
-using namespace rathena;
+using namespace brhades;
 
 std::unordered_map<int, std::shared_ptr<MapGuild>> guild_db;
 CastleDatabase castle_db;

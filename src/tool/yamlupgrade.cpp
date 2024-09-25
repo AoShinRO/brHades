@@ -3,7 +3,7 @@
 
 #include "yamlupgrade.hpp"
 
-using namespace rathena::tool_yamlupgrade;
+using namespace brhades::tool_yamlupgrade;
 
 static bool upgrade_achievement_db(std::string file, const uint32 source_version);
 static bool upgrade_item_db(std::string file, const uint32 source_version);

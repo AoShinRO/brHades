@@ -32,7 +32,7 @@ extern int parse_console(const char* buf);
 const char *get_svn_revision(void);
 const char *get_git_hash(void);
 
-namespace rathena{
+namespace brhades{
 	namespace server_core{
 		enum class e_core_status{
 			NOT_STARTED,
@@ -92,7 +92,7 @@ namespace rathena{
 	}
 }
 
-extern rathena::server_core::Core* global_core;
+extern brhades::server_core::Core* global_core;
 
 template <typename T> int main_core( int argc, char *argv[] ){
 	T server = {};

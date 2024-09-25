@@ -135,7 +135,7 @@ public:
 			return nullptr;
 		}
 
-		return rathena::util::umap_random( this->data );
+		return brhades::util::umap_random( this->data );
 	}
 
 	virtual void erase(keytype key) {

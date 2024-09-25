@@ -53,8 +53,8 @@
 #include "storage.hpp"
 #include "trade.hpp"
 
-using namespace rathena;
-using namespace rathena::server_map;
+using namespace brhades;
+using namespace brhades::server_map;
 
 std::string default_codepage = "";
 

@@ -27,7 +27,7 @@
 #include "pc.hpp"
 #include "trade.hpp"
 
-using namespace rathena;
+using namespace brhades;
 
 MercenaryDatabase mercenary_db;
 
