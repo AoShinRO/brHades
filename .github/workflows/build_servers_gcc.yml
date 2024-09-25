@@ -54,7 +54,7 @@ jobs:
       - name: Command - configure
         env:
             CONFIGURE_FLAGS: CC=gcc-10 CXX=g++-10 --enable-buildbot=yes
-            CXXFLAGS='-std=c++20'
+            CXXFLAGS= -std=c++20
         run: ./configure $CONFIGURE_FLAGS
       
       - name: Command - make clean
