@@ -39,10 +39,10 @@ jobs:
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v2
 
-      - name: Build solution in Debug
+      - name: Build solution in Debug (PRE-Renewal)
         if: ${{ matrix.mode == 'PRE' }}
-        run: msbuild rAthena.sln -t:rebuild -property:Configuration=Debug /p:DefineConstants="BUILDBOT%3BPRERE" /warnaserror
+        run: msbuild rAthena.sln -t:rebuild -property:Configuration=Debug /p:DefineConstants="BUILDBOT%3BPRERE" /p:CppLanguageStandard="stdcpp20" /warnaserror
 
-      - name: Build solution in Debug
+      - name: Build solution in Debug (Renewal)
         if: ${{ matrix.mode == 'RE' }}
-        run: msbuild rAthena.sln -t:rebuild -property:Configuration=Debug /p:DefineConstants="BUILDBOT" /warnaserror
+        run: msbuild rAthena.sln -t:rebuild -property:Configuration=Debug /p:DefineConstants="BUILDBOT" /p:CppLanguageStandard="stdcpp20" /warnaserror
