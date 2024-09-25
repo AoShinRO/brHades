@@ -38,7 +38,7 @@
 #include "storage.hpp"
 #include "trade.hpp"
 
-using namespace rathena;
+using namespace brhades;
 
 #ifndef MAX_SHADOW_SCAR 
 	#define MAX_SHADOW_SCAR 100 /// Max Shadow Scars
@@ -356,7 +356,7 @@ int unit_walktoxy_ontouch(struct block_list *bl, va_list ap)
 			struct npc_data *nd = map_id2nd(sd->areanpc[i]);
 
 			if (!nd || nd->subtype != NPCTYPE_SCRIPT || !(nd->bl.m == bl->m && bl->x >= nd->bl.x - nd->u.scr.xs && bl->x <= nd->bl.x + nd->u.scr.xs && bl->y >= nd->bl.y - nd->u.scr.ys && bl->y <= nd->bl.y + nd->u.scr.ys))
-				rathena::util::erase_at(sd->areanpc, i);
+				brhades::util::erase_at(sd->areanpc, i);
 		}
 		npc_touchnext_areanpc(sd, false);
 

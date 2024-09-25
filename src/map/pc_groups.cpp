@@ -11,7 +11,7 @@
 #include "atcommand.hpp" // AtCommandType
 #include "pc.hpp" // map_session_data
 
-using namespace rathena;
+using namespace brhades;
 
 const std::string PlayerGroupDatabase::getDefaultLocation() {
 	return std::string( conf_path ) + "/groups.yml";

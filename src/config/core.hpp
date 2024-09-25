@@ -11,7 +11,7 @@
 
 #include <custom/defines_pre.hpp>
 
-/// Max number of items on @autolootid list
+ /// Max number of items on @autolootid list
 #define AUTOLOOTITEM_SIZE 10
 
 /// The maximum number of atcommand and @warp suggestions
@@ -56,23 +56,23 @@
 #define VIP_SCRIPT 0
 
 #ifdef VIP_ENABLE
-	#ifndef MIN_STORAGE
-		#define MIN_STORAGE 300 // Default number of storage slots.
-	#endif
-	#ifndef MAX_CHAR_VIP
-		#define MAX_CHAR_VIP 6 // This must be less than MAX_CHARS
-	#endif
+#ifndef MIN_STORAGE
+#define MIN_STORAGE 300 // Default number of storage slots.
+#endif
+#ifndef MAX_CHAR_VIP
+#define MAX_CHAR_VIP 6 // This must be less than MAX_CHARS
+#endif
 #else
-	#ifndef MIN_STORAGE
-		#define MIN_STORAGE MAX_STORAGE // If the VIP system is disabled the min = max.
-	#endif
-	#ifndef MAX_CHAR_VIP
-		#define MAX_CHAR_VIP 0
-	#endif
+#ifndef MIN_STORAGE
+#define MIN_STORAGE MAX_STORAGE // If the VIP system is disabled the min = max.
+#endif
+#ifndef MAX_CHAR_VIP
+#define MAX_CHAR_VIP 0
+#endif
 #endif
 
 #ifndef MAX_CHAR_BILLING
-	#define MAX_CHAR_BILLING 0 // This must be less than MAX_CHARS
+#define MAX_CHAR_BILLING 0 // This must be less than MAX_CHARS
 #endif
 
 /// Comment to disable warnings for deprecated script commands
@@ -101,7 +101,7 @@
 //#define ENABLE_OLD_CASHSHOP_PREVIEW_PATCH
 
 #if defined(_DEBUG) || defined(DEBUG)
-	#define DETAILED_LOADING_OUTPUT
+#define DETAILED_LOADING_OUTPUT
 #endif
 
 /// Uncomment to forcibly disable the detailed loading output.
@@ -116,9 +116,9 @@
 #include "./secure.hpp"
 #include "./classes/general.hpp"
 
-/**
- * Constants come last; so they process anything that could've been modified in early includes
- **/
+ /**
+  * Constants come last; so they process anything that could've been modified in early includes
+  **/
 #include "./const.hpp"
 
 #include <custom/defines_post.hpp>

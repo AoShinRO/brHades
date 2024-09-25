@@ -10,7 +10,7 @@
 #include "showmsg.hpp"
 #include "utilities.hpp"
 
-using namespace rathena;
+using namespace brhades;
 
 bool YamlDatabase::nodeExists( const ryml::NodeRef& node, const std::string& name ){
 	return (node.num_children() > 0 && node.has_child(c4::to_csubstr(name)));

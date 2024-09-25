@@ -29,7 +29,7 @@ class cScopeTimer {
 
 int levenshtein( const std::string &s1, const std::string &s2 );
 
-namespace rathena {
+namespace brhades {
 	namespace util {
 		template <typename K, typename V> bool map_exists( std::map<K,V>& map, K key ){
 			return map.find( key ) != map.end();
@@ -276,7 +276,7 @@ namespace rathena {
 		template <typename T> T safe_addition_cap( T a, T b, T cap ){
 			T result;
 
-			if( rathena::util::safe_addition( a, b, result ) ){
+			if( brhades::util::safe_addition( a, b, result ) ){
 				return cap;
 			}
 			return std::min(result, cap);

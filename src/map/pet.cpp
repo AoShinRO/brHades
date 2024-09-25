@@ -28,7 +28,7 @@
 #include "npc.hpp"
 #include "pc.hpp"
 
-using namespace rathena;
+using namespace brhades;
 
 std::unordered_map<std::string, std::shared_ptr<s_pet_autobonus_wrapper>> pet_autobonuses;
 const t_tick MIN_PETTHINKTIME = 100;

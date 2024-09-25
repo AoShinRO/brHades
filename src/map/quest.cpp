@@ -26,7 +26,7 @@
 #include "party.hpp"
 #include "pc.hpp"
 
-using namespace rathena;
+using namespace brhades;
 
 static int split_exact_quest_time(char* modif_p, int* week, int* day, int* hour, int* minute, int *second);
 

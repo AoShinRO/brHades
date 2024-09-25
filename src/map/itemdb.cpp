@@ -27,7 +27,7 @@
 #include "pc.hpp"
 #include "status.hpp"
 
-using namespace rathena;
+using namespace brhades;
 
 
 ComboDatabase itemdb_combo;

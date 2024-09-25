@@ -23,7 +23,7 @@
 #include "inter.hpp"
 #include "int_mail.hpp"
 
-using namespace rathena;
+using namespace brhades;
 
 // int auction_id -> struct auction_data*
 static std::unordered_map<uint32, std::shared_ptr<struct auction_data>> auction_db;

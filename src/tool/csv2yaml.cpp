@@ -5,7 +5,7 @@
 
 #include <cmath>
 
-using namespace rathena::tool_csv2yaml;
+using namespace brhades::tool_csv2yaml;
 
 // Skill database data to memory
 static void skill_txt_data(const std::string& modePath, const std::string& fixedPath) {

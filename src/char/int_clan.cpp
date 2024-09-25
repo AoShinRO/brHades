@@ -23,7 +23,7 @@
 // int clan_id -> struct clan*
 static std::unordered_map<int32, std::shared_ptr<struct clan>> clan_db;
 
-using namespace rathena;
+using namespace brhades;
 
 int inter_clan_removemember_tosql(uint32 account_id, uint32 char_id){
 	if( SQL_ERROR == Sql_Query( sql_handle, "UPDATE `%s` SET `clan_id` = '0' WHERE `char_id` = '%d'", schema_config.char_db, char_id ) ){

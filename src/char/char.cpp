@@ -41,8 +41,8 @@
 #include "int_storage.hpp"
 #include "packets.hpp"
 
-using namespace rathena;
-using namespace rathena::server_character;
+using namespace brhades;
+using namespace brhades::server_character;
 
 //definition of exported var declared in header
 int login_fd=-1; //login file descriptor

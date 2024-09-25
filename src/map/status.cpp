@@ -36,7 +36,7 @@
 #include "pet.hpp"
 #include "script.hpp"
 
-using namespace rathena;
+using namespace brhades;
 
 // Regen related flags.
 enum e_regen {

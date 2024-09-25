@@ -55,7 +55,7 @@
 #include "trade.hpp"
 #include "vending.hpp"
 
-using namespace rathena;
+using namespace brhades;
 
 #define ATCOMMAND_LENGTH 50
 #define ACMD_FUNC(x) static int atcommand_ ## x (const int fd, map_session_data* sd, const char* command, const char* message)

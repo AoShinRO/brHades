@@ -55,10 +55,10 @@
 #include <map/skill.hpp>
 #include <map/storage.hpp>
 
-using namespace rathena;
-using namespace rathena::server_core;
+using namespace brhades;
+using namespace brhades::server_core;
 
-namespace rathena{
+namespace brhades{
 	namespace tool_yaml2sql{
 		class Yaml2SqlTool : public Core{
 			protected:
@@ -72,7 +72,7 @@ namespace rathena{
 	}
 }
 
-using namespace rathena::tool_yaml2sql;
+using namespace brhades::tool_yaml2sql;
 
 #ifndef WIN32
 int getch( void ){

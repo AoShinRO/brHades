@@ -21,7 +21,7 @@
 #include "char_mapif.hpp"
 #include "inter.hpp"
 
-using namespace rathena;
+using namespace brhades;
 
 struct party_data {
 	struct party party;

@@ -8,10 +8,10 @@
 
 #include "yaml.hpp"
 
-using rathena::server_core::Core;
-using rathena::server_core::e_core_type;
+using brhades::server_core::Core;
+using brhades::server_core::e_core_type;
 
-namespace rathena{
+namespace brhades{
 	namespace tool_yamlupgrade{
 		class YamlUpgradeTool : public Core{
 			protected:

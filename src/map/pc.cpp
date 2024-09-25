@@ -64,7 +64,7 @@
 #include "unit.hpp" // unit_stop_attack(), unit_stop_walking()
 #include "vending.hpp" // struct s_vending
 
-using namespace rathena;
+using namespace brhades;
 
 JobDatabase job_db;
 

@@ -39,7 +39,7 @@
 	#endif
 #endif
 
-using namespace rathena::server_core;
+using namespace brhades::server_core;
 
 Core* global_core = nullptr;
 

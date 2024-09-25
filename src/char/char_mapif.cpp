@@ -19,7 +19,7 @@
 #include "char_logif.hpp"
 #include "inter.hpp"
 
-using namespace rathena;
+using namespace brhades;
 
 /**
  * Packet send to all map-servers, attach to ourself

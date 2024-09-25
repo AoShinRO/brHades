@@ -46,7 +46,7 @@
 #include "status.hpp"
 #include "unit.hpp"
 
-using namespace rathena;
+using namespace brhades;
 
 #define SKILLUNITTIMER_INTERVAL	100
 #define TIMERSKILL_INTERVAL	150
