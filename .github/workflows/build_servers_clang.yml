@@ -46,10 +46,18 @@ jobs:
       - name: Ensure configure has execution permissions
         run: chmod +x ./configure 
 
+      - name: Check endianess
+        run: lscpu | grep "Byte Order"
+
       - name: Command - configure
         env:
-          CONFIGURE_FLAGS: 'CC=clang-${{ matrix.clang }} CXX=clang++-${{ matrix.clang }} --enable-buildbot=yes'
+          CONFIGURE_FLAGS: CC=clang-10 CXX=clang++-10 --enable-buildbot=yes
+          CXXFLAGS: -std=c++20
         run: ./configure $CONFIGURE_FLAGS
+
+        #env:
+        #  CONFIGURE_FLAGS: 'CC=clang-${{ matrix.clang }} CXX=clang++-${{ matrix.clang }} --enable-buildbot=yes'
+
 
       - name: Show config.log for debugging
         run: cat config.log || true
