@@ -75,9 +75,8 @@ jobs:
 
       - name: Command - configure
         env:
-            CONFIGURE_FLAGS: CC=gcc-10 CXX=g++-10
-            PRERE: ${{ env.PRERE }}
-        run: ./configure $CONFIGURE_FLAGS CXXFLAGS="-std=c++20" enable-prere="$PRERE" enable-buildbot=yes enable-vip=yes
+            CONFIGURE_FLAGS: CC=gcc-10 CXX=g++-10 --enable-prere=${{ matrix.mode }} --enable-buildbot=yes --enable-vip=yes
+        run: ./configure $CONFIGURE_FLAGS CXXFLAGS="-std=c++20"
      
       - name: Show config.log for debugging
         run: cat config.log || true
