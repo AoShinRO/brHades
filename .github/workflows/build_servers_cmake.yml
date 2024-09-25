@@ -42,6 +42,11 @@ jobs:
       - name: Create build directory
         run: mkdir cbuild
 
+      - name: Configure project with CMake (C++20)
+        run: |
+          cd cbuild
+          cmake -G "Unix Makefiles" -DCMAKE_CXX_STANDARD=20 ..
+
       - name: Create Unix Makefiles
         run: |
           cd cbuild

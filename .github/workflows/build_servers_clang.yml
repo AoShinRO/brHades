@@ -21,17 +21,12 @@ on:
 
 jobs:
   build:
-    # Github Actions checks for '[ci skip]', '[skip ci]', '[no ci]', '[skip actions]', or '[actions skip]' but not a hyphenated version.
-    # It's a catch-all incase a Pull Request has been opened and someone is on auto-pilot.
     if: "!contains(github.event.head_commit.message, 'ci-skip')"
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-          # The ubuntu-latest label currently points to ubuntu-22.04.
-          # Available: ubuntu-22.04, ubuntu-20.04
-          os: [ubuntu-20.04]
-          # Version list can be found on https://github.com/marketplace/actions/install-clang
-          clang: ['6.0', '7', '8', '9', '10', '11'] #, '12', '13']
+        os: [ubuntu-20.04]
+        clang: ['6.0', '7', '8', '9', '10', '11']
 
     steps:
       - uses: actions/checkout@v4
@@ -44,7 +39,7 @@ jobs:
 
       - name: Command - configure
         env:
-            CONFIGURE_FLAGS: 'CC=clang-${{ matrix.clang }} CXX=clang++-${{ matrix.clang }} --enable-buildbot=yes'
+          CONFIGURE_FLAGS: 'CC=clang-${{ matrix.clang }} CXX=clang++-${{ matrix.clang }} --enable-buildbot=yes CXXFLAGS="-std=c++20"'
         run: ./configure $CONFIGURE_FLAGS
 
       - name: Command - make clean
@@ -52,3 +47,9 @@ jobs:
 
       - name: Command - make all
         run: make all
+
+      - name: Ensure sql.sh has execution permissions
+        run: chmod +x ./tools/ci/sql.sh
+
+      - name: Run sql.sh
+        run: ./tools/ci/sql.sh
