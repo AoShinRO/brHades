@@ -6,11 +6,10 @@ concurrency:
   cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
 
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - master
+    branches: [ "main" ]
   pull_request:
+    branches: [ "main" ]
     paths:
       # Always trigger all Github Actions if an action or something CI related was changed
       - '.github/workflows/**'
@@ -18,6 +17,8 @@ on:
       # This workflow should run when a file in a source directory has been modified.
       - 'src/**'
       - '3rdparty/**'
+  schedule:
+    - cron: '41 2 * * 3'
 
 jobs:
   analyze:
