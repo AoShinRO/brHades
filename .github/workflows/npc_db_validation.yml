@@ -61,6 +61,12 @@ jobs:
       - name: Start MySQL
         run: sudo systemctl start mysql.service
 
+      - name: Grant execute permissions to sql.sh
+        run: chmod +x ./tools/ci/sql.sh
+
+      - name: Grant execute permissions to configure
+        run: chmod +x ./configure
+
       - name: Setup Database and import table data
         run: ./tools/ci/sql.sh
           
