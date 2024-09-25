@@ -40,6 +40,9 @@ jobs:
       - name: Ensure sql.sh has execution permissions
         run: chmod +x ./tools/ci/sql.sh
 
+      - name: Grant execute permissions to configure
+        run: chmod +x ./configure
+
       - name: Command - configure
         env:
           CONFIGURE_FLAGS: 'CC=clang-${{ matrix.clang }} CXX=clang++-${{ matrix.clang }} --enable-buildbot=yes'
