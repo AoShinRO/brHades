@@ -40,8 +40,8 @@ jobs:
       #- name: Ensure sql.sh has execution permissions
       #  run: chmod +x ./tools/ci/sql.sh
 
-      #- name: Ensure configure has execution permissions
-      #  run: chmod +x ./configure 
+      - name: Ensure configure has execution permissions
+        run: chmod +x ./configure 
 
       - name: Command - configure
         env:
