@@ -14,11 +14,6 @@
 #   ENABLE_* : option to use an internal feature/code or not
 #   HAVE_*   : internal variable indicating if we have and are using something
 #
-# Maintainers: Flavio J. Saraiva (feel free to send complaints or suggestions)
-#   flaviojs @ rAthena forum/irc
-#   flaviojs2005 \A-T/ gmail <D.o,T> com
-#   lightaisme \A-T/ gmail <D.o,T> com
-#
 #####################################################################
 
 
@@ -31,7 +26,7 @@
 # Update to 3.1 for CMAKE_CXX_STANDARD cross support definition
 set( CMAKE_LEGACY_CYGWIN_WIN32 0 )
 cmake_minimum_required( VERSION 3.1 )
-project( rAthena )
+project( brHades )
 if( CYGWIN )
 	unset( WIN32 )
 endif()
@@ -431,7 +426,7 @@ endif()
 #####################################################################
 # package stuff
 #
-set( CPACK_PACKAGE_NAME "rAthena" )
+set( CPACK_PACKAGE_NAME "brHades" )
 set( CPACK_PACKAGE_DESCRIPTION_SUMMARY "MMORPG server package" )
 set( CPACK_PACKAGE_VERSION ${SVNVERSION} )
 set( CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE )
@@ -497,7 +492,7 @@ set( DEVELOPMENT_FILES
 	"${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.txt"
 	"${CMAKE_CURRENT_SOURCE_DIR}/configure"
 	"${CMAKE_CURRENT_SOURCE_DIR}/configure.in"
-	"${CMAKE_CURRENT_SOURCE_DIR}/rAthena.sln"
+	"${CMAKE_CURRENT_SOURCE_DIR}/brHades.sln"
 	)
 set( DEVELOPMENT_DIRECTORIES
 	"3rdparty"

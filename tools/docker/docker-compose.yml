@@ -3,11 +3,11 @@ version: "3.7"
 services:
     db:
         image: "mariadb:bionic"
-        container_name: "rathena_db"
+        container_name: "brhades_db"
         ports:
             - "3306:3306" # allow DB connections from host
         volumes:
-            - "rathenadb:/var/lib/mysql" # save database to local disk
+            - "brhadesdb:/var/lib/mysql" # save database to local disk
             - "../../sql-files/:/docker-entrypoint-initdb.d" # initialize db with ./sql-files
         environment:
             MYSQL_ROOT_PASSWORD: ragnarok
@@ -16,14 +16,14 @@ services:
             MYSQL_PASSWORD: ragnarok
 
     builder:
-        image: "rathena:local"
-        container_name: "rathena-builder"
-        command: "/rathena/tools/docker/builder.sh"
+        image: "brhades:local"
+        container_name: "brhades-builder"
+        command: "/brhades/tools/docker/builder.sh"
         volumes:
-            - "../..:/rathena" # mount git repo directory inside container
-            - "./asset/inter_conf.txt:/rathena/conf/import/inter_conf.txt" # load db connection
-            - "./asset/char_conf.txt:/rathena/conf/import/char_conf.txt"   #localdev login-char relation
-            - "./asset/map_conf.txt:/rathena/conf/import/map_conf.txt"     #localdev char-map relation
+            - "../..:/brhades" # mount git repo directory inside container
+            - "./asset/inter_conf.txt:/brhades/conf/import/inter_conf.txt" # load db connection
+            - "./asset/char_conf.txt:/brhades/conf/import/char_conf.txt"   #localdev login-char relation
+            - "./asset/map_conf.txt:/brhades/conf/import/map_conf.txt"     #localdev char-map relation
         init: true # helps with signal forwarding and process reaping
         tty: true
         stdin_open: true
@@ -34,16 +34,16 @@ services:
             BUILDER_CONFIGURE: "--enable-packetver=20211103"
     
     login:
-        image: "rathena:local"
-        container_name: "rathena-login"
-        command: sh -c "/bin/wait-for db:3306 -- /rathena/login-server"
+        image: "brhades:local"
+        container_name: "brhades-login"
+        command: sh -c "/bin/wait-for db:3306 -- /brhades/login-server"
         ports:
             - "6900:6900" # login server
         volumes:
-            - "../..:/rathena" # mount git repo directory inside container
-            - "./asset/inter_conf.txt:/rathena/conf/import/inter_conf.txt" # load db connection
-            - "./asset/char_conf.txt:/rathena/conf/import/char_conf.txt"   #localdev login-char relation
-            - "./asset/map_conf.txt:/rathena/conf/import/map_conf.txt"     #localdev char-map relation
+            - "../..:/brhades" # mount git repo directory inside container
+            - "./asset/inter_conf.txt:/brhades/conf/import/inter_conf.txt" # load db connection
+            - "./asset/char_conf.txt:/brhades/conf/import/char_conf.txt"   #localdev login-char relation
+            - "./asset/map_conf.txt:/brhades/conf/import/map_conf.txt"     #localdev char-map relation
         init: true # helps with signal forwarding and process reaping
         tty: true
         stdin_open: true
@@ -53,16 +53,16 @@ services:
         depends_on:
             - db
     char:
-        image: "rathena:local"
-        container_name: "rathena-char"
-        command: sh -c "/bin/wait-for db:3306 -- /rathena/char-server"
+        image: "brhades:local"
+        container_name: "brhades-char"
+        command: sh -c "/bin/wait-for db:3306 -- /brhades/char-server"
         ports:
             - "6121:6121" # char server
         volumes:
-            - "../..:/rathena" # mount git repo directory inside container
-            - "./asset/inter_conf.txt:/rathena/conf/import/inter_conf.txt" # load db connection
-            - "./asset/char_conf.txt:/rathena/conf/import/char_conf.txt"   #localdev login-char relation
-            - "./asset/map_conf.txt:/rathena/conf/import/map_conf.txt"     #localdev char-map relation
+            - "../..:/brhades" # mount git repo directory inside container
+            - "./asset/inter_conf.txt:/brhades/conf/import/inter_conf.txt" # load db connection
+            - "./asset/char_conf.txt:/brhades/conf/import/char_conf.txt"   #localdev login-char relation
+            - "./asset/map_conf.txt:/brhades/conf/import/map_conf.txt"     #localdev char-map relation
         init: true # helps with signal forwarding and process reaping
         tty: true
         stdin_open: true
@@ -72,16 +72,16 @@ services:
         depends_on:
             - login
     map:
-        image: "rathena:local"
-        container_name: "rathena-map"
-        command: sh -c "/bin/wait-for db:3306 -- /rathena/map-server"
+        image: "brhades:local"
+        container_name: "brhades-map"
+        command: sh -c "/bin/wait-for db:3306 -- /brhades/map-server"
         ports:
             - "5121:5121" # map server
         volumes:
-            - "../..:/rathena" # mount git repo directory inside container
-            - "./asset/inter_conf.txt:/rathena/conf/import/inter_conf.txt" # load db connection
-            - "./asset/char_conf.txt:/rathena/conf/import/char_conf.txt"   #localdev login-char relation
-            - "./asset/map_conf.txt:/rathena/conf/import/map_conf.txt"     #localdev char-map relation
+            - "../..:/brhades" # mount git repo directory inside container
+            - "./asset/inter_conf.txt:/brhades/conf/import/inter_conf.txt" # load db connection
+            - "./asset/char_conf.txt:/brhades/conf/import/char_conf.txt"   #localdev login-char relation
+            - "./asset/map_conf.txt:/brhades/conf/import/map_conf.txt"     #localdev char-map relation
         init: true # helps with signal forwarding and process reaping
         tty: true
         stdin_open: true
@@ -92,4 +92,4 @@ services:
             - char
 
 volumes:
-    rathenadb:
+    brhadesdb:
