@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT(rAthena)
+AC_INIT(brHades)
 AC_REVISION($Revision$)
 AC_PREREQ([2.59])
 AC_LANG([C++])

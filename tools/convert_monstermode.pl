@@ -1,5 +1,4 @@
 #!/usr/bin/perl
-# rAthena Monster Mode Converter
 # Upgrades monster's mode to the new structure.
 #
 
@@ -87,7 +86,7 @@ sub Main {
 	my($filename, $dir, $suffix) = fileparse($0);
 	chdir $dir; #put ourself like was called in tool folder
 	GetArgs();
-	print "Running rAthena's Monster Mode Converter...\n";
+	print "Running brHades's Monster Mode Converter...\n";
 	print "Files to be converted: '@aFilein' into '@aFileout'.\n";
 	foreach my $sFile (@aFilein){
 		my $sReplace=0; #should we replace file when finished

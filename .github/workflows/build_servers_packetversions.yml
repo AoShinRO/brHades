@@ -51,7 +51,7 @@ jobs:
           echo "PRERE=no" >> $GITHUB_ENV
 
       - name: Update & Install packages
-        # Ubuntu runners already have most of the packages rAthena requires to build.
+        # Ubuntu runners already have most of the packages brHades requires to build.
         # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-Readme.md
         run: |
           sudo apt update
