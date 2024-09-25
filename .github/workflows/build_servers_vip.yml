@@ -74,23 +74,13 @@ jobs:
         run: ./tools/ci/sql.sh
 
       - name: Command - configure
-        if: ${{ matrix.mode == 'PRE' }} 
-        run: |
-          echo "PRERE=yes" >> $GITHUB_ENV
-
-      - name: Checking Mode - PRE
-        if: ${{ matrix.mode == 'PRE' }} 
-        env:
-          CONFIGURE_FLAGS: CC=gcc-10 CXX=g++-10 --enable-buildbot=yes --enable-prere --enable-vip
-
-      - name: Command - configure
         run: |
           if [[ "$PRERE" == "yes" ]]; then
             CONFIGURE_FLAGS="CC=gcc-10 CXX=g++-10 --enable-buildbot=yes --enable-prere --enable-vip"
           else
             CONFIGURE_FLAGS="CC=gcc-10 CXX=g++-10 --enable-buildbot=yes --enable-vip"
           fi
-          ./configure $CONFIGURE_FLAGS CXXFLAGS="-std=c++20"
+            ./configure $CONFIGURE_FLAGS CXXFLAGS="-std=c++20"
 
       - name: Checking Mode - RE
         if: ${{ matrix.mode == 'RE' }} 
