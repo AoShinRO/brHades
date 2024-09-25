@@ -83,6 +83,15 @@ jobs:
         env:
           CONFIGURE_FLAGS: CC=gcc-10 CXX=g++-10 --enable-buildbot=yes --enable-prere --enable-vip
 
+      - name: Command - configure
+        run: |
+          if [[ "$PRERE" == "yes" ]]; then
+            CONFIGURE_FLAGS="CC=gcc-10 CXX=g++-10 --enable-buildbot=yes --enable-prere --enable-vip"
+          else
+            CONFIGURE_FLAGS="CC=gcc-10 CXX=g++-10 --enable-buildbot=yes --enable-vip"
+          fi
+          ./configure $CONFIGURE_FLAGS CXXFLAGS="-std=c++20"
+
       - name: Checking Mode - RE
         if: ${{ matrix.mode == 'RE' }} 
         env:
