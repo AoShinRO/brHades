@@ -31,8 +31,8 @@ jobs:
 
       - name: Fix path issue (move files)
         run: |
-          mkdir /home/runner/work/brHades/brHades
           mv /home/runner/work/brHades/ * /home/runner/work/brHades/brHades/
+          #rm -rf /home/runner/work/brHades/brHades  # Remover o diretório com o conteúdo
 
       - name: Update & Install dependencies
         run: |
