@@ -53,8 +53,8 @@ jobs:
 
       - name: Command - configure
         env:
-            CONFIGURE_FLAGS: CC=clang-10 CXX=clang++-10 --enable-buildbot=yes
-            CXXFLAGS: -std=c++20
+            CONFIGURE_FLAGS: CC=gcc-10 CXX=g++-10 --enable-buildbot=yes
+            CXXFLAGS='-std=c++20'
         # -Werror: to treat all warnings as errors
         # -Wno-error=builtin-declaration-mismatch: otherwise ./configure checks fail
         run: ./configure $CONFIGURE_FLAGS --enable-buildbot=yes CXXFLAGS='-Werror -Wno-error=builtin-declaration-mismatch'
