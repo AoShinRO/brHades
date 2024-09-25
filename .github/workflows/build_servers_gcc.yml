@@ -1,0 +1,66 @@
+name: Build servers with GCC
+# build_servers_gcc.yml
+
+concurrency:
+  group: ${{ github.repository }}-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+  pull_request:
+    paths:
+      # Always trigger all Github Actions if an action or something CI related was changed
+      - '.github/workflows/**'
+      - 'tools/ci/**'
+      # This workflow should run when a file in a source directory has been modified.
+      - 'src/**'
+      - '3rdparty/**'
+
+jobs:
+  build:
+    # Github Actions checks for '[ci skip]', '[skip ci]', '[no ci]', '[skip actions]', or '[actions skip]' but not a hyphenated version.
+    # It's a catch-all incase a Pull Request has been opened and someone is on auto-pilot.
+    if: "!contains(github.event.head_commit.message, 'ci-skip')"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+          # The ubuntu-latest label currently points to ubuntu-22.04.
+          # Available: ubuntu-22.04, ubuntu-20.04
+          os: [ubuntu-latest]
+          # Older versions of GCC are not available via unaltered aptitude repo lists.
+          gcc: ['9', '10', '11', '12']
+          # GCC 13 was removed from 22.04, include it as a separate job
+          include:
+            - os: ubuntu-24.04
+              gcc: 13
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update & Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install build-essential zlib1g-dev libpcre3-dev gcc-10 g++-10
+
+      - name: Check endianess
+        run: lscpu | grep "Byte Order"
+
+      - name: Ensure configure has execution permissions
+        run: chmod +x ./configure
+
+      - name: Command - configure
+        env:
+            CONFIGURE_FLAGS: CC=gcc-10 CXX=g++-10 --enable-buildbot=yes
+        run: ./configure $CONFIGURE_FLAGS CXXFLAGS="-std=c++20"
+
+      - name: Show config.log for debugging
+        run: cat config.log || true
+      
+      - name: Command - make clean
+        run: make clean
+
+      - name: Command - make all
+        run: make all
