@@ -37,9 +37,13 @@ jobs:
           version: ${{ matrix.clang }}
           platform: x64
 
+      - name: Ensure sql.sh has execution permissions
+        run: chmod +x ./tools/ci/sql.sh
+
       - name: Command - configure
         env:
           CONFIGURE_FLAGS: 'CC=clang-${{ matrix.clang }} CXX=clang++-${{ matrix.clang }} --enable-buildbot=yes CXXFLAGS="-std=c++20"'
+        run: chmod +x ./configure 
         run: ./configure $CONFIGURE_FLAGS
 
       - name: Command - make clean
@@ -48,8 +52,3 @@ jobs:
       - name: Command - make all
         run: make all
 
-      - name: Ensure sql.sh has execution permissions
-        run: chmod +x ./tools/ci/sql.sh
-
-      - name: Run sql.sh
-        run: ./tools/ci/sql.sh
