@@ -46,13 +46,9 @@ jobs:
       - name: Ensure configure has execution permissions
         run: chmod +x ./configure 
 
-      - name: Fix path issue (move files)
-        run: chmod -R 777 /home/runner/work/brHades/
-
       - name: Command - configure
         env:
           CONFIGURE_FLAGS: 'CC=clang-${{ matrix.clang }} CXX=clang++-${{ matrix.clang }} --enable-buildbot=yes'
-          CXXFLAGS: '-std=c++20'
         run: ./configure $CONFIGURE_FLAGS
 
       - name: Show config.log for debugging
