@@ -29,11 +29,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fix path issue (move files)
-        run: |
-          rsync -av --ignore-existing /home/runner/work/brHades/ * /home/runner/work/brHades/brHades/
-          #rm -rf /home/runner/work/brHades/brHades  # Remover o diretório com o conteúdo
-
       - name: Update & Install dependencies
         run: |
           sudo apt update
@@ -50,6 +45,9 @@ jobs:
 
       - name: Ensure configure has execution permissions
         run: chmod +x ./configure 
+
+      - name: Fix path issue (move files)
+	chmod -R 777 /home/runner/work/brHades/
 
       - name: Command - configure
         env:
