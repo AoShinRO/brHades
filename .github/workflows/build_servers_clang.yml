@@ -47,7 +47,7 @@ jobs:
         run: chmod +x ./configure 
 
       - name: Fix path issue (move files)
-	chmod -R 777 /home/runner/work/brHades/
+        chmod -R 777 /home/runner/work/brHades/
 
       - name: Command - configure
         env:
