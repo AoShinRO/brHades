@@ -763,8 +763,8 @@ x_libraries=NONE
 # by default will actually change.
 # Use braces instead of parens because sh, perl, etc. also accept them.
 # (The list follows the same order as the GNU Coding Standards.)
-bindir='${exec_prefix}/bin'
-sbindir='${exec_prefix}/sbin'
+bindir='${exec_prefix}'
+sbindir='${exec_prefix}'
 libexecdir='${exec_prefix}/libexec'
 datarootdir='${prefix}/share'
 datadir='${datarootdir}'
