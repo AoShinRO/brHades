@@ -27412,6 +27412,45 @@ BUILDIN_FUNC(permission_add)
 	return SCRIPT_CMD_SUCCESS;
 }
 
+// force_memo("<mapname>",<x>,<y>,<slot>)
+BUILDIN_FUNC(force_memo) {
+	map_session_data *sd;
+
+	if ( !script_rid2sd(sd) ) 
+		return SCRIPT_CMD_FAILURE;
+
+	const char* map_name = script_getstr(st, 2);
+	int x = script_getnum(st, 3);
+	int y = script_getnum(st, 4);
+	int slot = script_getnum(st, 5);
+
+#if PACKETVER_MAIN_NUM >= 20170502 || PACKETVER_RE_NUM >= 20170419 || defined(PACKETVER_ZERO)
+	if(slot < 0 || slot >= PC_MAXMEMOPOINTS(sd))
+		return SCRIPT_CMD_FAILURE;
+#else
+	if(slot < 0 || slot >= MAX_MEMOPOINTS)
+		return SCRIPT_CMD_FAILURE;
+#endif
+
+	int16 map_id = map_mapname2mapid(map_name);
+
+	if(map_id < 0)
+		return SCRIPT_CMD_FAILURE;
+
+	for(int i = 0;i < MAX_MEMOPOINTS; i++)
+	{
+		if(strcmp( "", sd->status.memo_point[i].map ) == 0 || i == slot)
+		{
+			safestrncpy( sd->status.memo_point[i].map, map_mapid2mapname(map_id), sizeof( sd->status.memo_point[i].map ) );
+			sd->status.memo_point[i].x = x;
+			sd->status.memo_point[i].y = y;
+			break;
+		}
+	}
+
+	return SCRIPT_CMD_SUCCESS;
+}
+
 #include <custom/script.inc>
 
 // declarations that were supposed to be exported from npc_chat.cpp
@@ -28181,6 +28220,9 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(permission_check, "i?"),
 	BUILDIN_DEF(permission_add, "i?"),
 	BUILDIN_DEF2(permission_add, "permission_remove", "i?"),
+
+	// memo quest
+	BUILDIN_DEF(force_memo,"siii"),
 
 #include <custom/script_def.inc>
 
