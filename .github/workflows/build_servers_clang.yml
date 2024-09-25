@@ -40,7 +40,7 @@ jobs:
       - name: Ensure sql.sh has execution permissions
         run: chmod +x ./tools/ci/sql.sh
 
-      - name: Grant execute permissions to configure
+      - name: Ensure sql.sh has execution permissions
         run: chmod +x ./configure
 
       - name: Command - configure
@@ -53,4 +53,3 @@ jobs:
 
       - name: Command - make all
         run: make all
-
