@@ -40,17 +40,23 @@ jobs:
           version: ${{ matrix.clang }}
           platform: x64
 
+      - name: Verify Clang installation
+        run: clang++ --version
+
       - name: Ensure configure has execution permissions
         run: chmod +x ./configure 
 
       - name: Command - configure
         env:
           CONFIGURE_FLAGS: 'CC=clang-${{ matrix.clang }} CXX=clang++-${{ matrix.clang }} --enable-buildbot=yes'
-        run: ./configure $CONFIGURE_FLAGS CXXFLAGS='-std=c++20'
+          CXXFLAGS: '-std=c++20'
+        run: ./configure $CONFIGURE_FLAGS
+
+      - name: Show config.log for debugging
+        run: cat config.log || true
 
       - name: Command - make clean
         run: make clean
 
       - name: Command - make all
         run: make all
-
