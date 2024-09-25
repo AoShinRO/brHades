@@ -65,6 +65,9 @@ class MapGuild;
 #define ATTENDANCE_DATE_VAR "#AttendanceDate"
 #define ATTENDANCE_COUNT_VAR "#AttendanceCounter"
 #define ACHIEVEMENTLEVEL "AchievementLevel"
+#if PACKETVER_MAIN_NUM >= 20170502 || PACKETVER_RE_NUM >= 20170419 || defined(PACKETVER_ZERO)
+#define EXT_MEMO_VAR "EXT_MEMO_SLOTS"
+#endif
 
 //Total number of classes (for data storage)
 #define CLASS_COUNT (JOB_MAX - JOB_NOVICE_HIGH + JOB_MAX_BASIC)
@@ -1755,6 +1758,10 @@ void pc_macro_reporter_process(map_session_data &sd, int32 reporter_account_id =
 
 #ifdef MAP_GENERATOR
 void pc_reputation_generate();
+#endif
+
+#if PACKETVER_MAIN_NUM >= 20170502 || PACKETVER_RE_NUM >= 20170419 || defined(PACKETVER_ZERO)
+#define PC_MAXMEMOPOINTS(sd) ((NORMAL_MEMOPOINTS + pc_readreg2(sd,EXT_MEMO_VAR) >= MAX_MEMOPOINTS)? MAX_MEMOPOINTS : NORMAL_MEMOPOINTS + pc_readreg2(sd,EXT_MEMO_VAR) )
 #endif
 
 #endif /* PC_HPP */

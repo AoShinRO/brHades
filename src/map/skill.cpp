@@ -14058,6 +14058,22 @@ int skill_castend_pos2(struct block_list* src, int x, int y, uint16 skill_id, ui
 
 					if( skill_lv >= 4 ){
 						maps.push_back( sd->status.memo_point[2].map );
+            
+#if PACKETVER_MAIN_NUM >= 20170502 || PACKETVER_RE_NUM >= 20170419 || defined(PACKETVER_ZERO)
+						int64 extended_memo = pc_readreg2(sd,EXT_MEMO_VAR);
+						if (extended_memo >= 1){
+							maps.push_back(sd->status.memo_point[3].map);
+
+							if(extended_memo >= 2){
+								maps.push_back(sd->status.memo_point[4].map);
+
+								if(extended_memo >= 3)
+									maps.push_back(sd->status.memo_point[5].map);
+								
+							}
+						}
+#endif
+            
 					}
 				}
 			}
@@ -14820,7 +14836,7 @@ int skill_castend_map (map_session_data *sd, uint16 skill_id, const char *mapnam
 
 	case AL_WARP:
 		if( sd != nullptr ){
-			const struct s_point_str *p[4];
+			const struct s_point_str *p[MAX_MEMOPOINTS+1];
 			std::shared_ptr<s_skill_unit_group> group;
 			int i, lv, wx, wy;
 			int maxcount=0;
@@ -14837,6 +14853,12 @@ int skill_castend_map (map_session_data *sd, uint16 skill_id, const char *mapnam
 			p[1] = &sd->status.memo_point[0];
 			p[2] = &sd->status.memo_point[1];
 			p[3] = &sd->status.memo_point[2];
+
+#if PACKETVER_MAIN_NUM >= 20170502 || PACKETVER_RE_NUM >= 20170419 || defined(PACKETVER_ZERO)
+			p[4] = &sd->status.memo_point[3];
+			p[5] = &sd->status.memo_point[4];
+			p[6] = &sd->status.memo_point[5];
+#endif
 
 			if((maxcount = skill_get_maxcount(skill_id, sd->menuskill_val)) > 0) {
 				unit_skillunit_maxcount(sd->ud, skill_id, maxcount);
@@ -14855,6 +14877,19 @@ int skill_castend_map (map_session_data *sd, uint16 skill_id, const char *mapnam
 			if( lv <= 0 ) return 0;
 			if( lv > 4 ) lv = 4; // crash prevention
 
+#if PACKETVER_MAIN_NUM >= 20170502 || PACKETVER_RE_NUM >= 20170419 || defined(PACKETVER_ZERO)
+			// check if the chosen map exists in the memo list
+			size_t ext_size = static_cast<size_t>(lv + pc_readreg2(sd, EXT_MEMO_VAR));
+			if(ext_size > MAX_MEMOPOINTS+1) ext_size = MAX_MEMOPOINTS+1; // crash prevention
+			ARR_FIND( 0, ext_size, i, strncmp( p[i]->map, mapname, sizeof( p[i]->map ) ) == 0 );
+			if( i < ext_size ) {
+				x=p[i]->x;
+				y=p[i]->y;
+			} else {
+				skill_failed(sd);
+				return 0;
+			}
+#else
 			// check if the chosen map exists in the memo list
 			ARR_FIND( 0, lv, i, strncmp( p[i]->map, mapname, sizeof( p[i]->map ) ) == 0 );
 			if( i < lv ) {
@@ -14864,7 +14899,7 @@ int skill_castend_map (map_session_data *sd, uint16 skill_id, const char *mapnam
 				skill_failed(sd);
 				return 0;
 			}
-
+#endif
 			if(!skill_check_condition_castend(*sd, sd->menuskill_id, lv))
 			{  // This checks versus skill_id/skill_lv...
 				skill_failed(sd);
