@@ -4955,10 +4955,10 @@ static bool cashshop_parse_dbrow( char* fields[], size_t columns, size_t current
 	}
 
 	if( tab >= CASHSHOP_TAB_MAX ){
-		ShowWarning( "cashshop_parse_dbrow: Invalid tab %d in line '%d', skipping...\n", tab, current );
+		ShowWarning( "cashshop_parse_dbrow: Invalid tab %d in line '%zu', skipping...\n", tab, current );
 		return false;
 	}else if( price < 1 ){
-		ShowWarning( "cashshop_parse_dbrow: Invalid price %d in line '%d', skipping...\n", price, current );
+		ShowWarning( "cashshop_parse_dbrow: Invalid price %d in line '%zu', skipping...\n", price, current );
 		return false;
 	}
 
