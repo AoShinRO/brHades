@@ -4229,7 +4229,7 @@ static bool read_constdb( char* fields[], size_t columns, size_t current ){
 		}
 	}else{
 		if( sscanf(fields[0], "%1023[A-Za-z0-9/_] %1023[A-Za-z0-9/_-] %11d", name, val, &type) < 2 ){
-			ShowWarning( "Skipping line '" CL_WHITE "%d" CL_RESET "', invalid constant definition\n", current );
+			ShowWarning( "Skipping line '" CL_WHITE "%zu" CL_RESET "', invalid constant definition\n", current );
 			return false;
 		}
 	}
