@@ -3710,7 +3710,7 @@ static bool mob_parse_row_chatdb( char* fields[], size_t columns, size_t current
 	int msg_id = atoi(fields[0]);
 
 	if (msg_id <= 0){
-		ShowError("Invalid chat ID '%d' in line %d\n", msg_id, current);
+		ShowError("Invalid chat ID '%d' in line %zu\n", msg_id, current);
 		return false;
 	}
 
