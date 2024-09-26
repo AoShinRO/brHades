@@ -1,4 +1,4 @@
-name: "Build servers with Clang"
+name: "Compilação em Clang"
 # build_servers_clang.yml
 
 concurrency:

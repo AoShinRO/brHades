@@ -1,4 +1,4 @@
-name: Build servers with CMake
+name: Compilação em CMake
 # build_servers_cmake.yml
 
 concurrency:

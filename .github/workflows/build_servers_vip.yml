@@ -1,4 +1,4 @@
-name: Build servers in VIP mode
+name: Compilação com VIP ligado
 # build_servers_vip.yml
 
 concurrency:

@@ -1,4 +1,4 @@
-name: Build servers with MSVS
+name: Compilação em VisualStudio
 # build_servers_msbuild.yml
 
 concurrency:

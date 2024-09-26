@@ -1,4 +1,4 @@
-name: Build servers with different packet versions
+name: Compilação em differentes versões de packet
 # build_servers_packetversions.yml
 
 concurrency:
