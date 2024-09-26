@@ -7987,7 +7987,7 @@ void clif_party_message( struct party_data& party, uint32 account_id, const char
 	}
 
 	if (len > CHAT_SIZE_MAX) {
-		ShowWarning( "clif_party_message: Truncated message '%s' (len=%d, max=%" PRIuPTR ", party_id=%d).\n", mes, len, CHAT_SIZE_MAX, party.party.party_id );
+		ShowWarning( "clif_party_message: Truncated message '%s' (len=%zu, max=%" PRIuPTR ", party_id=%d).\n", mes, len, CHAT_SIZE_MAX, party.party.party_id );
 		len = CHAT_SIZE_MAX;
 	}
 
