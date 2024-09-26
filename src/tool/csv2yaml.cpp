@@ -3122,7 +3122,7 @@ static bool itemdb_read_randomopt_group( char* str[], size_t columns, size_t cur
 		}
 
 		if (randid_tmp < 0) {
-			ShowError("itemdb_read_randomopt_group: Invalid random group id '%s' in column %d!\n", str[k], k + 1);
+			ShowError("itemdb_read_randomopt_group: Invalid random group id '%s' in column %zu!\n", str[k], k + 1);
 			continue;
 		}
 
