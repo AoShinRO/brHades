@@ -3099,7 +3099,7 @@ static bool itemdb_read_randomopt(const char* file) {
 // Copied and adjusted from itemdb.cpp
 static bool itemdb_read_randomopt_group( char* str[], size_t columns, size_t current ){
 	if ((columns - 2) % 3 != 0) {
-		ShowError("itemdb_read_randomopt_group: Invalid column entries '%d'.\n", columns);
+		ShowError("itemdb_read_randomopt_group: Invalid column entries '%zu'.\n", columns);
 		return false;
 	}
 
