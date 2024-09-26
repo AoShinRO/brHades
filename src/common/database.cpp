@@ -154,16 +154,14 @@ void YamlDatabase::parse( const ryml::Tree& tree ){
 
 	if( this->nodeExists( tree.rootref(), "Body" ) ){
 		const ryml::NodeRef& bodyNode = tree["Body"];
+		const char* fileName = this->currentFile.c_str();
+
 #ifdef DETAILED_LOADING_OUTPUT
 		size_t childNodesCount = bodyNode.num_children();
-#endif
-		const char* fileName = this->currentFile.c_str();
-#ifdef DEBUG
 		size_t childNodesProgressed = 0;
-#endif
-#ifdef DETAILED_LOADING_OUTPUT
 		ShowStatus("Loading '" CL_WHITE "%" PRIdPTR CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'\n", childNodesCount, fileName);
 #endif
+
 		for( const ryml::NodeRef &node : bodyNode ){
 			count += this->parseBodyNode( node );
 #ifdef DETAILED_LOADING_OUTPUT
