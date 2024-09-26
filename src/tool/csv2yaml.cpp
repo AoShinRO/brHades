@@ -3722,11 +3722,11 @@ static bool mob_parse_row_chatdb( char* fields[], size_t columns, size_t current
 	}
 
 	if (len > (CHAT_SIZE_MAX-1)) {
-		ShowError("Message too long! Line %d, id: %d\n", current, msg_id);
+		ShowError("Message too long! Line %zu, id: %d\n", current, msg_id);
 		return false;
 	}
 	else if (len == 0) {
-		ShowWarning("Empty message for id %d.\n", msg_id);
+		ShowWarning("Empty message for id %zu.\n", current);
 		return false;
 	}
 
