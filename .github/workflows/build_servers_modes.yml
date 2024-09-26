@@ -1,5 +1,5 @@
-name: "Analyse servers with CodeQL"
-# analysis_codeql.yml
+name: Build servers in Pre-Renewal and Renewal
+# build_servers_modes.yml
 
 concurrency:
   group: ${{ github.repository }}-${{ github.workflow }}-${{ github.ref }}
@@ -22,37 +22,23 @@ on:
     - cron: '41 2 * * 3'
 
 jobs:
-  analyze:
+  build:
     # Github Actions checks for '[ci skip]', '[skip ci]', '[no ci]', '[skip actions]', or '[actions skip]' but not a hyphenated version.
     # It's a catch-all incase a Pull Request has been opened and someone is on auto-pilot.
     if: "!contains(github.event.head_commit.message, 'ci-skip')"
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
       matrix:
-          # The ubuntu-latest label currently points to ubuntu-20.04.
+          # The ubuntu-latest label currently points to ubuntu-22.04.
           # Available: ubuntu-22.04, ubuntu-20.04
           os: [ubuntu-latest]
           # Older versions of GCC are not available via unaltered aptitude repo lists.
-          gcc: ['10']
+          gcc: ['11']
           # We run build checks for both Renewal and PRE-Renewal
           mode: ['PRE','RE']
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      # Initializes the CodeQL tools for scanning.
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
-        with:
-           # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
-           # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
-           languages: cpp
-           # Trigger security and quality findings
-           # https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
-           # TODO: Resolve the issues and then enable it again
-           #queries: +security-and-quality
+      - uses: actions/checkout@v4
 
       # A simple 'yes' and 'no' can be confusing, so we use names to display in the current job then convert them for use in the compiler.
       - name: Variable Parsing - PRE
@@ -65,20 +51,24 @@ jobs:
           echo "PRERE=no" >> $GITHUB_ENV
 
       - name: Update & Install packages
-        # Ubuntu runners already have most of the packages rAthena requires to build.
+        # Ubuntu runners already have most of the packages brHades requires to build.
         # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-Readme.md
         run: |
           sudo apt update
           sudo apt install zlib1g-dev libpcre3-dev gcc-${{ matrix.gcc }} g++-${{ matrix.gcc }}
 
-      # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
-      # If this step fails, then you should remove it and run the build manually (see below)
-      #- name: Autobuild
-      #  uses: github/codeql-action/autobuild@v2
+      - name: Grant execute permissions to sql.sh
+        run: chmod +x ./tools/ci/sql.sh
 
-      # ?? If the Autobuild fails above, remove it and uncomment the following
-      #    three lines and modify them (or add more) to build your code if your
-      #    project uses a compiled language
+      - name: Grant execute permissions to configure
+        run: chmod +x ./configure
+
+      - name: Start MySQL
+        run: sudo systemctl start mysql.service
+
+      - name: Setup Database and import table data
+        run: ./tools/ci/sql.sh
+
       - name: Command - configure
         env:
             CONFIGURE_FLAGS: 'CC=gcc-${{ matrix.gcc }} CXX=g++-${{ matrix.gcc }} --enable-prere=${{ env.PRERE }} --enable-buildbot=yes'
@@ -90,5 +80,11 @@ jobs:
       - name: Command - make server
         run: make server
 
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+      - name: Run Once - login-server
+        run: ./login-server --run-once
+
+      - name: Run Once - char-server
+        run: ./char-server --run-once
+
+      - name: Run Once - map-server
+        run: ./map-server --run-once
