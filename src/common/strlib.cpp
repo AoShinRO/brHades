@@ -932,17 +932,17 @@ bool sv_readdb( const char* directory, const char* filename, char delim, size_t 
 
 		if( columns < mincols )
 		{
-			ShowError("sv_readdb: Insufficient columns in line %d of \"%s\" (found %zu, need at least %d).\n", lines, path, columns, mincols);
+			ShowError("sv_readdb: Insufficient columns in line %d of \"%s\" (found %zu, need at least %lu).\n", lines, path, columns, mincols);
 			continue; // not enough columns
 		}
 		if( columns > maxcols )
 		{
-			ShowError("sv_readdb: Too many columns in line %d of \"%s\" (found %zu, maximum is %d).\n", lines, path, columns, maxcols );
+			ShowError("sv_readdb: Too many columns in line %d of \"%s\" (found %zu, maximum is %lu).\n", lines, path, columns, maxcols );
 			continue; // too many columns
 		}
 		if( entries == maxrows )
 		{
-			ShowError("sv_readdb: Reached the maximum allowed number of entries (%d) when parsing file \"%s\".\n", maxrows, path);
+			ShowError("sv_readdb: Reached the maximum allowed number of entries (%lu) when parsing file \"%s\".\n", maxrows, path);
 			break;
 		}
 
@@ -962,7 +962,7 @@ bool sv_readdb( const char* directory, const char* filename, char delim, size_t 
 	aFree(fields);
 	aFree(line);
 	fclose(fp);
-	ShowStatus("Done reading '" CL_WHITE "%d" CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", entries, path);
+	ShowStatus("Done reading '" CL_WHITE "%zu" CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", entries, path);
 
 	return true;
 }
