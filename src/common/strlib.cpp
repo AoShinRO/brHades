@@ -932,7 +932,7 @@ bool sv_readdb( const char* directory, const char* filename, char delim, size_t 
 
 		if( columns < mincols )
 		{
-			ShowError("sv_readdb: Insufficient columns in line %d of \"%s\" (found %d, need at least %d).\n", lines, path, columns, mincols);
+			ShowError("sv_readdb: Insufficient columns in line %d of \"%s\" (found %d, need at least %lu).\n", lines, path, columns, mincols);
 			continue; // not enough columns
 		}
 		if( columns > maxcols )
