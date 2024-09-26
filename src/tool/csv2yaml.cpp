@@ -4130,7 +4130,7 @@ static bool mob_readdb_itemratio( char* str[], size_t columns, size_t current ){
 	body << YAML::Key << "Item" << YAML::Value << *item_name;
 	body << YAML::Key << "Ratio" << YAML::Value << strtoul(str[1], nullptr, 10);
 
-	if (columns-2 > 0) {
+	if (columns > 2) {
 		body << YAML::Key << "List";
 		body << YAML::BeginMap;
 		for( size_t i = 0; i < columns - 2; i++ ){
