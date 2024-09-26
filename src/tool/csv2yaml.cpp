@@ -3972,7 +3972,7 @@ static bool itemdb_read_group( char* str[], size_t columns, size_t current ){
 		return false;
 	}
 	if (columns < 3) {
-		ShowError("itemdb_read_group: Insufficient columns (found %d, need at least 3).\n", columns);
+		ShowError("itemdb_read_group: Insufficient columns (found %zu, need at least 3).\n", columns);
 		return false;
 	}
 
