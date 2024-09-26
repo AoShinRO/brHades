@@ -1,4 +1,4 @@
-name: Validate NPC Scripts and DB Changes
+name: Validação de NPCS e alterações na DB
 # npc_db_validation.yml
 
 # For NPC and DB validation we only need two builds: one of Renewal and one for Pre-Renewal checks.

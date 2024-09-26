@@ -1,5 +1,5 @@
-name: Compilação em differentes versões de packet
-# build_servers_packetversions.yml
+name: Analisador de codigo CodeQL
+# analysis_codeql.yml
 
 concurrency:
   group: ${{ github.repository }}-${{ github.workflow }}-${{ github.ref }}
@@ -8,9 +8,9 @@ concurrency:
 on:
   workflow_dispatch:
   push:
-    branches: [ "main" ]
+    branches:
+      - master
   pull_request:
-    branches: [ "main" ]
     paths:
       # Always trigger all Github Actions if an action or something CI related was changed
       - '.github/workflows/**'
@@ -20,25 +20,37 @@ on:
       - '3rdparty/**'
 
 jobs:
-  build:
+  analyze:
     # Github Actions checks for '[ci skip]', '[skip ci]', '[no ci]', '[skip actions]', or '[actions skip]' but not a hyphenated version.
     # It's a catch-all incase a Pull Request has been opened and someone is on auto-pilot.
     if: "!contains(github.event.head_commit.message, 'ci-skip')"
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-          # The ubuntu-latest label currently points to ubuntu-22.04.
+          # The ubuntu-latest label currently points to ubuntu-20.04.
           # Available: ubuntu-22.04, ubuntu-20.04
           os: [ubuntu-latest]
           # Older versions of GCC are not available via unaltered aptitude repo lists.
-          gcc: ['11']
+          gcc: ['10']
           # We run build checks for both Renewal and PRE-Renewal
           mode: ['PRE','RE']
-          # Check build success for different packet-versions
-          packetver: ['20211103', '20200902', '20200401', '20180620', '20151104']
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Initializes the CodeQL tools for scanning.
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+           # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
+           # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
+           languages: cpp
+           # Trigger security and quality findings
+           # https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
+           # TODO: Resolve the issues and then enable it again
+           #queries: +security-and-quality
 
       # A simple 'yes' and 'no' can be confusing, so we use names to display in the current job then convert them for use in the compiler.
       - name: Variable Parsing - PRE
@@ -55,27 +67,35 @@ jobs:
         # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-Readme.md
         run: |
           sudo apt update
-          sudo apt install build-essential zlib1g-dev libpcre3-dev gcc-10 g++-10
+          sudo apt install zlib1g-dev libpcre3-dev gcc-10 g++-10
+
 
       - name: Ensure configure has execution permissions
-        run: chmod +x ./configure
+        run: chmod +x ./configure 
 
-      - name: Grant execute permissions to sql.sh
-        run: chmod +x ./tools/ci/sql.sh
 
-      - name: Start MySQL
-        run: sudo systemctl start mysql.service
+      # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
+      # If this step fails, then you should remove it and run the build manually (see below)
+      #- name: Autobuild
+      #  uses: github/codeql-action/autobuild@v2
 
-      - name: Setup Database and import table data
-        run: ./tools/ci/sql.sh
-
+      # ?? If the Autobuild fails above, remove it and uncomment the following
+      #    three lines and modify them (or add more) to build your code if your
+      #    project uses a compiled language
       - name: Command - configure
         env:
-            CONFIGURE_FLAGS: "CC=gcc-10 CXX=g++-10 --enable-prere=${{ env.PRERE }} --enable-packetver=${{ matrix.packetver }} --enable-buildbot=yes"
+            CONFIGURE_FLAGS: "CC=gcc-10 CXX=g++-10 --enable-prere=${{ env.PRERE }} --enable-buildbot=yes"
         run: ./configure $CONFIGURE_FLAGS CXXFLAGS="-std=c++20"
 
       - name: Command - make clean
         run: make clean
 
-      - name: Command - make all
-        run: make all
+      - name: Command - make server
+        run: make server
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        continue-on-error: true
+        with:
+          category: "security-and-quality"
+

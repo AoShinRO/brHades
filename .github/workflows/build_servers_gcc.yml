@@ -1,4 +1,4 @@
-name: Build servers with GCC
+name: Compilação em GCC
 # build_servers_gcc.yml
 
 concurrency:
