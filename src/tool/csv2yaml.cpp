@@ -3014,7 +3014,7 @@ static bool itemdb_read_db(const char* file) {
 	}
 
 	fclose(fp);
-	ShowStatus("Done reading '" CL_WHITE "%d" CL_RESET "' items in '" CL_WHITE "%s" CL_RESET "'.\n", entries, file);
+	ShowStatus("Done reading '" CL_WHITE "%lu" CL_RESET "' items in '" CL_WHITE "%s" CL_RESET "'.\n", entries, file);
 
 	return true;
 }
@@ -3099,7 +3099,7 @@ static bool itemdb_read_randomopt(const char* file) {
 // Copied and adjusted from itemdb.cpp
 static bool itemdb_read_randomopt_group( char* str[], size_t columns, size_t current ){
 	if ((columns - 2) % 3 != 0) {
-		ShowError("itemdb_read_randomopt_group: Invalid column entries '%d'.\n", columns);
+		ShowError("itemdb_read_randomopt_group: Invalid column entries '%zu'.\n", columns);
 		return false;
 	}
 
@@ -3122,7 +3122,7 @@ static bool itemdb_read_randomopt_group( char* str[], size_t columns, size_t cur
 		}
 
 		if (randid_tmp < 0) {
-			ShowError("itemdb_read_randomopt_group: Invalid random group id '%s' in column %d!\n", str[k], k + 1);
+			ShowError("itemdb_read_randomopt_group: Invalid random group id '%s' in column %zu!\n", str[k], k + 1);
 			continue;
 		}
 
@@ -3276,7 +3276,7 @@ static bool mob_readdb_race2( char *fields[], size_t columns, size_t current ){
 
 	std::vector<uint32> mobs;
 
-	for (uint16 i = 1; i < columns; i++) {
+	for (size_t i = 1; i < columns; i++) {
 		uint32 mob_id = strtol(fields[i], nullptr, 10);
 		std::string *mob_name = util::umap_find(aegis_mobnames, static_cast<uint16>(mob_id));
 
@@ -3710,7 +3710,7 @@ static bool mob_parse_row_chatdb( char* fields[], size_t columns, size_t current
 	int msg_id = atoi(fields[0]);
 
 	if (msg_id <= 0){
-		ShowError("Invalid chat ID '%d' in line %d\n", msg_id, current);
+		ShowError("Invalid chat ID '%d' in line %zu\n", msg_id, current);
 		return false;
 	}
 
@@ -3722,11 +3722,11 @@ static bool mob_parse_row_chatdb( char* fields[], size_t columns, size_t current
 	}
 
 	if (len > (CHAT_SIZE_MAX-1)) {
-		ShowError("Message too long! Line %d, id: %d\n", current, msg_id);
+		ShowError("Message too long! Line %zu, id: %d\n", current, msg_id);
 		return false;
 	}
 	else if (len == 0) {
-		ShowWarning("Empty message for id %d.\n", msg_id);
+		ShowWarning("Empty message for id %zu.\n", current);
 		return false;
 	}
 
@@ -3953,7 +3953,7 @@ static bool exp_guild_parse_row( char* split[], size_t column, size_t current ){
 	t_exp exp = strtoull(split[0], nullptr, 10);
 
 	if (exp > MAX_GUILD_EXP) {
-		ShowError("exp_guild: Invalid exp %" PRIu64 " at line %d, exceeds max of %" PRIu64 "\n", exp, current, MAX_GUILD_EXP);
+		ShowError("exp_guild: Invalid exp %" PRIu64 " at line %zu, exceeds max of %" PRIu64 "\n", exp, current, MAX_GUILD_EXP);
 		return false;
 	}
 
@@ -3972,7 +3972,7 @@ static bool itemdb_read_group( char* str[], size_t columns, size_t current ){
 		return false;
 	}
 	if (columns < 3) {
-		ShowError("itemdb_read_group: Insufficient columns (found %d, need at least 3).\n", columns);
+		ShowError("itemdb_read_group: Insufficient columns (found %zu, need at least 3).\n", columns);
 		return false;
 	}
 
@@ -4130,7 +4130,7 @@ static bool mob_readdb_itemratio( char* str[], size_t columns, size_t current ){
 	body << YAML::Key << "Item" << YAML::Value << *item_name;
 	body << YAML::Key << "Ratio" << YAML::Value << strtoul(str[1], nullptr, 10);
 
-	if (columns-2 > 0) {
+	if (columns > 2) {
 		body << YAML::Key << "List";
 		body << YAML::BeginMap;
 		for( size_t i = 0; i < columns - 2; i++ ){
@@ -4224,12 +4224,12 @@ static bool read_constdb( char* fields[], size_t columns, size_t current ){
 		if( sscanf(fields[0], "%1023[A-Za-z0-9/_]", name) != 1 ||
 			sscanf(fields[1], "%1023[A-Za-z0-9/_]", val) != 1 || 
 			( columns >= 2 && sscanf(fields[2], "%11d", &type) != 1 ) ){
-			ShowWarning("Skipping line '" CL_WHITE "%d" CL_RESET "', invalid constant definition\n", current);
+			ShowWarning("Skipping line '" CL_WHITE "%zu" CL_RESET "', invalid constant definition\n", current);
 			return false;
 		}
 	}else{
 		if( sscanf(fields[0], "%1023[A-Za-z0-9/_] %1023[A-Za-z0-9/_-] %11d", name, val, &type) < 2 ){
-			ShowWarning( "Skipping line '" CL_WHITE "%d" CL_RESET "', invalid constant definition\n", current );
+			ShowWarning( "Skipping line '" CL_WHITE "%zu" CL_RESET "', invalid constant definition\n", current );
 			return false;
 		}
 	}
@@ -4955,10 +4955,10 @@ static bool cashshop_parse_dbrow( char* fields[], size_t columns, size_t current
 	}
 
 	if( tab >= CASHSHOP_TAB_MAX ){
-		ShowWarning( "cashshop_parse_dbrow: Invalid tab %d in line '%d', skipping...\n", tab, current );
+		ShowWarning( "cashshop_parse_dbrow: Invalid tab %d in line '%zu', skipping...\n", tab, current );
 		return false;
 	}else if( price < 1 ){
-		ShowWarning( "cashshop_parse_dbrow: Invalid price %d in line '%d', skipping...\n", price, current );
+		ShowWarning( "cashshop_parse_dbrow: Invalid price %d in line '%zu', skipping...\n", price, current );
 		return false;
 	}
 
