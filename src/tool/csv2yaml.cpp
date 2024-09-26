@@ -3276,7 +3276,7 @@ static bool mob_readdb_race2( char *fields[], size_t columns, size_t current ){
 
 	std::vector<uint32> mobs;
 
-	for (uint16 i = 1; i < columns; i++) {
+	for (size_t i = 1; i < columns; i++) {
 		uint32 mob_id = strtol(fields[i], nullptr, 10);
 		std::string *mob_name = util::umap_find(aegis_mobnames, static_cast<uint16>(mob_id));
 
