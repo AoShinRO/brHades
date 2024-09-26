@@ -3953,7 +3953,7 @@ static bool exp_guild_parse_row( char* split[], size_t column, size_t current ){
 	t_exp exp = strtoull(split[0], nullptr, 10);
 
 	if (exp > MAX_GUILD_EXP) {
-		ShowError("exp_guild: Invalid exp %" PRIu64 " at line %d, exceeds max of %" PRIu64 "\n", exp, current, MAX_GUILD_EXP);
+		ShowError("exp_guild: Invalid exp %" PRIu64 " at line %zu, exceeds max of %" PRIu64 "\n", exp, current, MAX_GUILD_EXP);
 		return false;
 	}
 
