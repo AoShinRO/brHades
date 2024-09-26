@@ -84,7 +84,7 @@ jobs:
       #    project uses a compiled language
       - name: Command - configure
         env:
-            CONFIGURE_FLAGS: "CC=gcc-10 CXX=g++-10 --enable-prere=${{ env.PRERE }} --enable-buildbot=yes -Wno-unused-variable"
+            CONFIGURE_FLAGS: "CC=gcc-10 CXX=g++-10 --enable-prere=${{ env.PRERE }} --enable-buildbot=yes"
         run: ./configure $CONFIGURE_FLAGS CXXFLAGS="-std=c++20"
 
       - name: Command - make clean
