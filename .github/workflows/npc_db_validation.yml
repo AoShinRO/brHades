@@ -21,8 +21,6 @@ on:
       # This workflow should run when a file in either the db/ or npc/ directory has been modified.
       - 'db/**'
       - 'npc/**'
-  schedule:
-    - cron: '41 2 * * 3'
 
 jobs:
   build:

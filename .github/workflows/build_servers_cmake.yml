@@ -20,8 +20,6 @@ on:
       - '3rdparty/**'
       # This workflow should run whenever a CMake related file has been modified
       - '**/CMakeLists.txt'
-  schedule:
-    - cron: '41 2 * * 3'
 
 jobs:
   build:

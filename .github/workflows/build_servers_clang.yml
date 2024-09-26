@@ -16,8 +16,6 @@ on:
       - 'tools/ci/**'
       - 'src/**'
       - '3rdparty/**'
-  schedule:
-    - cron: '41 2 * * 3'
 
 jobs:
   build:

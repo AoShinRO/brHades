@@ -18,9 +18,6 @@ on:
       # This workflow should run when a file in a source directory has been modified.
       - 'src/**'
       - '3rdparty/**'
-  schedule:
-    - cron: '41 2 * * 3'
-
 
 jobs:
   build:
