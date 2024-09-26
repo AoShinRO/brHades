@@ -1,11 +1,15 @@
-name: "Analyse servers with CodeQL"
-# analysis_codeql.yml
+name: Validate NPC Scripts and DB Changes
+# npc_db_validation.yml
+
+# For NPC and DB validation we only need two builds: one of Renewal and one for Pre-Renewal checks.
+# NPC scripts and database files are not platform dependent, so we can achieve this validation using only a simple linux setup.
 
 concurrency:
   group: ${{ github.repository }}-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "main" ]
   pull_request:
@@ -14,45 +18,29 @@ on:
       # Always trigger all Github Actions if an action or something CI related was changed
       - '.github/workflows/**'
       - 'tools/ci/**'
-      # This workflow should run when a file in a source directory has been modified.
-      - 'src/**'
-      - '3rdparty/**'
-  schedule:
-    - cron: '41 2 * * 3'
+      # This workflow should run when a file in either the db/ or npc/ directory has been modified.
+      - 'db/**'
+      - 'npc/**'
 
 jobs:
-  analyze:
+  build:
     # Github Actions checks for '[ci skip]', '[skip ci]', '[no ci]', '[skip actions]', or '[actions skip]' but not a hyphenated version.
     # It's a catch-all incase a Pull Request has been opened and someone is on auto-pilot.
     if: "!contains(github.event.head_commit.message, 'ci-skip')"
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
       matrix:
-          # The ubuntu-latest label currently points to ubuntu-20.04.
+          # The ubuntu-latest label currently points to ubuntu-22.04.
           # Available: ubuntu-22.04, ubuntu-20.04
           os: [ubuntu-latest]
-          # Older versions of GCC are not available via unaltered aptitude repo lists.
-          gcc: ['10']
+          # Only a single version of GCC is required for validating NPC scripts and database changes.
+          gcc: ['11']
           # We run build checks for both Renewal and PRE-Renewal
-          mode: ['PRE','RE']
+          mode: ['PRE', 'RE']
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      # Initializes the CodeQL tools for scanning.
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
-        with:
-           # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
-           # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
-           languages: cpp
-           # Trigger security and quality findings
-           # https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
-           # TODO: Resolve the issues and then enable it again
-           #queries: +security-and-quality
-
+      - uses: actions/checkout@v4
+      
       # A simple 'yes' and 'no' can be confusing, so we use names to display in the current job then convert them for use in the compiler.
       - name: Variable Parsing - PRE
         if: ${{ matrix.mode == 'PRE' }} 
@@ -69,25 +57,40 @@ jobs:
         run: |
           sudo apt update
           sudo apt install zlib1g-dev libpcre3-dev gcc-${{ matrix.gcc }} g++-${{ matrix.gcc }}
+          
+      - name: Start MySQL
+        run: sudo systemctl start mysql.service
 
-      # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
-      # If this step fails, then you should remove it and run the build manually (see below)
-      #- name: Autobuild
-      #  uses: github/codeql-action/autobuild@v2
+      - name: Grant execute permissions to sql.sh
+        run: chmod +x ./tools/ci/sql.sh
 
-      # ?? If the Autobuild fails above, remove it and uncomment the following
-      #    three lines and modify them (or add more) to build your code if your
-      #    project uses a compiled language
+      - name: Grant execute permissions to configure
+        run: chmod +x ./configure
+
+      - name: Setup Database and import table data
+        run: ./tools/ci/sql.sh
+
+      - name: Grant execute permissions to npc.sh
+        run: chmod +x ./tools/ci/npc.sh
+          
       - name: Command - configure
         env:
             CONFIGURE_FLAGS: 'CC=gcc-${{ matrix.gcc }} CXX=g++-${{ matrix.gcc }} --enable-prere=${{ env.PRERE }} --enable-buildbot=yes'
         run: ./configure $CONFIGURE_FLAGS
+      
+      # npc.sh enables all NPC scripts in the custom and test folders.
+      - name: Enable All NPCs for Testing
+        run: ./tools/ci/npc.sh
 
       - name: Command - make clean
         run: make clean
 
-      - name: Command - make server
-        run: make server
+      # Create import directories
+      - name: Command - make import
+        run: make import
 
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+      - name: Command - make map
+        run: make map
+
+      - name: Run Once - map-server
+        run: ./map-server --run-once
