@@ -942,7 +942,7 @@ bool sv_readdb( const char* directory, const char* filename, char delim, size_t 
 		}
 		if( entries == maxrows )
 		{
-			ShowError("sv_readdb: Reached the maximum allowed number of entries (%d) when parsing file \"%s\".\n", maxrows, path);
+			ShowError("sv_readdb: Reached the maximum allowed number of entries (%lu) when parsing file \"%s\".\n", maxrows, path);
 			break;
 		}
 
