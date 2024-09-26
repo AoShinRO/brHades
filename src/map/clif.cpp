@@ -9417,7 +9417,7 @@ void clif_disp_message(struct block_list* src, const char* mes, size_t len, enum
 	if( len == 0 ) {
 		return;
 	} else if( len > sizeof(buf)-5 ) {
-		ShowWarning("clif_disp_message: Truncated message '%s' (len=%d, max=%" PRIuPTR ", aid=%d).\n", mes, len, sizeof(buf)-5, src->id);
+		ShowWarning("clif_disp_message: Truncated message '%s' (len=%zu, max=%zu, aid=%d).\n", mes, len, sizeof(buf)-5, src->id);
 		len = sizeof(buf)-5;
 	}
 
