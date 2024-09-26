@@ -5659,7 +5659,7 @@ int npc_parsesrcfile(const char* filepath)
 
 		// fill w1
 		if( pos[3]-pos[2] > ARRAYLENGTH(w1)-1 )
-			ShowWarning("npc_parsesrcfile: w1 truncated, too much data (%d) in file '%s', line '%d'.\n", pos[3]-pos[2], filepath, strline(buffer,p-buffer));
+			ShowWarning("npc_parsesrcfile: w1 truncated, too much data (%zu) in file '%s', line '%d'.\n", pos[3]-pos[2], filepath, strline(buffer,p-buffer));
 
 		size_t index = std::min( pos[3] - pos[2], ARRAYLENGTH( w1 ) - 1 );
 		memcpy( w1, p + pos[2], index * sizeof( char ) );
