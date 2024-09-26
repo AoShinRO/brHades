@@ -937,7 +937,7 @@ bool sv_readdb( const char* directory, const char* filename, char delim, size_t 
 		}
 		if( columns > maxcols )
 		{
-			ShowError("sv_readdb: Too many columns in line %d of \"%s\" (found %d, maximum is %d).\n", lines, path, columns, maxcols );
+			ShowError("sv_readdb: Too many columns in line %d of \"%s\" (found %d, maximum is %lu).\n", lines, path, columns, maxcols );
 			continue; // too many columns
 		}
 		if( entries == maxrows )
