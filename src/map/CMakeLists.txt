@@ -29,7 +29,7 @@ source_group( common FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} )
 source_group( map FILES ${MAP_HEADERS} ${MAP_SOURCES} )
 include_directories( ${INCLUDE_DIRS} )
 
-set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR}/gcm.cache)
+set(CMAKE_MODULE_PATH ${MAP_SOURCE_DIR}/gcm.cache)
 
 foreach(MODULE_FILE ${MAP_MODULES})
 	# Extract the module name without the extension
