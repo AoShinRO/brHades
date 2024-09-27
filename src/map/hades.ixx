@@ -1,5 +1,5 @@
 // Este modulo vai ser usado para criar funçoes globais reutilizaveis
-
+module;
 export module hades;
 import <algorithm>;
 import <limits>;
