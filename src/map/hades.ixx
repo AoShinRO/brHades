@@ -3,8 +3,6 @@ module;
 export module hades;
 import <algorithm>;
 import <limits>;
-import <type_traits>;
-import <any>;
 
 // Cap input to numeric limits of target value and safecast it
 // @param input: numeric value

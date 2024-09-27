@@ -29,6 +29,13 @@ source_group( common FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} )
 source_group( map FILES ${MAP_HEADERS} ${MAP_SOURCES} )
 include_directories( ${INCLUDE_DIRS} )
 
+# Add target to build iostream module
+add_custom_target(std_modules ALL
+    COMMAND ${CMAKE_COMMAND} -E echo "Building standard library modules"
+    COMMAND g++ -fmodules-ts -std=c++20 -c -x c++-system-header algorithm c++-system-header limits
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+)
+
 set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR}/gcm.cache)
 
 foreach(MODULE_FILE ${MAP_MODULES})
@@ -43,7 +50,7 @@ endforeach()
 #message( STATUS "map-server SOURCE_FILES=${SOURCE_FILES}")
 add_executable( map-server ${SOURCE_FILES} )
 #message( STATUS "map-server LIBRARIES=${LIBRARIES}, DEPENDENCIES=${DEPENDENCIES} DEFINITIONS=${DEFINITIONS}")
-add_dependencies( map-server ${DEPENDENCIES} )
+add_dependencies( map-server ${DEPENDENCIES} std_modules )
 target_link_libraries( map-server ${LIBRARIES} ${DEPENDENCIES} )
 set_target_properties( map-server PROPERTIES COMPILE_FLAGS "${DEFINITIONS}" )
 if( INSTALL_COMPONENT_RUNTIME )
