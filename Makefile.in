@@ -28,7 +28,6 @@ endif
 	char \
 	map \
 	web \
-	tools \
 	import \
 	clean help \
 	install uninstall bin-clean \
@@ -59,7 +58,6 @@ libconfig:
 	@$(MAKE) -C 3rdparty/libconfig
 
 tools:
-	@$(MAKE) -C src/tool
 	@$(MAKE) -C src/map tools
 
 rapidyaml:
@@ -96,7 +94,6 @@ clean:
 	@$(MAKE) -C src/char $@
 	@$(MAKE) -C src/map $@
 	@$(MAKE) -C src/web $@
-	@$(MAKE) -C src/tool $@
 
 help:
 	@echo "most common targets are 'all' 'server' 'conf' 'clean' 'help'"
@@ -110,7 +107,6 @@ help:
 	@echo "'char'        - builds char server"
 	@echo "'map'         - builds map server"
 	@echo "'web'         - builds web server"
-	@echo "'tools'       - builds all the tools in src/tools"
 	@echo "'import'      - builds conf/import, conf/msg_conf/import and db/import folders from their template folders (x-tmpl)"
 	@echo "'all'         - builds all the above targets"
 	@echo "'server'      - builds servers (targets 'common' 'login' 'char' 'map' and 'import')"

@@ -528,7 +528,6 @@ set( RUNTIME_DIRECTORIES
 	"log"
 	"npc"
 	"sql-files"
-	"tools"
 	)
 if( INSTALL_TO_SOURCE )# skip, already in the source dir
 else()

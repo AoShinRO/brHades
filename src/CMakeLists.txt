@@ -25,5 +25,5 @@ add_subdirectory( login )
 add_subdirectory( char )
 add_subdirectory( map )
 add_subdirectory( web )
-add_subdirectory( tool )
+#add_subdirectory( tool )
 
