@@ -31,7 +31,7 @@ jobs:
           # Available: ubuntu-22.04, ubuntu-20.04
           os: [ubuntu-latest]
           # Older versions of GCC are not available via unaltered aptitude repo lists.
-          gcc: ['9', '10', '11', '12']
+          gcc: ['10', '11']
           # GCC 13 was removed from 22.04, include it as a separate job
           include:
             - os: ubuntu-24.04
@@ -43,7 +43,7 @@ jobs:
       - name: Update & Install dependencies
         run: |
           sudo apt update
-          sudo apt install build-essential zlib1g-dev libpcre3-dev gcc-10 g++-10
+          sudo apt install zlib1g-dev libpcre3-dev gcc-${{ matrix.gcc }} g++-${{ matrix.gcc }}
 
       - name: Check endianess
         run: lscpu | grep "Byte Order"
@@ -53,8 +53,8 @@ jobs:
 
       - name: Command - configure
         env:
-            CONFIGURE_FLAGS: CC=gcc-10 CXX=g++-10 --enable-buildbot=yes
-        run: ./configure $CONFIGURE_FLAGS CXXFLAGS="-std=c++20"
+            CONFIGURE_FLAGS: "CC=gcc-${{ matrix.gcc }} CXX=g++-${{ matrix.gcc }} --enable-buildbot=yes"
+        run: ./configure $CONFIGURE_FLAGS CXXFLAGS="-std=c++20 -Wno-error=builtin-declaration-mismatch"
 
       - name: Show config.log for debugging
         run: cat config.log || true

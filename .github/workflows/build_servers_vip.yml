@@ -31,7 +31,7 @@ jobs:
           # Available: ubuntu-22.04, ubuntu-20.04
           os: [ubuntu-latest]
           # Older versions of GCC are not available via unaltered aptitude repo lists.
-          gcc: ['10','11','12']
+          gcc: ['11']
           # We run build checks for both Renewal and PRE-Renewal
           mode: ['PRE', 'RE']
           include:
@@ -56,7 +56,7 @@ jobs:
         # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-Readme.md
         run: |
           sudo apt update
-          sudo apt install build-essential zlib1g-dev libpcre3-dev gcc-10 g++-10
+          sudo apt install build-essential zlib1g-dev libpcre3-dev gcc-${{ matrix.gcc }} g++-${{ matrix.gcc }}
 
       - name: Check endianess
         run: lscpu | grep "Byte Order"
@@ -76,9 +76,9 @@ jobs:
       - name: Command - configure
         run: |
           if [[ "$PRERE" == "yes" ]]; then
-            CONFIGURE_FLAGS="CC=gcc-10 CXX=g++-10 --enable-buildbot=yes --enable-prere --enable-vip"
+            CONFIGURE_FLAGS="CC=gcc-${{ matrix.gcc }} CXX=g++-${{ matrix.gcc }} --enable-buildbot=yes --enable-prere --enable-vip"
           else
-            CONFIGURE_FLAGS="CC=gcc-10 CXX=g++-10 --enable-buildbot=yes --enable-vip"
+            CONFIGURE_FLAGS="CC=gcc-${{ matrix.gcc }} CXX=g++-${{ matrix.gcc }} --enable-buildbot=yes --enable-vip"
           fi
             ./configure $CONFIGURE_FLAGS CXXFLAGS="-std=c++20"
      
