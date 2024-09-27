@@ -45,12 +45,12 @@ jobs:
       - name: Configure project with CMake (C++20)
         run: |
           cd cbuild
-          cmake -G "Unix Makefiles" -DCMAKE_CXX_STANDARD=20 ..
+          cmake -G "Unix Makefiles" -DCMAKE_CXX_STANDARD=20 -CMAKE_CXX_FLAGS=-fmodules-ts ..
 
-      - name: Create Unix Makefiles
-        run: |
-          cd cbuild
-          cmake -G "Unix Makefiles" ..
+#      - name: Create Unix Makefiles
+#        run: |
+#          cd cbuild
+#          cmake -G "Unix Makefiles" ..
 
       - name: Command - make
         run: |
