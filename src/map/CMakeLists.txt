@@ -54,6 +54,12 @@ function(add_module name)
     set( DEPENDENCIES ${DEPENDENCIES} ${MAP_SOURCE_DIR}/${name}.pcm )
 endfunction()
 
+add_compile_options(-fmodules)
+add_compile_options(-stdlib=libc++)
+add_compile_options(-fbuiltin-module-map)
+add_compile_options(-fimplicit-module-maps)
+add_compile_options(-fprebuilt-module-path=${MAP_SOURCE_DIR})
+
 foreach(MODULE_FILE ${MAP_MODULES})
 	# Extract the module name without the extension
 	get_filename_component(MODULE_NAME ${MODULE_FILE} NAME_WE)
