@@ -29,14 +29,14 @@ foreach(MODULE_FILE ${MAP_MODULES})
 	# Extract the module name without the extension
 	get_filename_component(MODULE_NAME ${MODULE_FILE} NAME_WE)
 	# Create a target for each module
-	add_library(${MODULE_NAME} OBJECT ${MODULE_NAME})
+	add_library(${MODULE_NAME} OBJECT ${MODULE_FILE})
 	# Add the module target to MODULE_LIBS
 	set ( MODULES ${MODULES} ${MODULE_FILE})
 endforeach()
 
-set( SOURCE_FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} ${MODULES} ${MAP_HEADERS} ${MAP_SOURCES} )
+set( SOURCE_FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} ${MAP_HEADERS} ${MAP_SOURCES} )
 source_group( common FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} )
-source_group( map FILES ${MODULES} ${MAP_HEADERS} ${MAP_SOURCES} )
+source_group( map FILES ${MAP_HEADERS} ${MAP_SOURCES} )
 include_directories( ${INCLUDE_DIRS} )
 
 #message( STATUS "map-server SOURCE_FILES=${SOURCE_FILES}")
