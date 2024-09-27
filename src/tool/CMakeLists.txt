@@ -34,13 +34,13 @@ add_executable(mapcache)
 target_link_libraries(mapcache PRIVATE tools)
 target_sources(mapcache PRIVATE "mapcache.cpp")
 
-set( TARGET_LIST ${TARGET_LIST} mapcache CACHE INTERNAL "" )
+set(TARGET_LIST ${TARGET_LIST} mapcache CACHE INTERNAL "")
 
-if( INSTALL_COMPONENT_RUNTIME )
-	cpack_add_component( Runtime_mapcache DESCRIPTION "mapcache generator" DISPLAY_NAME "mapcache" GROUP Runtime )
-	install( TARGETS mapcache
+if(INSTALL_COMPONENT_RUNTIME)
+	cpack_add_component(Runtime_mapcache DESCRIPTION "mapcache generator" DISPLAY_NAME "mapcache" GROUP Runtime)
+	install(TARGETS mapcache
 		DESTINATION "."
 		COMPONENT Runtime_mapcache
 	)
-	install (TARGETS )
 endif( INSTALL_COMPONENT_RUNTIME )
+

@@ -27,7 +27,7 @@ MAPCACHE_OBJ = obj_all/mapcache.o
 @SET_MAKE@
 
 #####################################################################
-.PHONY : all mapcache csv2yaml yaml2sql yamlupgrade clean help
+.PHONY : all mapcache clean help
 
 all: mapcache csv2yaml yaml2sql yamlupgrade
 
