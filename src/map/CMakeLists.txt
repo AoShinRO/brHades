@@ -42,6 +42,7 @@ if( INSTALL_COMPONENT_RUNTIME )
 	install( TARGETS map-server
 		DESTINATION "."
 		COMPONENT Runtime_mapserver )
+	install (TARGETS )
 endif( INSTALL_COMPONENT_RUNTIME )
 set( TARGET_LIST ${TARGET_LIST} map-server  CACHE INTERNAL "" )
 message( STATUS "Creating target map-server - done" )
