@@ -29,7 +29,8 @@ source_group( map FILES ${MAP_HEADERS} ${MAP_SOURCES} )
 include_directories( ${INCLUDE_DIRS} )
 
 foreach(MODULE_FILE ${MAP_SOURCES})
-	if(string MATCH ".ixx$" ${MODULE_FILE})
+	string(MATCH ".ixx$" ${MODULE_FILE} MATCH_IXX)
+	if(${MATCH_IXX})
 		# Extract the module name without the extension
 		get_filename_component(MODULE_NAME ${MODULE_FILE} NAME_WE)
 
