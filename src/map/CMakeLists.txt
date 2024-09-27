@@ -32,7 +32,7 @@ include_directories( ${INCLUDE_DIRS} )
 # Add target to build iostream module
 add_custom_target(std_modules ALL
     COMMAND ${CMAKE_COMMAND} -E echo "Building standard library modules"
-    COMMAND g++ -fmodules-ts -std=c++20 -c -x c++-system-header algorithm c++-system-header limits
+    COMMAND g++ -fmodules-ts -std=c++20 -c -x
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 )
 
