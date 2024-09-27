@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-20.04]
-        clang: ['6.0', '7', '8', '9', '10', '11','12','13']
+        clang: ['10', '11']
 
     steps:
       - uses: actions/checkout@v4
@@ -51,7 +51,7 @@ jobs:
 
       - name: Command - configure
         env:
-          CONFIGURE_FLAGS: CC=clang-10 CXX=clang++-10 --enable-buildbot=yes
+          CONFIGURE_FLAGS: 'CC=clang-${{ matrix.clang }} CXX=clang++-${{ matrix.clang }} --enable-buildbot=yes'
           CXXFLAGS: -std=c++20
         run: ./configure $CONFIGURE_FLAGS
 
