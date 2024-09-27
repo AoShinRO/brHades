@@ -28,6 +28,18 @@ source_group( common FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} )
 source_group( map FILES ${MAP_HEADERS} ${MAP_SOURCES} )
 include_directories( ${INCLUDE_DIRS} )
 
+foreach(MODULE_FILE ${MAP_SOURCES})
+	if(string MATCH ".ixx$" ${MODULE_FILE})
+		# Extract the module name without the extension
+		get_filename_component(MODULE_NAME ${MODULE_FILE} NAME_WE)
+
+		# Create a separate target for each module
+		add_library(${MODULE_NAME} OBJECT ${MODULE_FILE})
+
+		set( DEPENDENCIES ${MODULE_NAME} ${DEPENDENCIES} )
+	endif()
+endforeach()
+
 #message( STATUS "map-server SOURCE_FILES=${SOURCE_FILES}")
 add_executable( map-server ${SOURCE_FILES} )
 #message( STATUS "map-server LIBRARIES=${LIBRARIES}, DEPENDENCIES=${DEPENDENCIES} DEFINITIONS=${DEFINITIONS}")
