@@ -32,7 +32,7 @@ foreach(MODULE_FILE ${MAP_MODULES})
 	add_library(${MODULE_NAME} OBJECT ${MODULE_FILE})
 	# Add the module target to MODULE_LIBS
 	set ( MODULES ${MODULES} ${MODULE_FILE})
-	set ( MODULE_LIBS ${MODULE_LIBS} ${MODULE_NAME} PRIVATE )
+	set ( MODULE_LIBS ${MODULE_LIBS} ${MODULE_NAME} )
 endforeach()
 
 set( SOURCE_FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} ${MODULES} ${MAP_HEADERS} ${MAP_SOURCES} )
@@ -45,7 +45,7 @@ add_executable( map-server ${SOURCE_FILES} )
 
 #message( STATUS "map-server LIBRARIES=${LIBRARIES}, DEPENDENCIES=${DEPENDENCIES} DEFINITIONS=${DEFINITIONS}")
 add_dependencies( map-server ${DEPENDENCIES})
-target_link_libraries( map-server ${LIBRARIES} ${DEPENDENCIES} ${MODULE_LIBS})
+target_link_libraries( map-server PRIVATE ${LIBRARIES} ${DEPENDENCIES} ${MODULE_LIBS})
 set_target_properties( map-server PROPERTIES COMPILE_FLAGS "${DEFINITIONS}" )
 if( INSTALL_COMPONENT_RUNTIME )
 	cpack_add_component( Runtime_mapserver DESCRIPTION "map-server" DISPLAY_NAME "map-server" GROUP Runtime )
