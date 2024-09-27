@@ -8,7 +8,7 @@ set( MAP_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}  CACHE INTERNAL "" )
 #
 if( BUILD_SERVERS )
 message( STATUS "Creating target map-server" )
-file(GLOB MAP_MODULES ${MAP_SOURCE_DIR}/*.ixx)
+file(GLOB MAP_MODULES *.ixx)
 file(GLOB MAP_HEADERS ${MAP_SOURCE_DIR}/*.hpp)
 file(GLOB MAP_SOURCES ${MAP_SOURCE_DIR}/*.cpp)
 set( DEPENDENCIES common ryml)
@@ -40,7 +40,7 @@ include_directories( ${INCLUDE_DIRS} )
 
 	#set( LIBRARIES ${LIBRARIES} ${MODULE_NAME} )
 
-	#set( DEPENDENCIES ${MODULE_NAME} ${DEPENDENCIES} )
+	set( DEPENDENCIES ${MODULE_NAME} ${DEPENDENCIES} )
 #endforeach()
 
 #message( STATUS "map-server SOURCE_FILES=${SOURCE_FILES}")
