@@ -40,7 +40,7 @@ include_directories( ${INCLUDE_DIRS} )
 
 	#set( LIBRARIES ${LIBRARIES} ${MODULE_NAME} )
 
-	set( DEPENDENCIES ${MODULE_NAME} ${DEPENDENCIES} )
+	#set( DEPENDENCIES ${MODULE_NAME} ${DEPENDENCIES} )
 #endforeach()
 
 #message( STATUS "map-server SOURCE_FILES=${SOURCE_FILES}")

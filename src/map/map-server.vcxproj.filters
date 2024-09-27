@@ -280,6 +280,8 @@
     <ClCompile Include="vending.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="hades.ixx" />
+    <ClCompile Include="hades.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
