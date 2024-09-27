@@ -37,7 +37,7 @@ mapcache: obj_all $(MAPCACHE_OBJ) $(COMMON_DIR_OBJ)
 
 clean:
 	@echo "	CLEAN	tool"
-	@rm -rf obj_all/*.o ../../mapcache@EXEEXT@ ../../csv2yaml@EXEEXT@ ../../yaml2sql@EXEEXT@ ../../yamlupgrade@EXEEXT@
+	@rm -rf obj_all/*.o ../../mapcache@EXEEXT@
 
 help:
 	@echo "possible targets are 'mapcache' 'all' 'clean' 'help'"
