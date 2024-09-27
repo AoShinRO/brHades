@@ -7,6 +7,8 @@
 //#define DEBUG_HASH
 //#define DEBUG_DUMP_STACK
 
+import hades;
+
 #include "script.hpp"
 
 #include <cerrno>
