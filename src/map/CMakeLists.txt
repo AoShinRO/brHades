@@ -31,7 +31,7 @@ foreach(MODULE_FILE ${MAP_MODULES})
 	# Create a target for each module
 #	add_library(${MODULE_NAME} OBJECT ${MODULE_NAME})
 	# Add the module target to MODULE_LIBS
-	set ( MODULES ${MODULES} ${MODULE_NAME} PUBLIC)
+	set ( MODULES ${MODULES} ${MODULE_FILE} PUBLIC)
 endforeach()
 
 set( SOURCE_FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} ${MODULES} ${MAP_HEADERS} ${MAP_SOURCES} )
