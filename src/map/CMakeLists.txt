@@ -3,14 +3,14 @@
 #
 set( MAP_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}  CACHE INTERNAL "" )
 
+
 #
 # map server
 #
 if( BUILD_SERVERS )
 message( STATUS "Creating target map-server" )
-file(GLOB MAP_MODULES ${MAP_SOURCE_DIR}/*.ixx)
 file(GLOB MAP_HEADERS ${MAP_SOURCE_DIR}/*.hpp)
-file(GLOB MAP_SOURCES ${MAP_SOURCE_DIR}/*.cpp)
+file(GLOB MAP_SOURCES ${MAP_SOURCE_DIR}/*.cpp ${MAP_SOURCE_DIR}/*.ixx)
 set( DEPENDENCIES common ryml)
 set( LIBRARIES ${GLOBAL_LIBRARIES})
 set( INCLUDE_DIRS ${GLOBAL_INCLUDE_DIRS} ${COMMON_BASE_INCLUDE_DIRS} ${RA_INCLUDE_DIRS} )
@@ -23,25 +23,10 @@ if( WITH_PCRE )
 else()
 	message( STATUS "Disabled PCRE code" )
 endif()
-set( SOURCE_FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} ${MAP_MODULES} ${MAP_HEADERS} ${MAP_SOURCES} )
+set( SOURCE_FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} ${MAP_HEADERS} ${MAP_SOURCES} )
 source_group( common FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} )
-source_group( map FILES ${MAP_MODULES} ${MAP_HEADERS} ${MAP_SOURCES} )
+source_group( map FILES ${MAP_HEADERS} ${MAP_SOURCES} )
 include_directories( ${INCLUDE_DIRS} )
-
-#foreach(MODULE_FILE ${MAP_MODULES})
-	# Extract the module name without the extension
-	#get_filename_component(MODULE_NAME ${MODULE_FILE} NAME_WE)
-
-	# Create a separate target for each module
-	#add_library(${MODULE_NAME} OBJECT ${MODULE_FILE})
-
-	# Set compile options for each module
-	#target_compile_options(${MODULE_NAME} PUBLIC -std=c++20 -fmodules-ts)
-
-	#set( LIBRARIES ${LIBRARIES} ${MODULE_NAME} )
-
-	#set( DEPENDENCIES ${MODULE_NAME} ${DEPENDENCIES} )
-#endforeach()
 
 #message( STATUS "map-server SOURCE_FILES=${SOURCE_FILES}")
 add_executable( map-server ${SOURCE_FILES} )
