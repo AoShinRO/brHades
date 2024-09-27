@@ -29,7 +29,7 @@ foreach(MODULE_FILE ${MAP_MODULES})
 	# Extract the module name without the extension
 	get_filename_component(MODULE_NAME ${MODULE_FILE} NAME_WE)
 	# Create a target for each module
-#	add_library(${MODULE_NAME} OBJECT ${MODULE_NAME})
+	add_library(${MODULE_NAME} OBJECT ${MODULE_NAME})
 	# Add the module target to MODULE_LIBS
 	set ( MODULES ${MODULES} ${MODULE_FILE})
 endforeach()
@@ -44,7 +44,7 @@ add_executable( map-server ${SOURCE_FILES} )
 
 #message( STATUS "map-server LIBRARIES=${LIBRARIES}, DEPENDENCIES=${DEPENDENCIES} DEFINITIONS=${DEFINITIONS}")
 add_dependencies( map-server ${DEPENDENCIES})
-target_link_libraries( map-server ${LIBRARIES} ${DEPENDENCIES} )
+target_link_libraries( map-server ${LIBRARIES} ${DEPENDENCIES} ${MODULES})
 set_target_properties( map-server PROPERTIES COMPILE_FLAGS "${DEFINITIONS}" )
 if( INSTALL_COMPONENT_RUNTIME )
 	cpack_add_component( Runtime_mapserver DESCRIPTION "map-server" DISPLAY_NAME "map-server" GROUP Runtime )
