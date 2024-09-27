@@ -41,7 +41,7 @@ jobs:
 
       - name: Build solution in Debug (PRE-Renewal)
         if: ${{ matrix.mode == 'PRE' }}
-        run: msbuild brHades.sln -t:rebuild -property:Configuration=Debug /p:DefineConstants="BPRERE" /p:CppLanguageStandard="stdcpp20" /warnaserror
+        run: msbuild brHades.sln -t:rebuild -property:Configuration=Debug /p:DefineConstants="PRERE" /p:CppLanguageStandard="stdcpp20" /warnaserror
 
       - name: Build solution in Debug (Renewal)
         if: ${{ matrix.mode == 'RE' }}
