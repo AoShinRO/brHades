@@ -29,13 +29,21 @@ source_group( common FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} )
 source_group( map FILES ${MAP_HEADERS} ${MAP_MODULES} ${MAP_SOURCES} )
 include_directories( ${INCLUDE_DIRS} )
 
+foreach(MODULE_FILE ${MAP_MODULES})
+	# Extract the module name without the extension
+	get_filename_component(MODULE_NAME ${MODULE_FILE} NAME_WE)
+	# Create a target for each module
+	add_library(${MODULE_NAME} OBJECT ${MODULE_FILE})
+	set ( MODULE_LIBS ${MODULE_LIBS} ${MODULE_NAME} )
+endforeach()
+
 add_library(hades MODULE hades.ixx)
 
 #message( STATUS "map-server SOURCE_FILES=${SOURCE_FILES}")
 add_executable( map-server ${SOURCE_FILES} )
 #message( STATUS "map-server LIBRARIES=${LIBRARIES}, DEPENDENCIES=${DEPENDENCIES} DEFINITIONS=${DEFINITIONS}")
 add_dependencies( map-server ${DEPENDENCIES} )
-target_link_libraries( map-server ${LIBRARIES} ${DEPENDENCIES} )
+target_link_libraries( map-server ${LIBRARIES} ${DEPENDENCIES} ${MODULE_LIBS} )
 set_target_properties( map-server PROPERTIES COMPILE_FLAGS "${DEFINITIONS}" )
 if( INSTALL_COMPONENT_RUNTIME )
 	cpack_add_component( Runtime_mapserver DESCRIPTION "map-server" DISPLAY_NAME "map-server" GROUP Runtime )
