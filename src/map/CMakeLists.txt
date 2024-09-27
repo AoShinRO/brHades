@@ -25,18 +25,18 @@ else()
 	message( STATUS "Disabled PCRE code" )
 endif()
 
-#foreach(MODULE_FILE ${MAP_MODULES})
+foreach(MODULE_FILE ${MAP_MODULES})
 	# Extract the module name without the extension
-#	get_filename_component(MODULE_NAME ${MODULE_FILE} NAME_WE)
+	get_filename_component(MODULE_NAME ${MODULE_FILE} NAME_WE)
 	# Create a target for each module
 #	add_library(${MODULE_NAME} OBJECT ${MODULE_NAME})
 	# Add the module target to MODULE_LIBS
-#	set ( MODULE_LIBS ${MODULE_LIBS} ${MODULE_NAME})
-#endforeach()
+	set ( MODULES ${MODULES} ${MODULE_NAME} PUBLIC)
+endforeach()
 
-set( SOURCE_FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} ${MAP_MODULES} ${MAP_HEADERS} ${MAP_SOURCES} )
+set( SOURCE_FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} ${MODULES} ${MAP_HEADERS} ${MAP_SOURCES} )
 source_group( common FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} )
-source_group( map FILES ${MAP_MODULES} ${MAP_HEADERS} ${MAP_SOURCES} )
+source_group( map FILES ${MODULES} ${MAP_HEADERS} ${MAP_SOURCES} )
 include_directories( ${INCLUDE_DIRS} )
 
 #message( STATUS "map-server SOURCE_FILES=${SOURCE_FILES}")
