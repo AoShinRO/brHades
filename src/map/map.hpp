@@ -9,9 +9,6 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include <limits>
-#include <type_traits>
-#include <any>
 
 #include <common/cbasetypes.hpp>
 #include <common/core.hpp> // CORE_ST_LAST
@@ -1295,14 +1292,6 @@ extern char market_table[32];
 extern char partybookings_table[32];
 extern char roulette_table[32];
 extern char guild_storage_log_table[32];
-
-// Cap input to numeric limits of target value and safecast it
-// @param input: any value
-// @return static_cast<decltype(T)> capped min/max value
-template <typename TargetType, typename InputType>
-constexpr forceinline TargetType hades_cast(InputType input) {
-	return static_cast<TargetType>(std::clamp(input, static_cast<InputType>(std::numeric_limits<TargetType>::min()), static_cast<InputType>(std::numeric_limits<TargetType>::max())));	
-}
 
 void do_shutdown(void);
 

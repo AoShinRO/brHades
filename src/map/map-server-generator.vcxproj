@@ -286,6 +286,7 @@
     <ClCompile Include="trade.cpp" />
     <ClCompile Include="unit.cpp" />
     <ClCompile Include="vending.cpp" />
+	<ClCompile Include="hades.ixx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

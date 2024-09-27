@@ -257,6 +257,7 @@
     <ClCompile Include="duel.cpp" />
     <ClCompile Include="elemental.cpp" />
     <ClCompile Include="guild.cpp" />
+    <ClCompile Include="hades.ixx" />
     <ClCompile Include="homunculus.cpp" />
     <ClCompile Include="instance.cpp" />
     <ClCompile Include="intif.cpp" />

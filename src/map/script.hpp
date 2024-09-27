@@ -4,6 +4,8 @@
 #ifndef SCRIPT_HPP
 #define SCRIPT_HPP
 
+import hades;
+
 #include <ryml_std.hpp>
 #include <ryml.hpp>
 

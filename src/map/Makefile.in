@@ -22,7 +22,8 @@ MAP_OBJ = $(shell ls *.cpp | sed -e "s/\.cpp/\.o/g")
 #MAP_OBJ += $(shell ls *.c | sed -e "s/\.c/\.o/g")
 MAP_DIR_OBJ = $(MAP_OBJ:%=obj/%)
 MAP_GEN_DIR_OBJ = $(MAP_OBJ:%=obj-gen/%)
-MAP_H = $(shell ls ../map/*.hpp) \
+MAP_H = $(shell ls ../map/*.ixx) \	
+	$(shell ls ../map/*.hpp) \
 	$(shell ls ../config/*.hpp) \
 	../custom/battle_config_struct.inc
 
@@ -96,6 +97,10 @@ map-server-generator: obj-gen $(MAP_GEN_DIR_OBJ) $(COMMON_AR) $(LIBCONFIG_AR) $(
 
 # map object files
 #cause this one failling otherwise
+obj/hadex.o: hadex.ixx $(MAP_H) $(COMMON_H) $(LIBCONFIG_H) $(RAPIDYAML_H)
+	@echo "	CXX	$< (custom rule)"
+	@@CXX@ @CXXFLAG_CLEARS@ $(COMMON_INCLUDE) $(RA_INCLUDE) $(LIBCONFIG_INCLUDE) $(PCRE_CFLAGS) $(RAPIDYAML_INCLUDE) @MYSQL_CFLAGS@ @CPPFLAGS@ -c $(OUTPUT_OPTION) $<
+
 obj/npc.o: npc.cpp $(MAP_H) $(COMMON_H) $(LIBCONFIG_H) $(RAPIDYAML_H)
 	@echo "	CXX	$< (custom rule)"
 	@@CXX@ @CXXFLAG_CLEARS@ $(COMMON_INCLUDE) $(RA_INCLUDE) $(LIBCONFIG_INCLUDE) $(PCRE_CFLAGS) $(RAPIDYAML_INCLUDE) @MYSQL_CFLAGS@ @CPPFLAGS@ -c $(OUTPUT_OPTION) $<
