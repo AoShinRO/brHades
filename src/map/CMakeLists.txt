@@ -50,14 +50,14 @@ function(add_module name)
                 -o ${MAP_SOURCE_DIR}/${name}.pcm
 
             )
+    # Add a dependency for each module on the map-server target
+    set( DEPENDENCIES ${DEPENDENCIES} ${MAP_SOURCE_DIR}/${name}.pcm )
 endfunction()
 
 foreach(MODULE_FILE ${MAP_MODULES})
 	# Extract the module name without the extension
 	get_filename_component(MODULE_NAME ${MODULE_FILE} NAME_WE)
 	add_module(${MODULE_NAME} ${MODULE_FILE})
-	# Add a dependency for each module on the map-server target
-	set( DEPENDENCIES ${DEPENDENCIES} ${MODULE_NAME} )
 endforeach()
 
 #message( STATUS "map-server SOURCE_FILES=${SOURCE_FILES}")
