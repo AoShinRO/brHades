@@ -37,6 +37,8 @@ foreach(MODULE_FILE ${MAP_MODULES})
 
 	# Set compile options for each module
 	target_compile_options(${MODULE_NAME} PUBLIC -std=c++20 -fmodules-ts)
+
+	set( LIBRARIES ${LIBRARIES} ${MODULE_NAME} )
 endforeach()
 
 #message( STATUS "map-server SOURCE_FILES=${SOURCE_FILES}")
