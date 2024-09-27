@@ -37,8 +37,6 @@ foreach(MODULE_FILE ${MAP_MODULES})
 	set ( MODULE_LIBS ${MODULE_LIBS} ${MODULE_NAME} )
 endforeach()
 
-add_library(hades MODULE hades.ixx)
-
 #message( STATUS "map-server SOURCE_FILES=${SOURCE_FILES}")
 add_executable( map-server ${SOURCE_FILES} )
 #message( STATUS "map-server LIBRARIES=${LIBRARIES}, DEPENDENCIES=${DEPENDENCIES} DEFINITIONS=${DEFINITIONS}")
