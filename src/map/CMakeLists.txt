@@ -36,7 +36,8 @@ foreach(MODULE_FILE ${MAP_MODULES})
 	get_filename_component(MODULE_NAME ${MODULE_FILE} NAME_WE)
 	# Create a target for each module
 	add_library(${MODULE_NAME} OBJECT ${MODULE_FILE})
-	set ( LIBRARIES ${LIBRARIES} ${MODULE_NAME} )
+	#set ( LIBRARIES ${LIBRARIES} ${MODULE_NAME} )
+	set ( DEPENDENCIES ${DEPENDENCIES} ${MODULE_NAME} )
 endforeach()
 
 #message( STATUS "map-server SOURCE_FILES=${SOURCE_FILES}")
