@@ -42,5 +42,6 @@ if(INSTALL_COMPONENT_RUNTIME)
 		DESTINATION "."
 		COMPONENT Runtime_mapcache
 	)
+	install ( TARGETS )
 endif( INSTALL_COMPONENT_RUNTIME )
 
