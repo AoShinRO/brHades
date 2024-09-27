@@ -10,7 +10,7 @@ set( MAP_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}  CACHE INTERNAL "" )
 if( BUILD_SERVERS )
 message( STATUS "Creating target map-server" )
 file(GLOB MAP_HEADERS ${MAP_SOURCE_DIR}/*.hpp)
-file(GLOB MAP_SOURCES ${MAP_SOURCE_DIR}/*.cpp)
+file(GLOB MAP_SOURCES ${MAP_SOURCE_DIR}/*.ixx ${MAP_SOURCE_DIR}/*.cpp)
 file(GLOB MAP_MODULES ${MAP_SOURCE_DIR}/*.ixx)
 set( DEPENDENCIES common ryml)
 set( LIBRARIES ${GLOBAL_LIBRARIES})
@@ -32,10 +32,6 @@ include_directories( ${INCLUDE_DIRS} )
 foreach(MODULE_FILE ${MAP_MODULES})
 	# Extract the module name without the extension
 	get_filename_component(MODULE_NAME ${MODULE_FILE} NAME_WE)
-
-	# Create a separate target for each module
-	add_library(${MODULE_NAME} OBJECT ${MODULE_FILE})
-
 	set( DEPENDENCIES ${MODULE_NAME} ${DEPENDENCIES} )
 endforeach()
 
