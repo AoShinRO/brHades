@@ -29,17 +29,35 @@ source_group( common FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} )
 source_group( map FILES ${MAP_HEADERS} ${MAP_SOURCES} )
 include_directories( ${INCLUDE_DIRS} )
 
+
+#add_compile_options(-fmodules)
+#add_compile_options(-stdlib=libc++)
+#add_compile_options(-fbuiltin-module-map)
+#add_compile_options(-fimplicit-module-maps)
+#add_compile_options(-fprebuilt-module-path=${MAP_SOURCE_DIR})
+
+function(add_module name)
+    file(MAKE_DIRECTORY ${MAP_SOURCE_DIR})
+    add_custom_target(${name}.pcm
+            COMMAND
+                ${CMAKE_CXX_COMPILER}
+                -std=c++20
+                -stdlib=libc++
+                -fmodules
+                -c
+                ${CMAKE_CURRENT_SOURCE_DIR}/${ARGN}
+                -Xclang -emit-module-interface
+                -o ${MAP_SOURCE_DIR}/${name}.pcm
+
+            )
+endfunction()
+
 foreach(MODULE_FILE ${MAP_MODULES})
 	# Extract the module name without the extension
 	get_filename_component(MODULE_NAME ${MODULE_FILE} NAME_WE)
-
-	# Create a separate target for each module
-	add_library(${MODULE_NAME} OBJECT ${MODULE_FILE})
-
+	add_module(${MODULE_NAME} ${MODULE_FILE})
 	# Add a dependency for each module on the map-server target
-	add_dependencies(map-server ${MODULE_NAME})
-
-	set( DEPENDENCIES ${MODULE_NAME} ${DEPENDENCIES} )
+	set( DEPENDENCIES ${DEPENDENCIES} ${MODULE_NAME} )
 endforeach()
 
 #message( STATUS "map-server SOURCE_FILES=${SOURCE_FILES}")
