@@ -25,7 +25,7 @@ else()
 endif()
 set( SOURCE_FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} ${MAP_MODULES} ${MAP_HEADERS} ${MAP_SOURCES} )
 source_group( common FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} )
-source_group( map FILES ${MAP_HEADERS} ${MAP_SOURCES} )
+source_group( map FILES ${MAP_MODULES} ${MAP_HEADERS} ${MAP_SOURCES} )
 include_directories( ${INCLUDE_DIRS} )
 
 #foreach(MODULE_FILE ${MAP_MODULES})
