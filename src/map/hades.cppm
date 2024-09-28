@@ -1,6 +1,7 @@
 // Este modulo vai ser usado para criar funçoes globais reutilizaveis
 module;
 export module hades;
+
 import <algorithm>;
 import <limits>;
 
@@ -12,5 +13,5 @@ TargetType hades_cast(InputType input) {
 	return static_cast<TargetType>(
 		std::clamp(input,
 			static_cast<InputType>(std::numeric_limits<TargetType>::min()),
-			static_cast<InputType>(std::numeric_limits<TargetType>::max())));	
+			static_cast<InputType>(std::numeric_limits<TargetType>::max())));
 }
