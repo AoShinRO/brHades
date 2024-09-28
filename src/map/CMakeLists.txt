@@ -32,6 +32,9 @@ include_directories( ${INCLUDE_DIRS} )
 
 file(MAKE_DIRECTORY ${MAP_SOURCE_DIR}/gcm.cache)
 
+# Ajusta permissões de leitura, escrita e execução para todos (chmod 777)
+execute_process(COMMAND chmod 777 ${MAP_SOURCE_DIR}/gcm.cache)
+
 foreach(MODULE_FILE ${MAP_MODULES})
 	# Extract the module name without the extension
 	get_filename_component(MODULE_NAME ${MODULE_FILE} NAME_WE)

@@ -42,9 +42,6 @@ jobs:
       - name: Create build directory
         run: mkdir cbuild
 
-      - name: Grant execute permissions to configure
-        run: chmod +x ./home/runner/work/brHades/brHades/src/map/gcm.cache
-
       - name: Configure project with CMake (C++20)
         run: |
           cd cbuild
