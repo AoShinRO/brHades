@@ -1,183 +1,127 @@
-# Contributing to rAthena
+# Contribuindo para o brHades
 
+Tabela de Conteúdos
+-------------------
 
-Table of Contents
------------------
+  * [Relatar Bugs](#relatar-bugs)
+  * [Sugerir Melhorias](#sugerir-melhorias)
+  * [Rótulos de Problemas](#rótulos-de-problemas)
+  * [Ambiente de Desenvolvimento Local](#ambiente-de-desenvolvimento-local)
+  * [Torne-se um Membro da Equipe](#torne-se-um-membro-da-equipe)
 
-  * [Reporting Bugs](#reporting-bugs)
-  * [Suggesting Enhancements](#suggesting-enhancements)
-  * [Issue Labels](#issue-labels)
-  * [Local Development Environment](#local-development-environment)
-  * [Become a Team Member](#become-a-team-member)
-
-Reporting Bugs
---------------
-
-This bit of information is here to guide you through the process of creating a bug report for rAthena! Issues cannot only be used for developers to track bugs, but they can also track enhancements and tasks. The more detailed your report is, the easier it is for developers to reproduce and resolve the bug!
-
-### Did you find a bug? :bug:
-
-* **Ensure the bug is not coming from a customization** within your files!
-* **Ensure the bug was not already reported** by searching on GitHub under [Issues](https://github.com/rathena/rathena/issues). If the same issue exists, feel free to leave a comment and tell us you are experiencing the issue as well and if possible add some additional or missing information!
-* If you are unable to find an open issue addressing the problem, [open a new one](#submit-a-bug-report)!
-
-#### Submit A Bug Report :inbox_tray:
-
-There are several things that go into making a bug report a good bug report!
-
-This is a breakdown of a generic Issue:
-* **Title** should give some general insight as to what the bug is about.
-* **Description** should give greater detail of the bug that cannot be explained in the **Title**.
-* **Labels** are colored to represent a category they fall into.
-* **Milestones** are what developers use to group tasks together and quickly evaluate how close the project deliverable is near completion.
-* **Assignees** are developers who are directly linked to resolve the issue.
-* **Comments** allow other members to give feedback on the issue.
-
-#### What are some good details to provide in a bug report? :pencil2:
-
-When describing your Issue through the **Description** area, it is recommended that you provide as much information as possible to resolve the Issue as fast as possible. Keep in mind that you can tag people within the **Description** area through the `@mention` feature. You can also tag other Issues or Pull Requests by typing `#` which will pull up a list of issues. You can find a markdown guide at [Mastering Markdown](https://guides.github.com/features/mastering-markdown/).
-Some information to keep in mind while creating an Issue:
-* **GitHub Hash**: The hash is a 40 alpha-numeric string (which can be broken down to the first 7 characters) which states the version you are at. (**If you are using SVN instead of Git:** Please also put the change date and first line of the commit message beside the revision number, or we will not be able to look up the corresponding Git hash).
-* **Client Date**: The client date provides specific details depending on the issue. The main detail is that it helps narrow down issues that are related to a packet problem.
-* **Modifications that may affect results**: It is always best to try to reproduce your issue on a clean rAthena if you have lots of modifications.
-* **Description of Issue**: Describe your issue in detail! Screenshots and videos help a lot! Please also provide crash dumps if one of the servers is crashing.
-* **How to Reproduce Issue**: Describe how to reproduce your issue in detail! The more the merrier!
-* **Official Info**: Provide creditable sources to state why it is a bug! Please do not provide an iRO Wiki link as there is a high chance it does not match kRO behavior.
-
-#### Be wary of the `@mention` feature! :warning:
-
-Since rAthena uses custom `@commands`, when describing an issue that deals with these commands please keep in mind that this does clash with the `@mention` system for GitHub! Always quote the text when mentioning an ``` `@command` ```(like this) so that you do not tag uninvolved GitHub users!
-
-Suggesting Enhancements
------------------------
-
-### Did you write a patch that fixes a bug? :bookmark_tabs:
-
-* Open a new GitHub Pull Request with the patch.
-* Ensure the PR description clearly describes the problem and solution. Include the relevant issue number if applicable.
-
-### Do you intend to add a new feature or change an existing one? :bulb:
-
-* Open a new GitHub Pull Request with the feature addition or changes.
-* Ensure the PR description clearly describes what the addition or changes are for. Include the relevant issue number if applicable.
-
-#### How to create Pull Requests :pencil:
-
-1. Make sure you have a [GitHub account](https://github.com/signup/free).
-2. Next, you will need to [fork rAthena](https://help.github.com/articles/fork-a-repo/#fork-an-example-repository) to your account.
-3. Before making changes, make sure you [create a new branch](https://help.github.com/articles/creating-and-deleting-branches-within-your-repository/) for your working tree.
-4. After completing your changes, commit and push it to your branch.
-5. Now you are ready to [create a Pull Request](https://help.github.com/articles/creating-a-pull-request/) for rAthena!
-  * Upon creating the Pull Request, make sure you follow our [template](https://github.com/rathena/rathena/blob/master/.github/PULL_REQUEST_TEMPLATE.md) and provide the required information.
-  * **OPTIONAL**: We would greatly appreciate those that check the box to [allow edits by maintainers](https://help.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/), so we can apply small cleanups or additions to your changes before merging them!
-
-Issue Labels
+Relatar Bugs
 ------------
 
-For the most part you as a user will have no reason to worry about the **Milestone** or **Assignee** parts of an Issue. The different **Labels** of an Issue allow developers to quickly understand the issue and also allows for fast searching or sorting.
+Este guia o orientará no processo de criação de um relatório de bug para o brHades! Problemas podem ser usados não apenas para rastrear bugs, mas também para acompanhar melhorias e tarefas. Quanto mais detalhado for seu relatório, mais fácil será para os desenvolvedores reproduzirem e resolverem o bug!
 
-:bangbang: Users should be aware of the 'Mode' and 'Status' Type **Labels** as these sometimes require feedback! :bangbang:
+### Encontrou um bug? :bug:
 
-#### Component
+* **Certifique-se de que o bug não vem de uma personalização** nos seus arquivos!
+* **Certifique-se de que o bug não foi relatado anteriormente** procurando no GitHub em [Issues](https://github.com/AoShinRo/brHades/issues). Se o mesmo problema existir, sinta-se à vontade para deixar um comentário dizendo que você também está enfrentando o problema e, se possível, adicione algumas informações adicionais ou ausentes!
+* Se não encontrar um problema aberto que trate do problema, [abra um novo](#enviar-um-relatório-de-bug)!
 
-| Label Name | Search Link | Description |
-| --- | --- | --- |
-| `component:core` | [search][search-rathena-label-componentcore] | A fault that lies within the main framework of rAthena. |
-| `component:database` | [search][search-rathena-label-componentdatabase] | A fault that lies within the database of rAthena. |
-| `component:documentation` | [search][search-rathena-label-componentdocumentation] | A fault that lies within the documentation of rAthena. |
-| `component:script` | [search][search-rathena-label-componentscript] | A fault that lies within the scripts of rAthena. |
-| `component:skill` | [search][search-rathena-label-componentskill] | A fault that deals specifically with a skill. |
-| `component:tool` | [search][search-rathena-label-componenttool] | A fault that lies within a tool of rAthena. |
+#### Enviar um Relatório de Bug :inbox_tray:
 
-#### Missing
-| Label Name | Search Link | Description |
-| --- | --- | --- |
-| `missing:clientdate` | [search][search-rathena-label-missingclientdate] | Issue **Title** or **Description** does not state the client date used to create the bug. |
-| `missing:mode` | [search][search-rathena-label-missingmode] | Issue **Title** or **Description** does not state pre-renewal or renewal mode. |
-| `missing:revision` | [search][search-rathena-label-missingrevision] | Issue **Description** does not state the revision of rAthena used when the bug occurred. |
+Há vários elementos que compõem um bom relatório de bug!
 
-#### Mode
-| Label Name | Search Link | Description |
-| --- | --- | --- |
-| `mode:prerenewal` | [search][search-rathena-label-modeprerenewal] | A fault that exists within the pre-renewal mode. |
-| `mode:renewal` | [search][search-rathena-label-moderenewal] | A fault that exists within the renewal mode. |
+Aqui está um resumo de uma Issue genérica:
+* **Título** deve fornecer uma visão geral do que o bug se trata.
+* **Descrição** deve fornecer mais detalhes sobre o bug que não podem ser explicados no **Título**.
+* **Rótulos** são coloridos para representar uma categoria na qual se enquadram.
+* **Marcos** são usados pelos desenvolvedores para agrupar tarefas e avaliar rapidamente quão próximo o projeto está da conclusão.
+* **Atribuídos** são os desenvolvedores diretamente vinculados para resolver o problema.
+* **Comentários** permitem que outros membros deem feedback sobre o problema.
 
-#### Priority
+#### Quais são alguns bons detalhes para incluir no relatório de bug? :pencil2:
 
-| Label Name | Search Link | Description |
-| --- | --- | --- |
-| `priority:high` | [search][search-rathena-label-priorityhigh] | A fault that makes rAthena unstable or unusable. |
-| `priority:medium` | [search][search-rathena-label-prioritymedium] | A fault that makes rAthena have significant repercussions but does not render rAthena unusable. |
-| `priority:low` | [search][search-rathena-label-prioritylow] | A fault that affects rAthena in one piece of functionality and is self-contained. |
+Ao descrever seu problema na área de **Descrição**, recomenda-se fornecer o máximo de informações possível para que o problema seja resolvido rapidamente. Lembre-se de que você pode marcar pessoas usando a funcionalidade `@mention`. Você também pode marcar outras Issues ou Pull Requests digitando `#`, o que exibirá uma lista de problemas. Você pode encontrar um guia de markdown em [Mastering Markdown](https://guides.github.com/features/mastering-markdown/).
+Aqui estão algumas informações para lembrar ao criar uma Issue:
+* **GitHub Hash**: O hash é uma string alfanumérica de 40 caracteres (que pode ser reduzida aos 7 primeiros caracteres) que indica a versão que você está usando. (**Se você estiver usando SVN em vez de Git:** Inclua a data da alteração e a primeira linha da mensagem de commit ao lado do número da revisão, ou não conseguiremos buscar o hash correspondente do Git).
+* **Data do Cliente**: A data do cliente fornece detalhes específicos dependendo do problema. O principal detalhe é que ajuda a restringir problemas relacionados a pacotes.
+* **Modificações que podem afetar os resultados**: Sempre é melhor tentar reproduzir o problema em uma instalação limpa do brHades se você tiver muitas modificações.
+* **Descrição do Problema**: Descreva seu problema em detalhes! Capturas de tela e vídeos ajudam muito! Forneça também dumps de crash se um dos servidores estiver travando.
+* **Como Reproduzir o Problema**: Descreva como reproduzir o problema em detalhes! Quanto mais informações, melhor!
+* **Informações Oficiais**: Forneça fontes confiáveis para indicar por que é um bug! Por favor, não forneça links da iRO Wiki, pois há uma grande chance de que não correspondam ao comportamento do kRO.
 
-#### Status
+#### Cuidado com a funcionalidade `@mention`! :warning:
 
-| Label Name | Search Link | Description |
-| --- | --- | --- |
-| `status:code-review` | [search][search-rathena-label-statuscodereview] | Pull Request that requires reviewing from other developers before being pushed to master. |
-| `status:confirmed` | [search][search-rathena-label-statusconfirmed] | Issue that has been validated by a developer to affect rAthena. |
-| `status:duplicate` | [search][search-rathena-label-statusduplicate] |  Issue that has been reported before. |
-| `status:inprogress` | [search][search-rathena-label-statusinprogress] | Issue that has begun resolution by a developer. |
-| `status:invalid` | [search][search-rathena-label-statusinvalid] | Issue that is either not official or is not related to rAthena. |
-| `status:need more info` | [search][search-rathena-label-statusneedmoreinfo] | Issue that needs more information from a creditable source. |
-| `status:need user input` | [search][search-rathena-label-statusneeduserinput] | Issue that needs more information from the issue creator. |
-| `status:outdated emulator` | [search][search-rathena-label-statusoutdatedemulator] | Issue that requires the creator's local files to be updated to be resolved. |
-| `status:unable to reproduce` | [search][search-rathena-label-statusunabletoreproduce] | Issue that was unable to be reproduced on rAthena. |
-| `status:wontfix` | [search][search-rathena-label-statuswontfix] |  Issue that cannot be fixed through some limitation or is intended behavior. |
+Como o brHades usa `@comandos` personalizados, ao descrever um problema que trata desses comandos, lembre-se de que isso entra em conflito com o sistema de `@mention` do GitHub! Sempre coloque o texto entre aspas ao mencionar um ``` `@comando` ```(dessa forma) para não marcar usuários do GitHub não relacionados!
 
-#### Type
-| Label Name | Search Link | Description |
-| --- | --- | --- |
-| `type:bug` | [search][search-rathena-label-typebug] | Issue that is a bug within rAthena. |
-| `type:enhancement` | [search][search-rathena-label-typeenhancement] | Issue that is an enhancement to rAthena. |
-| `type:maintenance` | [search][search-rathena-label-typemaintenance] | Issue for refactoring rAthena. |
-| `type:question` | [search][search-rathena-label-typequestion] | Issue that is a question for rAthena. |
+Sugerir Melhorias
+-----------------
 
-[search-rathena-label-componentcore]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Acomponent%3Acore
-[search-rathena-label-componentdatabase]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Acomponent%3Adatabase
-[search-rathena-label-componentdocumentation]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Acomponent%3Adocumentation
-[search-rathena-label-componentscript]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Acomponent%3Ascript
-[search-rathena-label-componentskill]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Acomponent%3Askill
-[search-rathena-label-componenttool]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Acomponent%3Atool
-[search-rathena-label-missingclientdate]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Amissing%3Aclientdate
-[search-rathena-label-missingmode]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Amissing%3Amode
-[search-rathena-label-missingrevision]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Amissing%3Arevision
-[search-rathena-label-modeprerenewal]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Amode%3Aprerenewal
-[search-rathena-label-moderenewal]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Amode%3Arenewal
-[search-rathena-label-priorityhigh]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Apriority%3Ahigh
-[search-rathena-label-prioritymedium]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Apriority%3Amedium
-[search-rathena-label-prioritylow]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Apriority%3Alow
-[search-rathena-label-statuscodereview]: https://github.com/rathena/rathena/pulls?q=is%3Apr+is%3Aopen+label%3Astatus%3Acode-review
-[search-rathena-label-statusconfirmed]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Astatus%3Aconfirmed
-[search-rathena-label-statusduplicate]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Astatus%3Aduplicate
-[search-rathena-label-statusinprogress]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Astatus%3Ainprogress
-[search-rathena-label-statusinvalid]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Astatus%3Ainvalid
-[search-rathena-label-statusneedmoreinfo]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3A"status%3Aneed+more+info"
-[search-rathena-label-statusneeduserinput]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3A"status%3Aneed+user+input"
-[search-rathena-label-statusoutdatedemulator]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3A"status%3Aoutdated+emulator"
-[search-rathena-label-statusunabletoreproduce]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3A"status%3Aunable+to+reproduce"
-[search-rathena-label-statuswontfix]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Astatus%3Awontfix
-[search-rathena-label-typebug]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Abug
-[search-rathena-label-typeenhancement]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Aenhancement
-[search-rathena-label-typemaintenance]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Amaintenance
-[search-rathena-label-typequestion]: https://github.com/rathena/rathena/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Aquestion
+### Você escreveu um patch que corrige um bug? :bookmark_tabs:
 
-Local Development Environment
------------------------------
+* Abra um novo Pull Request no GitHub com o patch.
+* Certifique-se de que a descrição do PR descreva claramente o problema e a solução. Inclua o número do problema relevante, se aplicável.
 
-Developers can get up and running quickly with a Dockerized development environment that installs all dependencies needed to run and develop on rAthena.
-See [Docker documentation](https://github.com/rathena/rathena/blob/master/tools/docker/README.md) for details
+### Pretende adicionar um novo recurso ou alterar um existente? :bulb:
 
+* Abra um novo Pull Request no GitHub com a adição ou alteração de recursos.
+* Certifique-se de que a descrição do PR descreva claramente para que servem a adição ou as alterações. Inclua o número do problema relevante, se aplicável.
 
-Become a Team Member
+#### Como criar Pull Requests :pencil:
+
+1. Certifique-se de ter uma [conta no GitHub](https://github.com/signup/free).
+2. Em seguida, você precisará [fazer um fork do brHades](https://help.github.com/articles/fork-a-repo/#fork-an-example-repository) para sua conta.
+3. Antes de fazer alterações, certifique-se de [criar um novo branch](https://help.github.com/articles/creating-and-deleting-branches-within-your-repository/) para sua árvore de trabalho.
+4. Após concluir suas alterações, faça commit e push para seu branch.
+5. Agora você está pronto para [criar um Pull Request](https://help.github.com/articles/creating-a-pull-request/) para o brHades!
+  * Ao criar o Pull Request, siga nosso [template](https://github.com/AoShinRo/brHades/blob/master/.github/PULL_REQUEST_TEMPLATE.md) e forneça as informações necessárias.
+  * **OPCIONAL**: Agradecemos muito aqueles que marcam a opção para [permitir edições por mantenedores](https://help.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/), para que possamos aplicar pequenas correções ou adições às suas alterações antes de fazer o merge!
+
+Rótulos de Problemas
 --------------------
 
-1. Before you send in a staff application, make sure you have an [rAthena account](https://rathena.org/board/register/).
-    * If you are new to the community, go ahead and [introduce yourself](https://rathena.org/board/forum/89-introductions/)!
-2. Please fill out the [Staff Application](https://rathena.org/board/staffapplications/) and you will be notified shortly.
+Na maioria das vezes, você, como usuário, não precisará se preocupar com as partes de **Marco** ou **Atribuído** de uma Issue. Os diferentes **Rótulos** permitem que os desenvolvedores entendam rapidamente o problema e também permitem uma busca rápida ou ordenação.
 
-The rAthena team is comprised of all volunteers ([AUTHORS](https://github.com/rathena/rathena/blob/master/AUTHORS)). We encourage you to pitch in and submit bug reports or Pull Requests!
+:bangbang: Os usuários devem estar cientes dos rótulos do tipo 'Modo' e 'Status', pois às vezes requerem feedback! :bangbang:
 
-Thanks!
+#### Componente
 
-rAthena Team
+| Nome do Rótulo | Link de Busca | Descrição |
+| --- | --- | --- |
+| `component:core` | [buscar][buscar-brHades-label-componentcore] | Um erro no núcleo do brHades. |
+| `component:database` | [buscar][buscar-brHades-label-componentdatabase] | Um erro no banco de dados do brHades. |
+| `component:documentation` | [buscar][buscar-brHades-label-componentdocumentation] | Um erro na documentação do brHades. |
+| `component:script` | [buscar][buscar-brHades-label-componentscript] | Um erro nos scripts do brHades. |
+| `component:skill` | [buscar][buscar-brHades-label-componentskill] | Um erro que lida especificamente com uma habilidade. |
+| `component:tool` | [buscar][buscar-brHades-label-componenttool] | Um erro em uma ferramenta do brHades. |
+
+#### Faltando
+| Nome do Rótulo | Link de Busca | Descrição |
+| --- | --- | --- |
+| `missing:clientdate` | [buscar][buscar-brHades-label-missingclientdate] | O **Título** ou **Descrição** do problema não indica a data do cliente usada para criar o bug. |
+| `missing:mode` | [buscar][buscar-brHades-label-missingmode] | O **Título** ou **Descrição** do problema não indica o modo pré-renovação ou renovação. |
+| `missing:revision` | [buscar][buscar-brHades-label-missingrevision] | A **Descrição** do problema não indica a revisão do brHades usada quando o bug ocorreu. |
+
+#### Modo
+| Nome do Rótulo | Link de Busca | Descrição |
+| --- | --- | --- |
+| `mode:prerenewal` | [buscar][buscar-brHades-label-modeprerenewal] | Um erro que existe no modo pré-renovação. |
+| `mode:renewal` | [buscar][buscar-brHades-label-moderenewal] | Um erro que existe no modo renovação. |
+
+#### Prioridade
+
+| Nome do Rótulo | Link de Busca | Descrição |
+| --- | --- | --- |
+| `priority:high` | [buscar][buscar-brHades-label-priorityhigh] | Um erro que torna o brHades instável ou inutilizável. |
+| `priority:medium` | [buscar][buscar-brHades-label-prioritymedium] | Um erro que causa repercussões significativas, mas não torna o brHades inutilizável. |
+| `priority:low` | [buscar][buscar-brHades-label-prioritylow] | Um erro que é trivial. |
+
+Ambiente de Desenvolvimento Local
+---------------------------------
+
+Veja o guia de configuração em nosso [README.md](https://github.com/AoShinRo/brHades/blob/master/README.md).
+
+Torne-se um Membro da Equipe
+----------------------------
+
+Tem interesse em se tornar um colaborador ativo do brHades? Gostaria de se tornar um membro da equipe oficial? Existem alguns requisitos:
+
+* **Seja ativo no desenvolvimento do projeto** - Corrija bugs, envie novos recursos e tenha bons hábitos de programação.
+* **Atue de forma madura e responsável na comunidade** - Ajude outros desenvolvedores e mantenha uma atitude profissional em relação a contribuições.
+
+#### Interações na Comunidade
+
+Se você está buscando ajuda ou quer discutir melhorias para o projeto, não hesite em se envolver! Existem várias formas de entrar em contato e discutir com outros desenvolvedores, como fóruns e plataformas de comunicação do brHades.
