@@ -30,12 +30,14 @@ source_group( common FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} )
 source_group( map FILES ${MAP_HEADERS} ${MAP_SOURCES} )
 include_directories( ${INCLUDE_DIRS} )
 
+file(MAKE_DIRECTORY ${MAP_SOURCE_DIR}/gcm.cache)
+
 foreach(MODULE_FILE ${MAP_MODULES})
 	# Extract the module name without the extension
 	get_filename_component(MODULE_NAME ${MODULE_FILE} NAME_WE)
 	# Create a target for each module
 	add_library(${MODULE_NAME} OBJECT ${MODULE_FILE})
-	target_compile_options(${MODULE_NAME} PUBLIC -std=c++20 -fmodules-ts -fmodule-mapper=gcm.cache)
+	target_compile_options(${MODULE_NAME} PUBLIC -std=c++20 -fmodules-ts -fmodule-mapper=${MAP_SOURCE_DIR}/gcm.cache)
 	set ( LIBRARIES ${LIBRARIES} ${MODULE_NAME} )
 	#set ( DEPENDENCIES ${DEPENDENCIES} ${MODULE_NAME} )
 endforeach()
