@@ -1,11 +1,12 @@
-#<img src="" align="right" height="90" />
-
 # brHades
+
+<img src="https://cdn.discordapp.com/attachments/1177272749379567617/1289624475230408704/1727540383711.png?ex=66f97fe2&is=66f82e62&hm=5326b31ccce31df6f41888c6d0379ddee211a2527eeec79d056e89ce51425fdc&" align="right" height="450" />
+
 ![clang](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_clang.yml?label=clang%20build&logo=llvm) ![cmake](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_cmake.yml?label=cmake%20build&logo=cmake) ![gcc](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_gcc.yml?label=gcc%20build&logo=gnu) ![ms](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_msbuild.yml?label=ms%20build&logo=visualstudio) ![GitHub](https://img.shields.io/github/license/AoShinRo/brHades.svg) ![commit activity](https://img.shields.io/github/commit-activity/w/AoShinRo/brHades) ![GitHub repo size](https://img.shields.io/github/repo-size/AoShinRo/brHades.svg)
 
 > brHades is a collaborative software development project revolving around the creation of a robust massively multiplayer online role playing game (MMORPG) server package. Written in C++, the program is very versatile and provides NPCs, warps and modifications. The project is jointly managed by a group of volunteers located around the world as well as a tremendous community providing QA and support. brHades is a continuation of the eAthena project.
 
-[Forum](https://brHades.org/board)|[Discord](https://brHades.org/discord)|[Wiki](https://github.com/brHades/brHades/wiki)|[FluxCP](https://github.com/brHades/FluxCP)|[Crowdfunding](https://brHades.org/board/crowdfunding/)|[Fork and Pull Request Q&A](https://brHades.org/board/topic/86913-pull-request-qa/)
+[Discord](https://discord.com/invite/DAPWeV677z)|[SharpPatcher](https://github.com/AoShinRO/SharpPatcher)|[AzzyAI-RE](https://github.com/AoShinRO/AzzyAI-RE)|[ServerMonitor](https://github.com/AoShinRO/rAthena-ServMonitor-ByAoShinHo)|[Crowdfunding](https://brHades.org/board/crowdfunding/)|[Fork and Pull Request Q&A](https://brHades.org/board/topic/86913-pull-request-qa/)
 --------|--------|--------|--------|--------|--------
 
 ### Table of Contents
@@ -30,8 +31,8 @@ Disk Space | 300 MB | 500 MB
 ### Operating System & Preferred Compiler
 Operating System | Compiler
 ------|------
-Linux  | [gcc-6 or newer](https://www.gnu.org/software/gcc/gcc-6/) / [Make](https://www.gnu.org/software/make/)
-Windows | [MS Visual Studio 2017 or newer](https://www.visualstudio.com/downloads/)
+Linux  | [gcc-10 or newer](https://www.gnu.org/software/gcc/gcc-6/) / [Make](https://www.gnu.org/software/make/)
+Windows | [MS Visual Studio 2020 or newer](https://www.visualstudio.com/downloads/)
 
 ### Required Applications
 Application | Name
