@@ -43,6 +43,14 @@ foreach(MODULE_FILE ${MAP_MODULES})
 	target_compile_options(${MODULE_NAME} PUBLIC -std=c++20 -fmodules-ts -fmodule-mapper=${MAP_SOURCE_DIR}/gcm.cache)
 	set ( LIBRARIES ${LIBRARIES} ${MODULE_NAME} )
 	#set ( DEPENDENCIES ${DEPENDENCIES} ${MODULE_NAME} )
+
+	# Verifica se o diretório de cache está acessível
+	if(EXISTS ${MAP_SOURCE_DIR}/gcm.cache)
+		message(STATUS "Cache directory exists and is accessible.")
+	else()
+		message(FATAL_ERROR "Cache directory does not exist or is not accessible.")
+	endif()
+
 endforeach()
 
 #message( STATUS "map-server SOURCE_FILES=${SOURCE_FILES}")
