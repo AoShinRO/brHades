@@ -9,8 +9,9 @@ set( MAP_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}  CACHE INTERNAL "" )
 #
 if( BUILD_SERVERS )
 message( STATUS "Creating target map-server" )
-file(GLOB MAP_HEADERS ${MAP_SOURCE_DIR}/*.hpp ${MAP_SOURCE_DIR}/*.ixx)
-file(GLOB MAP_SOURCES ${MAP_SOURCE_DIR}/*.cpp ${MAP_SOURCE_DIR}/*.cppm)
+file(GLOB MAP_HEADERS ${MAP_SOURCE_DIR}/*.hpp)
+file(GLOB MAP_SOURCES ${MAP_SOURCE_DIR}/*.cpp)
+file(GLOB MAP_MODULES ${MAP_SOURCE_DIR}/*.cppm)
 
 set( DEPENDENCIES common ryml)
 set( LIBRARIES ${GLOBAL_LIBRARIES})
@@ -28,6 +29,16 @@ set( SOURCE_FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} ${MAP_HEADERS} ${MAP_
 source_group( common FILES ${COMMON_BASE_HEADERS} ${COMMON_HEADERS} )
 source_group( map FILES ${MAP_HEADERS} ${MAP_SOURCES} )
 include_directories( ${INCLUDE_DIRS} )
+
+foreach(MODULE_FILE ${MAP_MODULES})
+	# Extract the module name without the extension
+	get_filename_component(MODULE_NAME ${MODULE_FILE} NAME_WE)
+	# Create a target for each module
+	add_library(${MODULE_NAME} OBJECT ${CMAKE_SOURCE_DIR}/src/map/${MODULE_FILE})
+	target_compile_options(${MODULE_NAME} PRIVATE -std=c++20 -fmodules-ts)
+	#set ( LIBRARIES ${LIBRARIES} ${MODULE_NAME} )
+	set ( DEPENDENCIES ${DEPENDENCIES} ${MODULE_NAME} )
+endforeach()
 
 #message( STATUS "map-server SOURCE_FILES=${SOURCE_FILES}")
 add_executable( map-server ${SOURCE_FILES} )
