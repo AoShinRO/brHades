@@ -1,3 +1,4 @@
+
 COMMON_OBJ = minicore.o malloc.o showmsg.o strlib.o utils.o des.o grfio.o nullpo.o
 COMMON_DIR_OBJ = $(COMMON_OBJ:%=../common/obj/%)
 COMMON_H = $(shell ls ../common/*.hpp)
@@ -28,7 +29,7 @@ MAPCACHE_OBJ = obj_all/mapcache.o
 #####################################################################
 .PHONY : all mapcache clean help
 
-all: mapcache
+all: mapcache csv2yaml yaml2sql yamlupgrade
 
 mapcache: obj_all $(MAPCACHE_OBJ) $(COMMON_DIR_OBJ)
 	@echo "	LD	$@"
@@ -50,4 +51,16 @@ help:
 obj_all:
 	-mkdir obj_all
 
-obj_all/
+obj_all/%.o: %.cpp $(COMMON_H) $(OTHER_H) $(RAPIDYAML_H) $(YAML_CPP_H)
+	@echo "	CXX	$<"
+	@@CXX@ @CXXFLAGS@ $(COMMON_INCLUDE) $(RA_INCLUDE) $(LIBCONFIG_INCLUDE) $(RAPIDYAML_INCLUDE) $(YAML_CPP_INCLUDE) @CPPFLAGS@ -c $(OUTPUT_OPTION) $<
+
+# missing common object files
+$(COMMON_DIR_OBJ):
+	@$(MAKE) -C ../common server
+
+$(RAPIDYAML_AR):
+	@$(MAKE) -C ../../3rdparty/rapidyaml
+
+$(YAML_CPP_AR):
+	@$(MAKE) -C ../../3rdparty/yaml-cpp
