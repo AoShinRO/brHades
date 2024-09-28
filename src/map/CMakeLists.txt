@@ -34,10 +34,10 @@ foreach(MODULE_FILE ${MAP_MODULES})
 	# Extract the module name without the extension
 	get_filename_component(MODULE_NAME ${MODULE_FILE} NAME_WE)
 	# Create a target for each module
-	add_library(${MODULE_FILE} OBJECT ${MAP_SOURCE_DIR}/${MODULE_FILE})
+	add_library(${MODULE_NAME} OBJECT ${MAP_SOURCE_DIR}/${MODULE_FILE})
 	target_compile_options(${MODULE_NAME} PRIVATE -std=c++20 -fmodules-ts)
-	#set ( LIBRARIES ${LIBRARIES} ${MODULE_NAME} )
-	set ( DEPENDENCIES ${DEPENDENCIES} ${MODULE_NAME} )
+	set ( LIBRARIES ${LIBRARIES} ${MODULE_NAME} )
+	#set ( DEPENDENCIES ${DEPENDENCIES} ${MODULE_NAME} )
 endforeach()
 
 #message( STATUS "map-server SOURCE_FILES=${SOURCE_FILES}")
