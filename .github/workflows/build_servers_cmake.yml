@@ -45,7 +45,7 @@ jobs:
       - name: Configure project with CMake (C++20)
         run: |
           cd cbuild
-          cmake -G "Unix Makefiles" -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_FLAGS="-fmodules-ts -fbuiltin-module-map -fimplicit-module-maps -stdlib=libc++" -DCMAKE_CXX_EXTENSIONS=OFF ..
+          cmake -G "Unix Makefiles" -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_FLAGS="-fmodules-ts" -DCMAKE_CXX_EXTENSIONS=OFF ..
 
       - name: Command - make
         run: |
