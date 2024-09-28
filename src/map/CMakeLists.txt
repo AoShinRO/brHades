@@ -35,7 +35,7 @@ foreach(MODULE_FILE ${MAP_MODULES})
 	get_filename_component(MODULE_NAME ${MODULE_FILE} NAME_WE)
 	# Create a target for each module
 	add_library(${MODULE_NAME} OBJECT ${MODULE_FILE})
-	target_compile_options(${MODULE_NAME} PUBLIC -std=c++20 -fmodules-ts)
+	target_compile_options(${MODULE_NAME} PUBLIC -std=c++20 -fmodules-ts -fmodule-mapper=gcm.cache)
 	set ( LIBRARIES ${LIBRARIES} ${MODULE_NAME} )
 	#set ( DEPENDENCIES ${DEPENDENCIES} ${MODULE_NAME} )
 endforeach()
