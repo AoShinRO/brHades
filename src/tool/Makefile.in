@@ -24,45 +24,24 @@ OTHER_H = ../config/renewal.hpp
 
 MAPCACHE_OBJ = obj_all/mapcache.o
 
-CSV2YAML_OBJ = obj_all/csv2yaml.o
-
-YAML2SQL_OBJ = obj_all/yaml2sql.o
-
-YAMLUPGRADE_OBJ = obj_all/yamlupgrade.o
-
 @SET_MAKE@
 
 #####################################################################
-.PHONY : all mapcache csv2yaml yaml2sql yamlupgrade clean help
+.PHONY : all mapcache clean help
 
-all: mapcache csv2yaml yaml2sql yamlupgrade
+all: mapcache
 
 mapcache: obj_all $(MAPCACHE_OBJ) $(COMMON_DIR_OBJ)
 	@echo "	LD	$@"
 	@@CXX@ @LDFLAGS@ -o ../../mapcache@EXEEXT@ $(MAPCACHE_OBJ) $(COMMON_DIR_OBJ) @LIBS@
 
-csv2yaml: obj_all $(CSV2YAML_OBJ) $(COMMON_DIR_OBJ) $(RAPIDYAML_AR) $(YAML_CPP_AR)
-	@echo "	LD	$@"
-	@@CXX@ @LDFLAGS@ -o ../../csv2yaml@EXEEXT@ $(CSV2YAML_OBJ) $(COMMON_DIR_OBJ) ../common/obj/database.o $(RAPIDYAML_AR) $(YAML_CPP_AR) @LIBS@
-
-yaml2sql: obj_all $(YAML2SQL_OBJ) $(COMMON_DIR_OBJ) $(RAPIDYAML_AR) $(YAML_CPP_AR)
-	@echo "	LD	$@"
-	@@CXX@ @LDFLAGS@ -o ../../yaml2sql@EXEEXT@ $(YAML2SQL_OBJ) $(COMMON_DIR_OBJ) $(RAPIDYAML_AR) $(YAML_CPP_AR) @LIBS@
-
-yamlupgrade: obj_all $(YAMLUPGRADE_OBJ) $(COMMON_DIR_OBJ) $(RAPIDYAML_AR) $(YAML_CPP_AR)
-	@echo "	LD	$@"
-	@@CXX@ @LDFLAGS@ -o ../../yamlupgrade@EXEEXT@ $(YAMLUPGRADE_OBJ) $(COMMON_DIR_OBJ) ../common/obj/database.o $(RAPIDYAML_AR) $(YAML_CPP_AR) @LIBS@
-
 clean:
 	@echo "	CLEAN	tool"
-	@rm -rf obj_all/*.o ../../mapcache@EXEEXT@ ../../csv2yaml@EXEEXT@ ../../yaml2sql@EXEEXT@ ../../yamlupgrade@EXEEXT@
+	@rm -rf obj_all/*.o ../../mapcache@EXEEXT@
 
 help:
-	@echo "possible targets are 'mapcache' 'csv2yaml' 'yaml2sql' 'yamlupgrade' 'all' 'clean' 'help'"
+	@echo "possible targets are 'mapcache' 'all' 'clean' 'help'"
 	@echo "'mapcache'     - mapcache generator"
-	@echo "'csv2yaml'     - converts TXT databases to YAML"
-	@echo "'yaml2sql'     - converts YAML databases to SQL"
-	@echo "'yamlupgrade'  - upgrades YAML databases to latest version"
 	@echo "'all'          - builds all above targets"
 	@echo "'clean'        - cleans builds and objects"
 	@echo "'help'         - outputs this message"
