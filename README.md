@@ -31,7 +31,7 @@ Disk Space | 300 MB | 500 MB
 ### Operating System & Preferred Compiler
 Operating System | Compiler
 ------|------
-Linux  | [gcc-10 or newer](https://www.gnu.org/software/gcc/gcc-6/) / [Make](https://www.gnu.org/software/make/)
+Linux  | [gcc-10 or newer](https://www.gnu.org/software/gcc/) / [Make](https://www.gnu.org/software/make/)
 Windows | [MS Visual Studio 2020 or newer](https://www.visualstudio.com/downloads/)
 
 ### Required Applications
@@ -48,17 +48,17 @@ Database | [MySQL Workbench 5 or newer](http://www.mysql.com/downloads/workbench
 ## 2. Installation 
 
 ### Full Installation Instructions
-  * [Windows](https://github.com/brHades/brHades/wiki/Install-on-Windows)
-  * [CentOS](https://github.com/brHades/brHades/wiki/Install-on-Centos)
-  * [Debian](https://github.com/brHades/brHades/wiki/Install-on-Debian)
-  * [FreeBSD](https://github.com/brHades/brHades/wiki/Install-on-FreeBSD)
+  * [Windows](https://github.com/AoShinRo/brHades/wiki/Install-on-Windows)
+  * [CentOS](https://github.com/AoShinRo/brHades/wiki/Install-on-Centos)
+  * [Debian](https://github.com/AoShinRo/brHades/wiki/Install-on-Debian)
+  * [FreeBSD](https://github.com/AoShinRo/brHades/wiki/Install-on-FreeBSD)
 
 ## 3. Troubleshooting
 
 If you're having problems with starting your server, the first thing you should
 do is check what's happening on your consoles. More often that not, all support issues
-can be solved simply by looking at the error messages given. Check out the [wiki](https://github.com/brHades/brHades/wiki)
-or [forums](https://brHades.org/forum) if you need more support on troubleshooting.
+can be solved simply by looking at the error messages given. Check out the [discord](https://discord.com/invite/DAPWeV677z)
+if you need more support on troubleshooting.
 
 ## 4. More Documentation
 brHades has a large collection of help files and sample NPC scripts located in the /doc/
@@ -68,7 +68,7 @@ recommend that all users take the time to look over this directory before asking
 assistance elsewhere.
 
 ## 5. How to Contribute
-Details on how to contribute to brHades can be found in [CONTRIBUTING.md](https://github.com/brHades/brHades/blob/master/.github/CONTRIBUTING.md)!
+Details on how to contribute to brHades can be found in [CONTRIBUTING.md](https://github.com/AoShinRo/brHades/blob/master/.github/CONTRIBUTING.md)!
 
 ## 6. License
-Copyright (c) brHades Development Team - Licensed under [GNU General Public License v3.0](https://github.com/brHades/brHades/blob/master/LICENSE)
+Copyright (c) brHades Development Team - Licensed under [GNU General Public License v3.0](https://github.com/AoShinRo/brHades/blob/master/LICENSE)
