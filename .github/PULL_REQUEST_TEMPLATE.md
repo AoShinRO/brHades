@@ -1,16 +1,16 @@
-<!-- NOTE: Anything within these brackets will be hidden on the preview of the Pull Request. -->
+<!-- OBSERVAÇÃO: Qualquer conteúdo dentro dessas marcas será ocultado na pré-visualização do Pull Request. -->
 
-* **Addressed Issue(s)**: 
+* **Problema(s) Tratado(s)**:
 
 <!--
-Please specify the rAthena [GitHub issue(s)](https://help.github.com/articles/autolinked-references-and-urls/#issues-and-pull-requests) this pull request amends.
-If no issue exists yet, please [create one](https://github.com/rathena/rathena/issues/new) first and then link your pull request to the amendment!
+Por favor, especifique os [problemas](https://help.github.com/articles/autolinked-references-and-urls/#issues-and-pull-requests) do brHades que este pull request aborda.
+Se ainda não houver um problema, crie um [aqui](https://github.com/AoShinRo/brHades/issues/new) primeiro e depois vincule seu pull request a esse problema!
 -->
 
-* **Server Mode**: 
+* **Modo do Servidor**:
 
-<!-- Which mode does this pull request apply to: Pre-Renewal, Renewal, or Both? -->
+<!-- Em qual modo este pull request se aplica: Pré-Renewal, Renewal ou Ambos? -->
 
-* **Description of Pull Request**: 
+* **Descrição do Pull Request**:
 
-<!-- Describe how this pull request will resolve the issue(s) listed above. -->
+<!-- Descreva como este pull request resolverá os problemas listados acima. -->
