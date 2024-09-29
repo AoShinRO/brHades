@@ -9287,23 +9287,21 @@ void clif_guild_broken( map_session_data& sd, int flag ){
 	clif_send( &p, sizeof( p ), &sd.bl, SELF );
 }
 
+/// Displays emotion on an object 
+/// 00c0 <id>.L <type>.B (ZC_EMOTION).
+void clif_emotion(block_list& bl,e_emotion_type type){
 
-/// Displays emotion on an object (ZC_EMOTION).
-/// 00c0 <id>.L <type>.B
-/// type:
-///     enum emotion_type
-void clif_emotion(struct block_list *bl,int type)
-{
-	unsigned char buf[8];
+	if(type <= ET_BLANK || type >= ET_MAX)
+		return;
 
-	nullpo_retv(bl);
+	PACKET_ZC_EMOTION p{};
 
-	WBUFW(buf,0)=0xc0;
-	WBUFL(buf,2)=bl->id;
-	WBUFB(buf,6)=type;
-	clif_send(buf,packet_len(0xc0),bl,AREA);
+	p.packetType = HEADER_ZC_EMOTION;
+	p.srcId = bl.id;
+	p.emotion_type = type;
+
+	clif_send(&p,sizeof(p),&bl,AREA);
 }
-
 
 /// Displays the contents of a talkiebox trap.
 /// 0191 <id>.L <contents>.80B (ZC_TALKBOX_CHATCONTENTS)
@@ -11492,8 +11490,8 @@ void clif_parse_ChangeDir(int fd, map_session_data *sd)
 }
 
 
-/// Request to show an emotion (CZ_REQ_EMOTION).
-/// 00bf <type>.B
+/// Request to show an emotion.
+/// 00bf <type>.B (CZ_REQ_EMOTION)
 /// type:
 ///     @see enum emotion_type
 void clif_parse_Emotion(int fd, map_session_data *sd){
@@ -11501,7 +11499,13 @@ void clif_parse_Emotion(int fd, map_session_data *sd){
 		return;
 	}
 
-	int emoticon = RFIFOB(fd,packet_db[RFIFOW(fd,0)].pos[0]);
+	const PACKET_CZ_REQ_EMOTION* p = reinterpret_cast<const PACKET_CZ_REQ_EMOTION*>( RFIFOP( fd, 0 ) );
+
+	if( p->emotion_type >= ET_MAX ){
+		return;
+	}
+	
+	e_emotion_type emoticon = static_cast<e_emotion_type>( p->emotion_type );
 
 	if (battle_config.basic_skill_check == 0 || pc_checkskill(sd, NV_BASIC) >= 2 || pc_checkskill(sd, SU_BASIC_SKILL) >= 1) {
 		if (emoticon == ET_CHAT_PROHIBIT) {// prevent use of the mute emote [Valaris]
@@ -11529,10 +11533,10 @@ void clif_parse_Emotion(int fd, map_session_data *sd){
 		}
 
 		if(battle_config.client_reshuffle_dice && emoticon>=ET_DICE1 && emoticon<=ET_DICE6) {// re-roll dice
-			emoticon = rnd()%6+ET_DICE1;
+			emoticon = hades_cast<e_emotion_type>( rnd()%6+ET_DICE1 );
 		}
 
-		clif_emotion(&sd->bl, emoticon);
+		clif_emotion(sd->bl, emoticon);
 	} else
 		clif_skill_fail( *sd, 1, USESKILL_FAIL_LEVEL, 1 );
 }
@@ -12611,7 +12615,7 @@ static void clif_parse_UseSkillToId_homun(struct homun_data *hd, map_session_dat
 	if( !hd )
 		return;
 	if( skill_isNotOk_hom(hd, skill_id, skill_lv) ) {
-		clif_emotion(&hd->bl, ET_THINK);
+		clif_emotion(hd->bl, ET_THINK);
 		return;
 	}
 	if( hd->bl.id != target_id && skill_get_inf(skill_id)&INF_SELF_SKILL )
@@ -12619,7 +12623,7 @@ static void clif_parse_UseSkillToId_homun(struct homun_data *hd, map_session_dat
 	if( hd->ud.skilltimer != INVALID_TIMER ) {
 		if( skill_id != SA_CASTCANCEL && skill_id != SO_SPELLFIST ) return;
 	} else if( DIFF_TICK(tick, hd->ud.canact_tick) < 0 ) {
-		clif_emotion(&hd->bl, ET_THINK);
+		clif_emotion(hd->bl, ET_THINK);
 		if (hd->master)
 			clif_skill_fail( *hd->master, skill_id, USESKILL_FAIL_SKILLINTERVAL );
 		return;
@@ -12638,13 +12642,13 @@ static void clif_parse_UseSkillToPos_homun(struct homun_data *hd, map_session_da
 	if( !hd )
 		return;
 	if( skill_isNotOk_hom(hd, skill_id, skill_lv) ) {
-		clif_emotion(&hd->bl, ET_THINK);
+		clif_emotion(hd->bl, ET_THINK);
 		return;
 	}
 	if( hd->ud.skilltimer != INVALID_TIMER ) {
 		if( skill_id != SA_CASTCANCEL && skill_id != SO_SPELLFIST ) return;
 	} else if( DIFF_TICK(tick, hd->ud.canact_tick) < 0 ) {
-		clif_emotion(&hd->bl, ET_THINK);
+		clif_emotion(hd->bl, ET_THINK);
 		if (hd->master)
 			clif_skill_fail( *hd->master, skill_id, USESKILL_FAIL_SKILLINTERVAL );
 		return;
