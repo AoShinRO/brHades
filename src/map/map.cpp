@@ -3557,7 +3557,7 @@ int map_readfromcache(struct map_data *m, char *buffer, char *decode_buffer)
 	for(i = 0; i < header->map_count; i++) {
 		info = (struct map_cache_map_info *)p;
 
-		if(strcmp(m->name, info->name) == 0 )
+		if( strcmp(m->name, info->name) == 0 )
 			break; // Map found
 
 		// Jump to next entry..
