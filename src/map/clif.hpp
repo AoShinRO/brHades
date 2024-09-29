@@ -258,7 +258,8 @@ enum broadcast_flags : uint8_t {
 	BC_DEFAULT		= BC_ALL|BC_PC|BC_YELLOW
 };
 
-enum emotion_type {
+enum e_emotion_type : int8 {
+	ET_BLANK = -1, // Not showed in the client
 	ET_SURPRISE = 0,	// /!
 	ET_QUESTION,		// /?
 	ET_DELIGHT,
@@ -895,7 +896,7 @@ void clif_changechatstatus(chat_data& cd);
 void clif_refresh_storagewindow(map_session_data *sd);
 void clif_refresh(map_session_data *sd);	// self
 
-void clif_emotion(struct block_list *bl,int type);
+void clif_emotion(block_list& bl,e_emotion_type type);
 void clif_talkiebox(struct block_list* bl, const char* talkie);
 void clif_wedding_effect(struct block_list *bl);
 void clif_divorced(map_session_data* sd, const char* name);
@@ -931,12 +932,12 @@ void clif_class_change_target(struct block_list *bl,int class_, int type, enum s
 #define clif_mob_class_change(md, class_) clif_class_change(&md->bl, class_, 1)
 
 void clif_skillinfoblock(map_session_data *sd);
-void clif_skillup(map_session_data *sd, uint16 skill_id, int lv, int range, int upgradable);
-void clif_skillinfo(map_session_data *sd,int skill_id, int inf);
-void clif_addskill(map_session_data *sd, int skill_id);
+void clif_skillup(map_session_data &sd, uint16 skill_id, int lv, int range, bool upgradable);
+void clif_skillinfo(map_session_data& sd, uint16 skill_id);
+void clif_addskill(map_session_data& sd, uint16 skill_id);
 void clif_deleteskill(map_session_data& sd, uint16 skill_id, bool skip_infoblock = false);
 
-void clif_skillcasting(struct block_list* bl, int src_id, int dst_id, int dst_x, int dst_y, uint16 skill_id, uint16 skill_lv, int property, int casttime);
+void clif_skillcasting(block_list& src, block_list* dst, uint16 dst_x, uint16 dst_y, uint16 skill_id, uint16 skill_lv, e_element property, int32 casttime);
 void clif_skillcastcancel( block_list& bl );
 void clif_skill_fail( map_session_data& sd, uint16 skill_id, enum useskill_fail_cause cause = USESKILL_FAIL_LEVEL, int btype = 0, t_itemid itemId = 0 );
 void clif_skill_cooldown( map_session_data &sd, uint16 skill_id, t_tick tick );
@@ -1048,7 +1049,7 @@ void clif_guild_allianceinfo(map_session_data& sd);
 void clif_guild_memberlist( map_session_data& sd );
 void clif_guild_skillinfo( map_session_data& sd );
 void clif_guild_send_onlineinfo(map_session_data *sd); //[LuzZza]
-void clif_guild_memberlogin_notice(const struct mmo_guild &g,int idx,int flag);
+void clif_guild_memberlogin_notice(const struct mmo_guild &g,int idx,int online);
 void clif_guild_invite( map_session_data& sd, const struct mmo_guild& g );
 void clif_guild_inviteack( map_session_data& sd, int flag );
 void clif_guild_leave( map_session_data& sd, const char* name, uint32 char_id, const char* mes );

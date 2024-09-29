@@ -5347,7 +5347,7 @@ bool pc_skill(map_session_data* sd, uint16 skill_id, int level, enum e_addskill_
 				sd->status.skill[idx].id = 0;
 				clif_deleteskill(*sd,skill_id);
 			} else
-				clif_addskill(sd,skill_id);
+				clif_addskill(*sd,skill_id);
 			if (!skill_get_inf(skill_id) || pc_checkskill_summoner(sd, SUMMONER_POWER_LAND) >= 20 || pc_checkskill_summoner(sd, SUMMONER_POWER_SEA) >= 20) //Only recalculate for passive skills.
 				status_calc_pc(sd, SCO_NONE);
 			break;
@@ -5382,7 +5382,7 @@ bool pc_skill(map_session_data* sd, uint16 skill_id, int level, enum e_addskill_
 				sd->status.skill[idx].id = 0;
 				clif_deleteskill(*sd,skill_id);
 			} else
-				clif_addskill(sd,skill_id);
+				clif_addskill(*sd,skill_id);
 			if (!skill_get_inf(skill_id) || pc_checkskill_summoner(sd, SUMMONER_POWER_LAND) >= 20 || pc_checkskill_summoner(sd, SUMMONER_POWER_SEA) >= 20) //Only recalculate for passive skills.
 				status_calc_pc(sd, SCO_NONE);
 			break;
@@ -5434,7 +5434,7 @@ bool pc_skill_plagiarism(map_session_data &sd, uint16 skill_id, uint16 skill_lv)
 	sd.status.skill[idx].id = skill_id;
 	sd.status.skill[idx].lv = static_cast<uint8>(skill_lv);
 	sd.status.skill[idx].flag = SKILL_FLAG_PLAGIARIZED;
-	clif_addskill(&sd, skill_id);
+	clif_addskill(sd, skill_id);
 
 	return true;
 }
@@ -9032,7 +9032,7 @@ void pc_skillup(map_session_data *sd,uint16 skill_id)
 			sd->status.skill[idx].flag == SKILL_FLAG_PERMANENT && //Don't allow raising while you have granted skills. [Skotlex]
 			sd->status.skill[idx].lv < skill_tree_get_max(skill_id, sd->status.class_) )
 		{
-			int lv, range, upgradable;
+			int lv, range;
 			sd->status.skill[idx].lv++;
 			sd->status.skill_point--;
 			if( !skill_get_inf(skill_id) || pc_checkskill_summoner(sd, SUMMONER_POWER_LAND) >= 20 || pc_checkskill_summoner(sd, SUMMONER_POWER_SEA) >= 20 )
@@ -9044,8 +9044,7 @@ void pc_skillup(map_session_data *sd,uint16 skill_id)
 
 			lv = sd->status.skill[idx].lv;
 			range = skill_get_range2(&sd->bl, skill_id, lv, false);
-			upgradable = (lv < skill_tree_get_max(sd->status.skill[idx].id, sd->status.class_)) ? 1 : 0;
-			clif_skillup(sd,skill_id,lv,range,upgradable);
+			clif_skillup(*sd, skill_id, lv, range, (lv < skill_tree_get_max(sd->status.skill[idx].id, sd->status.class_)) ? true : false);
 			clif_updatestatus(*sd,SP_SKILLPOINT);
 			if( skill_id == GN_REMODELING_CART ) /* cart weight info was updated by status_calc_pc */
 				clif_updatestatus(*sd,SP_CARTINFO);
