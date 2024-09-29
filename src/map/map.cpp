@@ -3547,12 +3547,12 @@ static char *map_init_mapcache(FILE *fp)
  * Map cache reading
  * [Shinryo]: Optimized some behaviour to speed this up
  *==========================================*/
-int map_readfromcache(struct map_data *m, char *buffer, char *decode_buffer)
+static int forceinline map_readfromcache(struct map_data *m, char *buffer, char *decode_buffer)
 {
 	int i;
 	struct map_cache_main_header *header = (struct map_cache_main_header *)buffer;
 	struct map_cache_map_info *info = nullptr;
-	char *p = buffer + sizeof(struct map_cache_main_header);
+	char *p = (char*)((struct map_cache_main_header*)header + 1);
 
 	for(i = 0; i < header->map_count; i++) {
 		info = (struct map_cache_map_info *)p;
@@ -3565,27 +3565,26 @@ int map_readfromcache(struct map_data *m, char *buffer, char *decode_buffer)
 	}
 
 	if( info && i < header->map_count ) {
-		unsigned long size, xy;
 
 		if( info->xs <= 0 || info->ys <= 0 )
 			return 0;// Invalid
 
-		m->xs = info->xs;
-		m->ys = info->ys;
-		size = (unsigned long)info->xs*(unsigned long)info->ys;
+		unsigned long size = (unsigned long)info->xs * (unsigned long)info->ys;
 
 		if(size > MAX_MAP_SIZE) {
 			ShowWarning("map_readfromcache: %s exceeded MAX_MAP_SIZE of %d\n", info->name, MAX_MAP_SIZE);
 			return 0; // Say not found to remove it from list.. [Shinryo]
 		}
 
+		m->xs = info->xs;
+		m->ys = info->ys;
+
 		// TO-DO: Maybe handle the scenario, if the decoded buffer isn't the same size as expected? [Shinryo]
-		decode_zip(decode_buffer, &size, p+sizeof(struct map_cache_map_info), info->len);
+		decode_zip(decode_buffer, &size, (struct map_cache_map_info*)p + 1 , info->len);
 
 		CREATE(m->cell, struct mapcell, size);
 
-
-		for( xy = 0; xy < size; ++xy )
+		for(unsigned long xy = 0UL; xy < size; ++xy )
 			m->cell[xy] = map_gat2cell(decode_buffer[xy]);
 
 		return 1;
