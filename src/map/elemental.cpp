@@ -906,7 +906,7 @@ uint64 ElementalDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		if (!this->asUInt16(node, "AttackRange", range))
 			return 0;
 
-		elemental->status.rhw.range = range;
+		elemental->status.rhw.range = std::min(static_cast<decltype(elemental->status.rhw.range)>(range), std::numeric_limits<decltype(elemental->status.rhw.range)>::max());
 	} else {
 		if (!exists)
 			elemental->status.rhw.range = 0;
@@ -918,7 +918,7 @@ uint64 ElementalDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		if (!this->asUInt16(node, "SkillRange", range))
 			return 0;
 
-		elemental->range2 = range;
+		elemental->range2 = std::min(static_cast<decltype(elemental->range2)>(range), std::numeric_limits<decltype(elemental->range2)>::max());
 	} else {
 		if (!exists)
 			elemental->range2 = 5;
@@ -930,7 +930,7 @@ uint64 ElementalDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		if (!this->asUInt16(node, "ChaseRange", range))
 			return 0;
 
-		elemental->range3 = range;
+		elemental->range3 = std::min(static_cast<decltype(elemental->range3)>(range), std::numeric_limits<decltype(elemental->range3)>::max());
 	} else {
 		if (!exists)
 			elemental->range3 = 12;
