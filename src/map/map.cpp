@@ -3552,39 +3552,39 @@ int map_readfromcache(struct map_data *m, char *buffer, char *decode_buffer)
 	int i;
 	struct map_cache_main_header *header = (struct map_cache_main_header *)buffer;
 	struct map_cache_map_info *info = nullptr;
-	struct map_cache_map_info* p = reinterpret_cast<struct map_cache_map_info*>(buffer + sizeof(struct map_cache_main_header));
-	
+	char *p = buffer + sizeof(*header);
+
 	for (i = 0; i < header->map_count; i++) {
 		info = (struct map_cache_map_info *)p;
 		
 		if (strcmp(m->name, info->name) == 0) 
-		    break; // Map found
-				
-		p = reinterpret_cast<struct map_cache_map_info*>(reinterpret_cast<char*>(p) + 1) + info->len;
+			break; // Map found
+
+		p += sizeof(*info) + info->len;
 	}
-	
+
 	if (info && i < header->map_count) {
 		unsigned long size, xy;
 		
 		if (info->xs <= 0 || info->ys <= 0) 
-		    return 0; // Invalid
+			return 0; // Invalid
 		
 		m->xs = info->xs;
 		m->ys = info->ys;
 		size = (unsigned long)info->xs * (unsigned long)info->ys;
 		
 		if (size > MAX_MAP_SIZE) {
-		    ShowWarning("map_readfromcache: %s exceeded MAX_MAP_SIZE of %d\n", info->name, MAX_MAP_SIZE);
-		    return 0; // Say not found to remove it from list.. [Shinryo]
+			ShowWarning("map_readfromcache: %s exceeded MAX_MAP_SIZE of %d\n", info->name, MAX_MAP_SIZE);
+			return 0; // Say not found to remove it from list.. [Shinryo]
 		}
-		
-		decode_zip(decode_buffer, &size, reinterpret_cast<void*>(reinterpret_cast<char*>(p)), info->len);
-		
+
+		decode_zip(decode_buffer, &size, p+sizeof(*info) , info->len);
+
 		CREATE(m->cell, struct mapcell, size);
-		
+
 		for (xy = 0; xy < size; ++xy) 
-		    m->cell[xy] = map_gat2cell(decode_buffer[xy]);
-		
+			m->cell[xy] = map_gat2cell(decode_buffer[xy]);
+
 		return 1;
 	}
 	
