@@ -3552,7 +3552,7 @@ int map_readfromcache(struct map_data *m, char *buffer, char *decode_buffer)
 	int i;
 	struct map_cache_main_header *header = (struct map_cache_main_header *)buffer;
 	struct map_cache_map_info *info = nullptr;
-	char *p = (char*)header + sizeof(struct map_cache_main_header);
+	char *p = (char*)((struct map_cache_main_header*)header + 1);
 
 	for(i = 0; i < header->map_count; i++) {
 		info = (struct map_cache_map_info *)p;
@@ -3564,10 +3564,10 @@ int map_readfromcache(struct map_data *m, char *buffer, char *decode_buffer)
 		p += sizeof(struct map_cache_map_info) + info->len;
 	}
 
-	if(info && i < header->map_count) {
+	if( info && i < header->map_count ) {
 		unsigned long size, xy;
 
-		if(info->xs <= 0 || info->ys <= 0 )
+		if( info->xs <= 0 || info->ys <= 0 )
 			return 0;// Invalid
 
 		m->xs = info->xs;
@@ -3584,7 +3584,7 @@ int map_readfromcache(struct map_data *m, char *buffer, char *decode_buffer)
 		CREATE(m->cell, struct mapcell, size);
 
 
-		for(xy = 0; xy < size; ++xy) 
+		for( xy = 0; xy < size; ++xy )
 			m->cell[xy] = map_gat2cell(decode_buffer[xy]);
 
 		return 1;
