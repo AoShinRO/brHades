@@ -478,6 +478,16 @@ struct PACKET_CZ_RESET_SKILL{
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(CZ_RESET_SKILL, 0x0bb1)
 
+struct PACKET_ZC_SKILLINFO_UPDATE {
+	uint16 packetType;
+	uint16 skillId;
+	uint16 level;
+	uint16 sp;
+	uint16 range2;
+	bool upFlag;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_SKILLINFO_UPDATE, 0x10e);
+
 struct PACKET_ZC_BOSS_INFO{
 	int16 packetType;
 	uint8 type;
@@ -837,6 +847,27 @@ struct PACKET_ZC_GUILD_CHAT {
 	char message[];
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(ZC_GUILD_CHAT, 0x17f)
+
+#if (PACKETVER) // no idea when it changed
+struct PACKET_ZC_UPDATE_CHARSTAT {
+	uint16 packetType;
+	uint32 aid;
+	uint32 cid;
+	uint32 status;
+	uint16 gender;
+	uint16 hairStyle;
+	uint16 hairColor;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_UPDATE_CHARSTAT, 0x01f2)
+#else
+struct PACKET_ZC_UPDATE_CHARSTAT {
+	uint16 packetType;
+	uint32 aid;
+	uint32 cid;
+	uint32 status;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_UPDATE_CHARSTAT, 0x016d)
+#endif
 
 struct PACKET_ZC_STATUS {
 	int16 packetType;

@@ -4494,7 +4494,7 @@ void clif_changechatstatus(chat_data& cd) {
 	p->users = cd.users;
 
 	// not zero-terminated
-	strncpy(p->title, cd.title, strlen(cd.title));
+	memcpy(p->title, cd.title, strlen(cd.title));
 
 	if(cd.owner->type == BL_NPC){
 		// NPC itself counts as additional chat user
@@ -5649,8 +5649,8 @@ void clif_skillinfoblock(map_session_data *sd)
 
 	// adoption fix
 	if (haveCallPartnerSkill) {
-		clif_addskill(sd, WE_CALLPARTNER);
-		clif_skillinfo(sd, WE_CALLPARTNER, 0);
+		clif_addskill(*sd, WE_CALLPARTNER);
+		clif_skillinfo(*sd, WE_CALLPARTNER);
 	}
 
 	// workaround for bugreport:5348; send the remaining skills one by one to bypass packet size limit
@@ -5658,8 +5658,8 @@ void clif_skillinfoblock(map_session_data *sd)
 	{
 		if( (id = sd->status.skill[i].id) != 0 && ( id != WE_CALLPARTNER || !haveCallPartnerSkill ) )
 		{
-			clif_addskill(sd, id);
-			clif_skillinfo(sd, id, 0);
+			clif_addskill(*sd, id);
+			clif_skillinfo(*sd, id);
 		}
 	}
 }
@@ -5669,32 +5669,37 @@ void clif_skillinfoblock(map_session_data *sd)
 
 /// Adds new skill to the skill tree (ZC_ADD_SKILL).
 /// 0111 <skill id>.W <type>.L <level>.W <sp cost>.W <attack range>.W <skill name>.24B <upgradable>.B
-void clif_addskill(map_session_data *sd, int skill_id)
-{
-	nullpo_retv(sd);
+/// 0b31 <skill id>.W <type>.L <level>.W <sp cost>.W <attack range>.W <upgradable>.B <isnew>.B (ZC_ADD_SKILL2)
+void clif_addskill(map_session_data &sd, uint16 skill_id){
 
-	int fd = sd->fd;
 	uint16 idx = skill_get_index(skill_id);
 
-	if (!session_isActive(fd) || !idx)
+	if (!session_isActive(sd.fd) || idx == 0)
 		return;
 
-	if( sd->status.skill[idx].id <= 0 )
+	if( sd.status.skill[idx].id <= 0 || sd.status.skill[idx].id > MAX_SKILL)
 		return;
 
-	WFIFOHEAD(fd, packet_len(0x111));
-	WFIFOW(fd,0) = 0x111;
-	WFIFOW(fd,2) = skill_id;
-	WFIFOL(fd,4) = skill_get_inf(skill_id);
-	WFIFOW(fd,8) = sd->status.skill[idx].lv;
-	WFIFOW(fd,10) = skill_get_sp(skill_id,sd->status.skill[idx].lv);
-	WFIFOW(fd,12)= skill_get_range2(&sd->bl,skill_id,sd->status.skill[idx].lv,false);
-	safestrncpy(WFIFOCP(fd,14), skill_get_name(skill_id), NAME_LENGTH);
-	if( sd->status.skill[idx].flag == SKILL_FLAG_PERMANENT )
-		WFIFOB(fd,38) = (sd->status.skill[idx].lv < skill_tree_get_max(skill_id, sd->status.class_))? 1:0;
+	PACKET_ZC_ADD_SKILL p{};
+
+	p.packetType = HEADER_ZC_ADD_SKILL;
+	p.skill.id = skill_id;
+	p.skill.inf = skill_get_inf(skill_id);
+	p.skill.level = static_cast<decltype(p.skill.level)>(sd.status.skill[idx].lv);
+	p.skill.sp = static_cast<decltype(p.skill.sp)>( skill_get_sp(skill_id,sd.status.skill[idx].lv) );
+	p.skill.range2 = static_cast<decltype(p.skill.range2)>( skill_get_range2(&sd.bl,skill_id,sd.status.skill[idx].lv,false) );
+#if PACKETVER_RE_NUM >= 20190807 || PACKETVER_ZERO_NUM >= 20190918
+	p.skill.level2 = static_cast<decltype(p.skill.level2)>( pc_checkskill(&sd,skill_id) ); //new skillflag = 0, if pc have skill, not add lv on this, just for safe call
+#else
+	safestrncpy(p.skill.name, skill_get_name(skill_id), NAME_LENGTH);
+#endif
+
+	if( sd.status.skill[idx].flag == SKILL_FLAG_PERMANENT && sd.status.skill[idx].lv < skill_tree_get_max(skill_id, sd.status.class_))
+		p.skill.upFlag = 1;
 	else
-		WFIFOB(fd,38) = 0;
-	WFIFOSET(fd,packet_len(0x111));
+		p.skill.upFlag = 0;
+
+	clif_send(&p,sizeof(p),&sd.bl,SELF);
 }
 
 
@@ -5722,50 +5727,56 @@ void clif_deleteskill(map_session_data& sd, uint16 skill_id, bool skip_infoblock
 
 /// Updates a skill in the skill tree (ZC_SKILLINFO_UPDATE).
 /// 010e <skill id>.W <level>.W <sp cost>.W <attack range>.W <upgradable>.B
-void clif_skillup(map_session_data *sd, uint16 skill_id, int lv, int range, int upgradable) {
-	nullpo_retv(sd);
+void clif_skillup(map_session_data &sd, uint16 skill_id, int lv, int range, bool upgradable) {
 
-	int fd = sd->fd;
 	uint16 idx = skill_get_index(skill_id);
 
-	if (!session_isActive(fd) || !idx)
+	if (idx == 0 || !session_isActive(sd.fd))
 		return;
 	
-	WFIFOHEAD(fd, packet_len(0x10e));
-	WFIFOW(fd, 0) = 0x10e;
-	WFIFOW(fd, 2) = skill_id;
-	WFIFOW(fd, 4) = lv;
-	WFIFOW(fd, 6) = skill_get_sp(skill_id, lv);
-	WFIFOW(fd, 8) = range;
-	WFIFOB(fd, 10) = upgradable;
-	WFIFOSET(fd, packet_len(0x10e));
+	PACKET_ZC_SKILLINFO_UPDATE p{};
+
+	p.packetType = HEADER_ZC_SKILLINFO_UPDATE;
+	p.skillId = skill_id;
+	p.level = static_cast<decltype(p.level)>( lv );
+	p.sp = static_cast<decltype(p.sp)>( skill_get_sp(skill_id, lv) );
+	p.range2 = static_cast<decltype(p.range2)>( range );
+	p.upFlag = upgradable;
+
+	clif_send(&p,sizeof(p),&sd.bl,SELF);
 }
 
 
-/// Updates a skill in the skill tree (ZC_SKILLINFO_UPDATE2).
-/// 07e1 <skill id>.W <type>.L <level>.W <sp cost>.W <attack range>.W <upgradable>.B
-void clif_skillinfo(map_session_data *sd,int skill_id, int inf)
-{
-	nullpo_retv(sd);
-
-	const int fd = sd->fd;
+/// Updates a skill in the skill tree
+/// 07e1 <skill id>.W <type>.L <level>.W <sp cost>.W <attack range>.W <upgradable>.B (ZC_SKILLINFO_UPDATE2)
+/// 0b33 <skill id>.W <type>.L <level>.W <sp cost>.W <attack range>.W <upgradable>.B <level2>.W (ZC_SKILLINFO_UPDATE3)
+void clif_skillinfo( map_session_data& sd, uint16 skill_id ){
+#if PACKETVER >= 20090715
 	uint16 idx = skill_get_index(skill_id);
 
-	if (!session_isActive(fd) || !idx)
+	if (idx == 0 || !session_isActive(sd.fd))
 		return;
 
-	WFIFOHEAD(fd,packet_len(0x7e1));
-	WFIFOW(fd,0) = 0x7e1;
-	WFIFOW(fd,2) = skill_id;
-	WFIFOL(fd,4) = inf?inf:skill_get_inf(skill_id);
-	WFIFOW(fd,8) = sd->status.skill[idx].lv;
-	WFIFOW(fd,10) = skill_get_sp(skill_id,sd->status.skill[idx].lv);
-	WFIFOW(fd,12) = skill_get_range2(&sd->bl,skill_id,sd->status.skill[idx].lv,false);
-	if( sd->status.skill[idx].flag == SKILL_FLAG_PERMANENT )
-		WFIFOB(fd,14) = (sd->status.skill[idx].lv < skill_tree_get_max(skill_id, sd->status.class_))? 1:0;
+	PACKET_ZC_SKILLINFO_UPDATE2 p{};
+
+	p.packetType = HEADER_ZC_SKILLINFO_UPDATE2;
+	p.id = skill_id;
+	p.level = sd.status.skill[idx].lv;
+	p.sp = static_cast<decltype(p.sp)>( skill_get_sp(skill_id,sd.status.skill[idx].lv) );
+	p.range2 = static_cast<decltype(p.range2)>( skill_get_range2(&sd.bl,skill_id,sd.status.skill[idx].lv,false) );
+	p.inf = skill_get_inf(skill_id);
+
+	if( sd.status.skill[idx].flag == SKILL_FLAG_PERMANENT && sd.status.skill[idx].lv < skill_tree_get_max(skill_id, sd.status.class_) )
+		p.upFlag = 1;
 	else
-		WFIFOB(fd,14) = 0;
-	WFIFOSET(fd,packet_len(0x7e1));
+		p.upFlag = 0;
+
+#if PACKETVER_RE_NUM >= 20190807 || PACKETVER_ZERO_NUM >= 20190918
+	p.level2 = p.level;
+#endif
+
+	clif_send(&p,sizeof(p),&sd.bl,SELF);
+#endif
 }
 
 void clif_skill_scale( struct block_list *bl, int src_id, int x, int y, uint16 skill_id, uint16 skill_lv, int casttime ){
@@ -5797,6 +5808,7 @@ void clif_skill_scale( struct block_list *bl, int src_id, int x, int y, uint16 s
 /// Notifies clients in area, that an object is about to use a skill.
 /// 013e <src id>.L <dst id>.L <x>.W <y>.W <skill id>.W <property>.L <delaytime>.L (ZC_USESKILL_ACK)
 /// 07fb <src id>.L <dst id>.L <x>.W <y>.W <skill id>.W <property>.L <delaytime>.L <is disposable>.B (ZC_USESKILL_ACK2)
+/// 0b1a <src id>.L <dst id>.L <x>.W <y>.W <skill id>.W <property>.L <delaytime>.L <is disposable>.B <attackMT>.L (ZC_USESKILL_ACK3)
 /// property:
 ///     0 = Yellow cast aura
 ///     1 = Water elemental cast aura
@@ -5809,36 +5821,46 @@ void clif_skill_scale( struct block_list *bl, int src_id, int x, int y, uint16 s
 /// is disposable:
 ///     0 = yellow chat text "[src name] will use skill [skill name]."
 ///     1 = no text
-void clif_skillcasting(struct block_list* bl, int src_id, int dst_id, int dst_x, int dst_y, uint16 skill_id, uint16 skill_lv, int property, int casttime)
-{
-#if PACKETVER < 20091124
-	const int cmd = 0x13e;
-#else
-	const int cmd = 0x7fb;
-#endif
-	unsigned char buf[32];
+void clif_skillcasting(block_list& src, block_list* dst, uint16 dst_x, uint16 dst_y, uint16 skill_id, uint16 skill_lv, e_element property, int32 casttime){
+	PACKET_ZC_USESKILL_ACK p{};
 
-	WBUFW(buf,0) = cmd;
-	WBUFL(buf,2) = src_id;
-	WBUFL(buf,6) = dst_id;
-	WBUFW(buf,10) = dst_x;
-	WBUFW(buf,12) = dst_y;
-	WBUFW(buf,14) = skill_id;
-	WBUFL(buf,16) = property<0?0:property; //Avoid sending negatives as element [Skotlex]
-	WBUFL(buf,20) = casttime;
-#if PACKETVER >= 20091124
-	WBUFB(buf,24) = 0;  // isDisposable
+	p.packetType = HEADER_ZC_USESKILL_ACK;
+	p.srcId = src.id;
+	if( dst != nullptr ){
+		p.dstId = dst->id;
+	}else{
+		p.dstId = 0;
+	}
+	p.x = dst_x;
+	p.y = dst_y;
+	p.skillId = skill_id;
+	p.delayTime = casttime;
+
+
+	// Avoid sending unknown element
+	if(property >= ELE_NEUTRAL && property <= ELE_UNDEAD){
+		p.element = static_cast<decltype(p.element)>(property);
+	}else{
+		p.element = ELE_NEUTRAL;
+	}
+
+#if PACKETVER_MAIN_NUM >= 20091124 || PACKETVER_RE_NUM >= 20091124 || defined(PACKETVER_ZERO)
+	p.disposable = false;
+#endif
+#if PACKETVER_MAIN_NUM >= 20181212 || PACKETVER_RE_NUM >= 20181212 || PACKETVER_ZERO_NUM >= 20190130
+	p.attackMT = 0;
 #endif
 
-	if (disguised(bl)) {
-		clif_send(buf,packet_len(cmd), bl, AREA_WOS);
-		WBUFL(buf,2) = disguised_bl_id( src_id );
-		clif_send(buf,packet_len(cmd), bl, SELF);
+	if (disguised(&src)) {
+		clif_send(&p,sizeof(p), &src, AREA_WOS);
+
+		p.srcId = disguised_bl_id( src.id );
+		clif_send(&p,sizeof(p), &src, SELF);
 	} else
-		clif_send(buf,packet_len(cmd), bl, AREA);
+		clif_send(&p,sizeof(p), &src, AREA);
 
 	if( skill_get_inf2( skill_id, INF2_SHOWSCALE ) ){
-		clif_skill_scale( bl, src_id, bl->x, bl->y, skill_id, skill_lv, casttime );
+		clif_skill_scale( &src, src.id, src.x, src.y, skill_id, skill_lv, casttime );
 	}
 }
 
@@ -8607,29 +8629,34 @@ void clif_guild_belonginfo( map_session_data& sd ){
 /// status:
 ///     0 = offline
 ///     1 = online
-void clif_guild_memberlogin_notice(const struct mmo_guild &g,int idx,int flag)
-{
-	unsigned char buf[64];
+void clif_guild_memberlogin_notice(const struct mmo_guild &g,int idx,int online){
+
 	map_session_data* sd;
 
-	WBUFW(buf, 0)=0x1f2;
-	WBUFL(buf, 2)=g.member[idx].account_id;
-	WBUFL(buf, 6)=g.member[idx].char_id;
-	WBUFL(buf,10)=flag;
+	PACKET_ZC_UPDATE_CHARSTAT p{};
+
+	p.packetType = HEADER_ZC_UPDATE_CHARSTAT;
+	p.aid = g.member[idx].account_id;
+	p.cid = g.member[idx].char_id;
+	p.status = static_cast<decltype(p.status)>(online);
 
 	if( ( sd = g.member[idx].sd ) != nullptr )
 	{
-		WBUFW(buf,14) = sd->status.sex;
-		WBUFW(buf,16) = sd->status.hair;
-		WBUFW(buf,18) = sd->status.hair_color;
-		clif_send(buf,packet_len(0x1f2),&sd->bl,GUILD_WOS);
+#if (PACKETVER)
+		p.gender = static_cast<decltype(p.gender)>(sd->status.sex);
+		p.hairStyle = static_cast<decltype(p.hairStyle)>(sd->status.hair);
+		p.hairColor = static_cast<decltype(p.hairColor)>(sd->status.hair_color);
+#endif
+		clif_send(&p,sizeof(p),&sd->bl,GUILD_WOS);
 	}
 	else if( ( sd = guild_getavailablesd(g) ) != nullptr )
 	{
-		WBUFW(buf,14) = 0;
-		WBUFW(buf,16) = 0;
-		WBUFW(buf,18) = 0;
-		clif_send(buf,packet_len(0x1f2),&sd->bl,GUILD);
+#if (PACKETVER)
+		p.gender = 0;
+		p.hairStyle = 0;
+		p.hairColor = 0;
+#endif
+		clif_send(&p,sizeof(p),&sd->bl,GUILD);
 	}
 }
 
