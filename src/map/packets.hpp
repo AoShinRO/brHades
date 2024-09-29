@@ -478,6 +478,16 @@ struct PACKET_CZ_RESET_SKILL{
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(CZ_RESET_SKILL, 0x0bb1)
 
+struct PACKET_ZC_SKILLINFO_UPDATE {
+	uint16 packetType;
+	uint16 skillId;
+	uint16 level;
+	uint16 sp;
+	uint16 range2;
+	bool upFlag;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_SKILLINFO_UPDATE, 0x10e);
+
 struct PACKET_ZC_BOSS_INFO{
 	int16 packetType;
 	uint8 type;
@@ -865,6 +875,27 @@ struct PACKET_ZC_ACK_REQ_CHANGE_MEMBERS {
 	struct PACKET_ZC_ACK_REQ_CHANGE_MEMBERS_sub members[];
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(ZC_ACK_REQ_CHANGE_MEMBERS, 0x156);
+
+#if (PACKETVER) // no idea when it changed
+struct PACKET_ZC_UPDATE_CHARSTAT {
+	uint16 packetType;
+	uint32 aid;
+	uint32 cid;
+	uint32 status;
+	uint16 gender;
+	uint16 hairStyle;
+	uint16 hairColor;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_UPDATE_CHARSTAT, 0x01f2)
+#else
+struct PACKET_ZC_UPDATE_CHARSTAT {
+	uint16 packetType;
+	uint32 aid;
+	uint32 cid;
+	uint32 status;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_UPDATE_CHARSTAT, 0x016d)
+#endif
 
 struct PACKET_ZC_STATUS {
 	int16 packetType;
@@ -1344,6 +1375,19 @@ struct PACKET_ZC_EL_PAR_CHANGE {
 	uint32 value;
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(ZC_EL_PAR_CHANGE, 0x81e);
+
+struct PACKET_ZC_EMOTION {
+	uint16 packetType;
+	uint32 srcId;
+	uint8 emotion_type;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_EMOTION, 0xc0);
+
+struct PACKET_CZ_REQ_EMOTION {
+	uint16 packetType;
+	uint8 emotion_type;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(CZ_REQ_EMOTION, 0xbf);
 
 #if PACKETVER >= 20131223
 struct PACKET_ZC_NOTIFY_ACT{

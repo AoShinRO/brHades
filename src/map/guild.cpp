@@ -1383,6 +1383,8 @@ int guild_send_memberinfoshort(map_session_data *sd,int online) { // cleaned up 
 #if PACKETVER >= 20200902
 		// Clients after this version need this packet to show the guild name on alt+a
 		clif_guild_basicinfo( *sd );
+		if(map_nick2sd(g->guild.master,false) == nullptr) // (FIXME: It's not needed if master is online)
+			clif_name_area(&sd->bl); // Clients after this version need this to show the guild name on under character name to normal members if master is offline
 #endif
 		clif_guild_belonginfo( *sd );
 		sd->guild_emblem_id = g->guild.emblem_id;
@@ -1758,7 +1760,7 @@ int guild_skillupack(int guild_id,uint16 skill_id,uint32 account_id) {
 	if (sd != nullptr) {
 		int lv = g->guild.skill[idx].lv;
 		int range = skill_get_range(skill_id, lv);
-		clif_skillup(sd,skill_id,lv,range,1);
+		clif_skillup(*sd,skill_id,lv,range,true);
 
 		/* Guild Aura handling */
 		switch( skill_id ) {

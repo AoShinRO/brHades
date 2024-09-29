@@ -245,7 +245,7 @@ int hom_dead(struct homun_data *hd)
 	//There's no intimacy penalties on death (from Tharis)
 	map_session_data *sd = hd->master;
 
-	clif_emotion(&hd->bl, ET_KEK);
+	clif_emotion(hd->bl, ET_KEK);
 
 	//Delete timers when dead.
 	hom_hungry_timer_delete(hd);
@@ -254,7 +254,7 @@ int hom_dead(struct homun_data *hd)
 	if (!sd) //unit remove map will invoke unit free
 		return 3;
 
-	clif_emotion(&sd->bl, ET_CRY);
+	clif_emotion(sd->bl, ET_CRY);
 
 #ifdef RENEWAL
 	status_change_end(&sd->bl, SC_HOMUN_TIME);
@@ -310,7 +310,7 @@ int hom_vaporize(map_session_data *sd, int flag)
 * @param hd
 * @param emote
 */
-int hom_delete(struct homun_data *hd, int emote)
+int hom_delete(struct homun_data *hd)
 {
 	map_session_data *sd;
 	nullpo_ret(hd);
@@ -318,9 +318,6 @@ int hom_delete(struct homun_data *hd, int emote)
 
 	if (!sd)
 		return unit_free(&hd->bl,CLR_DEAD);
-
-	if (emote >= 0)
-		clif_emotion(&sd->bl, emote);
 
 	//This makes it be deleted right away.
 	hd->homunculus.intimacy = 0;
@@ -615,7 +612,7 @@ int hom_evolution(struct homun_data *hd)
 	nullpo_ret(hd);
 
 	if(!hd->homunculusDB->evo_class || hd->homunculus.class_ == hd->homunculusDB->evo_class) {
-		clif_emotion(&hd->bl, ET_SWEAT);
+		clif_emotion(hd->bl, ET_SWEAT);
 		return 0 ;
 	}
 
@@ -651,7 +648,7 @@ int hom_evolution(struct homun_data *hd)
 		return 0;
 
 	clif_spawn(&hd->bl);
-	clif_emotion(&sd->bl, ET_BEST);
+	clif_emotion(sd->bl, ET_BEST);
 	clif_specialeffect(&hd->bl,EF_HO_UP,AREA);
 
 	//status_Calc flag&1 will make current HP/SP be reloaded from hom structure
@@ -682,7 +679,7 @@ int hom_mutate(struct homun_data *hd, int homun_id)
 	m_id    = hom_class2mapid(homun_id);
 
 	if( m_class == -1 || m_id == -1 || !(m_class&HOM_EVO) || !(m_id&HOM_S) ) {
-		clif_emotion(&hd->bl, ET_SWEAT);
+		clif_emotion(hd->bl, ET_SWEAT);
 		return 0;
 	}
 
@@ -704,7 +701,7 @@ int hom_mutate(struct homun_data *hd, int homun_id)
 		return 0;
 
 	clif_spawn(&hd->bl);
-	clif_emotion(&sd->bl, ET_BEST);
+	clif_emotion(sd->bl, ET_BEST);
 	clif_specialeffect(&hd->bl,EF_HO_UP,AREA);
 
 	//status_Calc flag&1 will make current HP/SP be reloaded from hom structure
@@ -853,7 +850,7 @@ void hom_menu(map_session_data *sd, int type)
 			hom_food(sd, sd->hd);
 			break;
 		case 2:
-			hom_delete(sd->hd, -1);
+			hom_delete(sd->hd);
 			break;
 		default:
 			ShowError("hom_menu : unknown menu choice : %d\n", type);
@@ -868,7 +865,8 @@ void hom_menu(map_session_data *sd, int type)
 */
 int hom_food(map_session_data *sd, struct homun_data *hd)
 {
-	int i, foodID, emotion;
+	int i, foodID;
+	e_emotion_type emotion;
 
 	nullpo_retr(1,sd);
 	nullpo_retr(1,hd);
@@ -907,14 +905,14 @@ int hom_food(map_session_data *sd, struct homun_data *hd)
 
 	log_feeding(sd, LOG_FEED_HOMUNCULUS, foodID);
 
-	clif_emotion(&hd->bl,emotion);
+	clif_emotion(hd->bl,emotion);
 	clif_send_homdata( *hd, SP_HUNGRY );
 	clif_send_homdata( *hd, SP_INTIMATE );
 	clif_hom_food( *sd, foodID, 1 );
 
 	// Too much food :/
 	if(hd->homunculus.intimacy == 0)
-		return hom_delete(sd->hd, ET_HUK);
+		return hom_delete(sd->hd);
 
 	return 0;
 }
@@ -942,11 +940,11 @@ static TIMER_FUNC(hom_hungry){
 
 	hd->homunculus.hunger--;
 	if(hd->homunculus.hunger <= 10) {
-		clif_emotion(&hd->bl, ET_FRET);
+		clif_emotion(hd->bl, ET_FRET);
 	} else if(hd->homunculus.hunger == 25) {
-		clif_emotion(&hd->bl, ET_SCRATCH);
+		clif_emotion(hd->bl, ET_SCRATCH);
 	} else if(hd->homunculus.hunger == 75) {
-		clif_emotion(&hd->bl, ET_OK);
+		clif_emotion(hd->bl, ET_OK);
 	}
 
 	if( battle_config.feature_homunculus_autofeed && hd->homunculus.autofeed && hd->homunculus.hunger <= battle_config.feature_homunculus_autofeed_rate ){
@@ -957,7 +955,7 @@ static TIMER_FUNC(hom_hungry){
 		hd->homunculus.hunger = 0;
 		// Delete the homunculus if intimacy <= 100
 		if (!hom_decrease_intimacy(hd, 100))
-			return hom_delete(hd, ET_HUK);
+			return hom_delete(hd);
 		clif_send_homdata( *hd, SP_INTIMATE );
 	}
 
