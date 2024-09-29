@@ -5622,12 +5622,13 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 	std::unique_ptr<char[]> buffer(new char[len + 1]);
 	len = std::fread(buffer.get(), 1, len, fp);
 	buffer[len] = '\0';
-	std::fclose(fp);
 
 	if (std::ferror(fp)) {
 		ShowError("npc_parsesrcfile: Failed to read file '%.*s' - %s\n",(int)filepath.size(), filepath.data(), strerror(errno));
 		return 0;
 	}
+
+	std::fclose(fp);
 
 	if (len >= 3 && (unsigned char)buffer[0] == 0xEF && (unsigned char)buffer[1] == 0xBB && (unsigned char)buffer[2] == 0xBF) {
 		// UTF-8 BOM. This is most likely an error on the user's part, because:
