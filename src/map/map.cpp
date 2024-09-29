@@ -3552,45 +3552,42 @@ int map_readfromcache(struct map_data *m, char *buffer, char *decode_buffer)
 	int i;
 	struct map_cache_main_header *header = (struct map_cache_main_header *)buffer;
 	struct map_cache_map_info *info = nullptr;
-	char *p = reinterpret_cast<char*>(buffer + sizeof(*header));
-
-	for(i = 0; i < header->map_count; i++) {
+	void* p = buffer + sizeof(struct map_cache_main_header);
+	
+	for (i = 0; i < header->map_count; i++) {
 		info = (struct map_cache_map_info *)p;
-
-		if( strcmp(m->name, info->name) == 0 )
-			break; // Map found
-
-		// Jump to next entry..
-		p += sizeof(struct map_cache_map_info) + info->len;
+		
+		if (strcmp(m->name, info->name) == 0) 
+		    break; // Map found
+				
+		p = reinterpret_cast<void*>(reinterpret_cast<char*>(p) + sizeof(struct map_cache_map_info) + info->len);
 	}
-
-	if( info && i < header->map_count ) {
+	
+	if (info && i < header->map_count) {
 		unsigned long size, xy;
-
-		if( info->xs <= 0 || info->ys <= 0 )
-			return 0;// Invalid
-
+		
+		if (info->xs <= 0 || info->ys <= 0) 
+		    return 0; // Invalid
+		
 		m->xs = info->xs;
 		m->ys = info->ys;
-		size = (unsigned long)info->xs*(unsigned long)info->ys;
-
-		if(size > MAX_MAP_SIZE) {
-			ShowWarning("map_readfromcache: %s exceeded MAX_MAP_SIZE of %d\n", info->name, MAX_MAP_SIZE);
-			return 0; // Say not found to remove it from list.. [Shinryo]
+		size = (unsigned long)info->xs * (unsigned long)info->ys;
+		
+		if (size > MAX_MAP_SIZE) {
+		    ShowWarning("map_readfromcache: %s exceeded MAX_MAP_SIZE of %d\n", info->name, MAX_MAP_SIZE);
+		    return 0; // Say not found to remove it from list.. [Shinryo]
 		}
-
-		// TO-DO: Maybe handle the scenario, if the decoded buffer isn't the same size as expected? [Shinryo]
-		decode_zip(decode_buffer, &size, (struct map_cache_map_info*)p + 1 , info->len);
-
+		
+		decode_zip(decode_buffer, &size, reinterpret_cast<void*>(reinterpret_cast<char*>(p) + sizeof(struct map_cache_map_info)), info->len);
+		
 		CREATE(m->cell, struct mapcell, size);
-
-
-		for( xy = 0; xy < size; ++xy )
-			m->cell[xy] = map_gat2cell(decode_buffer[xy]);
-
+		
+		for (xy = 0; xy < size; ++xy) 
+		    m->cell[xy] = map_gat2cell(decode_buffer[xy]);
+		
 		return 1;
 	}
-
+	
 	return 0; // Not found
 }
 
