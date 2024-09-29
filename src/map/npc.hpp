@@ -1614,7 +1614,7 @@ int npc_get_new_npc_id(void);
 
 int npc_addsrcfile(const char* name, bool loadscript);
 void npc_delsrcfile(const char* name);
-int npc_parsesrcfile(const char* filepath);
+static inline int npc_parsesrcfile(std::string_view filepath);
 void do_clear_npc(void);
 void do_final_npc(void);
 void do_init_npc(void);

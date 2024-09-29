@@ -3588,7 +3588,7 @@ int npc_addsrcfile(const char* name, bool loadscript)
 	npc_src_files.push_back(name);
 
 	if (loadscript)
-		return npc_parsesrcfile(name);
+		return npc_parsesrcfile(npc_src_files.back());
 
 	return 1;
 }
@@ -3614,7 +3614,7 @@ void npc_loadsrcfiles() {
 #ifdef DETAILED_LOADING_OUTPUT
 		ShowStatus("Loading NPC file: %s" CL_CLL "\r", file.c_str());
 #endif
-		npc_parsesrcfile(file.c_str());
+		npc_parsesrcfile(file);
 	}
 	int npc_total = npc_warp + npc_shop + npc_script;
 
@@ -5601,57 +5601,56 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
  * @param runOnInit :  should we exec OnInit when it's done ?
  * @return 0:error, 1:success
  */
-int npc_parsesrcfile(const char* filepath)
+static inline int npc_parsesrcfile(std::string_view filepath)
 {
-	if (check_filepath(filepath) != 2) { //this is not a file 
-		ShowDebug("npc_parsesrcfile: Path doesn't seem to be a file skipping it : '%s'.\n", filepath);
+	if (check_filepath(filepath.data()) != 2) { //this is not a file 
+		ShowDebug("npc_parsesrcfile: Path doesn't seem to be a file skipping it : '%.*s'.\n", (int)filepath.size(), filepath.data());
 		return 0;
 	} 
             
 	// read whole file to buffer
-	FILE* fp = fopen(filepath, "rb");
-	if (fp == nullptr) {
-		ShowError("npc_parsesrcfile: File not found '%s'.\n", filepath);
+	std::FILE* fp = std::fopen(filepath.data(), "rb");
+	if (!fp) {
+		ShowError("npc_parsesrcfile: File not found '%.*s'.\n", (int)filepath.size(), filepath.data());
 		return 0;
 	}
-	fseek(fp, 0, SEEK_END);
-	size_t len = ftell(fp);
-	char* buffer = (char*)aMalloc(len+1);
-	fseek(fp, 0, SEEK_SET);
-	len = fread(buffer, 1, len, fp);
-	buffer[len] = '\0';
-	if (ferror(fp)) {
-		ShowError("npc_parsesrcfile: Failed to read file '%s' - %s\n", filepath, strerror(errno));
-		aFree(buffer);
-		fclose(fp);
-		return 0;
-	}
-	fclose(fp);
 
-	if ((unsigned char)buffer[0] == 0xEF && (unsigned char)buffer[1] == 0xBB && (unsigned char)buffer[2] == 0xBF) {
+	std::fseek(fp, 0, SEEK_END);
+	size_t len = std::ftell(fp);
+	std::fseek(fp, 0, SEEK_SET);
+
+	std::unique_ptr<char[]> buffer(new char[len + 1]);
+	len = std::fread(buffer.get(), 1, len, fp);
+	buffer[len] = '\0';
+	std::fclose(fp);
+
+	if (std::ferror(fp)) {
+		ShowError("npc_parsesrcfile: Failed to read file '%.*s' - %s\n",(int)filepath.size(), filepath.data(), strerror(errno));
+		return 0;
+	}
+
+	if (len >= 3 && (unsigned char)buffer[0] == 0xEF && (unsigned char)buffer[1] == 0xBB && (unsigned char)buffer[2] == 0xBF) {
 		// UTF-8 BOM. This is most likely an error on the user's part, because:
 		// - BOM is discouraged in UTF-8, and the only place where you see it is Notepad and such.
 		// - It's unlikely that the user wants to use UTF-8 data here, since we don't really support it, nor does the client by default.
 		// - If the user really wants to use UTF-8 (instead of latin1, EUC-KR, SJIS, etc), then they can still do it <without BOM>.
 		// More info at http://unicode.org/faq/utf_bom.html#bom5 and http://en.wikipedia.org/wiki/Byte_order_mark#UTF-8
-		ShowError("npc_parsesrcfile: Detected unsupported UTF-8 BOM in file '%s'. Stopping (please consider using another character set).\n", filepath);
-		aFree(buffer);
+		ShowError("npc_parsesrcfile: Detected unsupported UTF-8 BOM in file '%.*s'. Stopping. Stopping (please consider using another character set).\n", (int)filepath.size(), filepath.data());
 		return 0;
 	}
 
 	int lines = 0;
 
 	// parse buffer
-	for ( const char* p = skip_space(buffer); p && *p ; p = skip_space(p) ) {
+	for ( const char* p = skip_space(buffer.get()); p && *p ; p = skip_space(p) ) {
 		size_t pos[9];
 		lines++;
 
-		// w1<TAB>w2<TAB>w3<TAB>w4
 		bool error;
-		size_t count = sv_parse( p, len + buffer - p, 0, '\t', pos, ARRAYLENGTH( pos ), SV_TERMINATE_LF|SV_TERMINATE_CRLF, error );
+		size_t count = sv_parse(p, len + buffer.get() - p, 0, '\t', pos, ARRAYLENGTH(pos), SV_TERMINATE_LF | SV_TERMINATE_CRLF, error);
 
-		if( error ){
-			ShowError("npc_parsesrcfile: Parse error in file '%s', line '%d'. Stopping...\n", filepath, strline(buffer,p-buffer));
+		if (error) {
+			ShowError("npc_parsesrcfile: Parse error in file '%.*s', line '%d'. Stopping...\n", (int)filepath.size(), filepath.data(), lines);
 			break;
 		}
 
@@ -5659,7 +5658,7 @@ int npc_parsesrcfile(const char* filepath)
 
 		// fill w1
 		if( pos[3]-pos[2] > ARRAYLENGTH(w1)-1 )
-			ShowWarning("npc_parsesrcfile: w1 truncated, too much data (%zu) in file '%s', line '%d'.\n", pos[3]-pos[2], filepath, strline(buffer,p-buffer));
+			ShowWarning("npc_parsesrcfile: w1 truncated, too much data (%zu) in file '%.*s', line '%d'.\n", pos[3]-pos[2], (int)filepath.size(), filepath.data(), lines);
 
 		size_t index = std::min( pos[3] - pos[2], ARRAYLENGTH( w1 ) - 1 );
 		memcpy( w1, p + pos[2], index * sizeof( char ) );
@@ -5667,7 +5666,7 @@ int npc_parsesrcfile(const char* filepath)
 
 		// fill w2
 		if( pos[5]-pos[4] > ARRAYLENGTH(w2)-1 )
-			ShowWarning("npc_parsesrcfile: w2 truncated, too much data (%zu) in file '%s', line '%d'.\n", pos[5]-pos[4], filepath, strline(buffer,p-buffer));
+			ShowWarning("npc_parsesrcfile: w2 truncated, too much data (%zu) in file '%.*s', line '%d'.\n", pos[5]-pos[4], (int)filepath.size(), filepath.data(), lines);
 
 		index = std::min( pos[5] - pos[4], ARRAYLENGTH( w2 ) - 1 );
 		memcpy( w2, p + pos[4], index * sizeof( char ) );
@@ -5675,7 +5674,7 @@ int npc_parsesrcfile(const char* filepath)
 
 		// fill w3
 		if( pos[7]-pos[6] > ARRAYLENGTH(w3)-1 )
-			ShowWarning("npc_parsesrcfile: w3 truncated, too much data (%lu) in file '%s', line '%d'.\n", pos[7]-pos[6], filepath, strline(buffer,p-buffer));
+			ShowWarning("npc_parsesrcfile: w3 truncated, too much data (%lu) in file '%.*s', line '%d'.\n", pos[7]-pos[6], (int)filepath.size(), filepath.data(), lines);
 
 		index = std::min( pos[7] - pos[6], ARRAYLENGTH( w3 ) - 1 );
 		memcpy( w3, p + pos[6], index * sizeof( char ) );
@@ -5683,7 +5682,7 @@ int npc_parsesrcfile(const char* filepath)
 
 		// fill w4 (to end of line)
 		if( pos[1]-pos[8] > ARRAYLENGTH(w4)-1 )
-			ShowWarning("npc_parsesrcfile: w4 truncated, too much data (%lu) in file '%s', line '%d'.\n", pos[1]-pos[8], filepath, strline(buffer,p-buffer));
+			ShowWarning("npc_parsesrcfile: w4 truncated, too much data (%lu) in file '%.*s', line '%d'.\n", pos[1]-pos[8], (int)filepath.size(), filepath.data(), lines);
 		if (pos[8] != -1) {
 			index = std::min( pos[1] - pos[8], ARRAYLENGTH( w4 ) - 1 );
 			memcpy( w4, p + pos[8], index * sizeof( char ) );
@@ -5693,7 +5692,7 @@ int npc_parsesrcfile(const char* filepath)
 			w4[0] = '\0';
 
 		if (count < 3) {// Unknown syntax
-			ShowError("npc_parsesrcfile: Unknown syntax in file '%s', line '%d'. Stopping...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,p-buffer), w1, w2, w3, w4);
+			ShowError("npc_parsesrcfile: Unknown syntax in file '%.*s', line '%d'. Stopping...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), lines, w1, w2, w3, w4);
 			break;
 		}
 
@@ -5709,8 +5708,8 @@ int npc_parsesrcfile(const char* filepath)
 			int count2 = sscanf(w1,"%15[^,],%6hd,%6hd[^,]",mapname,&x,&y);
 
 			if (count2 < 1) {
-				ShowError("npc_parsesrcfile: Invalid script definition in file '%s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,p-buffer), w1, w2, w3, w4);
-				if (has_script && (p = npc_skip_script(p,buffer,filepath)) == nullptr)
+				ShowError("npc_parsesrcfile: Invalid script definition in file '%.*s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),p-buffer.get()), w1, w2, w3, w4);
+				if (has_script && (p = npc_skip_script(p,buffer.get(),filepath.data())) == nullptr)
 					break;
 				p = strchr(p,'\n');// next line
 				continue;
@@ -5721,15 +5720,15 @@ int npc_parsesrcfile(const char* filepath)
 			}
 
 			if (!mapindex_name2id(mapname)) {// Incorrect map, we must skip the script info...
-				ShowError("npc_parsesrcfile: Unknown map '%s' in file '%s', line '%d'. Skipping line...\n", mapname, filepath, strline(buffer,p-buffer));
-				if (has_script && (p = npc_skip_script(p,buffer,filepath)) == nullptr)
+				ShowError("npc_parsesrcfile: Unknown map '%s' in file '%.*s', line '%d'. Skipping line...\n", mapname, (int)filepath.size(), filepath.data(), strline(buffer.get(),p-buffer.get()));
+				if (has_script && (p = npc_skip_script(p,buffer.get(),filepath.data())) == nullptr)
 					break;
 				p = strchr(p,'\n');// next line
 				continue;
 			}
 			int16 m = map_mapname2mapid(mapname);
 			if (m < 0) {// "mapname" is not assigned to this server, we must skip the script info...
-				if (has_script && (p = npc_skip_script(p,buffer,filepath)) == nullptr)
+				if (has_script && (p = npc_skip_script(p,buffer.get(),filepath.data())) == nullptr)
 					break;
 				p = strchr(p,'\n');// next line
 				continue;
@@ -5738,8 +5737,8 @@ int npc_parsesrcfile(const char* filepath)
 			map_data *mapdata = map_getmapdata(m);
 
 			if (x < 0 || x >= mapdata->xs || y < 0 || y >= mapdata->ys) {
-				ShowError("npc_parsesrcfile: Unknown coordinates ('%d', '%d') for map '%s' in file '%s', line '%d'. Skipping line...\n", x, y, mapname, filepath, strline(buffer,p-buffer));
-				if (has_script && (p = npc_skip_script(p,buffer,filepath)) == nullptr)
+				ShowError("npc_parsesrcfile: Unknown coordinates ('%d', '%d') for map '%s' in file '%.*s', line '%d'. Skipping line...\n", x, y, mapname, (int)filepath.size(), filepath.data(), strline(buffer.get(),p-buffer.get()));
+				if (has_script && (p = npc_skip_script(p,buffer.get(),filepath.data())) == nullptr)
 					break;
 				p = strchr(p,'\n');// next line
 				continue;
@@ -5748,34 +5747,32 @@ int npc_parsesrcfile(const char* filepath)
 
 		// parse the data according to w2
 		if ((strncasecmp(w2, "warp", 4) == 0 || strncasecmp(w2, "warp2", 5) == 0) && count > 3)
-			p = npc_parse_warp(w1,w2,w3,w4, p, buffer, filepath);
+			p = npc_parse_warp(w1,w2,w3,w4, p, buffer.get(), filepath.data());
 		else if ((!strcasecmp(w2,"shop") || !strcasecmp(w2,"cashshop") || !strcasecmp(w2,"itemshop") || !strcasecmp(w2,"pointshop") || !strcasecmp(w2,"marketshop") ) && count > 3)
-			p = npc_parse_shop(w1,w2,w3,w4, p, buffer, filepath);
+			p = npc_parse_shop(w1,w2,w3,w4, p, buffer.get(), filepath.data());
 		else if (has_script) {
 			if (strcasecmp(w1,"function") == 0) {
 				if (strcasecmp(w2,"script") == 0)
-					p = npc_parse_function(w1, w2, w3, w4, p, buffer, filepath);
+					p = npc_parse_function(w1, w2, w3, w4, p, buffer.get(), filepath.data());
 				else {
-					ShowError("npc_parsesrcfile: Unable to parse, probably a missing or extra TAB in file '%s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,p-buffer), w1, w2, w3, w4);
+					ShowError("npc_parsesrcfile: Unable to parse, probably a missing or extra TAB in file '%.*s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),p-buffer.get()), w1, w2, w3, w4);
 					p = strchr(p,'\n');// skip and continue
 				}
 			}
 			else
-				p = npc_parse_script(w1,w2,w3,w4, p, buffer, filepath);
+				p = npc_parse_script(w1,w2,w3,w4, p, buffer.get(), filepath.data());
 		}
 		else if( int i = 0; ( sscanf( w2, "duplicate%n", &i ), ( i > 0 && w2[i] == '(' ) ) && count > 3 )
-			p = npc_parse_duplicate(w1,w2,w3,w4, p, buffer, filepath);
+			p = npc_parse_duplicate(w1,w2,w3,w4, p, buffer.get(), filepath.data());
 		else if( (strcmpi(w2,"monster") == 0 || strcmpi(w2,"boss_monster") == 0) && count > 3 )
-			p = npc_parse_mob(w1, w2, w3, w4, p, buffer, filepath);
+			p = npc_parse_mob(w1, w2, w3, w4, p, buffer.get(), filepath.data());
 		else if( strcmpi(w2,"mapflag") == 0 && count >= 3 )
-			p = npc_parse_mapflag(w1, w2, trim(w3), trim(w4), p, buffer, filepath);
+			p = npc_parse_mapflag(w1, w2, trim(w3), trim(w4), p, buffer.get(), filepath.data());
 		else {
-			ShowError("npc_parsesrcfile: Unable to parse, probably a missing or extra TAB in file '%s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,p-buffer), w1, w2, w3, w4);
+			ShowError("npc_parsesrcfile: Unable to parse, probably a missing or extra TAB in file '%.*s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),p-buffer.get()), w1, w2, w3, w4);
 			p = strchr(p,'\n');// skip and continue
 		}
 	}
-	aFree(buffer);
-
 	return 1;
 }
 
