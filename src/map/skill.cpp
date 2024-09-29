@@ -2309,7 +2309,7 @@ int skill_additional_effect( struct block_list* src, struct block_list *bl, uint
 				if (DIFF_TICK(ud->canact_tick, tick + delay) < 0){
 					ud->canact_tick = i64max(tick + delay, ud->canact_tick);
 					if ( battle_config.display_status_timers )
-						clif_status_change(src, EFST_POSTDELAY, 1, delay, 0, 0, 0);
+						clif_status_change(src, EFST_POSTDELAY, true, delay, 0, 0, 0);
 				}
 			}
 		}
@@ -2388,7 +2388,7 @@ int skill_additional_effect( struct block_list* src, struct block_list *bl, uint
 				if (DIFF_TICK(ud->canact_tick, tick + delay) < 0){
 					ud->canact_tick = i64max(tick + delay, ud->canact_tick);
 					if ( battle_config.display_status_timers && sd )
-						clif_status_change(src, EFST_POSTDELAY, 1, delay, 0, 0, 0);
+						clif_status_change(src, EFST_POSTDELAY, true, delay, 0, 0, 0);
 				}
 			}
 		}
@@ -2753,7 +2753,7 @@ int skill_counter_additional_effect (struct block_list* src, struct block_list *
 				if (DIFF_TICK(ud->canact_tick, tick + delay) < 0){
 					ud->canact_tick = i64max(tick + delay, ud->canact_tick);
 					if ( battle_config.display_status_timers && dstsd )
-						clif_status_change(bl, EFST_POSTDELAY, 1, delay, 0, 0, 0);
+						clif_status_change(bl, EFST_POSTDELAY, true, delay, 0, 0, 0);
 				}
 			}
 		}
@@ -6598,7 +6598,7 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, uint
 				}
 
 				sd->ud.canact_tick = i64max(tick + skill_delayfix(src, pres_skill_id, pres_skill_lv), sd->ud.canact_tick);
-				clif_status_change(src, EFST_POSTDELAY, 1, skill_delayfix(src, pres_skill_id, pres_skill_lv), 0, 0, 0);
+				clif_status_change(src, EFST_POSTDELAY, true, skill_delayfix(src, pres_skill_id, pres_skill_lv), 0, 0, 0);
 
 				int cooldown = pc_get_skillcooldown(sd,pres_skill_id, pres_skill_lv);
 
@@ -13413,7 +13413,7 @@ TIMER_FUNC(skill_castend_id){
 		}
 
 		if( battle_config.display_status_timers && sd )
-			clif_status_change(src, EFST_POSTDELAY, 1, skill_delayfix(src, ud->skill_id, ud->skill_lv), 0, 0, 0);
+			clif_status_change(src, EFST_POSTDELAY, true, skill_delayfix(src, ud->skill_id, ud->skill_lv), 0, 0, 0);
 		if( sd )
 		{
 			switch( ud->skill_id )
@@ -13650,7 +13650,7 @@ TIMER_FUNC(skill_castend_pos){
 			if(cooldown) skill_blockpc_start(sd, ud->skill_id, cooldown);
 		}
 		if( battle_config.display_status_timers && sd )
-			clif_status_change(src, EFST_POSTDELAY, 1, skill_delayfix(src, ud->skill_id, ud->skill_lv), 0, 0, 0);
+			clif_status_change(src, EFST_POSTDELAY, true, skill_delayfix(src, ud->skill_id, ud->skill_lv), 0, 0, 0);
 //		if( sd )
 //		{
 //			switch( ud->skill_id )
