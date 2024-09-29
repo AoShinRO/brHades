@@ -121,10 +121,8 @@
 	packet(0x010b,6);
 	packet(0x010c,6);
 	packet(0x010d,2);
-	packet(0x010e,11);
 	packet(0x010f,-1);
 	packet( HEADER_ZC_ACK_TOUSESKILL, sizeof( PACKET_ZC_ACK_TOUSESKILL ) );
-	packet(0x0111,39);
 	parseable_packet(0x0112,4,clif_parse_SkillUp,2);
 	parseable_packet(0x0113,10,clif_parse_UseSkillToId,2,4,6);
 	packet(0x0114,31);
@@ -149,7 +147,6 @@
 	packet(0x0132,6);
 	parseable_packet( HEADER_CZ_PC_PURCHASE_ITEMLIST_FROMMC, -1, clif_parse_PurchaseReq, 0 );
 	packet(0x0138,3);
-	packet(0x013e,24);
 	parseable_packet(0x013f,26,clif_parse_GM_Item_Monster,2);
 	parseable_packet(0x0140,22,clif_parse_MapMove,2,18,20);
 	parseable_packet(0x0143,10,clif_parse_NpcAmountInput,2,6);
@@ -1314,11 +1311,6 @@
 	packet(0x07d9,268);
 #endif
 
-// 2009-07-15aRagexeRE
-#if PACKETVER >= 20090715
-	packet(0x07e1,15);
-#endif
-
 // 2009-08-05aRagexeRE
 #if PACKETVER >= 20090805
 	packet(0x07e2,8);
@@ -1356,11 +1348,6 @@
 	packet(0x07f7,-1);
 	packet(0x07f8,-1);
 	packet(0x07f9,-1);
-#endif
-
-// 2009-11-24aRagexeRE
-#if PACKETVER >= 20091124
-	packet(0x07fb,25);
 #endif
 
 // 2009-12-01aRagexeRE

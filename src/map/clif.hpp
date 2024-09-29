@@ -930,12 +930,12 @@ void clif_class_change_target(struct block_list *bl,int class_, int type, enum s
 #define clif_mob_class_change(md, class_) clif_class_change(&md->bl, class_, 1)
 
 void clif_skillinfoblock(map_session_data *sd);
-void clif_skillup(map_session_data *sd, uint16 skill_id, int lv, int range, int upgradable);
-void clif_skillinfo(map_session_data *sd,int skill_id, int inf);
-void clif_addskill(map_session_data *sd, int skill_id);
+void clif_skillup(map_session_data &sd, uint16 skill_id, int lv, int range, bool upgradable);
+void clif_skillinfo(map_session_data& sd, uint16 skill_id);
+void clif_addskill(map_session_data& sd, uint16 skill_id);
 void clif_deleteskill(map_session_data& sd, uint16 skill_id, bool skip_infoblock = false);
 
-void clif_skillcasting(struct block_list* bl, int src_id, int dst_id, int dst_x, int dst_y, uint16 skill_id, uint16 skill_lv, int property, int casttime);
+void clif_skillcasting(block_list& src, block_list* dst, uint16 dst_x, uint16 dst_y, uint16 skill_id, uint16 skill_lv, e_element property, int32 casttime);
 void clif_skillcastcancel( block_list& bl );
 void clif_skill_fail( map_session_data& sd, uint16 skill_id, enum useskill_fail_cause cause = USESKILL_FAIL_LEVEL, int btype = 0, t_itemid itemId = 0 );
 void clif_skill_cooldown( map_session_data &sd, uint16 skill_id, t_tick tick );
