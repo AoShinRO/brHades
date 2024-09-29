@@ -5635,15 +5635,15 @@ void clif_skillinfoblock(map_session_data &sd){
 
 	// adoption fix
 	if (haveCallPartnerSkill) {
-		clif_addskill(&sd, WE_CALLPARTNER);
-		clif_skillinfo(&sd, WE_CALLPARTNER, 0);
+		clif_addskill(sd, WE_CALLPARTNER);
+		clif_skillinfo(sd, WE_CALLPARTNER);
 	}
 
 	// workaround for bugreport:5348; send the remaining skills one by one to bypass packet size limit
 	if(!remaining_skills.empty()) {
 		for(uint16 skill_remaining : remaining_skills){
-			clif_addskill(&sd, skill_remaining);
-			clif_skillinfo(&sd, skill_remaining, 0);
+			clif_addskill(sd, skill_remaining);
+			clif_skillinfo(sd, skill_remaining);
 		}
 	}
 }
