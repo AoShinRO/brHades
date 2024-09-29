@@ -870,6 +870,41 @@ struct PACKET_ZC_STATUS {
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(ZC_STATUS, 0xbd)
 
+struct PACKET_ZC_MSG_STATE_CHANGE{
+	uint16 packetType;
+	uint16 index;
+	uint32 srcId;
+	bool state;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_MSG_STATE_CHANGE,0x196)
+
+#if PACKETVER >= 20120618
+struct PACKET_ZC_MSG_STATE_CHANGE2{
+	uint16 packetType;
+	uint16 index;
+	uint32 srcId;
+	bool state;
+	uint32 duration;
+	uint32 duration2;
+	int val1;
+	int val2;
+	int val3;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_MSG_STATE_CHANGE2,0x983)
+#elif PACKETVER >= 20090121
+struct PACKET_ZC_MSG_STATE_CHANGE2{
+	uint16 packetType;
+	uint16 index;
+	uint32 srcId;
+	bool state;
+	uint32 duration;
+	int val1;
+	int val2;
+	int val3;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_MSG_STATE_CHANGE2,0x43f)
+#endif
+
 struct PACKET_ZC_NOTIFY_MAPINFO {
 	int16 packetType;
 	int16 type;
