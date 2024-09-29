@@ -69,7 +69,7 @@ jobs:
 
       - name: Command - configure
         env:
-            CONFIGURE_FLAGS: 'CC=gcc-${{ matrix.gcc }} CXX=g++-${{ matrix.gcc }} --enable-prere=${{ env.PRERE }} --enable-buildbot=yes'
+            CONFIGURE_FLAGS: 'CC=gcc-${{ matrix.gcc }} CXX=g++-${{ matrix.gcc }} --enable-prere=${{ matrix.mode }} --enable-buildbot=yes'
         run: ./configure $CONFIGURE_FLAGS
 
       - name: Command - make clean
