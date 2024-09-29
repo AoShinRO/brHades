@@ -8892,47 +8892,64 @@ static void clif_guild_positioninfolist(map_session_data& sd){
 ///     &0x10 = allow expel
 /// ranking:
 ///     TODO
-void clif_guild_positionchanged(const struct mmo_guild &g,int idx)
-{
-	// FIXME: This packet is intended to update the clients after a
-	// commit of position info changes, not sending one packet per
-	// position.
-	map_session_data *sd;
-	unsigned char buf[128];
+void clif_guild_positionchanged(const struct mmo_guild &g){
+	map_session_data *sd = guild_getavailablesd(g);
 
-	WBUFW(buf, 0)=0x174;
-	WBUFW(buf, 2)=44;  // packet len
-	// GUILD_REG_POSITION_INFO{
-	WBUFL(buf, 4)=idx;
-	WBUFL(buf, 8)=g.position[idx].mode;
-	WBUFL(buf,12)=idx;
-	WBUFL(buf,16)=g.position[idx].exp_mode;
-	safestrncpy(WBUFCP(buf,20),g.position[idx].name,NAME_LENGTH);
-	// }*
-	if( (sd=guild_getavailablesd(g))!=nullptr )
-		clif_send(buf,WBUFW(buf,2),&sd->bl,GUILD);
+	if( sd == nullptr )
+		return;
+
+	PACKET_ZC_ACK_CHANGE_GUILD_POSITIONINFO* p = reinterpret_cast<PACKET_ZC_ACK_CHANGE_GUILD_POSITIONINFO*>( packet_buffer );
+
+	p->PacketType = HEADER_ZC_ACK_CHANGE_GUILD_POSITIONINFO;
+	p->PacketLength = sizeof(*p);
+
+	int c = 0;
+
+	for(const guild_position& gp : g.position){
+		PACKET_ZC_ACK_CHANGE_GUILD_POSITIONINFO_sub& info = p->posInfo[c];
+
+		info.positionID = c;
+		info.mode = gp.mode;
+		info.ranking = c;
+		info.payRate = gp.exp_mode;
+		safestrncpy(info.posName, gp.name, sizeof(info.posName));
+		p->PacketLength += static_cast<decltype(p->PacketLength)>(sizeof(info));
+		c++;
+	}
+
+	clif_send(p,p->PacketLength,&sd->bl,GUILD);
 }
 
 
 /// Notifies clients in a guild about updated member position assignments.
 /// 0156 <packet len>.W { <account id>.L <char id>.L <position id>.L }* (ZC_ACK_REQ_CHANGE_MEMBERS)
-void clif_guild_memberpositionchanged(const struct mmo_guild &g, int idx)
-{
-	// FIXME: This packet is intended to update the clients after a
-	// commit of member position assignment changes, not sending one
-	// packet per position.
-	map_session_data *sd;
-	unsigned char buf[64];
+void clif_guild_memberpositionchanged(const struct mmo_guild &g){
+	map_session_data *sd = guild_getavailablesd(g);
 
-	WBUFW(buf, 0)=0x156;
-	WBUFW(buf, 2)=16;  // packet len
-	// MEMBER_POSITION_INFO{
-	WBUFL(buf, 4)=g.member[idx].account_id;
-	WBUFL(buf, 8)=g.member[idx].char_id;
-	WBUFL(buf,12)=g.member[idx].position;
-	// }*
-	if( (sd=guild_getavailablesd(g))!=nullptr )
-		clif_send(buf,WBUFW(buf,2),&sd->bl,GUILD);
+	if(sd == nullptr)
+		return;
+
+	PACKET_ZC_ACK_REQ_CHANGE_MEMBERS *p = reinterpret_cast<PACKET_ZC_ACK_REQ_CHANGE_MEMBERS*>( packet_buffer );
+
+	p->PacketType = HEADER_ZC_ACK_REQ_CHANGE_MEMBERS;
+	p->PacketLength = sizeof(*p);
+
+	int c = 0;
+
+	for(const guild_member& m : g.member){
+		if(m.char_id == 0)
+			continue;
+
+		PACKET_ZC_ACK_REQ_CHANGE_MEMBERS_sub& member = p->members[c];
+
+		member.accId = m.account_id;
+		member.charId = m.char_id;
+		member.positionID = m.position;
+		p->PacketLength += static_cast<decltype(p->PacketLength)>(sizeof(member));
+		c++;
+	}
+
+	clif_send(p,p->PacketLength,&sd->bl,GUILD);
 }
 
 
