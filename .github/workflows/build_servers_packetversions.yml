@@ -71,7 +71,7 @@ jobs:
 
       - name: Command - configure
         env:
-            CONFIGURE_FLAGS: "CC=gcc-10 CXX=g++-10 --enable-prere=${{ matrix.mode }} --enable-packetver=${{ matrix.packetver }} --enable-buildbot=yes"
+            CONFIGURE_FLAGS: "CC=gcc-10 CXX=g++-10 --enable-prere=${{ env.PRERE }} --enable-packetver=${{ matrix.packetver }} --enable-buildbot=yes"
         run: ./configure $CONFIGURE_FLAGS CXXFLAGS="-std=c++20"
 
       - name: Command - make clean
