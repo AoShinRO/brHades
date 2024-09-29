@@ -20742,7 +20742,7 @@ int skill_getareachar_skillunit_visibilty_sub(struct block_list *bl, va_list ap)
 			visible = false;
 	}
 
-	clif_getareachar_skillunit(bl, su, SELF, visible);
+	clif_getareachar_skillunit(*bl, *su, SELF, visible);
 	return 1;
 }
 
@@ -20758,7 +20758,7 @@ void skill_getareachar_skillunit_visibilty(struct skill_unit *su, enum send_targ
 	nullpo_retv(su);
 
 	if (!su->hidden) // It's not hidden, just do this!
-		clif_getareachar_skillunit(&su->bl, su, target, true);
+		clif_getareachar_skillunit(su->bl, *su, target, true);
 	else {
 		struct block_list *src = battle_get_master(&su->bl);
 		map_foreachinallarea(skill_getareachar_skillunit_visibilty_sub, su->bl.m, su->bl.x-AREA_SIZE, su->bl.y-AREA_SIZE,
@@ -20787,7 +20787,7 @@ void skill_getareachar_skillunit_visibilty_single(struct skill_unit *su, struct 
 			visible = false;
 	}
 
-	clif_getareachar_skillunit(bl, su, SELF, visible);
+	clif_getareachar_skillunit(*bl, *su, SELF, visible);
 }
 
 /**
@@ -20837,7 +20837,7 @@ struct skill_unit *skill_initunit(std::shared_ptr<s_skill_unit_group> group, int
 	switch (group->skill_id) {
 		case WZ_ICEWALL:
 			map_setgatcell(unit->bl.m,unit->bl.x,unit->bl.y,5);
-			clif_changemapcell(0,unit->bl.m,unit->bl.x,unit->bl.y,5,AREA);
+			clif_changemapcell(unit->bl.m,unit->bl.x,unit->bl.y,5,AREA);
 			skill_unitsetmapcell(unit,WZ_ICEWALL,group->skill_lv,CELL_ICEWALL,true);
 			break;
 		case SA_LANDPROTECTOR:
@@ -20899,7 +20899,7 @@ int skill_delunit(struct skill_unit* unit)
 			break;
 		case WZ_ICEWALL:
 			map_setgatcell(unit->bl.m,unit->bl.x,unit->bl.y,unit->val2);
-			clif_changemapcell(0,unit->bl.m,unit->bl.x,unit->bl.y,unit->val2,ALL_SAMEMAP); // hack to avoid clientside cell bug
+			clif_changemapcell(unit->bl.m,unit->bl.x,unit->bl.y,unit->val2,ALL_SAMEMAP); // hack to avoid clientside cell bug
 			skill_unitsetmapcell(unit,WZ_ICEWALL,group->skill_lv,CELL_ICEWALL,false);
 			break;
 		case SA_LANDPROTECTOR:
@@ -25392,7 +25392,7 @@ void skill_reload (void) {
 
 	for( map_session_data *sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); sd = (TBL_PC*)mapit_next(iter) ) {
 		pc_validate_skill(sd);
-		clif_skillinfoblock(sd);
+		clif_skillinfoblock(*sd);
 	}
 	mapit_free(iter);
 }

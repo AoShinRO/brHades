@@ -930,7 +930,7 @@ void clif_class_change_target(struct block_list *bl,int class_, int type, enum s
 #define clif_class_change(bl, class_, type) clif_class_change_target(bl, class_, type, AREA, nullptr)
 #define clif_mob_class_change(md, class_) clif_class_change(&md->bl, class_, 1)
 
-void clif_skillinfoblock(map_session_data *sd);
+void clif_skillinfoblock(map_session_data& sd);
 void clif_skillup(map_session_data &sd, uint16 skill_id, int lv, int range, bool upgradable);
 void clif_skillinfo(map_session_data& sd, uint16 skill_id);
 void clif_addskill(map_session_data& sd, uint16 skill_id);
@@ -953,11 +953,11 @@ void clif_cooking_list( map_session_data& sd, int trigger, uint16 skill_id, int 
 
 void clif_produceeffect(map_session_data* sd,int flag, t_itemid nameid);
 
-void clif_getareachar_skillunit(struct block_list *bl, struct skill_unit *unit, enum send_target target, bool visible);
+void clif_getareachar_skillunit(block_list &bl, skill_unit &unit, enum send_target target, bool visible);
 void clif_skill_delunit( skill_unit& unit );
 void clif_skillunit_update( block_list& bl);
 
-void clif_skill_unit_test(struct block_list *bl, short x, short y, int unit_id, short range, short skill_lv);
+void clif_skill_unit_test(block_list &bl, uint16 x, uint16 y, uint16 unit_id, uint8 range, uint8 skill_lv);
 
 void clif_autospell( map_session_data& sd, uint16 skill_lv );
 void clif_devotion(struct block_list *src, map_session_data *tsd);
@@ -967,7 +967,7 @@ void clif_servantball( map_session_data& sd, struct block_list* target = nullptr
 void clif_abyssball( map_session_data& sd, struct block_list* target = nullptr, enum send_target send_target = AREA );
 void clif_combo_delay(struct block_list *bl,t_tick wait);
 void clif_bladestop(struct block_list *src, int dst_id, int active);
-void clif_changemapcell(int fd, int16 m, int x, int y, int type, enum send_target target);
+void clif_changemapcell(int16 m, int x, int y, int type, enum send_target target, struct block_list* tbl = nullptr);
 
 #define clif_status_load(bl, type, flag) clif_status_change((bl), (type), (flag), 0, 0, 0, 0)
 void clif_status_change(struct block_list *bl, int type, int flag, t_tick tick, int val1, int val2, int val3);

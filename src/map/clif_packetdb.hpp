@@ -120,7 +120,6 @@
 	packet(0x010b,6);
 	packet(0x010c,6);
 	packet(0x010d,2);
-	packet(0x010f,-1);
 	packet( HEADER_ZC_ACK_TOUSESKILL, sizeof( PACKET_ZC_ACK_TOUSESKILL ) );
 	parseable_packet(0x0112,4,clif_parse_SkillUp,2);
 	parseable_packet(0x0113,10,clif_parse_UseSkillToId,2,4,6);
@@ -132,7 +131,6 @@
 	packet(0x0119,13);
 	parseable_packet(0x011b,20,clif_parse_UseSkillMap,2,4);
 	parseable_packet(0x011d,2,clif_parse_RequestMemo,0);
-	packet(0x011f,16);
 	packet( cartlistequipType, -1 );
 	packet( cartlistnormalType, -1 );
 	parseable_packet( HEADER_CZ_MOVE_ITEM_FROM_BODY_TO_CART, sizeof( PACKET_CZ_MOVE_ITEM_FROM_BODY_TO_CART ), clif_parse_PutItemToCart, 0 );
@@ -201,7 +199,6 @@
 	packet( HEADER_ZC_ACK_REQMAKINGITEM, sizeof( PACKET_ZC_ACK_REQMAKINGITEM ) );
 	parseable_packet(0x0190,90,clif_parse_UseSkillToPosMoreInfo,2,4,6,8,10);
 	packet( HEADER_ZC_TALKBOX_CHATCONTENTS, sizeof( struct PACKET_ZC_TALKBOX_CHATCONTENTS ) );
-	packet(0x0192,24);
 	parseable_packet(0x0193,6,clif_parse_SolveCharName,2);
 	packet(0x0194,30);
 	packet( HEADER_ZC_ACK_REQNAMEALL, sizeof( struct PACKET_ZC_ACK_REQNAMEALL ) );
@@ -1650,10 +1647,6 @@
 	parseable_packet(0x0879,41,clif_parse_PartyBookingRegisterReq,2,4,6);
 #endif
 
-#if PACKETVER >= 20121212
-	packet(0x08C7,20);
-#endif
-
 // 2013-03-20Ragexe (Judas)
 #if PACKETVER >= 20130320
 	parseable_packet(0x014f,6,clif_parse_GuildRequestInfo,2);
@@ -1702,7 +1695,6 @@
 	// New Packets
 	packet(0x08ff,24); // ZC_EFST_SET_ENTER
 	packet(0x0984,28); // ZC_EFST_SET_ENTER2
-	packet(0x099f,22); // ZC_SKILL_ENTRY4
 #endif
 
 // 2013-06-05Ragexe
@@ -1723,11 +1715,6 @@
 	parseable_packet( HEADER_CZ_REQ_BANKING_CHECK, sizeof( PACKET_CZ_REQ_BANKING_CHECK ), clif_parse_BankCheck, 0 );
 	parseable_packet( HEADER_CZ_REQ_OPEN_BANKING, sizeof( PACKET_CZ_REQ_OPEN_BANKING ), clif_parse_BankOpen, 0 );
 	parseable_packet( HEADER_CZ_REQ_CLOSE_BANKING, sizeof( PACKET_CZ_REQ_CLOSE_BANKING ), clif_parse_BankClose, 0 );
-#endif
-
-// 2013-07-31cRagexe
-#if PACKETVER >= 20130731
-	packet(0x09ca,23); // ZC_SKILL_ENTRY5
 #endif
 
 // 2013-08-07Ragexe
