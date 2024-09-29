@@ -3552,7 +3552,7 @@ int map_readfromcache(struct map_data *m, char *buffer, char *decode_buffer)
 	int i;
 	struct map_cache_main_header *header = (struct map_cache_main_header *)buffer;
 	struct map_cache_map_info *info = nullptr;
-	char *p = buffer + sizeof(*header);
+	char *p = buffer + sizeof(struct map_cache_main_header);
 
 	for (i = 0; i < header->map_count; i++) {
 		info = (struct map_cache_map_info *)p;
@@ -3578,7 +3578,7 @@ int map_readfromcache(struct map_data *m, char *buffer, char *decode_buffer)
 			return 0; // Say not found to remove it from list.. [Shinryo]
 		}
 
-		decode_zip(decode_buffer, &size, p+sizeof(*info) , info->len);
+		decode_zip(decode_buffer, &size, p+info->len , info->len);
 
 		CREATE(m->cell, struct mapcell, size);
 
