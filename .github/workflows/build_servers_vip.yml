@@ -74,14 +74,10 @@ jobs:
         run: ./tools/ci/sql.sh
 
       - name: Command - configure
-        run: |
-          if [[ "$PRERE" == "yes" ]]; then
-            CONFIGURE_FLAGS="CC=gcc-${{ matrix.gcc }} CXX=g++-${{ matrix.gcc }} --enable-buildbot=yes --enable-prere --enable-vip"
-          else
-            CONFIGURE_FLAGS="CC=gcc-${{ matrix.gcc }} CXX=g++-${{ matrix.gcc }} --enable-buildbot=yes --enable-vip"
-          fi
-            ./configure $CONFIGURE_FLAGS CXXFLAGS="-std=c++20"
-     
+        env:
+            CONFIGURE_FLAGS="CC=gcc-${{ matrix.gcc }} CXX=g++-${{ matrix.gcc }} --enable-buildbot=yes --enable-prere=${{ matrix.mode }} --enable-vip"
+        run: ./configure $CONFIGURE_FLAGS CXXFLAGS="-std=c++20"
+
       - name: Show config.log for debugging
         run: cat config.log || true
  
