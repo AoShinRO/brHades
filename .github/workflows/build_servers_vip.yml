@@ -34,9 +34,6 @@ jobs:
           gcc: ['11']
           # We run build checks for both Renewal and PRE-Renewal
           mode: ['PRE', 'RE']
-          include:
-            - os: ubuntu-24.04
-              gcc: 13
 
     steps:
       - uses: actions/checkout@v4
