@@ -257,7 +257,8 @@ enum broadcast_flags : uint8_t {
 	BC_DEFAULT		= BC_ALL|BC_PC|BC_YELLOW
 };
 
-enum emotion_type {
+enum e_emotion_type : int8 {
+	ET_BLANK = -1, // Not showed in the client
 	ET_SURPRISE = 0,	// /!
 	ET_QUESTION,		// /?
 	ET_DELIGHT,
@@ -894,7 +895,7 @@ void clif_changechatstatus(chat_data& cd);
 void clif_refresh_storagewindow(map_session_data *sd);
 void clif_refresh(map_session_data *sd);	// self
 
-void clif_emotion(struct block_list *bl,int type);
+void clif_emotion(block_list& bl,e_emotion_type type);
 void clif_talkiebox(struct block_list* bl, const char* talkie);
 void clif_wedding_effect(struct block_list *bl);
 void clif_divorced(map_session_data* sd, const char* name);

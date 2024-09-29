@@ -14,6 +14,7 @@
 #include "unit.hpp" // unit_stop_walking(), unit_stop_attack()
 
 struct guardian_data;
+enum e_emotion_type : int8;
 
 //This is the distance at which @autoloot works,
 //if the item drops farther from the player than this,
@@ -200,7 +201,7 @@ struct s_mob_skill {
 	int64 cond2;
 	short target;
 	int val[5];
-	short emotion;
+	e_emotion_type emotion;
 	unsigned short msg_id;
 };
 
