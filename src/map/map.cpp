@@ -3552,7 +3552,7 @@ int map_readfromcache(struct map_data *m, char *buffer, char *decode_buffer)
 	int i;
 	struct map_cache_main_header *header = (struct map_cache_main_header *)buffer;
 	struct map_cache_map_info *info = nullptr;
-	void* p = buffer + sizeof(struct map_cache_main_header);
+	struct map_cache_map_info* p = reinterpret_cast<struct map_cache_map_info*>(buffer + sizeof(struct map_cache_main_header));
 	
 	for (i = 0; i < header->map_count; i++) {
 		info = (struct map_cache_map_info *)p;
@@ -3560,7 +3560,7 @@ int map_readfromcache(struct map_data *m, char *buffer, char *decode_buffer)
 		if (strcmp(m->name, info->name) == 0) 
 		    break; // Map found
 				
-		p = reinterpret_cast<void*>(reinterpret_cast<char*>(p) + sizeof(struct map_cache_map_info) + info->len);
+		p = reinterpret_cast<struct map_cache_map_info*>(reinterpret_cast<char*>(p) + 1) + info->len;
 	}
 	
 	if (info && i < header->map_count) {
