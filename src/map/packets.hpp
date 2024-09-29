@@ -717,6 +717,15 @@ struct PACKET_ZC_NPCACK_SERVERMOVE {
 DEFINE_PACKET_HEADER(ZC_NPCACK_SERVERMOVE, 0x92)
 #endif
 
+struct PACKET_ZC_UPDATE_MAPINFO {
+	uint16 packetType;
+	uint16 x;
+	uint16 y;
+	uint16 type;
+	char mapname[MAP_NAME_LENGTH_EXT];
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_UPDATE_MAPINFO, 0x192)
+
 struct PACKET_ZC_STOPMOVE {
 	int16 packetType;
 	uint32	AID;
@@ -1212,6 +1221,72 @@ struct PACKET_ZC_RECOVERY {
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(ZC_RECOVERY, 0x13d);
 #endif
+
+#if PACKETVER <= 20120702
+struct PACKET_ZC_SKILL_ENTRY {
+	uint16 packetType;
+	uint32 unitId;
+	uint32 srcId;
+	uint16 x;
+	uint16 y;
+	uint8 viewId;
+	bool isVisible;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_SKILL_ENTRY, 0x011f)
+#elif PACKETVER < 20121212
+struct PACKET_ZC_SKILL_ENTRY {
+	uint16 packetType;
+	uint16 packetLen;
+	uint32 unitId;
+	uint32 srcId;
+	uint16 x;
+	uint16 y;
+	uint8 viewId;
+	uint16 range;
+	bool isVisible;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_SKILL_ENTRY, 0x08c7)
+#elif PACKETVER < 20130731
+struct PACKET_ZC_SKILL_ENTRY {
+	uint16 packetType;
+	uint16 packetLen;
+	uint32 unitId;
+	uint32 srcId;
+	uint16 x;
+	uint16 y;
+	uint32 viewId;
+	uint16 range;
+	bool isVisible;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_SKILL_ENTRY, 0x099f)
+#else
+struct PACKET_ZC_SKILL_ENTRY {
+	uint16 packetType;
+	uint16 packetLen;
+	uint32 unitId;
+	uint32 srcId;
+	uint16 x;
+	uint16 y;
+	uint32 viewId;
+	uint8 range;
+	bool isVisible;
+	uint8 skillLv;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_SKILL_ENTRY, 0x09ca)
+#endif
+
+struct PACKET_ZC_SKILL_ENTRY2 {  //used on graffity
+	uint16 packetType;
+	uint32 unitId;
+	uint32 srcId;
+	uint16 x;
+	uint16 y;
+	uint8 viewId;
+	bool isVisible;
+	bool hasMsg;
+	char mes[MESSAGE_SIZE];
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_SKILL_ENTRY2, 0x1c9);
 
 #if PACKETVER >= 20131223
 struct PACKET_ZC_ACK_WHISPER {
