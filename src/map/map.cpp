@@ -3580,7 +3580,7 @@ int map_readfromcache(struct map_data *m, char *buffer, char *decode_buffer)
 		}
 
 		// TO-DO: Maybe handle the scenario, if the decoded buffer isn't the same size as expected? [Shinryo]
-		decode_zip(decode_buffer, &size, reinterpret_cast<void*>(p + sizeof(struct map_cache_map_info)) , info->len);
+		decode_zip(decode_buffer, &size, (struct map_cache_map_info*)p + 1 , info->len);
 
 		CREATE(m->cell, struct mapcell, size);
 
