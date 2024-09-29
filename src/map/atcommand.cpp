@@ -6350,9 +6350,9 @@ ACMD_FUNC(displayskillcast)
 	}
 
 	if ( target_type == 1)
-		clif_skillcasting(&sd->bl, sd->bl.id, 0, sd->bl.x, sd->bl.y, skill_id, skill_lv, 0, cast_time);
+		clif_skillcasting(sd->bl, nullptr, sd->bl.x, sd->bl.y, skill_id, skill_lv, ELE_NEUTRAL, cast_time);
 	else
-		clif_skillcasting(&sd->bl, sd->bl.id, sd->bl.id, 0, 0, skill_id, skill_lv, 0, cast_time);
+		clif_skillcasting(sd->bl, &sd->bl, 0, 0, skill_id, skill_lv, ELE_NEUTRAL, cast_time);
 
 	return 0;
 }
@@ -7343,7 +7343,7 @@ ACMD_FUNC(pettalk)
 			}
 			sd->emotionlasttime = time(nullptr);
 
-			clif_emotion(&pd->bl, i);
+			clif_emotion(pd->bl, hades_cast<e_emotion_type>(i));
 			return 0;
 		}
 	}
@@ -8107,7 +8107,7 @@ ACMD_FUNC(hommutate)
 	if (m_class != -1 && m_id != -1 && m_class&HOM_EVO && m_id&HOM_S && sd->hd->homunculus.level >= 99) {
 		hom_mutate(sd->hd, homun_id);
 	} else {
-		clif_emotion(&sd->hd->bl, ET_SWEAT);
+		clif_emotion(sd->hd->bl, ET_SWEAT);
 	}
 	return 0;
 }
