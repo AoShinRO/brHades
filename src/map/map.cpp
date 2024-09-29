@@ -3578,7 +3578,7 @@ int map_readfromcache(struct map_data *m, char *buffer, char *decode_buffer)
 		    return 0; // Say not found to remove it from list.. [Shinryo]
 		}
 		
-		decode_zip(decode_buffer, &size, reinterpret_cast<void*>(reinterpret_cast<char*>(p) + sizeof(struct map_cache_map_info)), info->len);
+		decode_zip(decode_buffer, &size, reinterpret_cast<void*>(reinterpret_cast<char*>(p)), info->len);
 		
 		CREATE(m->cell, struct mapcell, size);
 		
