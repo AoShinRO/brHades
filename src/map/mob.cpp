@@ -4765,7 +4765,7 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		if (!this->asUInt16(node, "AttackRange", range))
 			return 0;
 
-		mob->status.rhw.range = range;
+		mob->status.rhw.range = std::min(static_cast<decltype(mob->status.rhw.range)>(range), std::numeric_limits<decltype(mob->status.rhw.range)>::max());
 	}
 	
 	if (this->nodeExists(node, "SkillRange")) {
@@ -4774,7 +4774,7 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		if (!this->asUInt16(node, "SkillRange", range))
 			return 0;
 
-		mob->range2 = range;
+		mob->range2 = std::min(static_cast<decltype(mob->range2)>(range), std::numeric_limits<decltype(mob->range2)>::max());
 	}
 	
 	if (this->nodeExists(node, "ChaseRange")) {
@@ -4783,7 +4783,7 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		if (!this->asUInt16(node, "ChaseRange", range))
 			return 0;
 
-		mob->range3 = range;
+		mob->range3 = std::min(static_cast<decltype(mob->range3)>(range), std::numeric_limits<decltype(mob->range3)>::max());
 	}
 	
 	if (this->nodeExists(node, "Size")) {
