@@ -5384,7 +5384,7 @@ static inline const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, 
  * eg : bat_c01	mapflag	battleground	2
  * also chking if mapflag conflict with another
  *------------------------------------------*/
-static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, const char* start, const char* buffer, const char* filepath)
+static inline const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, std::string_view start, std::unique_ptr<char[]>& buffer, std::string_view& filepath, int line)
 {
 	int16 m;
 	char mapname[MAP_NAME_LENGTH_EXT];
@@ -5393,13 +5393,13 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 
 	// w1=<mapname>
 	if (sscanf(w1, "%15[^,]", mapname) != 1) {
-		ShowError("npc_parse_mapflag: Invalid mapflag definition in file '%s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
-		return strchr(start,'\n');// skip and continue
+		ShowError("npc_parse_mapflag: Invalid mapflag definition in file '%.*s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), line, w1, w2, w3, w4);
+		return strchr(start.data(),'\n');// skip and continue
 	}
 	m = map_mapname2mapid(mapname);
 	if (m < 0) {
-		ShowWarning("npc_parse_mapflag: Unknown map '%s' in file '%s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", mapname, filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
-		return strchr(start,'\n');// skip and continue
+		ShowWarning("npc_parse_mapflag: Unknown map '%s' in file '%.*s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", mapname, (int)filepath.size(), filepath.data(), line, w1, w2, w3, w4);
+		return strchr(start.data(),'\n');// skip and continue
 	}
 
 	if (w4 && !strcmpi(w4, "off"))
@@ -5409,7 +5409,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 
 	switch( mapflag ){
 		case MF_INVALID:
-			ShowError("npc_parse_mapflag: unrecognized mapflag '%s' (file '%s', line '%d').\n", w3, filepath, strline(buffer,start-buffer));
+			ShowError("npc_parse_mapflag: unrecognized mapflag '%s' (file '%.*s', line '%d').\n", w3, (int)filepath.size(), filepath.data(), line);
 			break;
 		case MF_NOSAVE: {
 			char savemap[MAP_NAME_LENGTH_EXT];
@@ -5422,7 +5422,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 			} else if (state && sscanf(w4, "%15[^,],%6hd,%6hd", savemap, &args.nosave.x, &args.nosave.y) == 3) {
 				args.nosave.map = mapindex_name2id(savemap);
 				if (!args.nosave.map) {
-					ShowWarning("npc_parse_mapflag: Specified save point map '%s' for mapflag 'nosave' not found (file '%s', line '%d'), using 'SavePoint'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", savemap, filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+					ShowWarning("npc_parse_mapflag: Specified save point map '%s' for mapflag 'nosave' not found (file '%.*s', line '%d'), using 'SavePoint'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", savemap, (int)filepath.size(), filepath.data(), line, w1, w2, w3, w4);
 					args.nosave.x = -1;
 					args.nosave.y = -1;
 				}
@@ -5441,7 +5441,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 					args.nightmaredrop.drop_id = -1;
 				else if (!item_db.exists((args.nightmaredrop.drop_id = strtol(drop_arg1, nullptr, 10)))) {
 					args.nightmaredrop.drop_id = 0;
-					ShowWarning("npc_parse_mapflag: Invalid item ID '%d' supplied for mapflag 'pvp_nightmaredrop' (file '%s', line '%d'), removing.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", args.nightmaredrop.drop_id, filepath, strline(buffer, start - buffer), w1, w2, w3, w4);
+					ShowWarning("npc_parse_mapflag: Invalid item ID '%d' supplied for mapflag 'pvp_nightmaredrop' (file '%.*s', line '%d'), removing.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", args.nightmaredrop.drop_id, (int)filepath.size(), filepath.data(), line, w1, w2, w3, w4);
 					break;
 				}
 				if (!strcmpi(drop_arg2, "inventory"))
@@ -5489,7 +5489,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 				if (sscanf(w4, "%11d", &args.flag_val) == 1)
 					map_setmapflag_sub(m, MF_RESTRICTED, true, &args);
 				else // Could not be read, no value defined; don't remove as other restrictions may be set on the map
-					ShowWarning("npc_parse_mapflag: Zone value not set for the restricted mapflag! Skipped flag from %s (file '%s', line '%d').\n", map_mapid2mapname(m), filepath, strline(buffer,start-buffer));
+					ShowWarning("npc_parse_mapflag: Zone value not set for the restricted mapflag! Skipped flag from %s (file '%.*s', line '%d').\n", map_mapid2mapname(m), (int)filepath.size(), filepath.data(), line);
 			} else
 				map_setmapflag(m, MF_RESTRICTED, false);
 			break;
@@ -5532,7 +5532,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 						int64 val_tmp;
 
 						if (!script_get_constant(caster_constant, &val_tmp)) {
-							ShowError( "npc_parse_mapflag: Unknown constant '%s'. Skipping (file '%s', line '%d').\n", caster_constant, filepath, strline(buffer, start - buffer) );
+							ShowError( "npc_parse_mapflag: Unknown constant '%s'. Skipping (file '%.*s', line '%d').\n", caster_constant, (int)filepath.size(), filepath.data(), line );
 							break;
 						}
 
@@ -5550,7 +5550,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 					if (strcmp(skill_name, "all") == 0) // Adjust damage for all skills
 						map_setmapflag_sub(m, MF_SKILL_DAMAGE, true, &args);
 					else if (skill_name2id(skill_name) <= 0)
-						ShowWarning("npc_parse_mapflag: Invalid skill name '%s' for Skill Damage mapflag. Skipping (file '%s', line '%d').\n", skill_name, filepath, strline(buffer, start - buffer));
+						ShowWarning("npc_parse_mapflag: Invalid skill name '%s' for Skill Damage mapflag. Skipping (file '%.*s', line '%d').\n", skill_name, (int)filepath.size(), filepath.data(), line);
 					else { // Adjusted damage for specified skill
 						args.flag_val = 1;
 						map_setmapflag_sub(m, MF_SKILL_DAMAGE, true, &args);
@@ -5573,7 +5573,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 					args.skill_duration.skill_id = skill_name2id(skill_name);
 
 					if (!args.skill_duration.skill_id)
-						ShowError("npc_parse_mapflag: skill_duration: Invalid skill name '%s' for Skill Duration mapflag. Skipping (file '%s', line '%d')\n", skill_name, filepath, strline(buffer, start - buffer));
+						ShowError("npc_parse_mapflag: skill_duration: Invalid skill name '%s' for Skill Duration mapflag. Skipping (file '%.*s', line '%d')\n", skill_name, (int)filepath.size(), filepath.data(), line);
 					else {
 						args.skill_duration.per = cap_value(args.skill_duration.per, 0, UINT16_MAX);
 						map_setmapflag_sub(m, MF_SKILL_DURATION, true, &args);
@@ -5589,7 +5589,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 			break;
 	}
 
-	return strchr(start,'\n');// continue
+	return strchr(start.data(),'\n');// continue
 }
 
 /**
@@ -5766,7 +5766,7 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 		else if( (strcmpi(w2,"monster") == 0 || strcmpi(w2,"boss_monster") == 0) && count > 3 )
 			p = npc_parse_mob(w1, w2, w3, w4, p, buffer, filepath, linenum);
 		else if( strcmpi(w2,"mapflag") == 0 && count >= 3 )
-			p = npc_parse_mapflag(w1, w2, trim(w3), trim(w4), p, buffer.get(), filepath.data());
+			p = npc_parse_mapflag(w1, w2, trim(w3), trim(w4), p, buffer, filepath, linenum);
 		else {
 			ShowError("npc_parsesrcfile: Unable to parse, probably a missing or extra TAB in file '%.*s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), linenum, w1, w2, w3, w4);
 			p = strchr(p,'\n');// skip and continue
