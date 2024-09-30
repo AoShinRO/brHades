@@ -46,3 +46,11 @@ jobs:
       - name: Build solution in Debug (Renewal)
         if: ${{ matrix.mode == 'RE' }}
         run: msbuild brHades.sln -t:rebuild -property:Configuration=Debug /p:DefineConstants="BUILDBOT" /p:CppLanguageStandard="stdcpp20" /warnaserror
+
+      - name: Build solution in Release (PRE-Renewal)
+        if: ${{ matrix.mode == 'PRE' }}
+        run: msbuild brHades.sln -t:rebuild -property:Configuration=Release /p:DefineConstants="BUILDBOT%3BPRERE" /p:CppLanguageStandard="stdcpp20" /warnaserror
+
+      - name: Build solution in Release (Renewal)
+        if: ${{ matrix.mode == 'RE' }}
+        run: msbuild brHades.sln -t:rebuild -property:Configuration=Release /p:DefineConstants="BUILDBOT" /p:CppLanguageStandard="stdcpp20" /warnaserror
