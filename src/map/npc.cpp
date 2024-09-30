@@ -3857,14 +3857,14 @@ struct npc_data* npc_add_warp(char* name, short from_mapid, short from_x, short 
  * @param filepath : filename with path wich we are parsing
  * @return new index for next parsing
  */
-static const char* npc_parse_warp(char* w1, char* w2, char* w3, char* w4, std::string_view start, std::unique_ptr<char[]>& buffer, std::string_view& filepath) {
+static inline const char* npc_parse_warp(char* w1, char* w2, char* w3, char* w4, std::string_view start, std::unique_ptr<char[]>& buffer, std::string_view& filepath, int line) {
 	short x, y, xs, ys, to_x, to_y;
 	char mapname[MAP_NAME_LENGTH_EXT], to_mapname[MAP_NAME_LENGTH_EXT];
 
 	// w1=<from map name>,<fromX>,<fromY>,<facing>
 	// w4=<spanx>,<spany>,<to map name>,<toX>,<toY>
 	if( sscanf(w1, "%15[^,],%6hd,%6hd", mapname, &x, &y) != 3 || sscanf(w4, "%6hd,%6hd,%15[^,],%6hd,%6hd", &xs, &ys, to_mapname, &to_x, &to_y) != 5 ) {
-		ShowError("npc_parse_warp: Invalid warp definition in file '%.*s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
+		ShowError("npc_parse_warp: Invalid warp definition in file '%.*s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), line, w1, w2, w3, w4);
 		return strchr(start.data(),'\n');// skip and continue
 	}
 
@@ -3872,14 +3872,14 @@ static const char* npc_parse_warp(char* w1, char* w2, char* w3, char* w4, std::s
 	unsigned short i = mapindex_name2id(to_mapname);
 
 	if( i == 0 ) {
-		ShowError("npc_parse_warp: Unknown destination map in file '%.*s', line '%d' : %s\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), to_mapname, w1, w2, w3, w4);
+		ShowError("npc_parse_warp: Unknown destination map in file '%.*s', line '%d' : %s\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), line, to_mapname, w1, w2, w3, w4);
 		return strchr(start.data(),'\n');// skip and continue
 	}
 
 	struct map_data *mapdata = map_getmapdata(m);
 
 	if( m != -1 && ( x < 0 || x >= mapdata->xs || y < 0 || y >= mapdata->ys ) ) {
-		ShowWarning("npc_parse_warp: coordinates %d/%d are out of bounds in map %s(%dx%d), in file '%.*s', line '%d'\n", x, y, mapdata->name, mapdata->xs, mapdata->ys,(int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		ShowWarning("npc_parse_warp: coordinates %d/%d are out of bounds in map %s(%dx%d), in file '%.*s', line '%d'\n", x, y, mapdata->name, mapdata->xs, mapdata->ys,(int)filepath.size(), filepath.data(), line);
 	}
 
 	struct npc_data *nd = npc_create_npc(m, x, y);
@@ -3929,7 +3929,7 @@ static const char* npc_parse_warp(char* w1, char* w2, char* w3, char* w4, std::s
 
 		// state name
 		if (w2[shift-1] != '(' || w2[length-1] != ')' || length <= shift || length-shift >= sizeof(state_name))
-			ShowWarning("npc_parse_warp: Invalid npc state in file '%.*s', line '%d', defaulting to visible. w2=%s\n", (int)filepath.size(), filepath.data(),  strline(buffer.get(),start.data()-buffer.get()), w2);
+			ShowWarning("npc_parse_warp: Invalid npc state in file '%.*s', line '%d', defaulting to visible. w2=%s\n", (int)filepath.size(), filepath.data(),  line, w2);
 		else {
 			safestrncpy(state_name, w2+shift, length-shift);
 			if (strcasecmp("CLOAKED", state_name) == 0)
@@ -3939,7 +3939,7 @@ static const char* npc_parse_warp(char* w1, char* w2, char* w3, char* w4, std::s
 			else if (strcasecmp("DISABLED", state_name) == 0)
 				nd->state = NPCVIEW_DISABLE;
 			else
-				ShowWarning("npc_parse_warp: Invalid npc state in file '%.*s', line '%d', defaulting to visible. w2=%s\n", (int)filepath.size(), filepath.data(),  strline(buffer.get(),start.data()-buffer.get()), w2);
+				ShowWarning("npc_parse_warp: Invalid npc state in file '%.*s', line '%d', defaulting to visible. w2=%s\n", (int)filepath.size(), filepath.data(),  line, w2);
 			if (nd->state != NPCVIEW_ENABLE)
 				npc_enable_target(*nd, 0, nd->state);
 		}
@@ -3965,7 +3965,7 @@ static const char* npc_parse_warp(char* w1, char* w2, char* w3, char* w4, std::s
  * @param filepath : filename with path wich we are parsing
  * @return new index for next parsing
  */
-static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, std::string_view start, std::unique_ptr<char[]>& buffer, std::string_view& filepath)
+static inline const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, std::string_view start, std::unique_ptr<char[]>& buffer, std::string_view& filepath, int line)
 {
 	char *p, point_str[32];
 	int m, is_discount = 0;
@@ -3986,7 +3986,7 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, std::s
 		if( sscanf(w1, "%15[^,],%6hd,%6hd,%4hd", mapname, &x, &y, &dir) != 4
 		||	strchr(w4, ',') == nullptr )
 		{
-			ShowError("npc_parse_shop: Invalid shop definition in file '%.*s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
+			ShowError("npc_parse_shop: Invalid shop definition in file '%.*s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), line, w1, w2, w3, w4);
 			return strchr(start.data(),'\n');// skip and continue
 		}
 
@@ -3996,7 +3996,7 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, std::s
 	struct map_data *mapdata = map_getmapdata(m);
 
 	if( m != -1 && ( x < 0 || x >= mapdata->xs || y < 0 || y >= mapdata->ys ) ) {
-		ShowWarning("npc_parse_shop: coordinates %d/%d are out of bounds in map %s(%dx%d), in file '%.*s', line '%d'\n", x, y, mapdata->name, mapdata->xs, mapdata->ys,(int)filepath.size(), filepath.data(),strline(buffer.get(),start.data()-buffer.get()));
+		ShowWarning("npc_parse_shop: coordinates %d/%d are out of bounds in map %s(%dx%d), in file '%.*s', line '%d'\n", x, y, mapdata->name, mapdata->xs, mapdata->ys,(int)filepath.size(), filepath.data(),line);
 	}
 
 	if( !strcasecmp(w2,"cashshop") )
@@ -4016,11 +4016,11 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, std::s
 	switch(type) {
 		case NPCTYPE_ITEMSHOP: {
 			if (sscanf(p,",%u:%11d,",&nameid,&is_discount) < 1) {
-				ShowError("npc_parse_shop: Invalid item cost definition in file '%.*s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
+				ShowError("npc_parse_shop: Invalid item cost definition in file '%.*s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), line, w1, w2, w3, w4);
 				return strchr(start.data(),'\n'); // skip and continue
 			}
 			if (!item_db.exists(nameid)) {
-				ShowWarning("npc_parse_shop: Invalid item ID cost in file '%.*s', line '%d' (id '%u').\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), nameid);
+				ShowWarning("npc_parse_shop: Invalid item ID cost in file '%.*s', line '%d' (id '%u').\n", (int)filepath.size(), filepath.data(), line, nameid);
 				return strchr(start.data(),'\n'); // skip and continue
 			}
 			p = strchr(p+1,',');
@@ -4028,19 +4028,19 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, std::s
 		}
 		case NPCTYPE_POINTSHOP: {
 			if (sscanf(p, ",%31[^,:]:%11d,",point_str,&is_discount) < 1) {
-				ShowError("npc_parse_shop: Invalid item cost definition in file '%.*s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
+				ShowError("npc_parse_shop: Invalid item cost definition in file '%.*s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), line, w1, w2, w3, w4);
 				return strchr(start.data(),'\n'); // skip and continue
 			}
 			switch(point_str[0]) {
 				case '$':
 				case '.':
 				case '\'':
-					ShowWarning("npc_parse_shop: Invalid item cost variable type (must be permanent character or account based) in file '%.*s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
+					ShowWarning("npc_parse_shop: Invalid item cost variable type (must be permanent character or account based) in file '%.*s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), line, w1, w2, w3, w4);
 					return strchr(start.data(),'\n'); // skip and continue
 					break;
 			}
 			if (point_str[strlen(point_str) - 1] == '$') {
-				ShowWarning("npc_parse_shop: Invalid item cost variable type (must be integer) in file '%.*s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
+				ShowWarning("npc_parse_shop: Invalid item cost variable type (must be integer) in file '%.*s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), line, w1, w2, w3, w4);
 				return strchr(start.data(),'\n'); // skip and continue
 			}
 			p = strchr(p+1,',');
@@ -4086,14 +4086,14 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, std::s
 			case NPCTYPE_MARKETSHOP:
 #if PACKETVER >= 20131223
 				if (sscanf(p, ",%u:%11d:%11d", &nameid2, &value, &qty) != 3) {
-					ShowError("npc_parse_shop: (MARKETSHOP) Invalid item definition in file '%.*s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
+					ShowError("npc_parse_shop: (MARKETSHOP) Invalid item definition in file '%.*s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), line, w1, w2, w3, w4);
 					skip = true;
 				}
 #endif
 				break;
 			default:
 				if (sscanf(p, ",%u:%11d", &nameid2, &value) != 2) {
-					ShowError("npc_parse_shop: Invalid item definition in file '%.*s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
+					ShowError("npc_parse_shop: Invalid item definition in file '%.*s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), line, w1, w2, w3, w4);
 					skip = true;
 				}
 				break;
@@ -4105,7 +4105,7 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, std::s
 		std::shared_ptr<item_data> id = item_db.find(nameid2);
 
 		if( id == nullptr ) {
-			ShowWarning("npc_parse_shop: Invalid sell item in file '%.*s', line '%d' (id '%u').\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), nameid2);
+			ShowWarning("npc_parse_shop: Invalid sell item in file '%.*s', line '%d' (id '%u').\n", (int)filepath.size(), filepath.data(), line, nameid2);
 			p = strchr(p+1,',');
 			continue;
 		}
@@ -4115,15 +4115,15 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, std::s
 		}
 		if (value == 0 && (type == NPCTYPE_SHOP || type == NPCTYPE_MARKETSHOP)) { // NPC selling items for free!
 			ShowWarning("npc_parse_shop: Item %s [%u] is being sold for FREE in file '%.*s', line '%d'.\n",
-				id->name.c_str(), nameid2, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+				id->name.c_str(), nameid2, (int)filepath.size(), filepath.data(), line);
 		}
 		if( ( type == NPCTYPE_SHOP || type == NPCTYPE_MARKETSHOP ) && value*0.75 < id->value_sell*1.24 ) { // Exploit possible: you can buy and sell back with profit
 			ShowWarning("npc_parse_shop: Item %s [%u] discounted buying price (%d->%d) is less than overcharged selling price (%d->%d) at file '%.*s', line '%d'.\n",
-				id->name.c_str(), nameid2, value, (int)(value*0.75), id->value_sell, (int)(id->value_sell*1.24), (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+				id->name.c_str(), nameid2, value, (int)(value*0.75), id->value_sell, (int)(id->value_sell*1.24), (int)filepath.size(), filepath.data(), line);
 		}
 		if (type == NPCTYPE_MARKETSHOP && qty < -1) {
 			ShowWarning("npc_parse_shop: Item %s [%u] is stocked with invalid value %hd, changed to unlimited (-1). file '%.*s', line '%d'.\n",
-				id->name.c_str(), nameid2, qty, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+				id->name.c_str(), nameid2, qty, (int)filepath.size(), filepath.data(), line);
 			qty = -1;
 		}
 		//for logs filters, atcommands and iteminfo script command
@@ -4157,7 +4157,7 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, std::s
 		p = strchr(p+1,',');
 	}
 	if( nd->u.shop.count == 0 ) {
-		ShowWarning("npc_parse_shop: Ignoring empty shop in file '%.*s', line '%d'.\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		ShowWarning("npc_parse_shop: Ignoring empty shop in file '%.*s', line '%d'.\n", (int)filepath.size(), filepath.data(), line);
 		nd->~npc_data();
 		aFree(nd);
 		return strchr(start.data(),'\n');// continue
@@ -4345,7 +4345,7 @@ static const char* npc_skip_script(const char* start, const char* buffer, const 
  * @param filepath : filename with path wich we are parsing
  * @return new index for next parsing
  */
-static inline const char* npc_parse_script(char* w1, char* w2, char* w3, char* w4,  std::string_view start, std::unique_ptr<char[]>& buffer, std::string_view& filepath) {
+static inline const char* npc_parse_script(char* w1, char* w2, char* w3, char* w4,  std::string_view start, std::unique_ptr<char[]>& buffer, std::string_view& filepath, int line) {
 	int16 dir = 0;
 	short m, x, y, xs = 0, ys = 0; // [Valaris] thanks to fov
 	struct script_code *script;
@@ -4369,7 +4369,7 @@ static inline const char* npc_parse_script(char* w1, char* w2, char* w3, char* w
 
 		if( sscanf(w1, "%15[^,],%6hd,%6hd,%4hd", mapname, &x, &y, &dir) != 4 )
 		{
-			ShowError("npc_parse_script: Invalid placement format for a script in file '%.*s', line '%d'. Skipping the rest of file...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
+			ShowError("npc_parse_script: Invalid placement format for a script in file '%.*s', line '%d'. Skipping the rest of file...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), line, w1, w2, w3, w4);
 			return nullptr;// unknown format, don't continue
 		}
 		m = map_mapname2mapid(mapname);
@@ -4379,7 +4379,7 @@ static inline const char* npc_parse_script(char* w1, char* w2, char* w3, char* w
 	end = strchr(start.data(),'\n');
 	if( strstr(w4,",{") == nullptr || script_start == nullptr || (end != nullptr && script_start > end) )
 	{
-		ShowError("npc_parse_script: Missing left curly ',{' in file '%.*s', line '%d'. Skipping the rest of the file.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
+		ShowError("npc_parse_script: Missing left curly ',{' in file '%.*s', line '%d'. Skipping the rest of the file.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), line, w1, w2, w3, w4);
 		return nullptr;// can't continue
 	}
 	++script_start;
@@ -4453,7 +4453,7 @@ static inline const char* npc_parse_script(char* w1, char* w2, char* w3, char* w
 
 		// state name
 		if (w2[shift-1] != '(' || w2[length-1] != ')' || length <= shift || length-shift >= sizeof(state_name))
-			ShowWarning("npc_parse_script: Invalid npc state in file '%.*s', line '%d', defaulting to visible. w2=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w2);
+			ShowWarning("npc_parse_script: Invalid npc state in file '%.*s', line '%d', defaulting to visible. w2=%s\n", (int)filepath.size(), filepath.data(), line, w2);
 		else {
 			safestrncpy(state_name, w2+shift, length-shift);
 			if (strcasecmp("CLOAKED", state_name) == 0)
@@ -4463,7 +4463,7 @@ static inline const char* npc_parse_script(char* w1, char* w2, char* w3, char* w
 			else if (strcasecmp("DISABLED", state_name) == 0)
 				nd->state = NPCVIEW_DISABLE;
 			else
-				ShowWarning("npc_parse_script: Invalid npc state in file '%.*s', line '%d', defaulting to visible. w2=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w2);
+				ShowWarning("npc_parse_script: Invalid npc state in file '%.*s', line '%d', defaulting to visible. w2=%s\n", (int)filepath.size(), filepath.data(), line, w2);
 			if (nd->state != NPCVIEW_ENABLE)
 				npc_enable_target(*nd, 0, nd->state);
 		}
@@ -5125,27 +5125,26 @@ int npc_do_atcmd_event(map_session_data* sd, const char* command, const char* me
 
 /// Parses a function.
 /// function%TAB%script%TAB%<function name>%TAB%{<code>}
-static const char* npc_parse_function(char* w1, char* w2, char* w3, char* w4, const char* start, const char* buffer, const char* filepath)
+static inline const char* npc_parse_function(char* w1, char* w2, char* w3, char* w4, std::string_view start, std::unique_ptr<char[]>& buffer, std::string_view& filepath, int line)
 {
 	DBMap* func_db;
 	DBData old_data;
 	struct script_code *script;
-	const char* end;
-	const char* script_start;
+	std::string_view script_start;
+	size_t spos = start.find("\t{");
+	size_t epos = start.find('\n');
 
-	script_start = strstr(start,"\t{");
-	end = strchr(start,'\n');
-	if (*w4 != '{' || script_start == nullptr || (end != nullptr && script_start > end)) {
-		ShowError("npc_parse_function: Missing left curly '%%TAB%%{' in file '%s', line '%d'. Skipping the rest of the file.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+	if (*w4 != '{' || spos == std::string_view::npos || (epos != std::string_view::npos && spos > epos)) {
+		ShowError("npc_parse_function: Missing left curly '%%TAB%%{' in file '%.*s', line '%d'. Skipping the rest of the file.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), line, w1, w2, w3, w4);
 		return nullptr;// can't continue
 	}
-	++script_start;
+	script_start = start.substr(spos + 1);
 
-	end = npc_skip_script(script_start,buffer,filepath);
+	auto end = npc_skip_script(script_start.data(),buffer.get(),filepath.data());
 	if( end == nullptr )
 		return nullptr;// (simple) parse error, don't continue
 
-	script = parse_script(script_start, filepath, strline(buffer,start-buffer), SCRIPT_RETURN_EMPTY_SCRIPT);
+	script = parse_script(script_start.data(), filepath.data(), line, SCRIPT_RETURN_EMPTY_SCRIPT);
 	if( script == nullptr )// parse error, continue
 		return end;
 
@@ -5153,7 +5152,7 @@ static const char* npc_parse_function(char* w1, char* w2, char* w3, char* w4, co
 	if (func_db->put(func_db, db_str2key(w3), db_ptr2data(script), &old_data)) {
 		struct script_code *oldscript = (struct script_code*)db_data2ptr(&old_data);
 
-		ShowInfo("npc_parse_function: Overwriting user function [%s] (%s:%d)\n", w3, filepath, strline(buffer,start-buffer));
+		ShowInfo("npc_parse_function: Overwriting user function [%s] ('%.*s':%d)\n", w3, (int)filepath.size(), filepath.data(), line);
 		script_free_code( oldscript );
 	}
 
@@ -5186,7 +5185,7 @@ void npc_parse_mob2(struct spawn_data* mob)
 	}
 }
 
-static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, std::string_view start, std::unique_ptr<char[]>& buffer, std::string_view& filepath)
+static inline const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, std::string_view start, std::unique_ptr<char[]>& buffer, std::string_view& filepath, int line)
 {
 	int num, mob_id, mob_lv = -1, delay = 5000, size = -1, w1count, w4count;
 	short m, x = 0, y = 0, xs = 0, ys = 0;
@@ -5205,12 +5204,12 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, std::st
 	||	sscanf(w3, "%23[^,],%11d", mobname, &mob_lv) < 1
 	||	( w4count = sscanf(w4, "%23[^,],%11d,%11u,%11u,%77[^,],%11d,%11d[^\t\r\n]", sprite, &num, &delay, &mob.delay2, mob.eventname, &size, &ai) ) < 2 )
 	{
-		ShowError("npc_parse_mob: Invalid mob definition in file '%.*s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
+		ShowError("npc_parse_mob: Invalid mob definition in file '%.*s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), line, w1, w2, w3, w4);
 		return strchr(start.data(),'\n');// skip and continue
 	}
 	if( mapindex_name2id(mapname) == 0 )
 	{
-		ShowError("npc_parse_mob: Unknown map '%s' in file '%.*s', line '%d'.\n", mapname, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		ShowError("npc_parse_mob: Unknown map '%s' in file '%.*s', line '%d'.\n", mapname, (int)filepath.size(), filepath.data(), line);
 		return strchr(start.data(),'\n');// skip and continue
 	}
 	m =  map_mapname2mapid(mapname);
@@ -5222,7 +5221,7 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, std::st
 
 	if( x < 0 || x >= mapdata->xs || y < 0 || y >= mapdata->ys )
 	{
-		ShowError("npc_parse_mob: Spawn coordinates out of range: %s (%d,%d), map size is (%d,%d) - %s %s (file '%.*s', line '%d').\n", mapdata->name, x, y, (mapdata->xs-1), (mapdata->ys-1), w1, w3, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		ShowError("npc_parse_mob: Spawn coordinates out of range: %s (%d,%d), map size is (%d,%d) - %s %s (file '%.*s', line '%d').\n", mapdata->name, x, y, (mapdata->xs-1), (mapdata->ys-1), w1, w3, (int)filepath.size(), filepath.data(), line);
 		return strchr(start.data(),'\n');// skip and continue
 	}
 
@@ -5235,43 +5234,43 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, std::st
 		std::shared_ptr<s_mob_db> mob = mobdb_search_aegisname(sprite);
 
 		if (mob == nullptr) {
-			ShowError("npc_parse_mob: Unknown mob name %s (file '%.*s', line '%d').\n", sprite, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+			ShowError("npc_parse_mob: Unknown mob name %s (file '%.*s', line '%d').\n", sprite, (int)filepath.size(), filepath.data(), line);
 			return strchr(start.data(),'\n');// skip and continue
 		}
 		mob_id = mob->id;
 	}
 	else if (mobdb_checkid(mob_id) == 0) {	// check monster ID if exists!
-		ShowError("npc_parse_mob: Unknown mob ID %d (file '%.*s', line '%d').\n", mob_id, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		ShowError("npc_parse_mob: Unknown mob ID %d (file '%.*s', line '%d').\n", mob_id, (int)filepath.size(), filepath.data(), line);
 		return strchr(start.data(),'\n');// skip and continue
 	}
 
 	if( num < 1 || num > 1000 )
 	{
-		ShowError("npc_parse_mob: Invalid number of monsters %d, must be inside the range [1,1000] (file '%.*s', line '%d').\n", num, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		ShowError("npc_parse_mob: Invalid number of monsters %d, must be inside the range [1,1000] (file '%.*s', line '%d').\n", num, (int)filepath.size(), filepath.data(), line);
 		return strchr(start.data(),'\n');// skip and continue
 	}
 
 	if (w4count > 2 && delay != 5000 && delay < battle_config.mob_respawn_time) {
-		ShowWarning("npc_parse_mob: Invalid delay %u for mob ID %d (file '%.*s', line '%d'), defaulting to 5 seconds.\n", delay, mob_id, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		ShowWarning("npc_parse_mob: Invalid delay %u for mob ID %d (file '%.*s', line '%d'), defaulting to 5 seconds.\n", delay, mob_id, (int)filepath.size(), filepath.data(), line);
 		mob.delay1 = 5000;
 	} else
 		mob.delay1 = delay;
 
 	if( mob.state.size > SZ_BIG && size != -1 )
 	{
-		ShowError("npc_parse_mob: Invalid size number %d for mob ID %d (file '%.*s', line '%d').\n", mob.state.size, mob_id, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		ShowError("npc_parse_mob: Invalid size number %d for mob ID %d (file '%.*s', line '%d').\n", mob.state.size, mob_id, (int)filepath.size(), filepath.data(), line);
 		return strchr(start.data(), '\n');
 	}
 
 	if( (mob.state.ai < AI_NONE || mob.state.ai >= AI_MAX) && ai != -1 )
 	{
-		ShowError("npc_parse_mob: Invalid ai %d for mob ID %d (file '%.*s', line '%d').\n", mob.state.ai, mob_id, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		ShowError("npc_parse_mob: Invalid ai %d for mob ID %d (file '%.*s', line '%d').\n", mob.state.ai, mob_id, (int)filepath.size(), filepath.data(), line);
 		return strchr(start.data(), '\n');
 	}
 
 	if( (mob_lv == 0 || mob_lv > MAX_LEVEL) && mob_lv != -1 )
 	{
-		ShowError("npc_parse_mob: Invalid level %d for mob ID %d (file '%.*s', line '%d').\n", mob_lv, mob_id, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		ShowError("npc_parse_mob: Invalid level %d for mob ID %d (file '%.*s', line '%d').\n", mob_lv, mob_id, (int)filepath.size(), filepath.data(), line);
 		return strchr(start.data(), '\n');
 	}
 
@@ -5290,7 +5289,7 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, std::st
 		mob.state.ai = static_cast<enum mob_ai>(ai);
 
 	if (mob.xs < 0) {
-		ShowWarning("npc_parse_mob: Negative x-span %hd for mob ID %d (file '%.*s', line '%d'). Defaulting to map-wide.\n", mob.xs, mob_id, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		ShowWarning("npc_parse_mob: Negative x-span %hd for mob ID %d (file '%.*s', line '%d'). Defaulting to map-wide.\n", mob.xs, mob_id, (int)filepath.size(), filepath.data(), line);
 		mob.xs = 0;
 	}
 	else if (mob.xs == 0 && mob.x > 0) {
@@ -5300,7 +5299,7 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, std::st
 	}
 
 	if (mob.ys < 0) {
-		ShowWarning("npc_parse_mob: Negative y-span %hd for mob ID %d (file '%.*s', line '%d'). Defaulting to map-wide.\n", mob.ys, mob_id, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		ShowWarning("npc_parse_mob: Negative y-span %hd for mob ID %d (file '%.*s', line '%d'). Defaulting to map-wide.\n", mob.ys, mob_id, (int)filepath.size(), filepath.data(), line);
 		mob.ys = 0;
 	}
 	else if (mob.ys == 0 && mob.y > 0) {
@@ -5329,7 +5328,7 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, std::st
 	}
 
 	if(mob.delay1>0xfffffff || mob.delay2>0xfffffff) {
-		ShowError("npc_parse_mob: Invalid spawn delays %u %u (file '%.*s', line '%d').\n", mob.delay1, mob.delay2, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		ShowError("npc_parse_mob: Invalid spawn delays %u %u (file '%.*s', line '%d').\n", mob.delay1, mob.delay2, (int)filepath.size(), filepath.data(), line);
 		return strchr(start.data(),'\n');// skip and continue
 	}
 
@@ -5344,7 +5343,7 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, std::st
 	//Verify dataset.
 	if( !mob_parse_dataset(&mob) )
 	{
-		ShowError("npc_parse_mob: Invalid dataset for monster ID %d (file '%.*s', line '%d').\n", mob_id, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		ShowError("npc_parse_mob: Invalid dataset for monster ID %d (file '%.*s', line '%d').\n", mob_id, (int)filepath.size(), filepath.data(), line);
 		return strchr(start.data(),'\n');// skip and continue
 	}
 
@@ -5638,19 +5637,19 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 		return 0;
 	}
 
-	int lines = 0;
+	int linenum = 0;
 	bool has_script;
 	bool error;
 
 	// parse buffer
 	for ( const char* p = skip_space(buffer.get()); p && *p ; p = skip_space(p) ) {
 		size_t pos[9];
-		lines++;
+		linenum++;
 		error = false;	
 		size_t count = sv_parse(p, len + buffer.get() - p, 0, '\t', pos, ARRAYLENGTH(pos), SV_TERMINATE_LF | SV_TERMINATE_CRLF, error);
 
 		if (error) {
-			ShowError("npc_parsesrcfile: Parse error in file '%.*s', line '%d'. Stopping...\n", (int)filepath.size(), filepath.data(), lines);
+			ShowError("npc_parsesrcfile: Parse error in file '%.*s', line '%d'. Stopping...\n", (int)filepath.size(), filepath.data(), linenum);
 			break;
 		}
 
@@ -5658,7 +5657,7 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 
 		// fill w1
 		if( pos[3]-pos[2] > ARRAYLENGTH(w1)-1 )
-			ShowWarning("npc_parsesrcfile: w1 truncated, too much data (%zu) in file '%.*s', line '%d'.\n", pos[3]-pos[2], (int)filepath.size(), filepath.data(), lines);
+			ShowWarning("npc_parsesrcfile: w1 truncated, too much data (%zu) in file '%.*s', line '%d'.\n", pos[3]-pos[2], (int)filepath.size(), filepath.data(), linenum);
 
 		size_t index = std::min( pos[3] - pos[2], ARRAYLENGTH( w1 ) - 1 );
 		memcpy( w1, p + pos[2], index * sizeof( char ) );
@@ -5666,7 +5665,7 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 
 		// fill w2
 		if( pos[5]-pos[4] > ARRAYLENGTH(w2)-1 )
-			ShowWarning("npc_parsesrcfile: w2 truncated, too much data (%zu) in file '%.*s', line '%d'.\n", pos[5]-pos[4], (int)filepath.size(), filepath.data(), lines);
+			ShowWarning("npc_parsesrcfile: w2 truncated, too much data (%zu) in file '%.*s', line '%d'.\n", pos[5]-pos[4], (int)filepath.size(), filepath.data(), linenum);
 
 		index = std::min( pos[5] - pos[4], ARRAYLENGTH( w2 ) - 1 );
 		memcpy( w2, p + pos[4], index * sizeof( char ) );
@@ -5674,7 +5673,7 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 
 		// fill w3
 		if( pos[7]-pos[6] > ARRAYLENGTH(w3)-1 )
-			ShowWarning("npc_parsesrcfile: w3 truncated, too much data (%lu) in file '%.*s', line '%d'.\n", pos[7]-pos[6], (int)filepath.size(), filepath.data(), lines);
+			ShowWarning("npc_parsesrcfile: w3 truncated, too much data (%lu) in file '%.*s', line '%d'.\n", pos[7]-pos[6], (int)filepath.size(), filepath.data(), linenum);
 
 		index = std::min( pos[7] - pos[6], ARRAYLENGTH( w3 ) - 1 );
 		memcpy( w3, p + pos[6], index * sizeof( char ) );
@@ -5682,7 +5681,7 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 
 		// fill w4 (to end of line)
 		if( pos[1]-pos[8] > ARRAYLENGTH(w4)-1 )
-			ShowWarning("npc_parsesrcfile: w4 truncated, too much data (%lu) in file '%.*s', line '%d'.\n", pos[1]-pos[8], (int)filepath.size(), filepath.data(), lines);
+			ShowWarning("npc_parsesrcfile: w4 truncated, too much data (%lu) in file '%.*s', line '%d'.\n", pos[1]-pos[8], (int)filepath.size(), filepath.data(), linenum);
 		if (pos[8] != -1) {
 			index = std::min( pos[1] - pos[8], ARRAYLENGTH( w4 ) - 1 );
 			memcpy( w4, p + pos[8], index * sizeof( char ) );
@@ -5692,7 +5691,7 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 			w4[0] = '\0';
 
 		if (count < 3) {// Unknown syntax
-			ShowError("npc_parsesrcfile: Unknown syntax in file '%.*s', line '%d'. Stopping...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), lines, w1, w2, w3, w4);
+			ShowError("npc_parsesrcfile: Unknown syntax in file '%.*s', line '%d'. Stopping...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), linenum, w1, w2, w3, w4);
 			break;
 		}
 
@@ -5708,7 +5707,7 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 			int count2 = sscanf(w1,"%15[^,],%6hd,%6hd[^,]",mapname,&x,&y);
 
 			if (count2 < 1) {
-				ShowError("npc_parsesrcfile: Invalid script definition in file '%.*s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), lines, w1, w2, w3, w4);
+				ShowError("npc_parsesrcfile: Invalid script definition in file '%.*s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), linenum, w1, w2, w3, w4);
 				if (has_script && (p = npc_skip_script(p,buffer.get(),filepath.data())) == nullptr)
 					break;
 				p = strchr(p,'\n');// next line
@@ -5720,7 +5719,7 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 			}
 
 			if (!mapindex_name2id(mapname)) {// Incorrect map, we must skip the script info...
-				ShowError("npc_parsesrcfile: Unknown map '%s' in file '%.*s', line '%d'. Skipping line...\n", mapname, (int)filepath.size(), filepath.data(), lines);
+				ShowError("npc_parsesrcfile: Unknown map '%s' in file '%.*s', line '%d'. Skipping line...\n", mapname, (int)filepath.size(), filepath.data(), linenum);
 				if (has_script && (p = npc_skip_script(p,buffer.get(),filepath.data())) == nullptr)
 					break;
 				p = strchr(p,'\n');// next line
@@ -5737,7 +5736,7 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 			map_data *mapdata = map_getmapdata(m);
 
 			if (x < 0 || x >= mapdata->xs || y < 0 || y >= mapdata->ys) {
-				ShowError("npc_parsesrcfile: Unknown coordinates ('%d', '%d') for map '%s' in file '%.*s', line '%d'. Skipping line...\n", x, y, mapname, (int)filepath.size(), filepath.data(), lines);
+				ShowError("npc_parsesrcfile: Unknown coordinates ('%d', '%d') for map '%s' in file '%.*s', line '%d'. Skipping line...\n", x, y, mapname, (int)filepath.size(), filepath.data(), linenum);
 				if (has_script && (p = npc_skip_script(p,buffer.get(),filepath.data())) == nullptr)
 					break;
 				p = strchr(p,'\n');// next line
@@ -5747,29 +5746,29 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 
 		// parse the data according to w2
 		if ((strncasecmp(w2, "warp", 4) == 0 || strncasecmp(w2, "warp2", 5) == 0) && count > 3)
-			p = npc_parse_warp(w1,w2,w3,w4, p, buffer, filepath);
+			p = npc_parse_warp(w1,w2,w3,w4, p, buffer, filepath,linenum);
 		else if ((!strcasecmp(w2,"shop") || !strcasecmp(w2,"cashshop") || !strcasecmp(w2,"itemshop") || !strcasecmp(w2,"pointshop") || !strcasecmp(w2,"marketshop") ) && count > 3)
-			p = npc_parse_shop(w1,w2,w3,w4, p, buffer, filepath);
+			p = npc_parse_shop(w1,w2,w3,w4, p, buffer, filepath, linenum);
 		else if (has_script) {
 			if (strcasecmp(w1,"function") == 0) {
 				if (strcasecmp(w2,"script") == 0)
-					p = npc_parse_function(w1, w2, w3, w4, p, buffer.get(), filepath.data());
+					p = npc_parse_function(w1, w2, w3, w4, p, buffer, filepath, linenum);
 				else {
-					ShowError("npc_parsesrcfile: Unable to parse, probably a missing or extra TAB in file '%.*s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), lines, w1, w2, w3, w4);
+					ShowError("npc_parsesrcfile: Unable to parse, probably a missing or extra TAB in file '%.*s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), linenum, w1, w2, w3, w4);
 					p = strchr(p,'\n');// skip and continue
 				}
 			}
 			else
-				p = npc_parse_script(w1,w2,w3,w4, p, buffer, filepath);
+				p = npc_parse_script(w1,w2,w3,w4, p, buffer, filepath, linenum);
 		}
 		else if( int i = 0; ( sscanf( w2, "duplicate%n", &i ), ( i > 0 && w2[i] == '(' ) ) && count > 3 )
 			p = npc_parse_duplicate(w1,w2,w3,w4, p, buffer.get(), filepath.data());
 		else if( (strcmpi(w2,"monster") == 0 || strcmpi(w2,"boss_monster") == 0) && count > 3 )
-			p = npc_parse_mob(w1, w2, w3, w4, p, buffer, filepath);
+			p = npc_parse_mob(w1, w2, w3, w4, p, buffer, filepath, linenum);
 		else if( strcmpi(w2,"mapflag") == 0 && count >= 3 )
 			p = npc_parse_mapflag(w1, w2, trim(w3), trim(w4), p, buffer.get(), filepath.data());
 		else {
-			ShowError("npc_parsesrcfile: Unable to parse, probably a missing or extra TAB in file '%.*s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), lines, w1, w2, w3, w4);
+			ShowError("npc_parsesrcfile: Unable to parse, probably a missing or extra TAB in file '%.*s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), linenum, w1, w2, w3, w4);
 			p = strchr(p,'\n');// skip and continue
 		}
 	}
