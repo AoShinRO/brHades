@@ -4508,7 +4508,7 @@ static inline const char* npc_parse_duplicate( char* w1, char* w2, char* w3, cha
 	// get the npc being duplicated
 	if( w2[length-1] != ')' || length <= 11 || length-11 >= sizeof(srcname) )
 	{// does not match 'duplicate(%127s)', name is empty or too long
-		ShowError("npc_parse_script: bad duplicate name in file '%.*s', line '%.*s' : %s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w2);
+		ShowError("npc_parse_script: bad duplicate name in file '%.*s', line '%d' : %s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w2);
 		return end;// next line, try to continue
 	}
 	safestrncpy(srcname, w2+10, length-10);
