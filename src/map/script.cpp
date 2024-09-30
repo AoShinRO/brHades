@@ -4890,7 +4890,24 @@ void script_reload(void) {
 /////////////////////////////////////////////////////////////////////
 // NPC interaction
 //
-
+static void check_utf(const char* text)
+{
+	bool contains_utf8 = false;
+	for (size_t i = 0; i < strlen(text); ++i) {
+		unsigned char c = text[i];
+		
+		// Verifica se o caractere está fora do intervalo ANSI (0x00 - 0x7F)
+		if (c > 0x7F) {
+			contains_utf8 = true;
+			break;
+	    }
+	}
+	
+	if (contains_utf8) {
+		// Aqui você pode sugerir alterar a codificação para ANSI
+		ShowDebug("[brHades] Atenção: o arquivo contém caracteres fora do padrão ANSI. Considere salvar o arquivo como ANSI.");
+	}
+}
 /// Appends a message to the npc dialog.
 /// If a dialog doesn't exist yet, one is created.
 ///

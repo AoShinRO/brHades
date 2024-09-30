@@ -3857,34 +3857,33 @@ struct npc_data* npc_add_warp(char* name, short from_mapid, short from_x, short 
  * @param filepath : filename with path wich we are parsing
  * @return new index for next parsing
  */
-static const char* npc_parse_warp(char* w1, char* w2, char* w3, char* w4, const char* start, const char* buffer, const char* filepath)
-{
+static const char* npc_parse_warp(char* w1, char* w2, char* w3, char* w4, std::string_view start, std::unique_ptr<char[]>& buffer, std::string_view& filepath) {
 	short x, y, xs, ys, to_x, to_y;
 	char mapname[MAP_NAME_LENGTH_EXT], to_mapname[MAP_NAME_LENGTH_EXT];
 
 	// w1=<from map name>,<fromX>,<fromY>,<facing>
 	// w4=<spanx>,<spany>,<to map name>,<toX>,<toY>
 	if( sscanf(w1, "%15[^,],%6hd,%6hd", mapname, &x, &y) != 3 || sscanf(w4, "%6hd,%6hd,%15[^,],%6hd,%6hd", &xs, &ys, to_mapname, &to_x, &to_y) != 5 ) {
-		ShowError("npc_parse_warp: Invalid warp definition in file '%s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
-		return strchr(start,'\n');// skip and continue
+		ShowError("npc_parse_warp: Invalid warp definition in file '%.*s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
+		return strchr(start.data(),'\n');// skip and continue
 	}
 
 	int m = map_mapname2mapid(mapname);
 	unsigned short i = mapindex_name2id(to_mapname);
 
 	if( i == 0 ) {
-		ShowError("npc_parse_warp: Unknown destination map in file '%s', line '%d' : %s\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), to_mapname, w1, w2, w3, w4);
-		return strchr(start,'\n');// skip and continue
+		ShowError("npc_parse_warp: Unknown destination map in file '%.*s', line '%d' : %s\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), to_mapname, w1, w2, w3, w4);
+		return strchr(start.data(),'\n');// skip and continue
 	}
 
 	struct map_data *mapdata = map_getmapdata(m);
 
 	if( m != -1 && ( x < 0 || x >= mapdata->xs || y < 0 || y >= mapdata->ys ) ) {
-		ShowWarning("npc_parse_warp: coordinates %d/%d are out of bounds in map %s(%dx%d), in file '%s', line '%d'\n", x, y, mapdata->name, mapdata->xs, mapdata->ys,filepath,strline(buffer,start-buffer));
+		ShowWarning("npc_parse_warp: coordinates %d/%d are out of bounds in map %s(%dx%d), in file '%.*s', line '%d'\n", x, y, mapdata->name, mapdata->xs, mapdata->ys,(int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
 	}
 
 	struct npc_data *nd = npc_create_npc(m, x, y);
-	npc_parsename(nd, w3, start, buffer, filepath);
+	npc_parsename(nd, w3, start.data(), buffer.get(), filepath.data());
 
 	bool is_type_warp2 = (strncasecmp(w2, "warp2", 5) == 0);
 
@@ -3914,7 +3913,7 @@ static const char* npc_parse_warp(char* w1, char* w2, char* w3, char* w4, const 
 	map_addnpc(m, nd);
 	npc_setcells(nd);
 	if(map_addblock(&nd->bl)) //couldn't add on map
-		return strchr(start,'\n');
+		return strchr(start.data(),'\n');
 	status_set_viewdata(&nd->bl, nd->class_);
 	status_change_init(&nd->bl);
 	unit_dataset(&nd->bl);
@@ -3930,7 +3929,7 @@ static const char* npc_parse_warp(char* w1, char* w2, char* w3, char* w4, const 
 
 		// state name
 		if (w2[shift-1] != '(' || w2[length-1] != ')' || length <= shift || length-shift >= sizeof(state_name))
-			ShowWarning("npc_parse_warp: Invalid npc state in file '%s', line '%d', defaulting to visible. w2=%s\n", filepath, strline(buffer,start-buffer), w2);
+			ShowWarning("npc_parse_warp: Invalid npc state in file '%.*s', line '%d', defaulting to visible. w2=%s\n", (int)filepath.size(), filepath.data(),  strline(buffer.get(),start.data()-buffer.get()), w2);
 		else {
 			safestrncpy(state_name, w2+shift, length-shift);
 			if (strcasecmp("CLOAKED", state_name) == 0)
@@ -3940,13 +3939,13 @@ static const char* npc_parse_warp(char* w1, char* w2, char* w3, char* w4, const 
 			else if (strcasecmp("DISABLED", state_name) == 0)
 				nd->state = NPCVIEW_DISABLE;
 			else
-				ShowWarning("npc_parse_warp: Invalid npc state in file '%s', line '%d', defaulting to visible. w2=%s\n", filepath, strline(buffer,start-buffer), w2);
+				ShowWarning("npc_parse_warp: Invalid npc state in file '%.*s', line '%d', defaulting to visible. w2=%s\n", (int)filepath.size(), filepath.data(),  strline(buffer.get(),start.data()-buffer.get()), w2);
 			if (nd->state != NPCVIEW_ENABLE)
 				npc_enable_target(*nd, 0, nd->state);
 		}
 	}
 
-	return strchr(start,'\n');// continue
+	return strchr(start.data(),'\n');// continue
 }
 
 /**
@@ -5748,7 +5747,7 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 
 		// parse the data according to w2
 		if ((strncasecmp(w2, "warp", 4) == 0 || strncasecmp(w2, "warp2", 5) == 0) && count > 3)
-			p = npc_parse_warp(w1,w2,w3,w4, p, buffer.get(), filepath.data());
+			p = npc_parse_warp(w1,w2,w3,w4, p, buffer, filepath);
 		else if ((!strcasecmp(w2,"shop") || !strcasecmp(w2,"cashshop") || !strcasecmp(w2,"itemshop") || !strcasecmp(w2,"pointshop") || !strcasecmp(w2,"marketshop") ) && count > 3)
 			p = npc_parse_shop(w1,w2,w3,w4, p, buffer.get(), filepath.data());
 		else if (has_script) {

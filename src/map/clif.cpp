@@ -2382,6 +2382,20 @@ void clif_parse_NPCMarketPurchase(int fd, map_session_data *sd) {
 #endif
 }
 
+static void clif_check_utf(std::string_view text, uint32 npcid) {
+	bool contains_utf8 = false;
+	for (size_t i = 0; i < text.size(); ++i) {
+		unsigned char c = text[i];
+
+		if (c > 0x7F) {
+			contains_utf8 = true;
+			break;
+	    }
+	}
+	
+	if (contains_utf8) 
+		ShowDebug("[brHades] Atencao: o npc: '%s' contem caracteres fora do padrao ANSI. Considere salvar o arquivo como ANSI. \n", map_id2nd(npcid)->name );
+}
 
 /// Displays an NPC dialog message.
 /// 00b4 <packet len>.W <npc id>.L <message>.?B (ZC_SAY_DIALOG)
@@ -2393,6 +2407,8 @@ void clif_parse_NPCMarketPurchase(int fd, map_session_data *sd) {
 /// - append this text
 void clif_scriptmes( map_session_data& sd, uint32 npcid, const char *mes ){
 	PACKET_ZC_SAY_DIALOG* p = reinterpret_cast<PACKET_ZC_SAY_DIALOG*>( packet_buffer );
+
+	clif_check_utf(mes,npcid);
 
 	int16 length = (int16)( strlen( mes ) + 1 );
 
