@@ -4345,7 +4345,7 @@ static const char* npc_skip_script(const char* start, const char* buffer, const 
  * @param filepath : filename with path wich we are parsing
  * @return new index for next parsing
  */
-static const char* npc_parse_script(char* w1, char* w2, char* w3, char* w4, const char* start, const char* buffer, const char* filepath) {
+static inline const char* npc_parse_script(char* w1, char* w2, char* w3, char* w4,  std::string_view start, std::unique_ptr<char[]>& buffer, std::string_view& filepath) {
 	int16 dir = 0;
 	short m, x, y, xs = 0, ys = 0; // [Valaris] thanks to fov
 	struct script_code *script;
@@ -4369,32 +4369,32 @@ static const char* npc_parse_script(char* w1, char* w2, char* w3, char* w4, cons
 
 		if( sscanf(w1, "%15[^,],%6hd,%6hd,%4hd", mapname, &x, &y, &dir) != 4 )
 		{
-			ShowError("npc_parse_script: Invalid placement format for a script in file '%s', line '%d'. Skipping the rest of file...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+			ShowError("npc_parse_script: Invalid placement format for a script in file '%.*s', line '%d'. Skipping the rest of file...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
 			return nullptr;// unknown format, don't continue
 		}
 		m = map_mapname2mapid(mapname);
 	}
 
-	script_start = strstr(start,",{");
-	end = strchr(start,'\n');
+	script_start = strstr(start.data(),",{");
+	end = strchr(start.data(),'\n');
 	if( strstr(w4,",{") == nullptr || script_start == nullptr || (end != nullptr && script_start > end) )
 	{
-		ShowError("npc_parse_script: Missing left curly ',{' in file '%s', line '%d'. Skipping the rest of the file.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+		ShowError("npc_parse_script: Missing left curly ',{' in file '%.*s', line '%d'. Skipping the rest of the file.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
 		return nullptr;// can't continue
 	}
 	++script_start;
 
-	end = npc_skip_script(script_start, buffer, filepath);
+	end = npc_skip_script(script_start, buffer.get(), filepath.data());
 	if( end == nullptr )
 		return nullptr;// (simple) parse error, don't continue
 
-	script = parse_script(script_start, filepath, strline(buffer,script_start-buffer), SCRIPT_USE_LABEL_DB);
+	script = parse_script(script_start, filepath.data(), strline(buffer.get(),script_start-buffer.get()), SCRIPT_USE_LABEL_DB);
 	label_list = nullptr;
 	label_list_num = 0;
 	if( script )
 	{
 		DBMap* label_db = script_get_label_db();
-		label_db->foreach(label_db, npc_convertlabel_db, &label_list, &label_list_num, filepath);
+		label_db->foreach(label_db, npc_convertlabel_db, &label_list, &label_list_num, filepath.data());
 		db_clear(label_db); // not needed anymore, so clear the db
 	}
 
@@ -4411,8 +4411,8 @@ static const char* npc_parse_script(char* w1, char* w2, char* w3, char* w4, cons
 		nd->u.scr.ys = -1;
 	}
 
-	npc_parsename(nd, w3, start, buffer, filepath);
-	nd->class_ = m == -1 ? JT_FAKENPC : npc_parseview(w4, start, buffer, filepath);
+	npc_parsename(nd, w3, start.data(), buffer.get(), filepath.data());
+	nd->class_ = m == -1 ? JT_FAKENPC : npc_parseview(w4, start.data(), buffer.get(), filepath.data());
 	nd->speed = DEFAULT_NPC_WALK_SPEED;
 	nd->u.scr.script = script;
 	nd->u.scr.label_list = label_list;
@@ -4453,7 +4453,7 @@ static const char* npc_parse_script(char* w1, char* w2, char* w3, char* w4, cons
 
 		// state name
 		if (w2[shift-1] != '(' || w2[length-1] != ')' || length <= shift || length-shift >= sizeof(state_name))
-			ShowWarning("npc_parse_script: Invalid npc state in file '%s', line '%d', defaulting to visible. w2=%s\n", filepath, strline(buffer,start-buffer), w2);
+			ShowWarning("npc_parse_script: Invalid npc state in file '%.*s', line '%d', defaulting to visible. w2=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w2);
 		else {
 			safestrncpy(state_name, w2+shift, length-shift);
 			if (strcasecmp("CLOAKED", state_name) == 0)
@@ -4463,7 +4463,7 @@ static const char* npc_parse_script(char* w1, char* w2, char* w3, char* w4, cons
 			else if (strcasecmp("DISABLED", state_name) == 0)
 				nd->state = NPCVIEW_DISABLE;
 			else
-				ShowWarning("npc_parse_script: Invalid npc state in file '%s', line '%d', defaulting to visible. w2=%s\n", filepath, strline(buffer,start-buffer), w2);
+				ShowWarning("npc_parse_script: Invalid npc state in file '%.*s', line '%d', defaulting to visible. w2=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w2);
 			if (nd->state != NPCVIEW_ENABLE)
 				npc_enable_target(*nd, 0, nd->state);
 		}
@@ -4473,8 +4473,7 @@ static const char* npc_parse_script(char* w1, char* w2, char* w3, char* w4, cons
 	// Loop through labels to export them as necessary
 	for (i = 0; i < nd->u.scr.label_list_num; i++) {
 		if (npc_event_export(nd, i)) {
-			ShowWarning("npc_parse_script : duplicate event %s::%s (%s)\n",
-			             nd->exname, nd->u.scr.label_list[i].name, filepath);
+			ShowWarning("npc_parse_script : duplicate event %s::%s ('%.*s')\n", nd->exname, nd->u.scr.label_list[i].name, (int)filepath.size(), filepath.data());
 		}
 		npc_timerevent_export(nd, i);
 	}
@@ -5761,7 +5760,7 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 				}
 			}
 			else
-				p = npc_parse_script(w1,w2,w3,w4, p, buffer.get(), filepath.data());
+				p = npc_parse_script(w1,w2,w3,w4, p, buffer, filepath);
 		}
 		else if( int i = 0; ( sscanf( w2, "duplicate%n", &i ), ( i > 0 && w2[i] == '(' ) ) && count > 3 )
 			p = npc_parse_duplicate(w1,w2,w3,w4, p, buffer.get(), filepath.data());
