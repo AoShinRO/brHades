@@ -5187,7 +5187,7 @@ void npc_parse_mob2(struct spawn_data* mob)
 	}
 }
 
-static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, const char* start, const char* buffer, const char* filepath)
+static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, std::string_view start, std::unique_ptr<char[]>& buffer, std::string_view& filepath)
 {
 	int num, mob_id, mob_lv = -1, delay = 5000, size = -1, w1count, w4count;
 	short m, x = 0, y = 0, xs = 0, ys = 0;
@@ -5206,25 +5206,25 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, const c
 	||	sscanf(w3, "%23[^,],%11d", mobname, &mob_lv) < 1
 	||	( w4count = sscanf(w4, "%23[^,],%11d,%11u,%11u,%77[^,],%11d,%11d[^\t\r\n]", sprite, &num, &delay, &mob.delay2, mob.eventname, &size, &ai) ) < 2 )
 	{
-		ShowError("npc_parse_mob: Invalid mob definition in file '%s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
-		return strchr(start,'\n');// skip and continue
+		ShowError("npc_parse_mob: Invalid mob definition in file '%.*s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
+		return strchr(start.data(),'\n');// skip and continue
 	}
 	if( mapindex_name2id(mapname) == 0 )
 	{
-		ShowError("npc_parse_mob: Unknown map '%s' in file '%s', line '%d'.\n", mapname, filepath, strline(buffer,start-buffer));
-		return strchr(start,'\n');// skip and continue
+		ShowError("npc_parse_mob: Unknown map '%s' in file '%.*s', line '%d'.\n", mapname, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		return strchr(start.data(),'\n');// skip and continue
 	}
 	m =  map_mapname2mapid(mapname);
 	if( m < 0 )//Not loaded on this map-server instance.
-		return strchr(start,'\n');// skip and continue
+		return strchr(start.data(),'\n');// skip and continue
 	mob.m = (unsigned short)m;
 
 	struct map_data *mapdata = map_getmapdata(m);
 
 	if( x < 0 || x >= mapdata->xs || y < 0 || y >= mapdata->ys )
 	{
-		ShowError("npc_parse_mob: Spawn coordinates out of range: %s (%d,%d), map size is (%d,%d) - %s %s (file '%s', line '%d').\n", mapdata->name, x, y, (mapdata->xs-1), (mapdata->ys-1), w1, w3, filepath, strline(buffer,start-buffer));
-		return strchr(start,'\n');// skip and continue
+		ShowError("npc_parse_mob: Spawn coordinates out of range: %s (%d,%d), map size is (%d,%d) - %s %s (file '%.*s', line '%d').\n", mapdata->name, x, y, (mapdata->xs-1), (mapdata->ys-1), w1, w3, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		return strchr(start.data(),'\n');// skip and continue
 	}
 
 	// Check if sprite is the mob name or ID
@@ -5236,44 +5236,44 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, const c
 		std::shared_ptr<s_mob_db> mob = mobdb_search_aegisname(sprite);
 
 		if (mob == nullptr) {
-			ShowError("npc_parse_mob: Unknown mob name %s (file '%s', line '%d').\n", sprite, filepath, strline(buffer,start-buffer));
-			return strchr(start,'\n');// skip and continue
+			ShowError("npc_parse_mob: Unknown mob name %s (file '%.*s', line '%d').\n", sprite, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+			return strchr(start.data(),'\n');// skip and continue
 		}
 		mob_id = mob->id;
 	}
 	else if (mobdb_checkid(mob_id) == 0) {	// check monster ID if exists!
-		ShowError("npc_parse_mob: Unknown mob ID %d (file '%s', line '%d').\n", mob_id, filepath, strline(buffer,start-buffer));
-		return strchr(start,'\n');// skip and continue
+		ShowError("npc_parse_mob: Unknown mob ID %d (file '%.*s', line '%d').\n", mob_id, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		return strchr(start.data(),'\n');// skip and continue
 	}
 
 	if( num < 1 || num > 1000 )
 	{
-		ShowError("npc_parse_mob: Invalid number of monsters %d, must be inside the range [1,1000] (file '%s', line '%d').\n", num, filepath, strline(buffer,start-buffer));
-		return strchr(start,'\n');// skip and continue
+		ShowError("npc_parse_mob: Invalid number of monsters %d, must be inside the range [1,1000] (file '%.*s', line '%d').\n", num, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		return strchr(start.data(),'\n');// skip and continue
 	}
 
 	if (w4count > 2 && delay != 5000 && delay < battle_config.mob_respawn_time) {
-		ShowWarning("npc_parse_mob: Invalid delay %u for mob ID %d (file '%s', line '%d'), defaulting to 5 seconds.\n", delay, mob_id, filepath, strline(buffer, start - buffer));
+		ShowWarning("npc_parse_mob: Invalid delay %u for mob ID %d (file '%.*s', line '%d'), defaulting to 5 seconds.\n", delay, mob_id, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
 		mob.delay1 = 5000;
 	} else
 		mob.delay1 = delay;
 
 	if( mob.state.size > SZ_BIG && size != -1 )
 	{
-		ShowError("npc_parse_mob: Invalid size number %d for mob ID %d (file '%s', line '%d').\n", mob.state.size, mob_id, filepath, strline(buffer, start - buffer));
-		return strchr(start, '\n');
+		ShowError("npc_parse_mob: Invalid size number %d for mob ID %d (file '%.*s', line '%d').\n", mob.state.size, mob_id, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		return strchr(start.data(), '\n');
 	}
 
 	if( (mob.state.ai < AI_NONE || mob.state.ai >= AI_MAX) && ai != -1 )
 	{
-		ShowError("npc_parse_mob: Invalid ai %d for mob ID %d (file '%s', line '%d').\n", mob.state.ai, mob_id, filepath, strline(buffer, start - buffer));
-		return strchr(start, '\n');
+		ShowError("npc_parse_mob: Invalid ai %d for mob ID %d (file '%.*s', line '%d').\n", mob.state.ai, mob_id, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		return strchr(start.data(), '\n');
 	}
 
 	if( (mob_lv == 0 || mob_lv > MAX_LEVEL) && mob_lv != -1 )
 	{
-		ShowError("npc_parse_mob: Invalid level %d for mob ID %d (file '%s', line '%d').\n", mob_lv, mob_id, filepath, strline(buffer, start - buffer));
-		return strchr(start, '\n');
+		ShowError("npc_parse_mob: Invalid level %d for mob ID %d (file '%.*s', line '%d').\n", mob_lv, mob_id, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		return strchr(start.data(), '\n');
 	}
 
 	mob.num = (unsigned short)num;
@@ -5291,7 +5291,7 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, const c
 		mob.state.ai = static_cast<enum mob_ai>(ai);
 
 	if (mob.xs < 0) {
-		ShowWarning("npc_parse_mob: Negative x-span %hd for mob ID %d (file '%s', line '%d'). Defaulting to map-wide.\n", mob.xs, mob_id, filepath, strline(buffer, start - buffer));
+		ShowWarning("npc_parse_mob: Negative x-span %hd for mob ID %d (file '%.*s', line '%d'). Defaulting to map-wide.\n", mob.xs, mob_id, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
 		mob.xs = 0;
 	}
 	else if (mob.xs == 0 && mob.x > 0) {
@@ -5301,7 +5301,7 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, const c
 	}
 
 	if (mob.ys < 0) {
-		ShowWarning("npc_parse_mob: Negative y-span %hd for mob ID %d (file '%s', line '%d'). Defaulting to map-wide.\n", mob.ys, mob_id, filepath, strline(buffer, start - buffer));
+		ShowWarning("npc_parse_mob: Negative y-span %hd for mob ID %d (file '%.*s', line '%d'). Defaulting to map-wide.\n", mob.ys, mob_id, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
 		mob.ys = 0;
 	}
 	else if (mob.ys == 0 && mob.y > 0) {
@@ -5330,8 +5330,8 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, const c
 	}
 
 	if(mob.delay1>0xfffffff || mob.delay2>0xfffffff) {
-		ShowError("npc_parse_mob: Invalid spawn delays %u %u (file '%s', line '%d').\n", mob.delay1, mob.delay2, filepath, strline(buffer,start-buffer));
-		return strchr(start,'\n');// skip and continue
+		ShowError("npc_parse_mob: Invalid spawn delays %u %u (file '%.*s', line '%d').\n", mob.delay1, mob.delay2, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		return strchr(start.data(),'\n');// skip and continue
 	}
 
 	//Use db names instead of the spawn file ones.
@@ -5345,8 +5345,8 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, const c
 	//Verify dataset.
 	if( !mob_parse_dataset(&mob) )
 	{
-		ShowError("npc_parse_mob: Invalid dataset for monster ID %d (file '%s', line '%d').\n", mob_id, filepath, strline(buffer,start-buffer));
-		return strchr(start,'\n');// skip and continue
+		ShowError("npc_parse_mob: Invalid dataset for monster ID %d (file '%.*s', line '%d').\n", mob_id, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
+		return strchr(start.data(),'\n');// skip and continue
 	}
 
 	//Update mob spawn lookup database
@@ -5378,7 +5378,7 @@ static const char* npc_parse_mob(char* w1, char* w2, char* w3, char* w4, const c
 
 	npc_mob++;
 
-	return strchr(start,'\n');// continue
+	return strchr(start.data(),'\n');// continue
 }
 
 /*==========================================
@@ -5640,13 +5640,14 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 	}
 
 	int lines = 0;
+	bool has_script;
+	bool error;
 
 	// parse buffer
 	for ( const char* p = skip_space(buffer.get()); p && *p ; p = skip_space(p) ) {
 		size_t pos[9];
 		lines++;
-
-		bool error;
+		error = false;	
 		size_t count = sv_parse(p, len + buffer.get() - p, 0, '\t', pos, ARRAYLENGTH(pos), SV_TERMINATE_LF | SV_TERMINATE_CRLF, error);
 
 		if (error) {
@@ -5697,7 +5698,7 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 		}
 
 		// Whether w2 contains word "script"
-		bool has_script = false;
+		has_script = false;
 
 		if (count > 3 && strncasecmp(w2, "script", 6) == 0)
 			has_script = true;
@@ -5708,7 +5709,7 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 			int count2 = sscanf(w1,"%15[^,],%6hd,%6hd[^,]",mapname,&x,&y);
 
 			if (count2 < 1) {
-				ShowError("npc_parsesrcfile: Invalid script definition in file '%.*s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),p-buffer.get()), w1, w2, w3, w4);
+				ShowError("npc_parsesrcfile: Invalid script definition in file '%.*s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), lines, w1, w2, w3, w4);
 				if (has_script && (p = npc_skip_script(p,buffer.get(),filepath.data())) == nullptr)
 					break;
 				p = strchr(p,'\n');// next line
@@ -5720,7 +5721,7 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 			}
 
 			if (!mapindex_name2id(mapname)) {// Incorrect map, we must skip the script info...
-				ShowError("npc_parsesrcfile: Unknown map '%s' in file '%.*s', line '%d'. Skipping line...\n", mapname, (int)filepath.size(), filepath.data(), strline(buffer.get(),p-buffer.get()));
+				ShowError("npc_parsesrcfile: Unknown map '%s' in file '%.*s', line '%d'. Skipping line...\n", mapname, (int)filepath.size(), filepath.data(), lines);
 				if (has_script && (p = npc_skip_script(p,buffer.get(),filepath.data())) == nullptr)
 					break;
 				p = strchr(p,'\n');// next line
@@ -5737,7 +5738,7 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 			map_data *mapdata = map_getmapdata(m);
 
 			if (x < 0 || x >= mapdata->xs || y < 0 || y >= mapdata->ys) {
-				ShowError("npc_parsesrcfile: Unknown coordinates ('%d', '%d') for map '%s' in file '%.*s', line '%d'. Skipping line...\n", x, y, mapname, (int)filepath.size(), filepath.data(), strline(buffer.get(),p-buffer.get()));
+				ShowError("npc_parsesrcfile: Unknown coordinates ('%d', '%d') for map '%s' in file '%.*s', line '%d'. Skipping line...\n", x, y, mapname, (int)filepath.size(), filepath.data(), lines);
 				if (has_script && (p = npc_skip_script(p,buffer.get(),filepath.data())) == nullptr)
 					break;
 				p = strchr(p,'\n');// next line
@@ -5755,7 +5756,7 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 				if (strcasecmp(w2,"script") == 0)
 					p = npc_parse_function(w1, w2, w3, w4, p, buffer.get(), filepath.data());
 				else {
-					ShowError("npc_parsesrcfile: Unable to parse, probably a missing or extra TAB in file '%.*s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),p-buffer.get()), w1, w2, w3, w4);
+					ShowError("npc_parsesrcfile: Unable to parse, probably a missing or extra TAB in file '%.*s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), lines, w1, w2, w3, w4);
 					p = strchr(p,'\n');// skip and continue
 				}
 			}
@@ -5765,11 +5766,11 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 		else if( int i = 0; ( sscanf( w2, "duplicate%n", &i ), ( i > 0 && w2[i] == '(' ) ) && count > 3 )
 			p = npc_parse_duplicate(w1,w2,w3,w4, p, buffer.get(), filepath.data());
 		else if( (strcmpi(w2,"monster") == 0 || strcmpi(w2,"boss_monster") == 0) && count > 3 )
-			p = npc_parse_mob(w1, w2, w3, w4, p, buffer.get(), filepath.data());
+			p = npc_parse_mob(w1, w2, w3, w4, p, buffer, filepath);
 		else if( strcmpi(w2,"mapflag") == 0 && count >= 3 )
 			p = npc_parse_mapflag(w1, w2, trim(w3), trim(w4), p, buffer.get(), filepath.data());
 		else {
-			ShowError("npc_parsesrcfile: Unable to parse, probably a missing or extra TAB in file '%.*s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),p-buffer.get()), w1, w2, w3, w4);
+			ShowError("npc_parsesrcfile: Unable to parse, probably a missing or extra TAB in file '%.*s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), lines, w1, w2, w3, w4);
 			p = strchr(p,'\n');// skip and continue
 		}
 	}

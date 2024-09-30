@@ -2383,17 +2383,14 @@ void clif_parse_NPCMarketPurchase(int fd, map_session_data *sd) {
 }
 
 static void clif_check_utf(std::string_view text, uint32 npcid) {
-	bool contains_utf8 = false;
+	bool utf = false;
 	for (size_t i = 0; i < text.size(); ++i) {
-		unsigned char c = text[i];
-
-		if (c > 0x7F) {
-			contains_utf8 = true;
+		if (text[i] > 0x7F) {
+			utf = true;
 			break;
 	    }
 	}
-	
-	if (contains_utf8) 
+	if (utf) 
 		ShowDebug("[brHades] Atencao: o npc: '%s' contem caracteres fora do padrao ANSI. Considere salvar o arquivo como ANSI. \n", map_id2nd(npcid)->name );
 }
 
