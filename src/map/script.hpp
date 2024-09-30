@@ -2234,7 +2234,7 @@ void script_error(const char* src, const char* file, int start_line, const char*
 void script_warning(const char* src, const char* file, int start_line, const char* error_msg, const char* error_pos);
 
 bool is_number(const char *p);
-inline struct script_code* parse_script_( std::string_view src, std::string_view file, int line, int options, const char* src_file, int src_line, const char* src_func );
+struct script_code* parse_script_( const char *src, const char *file, int line, int options, const char* src_file, int src_line, const char* src_func );
 #define parse_script( src, file, line, options ) parse_script_( ( src ), ( file ), ( line ), ( options ), ALC_MARK )
 void run_script(struct script_code *rootscript,int pos,int rid,int oid);
 

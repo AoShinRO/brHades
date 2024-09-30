@@ -2467,18 +2467,18 @@ void script_warning(const char* src, const char* file, int start_line, const cha
 /*==========================================
  * Analysis of the script
  *------------------------------------------*/
-inline struct script_code* parse_script_( std::string_view src, std::string_view file, int line, int options, const char* src_file, int src_line, const char* src_func ){
+struct script_code* parse_script_( const char *src, const char *file, int line, int options, const char* src_file, int src_line, const char* src_func ){
 	const char *p,*tmpp;
 	int i;
 	struct script_code* code = nullptr;
 	char end;
 	bool unresolved_names = false;
 
-	parser_current_src = src.data();
-	parser_current_file = file.data();
+	parser_current_src = src;
+	parser_current_file = file;
 	parser_current_line = line;
 
-	if( src.empty() )
+	if( src == nullptr )
 		return nullptr;// empty script
 
 	memset(&syntax,0,sizeof(syntax));
@@ -2498,7 +2498,7 @@ inline struct script_code* parse_script_( std::string_view src, std::string_view
 		int j;
 		const int size = ARRAYLENGTH(syntax.curly);
 		if( error_report )
-			script_error(src.data(),file.data(),line,error_msg,error_pos);
+			script_error(src,file,line,error_msg,error_pos);
 		aFree( error_msg );
 		aFree( script_buf );
 		script_pos  = 0;
@@ -2512,7 +2512,7 @@ inline struct script_code* parse_script_( std::string_view src, std::string_view
 	}
 
 	parse_syntax_for_flag=0;
-	p=src.data();
+	p=src;
 	p=skip_space(p);
 	if( options&SCRIPT_IGNORE_EXTERNAL_BRACKETS )
 	{// does not require brackets around the script

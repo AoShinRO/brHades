@@ -3965,7 +3965,7 @@ static const char* npc_parse_warp(char* w1, char* w2, char* w3, char* w4, std::s
  * @param filepath : filename with path wich we are parsing
  * @return new index for next parsing
  */
-static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const char* start, const char* buffer, const char* filepath)
+static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, std::string_view start, std::unique_ptr<char[]>& buffer, std::string_view& filepath)
 {
 	char *p, point_str[32];
 	int m, is_discount = 0;
@@ -3986,8 +3986,8 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 		if( sscanf(w1, "%15[^,],%6hd,%6hd,%4hd", mapname, &x, &y, &dir) != 4
 		||	strchr(w4, ',') == nullptr )
 		{
-			ShowError("npc_parse_shop: Invalid shop definition in file '%s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
-			return strchr(start,'\n');// skip and continue
+			ShowError("npc_parse_shop: Invalid shop definition in file '%.*s', line '%d'.\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
+			return strchr(start.data(),'\n');// skip and continue
 		}
 
 		m = map_mapname2mapid(mapname);
@@ -3996,7 +3996,7 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 	struct map_data *mapdata = map_getmapdata(m);
 
 	if( m != -1 && ( x < 0 || x >= mapdata->xs || y < 0 || y >= mapdata->ys ) ) {
-		ShowWarning("npc_parse_shop: coordinates %d/%d are out of bounds in map %s(%dx%d), in file '%s', line '%d'\n", x, y, mapdata->name, mapdata->xs, mapdata->ys,filepath,strline(buffer,start-buffer));
+		ShowWarning("npc_parse_shop: coordinates %d/%d are out of bounds in map %s(%dx%d), in file '%.*s', line '%d'\n", x, y, mapdata->name, mapdata->xs, mapdata->ys,(int)filepath.size(), filepath.data(),strline(buffer.get(),start.data()-buffer.get()));
 	}
 
 	if( !strcasecmp(w2,"cashshop") )
@@ -4016,40 +4016,40 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 	switch(type) {
 		case NPCTYPE_ITEMSHOP: {
 			if (sscanf(p,",%u:%11d,",&nameid,&is_discount) < 1) {
-				ShowError("npc_parse_shop: Invalid item cost definition in file '%s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
-				return strchr(start,'\n'); // skip and continue
+				ShowError("npc_parse_shop: Invalid item cost definition in file '%.*s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
+				return strchr(start.data(),'\n'); // skip and continue
 			}
 			if (!item_db.exists(nameid)) {
-				ShowWarning("npc_parse_shop: Invalid item ID cost in file '%s', line '%d' (id '%u').\n", filepath, strline(buffer,start-buffer), nameid);
-				return strchr(start,'\n'); // skip and continue
+				ShowWarning("npc_parse_shop: Invalid item ID cost in file '%.*s', line '%d' (id '%u').\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), nameid);
+				return strchr(start.data(),'\n'); // skip and continue
 			}
 			p = strchr(p+1,',');
 			break;
 		}
 		case NPCTYPE_POINTSHOP: {
 			if (sscanf(p, ",%31[^,:]:%11d,",point_str,&is_discount) < 1) {
-				ShowError("npc_parse_shop: Invalid item cost definition in file '%s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
-				return strchr(start,'\n'); // skip and continue
+				ShowError("npc_parse_shop: Invalid item cost definition in file '%.*s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
+				return strchr(start.data(),'\n'); // skip and continue
 			}
 			switch(point_str[0]) {
 				case '$':
 				case '.':
 				case '\'':
-					ShowWarning("npc_parse_shop: Invalid item cost variable type (must be permanent character or account based) in file '%s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
-					return strchr(start,'\n'); // skip and continue
+					ShowWarning("npc_parse_shop: Invalid item cost variable type (must be permanent character or account based) in file '%.*s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
+					return strchr(start.data(),'\n'); // skip and continue
 					break;
 			}
 			if (point_str[strlen(point_str) - 1] == '$') {
-				ShowWarning("npc_parse_shop: Invalid item cost variable type (must be integer) in file '%s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
-				return strchr(start,'\n'); // skip and continue
+				ShowWarning("npc_parse_shop: Invalid item cost variable type (must be integer) in file '%.*s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
+				return strchr(start.data(),'\n'); // skip and continue
 			}
 			p = strchr(p+1,',');
 			break;
 		}
 		case NPCTYPE_MARKETSHOP:
 #if PACKETVER < 20131223
-			ShowError("npc_parse_shop: (MARKETSHOP) Feature is disabled, need client 20131223 or newer. Ignoring file '%s', line '%d\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer, start - buffer), w1, w2, w3, w4);
-			return strchr(start, '\n'); // skip and continue
+			ShowError("npc_parse_shop: (MARKETSHOP) Feature is disabled, need client 20131223 or newer. Ignoring file '%.*s', line '%d\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer, start - buffer), w1, w2, w3, w4);
+			return strchr(start.data(), '\n'); // skip and continue
 #else
 			is_discount = 0;
 			break;
@@ -4064,7 +4064,7 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 					is_discount = 0;
 				}else{
 					ShowError( "npc_parse_shop: unknown discount setting %s\n", point_str );
-					return strchr( start, '\n' ); // skip and continue
+					return strchr(start.data(), '\n' ); // skip and continue
 				}
 
 				p = strchr( p + 1, ',' );
@@ -4086,14 +4086,14 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 			case NPCTYPE_MARKETSHOP:
 #if PACKETVER >= 20131223
 				if (sscanf(p, ",%u:%11d:%11d", &nameid2, &value, &qty) != 3) {
-					ShowError("npc_parse_shop: (MARKETSHOP) Invalid item definition in file '%s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer, start - buffer), w1, w2, w3, w4);
+					ShowError("npc_parse_shop: (MARKETSHOP) Invalid item definition in file '%.*s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
 					skip = true;
 				}
 #endif
 				break;
 			default:
 				if (sscanf(p, ",%u:%11d", &nameid2, &value) != 2) {
-					ShowError("npc_parse_shop: Invalid item definition in file '%s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer, start - buffer), w1, w2, w3, w4);
+					ShowError("npc_parse_shop: Invalid item definition in file '%.*s', line '%d'. Ignoring the rest of the line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
 					skip = true;
 				}
 				break;
@@ -4105,7 +4105,7 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 		std::shared_ptr<item_data> id = item_db.find(nameid2);
 
 		if( id == nullptr ) {
-			ShowWarning("npc_parse_shop: Invalid sell item in file '%s', line '%d' (id '%u').\n", filepath, strline(buffer,start-buffer), nameid2);
+			ShowWarning("npc_parse_shop: Invalid sell item in file '%.*s', line '%d' (id '%u').\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), nameid2);
 			p = strchr(p+1,',');
 			continue;
 		}
@@ -4114,16 +4114,16 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 			else value = 0; // Cashshop doesn't have a "buy price" in the item_db
 		}
 		if (value == 0 && (type == NPCTYPE_SHOP || type == NPCTYPE_MARKETSHOP)) { // NPC selling items for free!
-			ShowWarning("npc_parse_shop: Item %s [%u] is being sold for FREE in file '%s', line '%d'.\n",
-				id->name.c_str(), nameid2, filepath, strline(buffer,start-buffer));
+			ShowWarning("npc_parse_shop: Item %s [%u] is being sold for FREE in file '%.*s', line '%d'.\n",
+				id->name.c_str(), nameid2, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
 		}
 		if( ( type == NPCTYPE_SHOP || type == NPCTYPE_MARKETSHOP ) && value*0.75 < id->value_sell*1.24 ) { // Exploit possible: you can buy and sell back with profit
-			ShowWarning("npc_parse_shop: Item %s [%u] discounted buying price (%d->%d) is less than overcharged selling price (%d->%d) at file '%s', line '%d'.\n",
-				id->name.c_str(), nameid2, value, (int)(value*0.75), id->value_sell, (int)(id->value_sell*1.24), filepath, strline(buffer,start-buffer));
+			ShowWarning("npc_parse_shop: Item %s [%u] discounted buying price (%d->%d) is less than overcharged selling price (%d->%d) at file '%.*s', line '%d'.\n",
+				id->name.c_str(), nameid2, value, (int)(value*0.75), id->value_sell, (int)(id->value_sell*1.24), (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
 		}
 		if (type == NPCTYPE_MARKETSHOP && qty < -1) {
-			ShowWarning("npc_parse_shop: Item %s [%u] is stocked with invalid value %hd, changed to unlimited (-1). File '%s', line '%d'.\n",
-				id->name.c_str(), nameid2, qty, filepath, strline(buffer,start-buffer));
+			ShowWarning("npc_parse_shop: Item %s [%u] is stocked with invalid value %hd, changed to unlimited (-1). file '%.*s', line '%d'.\n",
+				id->name.c_str(), nameid2, qty, (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
 			qty = -1;
 		}
 		//for logs filters, atcommands and iteminfo script command
@@ -4157,10 +4157,10 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 		p = strchr(p+1,',');
 	}
 	if( nd->u.shop.count == 0 ) {
-		ShowWarning("npc_parse_shop: Ignoring empty shop in file '%s', line '%d'.\n", filepath, strline(buffer,start-buffer));
+		ShowWarning("npc_parse_shop: Ignoring empty shop in file '%.*s', line '%d'.\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()));
 		nd->~npc_data();
 		aFree(nd);
-		return strchr(start,'\n');// continue
+		return strchr(start.data(),'\n');// continue
 	}
 
 	if( type == NPCTYPE_ITEMSHOP ){
@@ -4173,8 +4173,8 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 
 	nd->u.shop.discount = is_discount > 0;
 
-	npc_parsename(nd, w3, start, buffer, filepath);
-	nd->class_ = m == -1 ? JT_FAKENPC : npc_parseview(w4, start, buffer, filepath);
+	npc_parsename(nd, w3, start.data(), buffer.get(), filepath.data());
+	nd->class_ = m == -1 ? JT_FAKENPC : npc_parseview(w4, start.data(), buffer.get(), filepath.data());
 	nd->speed = DEFAULT_NPC_WALK_SPEED;
 
 	++npc_shop;
@@ -4192,7 +4192,7 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 	{// normal shop npc
 		map_addnpc(m,nd);
 		if(map_addblock(&nd->bl))
-			return strchr(start,'\n');
+			return strchr(start.data(),'\n');
 		status_change_init(&nd->bl);
 		unit_dataset(&nd->bl);
 		nd->ud.dir = (uint8)dir;
@@ -4206,7 +4206,7 @@ static const char* npc_parse_shop(char* w1, char* w2, char* w3, char* w4, const 
 		map_addiddb(&nd->bl);
 	}
 	strdb_put(npcname_db, nd->exname, nd);
-	return strchr(start,'\n');// continue
+	return strchr(start.data(),'\n');// continue
 }
 
 /** [Cydh]
@@ -5749,7 +5749,7 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 		if ((strncasecmp(w2, "warp", 4) == 0 || strncasecmp(w2, "warp2", 5) == 0) && count > 3)
 			p = npc_parse_warp(w1,w2,w3,w4, p, buffer, filepath);
 		else if ((!strcasecmp(w2,"shop") || !strcasecmp(w2,"cashshop") || !strcasecmp(w2,"itemshop") || !strcasecmp(w2,"pointshop") || !strcasecmp(w2,"marketshop") ) && count > 3)
-			p = npc_parse_shop(w1,w2,w3,w4, p, buffer.get(), filepath.data());
+			p = npc_parse_shop(w1,w2,w3,w4, p, buffer, filepath);
 		else if (has_script) {
 			if (strcasecmp(w1,"function") == 0) {
 				if (strcasecmp(w2,"script") == 0)
