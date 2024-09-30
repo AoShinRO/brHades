@@ -4489,7 +4489,7 @@ static inline const char* npc_parse_script(char* w1, char* w2, char* w3, char* w
 /// shop/cashshop/npc: <map name>,<x>,<y>,<facing>%TAB%duplicate(<name of target>)%TAB%<NPC Name>%TAB%<sprite id>
 /// npc: -%TAB%duplicate(<name of target>)%TAB%<NPC Name>%TAB%<sprite id>,<triggerX>,<triggerY>
 /// npc: <map name>,<x>,<y>,<facing>%TAB%duplicate(<name of target>)%TAB%<NPC Name>%TAB%<sprite id>,<triggerX>,<triggerY>
-const char* npc_parse_duplicate( char* w1, char* w2, char* w3, char* w4, const char* start, const char* buffer, const char* filepath, map_session_data* owner = nullptr ){
+static inline const char* npc_parse_duplicate( char* w1, char* w2, char* w3, char* w4, std::string_view start, std::unique_ptr<char[]>& buffer, std::string_view& filepath, map_session_data* owner = nullptr ){
 	short x, y, m, xs = -1, ys = -1;
 	int16 dir;
 	char srcname[128];
@@ -4502,20 +4502,20 @@ const char* npc_parse_duplicate( char* w1, char* w2, char* w3, char* w4, const c
 	struct npc_data* nd;
 	struct npc_data* dnd;
 
-	end = strchr(start,'\n');
+	end = strchr(start.data(),'\n');
 	length = strlen(w2);
 
 	// get the npc being duplicated
 	if( w2[length-1] != ')' || length <= 11 || length-11 >= sizeof(srcname) )
 	{// does not match 'duplicate(%127s)', name is empty or too long
-		ShowError("npc_parse_script: bad duplicate name in file '%s', line '%d' : %s\n", filepath, strline(buffer,start-buffer), w2);
+		ShowError("npc_parse_script: bad duplicate name in file '%.*s', line '%.*s' : %s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w2);
 		return end;// next line, try to continue
 	}
 	safestrncpy(srcname, w2+10, length-10);
 
 	dnd = npc_name2id(srcname);
 	if( dnd == nullptr) {
-		ShowError("npc_parse_script: original npc not found for duplicate in file '%s', line '%d' : %s\n", filepath, strline(buffer,start-buffer), srcname);
+		ShowError("npc_parse_script: original npc not found for duplicate in file '%.*s', line '%d' : %s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), srcname);
 		return end;// next line, try to continue
 	}
 	src_id = dnd->src_id ? dnd->src_id : dnd->bl.id;
@@ -4529,7 +4529,7 @@ const char* npc_parse_duplicate( char* w1, char* w2, char* w3, char* w4, const c
 		char mapname[MAP_NAME_LENGTH_EXT];
 
 		if( sscanf(w1, "%15[^,],%6hd,%6hd,%4hd", mapname, &x, &y, &dir) != 4 ) { // <map name>,<x>,<y>,<facing>
-			ShowError("npc_parse_duplicate: Invalid placement format for duplicate in file '%s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+			ShowError("npc_parse_duplicate: Invalid placement format for duplicate in file '%.*s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
 			return end;// next line, try to continue
 		}
 		m = map_mapname2mapid(mapname);
@@ -4538,19 +4538,19 @@ const char* npc_parse_duplicate( char* w1, char* w2, char* w3, char* w4, const c
 	struct map_data *mapdata = map_getmapdata(m);
 
 	if( m != -1 && ( x < 0 || x >= mapdata->xs || y < 0 || y >= mapdata->ys ) ) {
-		ShowError("npc_parse_duplicate: coordinates %d/%d are out of bounds in map %s(%dx%d), in file '%s', line '%d'\n", x, y, mapdata->name, mapdata->xs, mapdata->ys,filepath,strline(buffer,start-buffer));
+		ShowError("npc_parse_duplicate: coordinates %d/%d are out of bounds in map %s(%dx%d), in file '%.*s', line '%d'\n", x, y, mapdata->name, mapdata->xs, mapdata->ys,(int)filepath.size(), filepath.data(),strline(buffer.get(),start.data()-buffer.get()));
 	}
 
 	if( type == NPCTYPE_WARP && sscanf(w4, "%6hd,%6hd", &xs, &ys) == 2 );// <spanx>,<spany>
 	else if( type == NPCTYPE_SCRIPT && sscanf(w4, "%*[^,],%6hd,%6hd", &xs, &ys) == 2);// <sprite id>,<triggerX>,<triggerY>
 	else if( type == NPCTYPE_WARP ) {
-		ShowError("npc_parse_duplicate: Invalid span format for duplicate warp in file '%s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", filepath, strline(buffer,start-buffer), w1, w2, w3, w4);
+		ShowError("npc_parse_duplicate: Invalid span format for duplicate warp in file '%.*s', line '%d'. Skipping line...\n * w1=%s\n * w2=%s\n * w3=%s\n * w4=%s\n", (int)filepath.size(), filepath.data(), strline(buffer.get(),start.data()-buffer.get()), w1, w2, w3, w4);
 		return end;// next line, try to continue
 	}
 
 	nd = npc_create_npc(m, x, y);
-	npc_parsename(nd, w3, start, buffer, filepath);
-	nd->class_ = m == -1 ? JT_FAKENPC : npc_parseview(w4, start, buffer, filepath);
+	npc_parsename(nd, w3, start.data(), buffer.get(), filepath.data());
+	nd->class_ = m == -1 ? JT_FAKENPC : npc_parseview(w4, start.data(), buffer.get(), filepath.data());
 	nd->speed = DEFAULT_NPC_WALK_SPEED;
 	nd->src_id = src_id;
 	nd->bl.type = BL_NPC;
@@ -4631,13 +4631,12 @@ const char* npc_parse_duplicate( char* w1, char* w2, char* w3, char* w4, const c
 	// Loop through labels to export them as necessary
 	for (i = 0; i < nd->u.scr.label_list_num; i++) {
 		if (npc_event_export(nd, i)) {
-			ShowWarning("npc_parse_duplicate : duplicate event %s::%s (%s)\n",
-			             nd->exname, nd->u.scr.label_list[i].name, filepath);
+			ShowWarning("npc_parse_duplicate : duplicate event %s::%s ('%.*s')\n", nd->exname, nd->u.scr.label_list[i].name, (int)filepath.size(), filepath.data());
 		}
 		npc_timerevent_export(nd, i);
 	}
 
-	if(!strcmp(filepath,"INSTANCING")) //Instance NPCs will use this for commands
+	if(filepath == "INSTANCING") //Instance NPCs will use this for commands
 		nd->instance_id = mapdata->instance_id;
 
 	nd->u.scr.timerid = INVALID_TIMER;
@@ -4712,6 +4711,9 @@ int npc_duplicate4instance(struct npc_data *snd, int16 m) {
 	} else {
 		static char w1[128], w2[128], w3[128], w4[128];
 		const char* stat_buf = "- call from instancing subsystem -\n";
+		std::string_view mode = "INSTANCING";
+		std::unique_ptr<char[]> buffer = std::make_unique<char[]>(strlen(stat_buf) + 1); // +1 para o null terminator
+		strcpy(buffer.get(), stat_buf);
 
 		snprintf(w1, sizeof(w1), "%s,%d,%d,%d", mapdata->name, snd->bl.x, snd->bl.y, snd->ud.dir);
 		snprintf(w2, sizeof(w2), "duplicate(%s)", snd->exname);
@@ -4722,7 +4724,7 @@ int npc_duplicate4instance(struct npc_data *snd, int16 m) {
 		else
 			snprintf(w4, sizeof(w4), "%d", snd->class_);
 
-		npc_parse_duplicate(w1, w2, w3, w4, stat_buf, stat_buf, "INSTANCING");
+		npc_parse_duplicate(w1, w2, w3, w4, stat_buf, buffer, mode);
 	}
 
 	return 0;
@@ -5762,7 +5764,7 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 				p = npc_parse_script(w1,w2,w3,w4, p, buffer, filepath, linenum);
 		}
 		else if( int i = 0; ( sscanf( w2, "duplicate%n", &i ), ( i > 0 && w2[i] == '(' ) ) && count > 3 )
-			p = npc_parse_duplicate(w1,w2,w3,w4, p, buffer.get(), filepath.data());
+			p = npc_parse_duplicate(w1,w2,w3,w4, p, buffer, filepath);
 		else if( (strcmpi(w2,"monster") == 0 || strcmpi(w2,"boss_monster") == 0) && count > 3 )
 			p = npc_parse_mob(w1, w2, w3, w4, p, buffer, filepath, linenum);
 		else if( strcmpi(w2,"mapflag") == 0 && count >= 3 )
@@ -5822,8 +5824,11 @@ npc_data* npc_duplicate_npc( npc_data& nd, char name[NPC_NAME_LENGTH + 1], int16
 	}else{
 		snprintf( w4, sizeof( w4 ), "%d", class_ );
 	}
+	std::string_view mode = "DUPLICATE";
+	std::unique_ptr<char[]> buffer = std::make_unique<char[]>(strlen(stat_buf) + 1); // +1 para o null terminator
+	strcpy(buffer.get(), stat_buf);
 
-	npc_parse_duplicate( w1, w2, w3, w4, stat_buf, stat_buf, "DUPLICATE", owner ); //DUPLICATE means nothing for now.
+	npc_parse_duplicate( w1, w2, w3, w4, stat_buf, buffer, mode, owner ); //DUPLICATE means nothing for now.
 
 	npc_data* dnd = npc_name2id( exname );
 
