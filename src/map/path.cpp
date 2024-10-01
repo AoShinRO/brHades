@@ -43,12 +43,6 @@ public:
 		}
 	}
 
-	// Ensures that the heap has enough space for new elements
-	void ensure_capacity(size_t m, size_t n) {
-		size_t newsize = m > n ? m : n;
-		ensure(newsize);
-	}
-
 	// Returns the top value of the heap
 	path_node* peek() const {
 		return heap.front();
@@ -77,13 +71,13 @@ public:
 	
 	// Clears the heap
 	void clear() {
+		if(heap.empty()) return; // Se não tiver nenhum elemento, não há nada a fazer
 		heap.clear();
 	}
 
 	/// Pushes path_node to the binary node_heap.
 	/// Ensures there is enough space in array to store new element.
 	void push_node(path_node* node) {
-		ensure_capacity(256, length() + 1); 
 		push(*node); 
 	}
 
@@ -184,11 +178,11 @@ static inline double euclidean_distance(char dx, char dy) {
 /// @}
 
 void do_init_path(){
-	heap.clear();	// [fwi]: BHEAP_STRUCT_VAR already initialized the heap, this is rudendant & just for code-conformance/readability
+	heap.clear();	// already initialized the heap, this is rudendant & just for code-conformance/readability
 }//
 
 void do_final_path(){
-	heap.clear();
+	heap.clear();	// already clearing the heap, this is rudendant & just for code readability
 }//
 
 
@@ -400,6 +394,7 @@ static bool aegis_pathfinding(walkpath_data& wpd, int16 m, uint16 x0, uint16 y0,
 	std::vector<path_node> tp(MAX_WALKPATH * MAX_WALKPATH); // fix C6262.
 
 	heap.clear();
+	heap.ensure(MAX_WALKPATH * MAX_WALKPATH); // Aloca a memoria completa para nao precisar realocar toda hora
 
 	// Start node
 	i = calc_index(x0, y0);
