@@ -343,7 +343,7 @@ static unsigned char add_path(BinaryHeap& heap, std::vector<path_node>& tp, uint
 	}
 
 	if (tp[i].x || tp[i].y){ // Index is already taken; see `tp` array FIXME for details
-		ShowDebug("heap_update_node:Index is already taken \n"); // isso parou de aparecer quando comecei a usar um binaryheap por walkpath, acho  que as colisoes aconteciam por isso
+		//ShowDebug("heap_update_node:Index is already taken \n"); // isso parou de aparecer quando comecei a usar um binaryheap por walkpath, acho  que as colisoes aconteciam por isso
 		return 1;
 	}
 
