@@ -30,10 +30,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        gcc: ['10']
         mode: ['PRE', 'RE']
-        include:
-          - language: c-cpp
-            build-mode: autobuild
 
     steps:
     - name: Checkout repository
@@ -42,8 +40,8 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
       with:
-        languages: ${{ matrix.language }}
-        build-mode: ${{ matrix.build-mode }}
+        languages: c-cpp
+        queries: +security-and-quality
 
     - name: Variable Parsing - PRE
       if: ${{ matrix.mode == 'PRE' }}
@@ -54,18 +52,31 @@ jobs:
       run: |
         echo "PRERE=no" >> $GITHUB_ENV
 
-    - if: matrix.build-mode == 'manual'
-      shell: bash
+    - name: Update & Install dependencies
       run: |
-        echo 'If you are using a "manual" build mode for one or more of the' \
-          'languages you are analyzing, replace this with the commands to build' \
-          'your code, for example:'
-        echo '  make bootstrap'
-        echo '  make release'
-        exit 1
+        sudo apt update
+        sudo apt install zlib1g-dev libpcre3-dev gcc-${{ matrix.gcc }} g++-${{ matrix.gcc }}
+
+    - name: Check endianess
+      run: lscpu | grep "Byte Order"
+
+    - name: Ensure configure has execution permissions
+      run: chmod +x ./configure
+
+    - name: Command - configure
+      env:
+          CONFIGURE_FLAGS: "CC=gcc-${{ matrix.gcc }} CXX=g++-${{ matrix.gcc }} --enable-buildbot=yes"
+      run: ./configure $CONFIGURE_FLAGS CXXFLAGS="-std=c++20"
+
+    - name: Show config.log for debugging
+      run: cat config.log || true
+      
+    - name: Command - make clean
+      run: make clean
+
+    - name: Command - make all
+      run: make all
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
-      with:
-        category: "/language:${{matrix.language}}"
 
