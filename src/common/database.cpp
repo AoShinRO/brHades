@@ -19,7 +19,7 @@ bool YamlDatabase::nodeExists( const ryml::NodeRef& node, const std::string_view
 bool YamlDatabase::nodesExist( const ryml::NodeRef& node, std::initializer_list<const std::string> names ){
 	bool missing = false;
 
-	for( const std::string_view& name : names ){
+	for( const std::string_view name : names ){
 		if( !this->nodeExists( node, name ) ){
 			ShowError( "Missing mandatory node \"'%.*s'\".\n", (int)name.size(), name.data() );
 			missing = true;
