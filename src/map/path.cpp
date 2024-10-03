@@ -7,6 +7,8 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <functional>
+#include <iterator>
 
 #include <common/cbasetypes.hpp>
 #include <common/db.hpp>
@@ -19,9 +21,107 @@
 #include "map.hpp"
 
 /// Binary heap of path nodes
-BHEAP_STRUCT_DECL(node_heap, struct path_node*);
-static BHEAP_STRUCT_VAR(node_heap, heap);	// use static heap for all path calculations
-												// it get's initialized in do_init_path, freed in do_final_path.
+/// c++ A*
+
+class BinaryHeap {
+public:
+	std::vector<path_node*> heap;
+
+	// Returns the length of the heap
+	size_t length() const {
+		return heap.size();
+	}
+	
+	// Returns the capacity of the heap
+	size_t capacity() const {
+		return heap.capacity();
+	}
+
+	void ensure(size_t n) {
+		if (capacity() < n) {
+			heap.reserve(n); // Reservar espaço adicional, como especificado por 'step'
+		}
+	}
+
+	// Returns the top value of the heap
+	path_node* peek() const {
+		return heap.front();
+	}
+	
+	// Inserts a value in the heap and restores the heap property
+	void push(path_node& val) {
+		heap.push_back(&val);
+		size_t i = heap.size() - 1;
+		siftDown(0, i);
+	}
+	
+	// Removes the top value of the heap and restores the heap property
+	void pop() {
+		heap.front() = heap.back();
+		heap.pop_back();
+		if (heap.empty()) return;  // Se não restar nenhum elemento, não há mais nada a fazer
+		siftUp(0);
+	}
+	
+	// Updates the heap after modifying an element
+	void update(size_t idx) {
+		siftDown(0, idx);
+		siftUp(idx);
+	}
+	
+	// Clears the heap
+	void clear() {
+		if(heap.empty()) return; // Se não tiver nenhum elemento, não há nada a fazer
+		heap.clear();
+	}
+
+	/// Pushes path_node to the binary node_heap.
+	/// Ensures there is enough space in array to store new element.
+	void push_node(path_node* node) {
+		push(*node); 
+	}
+
+	/// Updates path_node in the binary node_heap.
+	int update_node(path_node& node)
+	{
+		auto it = std::find(heap.begin(), heap.end(), &node);
+		if (it == heap.end()) {
+			return 1;
+		}
+		size_t i = std::distance(heap.begin(), it);
+		update(i);
+		return 0;
+	}
+
+	std::function<int(const path_node*, const path_node*)> node_min_to_comp = [](const path_node* i, const path_node* j) {
+		return i->f_cost - j->f_cost;
+	};
+
+	// Helper function to sift down
+	void siftDown(size_t startIdx, size_t idx) {
+		while (idx > startIdx) {
+			size_t parent = (idx - 1) / 2;
+			if (node_min_to_comp(heap[parent], heap[idx]) <= 0) break;
+			std::swap(heap[parent], heap[idx]);
+			idx = parent;
+		}
+	}
+
+	// Helper function to sift up
+	void siftUp(size_t idx) {
+		size_t leftChild = idx * 2 + 1;
+		while (leftChild < heap.size()) {
+			size_t rightChild = idx * 2 + 2;
+			size_t swapChild = (rightChild < heap.size() && node_min_to_comp(heap[leftChild], heap[rightChild]) > 0) ? rightChild : leftChild;
+			if (node_min_to_comp(heap[idx], heap[swapChild]) <= 0) break;
+			std::swap(heap[idx], heap[swapChild]);
+			idx = swapChild;
+			leftChild = idx * 2 + 1;
+		}
+	}
+};
+
+static BinaryHeap heap; 	// use static heap for all path calculations
 
 #define calc_index(x,y) (((x)+(y)*MAX_WALKPATH) & (MAX_WALKPATH*MAX_WALKPATH-1))
 
@@ -78,11 +178,11 @@ static inline double euclidean_distance(char dx, char dy) {
 /// @}
 
 void do_init_path(){
-	BHEAP_INIT(heap);	// [fwi]: BHEAP_STRUCT_VAR already initialized the heap, this is rudendant & just for code-conformance/readability
+	heap.clear();	// already initialized the heap, this is rudendant & just for code-conformance/readability
 }//
 
 void do_final_path(){
-	BHEAP_CLEAR(heap);
+	heap.clear();	// already clearing the heap, this is rudendant & just for code readability
 }//
 
 
@@ -219,30 +319,6 @@ static inline unsigned short heuristic(uint16 x0,uint16 y0,uint16 x1,uint16 y1) 
 	return MOVE_COST * manhattan_distance((x1)-(x0), (y1)-(y0));
 }
 
-/// Pushes path_node to the binary node_heap.
-/// Ensures there is enough space in array to store new element.
-
-static void heap_push_node(path_node* node)
-{
-#ifndef __clang_analyzer__ // TODO: Figure out why clang's static analyzer doesn't like this
-	BHEAP_ENSURE2(heap, 1, 256, struct path_node **);
-	BHEAP_PUSH2(heap, node, NODE_MINTOPCMP);
-#endif // __clang_analyzer__
-}
-
-/// Updates path_node in the binary node_heap.
-static int heap_update_node(path_node& node)
-{
-	int i;
-	ARR_FIND(0, BHEAP_LENGTH(heap), i, BHEAP_DATA(heap)[i] == &node);
-	if (i == BHEAP_LENGTH(heap)) {
-		ShowError("heap_update_node: node not found\n");
-		return 1;
-	}
-	BHEAP_UPDATE(heap, i, NODE_MINTOPCMP);
-	return 0;
-}
-
 /// Path_node processing in A* pathfinding.
 /// Adds new node to heap and updates/re-adds old ones if necessary.
 static unsigned char add_path(std::vector<path_node>& tp, uint16 x, uint16 y, unsigned short g_cost, path_node& parent, unsigned short h_cost)
@@ -256,9 +332,10 @@ static unsigned char add_path(std::vector<path_node>& tp, uint16 x, uint16 y, un
 			tp[i].parent = &parent;
 			tp[i].f_cost = g_cost + h_cost;
 			if (tp[i].flag == SET_CLOSED) {
-				heap_push_node(&tp[i]); // Put it in open set again
+				heap.push_node(&tp[i]); // Put it in open set again
 			}
-			else if (heap_update_node(tp[i])) {
+			else if (heap.update_node(tp[i])) {
+				ShowError("heap_update_node: node not found\n");
 				return 1;
 			}
 			tp[i].flag = SET_OPEN;
@@ -276,7 +353,7 @@ static unsigned char add_path(std::vector<path_node>& tp, uint16 x, uint16 y, un
 	tp[i].parent = &parent;
 	tp[i].f_cost = g_cost + h_cost;
 	tp[i].flag = SET_OPEN;
-	heap_push_node(&tp[i]);
+	heap.push_node(&tp[i]);
 	return 0;
 }
 ///@}
@@ -316,7 +393,8 @@ static bool aegis_pathfinding(walkpath_data& wpd, int16 m, uint16 x0, uint16 y0,
 	// static struct path_node tp[MAX_WALKPATH * MAX_WALKPATH]; < old
 	std::vector<path_node> tp(MAX_WALKPATH * MAX_WALKPATH); // fix C6262.
 
-	BHEAP_RESET(heap);
+	heap.clear();
+	heap.ensure(MAX_WALKPATH * MAX_WALKPATH); // Aloca a memoria completa para nao precisar realocar toda hora
 
 	// Start node
 	i = calc_index(x0, y0);
@@ -327,18 +405,18 @@ static bool aegis_pathfinding(walkpath_data& wpd, int16 m, uint16 x0, uint16 y0,
 	tp[i].f_cost = heuristic(x0, y0, x1, y1);
 	tp[i].flag   = SET_OPEN;
 
-	heap_push_node(&tp[i]); // Put start node to 'open' set
+	heap.push_node(&tp[i]); // Put start node to 'open' set
 
 	for(;;) {
 
 		allowed_dirs = 0;
 
-		if (BHEAP_LENGTH(heap) == 0) {
+		if (heap.length() == 0) {
 			return false;
 		}
 
-		current = BHEAP_PEEK(heap); // Look for the lowest f_cost node in the 'open' set
-		BHEAP_POP2(heap, NODE_MINTOPCMP); // Remove it from 'open' set
+		current = heap.peek(); // Look for the lowest f_cost node in the 'open' set
+		heap.pop(); // Remove it from 'open' set
 
 		x      = current->x;
 		y      = current->y;
