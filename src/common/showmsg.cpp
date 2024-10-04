@@ -692,8 +692,9 @@ int _vShowMessage(enum msg_type flag, const char *string, va_list ap)
 		if( (log = fopen(console_log_filepath, "a+")) ) {
 			char timestring[255];
 			time_t curtime;
+			struct tm result;
 			time(&curtime);
-			strftime(timestring, 254, "%m/%d/%Y %H:%M:%S", localtime(&curtime));
+			strftime(timestring, 254, "%m/%d/%Y %H:%M:%S", localtime_r(&curtime, &result));
 			fprintf(log,"(%s) [ %s ] : ",
 				timestring,
 				flag == MSG_WARNING ? "Warning" :
