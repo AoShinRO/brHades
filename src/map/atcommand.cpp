@@ -5222,16 +5222,16 @@ ACMD_FUNC(servertime)
 {
 	const struct TimerData * timer_data;
 	time_t time_server;  // variable for number of seconds (used with time() function)
-	struct tm *datetime; // variable for time in structure ->tm_mday, ->tm_sec, ...
+	struct tm datetime; // variable for time in structure ->tm_mday, ->tm_sec, ...
 	char temp[CHAT_SIZE_MAX];
 	nullpo_retr(-1, sd);
 
 	memset(temp, '\0', sizeof(temp));
 
 	time(&time_server);  // get time in seconds since 1/1/1970
-	datetime = localtime(&time_server); // convert seconds in structure
+	localtime_r(&time_server, &datetime); // convert seconds in structure
 	// like sprintf, but only for date/time (Sunday, November 02 2003 15:12:52)
-	strftime(temp, sizeof(temp)-1, msg_txt(sd,230), datetime); // Server time (normal time): %A, %B %d %Y %X.
+	strftime(temp, sizeof(temp)-1, msg_txt(sd,230), &datetime); // Server time (normal time): %A, %B %d %Y %X.
 	clif_displaymessage(fd, temp);
 
 	if (battle_config.night_duration == 0 && battle_config.day_duration == 0) {
