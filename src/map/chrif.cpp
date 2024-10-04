@@ -1113,8 +1113,9 @@ int chrif_ban(int fd) {
 		time_t timestamp;
 		char tmpstr[256];
 		char strtime[25];
+		struct tm timeinfo;
 		timestamp = (time_t)RFIFOL(fd,7); // status or final date of a banishment
-		strftime(strtime, 24, "%d-%m-%Y %H:%M:%S", localtime(&timestamp));
+		strftime(strtime, 24, "%d-%m-%Y %H:%M:%S", localtime_r(&timestamp, &timeinfo));
 		safesnprintf(tmpstr,sizeof(tmpstr),msg_txt(sd,423),res==2?"char":"account",strtime); //"Your %s has been banished until %s "
 		clif_displaymessage(sd->fd, tmpstr);
 	}
