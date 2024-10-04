@@ -688,23 +688,28 @@ int _vShowMessage(enum msg_type flag, const char *string, va_list ap)
 		( flag == MSG_WARNING && console_msg_log&1 ) ||
 		( ( flag == MSG_ERROR || flag == MSG_SQL ) && console_msg_log&2 ) ||
 		( flag == MSG_DEBUG && console_msg_log&4 ) ) {//[Ind]
-		FILE *log = nullptr;
-		if( (log = fopen(console_log_filepath, "a+")) ) {
-			char timestring[255];
-			time_t curtime;
-			time(&curtime);
-			strftime(timestring, 254, "%m/%d/%Y %H:%M:%S", localtime(&curtime));
-			fprintf(log,"(%s) [ %s ] : ",
-				timestring,
-				flag == MSG_WARNING ? "Warning" :
-				flag == MSG_ERROR ? "Error" :
-				flag == MSG_SQL ? "SQL Error" :
-				flag == MSG_DEBUG ? "Debug" :
-				"Unknown");
-			va_copy(apcopy, ap);
-			vfprintf(log,string,apcopy);
-			va_end(apcopy);
-			fclose(log);
+		int log_fd = open(console_log_filepath, O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
+		if (log_fd != -1) {
+			FILE *log = fdopen(log_fd, "a");
+			if (log) {
+				char timestring[255];
+				time_t curtime;
+				time(&curtime);
+				strftime(timestring, 254, "%m/%d/%Y %H:%M:%S", localtime(&curtime));
+				fprintf(log,"(%s) [ %s ] : ",
+					timestring,
+					flag == MSG_WARNING ? "Warning" :
+					flag == MSG_ERROR ? "Error" :
+					flag == MSG_SQL ? "SQL Error" :
+					flag == MSG_DEBUG ? "Debug" :
+					"Unknown");
+				va_copy(apcopy, ap);
+				vfprintf(log,string,apcopy);
+				va_end(apcopy);
+				fclose(log);
+			} else {
+				close(log_fd);
+			}
 		}
 	}
 	if(
