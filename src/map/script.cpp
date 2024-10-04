@@ -10723,7 +10723,7 @@ BUILDIN_FUNC(gettimetick)	/* Asgard Version */
 {
 	int type;
 	time_t timer;
-	struct tm *t;
+	struct tm t;
 
 	type=script_getnum(st,2);
 
@@ -10736,8 +10736,8 @@ BUILDIN_FUNC(gettimetick)	/* Asgard Version */
 	case 1:
 		//type 1:(Second Ticks: 0-86399, 00:00:00-23:59:59)
 		time(&timer);
-		t=localtime(&timer);
-		script_pushint(st,((t->tm_hour)*3600+(t->tm_min)*60+t->tm_sec));
+		localtime_r(&timer, &t);
+		script_pushint(st,((t.tm_hour)*3600+(t.tm_min)*60+t.tm_sec));
 		break;
 	case 0:
 	default:
