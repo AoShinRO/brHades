@@ -565,11 +565,11 @@ static void warp_get_suggestions(map_session_data* sd, const char *name) {
 
 	// build the suggestion string
 	strcpy(buffer, msg_txt(sd, 205)); // Maybe you meant:
-	strcat(buffer, "\n");
+	strncat(buffer, "\n", CHAT_SIZE_MAX - strlen(buffer) - 1);
 
 	for( const char* suggestion : suggestions ){
-		strcat(buffer, suggestion);
-		strcat(buffer, " ");
+		strncat(buffer, suggestion, CHAT_SIZE_MAX - strlen(buffer) - 1);
+		strncat(buffer, " ", CHAT_SIZE_MAX - strlen(buffer) - 1);
 	}
 
 	clif_displaymessage(sd->fd, buffer);
