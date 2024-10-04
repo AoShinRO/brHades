@@ -560,8 +560,9 @@ static time_t quest_time(std::shared_ptr<s_quest_db> qi)
 		return time(nullptr) + qi->time;
 	else if (qi->time_at) {
 		time_t t = time(nullptr);
-		struct tm *lt = localtime(&t);
-		uint32 time_today = lt->tm_hour * 3600 + lt->tm_min * 60 + lt->tm_sec;
+		struct tm lt;
+		localtime_r(&t, &lt);
+		uint32 time_today = lt.tm_hour * 3600 + lt.tm_min * 60 + lt.tm_sec;
 
 		int32 day_shift = 0;
 
