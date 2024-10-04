@@ -14791,13 +14791,13 @@ void pc_show_version(map_session_data *sd) {
 	char buf[CHAT_SIZE_MAX];
 
 	if( svn[0] != UNKNOWN_VERSION )
-		sprintf(buf,msg_txt(sd,1295),"SVN: r",svn); //rAthena Version SVN: r%s
+		snprintf(buf, sizeof(buf), msg_txt(sd,1295), "SVN: r", svn); //rAthena Version SVN: r%s
 	else {
 		const char* git = get_git_hash();
 		if( git[0] != UNKNOWN_VERSION )
-			sprintf(buf,msg_txt(sd,1295),"Git Hash: ",git); //rAthena Version Git Hash: %s
+			snprintf(buf, sizeof(buf), msg_txt(sd,1295), "Git Hash: ", git); //rAthena Version Git Hash: %s
 		else
-			sprintf(buf,"%s",msg_txt(sd,1296)); //Cannot determine SVN/Git version.
+			snprintf(buf, sizeof(buf), "%s", msg_txt(sd,1296)); //Cannot determine SVN/Git version.
 	}
 	clif_displaymessage(sd->fd,buf);
 }
