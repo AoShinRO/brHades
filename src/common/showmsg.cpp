@@ -721,7 +721,8 @@ int _vShowMessage(enum msg_type flag, const char *string, va_list ap)
 	if (timestamp_format[0] && flag != MSG_NONE)
 	{	//Display time format. [Skotlex]
 		time_t t = time(nullptr);
-		strftime(prefix, 80, timestamp_format, localtime(&t));
+		struct tm t_local;
+		strftime(prefix, 80, timestamp_format, localtime_r(&t, &t_local));
 	} else prefix[0]='\0';
 
 	switch (flag) {
