@@ -532,13 +532,13 @@ static void memmgr_log (char *buf)
 	{
 		const char* version;
 		time_t raw;
-		struct tm* t;
+		struct tm t;
 
 		log_fp = fopen(memmer_logfile,"at");
 		if (!log_fp) log_fp = stdout;
 
 		time(&raw);
-		t = localtime(&raw);
+		localtime_r(&raw, &t);
 
 		if( ( version = get_git_hash() ) && version[0] != UNKNOWN_VERSION ){
 			fprintf(log_fp, "\nMemory manager: Memory leaks found at %d/%02d/%02d %02dh%02dm%02ds (Git Hash %s).\n", (t->tm_year+1900), (t->tm_mon+1), t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec, version );
