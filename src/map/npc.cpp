@@ -2151,8 +2151,9 @@ void run_tomb(map_session_data* sd, struct npc_data* nd)
 {
 	char buffer[200];
 	char time[10];
+	struct tm tm;
 
-	strftime(time, sizeof(time), "%H:%M", localtime(&nd->u.tomb.kill_time));
+	strftime(time, sizeof(time), "%H:%M", localtime_r(&nd->u.tomb.kill_time, &tm));
 
 	// TODO: Find exact color?
 	snprintf( buffer, sizeof( buffer ), msg_txt( sd, 657 ), nd->u.tomb.md->db->name.c_str() ); // [ ^EE0000%s^000000 ]
