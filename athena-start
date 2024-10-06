@@ -9,8 +9,8 @@ LOG_DIR="./log"
 
 print_start() {
 	#    more << EOF
-	echo "rAthena is starting..."
-	echo "            (c) 2021 rAthena Project"
+	echo "brhades is starting..."
+	echo "            (c) 2024 brhades Project"
 	echo ""
 	echo ""
 	echo "checking..."
@@ -108,7 +108,7 @@ case $1 in
 		print_start
 		check_files
 		echo "Check complete."
-		echo "Looks like a good, nice rAthena!"
+		echo "Looks like a good, nice brhades!"
 		if [ "$2" = "--enlog" ]; then
 		 ENLOG=1
 		 if [ ! -d "$LOG_DIR" ]; then mkdir -p $LOG_DIR; fi
@@ -120,19 +120,19 @@ case $1 in
 		do
 			start_serv $i $ENLOG
 		done
-		echo "rAthena was started."
+		echo "brhades was started."
 	;;
 	'watch')
 		if [ ! -d "$LOG_DIR" ]; then mkdir -p $LOG_DIR; fi
 		if [ -z $2 ]; then Restart_count=10; else Restart_count=$2; fi
 		if [ -z $3 ]; then Restart_sleep=3; else Restart_sleep=$3; fi
-		echo "Going to watch rAthena for restart_count = $Restart_count, restart_sleep = $Restart_sleep"
+		echo "Going to watch brhades for restart_count = $Restart_count, restart_sleep = $Restart_sleep"
 		for i in ${L_SRV} ${C_SRV} ${M_SRV} ${W_SRV}
 		do
 			start_serv $i 1
 		done
 		watch_serv $Restart_count $Restart_sleep
-		echo "Watching rAthena now."
+		echo "Watching brhades now."
 	;;
 	'stop')
 		for i in ${W_SRV} ${M_SRV} ${C_SRV} ${L_SRV}
