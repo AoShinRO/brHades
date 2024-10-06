@@ -276,13 +276,13 @@ int web_sql_init(void) {
 	ShowInfo("Conectando ao servidor Login DB.....\n");
 
 	if (SQL_ERROR == Sql_Connect(login_handle, login_server_id.c_str(), login_server_pw.c_str(), login_server_ip.c_str(), login_server_port, login_server_db.c_str())) {
-		ShowError("N„o foi possÌvel conectar com uname='%s',host='%s',porta='%hu',banco de dados='%s'\n",
+		ShowError("N√£o foi poss√≠vel conectar com uname='%s',host='%s',porta='%hu',banco de dados='%s'\n",
 			login_server_id.c_str(), login_server_ip.c_str(), login_server_port, login_server_db.c_str());
 		Sql_ShowDebug(login_handle);
 		Sql_Free(login_handle);
 		exit(EXIT_FAILURE);
 	}
-	ShowStatus("Conex„o bem-sucedida! (Conex„o do servidor de login)\n");
+	ShowStatus("Conex√£o bem-sucedida! (Conex√£o do servidor de login)\n");
 
 	if (!default_codepage.empty()) {
 		if (SQL_ERROR == Sql_SetEncoding(login_handle, default_codepage.c_str()))
@@ -293,13 +293,13 @@ int web_sql_init(void) {
 	ShowInfo("Conectando ao servidor Char DB.....\n");
 
 	if (SQL_ERROR == Sql_Connect(char_handle, char_server_id.c_str(), char_server_pw.c_str(), char_server_ip.c_str(), char_server_port, char_server_db.c_str())) {
-		ShowError("N„o foi possÌvel conectar com uname='%s',host='%s',porta='%hu',banco de dados='%s'\n",
+		ShowError("N√£o foi poss√≠vel conectar com uname='%s',host='%s',porta='%hu',banco de dados='%s'\n",
 			char_server_id.c_str(), char_server_ip.c_str(), char_server_port, char_server_db.c_str());
 		Sql_ShowDebug(char_handle);
 		Sql_Free(char_handle);
 		exit(EXIT_FAILURE);
 	}
-	ShowStatus("Conex„o bem-sucedida! (Conex„o do servidor Char)\n");
+	ShowStatus("Conex√£o bem-sucedida! (Conex√£o do servidor Char)\n");
 
 	if (!default_codepage.empty()) {
 		if (SQL_ERROR == Sql_SetEncoding(char_handle, default_codepage.c_str()))
@@ -310,13 +310,13 @@ int web_sql_init(void) {
 	ShowInfo("Conectando ao servidor Map DB.....\n");
 
 	if (SQL_ERROR == Sql_Connect(map_handle, map_server_id.c_str(), map_server_pw.c_str(), map_server_ip.c_str(), map_server_port, map_server_db.c_str())) {
-		ShowError("N„o foi possÌvel conectar com uname='%s',host='%s',porta='%hu',banco de dados='%s'\n",
+		ShowError("N√£o foi poss√≠vel conectar com uname='%s',host='%s',porta='%hu',banco de dados='%s'\n",
 			map_server_id.c_str(), map_server_ip.c_str(), map_server_port, map_server_db.c_str());
 		Sql_ShowDebug(map_handle);
 		Sql_Free(map_handle);
 		exit(EXIT_FAILURE);
 	}
-	ShowStatus("Conex„o bem-sucedida! (Conex„o do servidor de mapas)\n");
+	ShowStatus("Conex√£o bem-sucedida! (Conex√£o do servidor de mapas)\n");
 
 	if (!default_codepage.empty()) {
 		if (SQL_ERROR == Sql_SetEncoding(map_handle, default_codepage.c_str()))
@@ -327,13 +327,13 @@ int web_sql_init(void) {
 	ShowInfo("Conectando ao servidor Web DB.....\n");
 
 	if (SQL_ERROR == Sql_Connect(web_handle, web_server_id.c_str(), web_server_pw.c_str(), web_server_ip.c_str(), web_server_port, web_server_db.c_str())) {
-		ShowError("N„o foi possÌvel conectar com uname='%s',host='%s',porta='%hu',banco de dados='%s'\n",
+		ShowError("N√£o foi poss√≠vel conectar com uname='%s',host='%s',porta='%hu',banco de dados='%s'\n",
 			web_server_id.c_str(), web_server_ip.c_str(), web_server_port, web_server_db.c_str());
 		Sql_ShowDebug(web_handle);
 		Sql_Free(web_handle);
 		exit(EXIT_FAILURE);
 	}
-	ShowStatus("Conex„o bem-sucedida! (Conex„o com o servidor Web)\n");
+	ShowStatus("Conex√£o bem-sucedida! (Conex√£o com o servidor Web)\n");
 
 	if (!default_codepage.empty()) {
 		if (SQL_ERROR == Sql_SetEncoding(web_handle, default_codepage.c_str()))
@@ -346,16 +346,16 @@ int web_sql_init(void) {
 
 int web_sql_close(void)
 {
-	ShowStatus("Fechar conex„o de login com o banco de dados...\n");
+	ShowStatus("Fechar conex√£o de login com o banco de dados...\n");
 	Sql_Free(login_handle);
 	login_handle = nullptr;
-	ShowStatus("Fechar conex„o de banco de dados Char...\n");
+	ShowStatus("Fechar conex√£o de banco de dados Char...\n");
 	Sql_Free(char_handle);
 	char_handle = nullptr;
-	ShowStatus("Fechar conex„o de banco de dados Map...\n");
+	ShowStatus("Fechar conex√£o de banco de dados Map...\n");
 	Sql_Free(map_handle);
 	map_handle = nullptr;
-	ShowStatus("Fechar conex„o de banco de dados Web...\n");
+	ShowStatus("Fechar conex√£o de banco de dados Web...\n");
 	Sql_Free(web_handle);
 	web_handle = nullptr;
 
@@ -476,16 +476,16 @@ bool WebServer::initialize( int argc, char* argv[] ){
 
 		if (http_server->is_running())
 			break;
-		ShowDebug("Servidor web n„o est· em execuÁ„o, hibernando por 1 segundo.\n");
+		ShowDebug("Servidor web n√£o est√° em execu√ß√£o, hibernando por 1 segundo.\n");
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
 
 	if (!http_server->is_running()) {
-		ShowError("O servidor web n„o iniciou, parando.\n");
+		ShowError("O servidor web n√£o iniciou, parando.\n");
 		return false;
 	}
 
-	ShowStatus("O servidor web est· " CL_GREEN "pronto" CL_RESET " (o servidor est· escutando na porta %u).\n\n", web_config.web_port);
+	ShowStatus("O servidor web est√° " CL_GREEN "pronto" CL_RESET " (o servidor est√° escutando na porta %u).\n\n", web_config.web_port);
 	return true;
 #endif
 }
