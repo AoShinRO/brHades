@@ -5226,6 +5226,79 @@ int clif_damage(block_list& src, block_list& dst, t_tick tick, int sdelay, int d
 	return clif_calc_walkdelay(&dst, ddelay, type, damage+damage2, div);
 }
 
+/*==========================
+ RESTORE ANIMATION BY AOSHINHO
+============================*/
+void clif_parse_restore_animation(map_session_data* sd, block_list& target, uint16 skill_id, uint16 skill_lv)
+{
+#if PACKETVER >= 20181128
+
+#ifdef RENEWAL
+#ifndef PRENEWAL_ANIMATION
+	return;
+#endif
+#endif
+
+	nullpo_retv(sd);
+
+	short hit_count = 0;
+	switch (skill_id)
+	{
+#if PACKETVER >= 20191016
+	case GC_CROSSIMPACT:
+		hit_count = 6;
+		break;
+#endif
+	case AS_SONICBLOW:
+		hit_count = 8;
+		break;
+	case CG_ARROWVULCAN:
+		hit_count = 9;
+		break;
+	default:
+		break;
+	}
+	if(hit_count > 0){
+		bool exist = false;
+
+		if(!sd->animation.empty())
+		{
+			auto isEven = [target](const std::unique_ptr<e_skill_animation_restore>& p) { 
+				return p->get_targetid() == target.id; 
+			};
+			auto iter = std::find_if(sd->animation.begin(), sd->animation.end(), isEven);
+			if(iter == sd->animation.end())
+			{
+				if(!status_isdead(target)){
+					auto& it = *iter;
+					it->update_animation(hit_count);
+					exist = true;
+				}
+			}
+		}
+		if(!exist)
+			sd->animation.push_back(std::make_unique<e_skill_animation_restore>(sd, target, skill_id, skill_lv, hit_count));
+
+		if(!sd->animation.empty() && (sd->animation.back()->get_skillid() == 0))
+			sd->animation.pop_back();
+	}
+#endif
+}
+/// 08c8 <src ID>.L <dst ID>.L <server tick>.L <src speed>.L <dst speed>.L <damage>.L <IsSPDamage>.B <div>.W <type>.B <damage2>.L (ZC_NOTIFY_ACT3)
+/// yep sending damage action without damage&target
+void clif_hit_frame(block_list& bl, int motion)
+{
+	PACKET_ZC_NOTIFY_ACT p{};
+
+	p.packetType = HEADER_ZC_NOTIFY_ACT;
+	p.srcID = bl.id;
+	p.type = DMG_NORMAL;
+	p.div = 1;
+	p.srcSpeed = motion;
+	clif_send(&p, sizeof(p), &bl, AREA);
+
+}
+
 /*==========================================
  * src picks up dst
  *------------------------------------------*/
