@@ -73,6 +73,12 @@
 /// Leave this line to enable renewal calculation for increasing status/parameter points
 #define RENEWAL_STAT
 
+/// Pre-Renewal Animation
+/// (disable by commenting the line)
+///
+/// Leave this line commented to disable pre-rewewal animation from sonicblow, vulcan arrow, cross-impact in newer clients
+//#define PRENEWAL_ANIMATION
+
 #endif
 
 #endif /* CONFIG_RENEWAL_HPP */

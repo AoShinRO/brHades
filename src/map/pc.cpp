@@ -15886,6 +15886,50 @@ uint64 CaptchaDatabase::parseBodyNode(const ryml::NodeRef &node) {
 	return 1;
 }
 
+/* Animation Force Related */
+int e_skill_animation_restore::get_motion(map_session_data&sd,uint16 skill_id){
+	return std::clamp(mapedanimation[skill_id].max - ((mapedanimation[skill_id].max * sd.bonus.delayrate) / 100), mapedanimation[skill_id].min, mapedanimation[skill_id].max); //Kiel uncapped animation remove set min  to 0
+}
+int e_skill_animation_restore::adjust_delay(map_session_data&sd,uint16 skill_id){
+	return std::clamp(mapedanimation[skill_id].maxdelay - ((mapedanimation[skill_id].maxdelay * sd.bonus.delayrate) / 100), mapedanimation[skill_id].mindelay, mapedanimation[skill_id].maxdelay); //Kiel uncapped animation remove set min  to 0
+}
+TIMER_FUNC(pc_animation_force_timer){
+	map_session_data* sd = map_id2sd(id);
+	if (sd == nullptr || sd->animation.empty())
+		return 0;
+
+	auto isEven = [tid](const std::unique_ptr<e_skill_animation_restore>& p) { 
+		return p->get_tid() == tid; 
+	};
+	auto iter = std::find_if(sd->animation.begin(), sd->animation.end(), isEven);
+	if(iter == sd->animation.end())
+		return 0;
+
+	e_skill_animation_restore* it = iter->get();
+	if (DIFF_TICK(it->get_tid(), gettick()) > 0) {
+		clif_authfail_fd(sd->fd, 15);
+		ShowWarning("fail on animation timer sync from char id: %d \n", sd->status.char_id);
+	}
+	if(it->finished())
+	{
+		delete_timer(it->get_tid(),pc_animation_force_timer);
+		sd->animation.erase(iter);
+	} else {
+		struct block_list* target = map_id2bl(it->get_targetid());
+		uint8 dir = target != nullptr ? map_calc_dir(&sd->bl,target->x, target->y) : it->old_target_dir();
+		it->looktodir_ifnotlooking(sd->bl,dir);
+		if(target != nullptr && it->is_katar()){
+			if(!status_isdead(*target))
+			{
+				dir = unit_getdir(target);
+				unit_setdir(target,(dir < DIR_MAX ? dir + DIR_WEST : DIR_NORTH),true); //spin target
+			}
+		}
+		it->hit(sd->bl);
+	}
+	return 0;
+}
+
 /*==========================================
  * pc Init/Terminate
  *------------------------------------------*/
@@ -15933,7 +15977,7 @@ void do_init_pc(void) {
 	add_timer_func_list(pc_autotrade_timer, "pc_autotrade_timer");
 	add_timer_func_list(pc_on_expire_active, "pc_on_expire_active");
 	add_timer_func_list(pc_macro_detector_timeout, "pc_macro_detector_timeout");
-
+	add_timer_func_list(pc_animation_force_timer, "pc_animation_force_timer");
 	add_timer(gettick() + autosave_interval, pc_autosave, 0, 0);
 
 	// 0=day, 1=night [Yor]

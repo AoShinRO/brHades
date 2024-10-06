@@ -376,7 +376,11 @@ struct s_qi_display {
 	e_questinfo_types icon;
 	e_questinfo_markcolor color;
 };
-
+/*==========================
+ FORCE AMOTION ANIMATION BY AOSHINHO
+============================*/
+TIMER_FUNC(pc_animation_force_timer);
+class e_skill_animation_restore;
 class map_session_data {
 public:
 	struct block_list bl;
@@ -949,6 +953,9 @@ public:
 	s_macro_detect macro_detect;
 
 	std::vector<uint32> party_booking_requests;
+
+	std::vector<std::unique_ptr<e_skill_animation_restore>> animation;
+
 };
 
 extern struct eri *pc_sc_display_ers; /// Player's SC display table
@@ -1763,5 +1770,117 @@ void pc_reputation_generate();
 #if PACKETVER_MAIN_NUM >= 20170502 || PACKETVER_RE_NUM >= 20170419 || defined(PACKETVER_ZERO)
 #define PC_MAXMEMOPOINTS(sd) ((NORMAL_MEMOPOINTS + pc_readreg2(sd,EXT_MEMO_VAR) >= MAX_MEMOPOINTS)? MAX_MEMOPOINTS : NORMAL_MEMOPOINTS + pc_readreg2(sd,EXT_MEMO_VAR) )
 #endif
+
+struct e_animation_info{
+	int min;
+	int max;
+	int mindelay;
+	int maxdelay;
+};
+
+static std::unordered_map<uint16,e_animation_info> mapedanimation  {
+	{AS_SONICBLOW,{180,220,150,180}},
+	{GC_CROSSIMPACT,{180,220,150,180}},
+	{CG_ARROWVULCAN,{200,220,100,120}}
+};
+
+class e_skill_animation_restore
+{
+private:
+	int hitcount;
+	int max_hits;
+	int motion;
+	int delay;
+	int16 skill_id;
+	struct{
+		int id;
+		uint8 dir;
+		int x;
+		int y;
+	}target;
+	int get_motion(map_session_data&,uint16);
+	int adjust_delay(map_session_data&,uint16);
+	int tid;
+	int src_id;
+public:
+
+	e_skill_animation_restore(map_session_data* sd, block_list& target, uint16 skill_id, uint16 skill_lv, short hit_count = 1){	
+		this->target.dir = map_calc_dir(&sd->bl,target.x, target.y);
+		this->target.x = target.x;
+		this->target.y = target.y;
+		this->target.id = target.id;
+		this->skill_id = skill_id;
+		this->src_id = sd->bl.id;
+		this->hitcount = 0;
+		this->motion = this->get_motion(*sd,skill_id);
+		t_tick start_timer = gettick();
+		switch (skill_id) {
+			case AS_SONICBLOW:
+			{
+#ifndef RENEWAL
+				pc_stop_attack(sd);
+#endif
+			} break;
+			case GC_CROSSIMPACT:
+				start_timer += this->motion;
+				break;
+			default:
+				break;
+		}
+		this->max_hits = hit_count;
+		this->delay = adjust_delay(*sd,skill_id);
+		if (this->motion > 0)
+			this->tid = add_timer(start_timer, pc_animation_force_timer, sd->bl.id, this->delay);
+	} //end of constructor
+
+	bool finished() const {
+		return (this->hitcount >= this->max_hits);
+	}
+
+	bool is_katar() const {
+		return (this->get_skillid() == AS_SONICBLOW || this->get_skillid() == GC_CROSSIMPACT);
+	}
+
+	int recalculate_motion(intptr_t data) const {
+		return this->delay != data ? this->delay : data;
+	}
+
+	int get_targetid() const {
+		return this->target.id;
+	}
+
+	int get_tid() const {
+		return this->tid;
+	}
+
+	uint8 old_target_dir() const {
+		return this->target.dir;
+	}
+
+	uint16 get_skillid() const {
+		return this->skill_id;
+	}
+
+	//update number of hits
+	void update_animation(int hit_count){
+		this->max_hits += hit_count;
+		this->delay = this->delay/2;
+		this->motion = this->motion/2;
+		delete_timer(this->tid,pc_animation_force_timer);
+		this->tid = add_timer(gettick(), pc_animation_force_timer, this->src_id, this->delay);
+	}
+
+	void looktodir_ifnotlooking(block_list& bl, uint8 dir){
+		if(unit_getdir(&bl) != dir)
+			unit_setdir(&bl,dir,true);
+	}
+
+	//do a single hit
+	void hit(block_list &src) {
+		this->hitcount++;
+		this->tid = add_timer(gettick() + motion, pc_animation_force_timer, src.id, this->delay);
+		clif_hit_frame(src, this->motion);
+	}
+};
 
 #endif /* PC_HPP */
