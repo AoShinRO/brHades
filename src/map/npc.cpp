@@ -1292,7 +1292,7 @@ int npc_event_doall(const char* name)
 
 // runs the specified event(global only) and reports call count
 void npc_event_runall( const char* eventname ){
-	ShowStatus( "Event '" CL_WHITE "%s" CL_RESET "' executed with '" CL_WHITE "%d" CL_RESET "' NPCs.\n", eventname, npc_event_doall( eventname ) );
+	ShowStatus( "Evento '" CL_WHITE "%s" CL_RESET "' executado com '" CL_WHITE "%d" CL_RESET "' NPCs.\n", eventname, npc_event_doall( eventname ) );
 }
 
 // runs the specified event, with a RID attached (global only)
@@ -1321,7 +1321,7 @@ int npc_event_doall_path( const char* event_name, const char* path ){
 		}
 	}
 
-	ShowStatus( "Event '" CL_WHITE "%s" CL_RESET "' executed with '" CL_WHITE "%d" CL_RESET "' NPCs.\n", event_name, count );
+	ShowStatus( "Evento '" CL_WHITE "%s" CL_RESET "' executado com '" CL_WHITE "%d" CL_RESET "' NPCs.\n", event_name, count );
 
 	mapit_free(iter);
 	return count;
@@ -3609,23 +3609,23 @@ void npc_delsrcfile(const char* name)
  * Load all npc files
  */
 void npc_loadsrcfiles() {
-	ShowStatus("Loading NPCs...\n");
+	ShowStatus("Carregando NPCs...\n");
 	for (const auto& file : npc_src_files) {
 #ifdef DETAILED_LOADING_OUTPUT
-		ShowStatus("Loading NPC file: %s" CL_CLL "\r", file.c_str());
+		ShowStatus("Carregando arquivo NPC: %s" CL_CLL "\r", file.c_str());
 #endif
 		npc_parsesrcfile(file);
 	}
 	int npc_total = npc_warp + npc_shop + npc_script;
-
-	ShowInfo ("Done loading '" CL_WHITE "%d" CL_RESET "' NPCs:" CL_CLL "\n"
+	
+	ShowInfo ("Carregamento concluído '" CL_WHITE "%d" CL_RESET "' NPCs:" CL_CLL "\n"
 		"\t-'" CL_WHITE "%d" CL_RESET "' Warps\n"
-		"\t-'" CL_WHITE "%d" CL_RESET "' Shops\n"
+		"\t-'" CL_WHITE "%d" CL_RESET "' Lojas\n"
 		"\t-'" CL_WHITE "%d" CL_RESET "' Scripts\n"
-		"\t-'" CL_WHITE "%d" CL_RESET "' Spawn sets\n"
-		"\t-'" CL_WHITE "%d" CL_RESET "' Mobs Cached\n"
-		"\t-'" CL_WHITE "%d" CL_RESET "' Mobs Not Cached\n",
-		npc_total, npc_warp, npc_shop, npc_script, npc_mob, npc_cache_mob, npc_delay_mob);
+		"\t-'" CL_WHITE "%d" CL_RESET "' Conjuntos de spawn\n"
+		"\t-'" CL_WHITE "%d" CL_RESET "' Mobs armazenados em cache\n"
+		"\t-'" CL_WHITE "%d" CL_RESET "' Mobs não armazenados em cache\n",
+			npc_total, npc_warp, npc_shop, npc_script, npc_mob, npc_cache_mob, npc_delay_mob);
 }
 
 /// Parses and sets the name and exname of a npc.
@@ -3641,7 +3641,7 @@ static void npc_parsename(struct npc_data* nd, const char* name, const char* sta
 	if( p ) { // <Display name>::<Unique name>
 		size_t len = p-name;
 		if( len > NPC_NAME_LENGTH ) {
-			ShowWarning("npc_parsename: Display name of '%s' is too long (len=%u) in file '%s', line'%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NPC_NAME_LENGTH);
+			ShowWarning("npc_parsename: O nome de exibição de '%s' é muito longo (len=%u) no arquivo '%s', linha '%d'. Truncando para %u caracteres.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NPC_NAME_LENGTH);
 			safestrncpy(nd->name, name, sizeof(nd->name));
 		} else {
 			memcpy(nd->name, name, len);
@@ -3649,19 +3649,19 @@ static void npc_parsename(struct npc_data* nd, const char* name, const char* sta
 		}
 		len = strlen(p+2);
 		if( len > NPC_NAME_LENGTH )
-			ShowWarning("npc_parsename: Unique name of '%s' is too long (len=%u) in file '%s', line'%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NPC_NAME_LENGTH);
+			ShowWarning("npc_parsename: O nome exclusivo de '%s' é muito longo (len=%u) no arquivo '%s', linha '%d'. Truncando para %u caracteres.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NPC_NAME_LENGTH);
 		safestrncpy(nd->exname, p+2, sizeof(nd->exname));
 	} else {// <Display name>
 		size_t len = strlen(name);
 		if( len > NPC_NAME_LENGTH )
-			ShowWarning("npc_parsename: Name '%s' is too long (len=%u) in file '%s', line'%d'. Truncating to %u characters.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NPC_NAME_LENGTH);
+			ShowWarning("npc_parsename: O nome '%s' é muito longo (len=%u) no arquivo '%s', linha '%d'. Truncando para %u caracteres.\n", name, (unsigned int)len, filepath, strline(buffer,start-buffer), NPC_NAME_LENGTH);
 		safestrncpy(nd->name, name, sizeof(nd->name));
 		safestrncpy(nd->exname, name, sizeof(nd->exname));
 	}
 
 	if( *nd->exname == '\0' || strstr(nd->exname,"::") != nullptr ) {// invalid
 		snprintf(newname, ARRAYLENGTH(newname), "0_%d_%d_%d", nd->bl.m, nd->bl.x, nd->bl.y);
-		ShowWarning("npc_parsename: Invalid unique name in file '%s', line'%d'. Renaming '%s' to '%s'.\n", filepath, strline(buffer,start-buffer), nd->exname, newname);
+		ShowWarning("npc_parsename: Nome exclusivo inválido no arquivo '%s', linha '%d'. Renomeando '%s' para '%s'.\n", filepath, strline(buffer,start-buffer), nd->exname, newname);
 		safestrncpy(nd->exname, newname, sizeof(nd->exname));
 	}
 
@@ -3678,9 +3678,9 @@ static void npc_parsename(struct npc_data* nd, const char* name, const char* sta
 		strcpy(this_mapname, (nd->bl.m==-1?"(not on a map)":mapindex_id2name(map_getmapdata(nd->bl.m)->index)));
 		strcpy(other_mapname, (dnd->bl.m==-1?"(not on a map)":mapindex_id2name(map_getmapdata(dnd->bl.m)->index)));
 
-		ShowWarning("npc_parsename: Duplicate unique name in file '%s', line'%d'. Renaming '%s' to '%s'.\n", filepath, strline(buffer,start-buffer), nd->exname, newname);
-		ShowDebug("this npc:\n   display name '%s'\n   unique name '%s'\n   map=%s, x=%d, y=%d\n", nd->name, nd->exname, this_mapname, nd->bl.x, nd->bl.y);
-		ShowDebug("other npc in '%s' :\n   display name '%s'\n   unique name '%s'\n   map=%s, x=%d, y=%d\n",dnd->path, dnd->name, dnd->exname, other_mapname, dnd->bl.x, dnd->bl.y);
+		ShowWarning("npc_parsename: Nome exclusivo duplicado no arquivo '%s', linha '%d'. Renomeando '%s' para '%s'.\n", filepath, strline(buffer,start-buffer), nd->exname, newname);
+		ShowDebug("este npc:\n nome de exibição '%s'\n nome exclusivo '%s'\n mapa=%s, x=%d, y=%d\n", nd->name, nd->exname, this_mapname, nd->bl.x, nd->bl.y);
+		ShowDebug("outro npc em '%s' :\n nome de exibição '%s'\n nome exclusivo '%s'\n mapa=%s, x=%d, y=%d\n",dnd->path, dnd->name, dnd->exname, other_mapname, dnd->bl.x, dnd->bl.y);
 		safestrncpy(nd->exname, newname, sizeof(nd->exname));
 	}
 
@@ -4881,9 +4881,9 @@ static void npc_market_checkall(void) {
 	if (!db_size(NPCMarketDB))
 		return;
 	else {
-		ShowInfo("Checking '" CL_WHITE "%d" CL_RESET "' NPC Markets...\n", db_size(NPCMarketDB));
+		ShowInfo("Verificando '" CL_WHITE "%d" CL_RESET "' Mercados NPC...\n", db_size(NPCMarketDB));
 		NPCMarketDB->foreach(NPCMarketDB, npc_market_checkall_sub);
-		ShowStatus("Done checking '" CL_WHITE "%d" CL_RESET "' NPC Markets.\n", db_size(NPCMarketDB));
+		ShowStatus("Concluida a verificacao de '" CL_WHITE "%d" CL_RESET "' Mercados NPC.\n", db_size(NPCMarketDB));
 		NPCMarketDB->clear(NPCMarketDB, npc_market_free);
 	}
 }
@@ -4921,12 +4921,12 @@ static void npc_market_fromsql(void) {
 		std::shared_ptr<item_data> id = item_db.find(list.nameid);
 
 		if (id == nullptr) {
-			ShowWarning("npc_market_fromsql: Invalid sell item in table '%s' (id '%u').\n", market_table, list.nameid);
+			ShowWarning("npc_market_fromsql: Item de venda inválido na tabela '%s' (id '%u').\n", market_table, list.nameid);
 			continue;
 		}
 
 		if (list.value * 0.75 < id->value_sell * 1.24) { // Exploit possible: you can buy and sell back with profit
-			ShowWarning("npc_market_fromsql: Item %s [%u] discounted buying price (%d->%d) is less than overcharged selling price (%d->%d) in table '%s'. Assigning to current sell value.\n",
+			ShowWarning("npc_market_fromsql: O preço de compra com desconto (%d->%d) do item %s [%u] é menor que o preço de venda cobrado a mais (%d->%d) na tabela '%s'. Atribuindo ao valor de venda atual.\n",
 						id->name.c_str(), list.nameid, list.value, (int)(list.value * 0.75), id->value_sell, (int)(id->value_sell * 1.24), market_table);
 			list.value = id->value_sell;
 		}
@@ -4937,7 +4937,7 @@ static void npc_market_fromsql(void) {
 	}
 	Sql_FreeResult(mmysql_handle);
 
-	ShowStatus("Done loading '" CL_WHITE "%d" CL_RESET "' entries for '" CL_WHITE "%d" CL_RESET "' NPC Markets from '" CL_WHITE "%s" CL_RESET "' table.\n", count, db_size(NPCMarketDB), market_table);
+	ShowStatus("Carregamento concluído de '" CL_WHITE "%d" CL_RESET "' entradas para '" CL_WHITE "%d" CL_RESET "' Mercados de NPC da tabela '" CL_WHITE "%s" CL_RESET "'.\n",count, db_size(NPCMarketDB), market_table);
 }
 #endif
 

@@ -14394,10 +14394,10 @@ int pc_read_motd(void)
 			entries++;
 		}
 		fclose(fp);
-		ShowStatus("Done reading '" CL_WHITE "%u" CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", entries, motd_txt);
+		ShowStatus("Concluida a leitura de '" CL_WHITE "%u" CL_RESET "' entradas em '" CL_WHITE "%s" CL_RESET "'.\n", entries, motd_txt);
 	}
 	else
-		ShowWarning("File '" CL_WHITE "%s" CL_RESET "' not found.\n", motd_txt);
+		ShowWarning("Arquivo '" CL_WHITE "%s" CL_RESET "' não encontrado.\n", motd_txt);
 
 	return 0;
 }

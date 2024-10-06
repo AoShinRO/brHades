@@ -25496,12 +25496,12 @@ void packetdb_readdb(){
 #include "clif_packetdb.hpp"
 #include "clif_shuffle.hpp"
 
-	ShowStatus("Using packet version: " CL_WHITE "%d" CL_RESET ".\n", PACKETVER);
+	ShowStatus("Usando versao do pacote: " CL_WHITE "%d" CL_RESET ".\n", PACKETVER);
 
 #ifdef PACKET_OBFUSCATION
-	ShowStatus("Packet Obfuscation: " CL_GREEN "Enabled" CL_RESET ". Keys: " CL_WHITE "0x%08X, 0x%08X, 0x%08X" CL_RESET "\n", clif_cryptKey[0], clif_cryptKey[1], clif_cryptKey[2]);
+	ShowStatus("Ofuscacao de pacotes: " CL_GREEN "Habilitado" CL_RESET ". Chaves: " CL_WHITE "0x%08X, 0x%08X, 0x%08X" CL_RESET "\n", clif_cryptKey[0], clif_cryptKey[1], clif_cryptKey[2]);
 #else
-	ShowStatus("Packet Obfuscation: " CL_RED "Disabled" CL_RESET ".\n");
+	ShowStatus("Ofuscacao de pacotes: " CL_RED "Desabilitado" CL_RESET ".\n");
 #endif
 }
 
