@@ -1779,9 +1779,9 @@ struct e_animation_info{
 };
 
 static std::unordered_map<uint16,e_animation_info> mapedanimation  {
-	{AS_SONICBLOW,{180,240,120,150}},
-	{GC_CROSSIMPACT,{180,245,120,150}},
-	{CG_ARROWVULCAN,{180,200,90,100}}
+	{AS_SONICBLOW,{180,220,150,180}},
+	{GC_CROSSIMPACT,{180,220,150,180}},
+	{CG_ARROWVULCAN,{200,220,100,120}}
 };
 
 class e_skill_animation_restore
@@ -1836,9 +1836,11 @@ public:
 	bool finished() const {
 		return (this->hitcount >= this->max_hits);
 	}
+
 	bool is_katar() const {
 		return (this->get_skillid() == AS_SONICBLOW || this->get_skillid() == GC_CROSSIMPACT);
 	}
+
 	int recalculate_motion(intptr_t data) const {
 		return this->delay != data ? this->delay : data;
 	}
@@ -1846,32 +1848,38 @@ public:
 	int get_targetid() const {
 		return this->target.id;
 	}
+
 	int get_tid() const {
 		return this->tid;
 	}
+
 	uint8 old_target_dir() const {
 		return this->target.dir;
 	}
+
 	uint16 get_skillid() const {
 		return this->skill_id;
 	}
+
 	//update number of hits
 	void update_animation(int hit_count){
 		this->max_hits += hit_count;
 		this->delay = this->delay/2;
+		this->motion = this->motion/2;
 		delete_timer(this->tid,pc_animation_force_timer);
-		this->tid = add_timer(gettick(), pc_animation_force_timer, this->src_id, this->motion);
+		this->tid = add_timer(gettick(), pc_animation_force_timer, this->src_id, this->delay);
 	}
+
 	void looktodir_ifnotlooking(block_list& bl, uint8 dir){
 		if(unit_getdir(&bl) != dir)
 			unit_setdir(&bl,dir,true);
 	}
+
 	//do a single hit
-	void hit(block_list &src, int motion) {
-		this->motion = motion;
+	void hit(block_list &src) {
 		this->hitcount++;
-		this->tid = add_timer(gettick() + motion, pc_animation_force_timer, src.id, motion);
-		clif_hit_frame(src, motion);
+		this->tid = add_timer(gettick() + motion, pc_animation_force_timer, src.id, this->delay);
+		clif_hit_frame(src, this->motion);
 	}
 };
 

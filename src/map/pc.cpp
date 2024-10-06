@@ -15910,11 +15910,11 @@ TIMER_FUNC(pc_animation_force_timer){
 		clif_authfail_fd(sd->fd, 15);
 		ShowWarning("fail on animation timer sync from char id: %d \n", sd->status.char_id);
 	}
-	if(it->finished()){
+	if(it->finished())
+	{
 		delete_timer(it->get_tid(),pc_animation_force_timer);
 		sd->animation.erase(iter);
 	} else {
-		int motion = it->recalculate_motion(data);
 		struct block_list* target = map_id2bl(it->get_targetid());
 		uint8 dir = target != nullptr ? map_calc_dir(&sd->bl,target->x, target->y) : it->old_target_dir();
 		it->looktodir_ifnotlooking(sd->bl,dir);
@@ -15925,7 +15925,7 @@ TIMER_FUNC(pc_animation_force_timer){
 				unit_setdir(target,(dir < DIR_MAX ? dir + DIR_WEST : DIR_NORTH),true); //spin target
 			}
 		}
-		it->hit(sd->bl, motion);
+		it->hit(sd->bl);
 	}
 	return 0;
 }
