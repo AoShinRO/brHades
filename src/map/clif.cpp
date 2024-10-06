@@ -5295,8 +5295,8 @@ void clif_hit_frame(block_list& bl, int motion)
 	p.type = DMG_NORMAL;
 	p.div = 1;
 	p.srcSpeed = motion;
-	clif_send(&p, sizeof(p), &bl, AREA);
 
+	clif_send(&p, sizeof(p), &bl, AREA);
 }
 
 /*==========================================

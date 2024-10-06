@@ -76,7 +76,7 @@
 /// Pre-Renewal Animation
 /// (disable by commenting the line)
 ///
-/// Leave this line to disable rewewal animation from sonicblow, vulcan arrow, cross-impact in newer clients
+/// Leave this line commented to disable pre-rewewal animation from sonicblow, vulcan arrow, cross-impact in newer clients
 //#define PRENEWAL_ANIMATION
 
 #endif
