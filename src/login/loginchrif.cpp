@@ -107,7 +107,7 @@ int logchrif_parse_reqauth(int fd, int id,char* ip){
 			// each auth entry can only be used once
 			login_remove_auth_node( account_id );
 		}else{// authentication not found
-			ShowStatus("Char-server '%s': authentication of the account %d REFUSED (ip: %s).\n", ch_server[id].name, account_id, ip);
+			ShowStatus("Char-server '%s': autenticacao da conta %d RECUSADA (ip: %s).\n", ch_server[id].name, account_id, ip);
 			WFIFOHEAD(fd,21);
 			WFIFOW(fd,0) = 0x2713;
 			WFIFOL(fd,2) = account_id;
@@ -137,7 +137,7 @@ int logchrif_parse_ackusercount(int fd, int id){
 		RFIFOSKIP(fd,6);
 		// how many users on world? (update)
 		if( ch_server[id].users != users ){
-			ShowStatus("set users %s : %d\n", ch_server[id].name, users);
+			ShowStatus("definir usuários %s : %d\n", ch_server[id].name, users);
 			ch_server[id].users = users;
 		}
 	}
@@ -456,7 +456,7 @@ int logchrif_parse_upd_global_accreg(int fd, int id, char* ip){
 		uint32 account_id = RFIFOL(fd,4);
 
 		if( !accounts->load_num(accounts, &acc, account_id) )
-			ShowStatus("Char-server '%s': receiving (from the char-server) of account_reg2 (account: %d not found, ip: %s).\n", ch_server[id].name, account_id, ip);
+			ShowStatus("Char-server '%s': recebendo (do char-server) de account_reg2 (conta: %d nao encontrada, ip: %s).\n", ch_server[id].name, account_id, ip);
 		else
 			mmo_save_global_accreg(accounts,fd,account_id,RFIFOL(fd, 8));
 		RFIFOSKIP(fd,RFIFOW(fd,2));
@@ -869,7 +869,7 @@ void logchrif_server_reset(int id) {
  * @param id: id of char-serv (should be >0, FIXME)
  */
 void logchrif_on_disconnect(int id) {
-	ShowStatus("Char-server '%s' has disconnected.\n", ch_server[id].name);
+	ShowStatus("O servidor Char '%s' foi desconectado.\n",ch_server[id].name);
 	logchrif_server_reset(id);
 }
 

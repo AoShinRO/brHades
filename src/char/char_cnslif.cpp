@@ -79,7 +79,7 @@ int cnslif_parse(const char* buf)
 		else if( strcmpi("alive", command) == 0 || strcmpi("status", command) == 0 )
 			ShowInfo(CL_CYAN "Console: " CL_BOLD "I'm Alive." CL_RESET "\n");
 		else if( strcmpi("reloadconf", command) == 0 ) {
-			ShowInfo("Reloading config file \"%s\"\n", CHAR_CONF_NAME);
+			ShowInfo("Re-carregando config\"%s\"\n", CHAR_CONF_NAME);
 			char_config_read(CHAR_CONF_NAME, false);
 		}
 	}

@@ -605,7 +605,7 @@ bool login_config_read(const char* cfgName, bool normal) {
 				login_config.login_ip = host2ip(w2);
 				if( login_config.login_ip ) {
 					char ip_str[16];
-					ShowStatus("Login server binding IP address : %s -> %s\n", w2, ip2str(login_config.login_ip, ip_str));
+					ShowStatus("Endereco IP de vinculacao do servidor de login: %s -> %s\n", w2, ip2str(login_config.login_ip, ip_str));
 				}
 			}
 			else if( !strcmpi(w1, "login_port") )
@@ -810,7 +810,7 @@ void LoginServer::finalize(){
 	}
 
 	login_log(0, "login server", 100, "login server shutdown");
-	ShowStatus("Terminating...\n");
+	ShowStatus("Finalizando...\n");
 
 	if( login_config.log_login )
 		loginlog_final();
@@ -837,11 +837,11 @@ void LoginServer::finalize(){
 		login_fd = -1;
 	}
 
-	ShowStatus("Finished.\n");
+	ShowStatus("Finalizado.\n");
 }
 
 void LoginServer::handle_shutdown(){
-	ShowStatus("Shutting down...\n");
+	ShowStatus("Desligando...\n");
 	// TODO proper shutdown procedure; kick all characters, wait for acks, ...  [FlavioJS]
 	do_shutdown_loginchrif();
 	flush_fifos();
@@ -901,7 +901,7 @@ bool LoginServer::initialize( int argc, char* argv[] ){
 
 	do_init_logincnslif();
 
-	ShowStatus("The login-server is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %u).\n\n", login_config.login_port);
+	ShowStatus("O servidor de login está " CL_GREEN "pronto" CL_RESET " (o servidor está escutando na porta %u).\n\n", login_config.login_port);
 	login_log(0, "login server", 100, "login server started");
 
 	return true;

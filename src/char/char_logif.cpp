@@ -275,14 +275,14 @@ int chlogif_parse_ackconnect(int fd){
 
 	if (RFIFOB(fd,2)) {
 		//printf("connect login server error : %d\n", RFIFOB(fd,2));
-		ShowError("Can not connect to login-server.\n");
-		ShowError("The server communication passwords (default s1/p1) are probably invalid.\n");
-		ShowError("Also, please make sure your login db has the correct communication username/passwords and the gender of the account is S.\n");
-		ShowError("The communication passwords are set in map_athena.conf and char_athena.conf\n");
-		set_eof(fd);
-		return 0;
+	ShowError("Nao e possível conectar ao servidor de login.\n");
+	ShowError("As senhas de comunicacao do servidor (padrao s1/p1) provavelmente sao inválidas.\n");
+	ShowError("Alem disso, certifique-se de que seu banco de dados de login tenha o nome de usuário/senhas de comunicacao corretos e que o genero da conta seja S.\n");
+	ShowError("As senhas de comunicacao estao definidas em map_athena.conf e char_athena.conf\n");
+	set_eof(fd);
+	return 0;
 	} else {
-		ShowStatus("Connected to login-server (connection #%d).\n", fd);
+		ShowStatus("Conectado ao servidor de login (conexao #%d).\n", fd);
 		chlogif_on_ready();
 	}
 	RFIFOSKIP(fd,3);
@@ -853,7 +853,7 @@ void chlogif_reset(void){
 
 /// Called when the connection to Login Server is disconnected.
 void chlogif_on_disconnect(void){
-	ShowWarning("Connection to Login Server lost.\n\n");
+	ShowWarning("Conexao com o servidor de login perdida.\n\n");
 }
 
 /// Called when all the connection steps are completed.
@@ -867,7 +867,7 @@ void chlogif_on_ready(void)
 	// if no map-server already connected, display a message...
 	ARR_FIND( 0, ARRAYLENGTH(map_server), i, session_isValid(map_server[i].fd) && !map_server[i].maps.empty() );
 	if( i == ARRAYLENGTH(map_server) )
-		ShowStatus("Awaiting maps from map-server.\n");
+		ShowStatus("Aguardando mapas do servidor de mapas.\n");
 }
 
 void do_final_chlogif(void)

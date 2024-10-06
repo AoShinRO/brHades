@@ -645,9 +645,9 @@ static void memmgr_final (void)
 	}
 #ifdef LOG_MEMMGR
 	if(count == 0) {
-		ShowInfo("Memory manager: No memory leaks found.\n");
+		ShowInfo("Gerenciador de memória: Nenhum vazamento de memória encontrado.\n");
 	} else {
-		ShowWarning("Memory manager: Memory leaks found and fixed.\n");
+		ShowWarning("Gerenciador de memória: Vazamentos de memória encontrados e corrigidos.\n");
 		fclose(log_fp);
 	}
 #endif /* LOG_MEMMGR */
@@ -657,7 +657,7 @@ static void memmgr_init (void)
 {
 #ifdef LOG_MEMMGR
 	sprintf(memmer_logfile, "log/%s.leaks", SERVER_NAME);
-	ShowStatus("Memory manager initialised: " CL_WHITE "%s" CL_RESET "\n", memmer_logfile);
+	ShowStatus("Gerenciador de memória inicializado: " CL_WHITE "%s" CL_RESET "\n", memmer_logfile);
 	memset(hash_unfill, 0, sizeof(hash_unfill));
 #endif /* LOG_MEMMGR */
 }

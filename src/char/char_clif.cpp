@@ -371,7 +371,7 @@ int chclif_mmo_send006b(int fd, struct char_session_data* sd){
 #endif
 
 	if (charserv_config.save_log)
-		ShowInfo("Loading Char Data (" CL_BOLD "%d" CL_RESET ")\n",sd->account_id);
+		ShowInfo("Carregando Char Data (" CL_BOLD "%d" CL_RESET ")\n",sd->account_id);
 
 	j = 24 + offset; // offset
 	WFIFOHEAD(fd,j + MAX_CHARS*MAX_CHAR_BUF);
@@ -394,7 +394,7 @@ int chclif_mmo_send006b(int fd, struct char_session_data* sd){
 //----------------------------------------
 void chclif_mmo_send082d(int fd, struct char_session_data* sd) {
 	if (charserv_config.save_log)
-		ShowInfo("Loading Char Data (" CL_BOLD "%d" CL_RESET ")\n",sd->account_id);
+		ShowInfo("Carregando Char Data (" CL_BOLD "%d" CL_RESET ")\n",sd->account_id);
 	WFIFOHEAD(fd,29);
 	WFIFOW(fd,0) = 0x82d;
 	WFIFOW(fd,2) = 29;

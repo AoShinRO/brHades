@@ -1266,7 +1266,7 @@ int char_mmo_char_fromsql(uint32 char_id, struct mmo_charstatus* p, bool load_ev
 
 //==========================================================================================================
 int char_mmo_sql_init(void) {
-	ShowStatus("Characters per Account: '%d'.\n", charserv_config.char_config.char_per_account);
+	ShowStatus("Personagens por Acc: '%d'.\n", charserv_config.char_config.char_per_account);
 
 	//the 'set offline' part is now in check_login_conn ...
 	//if the server connects to loginserver
@@ -2300,7 +2300,7 @@ int char_lan_config_read(const char *lancfgName) {
 	}
 
 	if( subnet_count > 1 ) /* only useful if there is more than 1 */
-		ShowStatus("Read information about %d subnetworks.\n", subnet_count);
+		ShowStatus("Leia informacoes sobre %d subnetworks.\n", subnet_count);
 
 	fclose(fp);
 	return 0;
@@ -2942,7 +2942,7 @@ bool char_config_read(const char* cfgName, bool normal){
 				if (charserv_config.login_ip) {
 					char ip_str[16];
 					safestrncpy(charserv_config.login_ip_str, w2, sizeof(charserv_config.login_ip_str));
-					ShowStatus("Login server IP address : %s -> %s\n", w2, ip2str(charserv_config.login_ip, ip_str));
+					ShowStatus("Login server IP : %s -> %s\n", w2, ip2str(charserv_config.login_ip, ip_str));
 				}
 			} else if (strcmpi(w1, "login_port") == 0) {
 				charserv_config.login_port = atoi(w2);
@@ -2951,14 +2951,14 @@ bool char_config_read(const char* cfgName, bool normal){
 				if (charserv_config.char_ip) {
 					char ip_str[16];
 					safestrncpy(charserv_config.char_ip_str, w2, sizeof(charserv_config.char_ip_str));
-					ShowStatus("Character server IP address : %s -> %s\n", w2, ip2str(charserv_config.char_ip, ip_str));
+					ShowStatus("Character server IP : %s -> %s\n", w2, ip2str(charserv_config.char_ip, ip_str));
 				}
 			} else if (strcmpi(w1, "bind_ip") == 0) {
 				charserv_config.bind_ip = host2ip(w2);
 				if (charserv_config.bind_ip) {
 					char ip_str[16];
 					safestrncpy(charserv_config.bind_ip_str, w2, sizeof(charserv_config.bind_ip_str));
-					ShowStatus("Character server binding IP address : %s -> %s\n", w2, ip2str(charserv_config.bind_ip, ip_str));
+					ShowStatus("Character server conectando IP : %s -> %s\n", w2, ip2str(charserv_config.bind_ip, ip_str));
 				}
 			} else if (strcmpi(w1, "char_port") == 0) {
 				charserv_config.char_port = atoi(w2);
@@ -3142,7 +3142,7 @@ void char_do_final_msg(void){
 }
 
 void CharacterServer::finalize(){
-	ShowStatus("Terminating...\n");
+	ShowStatus("Finalizando...\n");
 
 	char_set_all_offline(-1);
 	char_set_all_offline_sql();
@@ -3167,12 +3167,12 @@ void CharacterServer::finalize(){
 
 	Sql_Free(sql_handle);
 
-	ShowStatus("Finished.\n");
+	ShowStatus("Finalizado.\n");
 }
 
 /// Called when a terminate signal is received.
 void CharacterServer::handle_shutdown(){
-	ShowStatus("Shutting down...\n");
+	ShowStatus("Desligando...\n");
 	// TODO proper shutdown procedure; wait for acks?, kick all characters, ... [FlavoJS]
 	for( int id = 0; id < ARRAYLENGTH(map_server); ++id )
 		chmapif_server_reset(id);
@@ -3212,9 +3212,9 @@ bool CharacterServer::initialize( int argc, char *argv[] ){
 		ip2str(addr_[0], ip_str);
 
 		if (naddr_ > 1)
-			ShowStatus("Multiple interfaces detected..  using %s as our IP address\n", ip_str);
+			ShowStatus("Multiplas interfaces detectadas..  usando %s de IP\n", ip_str);
 		else
-			ShowStatus("Defaulting to %s as our IP address\n", ip_str);
+			ShowStatus("Ajustando para %s o IP \n", ip_str);
 		if (!(charserv_config.login_ip) ) {
 			safestrncpy(charserv_config.login_ip_str, ip_str, sizeof(charserv_config.login_ip_str));
 			charserv_config.login_ip = str2ip(charserv_config.login_ip_str);
@@ -3278,7 +3278,7 @@ bool CharacterServer::initialize( int argc, char *argv[] ){
 
 	do_init_chcnslif();
 
-	ShowStatus("The char-server is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %d).\n\n", charserv_config.char_port);
+	ShowStatus("O char-server esta " CL_GREEN "pronto" CL_RESET " (o servidor esta escutando na porta %d).\n\n", charserv_config.char_port);
 
 	return true;
 }
