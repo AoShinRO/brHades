@@ -15888,7 +15888,7 @@ uint64 CaptchaDatabase::parseBodyNode(const ryml::NodeRef &node) {
 
 /* Animation Force Related */
 int e_skill_animation_restore::get_motion(map_session_data&sd,uint16 skill_id){
-	return std::clamp(mapedanimation[skill_id].max - ((mapedanimation[skill_id].max * sd.bonus.delayrate) / 100), mapedanimation[skill_id].min, mapedanimation[skill_id].max); //Kiel uncapped animation remove set min  to 0
+	return std::clamp(sd.battle_status.adelay - ((sd.battle_status.adelay * sd.bonus.delayrate) / 100), mapedanimation[skill_id].min, mapedanimation[skill_id].max); //Kiel uncapped animation remove set min  to 0
 }
 int e_skill_animation_restore::adjust_delay(map_session_data&sd,uint16 skill_id){
 	return std::clamp(mapedanimation[skill_id].maxdelay - ((mapedanimation[skill_id].maxdelay * sd.bonus.delayrate) / 100), mapedanimation[skill_id].mindelay, mapedanimation[skill_id].maxdelay); //Kiel uncapped animation remove set min  to 0
@@ -15922,7 +15922,7 @@ TIMER_FUNC(pc_animation_force_timer){
 			if(!status_isdead(*target))
 			{
 				dir = unit_getdir(target);
-				unit_setdir(target,(dir < DIR_MAX ? dir + DIR_WEST : DIR_NORTH),true); //spin target
+				unit_setdir(target,(dir + DIR_WEST < DIR_MAX ? dir + DIR_WEST : DIR_NORTH),true); //spin target
 			}
 		}
 		it->hit(sd->bl);
