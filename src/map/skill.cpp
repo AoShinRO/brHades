@@ -4158,7 +4158,7 @@ int64 skill_attack (int attack_type, struct block_list* src, struct block_list *
 		return 0; //Should return 0 when damage was reflected
 
 	if(damage > 0 && sd != nullptr){
-		clif_parse_restore_animation(sd,*dsrc,skill_id,skill_lv);
+		clif_parse_restore_animation(sd,*bl,skill_id,skill_lv);
 	}
 	return damage;
 }
