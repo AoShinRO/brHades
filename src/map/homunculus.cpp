@@ -561,9 +561,8 @@ int hom_levelup(struct homun_data *hd)
 	clif_homskillinfoblock( *hd );
 
 	if ( hd->master && battle_config.homunculus_show_growth ) {
-		#define OUTPUT_BUFFER_SIZE 256
-		char output[OUTPUT_BUFFER_SIZE];
-		snprintf(output, OUTPUT_BUFFER_SIZE,
+		char output[CHAT_SIZE_MAX];
+		snprintf(output, CHAT_SIZE_MAX-1,
 			"Growth: hp:%d sp:%d str(%.2f) agi(%.2f) vit(%.2f) int(%.2f) dex(%.2f) luk(%.2f) ",
 			growth_max_hp, growth_max_sp,
 			growth_str/10.0, growth_agi/10.0, growth_vit/10.0,
