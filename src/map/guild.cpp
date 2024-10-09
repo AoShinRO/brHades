@@ -2373,7 +2373,7 @@ void guild_castle_map_init(void) {
 	}
 
 	if( !castle_ids.empty() && intif_guild_castle_dataload( castle_ids ) ){
-		ShowStatus( "Requested '" CL_WHITE "%" PRIdPTR CL_RESET "' guild castles from char-server...\n", castle_ids.size() );
+		ShowStatus( "Solicitados '" CL_WHITE "%" PRIdPTR CL_RESET "' castelos de guilda do char-server...\n", castle_ids.size() );
 	}
 }
 
@@ -2389,7 +2389,7 @@ int guild_castledatasave(int castle_id, int index, int value) {
 	std::shared_ptr<guild_castle> gc = castle_db.find(castle_id);
 
 	if (gc == nullptr) {
-		ShowWarning("guild_castledatasave: guild castle '%d' not found\n", castle_id);
+		ShowWarning("guild_castledatasave: castelo da guilda '%d' nao encontrado\n", castle_id);
 		return 0;
 	}
 
@@ -2520,7 +2520,7 @@ int guild_castledataloadack(int len, struct guild_castle *gc) {
 			}
 		}
 	}
-	ShowStatus("Received '" CL_WHITE "%d" CL_RESET "' guild castles from char-server.\n", n);
+	ShowStatus("Recebidos '" CL_WHITE "%d" CL_RESET "' castelos de guilda do char-server.\n", n);
 	return 0;
 }
 

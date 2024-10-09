@@ -261,10 +261,9 @@ int chmapif_parse_getmapname(int fd, int id){
 
 	mapbuf = RFIFOP(fd,4);
 	RFIFOSKIP(fd,RFIFOW(fd,2));
-
-	ShowStatus("Map-Server %d connected: %" PRIuPTR " maps, from IP %d.%d.%d.%d port %d.\n",
-				id, map_server[id].maps.size(), CONVIP(map_server[id].ip), map_server[id].port);
-	ShowStatus("Map-server %d loading complete.\n", id);
+	ShowStatus("Map-Server %d conectado: %" PRIuPTR " mapas, do IP %d.%d.%d.%d porta %d.\n",
+		id, map_server[id].maps.size(), CONVIP(map_server[id].ip), map_server[id].port);
+	ShowStatus("Map-server %d Carregamento completo.\n", id);
 
 	chmapif_send_misc(fd);
 	chmapif_send_fame_list(fd); //Send fame list.
@@ -1542,7 +1541,7 @@ void chmapif_server_reset(int id){
  * @param id: id of map-serv (should be >0, FIXME)
  */
 void chmapif_on_disconnect(int id){
-	ShowStatus("Map-server #%d has disconnected.\n", id);
+	ShowStatus("Servidor de mapa #%d desconectado.\n", id);
 	chmapif_server_reset(id);
 }
 
