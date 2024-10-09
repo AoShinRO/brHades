@@ -25311,7 +25311,17 @@ void clif_goldpc_info( map_session_data& sd ){
 		struct PACKET_ZC_GOLDPCCAFE_POINT p = {};
 
 		p.PacketType = HEADER_ZC_GOLDPCCAFE_POINT;
-		p.isActive = true;
+
+		if(map_getmapflag(sd.bl.m,MF_GVG_TE_CASTLE) ||
+			map_getmapflag(sd.bl.m,MF_GVG_CASTLE) ||
+			map_getmapflag(sd.bl.m,MF_GVG_TE) ||
+			map_getmapflag(sd.bl.m,MF_GVG) ||
+			map_getmapflag(sd.bl.m,MF_BATTLEGROUND) ||
+			map_getmapflag(sd.bl.m,MF_PVP)
+			)
+			p.isActive = false;
+		else
+			p.isActive = true;
 
 		if( battle_config.feature_goldpc_vip && pc_isvip( &sd ) ){
 			p.mode = 2;
