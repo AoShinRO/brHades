@@ -5,6 +5,7 @@
 
 #include <cstdlib>
 #include <cmath>
+#include <filesystem>
 
 #include <config/core.hpp>
 
@@ -4107,9 +4108,13 @@ int map_config_read(const char *cfgName)
 			console_msg_log = atoi(w2);//[Ind]
 		else if (strcmpi(w1, "console_log_filepath") == 0)
 			safestrncpy(console_log_filepath, w2, sizeof(console_log_filepath));
-		else if (strcmpi(w1, "import") == 0)
-			map_config_read(w2);
-		else
+		else if (strcmpi(w1, "import") == 0){
+			if (std::filesystem::exists(w2)) {
+				map_config_read(w2);
+			} else {
+				ShowError("Invalid path in configuration: %s\n", w2);
+			}		
+		}else
 			ShowWarning("Unknown setting '%s' in file %s\n", w1, cfgName);
 	}
 
