@@ -75,13 +75,13 @@ int read_map(char *name, struct map_data *m)
 	size_t xy, off, num_cells;
 
 	// Open map GAT
-	sprintf(filename,"data\\%s.gat", name);
+	snprintf(filename, sizeof(filename), "data\\%s.gat", name);
 	gat = (unsigned char *)grfio_reads(filename);
 	if (gat == nullptr)
 		return 0;
 
 	// Open map RSW
-	sprintf(filename,"data\\%s.rsw", name);
+	snprintf(filename, sizeof(filename), "data\\%s.rsw", name);
 
 	// Read water height
 	water_height = grfio_read_rsw_water_level( filename );

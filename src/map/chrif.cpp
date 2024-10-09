@@ -263,6 +263,11 @@ int chrif_isconnected(void) {
 	return (session_isValid(char_fd) && chrif_state == 2);
 }
 
+static void chrif_goldpc_save(map_session_data* sd){
+	pc_setreg2(sd,GOLDPC_POINT_VAR, sd->gold_pc.points);
+	pc_setreg2(sd,GOLDPC_SECONDS_VAR, sd->gold_pc.playedtime);
+}
+
 /**
  * Saves character data.
  * @param sd: Player data
@@ -285,6 +290,7 @@ int chrif_save(map_session_data *sd, int flag) {
 		if (chrif_isconnected()) {
 			chrif_save_scdata(sd);
 			chrif_skillcooldown_save(sd);
+			chrif_goldpc_save(sd);
 		}
 		if ( !(flag&CSAVE_AUTOTRADE) && !chrif_auth_logout(sd, (flag&CSAVE_QUIT) ? ST_LOGOUT : ST_MAPCHANGE) )
 			ShowError("chrif_save: Failed to set up player %d:%d for proper quitting!\n", sd->status.account_id, sd->status.char_id);

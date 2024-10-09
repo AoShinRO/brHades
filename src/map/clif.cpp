@@ -11219,6 +11219,8 @@ void clif_parse_LoadEndAck(int fd,map_session_data *sd)
 	}
 #endif
 
+	clif_goldpc_info( *sd );
+
 	sd->state.connect_new = 0;
 	sd->state.changemap = false;
 }
@@ -25298,6 +25300,56 @@ void clif_set_npc_window_pos_percent(map_session_data& sd, int x, int y)
 
 	clif_send( &p, sizeof( p ), &sd.bl, SELF );
 #endif  // PACKETVER_MAIN_NUM >= 20220504
+}
+
+void clif_goldpc_info( map_session_data& sd ){
+#if PACKETVER_MAIN_NUM >= 20140508 || PACKETVER_RE_NUM >= 20140508 || defined(PACKETVER_ZERO)
+	if( battle_config.feature_goldpc_active ){
+
+		const static int32 client_max_seconds = 3600;
+
+		struct PACKET_ZC_GOLDPCCAFE_POINT p = {};
+
+		p.PacketType = HEADER_ZC_GOLDPCCAFE_POINT;
+
+		if(map_getmapflag(sd.bl.m,MF_GVG_TE_CASTLE) ||
+			map_getmapflag(sd.bl.m,MF_GVG_CASTLE) ||
+			map_getmapflag(sd.bl.m,MF_GVG_TE) ||
+			map_getmapflag(sd.bl.m,MF_GVG) ||
+			map_getmapflag(sd.bl.m,MF_BATTLEGROUND) ||
+			map_getmapflag(sd.bl.m,MF_PVP)
+			)
+			p.isActive = false;
+		else
+			p.isActive = true;
+
+		if( battle_config.feature_goldpc_vip && pc_isvip( &sd ) ){
+			p.mode = 2;
+		}else{
+			p.mode = 1;
+		}
+
+		if(sd.state.connect_new){
+			sd.gold_pc.points = (int32)pc_readreg2(&sd,GOLDPC_POINT_VAR);
+			sd.gold_pc.playedtime = (int32)pc_readreg2(&sd,GOLDPC_SECONDS_VAR);
+		}
+
+		p.point = sd.gold_pc.points;
+		p.playedTime = std::abs(sd.gold_pc.playedtime - client_max_seconds);
+
+		clif_send( &p, sizeof( p ), &sd.bl, SELF );
+	}
+#endif
+}
+
+void clif_parse_goldpc_request( int fd, map_session_data* sd ){
+#if PACKETVER_MAIN_NUM >= 20140430 || PACKETVER_RE_NUM >= 20140430 || defined(PACKETVER_ZERO)
+
+	if (!sd || sd->state.menu_or_input || sd->state.trading || sd->state.using_fake_npc || sd->npc_id)
+		return;
+
+	npc_event_do_id("Goldpoint Manager::OnGOLDPCCAFE", sd->status.account_id);
+#endif
 }
 
 /// Displays a special popup.

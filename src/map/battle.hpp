@@ -765,6 +765,11 @@ struct Battle_Config
 	int hom_delay_reset_vaporize;
 	int hom_delay_reset_warp;
 
+	int feature_goldpc_active;
+	int feature_goldpc_time;
+	int feature_goldpc_max_points;
+	int feature_goldpc_vip;
+
 #include <custom/battle_config_struct.inc>
 };
 

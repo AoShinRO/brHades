@@ -14791,13 +14791,13 @@ void pc_show_version(map_session_data *sd) {
 	char buf[CHAT_SIZE_MAX];
 
 	if( svn[0] != UNKNOWN_VERSION )
-		sprintf(buf,msg_txt(sd,1295),"SVN: r",svn); //rAthena Version SVN: r%s
+		snprintf(buf, sizeof(buf), msg_txt(sd,1295), "SVN: r", svn); //rAthena Version SVN: r%s
 	else {
 		const char* git = get_git_hash();
 		if( git[0] != UNKNOWN_VERSION )
-			sprintf(buf,msg_txt(sd,1295),"Git Hash: ",git); //rAthena Version Git Hash: %s
+			snprintf(buf, sizeof(buf), msg_txt(sd,1295), "Git Hash: ", git); //rAthena Version Git Hash: %s
 		else
-			sprintf(buf,"%s",msg_txt(sd,1296)); //Cannot determine SVN/Git version.
+			snprintf(buf, sizeof(buf), "%s", msg_txt(sd,1296)); //Cannot determine SVN/Git version.
 	}
 	clif_displaymessage(sd->fd,buf);
 }
@@ -15888,7 +15888,7 @@ uint64 CaptchaDatabase::parseBodyNode(const ryml::NodeRef &node) {
 
 /* Animation Force Related */
 int e_skill_animation_restore::get_motion(map_session_data&sd,uint16 skill_id){
-	return std::clamp(mapedanimation[skill_id].max - ((mapedanimation[skill_id].max * sd.bonus.delayrate) / 100), mapedanimation[skill_id].min, mapedanimation[skill_id].max); //Kiel uncapped animation remove set min  to 0
+	return std::clamp(sd.battle_status.adelay - ((sd.battle_status.adelay * sd.bonus.delayrate) / 100), mapedanimation[skill_id].min, mapedanimation[skill_id].max); //Kiel uncapped animation remove set min  to 0
 }
 int e_skill_animation_restore::adjust_delay(map_session_data&sd,uint16 skill_id){
 	return std::clamp(mapedanimation[skill_id].maxdelay - ((mapedanimation[skill_id].maxdelay * sd.bonus.delayrate) / 100), mapedanimation[skill_id].mindelay, mapedanimation[skill_id].maxdelay); //Kiel uncapped animation remove set min  to 0
@@ -15922,7 +15922,7 @@ TIMER_FUNC(pc_animation_force_timer){
 			if(!status_isdead(*target))
 			{
 				dir = unit_getdir(target);
-				unit_setdir(target,(dir < DIR_MAX ? dir + DIR_WEST : DIR_NORTH),true); //spin target
+				unit_setdir(target,(dir + DIR_WEST < DIR_MAX ? dir + DIR_WEST : DIR_NORTH),true); //spin target
 			}
 		}
 		it->hit(sd->bl);

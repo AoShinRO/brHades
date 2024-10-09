@@ -13,6 +13,7 @@
 #include <cmath>
 #include <csetjmp>
 #include <cstdlib> // atoi, strtol, strtoll, exit
+#include <filesystem>
 
 #ifdef PCRE_SUPPORT
 #include <pcre.h> // preg_match
@@ -4549,7 +4550,12 @@ int script_config_read(const char *cfgName)
 			script_config.warn_func_mismatch_argtypes = config_switch(w2);
 		}
 		else if(strcmpi(w1,"import")==0){
-			script_config_read(w2);
+			if (std::filesystem::exists(w2)) {
+				script_config_read(w2);
+			} else {
+				ShowError("Invalid path in configuration: %s\n", w2);
+			}
+			
 		}
 		else {
 			ShowWarning("Unknown setting '%s' in file %s\n", w1, cfgName);

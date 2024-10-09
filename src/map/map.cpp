@@ -5,6 +5,7 @@
 
 #include <cstdlib>
 #include <cmath>
+#include <filesystem>
 
 #include <config/core.hpp>
 
@@ -284,6 +285,33 @@ TIMER_FUNC(map_freeblock_timer){
 		map_freeblock_unlock();
 	}
 
+	return 0;
+}
+
+// Called each 1s
+TIMER_FUNC(map_goldpc_timer){
+	struct s_mapiterator* iter;
+	map_session_data* sd;
+
+	// readjust played time cache for each player
+	iter = mapit_geteachpc();
+	for( sd = (map_session_data*)mapit_first(iter); mapit_exists(iter); sd = (map_session_data*)mapit_next(iter) ) {
+		sd->gold_pc.playedtime--;
+		// Update the points and trigger a new timer if necessary
+		if(sd->gold_pc.playedtime <= 0 && !sd->state.connect_new){
+			const static int32 client_max_seconds = 3600;
+			if( battle_config.feature_goldpc_vip && pc_isvip( sd ) ){
+				sd->gold_pc.points += 2;
+			}else{
+				sd->gold_pc.points += 1;
+			}
+			sd->gold_pc.points = std::min(sd->gold_pc.points, battle_config.feature_goldpc_max_points);
+			pc_setreg2(sd,GOLDPC_POINT_VAR,sd->gold_pc.points);
+			sd->gold_pc.playedtime = std::clamp(battle_config.feature_goldpc_time, 1, client_max_seconds);
+			clif_goldpc_info( *sd );
+		}
+	}
+	mapit_free(iter);
 	return 0;
 }
 
@@ -4080,9 +4108,13 @@ int map_config_read(const char *cfgName)
 			console_msg_log = atoi(w2);//[Ind]
 		else if (strcmpi(w1, "console_log_filepath") == 0)
 			safestrncpy(console_log_filepath, w2, sizeof(console_log_filepath));
-		else if (strcmpi(w1, "import") == 0)
-			map_config_read(w2);
-		else
+		else if (strcmpi(w1, "import") == 0){
+			if (std::filesystem::exists(w2)) {
+				map_config_read(w2);
+			} else {
+				ShowError("Invalid path in configuration: %s\n", w2);
+			}		
+		}else
 			ShowWarning("Unknown setting '%s' in file %s\n", w1, cfgName);
 	}
 
@@ -5346,6 +5378,11 @@ bool MapServer::initialize( int argc, char *argv[] ){
 	if( console ){ //start listening
 		add_timer_func_list(parse_console_timer, "parse_console_timer");
 		add_timer_interval(gettick()+1000, parse_console_timer, 0, 0, 1000); //start in 1s each 1sec
+	}
+
+	if( battle_config.feature_goldpc_active ){
+		add_timer_func_list(map_goldpc_timer, "map_goldpc_timer");
+		add_timer_interval(gettick()+1000, map_goldpc_timer, 0, 0, 1000);
 	}
 
 	return true;

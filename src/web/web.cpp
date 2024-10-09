@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <string>
+#include <filesystem>
 #include <thread>
 
 #include <common/cli.hpp>
@@ -148,8 +149,13 @@ bool web_config_read(const char* cfgName, bool normal) {
 			safestrncpy(console_log_filepath, w2, sizeof(console_log_filepath));
 		else if (!strcmpi(w1, "print_req_res"))
 			web_config.print_req_res = config_switch(w2);
-		else if (!strcmpi(w1, "import"))
-			web_config_read(w2, normal);
+		else if (!strcmpi(w1, "import")) {
+			if (std::filesystem::exists(w2)) {
+				web_config_read(w2, normal);
+			} else {
+				ShowError("Invalid path in configuration: %s\n", w2);
+			}
+		}
 		else if (!strcmpi(w1, "allow_gifs"))
 			web_config.allow_gifs = config_switch(w2) == 1;
 	}
@@ -245,8 +251,13 @@ int inter_config_read(const char* cfgName)
 			safestrncpy(guild_db_table, w2, sizeof(guild_db_table));
 		else if (!strcmpi(w1, "char_db"))
 			safestrncpy(char_db_table, w2, sizeof(char_db_table));
-		else if(!strcmpi(w1,"import"))
-			inter_config_read(w2);
+		else if(!strcmpi(w1,"import")){
+			if (std::filesystem::exists(w2)) {
+				inter_config_read(w2);
+			} else {
+				ShowError("Invalid path in configuration: %s\n", w2);
+			}
+		}	
 	}
 	fclose(fp);
 
