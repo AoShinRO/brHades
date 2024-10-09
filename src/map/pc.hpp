@@ -65,6 +65,12 @@ class MapGuild;
 #define ATTENDANCE_DATE_VAR "#AttendanceDate"
 #define ATTENDANCE_COUNT_VAR "#AttendanceCounter"
 #define ACHIEVEMENTLEVEL "AchievementLevel"
+#ifndef GOLDPC_POINT_VAR
+	#define GOLDPC_POINT_VAR "Goldpc_Points"
+#endif
+#ifndef GOLDPC_SECONDS_VAR
+	#define GOLDPC_SECONDS_VAR "Goldpc_Seconds"
+#endif
 #if PACKETVER_MAIN_NUM >= 20170502 || PACKETVER_RE_NUM >= 20170419 || defined(PACKETVER_ZERO)
 #define EXT_MEMO_VAR "EXT_MEMO_SLOTS"
 #endif
@@ -949,6 +955,11 @@ public:
 		std::shared_ptr<s_captcha_data> cd;
 		uint16 upload_size;
 	} captcha_upload;
+
+	struct{
+		int32 playedtime;
+		int32 points;
+	} gold_pc;
 
 	s_macro_detect macro_detect;
 
