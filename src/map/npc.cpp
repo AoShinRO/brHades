@@ -5,6 +5,7 @@
 
 #include <cerrno>
 #include <cstdlib>
+#include <filesystem>
 #include <map>
 #include <vector>
 
@@ -5605,8 +5606,13 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 	if (check_filepath(filepath.data()) != 2) { //this is not a file 
 		ShowDebug("npc_parsesrcfile: Path doesn't seem to be a file skipping it : '%.*s'.\n", (int)filepath.size(), filepath.data());
 		return 0;
-	} 
-            
+	}
+
+    if (!std::filesystem::exists(filepath.data())) {
+		ShowError("npc_parsesrcfile: Invalid path in configuration: '%.*s'\n", (int)filepath.size(), filepath.data());
+		return 0;
+	}
+
 	// read whole file to buffer
 	std::FILE* fp = std::fopen(filepath.data(), "rb");
 	if (!fp) {
