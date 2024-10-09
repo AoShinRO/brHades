@@ -1458,6 +1458,8 @@ void clif_set_npc_window_size(map_session_data& sd, int width, int height);
 void clif_set_npc_window_pos(map_session_data& sd, int x, int y);
 void clif_set_npc_window_pos_percent(map_session_data& sd, int x, int y);
 
+void clif_goldpc_info( map_session_data& sd );
+
 void clif_noask_sub( map_session_data& sd, map_session_data& tsd, int type );
 
 void clif_specialpopup(map_session_data& sd, int32 id);
