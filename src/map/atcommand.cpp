@@ -484,7 +484,7 @@ static void warp_get_suggestions(map_session_data* sd, const char *name) {
 		return;
 	}
 
-	std::vector<const char*> suggestions;
+	std::vector<std::string_view> suggestions;
 
 	suggestions.reserve( MAX_SUGGESTIONS );
 
@@ -511,7 +511,7 @@ static void warp_get_suggestions(map_session_data* sd, const char *name) {
 		// Levenshtein > 4 is bad
 		const int LEVENSHTEIN_MAX = 4;
 
-		std::unordered_map<int, std::vector<const char*>> maps;
+		std::unordered_map<int, std::vector<std::string_view>> maps;
 
 		for (int i = 0; i < map_num; i++) {
 			struct map_data *mapdata = map_getmapdata(i);
@@ -529,7 +529,7 @@ static void warp_get_suggestions(map_session_data* sd, const char *name) {
 				continue;
 			}
 
-			std::vector<const char*>& vector = maps[distance];
+			std::vector<std::string_view>& vector = maps[distance];
 
 			// Do not add more entries than required
 			if( vector.size() == MAX_SUGGESTIONS ){
@@ -540,10 +540,10 @@ static void warp_get_suggestions(map_session_data* sd, const char *name) {
 		}
 
 		for( int distance = 0; distance <= LEVENSHTEIN_MAX; distance++ ){
-			std::vector<const char*>& vector = maps[distance];
+			const std::vector<std::string_view> vector = maps[distance];
 
-			for( const char* found_map : vector ){
-				suggestions.push_back( found_map );
+			for( std::string_view found_map : vector ){
+				suggestions.push_back( found_map.data() );
 
 				if( suggestions.size() == MAX_SUGGESTIONS ){
 					break;
@@ -561,18 +561,20 @@ static void warp_get_suggestions(map_session_data* sd, const char *name) {
 		return;
 	}
 
-	char buffer[CHAT_SIZE_MAX];
-
 	// build the suggestion string
-	strcpy(buffer, msg_txt(sd, 205)); // Maybe you meant:
-	strncat(buffer, "\n", CHAT_SIZE_MAX - strlen(buffer) - 1);
+	std::string buffer = msg_txt(sd, 205);  // Maybe you meant:
+	buffer.append("\n");
+	for( std::string_view suggestion : suggestions ){
+		buffer.append(suggestion);
+		buffer.append(" ");
 
-	for( const char* suggestion : suggestions ){
-		strncat(buffer, suggestion, CHAT_SIZE_MAX - strlen(buffer) - 1);
-		strncat(buffer, " ", CHAT_SIZE_MAX - strlen(buffer) - 1);
+		if (buffer.size() > CHAT_SIZE_MAX-1) {
+			buffer.resize(CHAT_SIZE_MAX-1);
+			break;
+		}
 	}
 
-	clif_displaymessage(sd->fd, buffer);
+	clif_displaymessage(sd->fd, buffer.c_str());
 }
 
 /*==========================================
