@@ -50,6 +50,7 @@ std::string login_server_id = "ragnarok";
 std::string login_server_pw = "";
 std::string login_server_db = "ragnarok";
 
+
 std::string char_server_ip = "127.0.0.1";
 uint16  char_server_port = 3306;
 std::string char_server_id = "ragnarok";
@@ -148,8 +149,13 @@ bool web_config_read(const char* cfgName, bool normal) {
 			safestrncpy(console_log_filepath, w2, sizeof(console_log_filepath));
 		else if (!strcmpi(w1, "print_req_res"))
 			web_config.print_req_res = config_switch(w2);
-		else if (!strcmpi(w1, "import"))
-			web_config_read(w2, normal);
+		else if (!strcmpi(w1, "import")) {
+			if (isValidPath(w2)) {
+				web_config_read(w2, normal);
+			} else {
+				ShowError("Invalid path in configuration: %s\n", w2);
+			}
+		}
 		else if (!strcmpi(w1, "allow_gifs"))
 			web_config.allow_gifs = config_switch(w2) == 1;
 	}
