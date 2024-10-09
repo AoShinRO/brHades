@@ -51,7 +51,6 @@ std::string login_server_id = "ragnarok";
 std::string login_server_pw = "";
 std::string login_server_db = "ragnarok";
 
-
 std::string char_server_ip = "127.0.0.1";
 uint16  char_server_port = 3306;
 std::string char_server_id = "ragnarok";
