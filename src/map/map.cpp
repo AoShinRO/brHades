@@ -292,13 +292,16 @@ TIMER_FUNC(map_freeblock_timer){
 TIMER_FUNC(map_goldpc_timer){
 	struct s_mapiterator* iter;
 	map_session_data* sd;
-
+	int32 points;
 	// readjust played time cache for each player
 	iter = mapit_geteachpc();
 	for( sd = (map_session_data*)mapit_first(iter); mapit_exists(iter); sd = (map_session_data*)mapit_next(iter) ) {
 		sd->gold_pc.playedtime--;
-		// Update the points and trigger a new timer if necessary
-		if(sd->gold_pc.playedtime <= 0 && !sd->state.connect_new){
+		points = (int32)pc_readreg2(sd,GOLDPC_POINT_VAR);
+		if(points != sd->gold_pc.points && !sd->state.connect_new){ // Update the points
+			sd->gold_pc.points = std::min(points, battle_config.feature_goldpc_max_points);
+			clif_goldpc_info( *sd );
+		} else if(sd->gold_pc.playedtime <= 0 && !sd->state.connect_new){ // Update the points and trigger a new timer if necessary
 			const static int32 client_max_seconds = 3600;
 			if( battle_config.feature_goldpc_vip && pc_isvip( sd ) ){
 				sd->gold_pc.points += 2;
@@ -306,7 +309,6 @@ TIMER_FUNC(map_goldpc_timer){
 				sd->gold_pc.points += 1;
 			}
 			sd->gold_pc.points = std::min(sd->gold_pc.points, battle_config.feature_goldpc_max_points);
-			pc_setreg2(sd,GOLDPC_POINT_VAR,sd->gold_pc.points);
 			sd->gold_pc.playedtime = std::clamp(battle_config.feature_goldpc_time, 1, client_max_seconds);
 			clif_goldpc_info( *sd );
 		}
