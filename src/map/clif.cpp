@@ -25330,8 +25330,8 @@ void clif_goldpc_info( map_session_data& sd ){
 		}
 
 		if(sd.state.connect_new){
-			sd.gold_pc.points = (int32)pc_readreg2(&sd,GOLDPC_POINT_VAR);
-			sd.gold_pc.playedtime = (int32)pc_readreg2(&sd,GOLDPC_SECONDS_VAR);
+			sd.gold_pc.points = std::min((int32)pc_readreg2(&sd,GOLDPC_POINT_VAR), battle_config.feature_goldpc_max_points);
+			sd.gold_pc.playedtime = std::min((int32)pc_readreg2(&sd,GOLDPC_SECONDS_VAR), battle_config.feature_goldpc_time);;
 		}
 
 		p.point = sd.gold_pc.points;
