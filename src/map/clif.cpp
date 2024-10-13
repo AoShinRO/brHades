@@ -342,7 +342,7 @@ uint16 clif_getport(void)
 }
 
 #if PACKETVER >= 20071106
-const enum e_clif_bl_types : unsigned char{
+enum e_clif_bl_types : unsigned char{
 	C_PC_TYPE = 0x0,
 	C_NPC_TYPE = 0x1,
 	C_ITEM_TYPE = 0x2,
