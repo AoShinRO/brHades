@@ -1498,7 +1498,7 @@ void clif_class_change_target(struct block_list *bl,int class_,int type, enum se
 
 		p.packetType = HEADER_ZC_NPCSPRITE_CHANGE;
 		p.gid = bl->id;
-		p.type = type;
+		p.type = hades_cast<decltype(p.type)>(type);
 		p.class_ = class_;
 		clif_send(&p,sizeof(p),(sd == nullptr ? bl : &(sd->bl)),target);
 	}
