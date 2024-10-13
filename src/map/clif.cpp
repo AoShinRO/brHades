@@ -5649,8 +5649,7 @@ int clif_outsight(struct block_list *bl,va_list ap)
 				clif_clearunit_single( bl->id, CLR_OUTSIGHT, *tsd );
 			if(sd->chatID){
 				struct chat_data *cd;
-				cd=map_id2cd(sd->chatID);
-				if(cd != nullptr && cd->usersd[0]==sd)
+				if(cd=map_id2cd(sd->chatID) != nullptr && cd->usersd[0] == sd)
 					clif_dispchat(*cd,tsd);
 			}
 			if(sd->state.vending)
