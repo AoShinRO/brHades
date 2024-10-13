@@ -342,23 +342,39 @@ uint16 clif_getport(void)
 }
 
 #if PACKETVER >= 20071106
+enum e_clif_bl_types : unsigned char{
+	C_PC_TYPE = 0x0,
+	C_NPC_TYPE = 0x1,
+	C_ITEM_TYPE = 0x2,
+	C_SKILL_TYPE = 0x3,
+	C_CHAT_TYPE = 0x4,
+	C_NPC_MOB_TYPE = 0x5,
+	C_NPC_EVT_TYPE = 0x6,
+	C_NPC_PET_TYPE = 0x7,
+	C_NPC_HOM_TYPE = 0x8,
+	C_NPC_MERSOL_TYPE = 0x9,
+	C_NPC_ELEMENTAL_TYPE = 0xa,
+	C_NPC_WALKABLETYPE = 0xc,
+	C_NPC_ABR_TYPE = 0xd,
+	C_NPC_BIONIC_TYPE = 0xe
+};
 static inline unsigned char clif_bl_type(struct block_list *bl, bool walking) {
 	switch (bl->type) {
-	case BL_PC:    return (disguised(bl) && !pcdb_checkid(status_get_viewdata(bl)->class_))? 0x1:0x0; //PC_TYPE
-	case BL_ITEM:  return 0x2; //ITEM_TYPE
-	case BL_SKILL: return 0x3; //SKILL_TYPE
-	case BL_CHAT:  return 0x4; //UNKNOWN_TYPE
+	case BL_PC:    return (disguised(bl) && !pcdb_checkid(status_get_viewdata(bl)->class_))? C_NPC_TYPE : C_PC_TYPE;
+	case BL_ITEM:  return C_ITEM_TYPE;
+	case BL_SKILL: return C_SKILL_TYPE;
+	case BL_CHAT:  return C_CHAT_TYPE;
 	case BL_MOB:
 		if( pcdb_checkid( status_get_viewdata( bl )->class_ ) ){
-			return 0x0; //PC_TYPE
+			return C_PC_TYPE;
 		}else{
 			switch( ( (mob_data*)bl )->special_state.ai ){
 				case AI_ABR:
-					return 0xd; //NPC_ABR_TYPE
+					return C_NPC_ABR_TYPE;
 				case AI_BIONIC:
-					return 0xe; //NPC_BIONIC_TYPE
+					return C_NPC_BIONIC_TYPE;
 				default:
-					return 0x5; //NPC_MOB_TYPE
+					return C_NPC_MOB_TYPE;
 			}
 		}
 	case BL_NPC:
@@ -367,19 +383,19 @@ static inline unsigned char clif_bl_type(struct block_list *bl, bool walking) {
 // Since walking NPCs are not supported on official servers, the client does not know how to handle it.
 #if PACKETVER >= 20170726
 		if (pcdb_checkid( status_get_viewdata( bl )->class_ ) && walking)
-			return 0x0;
-		else if (mobdb_checkid( status_get_viewdata( bl )->class_ ))	// FIXME: categorize NPCs able to walk
-			return 0xC;
+			return C_PC_TYPE;
+		else if (mobdb_checkid( status_get_viewdata( bl )->class_ ))
+			return C_NPC_WALKABLETYPE;
 		else
-			return 0x6;
+			return C_NPC_EVT_TYPE;
 #else
-		return pcdb_checkid(status_get_viewdata(bl)->class_) ? 0x0 : 0x6; //NPC_EVT_TYPE
+		return pcdb_checkid(status_get_viewdata(bl)->class_) ? C_PC_TYPE : C_NPC_EVT_TYPE; 
 #endif
-	case BL_PET:   return pcdb_checkid(status_get_viewdata(bl)->class_)?0x0:0x7; //NPC_PET_TYPE
-	case BL_HOM:   return 0x8; //NPC_HOM_TYPE
-	case BL_MER:   return 0x9; //NPC_MERSOL_TYPE
-	case BL_ELEM:  return 0xa; //NPC_ELEMENTAL_TYPE
-	default:       return 0x1; //NPC_TYPE
+	case BL_PET:   return pcdb_checkid(status_get_viewdata(bl)->class_)? C_PC_TYPE:C_NPC_PET_TYPE; 
+	case BL_HOM:   return C_NPC_HOM_TYPE; 
+	case BL_MER:   return C_NPC_MERSOL_TYPE; 
+	case BL_ELEM:  return C_NPC_ELEMENTAL_TYPE; 
+	default:       return C_NPC_TYPE; 
 	}
 }
 #endif
