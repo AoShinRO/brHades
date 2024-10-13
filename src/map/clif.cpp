@@ -4500,7 +4500,7 @@ void clif_createchat( map_session_data& sd, e_create_chatroom flag ){
 }
 
 
-const enum e_chat_flags :uint8 {
+enum e_chat_flags :uint8 {
 	FLAG_CHAT_PRIVATE = 0,
 	FLAG_CHAT_PUBLIC,
 	FLAG_CHAT_ARENA,
