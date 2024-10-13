@@ -268,7 +268,7 @@ int chat_changechatowner(map_session_data* sd, const char* nextownername)
 
 	cd = map_id2cd(sd->chatID);
 
-	if( cd == nullptr || (struct block_list*) sd != cd->owner )
+	if( cd == nullptr || sd->bl != cd->owner )
 		return 1;
 
 	ARR_FIND( 1, cd->users, i, strncmp(cd->usersd[i]->status.name, nextownername, NAME_LENGTH) == 0 );
@@ -318,7 +318,7 @@ int chat_changechatstatus(map_session_data* sd, const char* title, const char* p
 
 	cd = map_id2cd(sd->chatID);
 
-	if( cd == nullptr || (struct block_list *)sd != cd->owner )
+	if( cd == nullptr || sd->bl != cd->owner )
 		return 1;
 
 	safestrncpy(cd->title, title, CHATROOM_TITLE_SIZE);
