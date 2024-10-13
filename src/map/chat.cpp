@@ -106,7 +106,7 @@ int chat_createpcchat(map_session_data* sd, const char* title, const char* pass,
 		pc_setchatid(sd,cd->bl.id);
 		pc_stop_attack(sd);
 		clif_createchat( *sd, CREATEROOM_SUCCESS );
-		clif_dispchat(cd,0);
+		clif_dispchat(*cd);
 
 		if (status_isdead(sd->bl))
 			achievement_update_objective(sd, AG_CHATTING_DYING, 1, 1);
@@ -131,7 +131,7 @@ int chat_joinchat(map_session_data* sd, int chatid, const char* pass)
 
 	nullpo_ret(sd);
 
-	cd = (struct chat_data*)map_id2bl(chatid);
+	cd = map_id2cd(chatid);
 
 	if( cd == nullptr || cd->bl.type != BL_CHAT || cd->bl.m != sd->bl.m || sd->state.vending || sd->state.buyingstore || sd->chatID || ((cd->owner->type == BL_NPC) ? cd->users+1 : cd->users) >= cd->limit ) {
 		clif_joinchatfail( *sd, ENTERROOM_FULL );
@@ -170,8 +170,8 @@ int chat_joinchat(map_session_data* sd, int chatid, const char* pass)
 
 	// To the person who newly joined the chat
 	clif_joinchatok(*sd, *cd);
-	clif_addchat(cd, sd); //Reports To the person who already in the chat
-	clif_dispchat(cd, 0); //Reported number of changes to the people around
+	clif_addchat(*cd, *sd); //Reports To the person who already in the chat
+	clif_dispchat(*cd); //Reported number of changes to the people around
 
 	if (cd->owner->type == BL_PC)
 		achievement_update_objective(map_id2sd(cd->owner->id), AG_CHATTING_COUNT, 1, cd->users);
@@ -195,7 +195,7 @@ int chat_leavechat(map_session_data* sd, bool kicked)
 
 	nullpo_retr(1, sd);
 
-	cd = (struct chat_data*)map_id2bl(sd->chatID);
+	cd = map_id2cd(sd->chatID);
 
 	if( cd == nullptr ) {
 		pc_setchatid(sd, 0);
@@ -208,7 +208,7 @@ int chat_leavechat(map_session_data* sd, bool kicked)
 		return -1;
 	}
 
-	clif_leavechat(cd, sd, kicked);
+	clif_leavechat(*cd, *sd, kicked);
 	pc_setchatid(sd, 0);
 	cd->users--;
 
@@ -233,8 +233,8 @@ int chat_leavechat(map_session_data* sd, bool kicked)
 	}
 
 	if( leavechar == 0 && cd->owner->type == BL_PC ) { // Set and announce new owner
-		cd->owner = (struct block_list*) cd->usersd[0];
-		clif_changechatowner(cd, cd->usersd[0]);
+		cd->owner = &cd->usersd[0]->bl;
+		clif_changechatowner(*cd, *cd->usersd[0]);
 		clif_clearchat(*cd);
 
 		//Adjust Chat location after owner has been changed.
@@ -245,9 +245,9 @@ int chat_leavechat(map_session_data* sd, bool kicked)
 		if(map_addblock( &cd->bl ))
 			return 1;
 
-		clif_dispchat(cd,0);
+		clif_dispchat(*cd);
 	} else
-		clif_dispchat(cd,0); // refresh chatroom
+		clif_dispchat(*cd); // refresh chatroom
 
 	return 0;
 }
@@ -266,7 +266,7 @@ int chat_changechatowner(map_session_data* sd, const char* nextownername)
 
 	nullpo_retr(1, sd);
 
-	cd = (struct chat_data*)map_id2bl(sd->chatID);
+	cd = map_id2cd(sd->chatID);
 
 	if( cd == nullptr || (struct block_list*) sd != cd->owner )
 		return 1;
@@ -279,8 +279,8 @@ int chat_changechatowner(map_session_data* sd, const char* nextownername)
 	clif_clearchat(*cd);
 
 	// set new owner
-	cd->owner = (struct block_list*) cd->usersd[i];
-	clif_changechatowner(cd,cd->usersd[i]);
+	cd->owner = &cd->usersd[i]->bl;
+	clif_changechatowner(*cd, *cd->usersd[i]);
 
 	// swap the old and new owners' positions
 	tmpsd = cd->usersd[i];
@@ -296,7 +296,7 @@ int chat_changechatowner(map_session_data* sd, const char* nextownername)
 		return 1;
 
 	// and display again
-	clif_dispchat(cd,0);
+	clif_dispchat(*cd);
 
 	return 0;
 }
@@ -316,7 +316,7 @@ int chat_changechatstatus(map_session_data* sd, const char* title, const char* p
 
 	nullpo_retr(1, sd);
 
-	cd = (struct chat_data*)map_id2bl(sd->chatID);
+	cd = map_id2cd(sd->chatID);
 
 	if( cd == nullptr || (struct block_list *)sd != cd->owner )
 		return 1;
@@ -327,7 +327,7 @@ int chat_changechatstatus(map_session_data* sd, const char* title, const char* p
 	cd->pub = pub;
 
 	clif_changechatstatus(*cd);
-	clif_dispchat(cd,0);
+	clif_dispchat(*cd);
 
 	return 0;
 }
@@ -415,7 +415,7 @@ int chat_createnpcchat(struct npc_data* nd, const char* title, int limit, bool p
 
 	if( cd ) {
 		nd->chat_id = cd->bl.id;
-		clif_dispchat(cd,0);
+		clif_dispchat(*cd);
 	}
 
 	return 0;
@@ -431,7 +431,7 @@ int chat_deletenpcchat(struct npc_data* nd)
 
 	nullpo_ret(nd);
 
-	cd = (struct chat_data*)map_id2bl(nd->chat_id);
+	cd = map_id2cd(nd->chat_id);
 
 	if( cd == nullptr )
 		return 0;

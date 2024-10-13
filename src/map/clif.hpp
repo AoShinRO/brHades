@@ -885,13 +885,13 @@ void clif_changeoption2( block_list& bl );
 void clif_useitemack(map_session_data *sd,int index,int amount,bool ok);	// self
 void clif_GlobalMessage( block_list& bl, const char* message, enum send_target target );
 void clif_createchat( map_session_data& sd, e_create_chatroom flag );
-void clif_dispchat(struct chat_data* cd, int fd);	// area or fd
+void clif_dispchat(chat_data& cd, map_session_data* sd = nullptr);	// area or sd
 void clif_joinchatfail( map_session_data& sd, e_refuse_enter_room result );
 void clif_joinchatok(map_session_data& sd,chat_data& cd);
-void clif_addchat(struct chat_data* cd,map_session_data *sd);	// chat
-void clif_changechatowner(struct chat_data* cd, map_session_data* sd);	// chat
+void clif_addchat(chat_data& cd,map_session_data &sd);	// chat
+void clif_changechatowner(chat_data& cd, map_session_data& sd);	// chat
 void clif_clearchat(chat_data &cd);
-void clif_leavechat(struct chat_data* cd, map_session_data* sd, bool flag);	// chat
+void clif_leavechat(chat_data& cd, map_session_data& sd, bool flag);	// chat
 void clif_changechatstatus(chat_data& cd);
 void clif_refresh_storagewindow(map_session_data *sd);
 void clif_refresh(map_session_data *sd);	// self
