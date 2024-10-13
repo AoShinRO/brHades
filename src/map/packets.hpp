@@ -1146,6 +1146,14 @@ struct PACKET_ZC_NPC_SHOWEFST_UPDATE {
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(ZC_NPC_SHOWEFST_UPDATE, 0x28a);
 
+struct PACKET_ZC_NPCSPRITE_CHANGE {
+	uint16 packetType;
+	uint32 gid;
+	int8 type;
+	int32 class_;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_NPCSPRITE_CHANGE, 0x1b0);
+
 struct PACKET_ZC_ACTION_FAILURE {
 	int16 packetType;
 	uint16 type;

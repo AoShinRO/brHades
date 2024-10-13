@@ -1510,12 +1510,13 @@ void clif_class_change_target(struct block_list *bl,int class_,int type, enum se
 
 	if(!pcdb_checkid(class_))
 	{// player classes yield missing sprites
-		unsigned char buf[16];
-		WBUFW(buf,0)=0x1b0;
-		WBUFL(buf,2)=bl->id;
-		WBUFB(buf,6)=type;
-		WBUFL(buf,7)=class_;
-		clif_send(buf,packet_len(0x1b0),(sd == nullptr ? bl : &(sd->bl)),target);
+		PACKET_ZC_NPCSPRITE_CHANGE p{};
+
+		p.packetType = HEADER_ZC_NPCSPRITE_CHANGE;
+		p.gid = bl->id;
+		p.type = hades_cast<decltype(p.type)>(type);
+		p.class_ = class_;
+		clif_send(&p,sizeof(p),(sd == nullptr ? bl : &(sd->bl)),target);
 	}
 }
 
@@ -15587,7 +15588,7 @@ void clif_parse_PVPInfo(int fd,map_session_data *sd)
 void clif_parse_FeelSaveOk(int fd,map_session_data *sd)
 {
 	int i;
-	//int wich = RFIFOB(fd,packet_db[RFIFOW(fd,0)].pos[0]);
+
 	if (sd->menuskill_id != SG_FEEL)
 		return;
 	i = sd->menuskill_val-1;
@@ -15597,9 +15598,6 @@ void clif_parse_FeelSaveOk(int fd,map_session_data *sd)
 	sd->feel_map[i].m = sd->bl.m;
 	pc_setglobalreg(sd, add_str(sg_info[i].feel_var), sd->feel_map[i].index);
 
-//Are these really needed? Shouldn't they show up automatically from the feel save packet?
-//	clif_misceffect2(&sd->bl, 0x1b0);
-//	clif_misceffect2(&sd->bl, 0x21f);
 	clif_feel_info(sd, i, 0);
 	clif_menuskill_clear(sd);
 }

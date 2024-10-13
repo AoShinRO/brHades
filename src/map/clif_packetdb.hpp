@@ -222,7 +222,6 @@
 	packet(0x01ad,-1);
 	parseable_packet( HEADER_CZ_REQ_MAKINGARROW, sizeof( PACKET_CZ_REQ_MAKINGARROW ), clif_parse_SelectArrow, 0 );
 	parseable_packet(0x01af,4,clif_parse_ChangeCart,2);
-	packet(0x01b0,11);
 	packet(0x01b1,7);
 	parseable_packet(0x01b2,-1,clif_parse_OpenVending,2,4,84,85);
 	packet(0x01b5,18);
