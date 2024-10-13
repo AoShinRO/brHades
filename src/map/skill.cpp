@@ -13005,6 +13005,9 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 		}
 		clif_skill_nodamage(src, *src, skill_id, skill_lv);
 		break;
+	case ALL_EVENT_20TH_ANNIVERSARY:
+		clif_skill_nodamage(src, *src, skill_id, skill_lv);
+		break;
 
 	default: {
 		std::shared_ptr<s_skill_db> skill = skill_db.find(skill_id);
@@ -13186,8 +13189,8 @@ TIMER_FUNC( skill_keep_using ){
 	map_session_data* sd = map_id2sd( id );
 
 	if( sd && sd->skill_keep_using.skill_id ){
-		clif_parse_skill_toid( sd, sd->skill_keep_using.skill_id, sd->skill_keep_using.level, sd->skill_keep_using.target );
 		sd->skill_keep_using.tid = INVALID_TIMER;
+		clif_parse_skill_toid( sd, sd->skill_keep_using.skill_id, sd->skill_keep_using.level, sd->skill_keep_using.target );
 	}
 
 	return 0;
