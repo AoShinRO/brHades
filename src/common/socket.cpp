@@ -629,7 +629,7 @@ int make_connection(uint32 ip, uint16 port, bool silent,int timeout) {
 	remote_address.sin_port        = htons(port);
 
 	if( !silent )
-		ShowStatus("Connecting to %d.%d.%d.%d:%i\n", CONVIP(ip), port);
+		ShowStatus("Conectando a %d.%d.%d.%d:%i\n", CONVIP(ip), port);
 #ifdef WIN32
 	// On Windows we have to set the socket non-blocking before the connection to make timeout work. [Lemongrass]
 	set_nonblocking(fd, 1);

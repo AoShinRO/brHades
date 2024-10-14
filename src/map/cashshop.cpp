@@ -145,25 +145,25 @@ static bool sale_parse_dbrow( char* fields[], int columns, int current ){
 	struct sale_item_data* sale_item = nullptr;
 
 	if( !item_db.exists(nameid) ){
-		ShowWarning( "sale_parse_dbrow: Invalid ID %u in line '%d', skipping...\n", nameid, current );
+		ShowWarning( "sale_parse_dbrow: ID invalido %u na linha '%d', pulando...\n",nameid, current );
 		return false;
 	}
 
 	// Check if the item exists in the sales tab
 	if( cash_shop_db.findItemInTab( CASHSHOP_TAB_SALE, nameid ) == nullptr ){
-		ShowWarning( "sale_parse_dbrow: ID %u is not registered in the Sale tab in line '%d', skipping...\n", nameid, current );
+		ShowWarning( "sale_parse_dbrow: ID %u nao esta registrado na aba Venda na linha '%d', pulando...\n", nameid, current );
 		return false;
 	}
 
 	// Check if the end is after the start
 	if( start >= end ){
-		ShowWarning( "sale_parse_dbrow: Sale for item %u was ignored, because the timespan was not correct.\n", nameid );
+		ShowWarning( "sale_parse_dbrow: A venda do item %u foi ignorada porque o período nao estava correto.\n", nameid );
 		return false;
 	}
 
 	// Check if it is already in the past
 	if( end < now ){
-		ShowWarning( "sale_parse_dbrow: An outdated sale for item %u was ignored.\n", nameid );
+		ShowWarning( "sale_parse_dbrow: Uma venda desatualizada para o item %u foi ignorada.\n", nameid );
 		return false;
 	}
 
@@ -210,7 +210,7 @@ static void sale_read_db_sql( void ){
 		}
 
 		if( !sale_parse_dbrow( str, 4, lines ) ){
-			ShowError( "sale_read_db_sql: Cannot process table '%s' at line '%d', skipping...\n", sales_table, lines );
+			ShowError( "sale_read_db_sql: Nao e possível processar a tabela '%s' na linha '%d', ignorando...\n", sales_table, lines );
 			continue;
 		}
 
@@ -219,7 +219,7 @@ static void sale_read_db_sql( void ){
 
 	Sql_FreeResult(mmysql_handle);
 
-	ShowStatus( "Done reading '" CL_WHITE "%u" CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", count, sales_table );
+	ShowStatus( "Concluida a leitura de '" CL_WHITE "%u" CL_RESET "' entradas em '" CL_WHITE "%s" CL_RESET "'.\n", count, sales_table );
 }
 
 static TIMER_FUNC(sale_end_timer){

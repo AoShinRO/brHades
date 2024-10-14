@@ -74,7 +74,7 @@ int cnslif_parse(const char* buf){
 			char username[NAME_LENGTH], password[NAME_LENGTH], md5password[32+1], sex; //23+1 plaintext 32+1 md5
 			bool md5 = 0;
 			if( sscanf(command, "%23s %23s %c", username, password, &sex) < 3 || strnlen(username, sizeof(username)) < 4 || strnlen(password, sizeof(password)) < 1 ){
-				ShowWarning("Console: Invalid parameters for '%s'. Usage: %s <username> <password> <sex:F/M>\n", type, type);
+				ShowWarning("Console: Parâmetros invalidos para '%s'. Uso: %s <nome de usuario> <senha> <sexo:F/M>\n", type, type);
 				return 0;
 			}
 			if( login_config.use_md5_passwds ){
@@ -82,18 +82,18 @@ int cnslif_parse(const char* buf){
 				md5 = 1;
 			}
 			if( login_mmo_auth_new(username,(md5?md5password:password), TOUPPER(sex), "0.0.0.0") != -1 ){
-				ShowError("Console: Account creation failed.\n");
+				ShowError("Console: Falha na criacao da conta.\n");
 				return 0;
 			}
-			ShowStatus("Console: Account '%s' created successfully.\n", username);
+			ShowStatus("Console: Conta '%s' criada com sucesso.\n", username);
 		}
 	}
 	else if( strcmpi("help", type) == 0 ){
-		ShowInfo("Available commands:\n");
-		ShowInfo("\t server:shutdown => Stops the server.\n");
-		ShowInfo("\t server:alive => Checks if the server is running.\n");
-		ShowInfo("\t server:reloadconf => Reload config file: \"%s\"\n", LOGIN_CONF_NAME);
-		ShowInfo("\t create:<username> <password> <sex:M|F> => Creates a new account.\n");
+		ShowInfo("Comandos disponíveis:\n");
+		ShowInfo("\t server:shutdown => Para o servidor.\n");
+		ShowInfo("\t server:alive => Verifica se o servidor esta em execucao.\n");
+		ShowInfo("\t server:reloadconf => Recarrega o arquivo de configuracao: \"%s\"\n", LOGIN_CONF_NAME);
+		ShowInfo("\t create:<nome de usuario> <senha> <sexo:M|F> => Cria uma nova conta.\n");
 	}
 	return 1;
 }

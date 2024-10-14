@@ -410,7 +410,7 @@ void geoip_readdb(void){
 	geoip_cache = (unsigned char *) aMalloc(sizeof(unsigned char) * bufa.st_size);
 	if(fread(geoip_cache, sizeof(unsigned char), bufa.st_size, db) != bufa.st_size) { ShowError("geoip_cache reading didn't read all elements \n"); }
 	fclose(db);
-	ShowStatus("Finished Reading " CL_GREEN "GeoIP" CL_RESET " Database.\n");
+	ShowStatus("Leitura concluida " CL_GREEN "GeoIP" CL_RESET " Banco de dados.\n");
 }
 /* [Dekamaster/Nightroad] */
 /* There are millions of entries in GeoIP and it has its own algorithm to go quickly through them */
