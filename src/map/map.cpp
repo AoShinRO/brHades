@@ -5327,8 +5327,11 @@ bool MapServer::initialize( int argc, char *argv[] ){
 	add_timer_func_list(map_clearflooritem_timer, "map_clearflooritem_timer");
 	add_timer_func_list(map_removemobs_timer, "map_removemobs_timer");
 	add_timer_interval(gettick()+1000, map_freeblock_timer, 0, 0, 60*1000);
-	
+
 	map_do_init_msg();
+
+	auto start = std::chrono::high_resolution_clock::now(); // benchmark start
+
 	do_init_path();
 	do_init_atcommand();
 	do_init_battle();
@@ -5361,6 +5364,17 @@ bool MapServer::initialize( int argc, char *argv[] ){
 	do_init_duel();
 	do_init_vending();
 	do_init_buyingstore();
+
+	// Fim do benchmark
+	auto end = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double, std::milli> duration = end - start; // Tempo em milissegundos
+	
+	// Cálculo de minutos, segundos e milissegundos
+	long long total_milliseconds = static_cast<long long>(duration.count());
+	long long minutes = total_milliseconds / 60000; // 1 minuto = 60000 milissegundos
+	long long seconds = (total_milliseconds % 60000) / 1000; // Restante em segundos
+	
+	ShowInfo("Map-Server elapsed DB read time: %lld m, %lld s\n", minutes, seconds);
 
 	npc_event_do_oninit();	// Init npcs (OnInit)
 
