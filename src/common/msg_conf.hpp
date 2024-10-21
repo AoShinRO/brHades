@@ -5,6 +5,7 @@
 #define	MSG_CONF_HPP
 
 #include <config/core.hpp>
+#include <string_view>
 
 enum lang_types {
 	LANG_RUS = 0x01,
@@ -33,7 +34,7 @@ int _msg_config_read(const char* cfgName,int size, char ** msg_table);
 //clear msg_table
 void _do_final_msg(int size, char ** msg_table);
 //Lookups
-int msg_langstr2langtype(char * langtype);
+int msg_langstr2langtype(std::string_view langtype);
 const char* msg_langtype2langstr(int langtype);
 // Verify that the choosen langtype is enabled.
 int msg_checklangtype(int lang, bool display);

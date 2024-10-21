@@ -86,20 +86,16 @@ void _do_final_msg(int size, char ** msg_table){
  * lookup a langtype string into his associate langtype number
  * return -1 if not found
  */
-int msg_langstr2langtype(char * langtype){
-	int lang=-1;
-	if (!strncmpi(langtype, "eng",2)) lang = 0;
-	else if (!strncmpi(langtype, "rus",2)) lang = 1;
-	else if (!strncmpi(langtype, "spn",2)) lang = 2;
-	else if (!strncmpi(langtype, "grm",2)) lang = 3;
-	else if (!strncmpi(langtype, "chn",2)) lang = 4;
-	else if (!strncmpi(langtype, "mal",2)) lang = 5;
-	else if (!strncmpi(langtype, "idn",2)) lang = 6;
-	else if (!strncmpi(langtype, "frn",2)) lang = 7;
-	else if (!strncmpi(langtype, "por",2)) lang = 8;
-	else if (!strncmpi(langtype, "tha",2)) lang = 9;
-
-	return lang;
+static constexpr std::string_view languages[] = {"eng", "rus", "spn", "grm", "chn", "mal", "idn", "frn", "por", "tha"};
+int msg_langstr2langtype(std::string_view langtype) {
+    
+    for (unsigned char i = 0; i < std::size(languages); i++) {
+        if (langtype.substr(0, 3) == languages[i]) {
+            return i;
+        }
+    }
+    
+    return -1; // Caso não encontre a linguagem
 }
 
 /*

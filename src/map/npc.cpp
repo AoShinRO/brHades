@@ -3611,11 +3611,19 @@ void npc_delsrcfile(const char* name)
  */
 void npc_loadsrcfiles() {
 	ShowStatus("Loading NPCs...\n");
+
+	util::ThreadPool pool(std::thread::hardware_concurrency());
+	std::vector<std::pair<std::string,std::future<void>>> files;
+
 	for (const auto& file : npc_src_files) {
+		files.push_back({file,pool.enqueue(npc_parsesrcfile,file)});
+	}
+	for (auto& file : files)
+	{
 #ifdef DETAILED_LOADING_OUTPUT
-		ShowStatus("Loading NPC file: %s" CL_CLL "\r", file.c_str());
+		ShowStatus("Loading NPC file: %s" CL_CLL "\r", file.first.c_str());
 #endif
-		npc_parsesrcfile(file);
+		file.second.get();
 	}
 	int npc_total = npc_warp + npc_shop + npc_script;
 
@@ -5603,37 +5611,35 @@ static inline const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* 
  */
 static inline int npc_parsesrcfile(std::string_view filepath)
 {
-	if (check_filepath(filepath.data()) != 2) { //this is not a file 
+	if (check_filepath(filepath.data()) != 2) { //this is not a file
 		ShowDebug("npc_parsesrcfile: Path doesn't seem to be a file skipping it : '%.*s'.\n", (int)filepath.size(), filepath.data());
 		return 0;
 	}
 
-    if (!std::filesystem::exists(filepath.data())) {
+	if (!std::filesystem::exists(filepath.data())) {
 		ShowError("npc_parsesrcfile: Invalid path in configuration: '%.*s'\n", (int)filepath.size(), filepath.data());
 		return 0;
 	}
-
 	// read whole file to buffer
-	std::FILE* fp = std::fopen(filepath.data(), "rb");
-	if (!fp) {
+	std::FILE* f = std::fopen(filepath.data(), "rb");
+	if (!f) {
 		ShowError("npc_parsesrcfile: File not found '%.*s'.\n", (int)filepath.size(), filepath.data());
 		return 0;
 	}
-
-	std::fseek(fp, 0, SEEK_END);
-	size_t len = std::ftell(fp);
-	std::fseek(fp, 0, SEEK_SET);
+	std::fseek(f, 0, SEEK_END);
+	size_t len = std::ftell(f);
+	std::fseek(f, 0, SEEK_SET);
 
 	std::unique_ptr<char[]> buffer(new char[len + 1]);
-	len = std::fread(buffer.get(), 1, len, fp);
+	len = std::fread(buffer.get(), 1, len, f);
 	buffer[len] = '\0';
 
-	if (std::ferror(fp)) {
+	if (std::ferror(f)) {
 		ShowError("npc_parsesrcfile: Failed to read file '%.*s' - %s\n",(int)filepath.size(), filepath.data(), strerror(errno));
 		return 0;
 	}
 
-	std::fclose(fp);
+	std::fclose(f);
 
 	if (len >= 3 && (unsigned char)buffer[0] == 0xEF && (unsigned char)buffer[1] == 0xBB && (unsigned char)buffer[2] == 0xBF) {
 		// UTF-8 BOM. This is most likely an error on the user's part, because:
