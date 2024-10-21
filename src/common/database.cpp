@@ -121,7 +121,7 @@ bool YamlDatabase::load(const std::string_view& path) {
 	size_t size = result.first;
 	if(!size)
 	{
-		ShowError("Failed to open %*s database file from '" CL_WHITE "'%.*s'" CL_RESET "'.\n", type.c_str(), (int)path.size(), path.data());
+		ShowError("Failed to open %s database file from '" CL_WHITE "'%.*s'" CL_RESET "'.\n", this->type.c_str(), (int)path.size(), path.data());
 		return false;
 	}
 	std::unique_ptr<char[]> buf = std::move(result.second);
