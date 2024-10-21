@@ -11,6 +11,10 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <functional>
+#include <queue>
+#include <condition_variable>
+#include <future>
 
 #include "cbasetypes.hpp"
 #include "random.hpp"
@@ -18,10 +22,6 @@
 #ifndef __has_builtin
 	#define __has_builtin(x) 0
 #endif
-#include "showmsg.hpp"
-#include <queue>
-#include <condition_variable>
-#include <future>
 
 // Class used to perform time measurement
 class cScopeTimer {
