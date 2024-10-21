@@ -315,82 +315,71 @@ namespace brhades {
 		**/
 		std::string base62_encode( uint32 val );
 
-	class ThreadPool {
-	private:
-	    struct Task {
-	        std::function<void(void)> func;
-	        std::promise<void> promise;
+		class ThreadPool {
+		private:
+		    struct Task {
+		        std::function<void(void)> func;
+		        std::promise<void> promise;
+		
+		        // Constructor to initialize the Task struct. This is crucial!
+		        Task(std::function<void(void)>&& f, std::promise<void>&& p) : func(std::move(f)), promise(std::move(p)) {}
+		    };
+		
+		    void workerThread() {
+		        while (!stop_) {
+		            std::unique_lock<std::mutex> lock(queue_mutex_);
+		            cv_.wait(lock, [this]() { return !tasks_.empty() || stop_; });
+		            if (stop_) return;
+		
+		            // Directly use the Task from the queue.  No need for 'Task task;'
+		            try {
+		                tasks_.front().func();  // Call the function directly
+		                tasks_.front().promise.set_value(); // Set value directly
+		                tasks_.pop(); // Remove the task after execution
+		            } catch (...) {
+		                tasks_.front().promise.set_exception(std::current_exception());
+		                tasks_.pop(); // Remove the task even if an exception occurred.
+		            }
+		        }
+			}
+		
+		    size_t numThreads_;
+		    std::vector<std::thread> threads_;
+		    std::queue<Task> tasks_;
+		    std::mutex queue_mutex_;
+		    std::condition_variable cv_;
+		    bool stop_ = false;
+		public:
+		    ThreadPool(size_t numThreads) : numThreads_(numThreads) {
 	
-	        // Constructor to initialize the Task struct. This is crucial!
-	        Task(std::function<void(void)>&& f, std::promise<void>&& p) : func(std::move(f)), promise(std::move(p)) {}
-	    };
-	
-	    void workerThread() {
-	        while (!stop_) {
-	            std::unique_lock<std::mutex> lock(queue_mutex_);
-	            cv_.wait(lock, [this]() { return !tasks_.empty() || stop_; });
-	            if (stop_) return;
-	
-	            // Directly use the Task from the queue.  No need for 'Task task;'
-	            try {
-	                tasks_.front().func();  // Call the function directly
-	                tasks_.front().promise.set_value(); // Set value directly
-	                tasks_.pop(); // Remove the task after execution
-	            } catch (...) {
-	                tasks_.front().promise.set_exception(std::current_exception());
-	                tasks_.pop(); // Remove the task even if an exception occurred.
-	            }
-	        }
-		}
-	
-	    size_t numThreads_;
-	    std::vector<std::thread> threads_;
-	    std::queue<Task> tasks_;
-	    std::mutex queue_mutex_;
-	    std::condition_variable cv_;
-	    bool stop_ = false;
-	public:
-	    ThreadPool(size_t numThreads) : numThreads_(numThreads) {
+		        threads_.reserve(numThreads_);
+		        for (size_t i = 0; i < numThreads_; ++i) {
+		            threads_.emplace_back([this]() { this->workerThread(); });
+		        }
+		    }
+		    ~ThreadPool() {
+		        stop_ = true;
+		        cv_.notify_all();
+		        for (auto& thread : threads_) {
+		            thread.join();
+		        }
+		    }
+		
+		    template <typename F, typename... Args>
+		    auto enqueue(F&& f, Args&&... args) {
+		        std::promise<void> promise;
+		        auto future = promise.get_future();
+		        // Use std::bind to create a callable object suitable for the Task constructor
+		        {
+		            std::unique_lock<std::mutex> lock(queue_mutex_);
+		            tasks_.push(Task(std::bind(std::forward<F>(f), std::forward<Args>(args)...), std::move(promise)));
+		        }
+		        cv_.notify_one();
+		        return future;
+		    }	
+		}; //ThreadPool End
 
-	        threads_.reserve(numThreads_);
-	        for (size_t i = 0; i < numThreads_; ++i) {
-	            threads_.emplace_back([this]() { this->workerThread(); });
-	        }
-	    }
-	    ~ThreadPool() {
-	        stop_ = true;
-	        cv_.notify_all();
-	        for (auto& thread : threads_) {
-	            thread.join();
-	        }
-	    }
-	
-	    template <typename F, typename... Args>
-	    auto enqueue(F&& f, Args&&... args) {
-	        std::promise<void> promise;
-	        auto future = promise.get_future();
-	        // Use std::bind to create a callable object suitable for the Task constructor
-	        {
-	            std::unique_lock<std::mutex> lock(queue_mutex_);
-	            tasks_.push(Task(std::bind(std::forward<F>(f), std::forward<Args>(args)...), std::move(promise)));
-	        }
-	        cv_.notify_one();
-	        return future;
-	    }
 
-	    template <typename F>
-	    auto enqueue(F&& f) {
-	        std::promise<void> promise;
-	        auto future = promise.get_future();
-	        // Use std::bind to create a callable object suitable for the Task constructor
-	        {
-	            std::unique_lock<std::mutex> lock(queue_mutex_);
-	            tasks_.push(Task(std::bind(std::forward<F>(f)...), std::move(promise)));
-	        }
-	        cv_.notify_one();
-	        return future;
-	    }
-	};
 	}
 }
 

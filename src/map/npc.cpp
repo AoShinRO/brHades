@@ -3611,11 +3611,19 @@ void npc_delsrcfile(const char* name)
  */
 void npc_loadsrcfiles() {
 	ShowStatus("Loading NPCs...\n");
+
+	util::ThreadPool pool(std::thread::hardware_concurrency());
+	std::vector<std::pair<std::string,std::future<void>>> files;
+
 	for (const auto& file : npc_src_files) {
+		files.push_back({file,pool.enqueue(npc_parsesrcfile,file)});
+	}
+	for (auto& file : files)
+	{
 #ifdef DETAILED_LOADING_OUTPUT
-		ShowStatus("Loading NPC file: %s" CL_CLL "\r", file.c_str());
+		ShowStatus("Loading NPC file: %s" CL_CLL "\r", file.first.c_str());
 #endif
-		npc_parsesrcfile(file);
+		file.second.get();
 	}
 	int npc_total = npc_warp + npc_shop + npc_script;
 
