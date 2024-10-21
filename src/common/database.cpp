@@ -89,61 +89,77 @@ bool YamlDatabase::reload(){
 	return this->load();
 }
 
-bool YamlDatabase::load(const std::string_view& path) {
-	ShowStatus("Loading '" CL_WHITE "%.*s" CL_RESET "'..." CL_CLL "\r", (int)path.size(), path.data());
-	std::FILE* f = std::fopen(path.data(), "r");
-	if (f == nullptr) {
-		ShowError("Failed to open %s database file from '" CL_WHITE "'%.*s'" CL_RESET "'.\n", this->type.c_str(), (int)path.size(), path.data());
-		return false;
+std::pair<size_t, std::unique_ptr<char[]>> readDBFileAsync(const std::string_view& filepath, const std::string& type) {
+
+	// read whole file to buffer
+	std::FILE* f = std::fopen(filepath.data(), "rb");
+	if (!f) {
+		ShowError("Failed to open %s database file from '%.*s'.\n", type.c_str(), (int)filepath.size(), filepath.data());
+		return { 0,nullptr };
 	}
 	std::fseek(f, 0, SEEK_END);
-	size_t size = std::ftell(f);
-	std::unique_ptr<char[]> buf(new char[size + 1]);
-	std::rewind(f);
-	size_t real_size = std::fread(buf.get(), sizeof(char), size, f);
-	// Zero terminate
-	buf[real_size] = '\0';
+	size_t len = std::ftell(f);
+	std::fseek(f, 0, SEEK_SET);
+
+	std::unique_ptr<char[]> buffer(new char[len + 1]);
+	len = std::fread(buffer.get(), 1, len, f);
+	buffer[len] = '\0';
 
 	if (std::ferror(f)) {
-		ShowError("Failed to read %s database file from '" CL_WHITE "'%.*s'" CL_RESET "' - %s\n",this->type.c_str(), (int)path.size(), path.data(), strerror(errno));
-		return false;
+		ShowError("Failed to read %s database file from '%.*s' - %s\n",type.c_str(),(int)filepath.size(), filepath.data(), strerror(errno));
+		return { 0,nullptr };
 	}
 
 	std::fclose(f);
+	return std::make_pair(len, std::move(buffer));
+}
+bool YamlDatabase::load(const std::string_view& path) {
+	ShowStatus("Loading '" CL_WHITE "%.*s" CL_RESET "'..." CL_CLL "\r", (int)path.size(), path.data());
+
+	auto futureResult = std::async(std::launch::async, readDBFileAsync, path, this->type);
+	auto result = futureResult.get(); // Wait for file reading to finish
+	size_t size = result.first;
+	if(!size)
+	{
+		ShowError("Failed to open %*s database file from '" CL_WHITE "'%.*s'" CL_RESET "'.\n", type.c_str(), (int)path.size(), path.data());
+		return false;
+	}
+	std::unique_ptr<char[]> buf = std::move(result.second);
 
 	parser = {};
 	ryml::Tree tree;
 
-	try{
+	try {
 		tree = parser.parse_in_arena(c4::to_csubstr(path.data()), c4::to_csubstr(buf.get()));
-	}catch( const std::runtime_error& e ){
-		ShowError( "Failed to load %s database file from '" CL_WHITE "'%.*s'" CL_RESET "'.\n", this->type.c_str(), (int)path.size(), path.data() );
-		ShowError( "There is likely a syntax error in the file.\n" );
-		ShowError( "Error message: %s\n", e.what() );
+	}
+	catch (const std::runtime_error& e) {
+		ShowError("Failed to load %s database file from '" CL_WHITE "'%.*s'" CL_RESET "'.\n", this->type.c_str(), (int)path.size(), path.data());
+		ShowError("There is likely a syntax error in the file.\n");
+		ShowError("Error message: %s\n", e.what());
 		return false;
 	}
 
 	// Required here already for header error reporting
 	this->currentFile = path;
 
-	if (!this->verifyCompatibility(tree)){
+	if (!this->verifyCompatibility(tree)) {
 		ShowError("Failed to verify compatibility with %s database file from '" CL_WHITE "%s" CL_RESET "'.\n", this->type.c_str(), this->currentFile.c_str());
 		return false;
 	}
 
 	const ryml::NodeRef& header = tree["Header"];
 
-	if( this->nodeExists( header, "Clear" ) ){
+	if (this->nodeExists(header, "Clear")) {
 		bool clear;
 
-		if( this->asBool( header, "Clear", clear ) && clear ){
+		if (this->asBool(header, "Clear", clear) && clear) {
 			this->clear();
 		}
 	}
 
-	this->parse( tree );
+	this->parse(tree);
 
-	this->parseImports( tree );
+	this->parseImports(tree);
 
 	return true;
 }
