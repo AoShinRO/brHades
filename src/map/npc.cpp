@@ -5609,30 +5609,6 @@ static inline const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* 
  * @param runOnInit :  should we exec OnInit when it's done ?
  * @return 0:error, 1:success
  */
-std::pair<size_t, std::unique_ptr<char[]>> readNPCFileAsync(const std::string_view& filepath) {
-
-	// read whole file to buffer
-	std::FILE* f = std::fopen(filepath.data(), "rb");
-	if (!f) {
-		ShowError("npc_parsesrcfile: File not found '%.*s'.\n", (int)filepath.size(), filepath.data());
-		return { 0,nullptr };
-	}
-	std::fseek(f, 0, SEEK_END);
-	size_t len = std::ftell(f);
-	std::fseek(f, 0, SEEK_SET);
-
-	std::unique_ptr<char[]> buffer(new char[len + 1]);
-	len = std::fread(buffer.get(), 1, len, f);
-	buffer[len] = '\0';
-
-	if (std::ferror(f)) {
-		ShowError("npc_parsesrcfile: Failed to read file '%.*s' - %s\n", (int)filepath.size(), filepath.data(), strerror(errno));
-		return { 0,nullptr };
-	}
-
-	std::fclose(f);
-	return std::make_pair(len, std::move(buffer));
-}
 static inline int npc_parsesrcfile(std::string_view filepath)
 {
 	if (check_filepath(filepath.data()) != 2) { //this is not a file
@@ -5644,15 +5620,26 @@ static inline int npc_parsesrcfile(std::string_view filepath)
 		ShowError("npc_parsesrcfile: Invalid path in configuration: '%.*s'\n", (int)filepath.size(), filepath.data());
 		return 0;
 	}
-	auto futureResult = std::async(std::launch::async, readNPCFileAsync, filepath);
-	auto result = futureResult.get(); // Wait for file reading to finish
-	size_t len = result.first;
-	if (!len)
-	{
-		ShowError("npc_parsesrcfile: Failed to read file '%.*s' - %s\n", (int)filepath.size(), filepath.data(), strerror(errno));
-		return false;
+	// read whole file to buffer
+	std::FILE* f = std::fopen(filepath.data(), "rb");
+	if (!f) {
+		ShowError("npc_parsesrcfile: File not found '%.*s'.\n", (int)filepath.size(), filepath.data());
+		return 0;
 	}
-	std::unique_ptr<char[]> buffer = std::move(result.second);
+	std::fseek(f, 0, SEEK_END);
+	size_t len = std::ftell(f);
+	std::fseek(f, 0, SEEK_SET);
+
+	std::unique_ptr<char[]> buffer(new char[len + 1]);
+	len = std::fread(buffer.get(), 1, len, f);
+	buffer[len] = '\0';
+
+	if (std::ferror(f)) {
+		ShowError("npc_parsesrcfile: Failed to read file '%.*s' - %s\n",(int)filepath.size(), filepath.data(), strerror(errno));
+		return 0;
+	}
+
+	std::fclose(f);
 
 	if (len >= 3 && (unsigned char)buffer[0] == 0xEF && (unsigned char)buffer[1] == 0xBB && (unsigned char)buffer[2] == 0xBF) {
 		// UTF-8 BOM. This is most likely an error on the user's part, because:
