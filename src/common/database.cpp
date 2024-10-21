@@ -94,7 +94,6 @@ static std::pair<size_t, std::unique_ptr<char[]>> readDBFileAsync(const std::str
 	// read whole file to buffer
 	std::FILE* f = std::fopen(filepath.data(), "rb");
 	if (!f) {
-		ShowError("Failed to open %s database file from '%.*s'.\n", type.c_str(), (int)filepath.size(), filepath.data());
 		return { 0,nullptr };
 	}
 	std::fseek(f, 0, SEEK_END);
@@ -106,7 +105,6 @@ static std::pair<size_t, std::unique_ptr<char[]>> readDBFileAsync(const std::str
 	buf[real_size] = '\0';
 
 	if (std::ferror(f)) {
-		ShowError("Failed to read %s database file from '%.*s' - %s\n",type.c_str(),(int)filepath.size(), filepath.data(), strerror(errno));
 		return { 0,nullptr };
 	}
 
