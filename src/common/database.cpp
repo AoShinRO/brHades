@@ -89,7 +89,7 @@ bool YamlDatabase::reload(){
 	return this->load();
 }
 
-std::pair<size_t, std::unique_ptr<char[]>> readDBFileAsync(const std::string_view& filepath, const std::string& type) {
+static std::pair<size_t, std::unique_ptr<char[]>> readDBFileAsync(const std::string_view& filepath, const std::string& type) {
 
 	// read whole file to buffer
 	std::FILE* f = std::fopen(filepath.data(), "rb");
@@ -99,11 +99,11 @@ std::pair<size_t, std::unique_ptr<char[]>> readDBFileAsync(const std::string_vie
 	}
 	std::fseek(f, 0, SEEK_END);
 	size_t len = std::ftell(f);
-	std::fseek(f, 0, SEEK_SET);
-
-	std::unique_ptr<char[]> buffer(new char[len + 1]);
-	len = std::fread(buffer.get(), 1, len, f);
-	buffer[len] = '\0';
+	std::unique_ptr<char[]> buf(new char[len + 1]);
+	std::rewind(f);
+	size_t real_size = std::fread(buf.get(), sizeof(char), len, f);
+	// Zero terminate
+	buf[real_size] = '\0';
 
 	if (std::ferror(f)) {
 		ShowError("Failed to read %s database file from '%.*s' - %s\n",type.c_str(),(int)filepath.size(), filepath.data(), strerror(errno));
@@ -111,8 +111,9 @@ std::pair<size_t, std::unique_ptr<char[]>> readDBFileAsync(const std::string_vie
 	}
 
 	std::fclose(f);
-	return std::make_pair(len, std::move(buffer));
+	return std::make_pair(len, std::move(buf));
 }
+
 bool YamlDatabase::load(const std::string_view& path) {
 	ShowStatus("Loading '" CL_WHITE "%.*s" CL_RESET "'..." CL_CLL "\r", (int)path.size(), path.data());
 
