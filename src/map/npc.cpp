@@ -3612,19 +3612,28 @@ void npc_delsrcfile(const char* name)
 void npc_loadsrcfiles() {
 	ShowStatus("Loading NPCs...\n");
 
-	util::ThreadPool pool(std::thread::hardware_concurrency());
-	std::vector<std::pair<std::string,std::future<void>>> files;
+	auto start = std::chrono::high_resolution_clock::now(); // benchmark start
+    static std::unique_ptr<util::ThreadPool> pool; // Usar unique_ptr para gerenciar a memória
+    if (!pool) {
+        pool = std::make_unique<util::ThreadPool>(std::thread::hardware_concurrency());
+    }
+
+    static std::vector<std::future<void>> files;
+    files.clear();
 
 	for (const auto& file : npc_src_files) {
-		files.push_back({file,pool.enqueue(npc_parsesrcfile,file)});
-	}
-	for (auto& file : files)
-	{
 #ifdef DETAILED_LOADING_OUTPUT
-		ShowStatus("Loading NPC file: %s" CL_CLL "\r", file.first.c_str());
+		ShowStatus("Loading NPC file: %s" CL_CLL "\r", file.c_str());
 #endif
-		file.second.get();
+		files.push_back(pool->enqueue(npc_parsesrcfile,file));
 	}
+#ifdef DETAILED_LOADING_OUTPUT
+	for (auto& file : files)
+		file.get();	
+#else
+	pool->waitForAll();
+#endif
+
 	int npc_total = npc_warp + npc_shop + npc_script;
 
 	ShowInfo ("Done loading '" CL_WHITE "%d" CL_RESET "' NPCs:" CL_CLL "\n"
@@ -3635,6 +3644,16 @@ void npc_loadsrcfiles() {
 		"\t-'" CL_WHITE "%d" CL_RESET "' Mobs Cached\n"
 		"\t-'" CL_WHITE "%d" CL_RESET "' Mobs Not Cached\n",
 		npc_total, npc_warp, npc_shop, npc_script, npc_mob, npc_cache_mob, npc_delay_mob);
+
+	auto end = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double, std::milli> duration = end - start; // Tempo em milissegundos
+	
+	// Cálculo de minutos, segundos e milissegundos
+	long long total_milliseconds = static_cast<long long>(duration.count());
+	long long minutes = total_milliseconds / 60000; // 1 minuto = 60000 milissegundos
+	long long seconds = (total_milliseconds % 60000) / 1000; // Restante em segundos
+	
+	ShowInfo("NPC read time: %lld m, %lld s\n", minutes, seconds);
 }
 
 /// Parses and sets the name and exname of a npc.

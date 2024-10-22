@@ -317,54 +317,83 @@ namespace brhades {
 
 		class ThreadPool {
 		private:
-		    struct Task {
-		        std::function<void(void)> func;
-		        std::promise<void> promise;
-		
-		        // Constructor to initialize the Task struct. This is crucial!
-		        Task(std::function<void(void)>&& f, std::promise<void>&& p) : func(std::move(f)), promise(std::move(p)) {}
-		    };
-		
-		    void workerThread() {
-		        while (!stop_) {
-		            std::unique_lock<std::mutex> lock(queue_mutex_);
-		            cv_.wait(lock, [this]() { return !tasks_.empty() || stop_; });
-		            if (stop_) return;
-		
-		            // Directly use the Task from the queue.  No need for 'Task task;'
-		            try {
-		                tasks_.front().func();  // Call the function directly
-		                tasks_.front().promise.set_value(); // Set value directly
-		                tasks_.pop(); // Remove the task after execution
-		            } catch (...) {
-		                tasks_.front().promise.set_exception(std::current_exception());
-		                tasks_.pop(); // Remove the task even if an exception occurred.
-		            }
-		        }
+			struct Task {
+				std::function<void(void)> func;
+				std::promise<void> promise;
+				
+				Task(std::function<void(void)>&& f, std::promise<void>&& p) : func(std::move(f)), promise(std::move(p)) {}
+			};
+			
+			void workerThread() {
+				while (!stop_) {
+					std::unique_lock<std::mutex> lock(queue_mutex_);
+					cv_.wait(lock, [this]() {
+						return !tasks_.empty() || stop_;
+						});
+
+					if (stop_)
+						return;
+					
+					try {
+						tasks_.front().func();  // Chama a função diretamente
+						tasks_.front().promise.set_value(); // Define o valor diretamente
+						tasks_.pop(); // Remove a tarefa após a execução
+					} catch (...) {
+						tasks_.front().promise.set_exception(std::current_exception());
+						tasks_.pop(); // Remove a tarefa mesmo se ocorrer uma exceção.
+					}
+				}
 			}
-		
-		    size_t numThreads_;
-		    std::vector<std::thread> threads_;
-		    std::queue<Task> tasks_;
-		    std::mutex queue_mutex_;
-		    std::condition_variable cv_;
-		    bool stop_ = false;
+			
+			size_t numThreads_;
+			std::vector<std::thread> threads_;
+			std::queue<Task> tasks_;
+			std::mutex queue_mutex_;
+			std::condition_variable cv_;
+			bool stop_ = false;
+#ifndef DETAILED_LOADING_OUTPUT				
+			// Novo vetor para armazenar futuros
+			std::vector<std::future<void>> futures_;
+#endif			
 		public:
-		    ThreadPool(size_t numThreads) : numThreads_(numThreads) {
-	
-		        threads_.reserve(numThreads_);
-		        for (size_t i = 0; i < numThreads_; ++i) {
-		            threads_.emplace_back([this]() { this->workerThread(); });
-		        }
-		    }
-		    ~ThreadPool() {
-		        stop_ = true;
-		        cv_.notify_all();
-		        for (auto& thread : threads_) {
-		            thread.join();
-		        }
-		    }
-		
+			ThreadPool(size_t numThreads) : numThreads_(numThreads) {
+				threads_.reserve(numThreads_);
+				for (size_t i = 0; i < numThreads_; ++i) {
+					threads_.emplace_back([this]() { this->workerThread(); });
+				}
+			}
+			
+			~ThreadPool() {
+				stop_ = true;
+				cv_.notify_all();
+				for (auto& thread : threads_) {
+					thread.join();
+				}
+			}
+#ifndef DETAILED_LOADING_OUTPUT			
+			template <typename F, typename... Args>
+			auto enqueue(F&& f, Args&&... args) {
+				std::promise<void> promise;
+				auto future = promise.get_future();
+				
+				// Adiciona o futuro ao vetor movendo-o
+				futures_.emplace_back(std::move(future));
+				
+				{
+					std::unique_lock<std::mutex> lock(queue_mutex_);
+					tasks_.push(Task(std::bind(std::forward<F>(f), std::forward<Args>(args)...), std::move(promise)));
+				}
+				cv_.notify_one();
+				return future;
+			}
+			// Método para esperar todos os futuros
+			void waitForAll() {
+				for (auto& future : futures_) {
+					future.get();  // Espera pelo futuro associado
+				}
+				futures_.clear();  // Limpa o vetor após esperar
+			}
+#else
 		    template <typename F, typename... Args>
 		    auto enqueue(F&& f, Args&&... args) {
 		        std::promise<void> promise;
@@ -376,9 +405,9 @@ namespace brhades {
 		        }
 		        cv_.notify_one();
 		        return future;
-		    }	
-		}; //ThreadPool End
-
+		    }
+#endif
+		}; // Fim da classe ThreadPool
 
 	}
 }
