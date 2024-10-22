@@ -979,13 +979,13 @@ void  linkdb_foreach (struct linkdb_node** head, LinkDBFunc func, ...);
 /// @param __var     Index variable
 /// @param __cmp     Expression that returns true when the target entry is found
 #define ARR_FIND(__start, __end, __var, __cmp) \
-	do{ \
-		for( (__var) = (__start); (__var) < (__end); ++(__var) ) \
-			if( __cmp ) \
-				break; \
-	}while(0)
-
-
+  do { \
+    char __dir = (__start) < (__end) ? 1 : -1; /* Define a direção do loop */ \
+    decltype(__var) ___max = (__start) < (__end) ? (__end) : (__start); /* Define o maior valor */ \
+    for ((__var) = (__start); (__var) < (___max); (__var) += __dir) \
+      if (__cmp) \
+        break; \
+  } while (0)
 
 /// Moves an entry of the array.
 /// Use ARR_MOVERIGHT/ARR_MOVELEFT if __from and __to are direct numbers.

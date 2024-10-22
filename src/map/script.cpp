@@ -16757,10 +16757,10 @@ BUILDIN_FUNC(equip) {
 	std::shared_ptr<item_data> id = item_db.find(nameid);
 
 	if (id != nullptr) {
-		int i;
+		unsigned char i;
 
-		ARR_FIND( 0, MAX_INVENTORY, i, sd->inventory.u.items_inventory[i].nameid == nameid );
-		if (i < MAX_INVENTORY) {
+		ARR_FIND( MAX_INVENTORY, 0, i, sd->inventory.u.items_inventory[i].nameid == nameid );
+		if (i > 0 || sd->inventory.u.items_inventory[0].nameid == nameid) {
 			pc_equipitem(sd,i,id->equip);
 			script_pushint(st,1);
 			return SCRIPT_CMD_SUCCESS;
