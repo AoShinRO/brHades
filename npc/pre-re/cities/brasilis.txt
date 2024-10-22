@@ -1,9 +1,11 @@
-//===== rAthena Script =======================================
-//= Brasilis Town Pre-Renewal
-//===== Description: =========================================
-//= [Official Conversion based on bRO & jRO servers]
-//= Brasilis town NPCs.
-//
+//===============================================================\\
+//	___.         .__                .___             	 ||
+//	\_ |_________|  |__ _____     __| _/____   ______	 ||
+//	 | __ \_  __ \  |  \\__  \   / __ |/ __ \ /  ___/	 ||
+//	 | \_\ \  | \/   Y  \/ __ \_/ /_/ \  ___/ \___ \ 	 ||
+//	 |___  /__|  |___|  (____  /\____ |\___  >____  >	 ||
+//	     \/           \/     \/      \/    \/     \/ 	 ||
+//===============================================================//
 // Note:
 // - Brasilis was introduced in Pre-Renewal only for bRO and
 //   jRO official servers with differences in monster stats,
