@@ -190,7 +190,7 @@ Escape sequences for Select Character Set
 #define is_console(handle) (FILE_TYPE_CHAR==GetFileType(handle))
 
 ///////////////////////////////////////////////////////////////////////////////
-int	VFPRINTF(HANDLE handle, const char *fmt, va_list argptr)
+static int VFPRINTF(HANDLE handle, const std::string_view fmt, va_list argptr)
 {
 	/////////////////////////////////////////////////////////////////
 	/* XXX Two streams are being used. Disabled to avoid inconsistency [flaviojs]
@@ -202,11 +202,11 @@ int	VFPRINTF(HANDLE handle, const char *fmt, va_list argptr)
 	char *p, *q;
 	NEWBUF(tempbuf); // temporary buffer
 
-	if(!fmt || !*fmt)
+	if(fmt.empty())
 		return 0;
 
 	// Print everything to the buffer
-	BUFVPRINTF(tempbuf,fmt,argptr);
+	BUFVPRINTF(tempbuf,fmt.data(),argptr);
 
 	if( !is_console(handle) && stdout_with_ansisequence )
 	{
@@ -507,7 +507,7 @@ int	VFPRINTF(HANDLE handle, const char *fmt, va_list argptr)
 	return 0;
 }
 
-int	FPRINTF(HANDLE handle, const char *fmt, ...)
+static int FPRINTF(HANDLE handle, const std::string_view fmt, ...)
 {
 	int ret;
 	va_list argptr;
@@ -528,22 +528,22 @@ int	FPRINTF(HANDLE handle, const char *fmt, ...)
 #define is_console(file) (0!=isatty(fileno(file)))
 
 //vprintf_without_ansiformats
-int	VFPRINTF(FILE *file, const char *fmt, va_list argptr)
+static int VFPRINTF(FILE *file, const std::string_view fmt, va_list argptr)
 {
 	char *p, *q;
 	NEWBUF(tempbuf); // temporary buffer
 
-	if(!fmt || !*fmt)
+	if(fmt.empty())
 		return 0;
 
 	if( is_console(file) || stdout_with_ansisequence )
 	{
-		vfprintf(file, fmt, argptr);
+		vfprintf(file, fmt.data(), argptr);
 		return 0;
 	}
 
 	// Print everything to the buffer
-	BUFVPRINTF(tempbuf,fmt,argptr);
+	BUFVPRINTF(tempbuf,fmt.data(),argptr);
 
 	// start with processing
 	p = BUFVAL(tempbuf);
@@ -643,7 +643,7 @@ int	VFPRINTF(FILE *file, const char *fmt, va_list argptr)
 	FREEBUF(tempbuf);
 	return 0;
 }
-int	FPRINTF(FILE *file, const char *fmt, ...)
+static int FPRINTF(FILE *file, const std::string_view fmt, ...)
 {
 	int ret;
 	va_list argptr;
@@ -662,7 +662,7 @@ int	FPRINTF(FILE *file, const char *fmt, ...)
 
 char timestamp_format[20] = ""; //For displaying Timestamps
 
-int _vShowMessage(enum msg_type flag, const char *string, va_list ap)
+int _vShowMessage(enum msg_type flag, const std::string_view string, va_list ap)
 {
 	va_list apcopy;
 	char prefix[100];
@@ -670,7 +670,7 @@ int _vShowMessage(enum msg_type flag, const char *string, va_list ap)
 	FILE *fp;
 #endif
 	
-	if (!string || *string == '\0') {
+	if (string.empty()) {
 		ShowError("Empty string passed to _vShowMessage().\n");
 		return 1;
 	}
@@ -702,7 +702,7 @@ int _vShowMessage(enum msg_type flag, const char *string, va_list ap)
 				flag == MSG_DEBUG ? "Debug" :
 				"Unknown");
 			va_copy(apcopy, ap);
-			vfprintf(log,string,apcopy);
+			vfprintf(log,string.data(),apcopy);
 			va_end(apcopy);
 			fclose(log);
 		}
@@ -781,7 +781,7 @@ int _vShowMessage(enum msg_type flag, const char *string, va_list ap)
 		} else {
 			fprintf(fp,"%s ", prefix);
 			va_copy(apcopy, ap);
-			vfprintf(fp,string,apcopy);
+			vfprintf(fp,string.data(),apcopy);
 			va_end(apcopy);
 			fclose(fp);
 		}
@@ -800,7 +800,7 @@ void ClearScreen(void)
 	ShowMessage(CL_CLS);	// to prevent empty string passed messages
 #endif
 }
-int _ShowMessage(enum msg_type flag, const char *string, ...)
+static int _ShowMessage(enum msg_type flag, const std::string_view string, ...)
 {
 	int ret;
 	va_list ap;
@@ -811,67 +811,67 @@ int _ShowMessage(enum msg_type flag, const char *string, ...)
 }
 
 // direct printf replacement
-void ShowMessage(const char *string, ...) {
+void ShowMessage(const std::string_view string, ...) {
 	va_list ap;
 	va_start(ap, string);
 	_vShowMessage(MSG_NONE, string, ap);
 	va_end(ap);
 }
-void ShowStatus(const char *string, ...) {
+void ShowStatus(const std::string_view string, ...) {
 	va_list ap;
 	va_start(ap, string);
 	_vShowMessage(MSG_STATUS, string, ap);
 	va_end(ap);
 }
-void ShowSQL(const char *string, ...) {
+void ShowSQL(const std::string_view string, ...) {
 	va_list ap;
 	va_start(ap, string);
 	_vShowMessage(MSG_SQL, string, ap);
 	va_end(ap);
 }
-void ShowInfo(const char *string, ...) {
+void ShowInfo(const std::string_view string, ...) {
 	va_list ap;
 	va_start(ap, string);
 	_vShowMessage(MSG_INFORMATION, string, ap);
 	va_end(ap);
 }
-void ShowNotice(const char *string, ...) {
+void ShowNotice(const std::string_view string, ...) {
 	va_list ap;
 	va_start(ap, string);
 	_vShowMessage(MSG_NOTICE, string, ap);
 	va_end(ap);
 }
-void ShowWarning(const char *string, ...) {
+void ShowWarning(const std::string_view string, ...) {
 	va_list ap;
 	va_start(ap, string);
 	_vShowMessage(MSG_WARNING, string, ap);
 	va_end(ap);
 }
-void ShowConfigWarning(config_setting_t *config, const char *string, ...)
+void ShowConfigWarning(config_setting_t *config, const std::string_view string, ...)
 {
 	StringBuf buf;
 	va_list ap;
 	StringBuf_Init(&buf);
-	StringBuf_AppendStr(&buf, string);
+	StringBuf_AppendStr(&buf, string.data());
 	StringBuf_Printf(&buf, " (%s:%d)\n", config_setting_source_file(config), config_setting_source_line(config));
 	va_start(ap, string);
 	_vShowMessage(MSG_WARNING, StringBuf_Value(&buf), ap);
 	va_end(ap);
 	StringBuf_Destroy(&buf);
 }
-void ShowDebug(const char *string, ...) {
+void ShowDebug(const std::string_view string, ...) {
 	va_list ap;
 	va_start(ap, string);
 	_vShowMessage(MSG_DEBUG, string, ap);
 	va_end(ap);
 }
-void ShowError(const char *string, ...) {
+void ShowError(const std::string_view string, ...) {
 	va_list ap;
 	va_start(ap, string);
 	_vShowMessage(MSG_ERROR, string, ap);
 	va_end(ap);
 }
-void ShowFatalError(const char *string, ...) {
+void ShowFatalError(const std::string_view string, ...) {
 	va_list ap;
 	va_start(ap, string);
 	_vShowMessage(MSG_FATALERROR, string, ap);

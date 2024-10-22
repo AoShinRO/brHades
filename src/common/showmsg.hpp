@@ -5,6 +5,7 @@
 #define SHOWMSG_HPP
 
 #include <libconfig.h>
+#include <string_view>
 
 // for help with the console colors look here:
 // http://www.edoceo.com/liberum/?doc=printf-with-color
@@ -86,16 +87,16 @@ enum msg_type {
 };
 
 extern void ClearScreen(void);
-extern int _vShowMessage(enum msg_type flag, const char *string, va_list ap);
-extern void ShowMessage(const char *, ...);
-extern void ShowStatus(const char *, ...);
-extern void ShowSQL(const char *, ...);
-extern void ShowInfo(const char *, ...);
-extern void ShowNotice(const char *, ...);
-extern void ShowWarning(const char *, ...);
-extern void ShowDebug(const char *, ...);
-extern void ShowError(const char *, ...);
-extern void ShowFatalError(const char *, ...);
-extern void ShowConfigWarning(config_setting_t *config, const char *string, ...);
+extern int _vShowMessage(enum msg_type flag, const std::string_view string, va_list ap);
+extern void ShowMessage(const std::string_view, ...);
+extern void ShowStatus(const std::string_view, ...);
+extern void ShowSQL(const std::string_view, ...);
+extern void ShowInfo(const std::string_view, ...);
+extern void ShowNotice(const std::string_view, ...);
+extern void ShowWarning(const std::string_view, ...);
+extern void ShowDebug(const std::string_view, ...);
+extern void ShowError(const std::string_view, ...);
+extern void ShowFatalError(const std::string_view, ...);
+extern void ShowConfigWarning(config_setting_t *config, const std::string_view string, ...);
 
 #endif /* SHOWMSG_HPP */

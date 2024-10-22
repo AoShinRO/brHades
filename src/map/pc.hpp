@@ -1852,10 +1852,6 @@ public:
 		return (this->get_skillid() == AS_SONICBLOW || this->get_skillid() == GC_CROSSIMPACT);
 	}
 
-	int recalculate_motion(intptr_t data) const {
-		return this->delay != data ? this->delay : data;
-	}
-
 	int get_targetid() const {
 		return this->target.id;
 	}
