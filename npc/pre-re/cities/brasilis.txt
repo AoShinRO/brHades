@@ -1,21 +1,22 @@
 //===============================================================\\
-//	___.         .__                .___             	 ||
-//	\_ |_________|  |__ _____     __| _/____   ______	 ||
-//	 | __ \_  __ \  |  \\__  \   / __ |/ __ \ /  ___/	 ||
-//	 | \_\ \  | \/   Y  \/ __ \_/ /_/ \  ___/ \___ \ 	 ||
-//	 |___  /__|  |___|  (____  /\____ |\___  >____  >	 ||
-//	     \/           \/     \/      \/    \/     \/ 	 ||
+//      ___.         .__                .___                     ||
+//      \_ |_________|  |__ _____     __| _/____   ______        ||
+//       | __ \_  __ \  |  \\__  \   / __ |/ __ \ /  ___/   	 ||
+//       | \_\ \  | \/   Y  \/ __ \_/ /_/ \  ___/ \___ \         ||
+//       |___  /__|  |___|  (____  /\____ |\___  >____  >        ||
+//           \/           \/     \/      \/    \/     \/         ||
+//                                   Scripts                     ||
+//===============================================================||
+// Note:                                                         ||    
+// - Brasilis was introduced in Pre-Renewal only for bRO and     ||     
+//   jRO official servers with differences in monster stats,     ||     
+//   spawns and quests.                                          ||
+//   It was added in Renewal for every other official server.    ||      
+//   Since we follow kRO this is disabled by default.            || 
+//   You can enable it on npc/pre-re/scripts_athena.conf         ||   
+//===== Changelog: ==============================================||
+//= 1.0 First Version [Daegaladh] rAthena Dev                    ||   
 //===============================================================//
-// Note:
-// - Brasilis was introduced in Pre-Renewal only for bRO and
-//   jRO official servers with differences in monster stats,
-//   spawns and quests.
-//   It was added in Renewal for every other official server.
-//   Since we follow kRO this is disabled by default.
-//   You can enable it on npc/pre-re/scripts_athena.conf
-//===== Changelog: ===========================================
-//= 1.0 First Version [Daegaladh]
-//============================================================
 
 // Brasilis Transportation :: brasilis_trans
 //============================================================

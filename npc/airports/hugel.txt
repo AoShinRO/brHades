@@ -1,38 +1,49 @@
-//===== rAthena Script ======================================= 
-//= Hugel Airport NPCs
-//===== By: ================================================== 
-//= rAthena Dev Team
-//===== Current Version: =====================================
-//= 1.0
-//===== Compatible With: ===================================== 
-//= rAthena Project
-//===== Description: ========================================= 
-//= Hugel Airport NPCs
-//===== Additional Comments: ================================= 
-//= 1.0 First version.
-//============================================================ 
+//===============================================================\\
+//      ___.         .__                .___                     ||
+//      \_ |_________|  |__ _____     __| _/____   ______        ||
+//       | __ \_  __ \  |  \\__  \   / __ |/ __ \ /  ___/   	 ||
+//       | \_\ \  | \/   Y  \/ __ \_/ /_/ \  ___/ \___ \         ||
+//       |___  /__|  |___|  (____  /\____ |\___  >____  >        ||
+//           \/           \/     \/      \/    \/     \/         ||
+//                                   Scripts                     ||
+//===============================================================||
+// = Nome do NPC:                                                ||
+// - hugel.txt                                                   ||
+//===============================================================||
+// = Criação:                                                    ||
+// - eA/Herc/Cronus                                              ||
+//===============================================================||
+// = Versão:                                                     ||
+// - 1.0                                                         ||
+//===============================================================||
+// = Alterações:                                                 ||
+// - Tradução [Wolf]                                             ||
+//===============================================================||
+// = Descrição:                                                  ||
+// - Aeroplano de Hugel                                          ||
+//===============================================================//
 
-hugel,178,142,0	script	toairplane#hugel	45,1,1,{
+hugel,178,142,0	script	toairplane#hugel	WARPNPC,1,1,{
 	end;
 OnTouch:
-	mes "To use the airship, you are required to pay 1,200 zeny or a Free Airship Ticket.";
-	mes "Would you like to use the service?";
+	mes "Para usar o aeroplano, você precisará pagar uma taxa de 1,200 zenys ou possuir um Bilhete para o Aeroplano.";
+	mes "Gostaria de utilizar nossos serviços?";
 	next;
-	if (select("Yes:No") == 1) {
+	if (select("Sim:Não") == 1) {
 		if (countitem(7311) > 0) {
-			delitem 7311,1; //Free_Flying_Ship_Ticket
+			delitem 7311,1; //Bilhete para o Aerplano
 			warp "airplane",244,58;
 			end;
 		}
 		if (Zeny >= 1200) {
-			set Zeny, Zeny - 1200;
+			Zeny -= 1200;
 			warp "airplane",244,58;
 			end;
 		}
-		mes "I am sorry, but you do not have enough money.";
-		mes "Please remember, you are required to pay 1,200 zeny to use the service.";
+		mes "Desculpe, mas você não possui o zeny necessário.";
+		mes "Lembre-se, você precisa possuir o Bilhete para o Aeroplano, ou possuir a taxa de embarque equivalente a 1,200 zenys.";
 		close;
 	}
-	mes "Thank you, please come again.";
+	mes "Obrigado, e volte novamente.";
 	close;
 }
