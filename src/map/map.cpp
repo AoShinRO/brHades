@@ -3671,36 +3671,42 @@ int map_delmap(char* mapname){
 
 	return 0;
 }
+static void map_flags_init_async(int i){
+	struct map_data *mapdata = &map[i];
+	union u_mapflag_args args = {};
+
+	mapdata->initMapFlags(); // Resize and define default values
+	mapdata->drop_list.clear();
+	args.flag_val = 100;
+
+	// additional mapflag data
+	mapdata->zone = 0; // restricted mapflag zone
+	mapdata->setMapFlag(MF_NOCOMMAND, false); // nocommand mapflag level
+	map_setmapflag_sub(i, MF_BEXP, true, &args); // per map base exp multiplicator
+	map_setmapflag_sub(i, MF_JEXP, true, &args); // per map job exp multiplicator
+
+	// Clear adjustment data, will be reset after loading NPC
+	mapdata->damage_adjust = {};
+	mapdata->skill_damage.clear();
+	mapdata->skill_duration.clear();
+	map_free_questinfo(mapdata);
+
+	if (instance_start && i >= instance_start)
+		return;
+
+	// adjustments
+	if( battle_config.pk_mode && !mapdata_flag_vs2(mapdata) )
+		mapdata->setMapFlag(MF_PVP, true); // make all maps pvp for pk_mode [Valaris]
+}
 
 /// Initializes map flags and adjusts them depending on configuration.
 void map_flags_init(void){
-	for (int i = 0; i < map_num; i++) {
-		struct map_data *mapdata = &map[i];
-		union u_mapflag_args args = {};
-
-		mapdata->initMapFlags(); // Resize and define default values
-		mapdata->drop_list.clear();
-		args.flag_val = 100;
-
-		// additional mapflag data
-		mapdata->zone = 0; // restricted mapflag zone
-		mapdata->setMapFlag(MF_NOCOMMAND, false); // nocommand mapflag level
-		map_setmapflag_sub(i, MF_BEXP, true, &args); // per map base exp multiplicator
-		map_setmapflag_sub(i, MF_JEXP, true, &args); // per map job exp multiplicator
-
-		// Clear adjustment data, will be reset after loading NPC
-		mapdata->damage_adjust = {};
-		mapdata->skill_damage.clear();
-		mapdata->skill_duration.clear();
-		map_free_questinfo(mapdata);
-
-		if (instance_start && i >= instance_start)
-			continue;
-
-		// adjustments
-		if( battle_config.pk_mode && !mapdata_flag_vs2(mapdata) )
-			mapdata->setMapFlag(MF_PVP, true); // make all maps pvp for pk_mode [Valaris]
-	}
+	std::vector<std::future<void>> futureMapflagloads;
+	for (int i = 0; i < map_num; i++) 
+		futureMapflagloads.push_back(std::async(std::launch::async, map_flags_init_async, i));
+	
+	for(auto& result : futureMapflagloads)
+		result.get();
 }
 
 /**
@@ -3726,16 +3732,23 @@ void map_data_copy(struct map_data *dst_map, struct map_data *src_map) {
 * Copy map data for instance maps from its parents
 * that were cleared in map_flags_init() after reloadscript
 */
+static void map_data_copyall_async(int i){
+	struct map_data *mapdata = &map[i];
+	std::shared_ptr<s_instance_data> idata = util::umap_find(instances, mapdata->instance_id);
+	if (!mapdata || mapdata->name[0] == '\0' || !mapdata->instance_src_map || (idata && idata->nomapflag))
+		return;
+	map_data_copy(mapdata, &map[mapdata->instance_src_map]);
+}
+
 void map_data_copyall (void) {
 	if (!instance_start)
 		return;
-	for (int i = instance_start; i < map_num; i++) {
-		struct map_data *mapdata = &map[i];
-		std::shared_ptr<s_instance_data> idata = util::umap_find(instances, mapdata->instance_id);
-		if (!mapdata || mapdata->name[0] == '\0' || !mapdata->instance_src_map || (idata && idata->nomapflag))
-			continue;
-		map_data_copy(mapdata, &map[mapdata->instance_src_map]);
-	}
+	std::vector<std::future<void>> future_mapDatacopy;
+	for (int i = instance_start; i < map_num; i++) 
+		future_mapDatacopy.push_back(std::async(std::launch::async, map_data_copyall_async, i));
+	
+	for(auto& result : future_mapDatacopy)
+		result.get();
 }
 
 /*

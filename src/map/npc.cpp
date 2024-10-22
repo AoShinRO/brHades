@@ -1307,20 +1307,25 @@ int npc_event_doall_id(const char* name, int rid)
 }
 
 // runs the specified event on all NPCs with the given path
+static int npc_event_doall_path_async(npc_data* nd, const char* event_name){
+	char name[EVENT_NAME_LENGTH];
+
+	safesnprintf( name, EVENT_NAME_LENGTH, "%s::%s", nd->exname, event_name );
+
+	return npc_event_do( name );
+}
 int npc_event_doall_path( const char* event_name, const char* path ){
 	s_mapiterator* iter = mapit_geteachnpc();
 	npc_data* nd;
 	int count = 0;
-
+	std::vector<std::future<int>> future_npc_event_doall;
+	
 	while( ( nd = (npc_data*)mapit_next( iter ) ) != nullptr ){
-		if( nd->path && strcasecmp( nd->path, path ) == 0 ){
-			char name[EVENT_NAME_LENGTH];
-
-			safesnprintf( name, EVENT_NAME_LENGTH, "%s::%s", nd->exname, event_name );
-
-			count += npc_event_do( name );
-		}
+		if( nd->path && strcasecmp( nd->path, path ) == 0 )
+			future_npc_event_doall.push_back(std::async(std::launch::async, npc_event_doall_path_async, nd, event_name));	
 	}
+	for(auto& result : future_npc_event_doall)
+		count += result.get();
 
 	ShowStatus( "Event '" CL_WHITE "%s" CL_RESET "' executed with '" CL_WHITE "%d" CL_RESET "' NPCs.\n", event_name, count );
 
@@ -5989,42 +5994,47 @@ const char *npc_get_script_event_name(int npce_index)
 	}
 }
 
+static void npc_read_event_async(uint8 i){
+	DBIterator* iter;
+	DBKey key;
+	DBData *data;
+	char name[EVENT_NAME_LENGTH];
+
+	safesnprintf(name,EVENT_NAME_LENGTH,"::%s", npc_get_script_event_name(i));
+
+	iter = db_iterator(ev_db);
+	for( data = iter->first(iter,&key); iter->exists(iter); data = iter->next(iter,&key) )
+	{
+		const char* p = key.str;
+		struct event_data* ed = (struct event_data*)db_data2ptr(data);
+
+		if( (p=strchr(p,':')) && strcmpi(name,p)==0 ){
+			struct script_event_s evt;
+
+			evt.event = ed;
+			evt.event_name = key.str;
+
+			script_event[static_cast<enum npce_event>(i)].push_back(evt);
+		}
+	}
+	dbi_destroy(iter);
+}
+
 void npc_read_event_script(void)
 {
-	int i;
+	uint8 i;
 
 	script_event.clear();
+	std::vector<std::future<void>> futureEventloads;
+	for (i = 0U; i < NPCE_MAX; i++)
+		futureEventloads.push_back(std::async(std::launch::async, npc_read_event_async, i));
 
-	for (i = 0; i < NPCE_MAX; i++)
-	{
-		DBIterator* iter;
-		DBKey key;
-		DBData *data;
-		char name[EVENT_NAME_LENGTH];
-
-		safesnprintf(name,EVENT_NAME_LENGTH,"::%s", npc_get_script_event_name(i));
-
-		iter = db_iterator(ev_db);
-		for( data = iter->first(iter,&key); iter->exists(iter); data = iter->next(iter,&key) )
-		{
-			const char* p = key.str;
-			struct event_data* ed = (struct event_data*)db_data2ptr(data);
-
-			if( (p=strchr(p,':')) && strcmpi(name,p)==0 ){
-				struct script_event_s evt;
-
-				evt.event = ed;
-				evt.event_name = key.str;
-
-				script_event[static_cast<enum npce_event>(i)].push_back(evt);
-			}
-		}
-		dbi_destroy(iter);
-	}
+	for(auto& result : futureEventloads)
+		result.get();
 
 	if (battle_config.etc_log) {
 		//Print summary.
-		for (i = 0; i < NPCE_MAX; i++)
+		for (i = 0U; i < NPCE_MAX; i++)
 			ShowInfo("%" PRIuPTR " '%s' events.\n", script_event[static_cast<enum npce_event>(i)].size(), npc_get_script_event_name(i));
 	}
 }
