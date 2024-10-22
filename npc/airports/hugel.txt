@@ -36,7 +36,7 @@ OnTouch:
 			end;
 		}
 		if (Zeny >= 1200) {
-			Zeny -= 1200;
+			Zeny = Zeny - 1200;
 			warp "airplane",244,58;
 			end;
 		}

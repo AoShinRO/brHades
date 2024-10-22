@@ -44,7 +44,7 @@ airport,143,43,5	script	Equipe do Aeroporto#airport1a::airport1	4_F_01,{
 				end;
 			}
 			if (Zeny >= 1200) {
-				Zeny -= 1200;
+				Zeny = Zeny - 1200;
 				warp "airport",148,51;
 				end;
 			}

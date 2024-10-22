@@ -44,7 +44,7 @@
 				end;
 			}
 			if (Zeny >= 1200) {
-				Zeny -= 1200;
+				Zeny = Zeny - 1200;
 				warp "airplane_01",244,58;
 				end;
 			}

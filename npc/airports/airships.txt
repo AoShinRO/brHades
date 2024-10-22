@@ -910,7 +910,7 @@ airplane_01,50,66,5	script	Mercador de Maçãs#air01	4_M_04,{
 			close;
 		}
 		else {
-			Zeny -= .@pay;
+			Zeny = Zeny - .@pay;
 			getitem 512,.@input; //Apple
 			mes "[Meltz]";
 			mes "Obrigado pela visita";
