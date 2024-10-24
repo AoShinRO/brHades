@@ -53,7 +53,7 @@ void clan_load_clandata( int count, struct clan* clans ){
 		j++;
 	}
 
-	ShowStatus( "Received '" CL_WHITE "%d" CL_RESET "' clans from char-server.\n", j );
+	ShowStatus( "Recebido '" CL_WHITE "%d" CL_RESET "' guilds do char-server.\n", j );
 }
 
 struct clan* clan_search( int id ){

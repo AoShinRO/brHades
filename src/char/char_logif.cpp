@@ -275,14 +275,14 @@ int chlogif_parse_ackconnect(int fd){
 
 	if (RFIFOB(fd,2)) {
 		//printf("connect login server error : %d\n", RFIFOB(fd,2));
-		ShowError("Can not connect to login-server.\n");
-		ShowError("The server communication passwords (default s1/p1) are probably invalid.\n");
-		ShowError("Also, please make sure your login db has the correct communication username/passwords and the gender of the account is S.\n");
-		ShowError("The communication passwords are set in map_athena.conf and char_athena.conf\n");
-		set_eof(fd);
-		return 0;
+	ShowError("Nao e possivel conectar ao servidor de login.\n");
+	ShowError("As senhas de comunicacao do servidor (padrao s1/p1) provavelmente sao invalidas.\n");
+	ShowError("Alem disso, certifique-se de que seu banco de dados de login tenha o nome de usuario/senhas de comunicacao corretos e que o genero da conta seja S.\n");
+	ShowError("As senhas de comunicacao estao definidas em map_athena.conf e char_athena.conf\n");
+	set_eof(fd);
+	return 0;
 	} else {
-		ShowStatus("Connected to login-server (connection #%d).\n", fd);
+		ShowStatus("Conectado ao servidor de login (conexao #%d).\n", fd);
 		chlogif_on_ready();
 	}
 	RFIFOSKIP(fd,3);
@@ -638,7 +638,7 @@ int chlogif_parse_updip(int fd){
 	new_ip = host2ip(charserv_config.char_ip_str);
 	if (new_ip && new_ip != charserv_config.char_ip) { // Char-server IP is updated.
 		charserv_config.char_ip = new_ip;
-		ShowInfo("Updating IP for [%s].\n", charserv_config.char_ip_str);
+		ShowInfo("Atualizando IP para [%s].\n", charserv_config.char_ip_str);
 		// notify login server about the change
 		WFIFOHEAD(fd,6);
 		WFIFOW(fd,0) = 0x2736;
@@ -798,7 +798,7 @@ TIMER_FUNC(chlogif_check_connect_logserver){
 	if (chlogif_isconnected())
 		return 0;
 
-	ShowInfo("Attempt to connect to login-server...\n");
+	ShowInfo("Tentativa de conexao ao servidor de login...\n");
 	login_fd = make_connection(charserv_config.login_ip, charserv_config.login_port, false,10);
 	if (login_fd == -1)
 	{	//Try again later. [Skotlex]
@@ -853,7 +853,7 @@ void chlogif_reset(void){
 
 /// Called when the connection to Login Server is disconnected.
 void chlogif_on_disconnect(void){
-	ShowWarning("Connection to Login Server lost.\n\n");
+	ShowWarning("Conexao com o servidor de login perdida.\n\n");
 }
 
 /// Called when all the connection steps are completed.
@@ -867,7 +867,7 @@ void chlogif_on_ready(void)
 	// if no map-server already connected, display a message...
 	ARR_FIND( 0, ARRAYLENGTH(map_server), i, session_isValid(map_server[i].fd) && !map_server[i].maps.empty() );
 	if( i == ARRAYLENGTH(map_server) )
-		ShowStatus("Awaiting maps from map-server.\n");
+		ShowStatus("Aguardando mapas do servidor de mapas.\n");
 }
 
 void do_final_chlogif(void)

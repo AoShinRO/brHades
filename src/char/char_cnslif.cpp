@@ -19,16 +19,16 @@
  *------------------------------------------------------*/
 void display_helpscreen(bool do_exit)
 {
-	ShowInfo("Usage: %s [options]\n", SERVER_NAME);
+	ShowInfo("Uso: %s [options]\n", SERVER_NAME);
 	ShowInfo("\n");
-	ShowInfo("Options:\n");
-	ShowInfo("  -?, -h [--help]\t\tDisplays this help screen.\n");
-	ShowInfo("  -v [--version]\t\tDisplays the server's version.\n");
-	ShowInfo("  --run-once\t\t\tCloses server after loading (testing).\n");
-	ShowInfo("  --char-config <file>\t\tAlternative char-server configuration.\n");
-	ShowInfo("  --lan-config <file>\t\tAlternative lag configuration.\n");
-	ShowInfo("  --inter-config <file>\t\tAlternative inter-server configuration.\n");
-	ShowInfo("  --msg-config <file>\t\tAlternative message configuration.\n");
+	ShowInfo("Opcoes:\n");
+	ShowInfo(" -?, -h [--help]\t\tExibe esta tela de ajuda.\n");
+	ShowInfo(" -v [--version]\t\tExibe a versao do servidor.\n");
+	ShowInfo(" --run-once\t\t\tFecha o servidor apos o carregamento (teste).\n");
+	ShowInfo(" --char-config <file>\t\tConfiguracao alternativa do char-server.\n");
+	ShowInfo(" --lan-config <file>\t\tConfiguracao alternativa do lag.\n");
+	ShowInfo(" --inter-config <file>\t\tConfiguracao alternativa entre servidores.\n");
+	ShowInfo(" --msg-config <file>\t\tConfiguracao de mensagem alternativa.\n");
 	if( do_exit )
 		exit(EXIT_SUCCESS);
 }
@@ -66,20 +66,20 @@ int cnslif_parse(const char* buf)
 		if((n = sscanf(buf, "%63[^\n]", type))<1) return -1; //nothing to do no arg
 	}
 	if( n != 2 ){ //end string
-		ShowNotice("Type: '%s'\n",type);
+		ShowNotice("Tipo: '%s'\n",type);
 		command[0] = '\0';
 	}
 	else
-		ShowNotice("Type of command: '%s' || Command: '%s'\n",type,command);
+		ShowNotice("Tipo de comando: '%s' || Comando: '%s'\n",type,command);
 
 	if( n == 2 && strcmpi("server", type) == 0 ){
 		if( strcmpi("shutdown", command) == 0 || strcmpi("exit", command) == 0 || strcmpi("quit", command) == 0 ){
 			global_core->signal_shutdown();
 		}
 		else if( strcmpi("alive", command) == 0 || strcmpi("status", command) == 0 )
-			ShowInfo(CL_CYAN "Console: " CL_BOLD "I'm Alive." CL_RESET "\n");
+			ShowInfo(CL_CYAN "Console: " CL_BOLD "Estou Online." CL_RESET "\n");
 		else if( strcmpi("reloadconf", command) == 0 ) {
-			ShowInfo("Reloading config file \"%s\"\n", CHAR_CONF_NAME);
+			ShowInfo("Re-carregando config\"%s\"\n", CHAR_CONF_NAME);
 			char_config_read(CHAR_CONF_NAME, false);
 		}
 	}
@@ -87,11 +87,11 @@ int cnslif_parse(const char* buf)
 		ers_report();
 	}
 	else if( strcmpi("help", type) == 0 ){
-		ShowInfo("Available commands:\n");
-		ShowInfo("\t server:shutdown => Stops the server.\n");
-		ShowInfo("\t server:alive => Checks if the server is running.\n");
-		ShowInfo("\t server:reloadconf => Reload config file: \"%s\"\n", CHAR_CONF_NAME);
-		ShowInfo("\t ers_report => Displays database usage.\n");
+		ShowInfo("Comandos disponiveis:\n");
+		ShowInfo("\t server:shutdown => Para o servidor.\n");
+		ShowInfo("\t server:alive => Verifica se o servidor esta em execucao.\n");
+		ShowInfo("\t server:reloadconf => Recarrega o arquivo de configuracao: \"%s\"\n", CHAR_CONF_NAME);
+		ShowInfo("\t ers_report => Exibe o uso do banco de dados.\n");
 	}
 
 	return 0;

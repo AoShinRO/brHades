@@ -1,22 +1,26 @@
-//===== rAthena Script ======================================= 
-//= Juno City
-//===== By: ================================================== 
-//= Euphy
-//===== Current Version: ===================================== 
-//= 1.0
-//===== Compatible With: ===================================== 
-//= rAthena Project
-//===== Description: ========================================= 
-//= [Official Conversion]
-//= NPCs for the City of Juno
-//===== Additional Comments: ================================= 
-//= 1.0 First version.
-//============================================================ 
+//===============================================================\\
+//      ___.         .__                .___                     ||
+//      \_ |_________|  |__ _____     __| _/____   ______        ||
+//       | __ \_  __ \  |  \\__  \   / __ |/ __ \ /  ___/   	 ||
+//       | \_\ \  | \/   Y  \/ __ \_/ /_/ \  ___/ \___ \         ||
+//       |___  /__|  |___|  (____  /\____ |\___  >____  >        ||
+//           \/           \/     \/      \/    \/     \/         ||
+//                                   Scripts                     ||
+//===============================================================||
+// = Versão:                                                     ||
+// - 1.0                                                         ||
+//===============================================================||
+// = Alterações:                                                 ||
+// - Tradução [Spell Master]                                     ||
+//===============================================================||
+// = Descrição:                                                  ||
+// - Cidade de Juno                                              ||
+//===============================================================//
 
-yuno,150,283,4	duplicate(JunoSoldier1)	Juno Soldier#juno	105
-yuno,165,283,4	duplicate(JunoSoldier2)	Juno Soldier#2juno	105
-yuno,227,292,4	duplicate(JunoSoldier3)	Juno Soldier#3juno	105
-yuno,165,228,4	duplicate(JunoSoldier4)	Juno Soldier#4juno	105
-yuno,150,228,4	duplicate(JunoSoldier5)	Juno Soldier#5juno	105
-yuno,334,182,4	duplicate(JunoSoldier6)	Juno Soldier#6juno	105
-yuno,263,320,4	duplicate(JunoSoldier7)	Juno Soldier#7juno	105
+yuno,150,283,4	duplicate(JunoSoldier1)	Soldado de Juno#juno	8W_SOLDIER
+yuno,165,283,4	duplicate(JunoSoldier2)	Soldado de Juno#2juno	8W_SOLDIER
+yuno,227,292,4	duplicate(JunoSoldier3)	Soldado de Juno#3juno	8W_SOLDIER
+yuno,165,228,4	duplicate(JunoSoldier4)	Soldado de Juno#4juno	8W_SOLDIER
+yuno,150,228,4	duplicate(JunoSoldier5)	Soldado de Juno#5juno	8W_SOLDIER
+yuno,334,182,4	duplicate(JunoSoldier6)	Soldado de Juno#6juno	8W_SOLDIER
+yuno,263,320,4	duplicate(JunoSoldier7)	Soldado de Juno#7juno	8W_SOLDIER

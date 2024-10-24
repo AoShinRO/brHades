@@ -1482,7 +1482,7 @@ void channel_read_config(void) {
 			}
 		}
 
-		ShowStatus("Done reading '" CL_WHITE "%d" CL_RESET "' channels in '" CL_WHITE "%s" CL_RESET "'.\n", db_size(channel_db), channel_conf);
+		ShowStatus("Concluida a leitura de '" CL_WHITE "%d" CL_RESET "' canais em '" CL_WHITE "%s" CL_RESET "'.\n", db_size(channel_db), channel_conf);
 		config_destroy(&channels_conf);
 	}
 }

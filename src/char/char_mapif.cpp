@@ -261,10 +261,9 @@ int chmapif_parse_getmapname(int fd, int id){
 
 	mapbuf = RFIFOP(fd,4);
 	RFIFOSKIP(fd,RFIFOW(fd,2));
-
-	ShowStatus("Map-Server %d connected: %" PRIuPTR " maps, from IP %d.%d.%d.%d port %d.\n",
-				id, map_server[id].maps.size(), CONVIP(map_server[id].ip), map_server[id].port);
-	ShowStatus("Map-server %d loading complete.\n", id);
+	ShowStatus("Map-Server %d conectado: %" PRIuPTR " mapas, do IP %d.%d.%d.%d porta %d.\n",
+		id, map_server[id].maps.size(), CONVIP(map_server[id].ip), map_server[id].port);
+	ShowStatus("Map-server %d Carregamento completo.\n", id);
 
 	chmapif_send_misc(fd);
 	chmapif_send_fame_list(fd); //Send fame list.
@@ -348,7 +347,7 @@ int chmapif_parse_getusercount(int fd, int id){
 		return 0;
 	if (RFIFOW(fd,2) != map_server[id].users) {
 		map_server[id].users = RFIFOW(fd,2);
-		ShowInfo("User Count: %d (Server: %d)\n", map_server[id].users, id);
+		ShowInfo("Contagem De Usuarios: %d (Servidor: %d)\n", map_server[id].users, id);
 	}
 	RFIFOSKIP(fd, 4);
 	return 1;
@@ -1100,7 +1099,7 @@ int chmapif_parse_updmapip(int fd, int id){
 	if (RFIFOREST(fd) < 6) 
 		return 0;
 	map_server[id].ip = ntohl(RFIFOL(fd, 2));
-	ShowInfo("Updated IP address of map-server #%d to %d.%d.%d.%d.\n", id, CONVIP(map_server[id].ip));
+	ShowInfo("Endereco IP atualizado do servidor de mapas #%d to %d.%d.%d.%d.\n", id, CONVIP(map_server[id].ip));
 	RFIFOSKIP(fd,6);
 	return 1;
 }
@@ -1329,7 +1328,7 @@ int chmapif_bonus_script_get(int fd) {
 
 			WFIFOSET(fd, size);
 
-			ShowInfo("Bonus Script loaded for CID=%d. Total: %d.\n", cid, i);
+			ShowInfo("Script de bonus carregado para CID=%d. Total: %d.\n", cid, i);
 
 			if (SQL_ERROR == SqlStmt_Prepare(stmt,"DELETE FROM `%s` WHERE `char_id`='%d'",schema_config.bonus_script_db,cid) ||
 				SQL_ERROR == SqlStmt_Execute(stmt))
@@ -1376,7 +1375,7 @@ int chmapif_bonus_script_save(int fd) {
 				Sql_ShowDebug(sql_handle);
 
 			StringBuf_Destroy(&buf);
-			ShowInfo("Bonus Script saved for CID=%d. Total: %d.\n", cid, count);
+			ShowInfo("Script de bonus salvo para CID=%d. Total: %d.\n",cid, count);
 		}
 		RFIFOSKIP(fd,RFIFOW(fd,2));
 	}
@@ -1542,7 +1541,7 @@ void chmapif_server_reset(int id){
  * @param id: id of map-serv (should be >0, FIXME)
  */
 void chmapif_on_disconnect(int id){
-	ShowStatus("Map-server #%d has disconnected.\n", id);
+	ShowStatus("Servidor de mapa #%d desconectado.\n", id);
 	chmapif_server_reset(id);
 }
 

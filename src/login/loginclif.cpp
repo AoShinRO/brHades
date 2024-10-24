@@ -59,11 +59,11 @@ static void logclif_auth_ok(struct login_session_data* sd) {
 	}
 
 	if( login_config.group_id_to_connect >= 0 && sd->group_id != login_config.group_id_to_connect ) {
-		ShowStatus("Connection refused: the required group id for connection is %d (account: %s, group: %d).\n", login_config.group_id_to_connect, sd->userid, sd->group_id);
+		ShowStatus("Conexao recusada: o ID de grupo necessario para conexao e %d (conta: %s, grupo: %d).\n", login_config.group_id_to_connect, sd->userid, sd->group_id);
 		logclif_sent_auth_result(fd,1); // server closed
 		return;
 	} else if( login_config.min_group_id_to_connect >= 0 && login_config.group_id_to_connect == -1 && sd->group_id < login_config.min_group_id_to_connect ) {
-		ShowStatus("Connection refused: the minimum group id required for connection is %d (account: %s, group: %d).\n", login_config.min_group_id_to_connect, sd->userid, sd->group_id);
+		ShowStatus("Conexao recusada: o ID de grupo minimo necessario para conexao e %d (conta: %s, grupo: %d).\n", login_config.min_group_id_to_connect, sd->userid, sd->group_id);
 		logclif_sent_auth_result(fd,1); // server closed
 		return;
 	}
@@ -75,7 +75,7 @@ static void logclif_auth_ok(struct login_session_data* sd) {
 
 	if( server_num == 0 )
 	{// if no char-server, don't send void list of servers, just disconnect the player with proper message
-		ShowStatus("Connection refused: there is no char-server online (account: %s).\n", sd->userid);
+		ShowStatus("Conexao recusada: nao ha nenhum char-server online (conta: %s).\n", sd->userid);
 		logclif_sent_auth_result(fd,1); // server closed
 		return;
 	}
@@ -109,7 +109,7 @@ static void logclif_auth_ok(struct login_session_data* sd) {
 	}
 
 	login_log(ip, sd->userid, 100, "login ok");
-	ShowStatus("Connection of the account '%s' accepted.\n", sd->userid);
+	ShowStatus("Conexao da conta '%s' aceita.\n", sd->userid);
 
 	PACKET_AC_ACCEPT_LOGIN* p = reinterpret_cast<PACKET_AC_ACCEPT_LOGIN*>( packet_buffer );
 
@@ -273,7 +273,7 @@ static bool logclif_parse_reqauth_raw( int fd, login_session_data& sd ){
 	safestrncpy( sd.userid, p->username, sizeof( sd.userid ) );
 	sd.clienttype = p->clienttype;
 
-	ShowStatus( "Request for connection of %s (ip: %s)\n", sd.userid, ip );
+	ShowStatus( "Solicitacao de conexao de %s (ip: %s)\n", sd.userid, ip );
 	safestrncpy( sd.passwd, p->password, PASSWD_LENGTH );
 
 	if( login_config.use_md5_passwds ){
@@ -304,7 +304,7 @@ static bool logclif_parse_reqauth_md5( int fd, login_session_data& sd ){
 	safestrncpy( sd.userid, p->username, sizeof( sd.userid ) );
 	sd.clienttype = p->clienttype;
 
-	ShowStatus( "Request for connection (passwdenc mode) of %s (ip: %s)\n", sd.userid, ip );
+	ShowStatus( "Solicitacao de conexao (modo passwdenc) de %s (ip: %s)\n", sd.userid, ip );
 	bin2hex( sd.passwd, p->passwordMD5, sizeof( p->passwordMD5 ) ); // raw binary data here!
 
 	sd.passwdenc = PASSWORDENC;
@@ -338,7 +338,7 @@ static bool logclif_parse_reqauth_sso( int fd, login_session_data& sd ){
 	safestrncpy( sd.userid, p->username, sizeof( sd.userid ) );
 	sd.clienttype = p->clienttype;
 
-	ShowStatus( "Request for connection (SSO mode) of %s (ip: %s)\n", sd.userid, ip );
+	ShowStatus( "Solicitacao de conexao (modo SSO) de %s (ip: %s)\n", sd.userid, ip );
 	// Shinryo: For the time being, just use token as password.
 	safestrncpy( sd.passwd, p->token, token_length + 1 );
 
@@ -418,7 +418,7 @@ static int logclif_parse_reqcharconnec(int fd, struct login_session_data *sd, ch
 		new_ = RFIFOW(fd,84);
 		RFIFOSKIP(fd,86);
 
-		ShowInfo("Connection request of the char-server '%s' @ %u.%u.%u.%u:%u (account: '%s', ip: '%s')\n", server_name, CONVIP(server_ip), server_port, sd->userid, ip);
+		ShowInfo("Solicitacao de conexao do char-server '%s' @ %u.%u.%u.%u:%u (conta: '%s', ip: '%s')\n", server_name, CONVIP(server_ip), server_port, sd->userid, ip);
 		sprintf(message, "charserver - %s@%u.%u.%u.%u:%u", server_name, CONVIP(server_ip), server_port);
 		login_log(session[fd]->client_addr, sd->userid, 100, message);
 
@@ -429,7 +429,7 @@ static int logclif_parse_reqcharconnec(int fd, struct login_session_data *sd, ch
 			sd->account_id < ARRAYLENGTH(ch_server) &&
 			!session_isValid(ch_server[sd->account_id].fd) )
 		{
-			ShowStatus("Connection of the char-server '%s' accepted.\n", server_name);
+			ShowStatus("Conexao do char-server '%s' aceita.\n", server_name);
 			safestrncpy(ch_server[sd->account_id].name, server_name, sizeof(ch_server[sd->account_id].name));
 			ch_server[sd->account_id].fd = fd;
 			ch_server[sd->account_id].ip = server_ip;
@@ -450,7 +450,7 @@ static int logclif_parse_reqcharconnec(int fd, struct login_session_data *sd, ch
 		}
 		else
 		{
-			ShowNotice("Connection of the char-server '%s' REFUSED.\n", server_name);
+			ShowNotice("Conexao do char-server '%s' RECUSADA.\n", server_name);
 			WFIFOHEAD(fd,3);
 			WFIFOW(fd,0) = 0x2711;
 			WFIFOB(fd,2) = 3;
@@ -512,7 +512,7 @@ int logclif_parse(int fd) {
 
 	if( session[fd]->flag.eof )
 	{
-		ShowInfo("Closed connection from '" CL_WHITE "%s" CL_RESET "'.\n", ip);
+		ShowInfo("Conexao fechada de '" CL_WHITE "%s" CL_RESET "'.\n", ip);
 		do_close(fd);
 		return 0;
 	}
@@ -521,7 +521,7 @@ int logclif_parse(int fd) {
 		// Perform ip-ban check
 		if( login_config.ipban && ipban_check(ipl) )
 		{
-			ShowStatus("Connection refused: IP isn't authorised (deny/allow, ip: %s).\n", ip);
+			ShowStatus("Conexao recusada: IP nao autorizado (negar/permitir, ip: %s).\n", ip);
 			login_log(ipl, "unknown", -3, "ip banned");
 
 			logclif_auth_failed( fd, 3 ); // 3 = Rejected from Server

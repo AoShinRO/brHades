@@ -3834,13 +3834,13 @@ bool itemdb_parse_roulette_db(void)
 			continue;
 
 		if (rd.items[i] > limit) {
-			ShowWarning("itemdb_parse_roulette_db: level %d has %d items, only %d supported, capping...\n", i + 1, rd.items[i], limit);
+			ShowWarning("itemdb_parse_roulette_db: nivel %d tem %d itens, apenas %d suportados, limitando...\n", i + 1, rd.items[i], limit);
 			rd.items[i] = limit;
 			continue;
 		}
 
 		/** this scenario = rd.items[i] < limit **/
-		ShowWarning("itemdb_parse_roulette_db: Level %d has %d items, %d are required. Filling with Apples...\n", i + 1, rd.items[i], limit);
+		ShowWarning("itemdb_parse_roulette_db: O nivel %d tem %d itens, %d sao obrigatorios. Preenchendo com Macas...\n", i + 1, rd.items[i], limit);
 
 		rd.items[i] = limit;
 		RECREATE(rd.nameid[i], t_itemid, rd.items[i]);
@@ -3857,7 +3857,7 @@ bool itemdb_parse_roulette_db(void)
 		}
 	}
 
-	ShowStatus("Done reading '" CL_WHITE "%u" CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", count, roulette_table);
+	ShowStatus("Concluida a leitura de '" CL_WHITE "%u" CL_RESET "' entradas em '" CL_WHITE "%s" CL_RESET "'.\n", count, roulette_table);
 
 	return true;
 }
@@ -4222,12 +4222,12 @@ static int itemdb_read_sqldb(void) {
 		uint32 total_columns = Sql_NumColumns(mmysql_handle);
 		uint64 total_rows = Sql_NumRows(mmysql_handle), rows = 0, count = 0;
 
-		ShowStatus("Loading '" CL_WHITE "%" PRIdPTR CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'\n", total_rows, item_db_name[fi]);
+		ShowStatus("Carregando '" CL_WHITE "%" PRIdPTR CL_RESET "' entradas em '" CL_WHITE "%s" CL_RESET "'\n", total_rows, item_db_name[fi]);
 
 		// process rows one by one
 		while( SQL_SUCCESS == Sql_NextRow(mmysql_handle) ) {
 #ifdef DETAILED_LOADING_OUTPUT
-			ShowStatus( "Loading [%" PRIu64 "/%" PRIu64 "] entries in '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\r", ++rows, total_rows, item_db_name[fi] );
+			ShowStatus( "Carregando [%" PRIu64 "/%" PRIu64 "] entradas em '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\r", ++rows, total_rows, item_db_name[fi] );
 #endif
 			std::vector<std::string> data = {};
 
@@ -4249,7 +4249,7 @@ static int itemdb_read_sqldb(void) {
 		// free the query result
 		Sql_FreeResult(mmysql_handle);
 
-		ShowStatus("Done reading '" CL_WHITE "%" PRIu64 CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", count, item_db_name[fi]);
+		ShowStatus("Concluida a leitura de '" CL_WHITE "%" PRIu64 CL_RESET "' entradas em '" CL_WHITE "%s" CL_RESET "'.\n", count, item_db_name[fi]);
 	}
 
 	item_db.loadingFinished();

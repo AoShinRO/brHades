@@ -5354,12 +5354,12 @@ static int mob_read_sqldb(void)
 		uint32 total_columns = Sql_NumColumns(mmysql_handle);
 		uint64 total_rows = Sql_NumRows(mmysql_handle), rows = 0, count = 0;
 
-		ShowStatus("Loading '" CL_WHITE "%" PRIdPTR CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'\n", total_rows, mob_db_name[fi]);
+		ShowStatus("Carregando '" CL_WHITE "%" PRIdPTR CL_RESET "' entradas em '" CL_WHITE "%s" CL_RESET "'\n", total_rows, mob_db_name[fi]);
 
 		// process rows one by one
 		while( SQL_SUCCESS == Sql_NextRow(mmysql_handle) ) {
 #ifdef DETAILED_LOADING_OUTPUT
-			ShowStatus("Loading [%" PRIu64 "/%" PRIu64 "] entries in '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\r", ++rows, total_rows, mob_db_name[fi]);
+			ShowStatus("Carregando [%" PRIu64 "/%" PRIu64 "] entradas em '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\r", ++rows, total_rows, mob_db_name[fi]);
 #endif
 			std::vector<std::string> data = {};
 
@@ -5382,7 +5382,7 @@ static int mob_read_sqldb(void)
 		// free the query result
 		Sql_FreeResult(mmysql_handle);
 
-		ShowStatus("Done reading '" CL_WHITE "%" PRIu64 CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", count, mob_db_name[fi]);
+		ShowStatus("Concluida a leitura de '" CL_WHITE "%" PRIu64 CL_RESET "' entradas em '" CL_WHITE "%s" CL_RESET "'.\n", count, mob_db_name[fi]);
 	}
 
 	mob_db.loadingFinished();
@@ -6141,7 +6141,7 @@ static bool mob_parse_row_mobskilldb( char** str, size_t columns, size_t current
  *------------------------------------------*/
 static void mob_readskilldb(const char* basedir, bool silent) {
 	if( battle_config.mob_skill_rate == 0 ) {
-		ShowStatus("Mob skill use disabled. Not reading mob skills.\n");
+		ShowStatus("Uso de habilidade do mob desabilitado. Nao e possivel ler as habilidades do mob.\n");
 		return;
 	}
 	sv_readdb(basedir, "mob_skill_db.txt", ',', 19, 19, -1, &mob_parse_row_mobskilldb, silent);
@@ -6160,7 +6160,7 @@ static int mob_read_sqlskilldb(void)
 	int fi;
 
 	if( battle_config.mob_skill_rate == 0 ) {
-		ShowStatus("Mob skill use disabled. Not reading mob skills.\n");
+		ShowStatus("Uso de habilidade do mob desabilitado. Nao e possivel ler as habilidades do mob.\n");
 		return 0;
 	}
 
@@ -6196,7 +6196,7 @@ static int mob_read_sqlskilldb(void)
 		// free the query result
 		Sql_FreeResult(mmysql_handle);
 
-		ShowStatus("Done reading '" CL_WHITE "%u" CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'.\n", count, mob_skill_db_name[fi]);
+		ShowStatus("Concluida a leitura de '" CL_WHITE "%u" CL_RESET "' entradas em '" CL_WHITE "%s" CL_RESET "'.\n", count, mob_skill_db_name[fi]);
 	}
 	return 0;
 }

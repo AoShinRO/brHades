@@ -289,7 +289,7 @@ int chclif_parse_pincode_change( int fd, struct char_session_data* sd ){
 		if( pincode_allowed(newpin) ){
 			chlogif_pincode_notifyLoginPinUpdate( sd->account_id, newpin );
 			strncpy(sd->pincode, newpin, sizeof(newpin));
-			ShowInfo("Pincode changed for AID: %d\n", sd->account_id);
+			ShowInfo("Pincode alterado na conta AID: %d\n", sd->account_id);
 			sd->pincode_correct = true;
 
 			chclif_pincode_sendstate( fd, sd, PINCODE_PASSED );
@@ -371,7 +371,7 @@ int chclif_mmo_send006b(int fd, struct char_session_data* sd){
 #endif
 
 	if (charserv_config.save_log)
-		ShowInfo("Loading Char Data (" CL_BOLD "%d" CL_RESET ")\n",sd->account_id);
+		ShowInfo("Carregando Char Data (" CL_BOLD "%d" CL_RESET ")\n",sd->account_id);
 
 	j = 24 + offset; // offset
 	WFIFOHEAD(fd,j + MAX_CHARS*MAX_CHAR_BUF);
@@ -394,7 +394,7 @@ int chclif_mmo_send006b(int fd, struct char_session_data* sd){
 //----------------------------------------
 void chclif_mmo_send082d(int fd, struct char_session_data* sd) {
 	if (charserv_config.save_log)
-		ShowInfo("Loading Char Data (" CL_BOLD "%d" CL_RESET ")\n",sd->account_id);
+		ShowInfo("Carregando Char Data (" CL_BOLD "%d" CL_RESET ")\n",sd->account_id);
 	WFIFOHEAD(fd,29);
 	WFIFOW(fd,0) = 0x82d;
 	WFIFOW(fd,2) = 29;
@@ -594,7 +594,7 @@ bool chclif_delchar_check(struct char_session_data *sd, char *delcode, uint8 fla
 				!stricmp("a@a.com", sd->email) && //it is default email and
 				!strcmp("", delcode) //user sent an empty email
 			))) {
-			ShowInfo("" CL_RED "Char Deleted" CL_RESET " " CL_GREEN "(E-Mail)" CL_RESET ".\n");
+			ShowInfo("" CL_RED "Char Excluido" CL_RESET " " CL_GREEN "(E-Mail)" CL_RESET ".\n");
 			return true;
 	}
 	// Birthdate (YYMMDD)
@@ -604,7 +604,7 @@ bool chclif_delchar_check(struct char_session_data *sd, char *delcode, uint8 fla
 			!strcmp("",sd->birthdate) && // it is default birthdate and
 			!strcmp("",delcode) // user sent an empty birthdate
 		))) {
-		ShowInfo("" CL_RED "Char Deleted" CL_RESET " " CL_GREEN "(Birthdate)" CL_RESET ".\n");
+		ShowInfo("" CL_RED "Char Excluido" CL_RESET " " CL_GREEN "(Data de Nascimento)" CL_RESET ".\n");
 		return true;
 	}
 	return false;
@@ -618,7 +618,7 @@ int chclif_parse_char_delete2_accept(int fd, struct char_session_data* sd) {
 		uint32 char_id;
 		char_id = RFIFOL(fd,2);
 
-		ShowInfo(CL_RED "Request Char Deletion: " CL_GREEN "%d (%d)" CL_RESET "\n", sd->account_id, char_id);
+		ShowInfo(CL_RED "Requisitado Exclusao de Personagem: " CL_GREEN "%d (%d)" CL_RESET "\n", sd->account_id, char_id);
 
 		// construct "YY-MM-DD"
 		birthdate[0] = RFIFOB(fd,6);
@@ -745,13 +745,13 @@ int chclif_parse_reqtoconnect(int fd, struct char_session_data* sd,uint32 ipl){
 		int sex = RFIFOB(fd,16);
 		RFIFOSKIP(fd,17);
 
-		ShowInfo("request connect - account_id:%d/login_id1:%d/login_id2:%d\n", account_id, login_id1, login_id2);
+		ShowInfo("solicitar conexao - account_id:%d/login_id1:%d/login_id2:%d\n", account_id, login_id1, login_id2);
 
 		if (sd) {
 			//Received again auth packet for already authentified account?? Discard it.
 			//TODO: Perhaps log this as a hack attempt?
 			//TODO: and perhaps send back a reply?
-			ShowInfo("Already registered break\n");
+			ShowInfo("Conta ja registrada\n");
 			return 1;
 		}
 
@@ -907,7 +907,7 @@ int chclif_parse_select_accessible_map( int fd, struct char_session_data* sd, ui
 		}
 	}
 
-	ShowInfo( "Selected char: (Account %d: %d - %s)\n", sd->account_id, p.slot, char_dat.name );
+	ShowInfo( "Personagem selecionado: (Conta %d: %d - %s)\n", sd->account_id, p.slot, char_dat.name );
 
 	// Check if there is really no mapserver for the last point where the player was
 	int32 mapserver = char_search_mapserver( cd->last_point.map, -1, -1 );
@@ -1066,7 +1066,7 @@ int chclif_parse_charselect(int fd, struct char_session_data* sd,uint32 ipl){
 				schema_config.charlog_db, sd->account_id, slot, esc_name) )
 				Sql_ShowDebug(sql_handle);
 		}
-		ShowInfo("Selected char: (Account %d: %d - %s)\n", sd->account_id, slot, char_dat.name);
+		ShowInfo("Personagem Selecionado: (Conta %d: %d - %s)\n", sd->account_id, slot, char_dat.name);
 
 		// searching map server
 		i = char_search_mapserver( cd->last_point.map, -1, -1 );
@@ -1278,7 +1278,7 @@ int chclif_parse_delchar(int fd,struct char_session_data* sd, int cmd){
 		char email[40];
 		uint32 cid = RFIFOL(fd,2);
 
-		ShowInfo(CL_RED "Request Char Deletion: " CL_GREEN "%u (%u)" CL_RESET "\n", sd->account_id, cid);
+		ShowInfo(CL_RED "Requisitado Exclusao de Personagem: " CL_GREEN "%u (%u)" CL_RESET "\n", sd->account_id, cid);
 		memcpy(email, RFIFOP(fd,6), 40);
 		RFIFOSKIP(fd,( cmd == 0x68) ? 46 : 56);
 

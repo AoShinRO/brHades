@@ -2,7 +2,6 @@
 // For more information, see LICENCE in the main folder
 
 #include "showmsg.hpp"
-
 #include <cstdlib> // atexit
 #include <ctime>
 
@@ -499,10 +498,11 @@ static int VFPRINTF(HANDLE handle, const std::string_view fmt, va_list argptr)
 				break;
 			}// end while
 		}
-	}
-	if (*p)	// write the rest of the buffer
+	}	
+	if (*p){	// write the rest of the buffer
 		if( 0==WriteConsole(handle, p, (DWORD)strlen(p), &written, 0) )
 			WriteFile(handle, p, (DWORD)strlen(p), &written, 0);
+	}
 	FREEBUF(tempbuf);
 	return 0;
 }

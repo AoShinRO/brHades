@@ -356,7 +356,7 @@ int chrif_save(map_session_data *sd, int flag) {
  * @return 0:request sent
  */
 int chrif_connect(int fd) {
-	ShowStatus("Logging in to char server...\n", char_fd);
+	ShowStatus("Efetuando login no servidor char...\n", char_fd);
 	WFIFOHEAD(fd,60);
 	WFIFOW(fd,0) = 0x2af8;
 	memcpy(WFIFOP(fd,2), userid, NAME_LENGTH);
@@ -371,7 +371,7 @@ int chrif_connect(int fd) {
 
 // sends maps to char-server
 int chrif_sendmap(int fd) {
-	ShowStatus("Sending maps to char server...\n");
+	ShowStatus("Enviando mapas para o servidor char...\n");
 
 	// Sending normal maps, not instances
 	WFIFOHEAD( fd, 4 + instance_start * MAP_NAME_LENGTH_EXT );
@@ -395,7 +395,7 @@ int chrif_recvmap(int fd) {
 	}
 
 	if (battle_config.etc_log)
-		ShowStatus("Received maps from %d.%d.%d.%d:%d (%d maps)\n", CONVIP(ip), port, j);
+		ShowStatus("Mapas recebidos de %d.%d.%d.%d:%d (%d mapas)\n", CONVIP(ip), port, j);
 
 	other_mapserver_count++;
 
@@ -415,7 +415,7 @@ int chrif_removemap(int fd) {
 	other_mapserver_count--;
 
 	if(battle_config.etc_log)
-		ShowStatus("remove map of server %d.%d.%d.%d:%d (%d maps)\n", CONVIP(ip), port, j);
+		ShowStatus("remover mapa do servidor %d.%d.%d.%d:%d (%d mapas)\n", CONVIP(ip), port, j);
 
 	return 0;
 }
@@ -487,11 +487,11 @@ int chrif_changemapserverack(uint32 account_id, int login_id1, int login_id2, ui
  */
 int chrif_connectack(int fd) {
 	if (RFIFOB(fd,2)) {
-		ShowFatalError("Connection to char-server failed %d, please check conf/import/map_conf userid and passwd.\n", RFIFOB(fd,2));
+		ShowFatalError("A conexao com o char-server falhou %d, verifique conf/import/map_conf userid e passwd.\n", RFIFOB(fd,2));
 		exit(EXIT_FAILURE);
 	}
 
-	ShowStatus("Successfully logged on to Char Server (Connection: '" CL_WHITE "%d" CL_RESET "').\n",fd);
+	ShowStatus("Login efetuado com sucesso no Char Server (Conexao: '" CL_WHITE "%d" CL_RESET "').\n",fd);
 	chrif_state = 1;
 	chrif_connected = 1;
 
@@ -545,7 +545,7 @@ static int chrif_reconnect(DBKey key, DBData *data, va_list ap) {
 
 /// Called when all the connection steps are completed.
 void chrif_on_ready(void) {
-	ShowStatus("Map Server is now online.\n");
+	ShowStatus("O servidor de mapas agora esta online.\n");
 
 	chrif_state = 2;
 
@@ -580,7 +580,7 @@ int chrif_sendmapack(int fd) {
 	uint16 offs = 5;
 
 	if (RFIFOB(fd,4)) {
-		ShowFatalError("chrif : send map list to char server failed %d\n", RFIFOB(fd,2));
+		ShowFatalError("chrif: falha no envio da lista de mapas para o servidor char %d\n", RFIFOB(fd,2));
 		exit(EXIT_FAILURE);
 	}
 
@@ -590,7 +590,7 @@ int chrif_sendmapack(int fd) {
 	// Server name
 	safestrncpy( charserver_name, RFIFOCP( fd, offs + NAME_LENGTH ), NAME_LENGTH );
 
-	ShowStatus( "Map-server connected to char-server '" CL_WHITE "%s" CL_RESET "' (whispername: %s).\n", charserver_name, wisp_server_name );
+	ShowStatus( "Servidor de mapas conectado ao Char server '" CL_WHITE "%s" CL_RESET "' (whispername: %s).\n", charserver_name, wisp_server_name );
 
 	chrif_on_ready();
 
@@ -1856,7 +1856,7 @@ static TIMER_FUNC(check_connect_char_server){
 	static int displayed = 0;
 	if ( char_fd <= 0 || session[char_fd] == nullptr ) {
 		if ( !displayed ) {
-			ShowStatus("Attempting to connect to Char Server. Please wait.\n");
+			ShowStatus("Tentando conectar ao Char Server. Aguarde.\n");
 			displayed = 1;
 		}
 

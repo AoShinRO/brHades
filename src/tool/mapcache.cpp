@@ -210,15 +210,15 @@ bool MapcacheTool::initialize( int argc, char* argv[] ){
 	// Process the command-line arguments
 	process_args(argc, argv);
 
-	ShowStatus("Initializing grfio with %s\n", grf_list_file.c_str());
+	ShowStatus("Inicializando grfio com %s\n", grf_list_file.c_str());
 	grfio_init(grf_list_file.c_str());
 
 	// Attempt to open the map cache file and force rebuild if not found
-	ShowStatus("Opening map cache: %s\n", map_cache_file.c_str());
+	ShowStatus("Abrindo cache do mapa: %s\n", map_cache_file.c_str());
 	if(!rebuild) {
 		map_cache_fp = fopen(map_cache_file.c_str(), "rb");
 		if(map_cache_fp == nullptr) {
-			ShowNotice("Existing map cache not found, forcing rebuild mode\n");
+			ShowNotice("Cache de mapa existente nao encontrado, forcando modo de reconstrucao\n");
 			rebuild = 1;
 		} else
 			fclose(map_cache_fp);
@@ -228,7 +228,7 @@ bool MapcacheTool::initialize( int argc, char* argv[] ){
 	else
 		map_cache_fp = fopen(map_cache_file.c_str(), "r+b");
 	if(map_cache_fp == nullptr) {
-		ShowError("Failure when opening map cache file %s\n", map_cache_file.c_str());
+		ShowError("Falha ao abrir o arquivo de cache do mapa %s\n", map_cache_file.c_str());
 		return false;
 	}
 
@@ -239,10 +239,10 @@ bool MapcacheTool::initialize( int argc, char* argv[] ){
 	for (const auto &directory : directories) {
 		std::string filename = directory + map_list_file;
 
-		ShowStatus("Opening map list: %s\n", filename.c_str());
+		ShowStatus("Abrindo lista de mapas: %s\n", filename.c_str());
 		list = fopen(filename.c_str(), "r");
 		if (list == nullptr) {
-			ShowError("Failure when opening maps list file %s\n", filename.c_str());
+			ShowError("Falha ao abrir o arquivo de lista de mapas %s\n", filename.c_str());
 			return false;
 		}
 
@@ -251,7 +251,7 @@ bool MapcacheTool::initialize( int argc, char* argv[] ){
 			header.file_size = sizeof(struct main_header);
 			header.map_count = 0;
 		} else {
-			if (fread(&header, sizeof(struct main_header), 1, map_cache_fp) != 1) { printf("An error as occured while reading map_cache_fp \n"); }
+			if (fread(&header, sizeof(struct main_header), 1, map_cache_fp) != 1) { printf("Ocorreu um erro ao ler map_cache_fp \n"); }
 			header.file_size = GetULong((unsigned char *)&(header.file_size));
 			header.map_count = GetUShort((unsigned char *)&(header.map_count));
 		}
@@ -277,30 +277,30 @@ bool MapcacheTool::initialize( int argc, char* argv[] ){
 			name[MAP_NAME_LENGTH_EXT - 1] = '\0';
 			remove_extension(name);
 			if (find_map(name))
-				ShowInfo("Map '" CL_WHITE "%s" CL_RESET "' already in cache.\n", name);
+				ShowInfo("Mapa '" CL_WHITE "%s" CL_RESET "' ja esta no cache.\n", name);
 			else if (read_map(name, &map)) {
 				cache_map(name, &map);
-				ShowInfo("Map '" CL_WHITE "%s" CL_RESET "' successfully cached.\n", name);
+				ShowInfo("Mapa '" CL_WHITE "%s" CL_RESET "' armazenado em cache com sucesso.\n", name);
 			}
 			else
-				ShowError("Map '" CL_WHITE "%s" CL_RESET "' not found!\n", name);
+				ShowError("Mapa '" CL_WHITE "%s" CL_RESET "' nao encontrado!\n", name);
 
 		}
 
-		ShowStatus("Closing map list: %s\n", filename.c_str());
+		ShowStatus("Fechando lista de mapas: %s\n", filename.c_str());
 		fclose(list);
 	}
 
 	// Write the main header and close the map cache
-	ShowStatus("Closing map cache: %s\n", map_cache_file.c_str());
+	ShowStatus("Fechando cache do mapa: %s\n", map_cache_file.c_str());
 	fseek(map_cache_fp, 0, SEEK_SET);
 	fwrite(&header, sizeof(struct main_header), 1, map_cache_fp);
 	fclose(map_cache_fp);
 
-	ShowStatus("Finalizing grfio\n");
+	ShowStatus("Finalizando grfio\n");
 	grfio_final();
 
-	ShowInfo("%d maps now in cache\n", header.map_count);
+	ShowInfo("%d mapas agora em cache\n", header.map_count);
 
 	return true;
 }

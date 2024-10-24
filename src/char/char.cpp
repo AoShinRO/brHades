@@ -519,7 +519,7 @@ int char_mmo_char_tosql(uint32 char_id, struct mmo_charstatus* p){
 #endif
 	StringBuf_Destroy(&buf);
 	if (save_status[0]!='\0' && charserv_config.save_log)
-		ShowInfo("Saved char %d - %s:%s.\n", char_id, p->name, save_status);
+		ShowInfo("Personagem Salvo %d - %s:%s.\n", char_id, p->name, save_status);
 
 	if( !errors ){
 		memcpy( cp.get(), p, sizeof( struct mmo_charstatus ) );
@@ -738,7 +738,7 @@ int char_memitemdata_to_sql(const struct item items[], int max, int id, enum sto
 		errors++;
 	}
 
-	ShowInfo("Saved %s (%d) data to table %s for %s: %d\n", printname, stor_id, tablename, selectoption, id);
+	ShowInfo("%s (%d) dados salvos na tabela %s para %s: %d\n",printname, stor_id, tablename, selectoption, id);
 	StringBuf_Destroy(&buf);
 	aFree(flag);
 
@@ -850,7 +850,7 @@ bool char_memitemdata_from_sql(struct s_storage* p, int max, int id, enum storag
 		memcpy(&storage[i], &item, sizeof(item));
 
 	p->amount = i;
-	ShowInfo("Loaded %s data from table %s for %s: %d (total: %d)\n", printname, tablename, selectoption, id, p->amount);
+	ShowInfo("Carregados %s dados da tabela %s para %s: %d (total: %d)\n", printname, tablename, selectoption, id, p->amount);
 
 	SqlStmt_FreeResult(stmt);
 	SqlStmt_Free(stmt);
@@ -1044,7 +1044,7 @@ int char_mmo_char_fromsql(uint32 char_id, struct mmo_charstatus* p, bool load_ev
 
 	memset(p, 0, sizeof(struct mmo_charstatus));
 
-	if (charserv_config.save_log) ShowInfo("Char load request (%d)\n", char_id);
+	if (charserv_config.save_log) ShowInfo("Solicitacao de carregamento de char (%d)\n", char_id);
 
 	stmt = SqlStmt_Malloc(sql_handle);
 	if( stmt == nullptr )
@@ -1247,7 +1247,7 @@ int char_mmo_char_fromsql(uint32 char_id, struct mmo_charstatus* p, bool load_ev
 
 
 	if (charserv_config.save_log)
-		ShowInfo("Loaded char (%d - %s): %s\n", char_id, p->name, StringBuf_Value(&msg_buf)); //ok. all data load successfully!
+		ShowInfo("Personagem carregado (%d - %s): %s\n", char_id, p->name, StringBuf_Value(&msg_buf)); //ok. all data load successfully!
 	SqlStmt_Free(stmt);
 
 	std::shared_ptr<struct mmo_charstatus> cp = util::umap_find( char_get_chardb(), char_id );
@@ -1266,7 +1266,7 @@ int char_mmo_char_fromsql(uint32 char_id, struct mmo_charstatus* p, bool load_ev
 
 //==========================================================================================================
 int char_mmo_sql_init(void) {
-	ShowStatus("Characters per Account: '%d'.\n", charserv_config.char_config.char_per_account);
+	ShowStatus("Personagens por Acc: '%d'.\n", charserv_config.char_config.char_per_account);
 
 	//the 'set offline' part is now in check_login_conn ...
 	//if the server connects to loginserver
@@ -1539,7 +1539,7 @@ int char_make_new_char( struct char_session_data* sd, char* name_, int str, int 
 			Sql_ShowDebug(sql_handle);
 	}
 
-	ShowInfo("Created char: account: %d, char: %d, slot: %d, name: %s\n", sd->account_id, char_id, slot, name);
+	ShowInfo("Char criado: conta: %d, char: %d, slot: %d, nome: %s\n", sd->account_id, char_id, slot, name);
 	return char_id;
 }
 
@@ -1575,7 +1575,7 @@ enum e_char_del_response char_delete(struct char_session_data* sd, uint32 char_i
 
 	// Such a character does not exist in the account
 	if (i == MAX_CHARS) {
-		ShowInfo("Char deletion aborted: %s, Account ID: %u, Character ID: %u\n", name, sd->account_id, char_id);
+		ShowInfo("Exclusao de personagem abortada: %s, ID da conta: %u, ID do personagem: %u\n", name, sd->account_id, char_id);
 		return CHAR_DELETE_NOTFOUND;
 	}
 
@@ -1586,7 +1586,7 @@ enum e_char_del_response char_delete(struct char_session_data* sd, uint32 char_i
 
 	if( SQL_SUCCESS != Sql_NextRow(sql_handle) )
 	{
-		ShowInfo("Char deletion aborted: %s, Account ID: %u, Character ID: %u\n", name, sd->account_id, char_id);
+		ShowInfo("Exclusao de personagem abortada: %s, ID da conta: %u, ID do personagem: %u\n", name, sd->account_id, char_id);
 		Sql_FreeResult(sql_handle);
 		return CHAR_DELETE_NOTFOUND;
 	}
@@ -1610,24 +1610,24 @@ enum e_char_del_response char_delete(struct char_session_data* sd, uint32 char_i
 	if( ( charserv_config.char_config.char_del_level > 0 && base_level >= charserv_config.char_config.char_del_level )
 	 || ( charserv_config.char_config.char_del_level < 0 && base_level <= -charserv_config.char_config.char_del_level )
 	) {
-			ShowInfo("Char deletion aborted: %s, BaseLevel: %i\n", name, base_level);
+			ShowInfo("Exclusao de char abortada: %s, BaseLevel: %i\n", name, base_level);
 			return CHAR_DELETE_BASELEVEL;
 	}
 
 	if (charserv_config.char_config.char_del_restriction&CHAR_DEL_RESTRICT_GUILD && guild_id) // character is in guild
 	{
-		ShowInfo("Char deletion aborted: %s, Guild ID: %i\n", name, guild_id);
+		ShowInfo("Exclusao de char abortada: %s, Guild ID: %i\n", name, guild_id);
 		return CHAR_DELETE_GUILD;
 	}
 
 	if (charserv_config.char_config.char_del_restriction&CHAR_DEL_RESTRICT_PARTY && party_id) // character is in party
 	{
-		ShowInfo("Char deletion aborted: %s, Party ID: %i\n", name, party_id);
+		ShowInfo("Exclusao de char abortada: %s, Party ID: %i\n", name, party_id);
 		return CHAR_DELETE_PARTY;
 	}
 
 	if( charserv_config.char_config.char_del_delay > 0 && ( !delete_date || delete_date > time(nullptr) ) ){ // not queued or delay not yet passed
-		ShowInfo("Char deletion aborted: %s, Time was not set or has not been reached ye\n", name );
+		ShowInfo("Exclusao de caractere abortada: %s, o tempo nao foi definido ou nao foi atingido ainda. \n", name );
 		return CHAR_DELETE_TIME;
 	}
 
@@ -2128,10 +2128,10 @@ int char_lan_subnetcheck(uint32 ip){
 	int i;
 	ARR_FIND( 0, subnet_count, i, (subnet[i].char_ip & subnet[i].mask) == (ip & subnet[i].mask) );
 	if( i < subnet_count ) {
-		ShowInfo("Subnet check [%u.%u.%u.%u]: Matches " CL_CYAN "%u.%u.%u.%u/%u.%u.%u.%u" CL_RESET"\n", CONVIP(ip), CONVIP(subnet[i].char_ip & subnet[i].mask), CONVIP(subnet[i].mask));
+		ShowInfo("Verificacao de sub-rede [%u.%u.%u.%u]: Correspondencias " CL_CYAN "%u.%u.%u.%u/%u.%u.%u.%u" CL_RESET"\n", CONVIP(ip), CONVIP(subnet[i].char_ip & subnet[i].mask), CONVIP(subnet[i].mask));
 		return subnet[i].map_ip;
 	} else {
-		ShowInfo("Subnet check [%u.%u.%u.%u]: " CL_CYAN "WAN" CL_RESET "\n", CONVIP(ip));
+		ShowInfo("Verificacao de sub-rede [%u.%u.%u.%u]: " CL_CYAN "WAN" CL_RESET "\n", CONVIP(ip));
 		return 0;
 	}
 }
@@ -2300,7 +2300,7 @@ int char_lan_config_read(const char *lancfgName) {
 	}
 
 	if( subnet_count > 1 ) /* only useful if there is more than 1 */
-		ShowStatus("Read information about %d subnetworks.\n", subnet_count);
+		ShowStatus("Leia informacoes sobre %d subnetworks.\n", subnet_count);
 
 	fclose(fp);
 	return 0;
@@ -2327,7 +2327,7 @@ bool char_checkdb(void){
 		schema_config.elemental_db, schema_config.skillcooldown_db, schema_config.bonus_script_db,
 		schema_config.clan_table, schema_config.clan_alliance_table, schema_config.mail_attachment_db, schema_config.achievement_table
 	};
-	ShowInfo("Start checking DB integrity\n");
+	ShowInfo("Iniciar verificacao da integridade do BD\n");
 	for (i=0; i<ARRAYLENGTH(sqltable); i++){ //check if they all exist and we can acces them in sql-server
 		if( SQL_ERROR == Sql_Query(sql_handle, "SELECT 1 FROM `%s` LIMIT 1;", sqltable[i]) ){
 			Sql_ShowDebug(sql_handle);
@@ -2571,7 +2571,7 @@ bool char_checkdb(void){
 		return false;
 	}
 	Sql_FreeResult(sql_handle);
-	ShowInfo("DB integrity check finished with success\n");
+	ShowInfo("A verificacao de integridade do banco de dados foi concluida com sucesso\n");
 	return true;
 }
 
@@ -2674,7 +2674,7 @@ void char_sql_config_read(const char* cfgName) {
 			char_sql_config_read(w2);
 	}
 	fclose(fp);
-	ShowInfo("Done reading %s.\n", cfgName);
+	ShowInfo("Leitura concluida de %s.\n", cfgName);
 }
 
 
@@ -2942,7 +2942,7 @@ bool char_config_read(const char* cfgName, bool normal){
 				if (charserv_config.login_ip) {
 					char ip_str[16];
 					safestrncpy(charserv_config.login_ip_str, w2, sizeof(charserv_config.login_ip_str));
-					ShowStatus("Login server IP address : %s -> %s\n", w2, ip2str(charserv_config.login_ip, ip_str));
+					ShowStatus("Login server IP : %s -> %s\n", w2, ip2str(charserv_config.login_ip, ip_str));
 				}
 			} else if (strcmpi(w1, "login_port") == 0) {
 				charserv_config.login_port = atoi(w2);
@@ -2951,14 +2951,14 @@ bool char_config_read(const char* cfgName, bool normal){
 				if (charserv_config.char_ip) {
 					char ip_str[16];
 					safestrncpy(charserv_config.char_ip_str, w2, sizeof(charserv_config.char_ip_str));
-					ShowStatus("Character server IP address : %s -> %s\n", w2, ip2str(charserv_config.char_ip, ip_str));
+					ShowStatus("Character server IP : %s -> %s\n", w2, ip2str(charserv_config.char_ip, ip_str));
 				}
 			} else if (strcmpi(w1, "bind_ip") == 0) {
 				charserv_config.bind_ip = host2ip(w2);
 				if (charserv_config.bind_ip) {
 					char ip_str[16];
 					safestrncpy(charserv_config.bind_ip_str, w2, sizeof(charserv_config.bind_ip_str));
-					ShowStatus("Character server binding IP address : %s -> %s\n", w2, ip2str(charserv_config.bind_ip, ip_str));
+					ShowStatus("Character server conectando IP : %s -> %s\n", w2, ip2str(charserv_config.bind_ip, ip_str));
 				}
 			} else if (strcmpi(w1, "char_port") == 0) {
 				charserv_config.char_port = atoi(w2);
@@ -2972,7 +2972,7 @@ bool char_config_read(const char* cfgName, bool normal){
 		} else if(strcmpi(w1,"console_silent")==0){
 			msg_silent = atoi(w2);
 			if( msg_silent ) /* only bother if its actually enabled */
-				ShowInfo("Console Silent Setting: %d\n", atoi(w2));
+				ShowInfo("Configuracao de Console Silencioso: %d\n", atoi(w2));
 		} else if (strcmpi(w1, "console_msg_log") == 0) {
 			console_msg_log = atoi(w2);
 		} else if  (strcmpi(w1, "console_log_filepath") == 0) {
@@ -3112,7 +3112,7 @@ bool char_config_read(const char* cfgName, bool normal){
 	}
 	fclose(fp);
 
-	ShowInfo("Done reading %s.\n", cfgName);
+	ShowInfo("Leitura concluida de %s.\n", cfgName);
 	return true;
 }
 
@@ -3142,7 +3142,7 @@ void char_do_final_msg(void){
 }
 
 void CharacterServer::finalize(){
-	ShowStatus("Terminating...\n");
+	ShowStatus("Finalizando...\n");
 
 	char_set_all_offline(-1);
 	char_set_all_offline_sql();
@@ -3167,12 +3167,12 @@ void CharacterServer::finalize(){
 
 	Sql_Free(sql_handle);
 
-	ShowStatus("Finished.\n");
+	ShowStatus("Finalizado.\n");
 }
 
 /// Called when a terminate signal is received.
 void CharacterServer::handle_shutdown(){
-	ShowStatus("Shutting down...\n");
+	ShowStatus("Desligando...\n");
 	// TODO proper shutdown procedure; wait for acks?, kick all characters, ... [FlavoJS]
 	for( int id = 0; id < ARRAYLENGTH(map_server); ++id )
 		chmapif_server_reset(id);
@@ -3212,9 +3212,9 @@ bool CharacterServer::initialize( int argc, char *argv[] ){
 		ip2str(addr_[0], ip_str);
 
 		if (naddr_ > 1)
-			ShowStatus("Multiple interfaces detected..  using %s as our IP address\n", ip_str);
+			ShowStatus("Multiplas interfaces detectadas..  usando %s de IP\n", ip_str);
 		else
-			ShowStatus("Defaulting to %s as our IP address\n", ip_str);
+			ShowStatus("Ajustando para %s o IP \n", ip_str);
 		if (!(charserv_config.login_ip) ) {
 			safestrncpy(charserv_config.login_ip_str, ip_str, sizeof(charserv_config.login_ip_str));
 			charserv_config.login_ip = str2ip(charserv_config.login_ip_str);
@@ -3278,7 +3278,7 @@ bool CharacterServer::initialize( int argc, char *argv[] ){
 
 	do_init_chcnslif();
 
-	ShowStatus("The char-server is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %d).\n\n", charserv_config.char_port);
+	ShowStatus("O char-server esta " CL_GREEN "pronto" CL_RESET " (o servidor esta escutando na porta %d).\n\n", charserv_config.char_port);
 
 	return true;
 }

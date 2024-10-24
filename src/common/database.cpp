@@ -91,11 +91,10 @@ bool YamlDatabase::reload(){
 
 static std::pair<size_t, std::unique_ptr<char[]>> readDBFileAsync(const std::string_view& filepath, const std::string& type) {
 
-	// read whole file to buffer
 	std::FILE* f = std::fopen(filepath.data(), "rb");
-	if (!f) {
+	if (f == nullptr) 
 		return { 0,nullptr };
-	}
+	
 	std::fseek(f, 0, SEEK_END);
 	size_t len = std::ftell(f);
 	std::unique_ptr<char[]> buf(new char[len + 1]);
@@ -104,23 +103,22 @@ static std::pair<size_t, std::unique_ptr<char[]>> readDBFileAsync(const std::str
 	// Zero terminate
 	buf[real_size] = '\0';
 
-	if (std::ferror(f)) {
+	if (std::ferror(f)) 
 		return { 0,nullptr };
-	}
-
+	
 	std::fclose(f);
 	return std::make_pair(len, std::move(buf));
 }
 
 bool YamlDatabase::load(const std::string_view& path) {
-	ShowStatus("Loading '" CL_WHITE "%.*s" CL_RESET "'..." CL_CLL "\r", (int)path.size(), path.data());
+	ShowStatus("Carregando '" CL_WHITE "%.*s" CL_RESET "'..." CL_CLL "\r", (int)path.size(), path.data());
 
 	auto futureResult = std::async(std::launch::async, readDBFileAsync, path, this->type);
 	auto result = futureResult.get(); // Wait for file reading to finish
 	size_t size = result.first;
 	if(!size)
 	{
-		ShowError("Failed to open %s database file from '" CL_WHITE "'%.*s'" CL_RESET "'.\n", this->type.c_str(), (int)path.size(), path.data());
+		ShowError("Falha ao abrir o arquivo de banco de dados %s de '" CL_WHITE "'%.*s'" CL_RESET "'.\n", this->type.c_str(), (int)path.size(), path.data());
 		return false;
 	}
 	std::unique_ptr<char[]> buf = std::move(result.second);
@@ -132,9 +130,9 @@ bool YamlDatabase::load(const std::string_view& path) {
 		tree = parser.parse_in_arena(c4::to_csubstr(path.data()), c4::to_csubstr(buf.get()));
 	}
 	catch (const std::runtime_error& e) {
-		ShowError("Failed to load %s database file from '" CL_WHITE "'%.*s'" CL_RESET "'.\n", this->type.c_str(), (int)path.size(), path.data());
-		ShowError("There is likely a syntax error in the file.\n");
-		ShowError("Error message: %s\n", e.what());
+		ShowError( "Falha ao carregar o arquivo de banco de dados %s de '" CL_WHITE "'%.*s'" CL_RESET "'.\n", this->type.c_str(), (int)path.size(), path.data() );
+		ShowError( "Provavelmente ha um erro de sintaxe no arquivo.\n" );
+		ShowError( "Mensagem de erro: %s\n", e.what() );
 		return false;
 	}
 
@@ -142,7 +140,7 @@ bool YamlDatabase::load(const std::string_view& path) {
 	this->currentFile = path;
 
 	if (!this->verifyCompatibility(tree)) {
-		ShowError("Failed to verify compatibility with %s database file from '" CL_WHITE "%s" CL_RESET "'.\n", this->type.c_str(), this->currentFile.c_str());
+		ShowError("Falha ao verificar a compatibilidade com o arquivo de banco de dados %s de '" CL_WHITE "%s" CL_RESET "'.\n", this->type.c_str(), this->currentFile.c_str());
 		return false;
 	}
 
@@ -176,17 +174,17 @@ void YamlDatabase::parse( const ryml::Tree& tree ){
 
 #ifdef DETAILED_LOADING_OUTPUT
 		size_t childNodesCount = bodyNode.num_children();
-		ShowStatus("Loading '" CL_WHITE "%" PRIdPTR CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'\n", childNodesCount, fileName);
+		ShowStatus("Carregando entradas de '" CL_WHITE "%" PRIdPTR CL_RESET "' em '" CL_WHITE "%s" CL_RESET "'\n", childNodesCount, fileName);
 #endif
 
 		for( const ryml::NodeRef &node : bodyNode ){
 			count += this->parseBodyNode( node );
 #ifdef DETAILED_LOADING_OUTPUT
-			ShowStatus( "Loading [%" PRIu64 "/%" PRIdPTR "] entries from '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\r", count, childNodesCount, fileName );
+			ShowStatus( "Carregando [%" PRIu64 "/%" PRIdPTR "] entradas de '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\r", count, childNodesCount, fileName );
 #endif
 		}
 
-		ShowStatus( "Done reading '" CL_WHITE "%" PRIu64 CL_RESET "' entries in '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\n", count, fileName );
+		ShowStatus( "Concluida a leitura de '" CL_WHITE "%" PRIu64 CL_RESET "' entradas em '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\n", count, fileName );
 	}
 }
 
