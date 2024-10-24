@@ -5382,12 +5382,12 @@ bool MapServer::initialize( int argc, char *argv[] ){
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double, std::milli> duration = end - start; // Tempo em milissegundos
 	
-	// Cálculo de minutos, segundos e milissegundos
+	// CÃ¡lculo de minutos, segundos e milissegundos
 	long long total_milliseconds = static_cast<long long>(duration.count());
 	long long minutes = total_milliseconds / 60000; // 1 minuto = 60000 milissegundos
 	long long seconds = (total_milliseconds % 60000) / 1000; // Restante em segundos
 	
-	ShowInfo("Map-Server elapsed DB read time: %lld m, %lld s\n", minutes, seconds);
+	ShowInfo("Tempo de leitura das databases: %lld m, %lld s\n", minutes, seconds);
 
 	npc_event_do_oninit();	// Init npcs (OnInit)
 

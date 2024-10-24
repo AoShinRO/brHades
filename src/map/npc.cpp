@@ -3613,7 +3613,7 @@ void npc_loadsrcfiles() {
 	ShowStatus("Carregando NPCs...\n");
 
 	auto start = std::chrono::high_resolution_clock::now(); // benchmark start
-    static std::unique_ptr<util::ThreadPool> pool; // Usar unique_ptr para gerenciar a memória
+    static std::unique_ptr<util::ThreadPool> pool; // Usar unique_ptr para gerenciar a memÃ³ria
     if (!pool) {
         pool = std::make_unique<util::ThreadPool>(std::thread::hardware_concurrency());
     }
@@ -3648,12 +3648,12 @@ void npc_loadsrcfiles() {
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double, std::milli> duration = end - start; // Tempo em milissegundos
 	
-	// Cálculo de minutos, segundos e milissegundos
+	// CÃ¡lculo de minutos, segundos e milissegundos
 	long long total_milliseconds = static_cast<long long>(duration.count());
 	long long minutes = total_milliseconds / 60000; // 1 minuto = 60000 milissegundos
 	long long seconds = (total_milliseconds % 60000) / 1000; // Restante em segundos
 	
-	ShowInfo("NPC read time: %lld m, %lld s\n", minutes, seconds);
+	ShowInfo("Tempo de carregamento dos NPCs: %lld m, %lld s\n", minutes, seconds);
 }
 
 /// Parses and sets the name and exname of a npc.
