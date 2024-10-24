@@ -91,11 +91,10 @@ bool YamlDatabase::reload(){
 
 static std::pair<size_t, std::unique_ptr<char[]>> readDBFileAsync(const std::string_view& filepath, const std::string& type) {
 
-	// read whole file to buffer
 	std::FILE* f = std::fopen(filepath.data(), "rb");
-	if (!f) {
+	if (f == nullptr) 
 		return { 0,nullptr };
-	}
+	
 	std::fseek(f, 0, SEEK_END);
 	size_t len = std::ftell(f);
 	std::unique_ptr<char[]> buf(new char[len + 1]);
@@ -104,10 +103,9 @@ static std::pair<size_t, std::unique_ptr<char[]>> readDBFileAsync(const std::str
 	// Zero terminate
 	buf[real_size] = '\0';
 
-	if (std::ferror(f)) {
+	if (std::ferror(f)) 
 		return { 0,nullptr };
-	}
-
+	
 	std::fclose(f);
 	return std::make_pair(len, std::move(buf));
 }
