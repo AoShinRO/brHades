@@ -180,11 +180,7 @@ void YamlDatabase::parse( const ryml::Tree& tree ){
 		for( const ryml::NodeRef &node : bodyNode ){
 			count += this->parseBodyNode( node );
 #ifdef DETAILED_LOADING_OUTPUT
-<<<<<<< .mine
-			ShowStatus( "Loading [%" PRIu64 "/%" PRIdPTR "] entries from '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\r", count, childNodesCount, fileName );
-=======
-			ShowStatus( "Carregando [%" PRIdPTR "/%" PRIdPTR "] entradas de '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\r", ++childNodesProgressed, childNodesCount, fileName );
->>>>>>> .theirs
+			ShowStatus( "Carregando [%" PRIu64 "/%" PRIdPTR "] entradas de '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\r", count, childNodesCount, fileName );
 #endif
 		}
 
