@@ -89,21 +89,12 @@ bool YamlDatabase::reload(){
 	return this->load();
 }
 
-<<<<<<< .mine
 static std::pair<size_t, std::unique_ptr<char[]>> readDBFileAsync(const std::string_view& filepath, const std::string& type) {
 
 	// read whole file to buffer
 	std::FILE* f = std::fopen(filepath.data(), "rb");
 	if (!f) {
 		return { 0,nullptr };
-=======
-bool YamlDatabase::load(const std::string_view& path) {
-	ShowStatus("Carregando '" CL_WHITE "%.*s" CL_RESET "'..." CL_CLL "\r", (int)path.size(), path.data());
-	std::FILE* f = std::fopen(path.data(), "r");
-	if (f == nullptr) {
-		ShowError("Falha ao abrir o arquivo de banco de dados %s de '" CL_WHITE "'%.*s'" CL_RESET "'.\n", this->type.c_str(), (int)path.size(), path.data());
-		return false;
->>>>>>> .theirs
 	}
 	std::fseek(f, 0, SEEK_END);
 	size_t len = std::ftell(f);
@@ -114,13 +105,8 @@ bool YamlDatabase::load(const std::string_view& path) {
 	buf[real_size] = '\0';
 
 	if (std::ferror(f)) {
-<<<<<<< .mine
 		return { 0,nullptr };
 
-=======
-		ShowError("Falha ao ler o arquivo de banco de dados %s de '" CL_WHITE "'%.*s'" CL_RESET "' - %s\n",this->type.c_str(), (int)path.size(), path.data(), strerror(errno));
-		return false;
->>>>>>> .theirs
 	}
 
 	std::fclose(f);
@@ -128,14 +114,14 @@ bool YamlDatabase::load(const std::string_view& path) {
 }
 
 bool YamlDatabase::load(const std::string_view& path) {
-	ShowStatus("Loading '" CL_WHITE "%.*s" CL_RESET "'..." CL_CLL "\r", (int)path.size(), path.data());
+	ShowStatus("Carregando '" CL_WHITE "%.*s" CL_RESET "'..." CL_CLL "\r", (int)path.size(), path.data());
 
 	auto futureResult = std::async(std::launch::async, readDBFileAsync, path, this->type);
 	auto result = futureResult.get(); // Wait for file reading to finish
 	size_t size = result.first;
 	if(!size)
 	{
-		ShowError("Failed to open %s database file from '" CL_WHITE "'%.*s'" CL_RESET "'.\n", this->type.c_str(), (int)path.size(), path.data());
+		ShowError("Falha ao abrir o arquivo de banco de dados %s de '" CL_WHITE "'%.*s'" CL_RESET "'.\n", this->type.c_str(), (int)path.size(), path.data());
 		return false;
 	}
 	std::unique_ptr<char[]> buf = std::move(result.second);
