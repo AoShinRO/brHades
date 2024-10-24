@@ -284,16 +284,16 @@ void web_set_defaults() {
 int web_sql_init(void) {
 	// login db connection
 	login_handle = Sql_Malloc();
-	ShowInfo("Connecting to the Login DB server.....\n");
+	ShowInfo("Conectando ao servidor Login DB.....\n");
 
 	if (SQL_ERROR == Sql_Connect(login_handle, login_server_id.c_str(), login_server_pw.c_str(), login_server_ip.c_str(), login_server_port, login_server_db.c_str())) {
-		ShowError("Couldn't connect with uname='%s',host='%s',port='%hu',database='%s'\n",
+		ShowError("Nao foi possivel conectar com uname='%s',host='%s',porta='%hu',banco de dados='%s'\n",
 			login_server_id.c_str(), login_server_ip.c_str(), login_server_port, login_server_db.c_str());
 		Sql_ShowDebug(login_handle);
 		Sql_Free(login_handle);
 		exit(EXIT_FAILURE);
 	}
-	ShowStatus("Connect success! (Login Server Connection)\n");
+	ShowStatus("Conexao bem-sucedida! (Conexao do servidor de login)\n");
 
 	if (!default_codepage.empty()) {
 		if (SQL_ERROR == Sql_SetEncoding(login_handle, default_codepage.c_str()))
@@ -301,16 +301,16 @@ int web_sql_init(void) {
 	}
 
 	char_handle = Sql_Malloc();
-	ShowInfo("Connecting to the Char DB server.....\n");
+	ShowInfo("Conectando ao servidor Char DB.....\n");
 
 	if (SQL_ERROR == Sql_Connect(char_handle, char_server_id.c_str(), char_server_pw.c_str(), char_server_ip.c_str(), char_server_port, char_server_db.c_str())) {
-		ShowError("Couldn't connect with uname='%s',host='%s',port='%hu',database='%s'\n",
+		ShowError("Nao foi possivel conectar com uname='%s',host='%s',porta='%hu',banco de dados='%s'\n",
 			char_server_id.c_str(), char_server_ip.c_str(), char_server_port, char_server_db.c_str());
 		Sql_ShowDebug(char_handle);
 		Sql_Free(char_handle);
 		exit(EXIT_FAILURE);
 	}
-	ShowStatus("Connect success! (Char Server Connection)\n");
+	ShowStatus("Conexao bem-sucedida! (Conexao do servidor Char)\n");
 
 	if (!default_codepage.empty()) {
 		if (SQL_ERROR == Sql_SetEncoding(char_handle, default_codepage.c_str()))
@@ -318,16 +318,16 @@ int web_sql_init(void) {
 	}
 
 	map_handle = Sql_Malloc();
-	ShowInfo("Connecting to the Map DB server.....\n");
+	ShowInfo("Conectando ao servidor Map DB.....\n");
 
 	if (SQL_ERROR == Sql_Connect(map_handle, map_server_id.c_str(), map_server_pw.c_str(), map_server_ip.c_str(), map_server_port, map_server_db.c_str())) {
-		ShowError("Couldn't connect with uname='%s',host='%s',port='%hu',database='%s'\n",
+		ShowError("Nao foi possivel conectar com uname='%s',host='%s',porta='%hu',banco de dados='%s'\n",
 			map_server_id.c_str(), map_server_ip.c_str(), map_server_port, map_server_db.c_str());
 		Sql_ShowDebug(map_handle);
 		Sql_Free(map_handle);
 		exit(EXIT_FAILURE);
 	}
-	ShowStatus("Connect success! (Map Server Connection)\n");
+	ShowStatus("Conexao bem-sucedida! (Conexao do servidor de mapas)\n");
 
 	if (!default_codepage.empty()) {
 		if (SQL_ERROR == Sql_SetEncoding(map_handle, default_codepage.c_str()))
@@ -335,16 +335,16 @@ int web_sql_init(void) {
 	}
 
 	web_handle = Sql_Malloc();
-	ShowInfo("Connecting to the Web DB server.....\n");
+	ShowInfo("Conectando ao servidor Web DB.....\n");
 
 	if (SQL_ERROR == Sql_Connect(web_handle, web_server_id.c_str(), web_server_pw.c_str(), web_server_ip.c_str(), web_server_port, web_server_db.c_str())) {
-		ShowError("Couldn't connect with uname='%s',host='%s',port='%hu',database='%s'\n",
+		ShowError("Nao foi possivel conectar com uname='%s',host='%s',porta='%hu',banco de dados='%s'\n",
 			web_server_id.c_str(), web_server_ip.c_str(), web_server_port, web_server_db.c_str());
 		Sql_ShowDebug(web_handle);
 		Sql_Free(web_handle);
 		exit(EXIT_FAILURE);
 	}
-	ShowStatus("Connect success! (Web Server Connection)\n");
+	ShowStatus("Conexao bem-sucedida! (Conexao com o servidor Web)\n");
 
 	if (!default_codepage.empty()) {
 		if (SQL_ERROR == Sql_SetEncoding(web_handle, default_codepage.c_str()))
@@ -357,16 +357,16 @@ int web_sql_init(void) {
 
 int web_sql_close(void)
 {
-	ShowStatus("Close Login DB Connection....\n");
+	ShowStatus("Fechar conexao de login com o banco de dados...\n");
 	Sql_Free(login_handle);
 	login_handle = nullptr;
-	ShowStatus("Close Char DB Connection....\n");
+	ShowStatus("Fechar conexao de banco de dados Char...\n");
 	Sql_Free(char_handle);
 	char_handle = nullptr;
-	ShowStatus("Close Map DB Connection....\n");
+	ShowStatus("Fechar conexao de banco de dados Map...\n");
 	Sql_Free(map_handle);
 	map_handle = nullptr;
-	ShowStatus("Close Web DB Connection....\n");
+	ShowStatus("Fechar conexao de banco de dados Web...\n");
 	Sql_Free(web_handle);
 	web_handle = nullptr;
 
@@ -378,14 +378,14 @@ int web_sql_close(void)
  *  dealloc..., function called at exit of the web-server
  */
 void WebServer::finalize(){
-	ShowStatus("Terminating...\n");
+	ShowStatus("Finalizando...\n");
 #ifdef WEB_SERVER_ENABLE
 	http_server->stop();
 	svr_thr.join();
 	web_sql_close();
 #endif
 	do_final_msg();
-	ShowStatus("Finished.\n");
+	ShowStatus("Finalizado.\n");
 }
 
 /**
@@ -454,7 +454,7 @@ bool WebServer::initialize( int argc, char* argv[] ){
 
 	web_sql_init();
 
-	ShowStatus("Starting server...\n");
+	ShowStatus("Iniciando servidor...\n");
 
 	http_server = std::make_shared<httplib::Server>();
 	// set up routes
@@ -487,16 +487,16 @@ bool WebServer::initialize( int argc, char* argv[] ){
 
 		if (http_server->is_running())
 			break;
-		ShowDebug("Web server not running, sleeping 1 second.\n");
+		ShowDebug("Servidor web nao esta em execucao, hibernando por 1 segundo.\n");
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
 
 	if (!http_server->is_running()) {
-		ShowError("Web server hasn't started, stopping.\n");
+		ShowError("O servidor web nao iniciou, parando.\n");
 		return false;
 	}
 
-	ShowStatus("The web-server is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %u).\n\n", web_config.web_port);
+	ShowStatus("O servidor web esta " CL_GREEN "pronto" CL_RESET " (o servidor esta escutando na porta %u).\n\n", web_config.web_port);
 	return true;
 #endif
 }

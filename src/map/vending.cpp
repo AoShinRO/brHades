@@ -690,7 +690,7 @@ void do_init_vending_autotrade(void)
 			}
 			dbi_destroy(iter);
 
-			ShowStatus("Done loading '" CL_WHITE "%d" CL_RESET "' vending autotraders with '" CL_WHITE "%d" CL_RESET "' items.\n", db_size(vending_autotrader_db), items);
+			ShowStatus("Carregamento concluido de '" CL_WHITE "%d" CL_RESET "' vendedores automaticos com '" CL_WHITE "%d" CL_RESET "' itens.\n", db_size(vending_autotrader_db), items);
 		}
 	}
 

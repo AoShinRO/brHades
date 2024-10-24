@@ -2932,7 +2932,7 @@ void map_spawnmobs(int16 m)
 
 	if (battle_config.etc_log && k > 0)
 	{
-		ShowStatus("Map %s: Spawned '" CL_WHITE "%d" CL_RESET "' mobs.\n",mapdata->name, k);
+		ShowStatus("Mapa %s: Gerados '" CL_WHITE "%d" CL_RESET "' mobs.\n",mapdata->name, k);
 	}
 }
 
@@ -2987,7 +2987,7 @@ TIMER_FUNC(map_removemobs_timer){
 	count = map_foreachinmap(map_removemobs_sub, m, BL_MOB);
 
 	if (battle_config.etc_log && count > 0)
-		ShowStatus("Map %s: Removed '" CL_WHITE "%d" CL_RESET "' mobs.\n",mapdata->name, count);
+		ShowStatus("Mapa %s: Removido '" CL_WHITE "%d" CL_RESET "' mobs.\n",mapdata->name, count);
 
 	return 1;
 }
@@ -3838,7 +3838,7 @@ int map_readallmaps (void)
 	std::vector<char *> map_cache_buffer = {};
 
 	if( enable_grf )
-		ShowStatus("Loading maps (using GRF files)...\n");
+		ShowStatus("Carregando mapas (usando arquivos GRF)...\n");
 	else {
 		// Load the map cache files in reverse order to account for import
 		const std::vector<std::string> mapcachefilepath = {
@@ -3848,10 +3848,10 @@ int map_readallmaps (void)
 		};
 
 		for(const auto &mapdat : mapcachefilepath) {
-			ShowStatus( "Loading maps (using %s as map cache)...\n", mapdat.c_str() );
+			ShowStatus( "Carregando mapas (usando %s como cache de mapas)...\n", mapdat.c_str() );
 
 			if( ( fp = fopen(mapdat.c_str(), "rb")) == nullptr) {
-				ShowFatalError( "Unable to open map cache file " CL_WHITE "%s" CL_RESET "\n", mapdat.c_str());
+				ShowFatalError( "Nao foi possivel abrir o arquivo de cache do mapa " CL_WHITE "%s" CL_RESET "\n", mapdat.c_str());
 				continue;
 			}
 
@@ -3859,7 +3859,7 @@ int map_readallmaps (void)
 			map_cache_buffer.push_back(map_init_mapcache(fp));
 
 			if( !map_cache_buffer.back() ) {
-				ShowFatalError( "Failed to initialize mapcache data (%s)..\n", mapdat.c_str());
+				ShowFatalError( "Falha ao inicializar dados do mapcache (%s)..\n", mapdat.c_str());
 				exit(EXIT_FAILURE);
 			}
 
@@ -3869,7 +3869,7 @@ int map_readallmaps (void)
 
 	int maps_removed = 0;
 
-	ShowStatus("Loading %d maps.\n", map_num);
+	ShowStatus("Carregando %d mapas.\n", map_num);
 
 	for (int i = 0; i < map_num; i++) {
 		size_t size;
@@ -3880,7 +3880,7 @@ int map_readallmaps (void)
 
 #ifdef DETAILED_LOADING_OUTPUT
 		// show progress
-		ShowStatus("Loading maps [%i/%i]: %s" CL_CLL "\r", i, map_num, mapdata->name);
+		ShowStatus("Carregando mapas [%i/%i]: %s" CL_CLL "\r",i, map_num, mapdata->name);
 #endif
 
 		if( enable_grf ){
@@ -3948,10 +3948,10 @@ int map_readallmaps (void)
 	}
 
 	if (maps_removed)
-		ShowNotice("Maps removed: '" CL_WHITE "%d" CL_RESET "'" CL_CLL ".\n", maps_removed);
+		ShowNotice("Mapas removidos: '" CL_WHITE "%d" CL_RESET "'" CL_CLL ".\n", maps_removed);
 
 	// finished map loading
-	ShowInfo("Successfully loaded '" CL_WHITE "%d" CL_RESET "' maps." CL_CLL "\n",map_num);
+	ShowInfo("Mapas '" CL_WHITE "%d" CL_RESET "' carregados com sucesso." CL_CLL "\n",map_num);
 
 	return 0;
 }
@@ -4277,7 +4277,7 @@ int inter_config_read(const char *cfgName)
 		else
 		if(strcmpi(w1,"use_sql_db")==0) {
 			db_use_sqldbs = config_switch(w2);
-			ShowStatus ("Using SQL dbs: %s\n",w2);
+			ShowStatus ("Usando SQL dbs: %s\n",w2);
 		} else
 		if(strcmpi(w1,"log_db_ip")==0)
 			log_db_ip = w2;
@@ -4338,7 +4338,7 @@ int map_sql_init(void)
 		Sql_Free(qsmysql_handle);
 		exit(EXIT_FAILURE);
 	}
-	ShowStatus("Connect success! (Map Server Connection)\n");
+	ShowStatus("Conexao bem-sucedida! (Conexao do servidor de mapas)\n");
 
 	if( !default_codepage.empty() ) {
 		if ( SQL_ERROR == Sql_SetEncoding(mmysql_handle, default_codepage.c_str()) )
@@ -4351,7 +4351,7 @@ int map_sql_init(void)
 
 int map_sql_close(void)
 {
-	ShowStatus("Close Map DB Connection....\n");
+	ShowStatus("Fechar conexao com o banco de dados do mapa....\n");
 	Sql_Free(mmysql_handle);
 	Sql_Free(qsmysql_handle);
 	mmysql_handle = nullptr;
@@ -4359,7 +4359,7 @@ int map_sql_close(void)
 
 	if (log_config.sql_logs)
 	{
-		ShowStatus("Close Log DB Connection....\n");
+		ShowStatus("Fechar conexao de log do banco de dados....\n");
 		Sql_Free(logmysql_handle);
 		logmysql_handle = nullptr;
 	}
@@ -4372,15 +4372,15 @@ int log_sql_init(void)
 	// log db connection
 	logmysql_handle = Sql_Malloc();
 
-	ShowInfo("" CL_WHITE "[SQL]" CL_RESET ": Connecting to the Log Database " CL_WHITE "%s" CL_RESET " At " CL_WHITE "%s" CL_RESET "...\n",log_db_db.c_str(), log_db_ip.c_str());
+	ShowInfo("" CL_WHITE "[SQL]" CL_RESET ": Conectando ao Banco de Dados de Log " CL_WHITE "%s" CL_RESET " Em " CL_WHITE "%s" CL_RESET "...\n",log_db_db.c_str(), log_db_ip.c_str());
 	if ( SQL_ERROR == Sql_Connect(logmysql_handle, log_db_id.c_str(), log_db_pw.c_str(), log_db_ip.c_str(), log_db_port, log_db_db.c_str()) ){
-		ShowError("Couldn't connect with uname='%s',host='%s',port='%hu',database='%s'\n",
+		ShowError("Nao foi possivel conectar com uname='%s',host='%s',porta='%hu',banco de dados='%s'\n",
 			log_db_id.c_str(), log_db_ip.c_str(), log_db_port, log_db_db.c_str());
 		Sql_ShowDebug(logmysql_handle);
 		Sql_Free(logmysql_handle);
 		exit(EXIT_FAILURE);
 	}
-	ShowStatus("" CL_WHITE "[SQL]" CL_RESET ": Successfully '" CL_GREEN "connected" CL_RESET "' to Database '" CL_WHITE "%s" CL_RESET "'.\n", log_db_db.c_str());
+	ShowStatus("" CL_WHITE "[SQL]" CL_RESET ": '" CL_GREEN "conectou" CL_RESET "' com sucesso ao banco de dados '" CL_WHITE "%s" CL_RESET "'.\n", log_db_db.c_str());
 
 	if( !default_codepage.empty() )
 		if ( SQL_ERROR == Sql_SetEncoding(logmysql_handle, default_codepage.c_str()) )
@@ -4933,7 +4933,7 @@ static int cleanup_db_sub(DBKey key, DBData *data, va_list va)
  * map destructor
  *------------------------------------------*/
 void MapServer::finalize(){
-	ShowStatus("Terminating...\n");
+	ShowStatus("Finalizando...\n");
 	channel_config.closing = true;
 
 	//Ladies and babies first.
@@ -4950,16 +4950,16 @@ void MapServer::finalize(){
 	do_clear_npc();
 
 	// remove all objects on maps
-	ShowStatus("Cleaning up %d maps.\n", map_num);
+	ShowStatus("Limpando %d mapas.\n", map_num);
 	for (int i = 0; i < map_num; i++) {
 		struct map_data *mapdata = map_getmapdata(i);
 #ifdef DEBUG
-		ShowStatus("Cleaning up maps [%d/%d]: %s..." CL_CLL "\r", i++, map_num, mapdata->name);
+		ShowStatus("Limpando mapas [%d/%d]: %s..." CL_CLL "\r", i++, map_num, mapdata->name);
 #endif
 		map_foreachinmap(cleanup_sub, i, BL_ALL);
 		channel_delete(mapdata->channel,false);
 	}
-	ShowStatus("Cleaned up %d maps." CL_CLL "\n", map_num);
+	ShowStatus("Limpados %d mapas." CL_CLL "\n", map_num);
 
 	id_db->foreach(id_db,cleanup_db_sub);
 	chrif_char_reset_offline();
@@ -5031,7 +5031,7 @@ void MapServer::finalize(){
 
 	map_sql_close();
 
-	ShowStatus("Finished.\n");
+	ShowStatus("Finalizado.\n");
 }
 
 static int map_abort_sub(map_session_data* sd, va_list ap)
@@ -5240,7 +5240,7 @@ void map_data::copyFlags(const map_data& other) {
 
 /// Called when a terminate signal is received.
 void MapServer::handle_shutdown(){
-	ShowStatus("Shutting down...\n");
+	ShowStatus("Desligando...\n");
 
 	map_session_data* sd;
 	struct s_mapiterator* iter = mapit_getallusers();
@@ -5283,7 +5283,7 @@ bool MapServer::initialize( int argc, char *argv[] ){
 	map_config_read(MAP_CONF_NAME);
 
 	if (save_settings == CHARSAVE_NONE)
-		ShowWarning("Value of 'save_settings' is not set, player's data only will be saved every 'autosave_time' (%d seconds).\n", autosave_interval/1000);
+		ShowWarning("O valor de 'save_settings' nao esta definido, os dados do jogador serao salvos somente a cada 'autosave_time' (%d segundos).\n", autosave_interval/1000);
 
 	// loads npcs
 	map_reloadnpc(false);
@@ -5295,7 +5295,7 @@ bool MapServer::initialize( int argc, char *argv[] ){
 		ip2str(addr_[0], ip_str);
 
 #if !defined(BUILDBOT)
-		ShowWarning( "Not all IP addresses in map_athena.conf configured, autodetecting...\n" );
+		ShowWarning( "Nem todos os enderecos IP em map_athena.conf estao configurados, detectando automaticamente...\n" );
 #endif
 
 		if (naddr_ == 0)
@@ -5303,7 +5303,7 @@ bool MapServer::initialize( int argc, char *argv[] ){
 		else if (naddr_ > 1)
 			ShowNotice("Multiple interfaces detected...\n");
 
-		ShowInfo("Defaulting to %s as our IP address\n", ip_str);
+		ShowInfo("O padrao e %s como nosso endereco IP\n", ip_str);
 
 		if (!map_ip_set)
 			clif_setip(ip_str);
@@ -5382,7 +5382,7 @@ bool MapServer::initialize( int argc, char *argv[] ){
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double, std::milli> duration = end - start; // Tempo em milissegundos
 	
-	// CÃ¡lculo de minutos, segundos e milissegundos
+	// Cálculo de minutos, segundos e milissegundos
 	long long total_milliseconds = static_cast<long long>(duration.count());
 	long long minutes = total_milliseconds / 60000; // 1 minuto = 60000 milissegundos
 	long long seconds = (total_milliseconds % 60000) / 1000; // Restante em segundos
@@ -5392,10 +5392,10 @@ bool MapServer::initialize( int argc, char *argv[] ){
 	npc_event_do_oninit();	// Init npcs (OnInit)
 
 	if (battle_config.pk_mode)
-		ShowNotice("Server is running on '" CL_WHITE "PK Mode" CL_RESET "'.\n");
+		ShowNotice("O servidor esta sendo executado em '" CL_WHITE "Modo PK" CL_RESET "'.\n");
 
 #ifndef MAP_GENERATOR
-	ShowStatus("Server is '" CL_GREEN "ready" CL_RESET "' and listening on port '" CL_WHITE "%d" CL_RESET "'.\n\n", map_port);
+	ShowStatus("O servidor esta '" CL_GREEN "pronto" CL_RESET "' e escutando na porta '" CL_WHITE "%d" CL_RESET "'.\n\n", map_port);
 #else
 	// depending on gen_options, generate the correct things
 	if (gen_options.navi)

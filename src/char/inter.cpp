@@ -410,7 +410,7 @@ void geoip_readdb(void){
 	geoip_cache = (unsigned char *) aMalloc(sizeof(unsigned char) * bufa.st_size);
 	if(fread(geoip_cache, sizeof(unsigned char), bufa.st_size, db) != bufa.st_size) { ShowError("geoip_cache reading didn't read all elements \n"); }
 	fclose(db);
-	ShowStatus("Finished Reading " CL_GREEN "GeoIP" CL_RESET " Database.\n");
+	ShowStatus("Leitura concluida " CL_GREEN "GeoIP" CL_RESET " Banco de dados.\n");
 }
 /* [Dekamaster/Nightroad] */
 /* There are millions of entries in GeoIP and it has its own algorithm to go quickly through them */
@@ -874,7 +874,7 @@ int inter_config_read(const char* cfgName)
 	}
 	fclose(fp);
 
-	ShowInfo ("Done reading %s.\n", cfgName);
+	ShowInfo ("Concluido Leitura de %s.\n", cfgName);
 
 	return 0;
 }
@@ -980,7 +980,7 @@ int inter_init_sql(const char *file)
 
 	//DB connection initialized
 	sql_handle = Sql_Malloc();
-	ShowInfo("Connect Character DB server.... (Character Server)\n");
+	ShowInfo("Conectar servidor de banco de dados de personagens.... (Char-Serv)\n");
 	if( SQL_ERROR == Sql_Connect(sql_handle, char_server_id.c_str(), char_server_pw.c_str(), char_server_ip.c_str(), (uint16)char_server_port, char_server_db.c_str()))
 	{
 		ShowError("Couldn't connect with username = '%s', host = '%s', port = '%d', database = '%s'\n",
