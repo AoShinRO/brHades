@@ -106,7 +106,6 @@ static std::pair<size_t, std::unique_ptr<char[]>> readDBFileAsync(const std::str
 
 	if (std::ferror(f)) {
 		return { 0,nullptr };
-
 	}
 
 	std::fclose(f);
