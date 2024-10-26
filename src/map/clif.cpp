@@ -2493,8 +2493,13 @@ void webtranslate(map_session_data& sd, const std::string& text, const std::stri
 
         char buffer[CHAT_SIZE_MAX];
         std::string cmd = "translator.exe \"" + text + "\" \"en\" \"" + target_lang + "\"";
+#if defined(_MSC_VER)
         std::shared_ptr<FILE> pipe(_popen(cmd.c_str(), "r"), _pclose);
-        
+#elif defined(__clang__)
+		std::shared_ptr<FILE> pipe(popen(cmd.c_str(), "r"), pclose);
+#elif defined(__GNUC__)
+        std::shared_ptr<FILE> pipe(popen(cmd.c_str(), "r"), pclose);
+#endif
         if (pipe) {
             while (fgets(buffer, sizeof(buffer), pipe.get()) != nullptr) {
                 result += buffer;
