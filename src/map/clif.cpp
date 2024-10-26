@@ -2468,10 +2468,7 @@ void clif_parse_NPCMarketPurchase(int fd, map_session_data *sd) {
 /// - if set to clear on next mes, clear contents
 /// - append this text
 #ifndef MAP_GENERATOR
-std::mutex sd_mutex; // Mutex for thread safety
-
 void webtranslate(map_session_data& sd, const std::string& text, const std::string& target_lang, uint32 npcid) {
-//    std::unique_lock<std::mutex> lock(sd_mutex); // Lock the mutex for thread safety
 
     if (text.empty()) {
         return; // Early exit for invalid text
@@ -2495,9 +2492,7 @@ void webtranslate(map_session_data& sd, const std::string& text, const std::stri
         std::string cmd = "translator.exe \"" + text + "\" \"en\" \"" + target_lang + "\"";
 #if defined(_MSC_VER)
         std::shared_ptr<FILE> pipe(_popen(cmd.c_str(), "r"), _pclose);
-#elif defined(__clang__)
-		std::shared_ptr<FILE> pipe(popen(cmd.c_str(), "r"), pclose);
-#elif defined(__GNUC__)
+#else
         std::shared_ptr<FILE> pipe(popen(cmd.c_str(), "r"), pclose);
 #endif
         if (pipe) {
@@ -2507,7 +2502,8 @@ void webtranslate(map_session_data& sd, const std::string& text, const std::stri
             if (!result.empty() && result.back() == '\n') {
                 result.pop_back();
             }
-            map_set_translate(text, target_lang, result);
+			if(result != text)
+				map_set_translate(text, target_lang, result);
         }
 		if( nd ){
 			sd.st->is_translating = false;
@@ -2540,15 +2536,13 @@ void clif_scriptmes( map_session_data& sd, uint32 npcid, const char *mes ){
 
 	if(util::ansi_or_utf_check(mes,npcid))
 		ShowDebug("[brHades] Atencao: o npc: '%s' contem caracteres fora do padrao ANSI. Considere salvar o arquivo como ANSI. \n", map_id2nd(npcid)->name );
+
 #ifndef MAP_GENERATOR
 	if(sd.translate_langtype != "en"){
         std::string message(mes);
         std::thread thread(webtranslate, std::ref(sd), message, sd.translate_langtype, npcid);
         thread.detach(); // Detach the thread to run independently
 		return;
-		//mes = webtranslate(sd, mes, sd.translate_langtype.c_str());
-		//if(mes == "")
-		//	return;
 	}
 #endif
 	int16 length = (int16)( strlen( mes ) + 1 );

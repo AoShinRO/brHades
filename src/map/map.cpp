@@ -4954,7 +4954,6 @@ static void map_save_translation_db() {
             const auto& traducao = par.second;
             arquivo << frase_original << "|" << lang_type << "|" << traducao << std::endl;
         }
-        arquivo.close();
     } else {
 		ShowError("Erro ao abrir o arquivo: %s \n",TRANSLATED_NPC_NAME);
     }
@@ -4976,7 +4975,6 @@ static void map_load_translation_db() {
 			ShowStatus( "Carregando [%" PRIu64 "] entradas de '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\r", count, TRANSLATED_NPC_NAME );
 #endif
         }
-        arquivo.close();
 		ShowStatus( "Concluida a leitura de '" CL_WHITE "%" PRIu64 CL_RESET "' entradas em '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\n", count, TRANSLATED_NPC_NAME );
     } else {
         // Cria o arquivo usando ofstream
@@ -4985,7 +4983,6 @@ static void map_load_translation_db() {
             ShowError("Falha ao criar o arquivo: %s \n",TRANSLATED_NPC_NAME);
             return;
         }
-        novoArquivo.close(); // Fecha o arquivo após criá-lo
     }
 }
 #endif
