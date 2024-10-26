@@ -332,6 +332,7 @@ struct script_state {
 	unsigned clear_cutin : 1;
 	char* funcname; // Stores the current running function name
 	unsigned int id;
+	bool is_translating;
 };
 
 struct script_reg {

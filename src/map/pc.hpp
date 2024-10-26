@@ -967,6 +967,8 @@ public:
 
 	std::vector<std::unique_ptr<e_skill_animation_restore>> animation;
 
+	std::string translate_langtype = "en";
+	bool nextclicked;
 };
 
 extern struct eri *pc_sc_display_ers; /// Player's SC display table

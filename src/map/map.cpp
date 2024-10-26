@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <filesystem>
+#include <fstream>
 
 #include <config/core.hpp>
 
@@ -4929,12 +4930,76 @@ static int cleanup_db_sub(DBKey key, DBData *data, va_list va)
 	return cleanup_sub((struct block_list *)db_data2ptr(data), va);
 }
 
+#ifndef MAP_GENERATOR
+#define TRANSLATED_NPC_NAME "db/translated/database.lua"
+std::map<std::tuple<std::string, std::string>, std::string> map_dialogue_translations;
+void map_set_translate(const std::string& origin, const std::string& lang_type, const std::string& result) {
+    map_dialogue_translations[std::make_tuple(origin, lang_type)] = result;
+}
+
+std::string map_get_translate(const std::string& origin, const std::string& lang_type) {
+    auto it = map_dialogue_translations.find(std::make_tuple(origin, lang_type));
+    if (it != map_dialogue_translations.end()) {
+        return it->second;
+    } else {
+        return ""; // Retorna uma string vazia se a tradução não for encontrada
+    }
+}
+
+static void map_save_translation_db() {
+    std::ofstream arquivo(TRANSLATED_NPC_NAME); // Abre o arquivo para escrita e limpa o conteúdo se ele já existir
+    if (arquivo.is_open()) {
+        for (const auto& par : map_dialogue_translations) {
+            const auto& [frase_original, lang_type] = par.first;
+            const auto& traducao = par.second;
+            arquivo << frase_original << "|" << lang_type << "|" << traducao << std::endl;
+        }
+        arquivo.close();
+    } else {
+		ShowError("Erro ao abrir o arquivo: %s \n",TRANSLATED_NPC_NAME);
+    }
+}
+
+static void map_load_translation_db() {
+    std::ifstream arquivo(TRANSLATED_NPC_NAME);
+	ShowStatus("Carregando traducoes: %s \n",TRANSLATED_NPC_NAME);
+
+    if (arquivo.is_open()) {
+		uint64 count = 0;
+        std::string frase_original, lang_type, traducao;
+        while (std::getline(arquivo, frase_original, '|')) {
+            std::getline(arquivo, lang_type, '|');
+            std::getline(arquivo, traducao);
+            map_set_translate(frase_original, lang_type, traducao);
+			count++;
+#ifdef DETAILED_LOADING_OUTPUT
+			ShowStatus( "Carregando [%" PRIu64 "] entradas de '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\r", count, TRANSLATED_NPC_NAME );
+#endif
+        }
+        arquivo.close();
+		ShowStatus( "Concluida a leitura de '" CL_WHITE "%" PRIu64 CL_RESET "' entradas em '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\n", count, TRANSLATED_NPC_NAME );
+    } else {
+        // Cria o arquivo usando ofstream
+        std::ofstream novoArquivo(TRANSLATED_NPC_NAME);
+        if (!novoArquivo) {
+            ShowError("Falha ao criar o arquivo: %s \n",TRANSLATED_NPC_NAME);
+            return;
+        }
+        novoArquivo.close(); // Fecha o arquivo após criá-lo
+    }
+}
+#endif
+
 /*==========================================
  * map destructor
  *------------------------------------------*/
 void MapServer::finalize(){
 	ShowStatus("Finalizando...\n");
 	channel_config.closing = true;
+
+#ifndef MAP_GENERATOR
+	map_save_translation_db();
+#endif
 
 	//Ladies and babies first.
 	struct s_mapiterator* iter = mapit_getallusers();
@@ -5046,6 +5111,9 @@ static int map_abort_sub(map_session_data* sd, va_list ap)
 // has received a crash signal.
 //------------------------------
 void MapServer::handle_crash(){
+#ifndef MAP_GENERATOR
+	map_save_translation_db();
+#endif
 	static int run = 0;
 	//Save all characters and then flush the inter-connection.
 	if (run) {
@@ -5240,8 +5308,10 @@ void map_data::copyFlags(const map_data& other) {
 
 /// Called when a terminate signal is received.
 void MapServer::handle_shutdown(){
+#ifndef MAP_GENERATOR
+	map_save_translation_db();
+#endif
 	ShowStatus("Desligando...\n");
-
 	map_session_data* sd;
 	struct s_mapiterator* iter = mapit_getallusers();
 	for( sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); sd = (TBL_PC*)mapit_next(iter) )
@@ -5416,7 +5486,9 @@ bool MapServer::initialize( int argc, char *argv[] ){
 		add_timer_func_list(map_goldpc_timer, "map_goldpc_timer");
 		add_timer_interval(gettick()+1000, map_goldpc_timer, 0, 0, 1000);
 	}
-
+#ifndef MAP_GENERATOR
+	map_load_translation_db();
+#endif
 	return true;
 }
 

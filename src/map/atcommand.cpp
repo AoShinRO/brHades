@@ -10303,7 +10303,177 @@ ACMD_FUNC(fontcolor)
 
 	return 0;
 }
+/*==========================================
+ * +LangType By AoShinHo
+ *------------------------------------------*/
+/*
+ACMD_FUNC(changelangtype)
+{
 
+	std::unordered_map<std::string, std::string> ISO639 = {
+	    {"af", "Afrikaans"},
+	    {"sq", "Albanian"},
+	    {"am", "Amharic"},
+	    {"ar", "Arabic"},
+	    {"hy", "Armenian"},
+	    {"as", "Assamese"},
+	    {"ay", "Aymara"},
+	    {"az", "Azerbaijani"},
+	    {"bm", "Bambara"},
+	    {"eu", "Basque"},
+	    {"be", "Belarusian"},
+	    {"bn", "Bengali"},
+	    {"bho", "Bhojpuri"},
+	    {"bs", "Bosnian"},
+	    {"bg", "Bulgarian"},
+	    {"ca", "Catalan"},
+	    {"ceb", "Cebuano"},
+	    {"zh-CN", "Chinese (Simplified)"},
+	    {"zh-TW", "Chinese (Traditional)"},
+	    {"co", "Corsican"},
+	    {"hr", "Croatian"},
+	    {"cs", "Czech"},
+	    {"da", "Danish"},
+	    {"dv", "Divehi"},
+	    {"doi", "Dogri"},
+	    {"nl", "Dutch"},
+	    {"en", "English"},
+	    {"eo", "Esperanto"},
+	    {"et", "Estonian"},
+	    {"ee", "Ewe"},
+	    {"fil", "Filipino (Tagalog)"},
+	    {"fi", "Finnish"},
+	    {"fr", "French"},
+	    {"fy", "Frisian"},
+	    {"gl", "Galician"},
+	    {"ka", "Georgian"},
+	    {"de", "German"},
+	    {"el", "Greek"},
+	    {"gn", "Guarani"},
+	    {"gu", "Gujarati"},
+	    {"ht", "Haitian Creole"},
+	    {"ha", "Hausa"},
+	    {"haw", "Hawaiian"},
+	    {"he", "Hebrew"},
+	    {"hi", "Hindi"},
+	    {"hmn", "Hmong"},
+	    {"hu", "Hungarian"},
+	    {"is", "Icelandic"},
+	    {"ig", "Igbo"},
+	    {"ilo", "Ilocano"},
+	    {"id", "Indonesian"},
+	    {"ga", "Irish"},
+	    {"it", "Italian"},
+	    {"ja", "Japanese"},
+	    {"jv", "Javanese"},
+	    {"kn", "Kannada"},
+	    {"kk", "Kazakh"},
+	    {"km", "Khmer"},
+	    {"rw", "Kinyarwanda"},
+	    {"gom", "Konkani"},
+	    {"ko", "Korean"},
+	    {"kri", "Krio"},
+	    {"ku", "Kurdish"},
+	    {"ckb", "Kurdish (Sorani)"},
+	    {"ky", "Kyrgyz"},
+	    {"lo", "Lao"},
+	    {"la", "Latin"},
+	    {"lv", "Latvian"},
+	    {"ln", "Lingala"},
+	    {"lt", "Lithuanian"},
+	    {"lg", "Luganda"},
+	    {"lb", "Luxembourgish"},
+	    {"mk", "Macedonian"},
+	    {"mai", "Maithili"},
+	    {"mg", "Malagasy"},
+	    {"ms", "Malay"},
+	    {"ml", "Malayalam"},
+	    {"mt", "Maltese"},
+	    {"mi", "Maori"},
+	    {"mr", "Marathi"},
+	    {"mni-Mtei", "Meiteilon (Manipuri)"},
+	    {"lus", "Mizo"},
+	    {"mn", "Mongolian"},
+	    {"my", "Burmese"},
+	    {"ne", "Nepali"},
+	    {"no", "Norwegian"},
+	    {"ny", "Nyanja (Chichewa)"},
+	    {"or", "Odia"},
+	    {"om", "Oromo"},
+	    {"ps", "Pashto"},
+	    {"fa", "Persian"},
+	    {"pl", "Polish"},
+	    {"pt", "Portuguese"},
+	    {"pa", "Punjabi"},
+	    {"qu", "Quechua"},
+	    {"ro", "Romanian"},
+	    {"ru", "Russian"},
+	    {"sm", "Samoan"},
+	    {"sa", "Sanskrit"},
+	    {"gd", "Scottish Gaelic"},
+	    {"nso", "Sepedi"},
+	    {"sr", "Serbian"},
+	    {"st", "Sesotho"},
+	    {"sn", "Shona"},
+	    {"sd", "Sindhi"},
+	    {"si", "Sinhalese"},
+	    {"sk", "Slovak"},
+	    {"sl", "Slovene"},
+	    {"so", "Somali"},
+	    {"es", "Spanish"},
+	    {"su", "Sundanese"},
+	    {"sw", "Swahili"},
+	    {"sv", "Swedish"},
+	    {"tl", "Tagalog"},
+	    {"tg", "Tajik"},
+	    {"ta", "Tamil"},
+	    {"tt", "Tatar"},
+	    {"te", "Telugu"},
+	    {"th", "Thai"},
+	    {"ti", "Tigrinya"},
+	    {"ts", "Tsonga"},
+	    {"tr", "Turkish"},
+	    {"tk", "Turkmen"},
+	    {"ak", "Twi (Akan)"},
+	    {"uk", "Ukrainian"},
+	    {"ur", "Urdu"},
+	    {"ug", "Uyghur"},
+	    {"uz", "Uzbek"},
+	    {"vi", "Vietnamese"},
+	    {"cy", "Welsh"},
+	    {"xh", "Xhosa"},
+	    {"yi", "Yiddish"},
+	    {"yo", "Yoruba"},
+	    {"zu", "Zulu"}
+	};
+
+
+	nullpo_retr(-1, sd);
+
+	char lang[10];
+	memset(lang, 0, sizeof(lang));
+	if(!message || !*message || (sscanf(message, "%9s", &lang) < 1)) {
+		clif_displaymessage(fd, "Please enter langtype \n (usage: @changelangtype <ISO639 Langtype code> or help too see avaliable langtypes).");
+		return -1;
+	}
+
+	auto findlang = ISO639.find(lang);
+	std::string buf;
+	if(findlang == ISO639.end() || strstr(lang,"help") != nullptr) {
+		if(strstr(lang,"help") == nullptr)
+			clif_displaymessage(fd, "Invalid Langtype, ISO639 list:"); // Invalid langtype.
+		for(auto& it : ISO639){
+			buf = "Code:"+it.first+", Lang:"+ it.second;
+			clif_displaymessage(fd,buf.c_str());
+		}
+		return -1;
+	}
+	sd->translate_langtype = findlang->first;
+	buf = "Lang Selected:"+ findlang->second;
+	clif_displaymessage(fd, buf.c_str());
+	return 0;
+}
+*/
 ACMD_FUNC(langtype)
 {
 	char langstr[8];
@@ -10319,9 +10489,23 @@ ACMD_FUNC(langtype)
 			pc_setaccountreg(sd, add_str(LANGTYPE_VAR), lang); //For login/char
 			sd->langtype = lang;
 			sprintf(output,msg_txt(sd,461),msg_langtype2langstr(lang)); // Language is now set to %s.
+			std::unordered_map<unsigned char, std::string> ISO639 = {
+				{0, "en"},
+				{1, "ru"},
+				{2, "es"},
+				{3, "de"},
+				{4, "zh-CN"},
+				{5, "mg"},
+				{6, "id"},
+				{7, "fr"},
+				{8, "pt"},
+				{9, "th"},
+			};
+			sd->translate_langtype = ISO639[lang];
 			clif_displaymessage(fd,output);
 			return 0;
 		} else if (lang != -1) { //defined langage but failed check
+			sd->translate_langtype = "en";
 			clif_displaymessage(fd,msg_txt(sd,462)); // This langage is currently disabled.
 			return -1;
 		}

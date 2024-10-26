@@ -1,63 +1,53 @@
-//===============================================================\\
-//      ___.         .__                .___                     ||
-//      \_ |_________|  |__ _____     __| _/____   ______        ||
-//       | __ \_  __ \  |  \\__  \   / __ |/ __ \ /  ___/   	 ||
-//       | \_\ \  | \/   Y  \/ __ \_/ /_/ \  ___/ \___ \         ||
-//       |___  /__|  |___|  (____  /\____ |\___  >____  >        ||
-//           \/           \/     \/      \/    \/     \/         ||
-//                                   Scripts                     ||
-//===============================================================||
-// = Nome do NPC:                                                ||
-// - izlude.txt                                                  ||
-//===============================================================||
-// = Criação:                                                    ||
-// - eA/Herc/Cronus                                              ||
-//===============================================================||
-// = Versão:                                                     ||
-// - 1.0                                                         ||
-//===============================================================||
-// = Alterações:                                                 ||
-// - Tradução [Wolf]                                             ||
-//===============================================================||
-// = Descrição:                                                  ||
-// - Aeroplano de Izlude                                         ||
-//===============================================================//
+//===== rAthena Script ======================================= 
+//= Izlude Airport NPCs
+//===== By: ================================================== 
+//= rAthena Dev Team
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Izlude Airport NPCs
+//===== Additional Comments: ================================= 
+//= 1.0 First version.
+//============================================================ 
 
 -	script	::Airship_Staff_izlude	-1,{
-	mes "[Equipe do Aeroporto]";
-	mes "Bem-vind"+(Sex?"o":"a")+"! Gostaria de";
-	mes "embarcar no voo que te leva a";
-	mes "Juno ou Rachel?";
+	mes "[Airship Staff]";
+	mes "Welcome! Would you like";
+	mes "to board the Airship that";
+	mes "departs on the flight which stops";
+	mes "in Juno and Rachel?";
 	next;
-	if (select("Embarcar no voo para Juno/Rachel.:Cancelar.") == 1) {
-		mes "[Equipe do Aeroporto]";
-		mes "O voo tem um custo de";
-		mes "1,200 zeny. Ou caso você tenha";
-		mes "um Bilhete para o Aeroplano,";
-		mes "sua taxa não é cobrada. Então,";
-		mes "gostaria de embarcar?";
+	if (select("Board the Airship to Juno/Rachel.:Cancel.") == 1) {
+		mes "[Airship Staff]";
+		mes "The boarding fee is";
+		mes "1,200 zeny. However, this";
+		mes "charged is waived if you use";
+		mes "a Free Ticket for Airship. Now,";
+		mes "would you still like to board?";
 		next;
-		if (select("Sim:Não") == 1) {
+		if (select("Yes:No") == 1) {
 			if (countitem(7311) > 0) {
-				delitem 7311,1; //Bilhete para o Aeroplano
+				delitem 7311,1; //Free_Flying_Ship_Ticket
 				warp "airplane_01",244,58;
 				end;
 			}
 			if (Zeny >= 1200) {
-				Zeny = Zeny - 1200;
+				set Zeny, Zeny - 1200;
 				warp "airplane_01",244,58;
 				end;
 			}
-			mes "[Equipe do Aeroporto]";
-			mes "Desculpe, mas você não";
-			mes "possui 1,200 zenys para";
-			mes "pagar o embarque.";
+			mes "[Airship Staff]";
+			mes "I'm sorry, but you don't";
+			mes "have 1,200 zeny to pay";
+			mes "for the boarding fee.";
 			close;
 		}
 	}
-	mes "[Equipe do Aeroporto]";
-	mes "Obrigado, e por favor";
-	mes "volte novamente.";
-	mes "Tenha um bom dia~";
+	mes "[Airship Staff]";
+	mes "Thank you and";
+	mes "please come again.";
+	mes "Have a good day~";
 	close;
 }

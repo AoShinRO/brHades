@@ -9,6 +9,8 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <map>
+#include <tuple>
 #include <limits>
 #include <type_traits>
 #include <any>
@@ -1304,6 +1306,13 @@ template <typename TargetType, typename InputType>
 constexpr forceinline TargetType hades_cast(InputType input) {
 	return static_cast<TargetType>(std::clamp(input, static_cast<InputType>(std::numeric_limits<TargetType>::min()), static_cast<InputType>(std::numeric_limits<TargetType>::max())));	
 }
+
+#ifndef MAP_GENERATOR
+extern std::map<std::string, std::string> map_ISO639;
+extern std::map<std::tuple<std::string, std::string>, std::string> map_dialogue_translations;
+std::string map_get_translate(const std::string& origin, const std::string& lang_type);
+void map_set_translate(const std::string& origin, const std::string& lang_type, const std::string& result);
+#endif
 
 void do_shutdown(void);
 

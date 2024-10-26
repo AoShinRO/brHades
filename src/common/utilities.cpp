@@ -8,6 +8,7 @@
 #include <iostream>
 #include <numeric> //iota
 #include <string>
+#include <string_view>
 
 #ifndef __has_builtin
 	#define __has_builtin(x) 0
@@ -143,4 +144,16 @@ std::string brhades::util::base62_encode( uint32 val ){
 		val /= 62;
 	}
 	return result;
+}
+
+
+bool brhades::util::ansi_or_utf_check(std::string_view text, uint32 npcid) {
+	bool ansi = false;
+	for (size_t i = 0; i < text.size(); ++i) {
+		if (text[i] > 0x7F) {
+			ansi = true;
+			break;
+	    }
+	}
+	return ansi;
 }
