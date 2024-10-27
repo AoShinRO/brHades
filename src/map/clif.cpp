@@ -347,7 +347,7 @@ uint16 clif_getport(void)
 std::string translate_api_call(map_session_data& sd, const std::string& text, const std::string& target_lang){
 
 	std::string result;
-	int estimated_time_ms = std::min(10000, static_cast<int>(text.size() * 75)); // 75 ms por caractere, máximo de 10000 ms
+	int estimated_time_ms = std::min(30000, static_cast<int>(text.size() * 75)); // 75 ms por caractere, máximo de 30000 ms
 	int second = estimated_time_ms / 1000;
 	std::string tempbuf = "Tranlating to: "+target_lang;
 	
@@ -358,13 +358,20 @@ std::string translate_api_call(map_session_data& sd, const std::string& text, co
 	clif_messagecolor_target(&sd.bl, color_table[COLOR_CYAN],tempbuf.c_str(), false, SELF, &sd);
 	clif_progressbar(&sd, strtol("#FFFFFF", (char**)nullptr, 0), second); 
 	
-	char buffer[CHAT_SIZE_MAX];
+	char buffer[2048];
+
+#ifdef TRANSLATION_API_PY
+	std::string cmd = "python3 translator.py \"" + text + "\" \"en\" \"" + target_lang + "\"";
+#else
 	std::string cmd = "translator.exe \"" + text + "\" \"en\" \"" + target_lang + "\"";
+#endif
+
 #if defined(_MSC_VER)
 	std::shared_ptr<FILE> pipe(_popen(cmd.c_str(), "r"), _pclose);
 #else
 	std::shared_ptr<FILE> pipe(popen(cmd.c_str(), "r"), pclose);
 #endif
+
 	if (pipe) {
 		while (fgets(buffer, sizeof(buffer), pipe.get()) != nullptr) {
 			result += buffer;
@@ -374,8 +381,11 @@ std::string translate_api_call(map_session_data& sd, const std::string& text, co
 		}
 		map_set_translate(text, target_lang, result);
 	}
+
 	if( sd.st != nullptr )
 		sd.st->is_translating = false;
+
+	clif_progressbar_abort(&sd);
 
     if (result.empty()) 
         return text;
