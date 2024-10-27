@@ -4931,6 +4931,7 @@ static int cleanup_db_sub(DBKey key, DBData *data, va_list va)
 }
 
 #ifndef MAP_GENERATOR
+#ifdef TRANSLATION_API
 #define TRANSLATED_NPC_NAME "db/translated/database.lua"
 std::map<std::tuple<std::string, std::string>, std::string> map_dialogue_translations;
 void map_set_translate(const std::string& origin, const std::string& lang_type, const std::string& result) {
@@ -4986,6 +4987,7 @@ static void map_load_translation_db() {
     }
 }
 #endif
+#endif
 
 /*==========================================
  * map destructor
@@ -4995,7 +4997,9 @@ void MapServer::finalize(){
 	channel_config.closing = true;
 
 #ifndef MAP_GENERATOR
+#ifdef TRANSLATION_API
 	map_save_translation_db();
+#endif
 #endif
 
 	//Ladies and babies first.
@@ -5109,7 +5113,9 @@ static int map_abort_sub(map_session_data* sd, va_list ap)
 //------------------------------
 void MapServer::handle_crash(){
 #ifndef MAP_GENERATOR
+#ifdef TRANSLATION_API
 	map_save_translation_db();
+#endif
 #endif
 	static int run = 0;
 	//Save all characters and then flush the inter-connection.
@@ -5306,7 +5312,9 @@ void map_data::copyFlags(const map_data& other) {
 /// Called when a terminate signal is received.
 void MapServer::handle_shutdown(){
 #ifndef MAP_GENERATOR
+#ifdef TRANSLATION_API
 	map_save_translation_db();
+#endif
 #endif
 	ShowStatus("Desligando...\n");
 	map_session_data* sd;
@@ -5445,6 +5453,11 @@ bool MapServer::initialize( int argc, char *argv[] ){
 	do_init_vending();
 	do_init_buyingstore();
 
+#ifndef MAP_GENERATOR
+#ifdef TRANSLATION_API
+	map_load_translation_db();
+#endif
+#endif
 	// Fim do benchmark
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double, std::milli> duration = end - start; // Tempo em milissegundos
@@ -5483,9 +5496,7 @@ bool MapServer::initialize( int argc, char *argv[] ){
 		add_timer_func_list(map_goldpc_timer, "map_goldpc_timer");
 		add_timer_interval(gettick()+1000, map_goldpc_timer, 0, 0, 1000);
 	}
-#ifndef MAP_GENERATOR
-	map_load_translation_db();
-#endif
+
 	return true;
 }
 

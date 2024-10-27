@@ -361,7 +361,7 @@ std::string translate_api_call(map_session_data& sd, const std::string& text, co
 	char buffer[2048];
 
 #ifdef TRANSLATION_API_PY
-	std::string cmd = "python3 translator.py \"" + text + "\" \"en\" \"" + target_lang + "\"";
+	std::string cmd = "python3 tools/translator.py \"" + text + "\" \"en\" \"" + target_lang + "\"";
 #else
 	std::string cmd = "translator.exe \"" + text + "\" \"en\" \"" + target_lang + "\"";
 #endif
@@ -377,7 +377,8 @@ std::string translate_api_call(map_session_data& sd, const std::string& text, co
 			result += buffer;
 		}
 		if (!result.empty() && result.back() == '\n') {
-			result.pop_back();
+			while(result.back() == '\n')
+				result.pop_back();
 		}
 		map_set_translate(text, target_lang, result);
 	}
