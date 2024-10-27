@@ -11,6 +11,9 @@
 
 #include <custom/defines_pre.hpp>
 
+/// Use translation API disable to set off
+#define TRANSLATION_API
+
  /// Max number of items on @autolootid list
 #define AUTOLOOTITEM_SIZE 10
 

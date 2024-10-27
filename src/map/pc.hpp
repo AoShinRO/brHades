@@ -966,9 +966,13 @@ public:
 	std::vector<uint32> party_booking_requests;
 
 	std::vector<std::unique_ptr<e_skill_animation_restore>> animation;
-
-	std::string translate_langtype = "en";
-	bool nextclicked;
+#ifdef TRANSLATION_API
+	struct{
+		std::string translate_langtype = "en";
+		bool resend_state_packet;
+		std::mutex api_lock;
+	} translation_api;
+#endif
 };
 
 extern struct eri *pc_sc_display_ers; /// Player's SC display table

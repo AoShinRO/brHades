@@ -2290,6 +2290,7 @@ bool pc_set_hate_mob(map_session_data *sd, int pos, struct block_list *bl)
 	clif_hate_info(sd, pos, class_, 1);
 	return true;
 }
+#ifdef TRANSLATION_API
 std::unordered_map<unsigned char, std::string> ISO639_map = {
 	{0, "en"},
 	{1, "ru"},
@@ -2302,6 +2303,7 @@ std::unordered_map<unsigned char, std::string> ISO639_map = {
 	{8, "pt"},
 	{9, "th"},
 };
+#endif
 /*==========================================
  * Invoked once after the char/account/account2 registry variables are received. [Skotlex]
  * We didn't receive item information at this point so DO NOT attempt to do item operations here.
@@ -2321,9 +2323,9 @@ void pc_reg_received(map_session_data *sd)
 	sd->langtype = static_cast<int>(pc_readaccountreg(sd, add_str(LANGTYPE_VAR)));
 	if (msg_checklangtype(sd->langtype,true) < 0)
 		sd->langtype = 0; //invalid langtype reset to default
-
-	sd->translate_langtype = ISO639_map[sd->langtype];
-
+#ifdef TRANSLATION_API
+	sd->translation_api.translate_langtype = ISO639_map[sd->langtype];
+#endif
 	// Cash shop
 	sd->cashPoints = static_cast<int>(pc_readaccountreg(sd, add_str(CASHPOINT_VAR)));
 	sd->kafraPoints = static_cast<int>(pc_readaccountreg(sd, add_str(KAFRAPOINT_VAR)));
