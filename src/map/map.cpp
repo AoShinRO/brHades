@@ -4971,7 +4971,6 @@ void map_save_translation_db() {
                     arquivo << frase_original << "|" << lang_type << "|" << traducao << std::endl;
                 }
             }
-            arquivo.close();
         }
     }
 }
@@ -4993,7 +4992,6 @@ void map_load_translation_db() {
                 map_set_translate(frase_original, lang_type, traducao);
                 count++;
             }
-            arquivo.close();
             ShowStatus("Concluida a leitura de %" PRIu64 " entradas para o idioma %s\n", count, lang_code.c_str());
         } else {
 			std::ofstream novoArquivo(filename, std::ios::binary);
