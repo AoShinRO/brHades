@@ -4932,7 +4932,13 @@ static int cleanup_db_sub(DBKey key, DBData *data, va_list va)
 
 #ifndef MAP_GENERATOR
 #ifdef TRANSLATION_API
-#define TRANSLATED_NPC_NAME "db/translated/database.lua"
+#define TRANSLATED_DB_NAME "db/translated/database_"
+
+std::map<std::string, std::string> codepage_por_idioma = {
+    {"en", "utf-8"}, {"ru", "cp1251"}, {"es", "cp1252"}, {"de", "cp1252"},
+    {"zh-CN", "gbk"}, {"mg", "utf-8"}, {"id", "utf-8"},
+    {"fr", "cp1252"}, {"pt", "cp1252"}, {"th", "tis-620"}
+};
 std::map<std::tuple<std::string, std::string>, std::string> map_dialogue_translations;
 void map_set_translate(const std::string& origin, const std::string& lang_type, const std::string& result) {
     map_dialogue_translations[std::make_tuple(origin, lang_type)] = result;
@@ -4947,45 +4953,58 @@ std::string map_get_translate(const std::string& origin, const std::string& lang
     }
 }
 
-static void map_save_translation_db() {
-    std::ofstream arquivo(TRANSLATED_NPC_NAME); // Abre o arquivo para escrita e limpa o conteúdo se ele já existir
-    if (arquivo.is_open()) {
-        for (const auto& par : map_dialogue_translations) {
-            const auto& [frase_original, lang_type] = par.first;
-            const auto& traducao = par.second;
-            arquivo << frase_original << "|" << lang_type << "|" << traducao << std::endl;
-        }
-    } else {
-		ShowError("Erro ao abrir o arquivo: %s \n",TRANSLATED_NPC_NAME);
-    }
-}
-
-static void map_load_translation_db() {
-    std::ifstream arquivo(TRANSLATED_NPC_NAME);
-	ShowStatus("Carregando traducoes: %s \n",TRANSLATED_NPC_NAME);
-
-    if (arquivo.is_open()) {
-		uint64 count = 0;
-        std::string frase_original, lang_type, traducao;
-        while (std::getline(arquivo, frase_original, '|')) {
-            std::getline(arquivo, lang_type, '|');
-            std::getline(arquivo, traducao);
-            map_set_translate(frase_original, lang_type, traducao);
-			count++;
-#ifdef DETAILED_LOADING_OUTPUT
-			ShowStatus( "Carregando [%" PRIu64 "] entradas de '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\r", count, TRANSLATED_NPC_NAME );
-#endif
-        }
-		ShowStatus( "Concluida a leitura de '" CL_WHITE "%" PRIu64 CL_RESET "' entradas em '" CL_WHITE "%s" CL_RESET "'" CL_CLL "\n", count, TRANSLATED_NPC_NAME );
-    } else {
-        // Cria o arquivo usando ofstream
-        std::ofstream novoArquivo(TRANSLATED_NPC_NAME);
-        if (!novoArquivo) {
-            ShowError("Falha ao criar o arquivo: %s \n",TRANSLATED_NPC_NAME);
-            return;
+// Função para salvar as traduções em arquivos específicos para cada idioma
+void map_save_translation_db() {
+    for (const auto& lang : codepage_por_idioma) {
+        std::string lang_code = lang.first;
+        std::string encoding = lang.second;
+        
+        // Define o nome do arquivo específico para o idioma
+        std::string filename = TRANSLATED_DB_NAME + lang_code + ".lua";
+        std::ofstream arquivo(filename, std::ios::binary); // Abre em modo binário para evitar problemas com encoding
+        
+        if (arquivo.is_open()) {
+            for (const auto& par : map_dialogue_translations) {
+                const auto& [frase_original, lang_type] = par.first;
+                if (lang_type == lang_code) { // Somente salva as traduções do idioma correspondente
+                    const auto& traducao = par.second;
+                    arquivo << frase_original << "|" << lang_type << "|" << traducao << std::endl;
+                }
+            }
+            arquivo.close();
         }
     }
 }
+
+// Função para carregar as traduções a partir dos arquivos específicos para cada idioma
+void map_load_translation_db() {
+    for (const auto& lang : codepage_por_idioma) {
+        std::string lang_code = lang.first;
+        std::string filename = TRANSLATED_DB_NAME + lang_code + ".lua";
+        
+        std::ifstream arquivo(filename, std::ios::binary);
+        if (arquivo.is_open()) {
+            uint64 count = 0;
+            std::string frase_original, lang_type, traducao;
+            
+            while (std::getline(arquivo, frase_original, '|')) {
+                std::getline(arquivo, lang_type, '|');
+                std::getline(arquivo, traducao);
+                map_set_translate(frase_original, lang_type, traducao);
+                count++;
+            }
+            arquivo.close();
+            ShowStatus("Concluída a leitura de %" PRIu64 " entradas para o idioma %s\n", count, lang_code.c_str());
+        } else {
+			std::ofstream novoArquivo(filename, std::ios::binary);
+			if (!novoArquivo) {
+				ShowDebug("Falha ao criar o arquivo: %s \n", filename.c_str());
+				return;
+			}
+        }
+    }
+}
+
 #endif
 #endif
 
