@@ -349,7 +349,7 @@ std::string translate_api_call(map_session_data& sd, const std::string& text, co
 	std::string result;
 	int estimated_time_ms = std::min(60000, static_cast<int>(text.size() * 100)); // 100 ms por caractere, máximo de 60000 ms
 	int second = estimated_time_ms / 1000;
-	std::string tempbuf = "Tranlating to: "+target_lang;
+	std::string tempbuf = "Tranlating to: "+target_lang + ", Wait...";
 	
 	if(sd.st != nullptr){
 		sd.st->is_translating = true;

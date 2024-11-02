@@ -4994,7 +4994,7 @@ void map_load_translation_db() {
                 count++;
             }
             arquivo.close();
-            ShowStatus("Concluída a leitura de %" PRIu64 " entradas para o idioma %s\n", count, lang_code.c_str());
+            ShowStatus("Concluida a leitura de %" PRIu64 " entradas para o idioma %s\n", count, lang_code.c_str());
         } else {
 			std::ofstream novoArquivo(filename, std::ios::binary);
 			if (!novoArquivo) {
