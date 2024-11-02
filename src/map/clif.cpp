@@ -2617,7 +2617,6 @@ void clif_scriptmes( map_session_data& sd, uint32 npcid, const char *mes ){
 /// - set to clear on next mes
 /// - remove 'next' button
 void clif_scriptnext( map_session_data& sd, uint32 npcid ){
-
 	PACKET_ZC_WAIT_DIALOG p = {};
 
 	p.PacketType = HEADER_ZC_WAIT_DIALOG;
@@ -2643,7 +2642,6 @@ void clif_scriptnext( map_session_data& sd, uint32 npcid ){
 /// - close the menu window
 /// - 0146 <npcid of dialog window>.L
 void clif_scriptclose( map_session_data& sd, uint32 npcid ){
-
 	PACKET_ZC_CLOSE_DIALOG packet{};
 
 	packet.packetType = HEADER_ZC_CLOSE_DIALOG;
