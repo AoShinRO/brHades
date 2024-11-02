@@ -3997,14 +3997,8 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      if (strcharinfo(3) == "prt_q") {
-         specialeffect2 EF_GUARD;
-         bonus_script "{ bonus2 bSubSize,Size_All,10; }",600;
-         sc_end SC_SILENCE;
-         sc_end SC_POISON;
-         sc_end SC_CURSE;
-         heal 1000,0;
-      }
+      specialeffect2 EF_GUARD;
+      sc_start SC_EP16_DEF,180000,10;
   - Id: 11601
     AegisName: Tasty_Anchovy
     Name: Delicious Anchovy
@@ -8776,7 +8770,7 @@ Body:
       BuyingStore: true
     Script: |
       specialeffect2 EF_ANGELUS;
-      bonus_script "{ bonus bHPrecovRate,3; bonus bSPrecovRate,3; bonus bHit,3; bonus bCritical,7; }",600,0,0,EFST_BUCHEDENOEL;
+      sc_start SC_BUCHEDENOEL,600000,1;
   - Id: 12355
     AegisName: Xmas_Gift
     Name: Xmas Gift
@@ -13343,7 +13337,7 @@ Body:
       NoAuction: true
     Script: |
       specialeffect2 EF_POTION_BERSERK;
-      bonus_script "{ bonus bStr,20; }",60,0,0,EFST_STR_SCROLL;
+      sc_start SC_STR_SCROLL,60000,20;
   - Id: 12741
     AegisName: Inc_Int_Scroll
     Name: Intellect Amplification Scroll
@@ -13360,7 +13354,7 @@ Body:
       NoAuction: true
     Script: |
       specialeffect2 EF_SPELLBREAKER;
-      bonus_script "{ bonus bInt,20; }",60,0,0,EFST_INT_SCROLL;
+      sc_start SC_INT_SCROLL,60000,20;
   - Id: 12742
     AegisName: Valentine_Gift_Box1
     Name: Valentine Gift Box
@@ -59155,7 +59149,7 @@ Body:
       NoMail: true
       NoAuction: true
     Script: |
-      RouletteBronze++;
+      RouletteBronze += 10;
   - Id: 22870
     AegisName: Xmas_Package_14
     Name: Christmas Package
@@ -78161,6 +78155,10 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
+    Script: |
+      sc_start SC_CONTENTS_1,900000,10;
+      specialeffect2 EF_POTION_BERSERK;
+      specialeffect2 EF_PROVIDENCE;
   - Id: 102781
     AegisName: 2401_ev_Galbi
     Name: New Year Galbi-jjim
@@ -78174,6 +78172,10 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
+    Script: |
+      sc_start SC_CONTENTS_2,900000,10;
+      specialeffect2 EF_POTION_BERSERK;
+      specialeffect2 EF_SPELLBREAKER;
   - Id: 102782
     AegisName: 2401_ev_Rice_Soup
     Name: New Year Rice Cake Soup
@@ -78187,6 +78189,10 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
+    Script: |
+      sc_start SC_CONTENTS_3,900000,15;
+      specialeffect2 EF_POTION_BERSERK;
+      specialeffect2 EF_HASTEUP;
   - Id: 102783
     AegisName: 2401_ev_Lunch_Box
     Name: Sulki's Lunch Box
