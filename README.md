@@ -55,10 +55,10 @@ Database | [MySQL Workbench 5 or newer](http://www.mysql.com/downloads/workbench
 ## 2. Instalação
 
 ### Instruçoes de Instalação
-  * [Windows](https://github.com/AoShinRo/brHades/wiki/Install-on-Windows)
-  * [CentOS](https://github.com/AoShinRo/brHades/wiki/Install-on-Centos)
-  * [Debian](https://github.com/AoShinRo/brHades/wiki/Install-on-Debian)
-  * [FreeBSD](https://github.com/AoShinRo/brHades/wiki/Install-on-FreeBSD)
+  * [Windows](https://github.com/AoShinRO/brHades/wiki/Instalando-no-Windows)
+  * [Ubuntu](https://github.com/AoShinRO/brHades/wiki/Instalar-no-Ubuntu)
+  * [Debian](https://github.com/AoShinRO/brHades/wiki/Instalando-no-Debian)
+  * [FreeBSD](https://github.com/AoShinRO/brHades/wiki/Instalando-no-FreeBSD)
 
 ## 3. Problemas e Erros
 
