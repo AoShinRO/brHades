@@ -4,9 +4,10 @@
 #ifndef NAVI_H
 #define NAVI_H
 
+#ifdef MAP_GENERATOR
+
 #include <config/core.hpp>
 
-#ifdef MAP_GENERATOR
 struct navi_pos {
 	int m;
 	int x;

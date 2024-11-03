@@ -16,7 +16,7 @@
 #include <queue>
 #include <condition_variable>
 #include <future>
-#include "core.hpp"
+#include <config/core.hpp>
 #include "cbasetypes.hpp"
 #include "random.hpp"
 
