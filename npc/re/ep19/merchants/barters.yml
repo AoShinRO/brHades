@@ -47,6 +47,6 @@ Header:
 
 Footer:
   Imports:
-  - Path: npc/re/custom/ep19/english/npc/merchants/barters/quests_19_daily.yml
-  - Path: npc/re/custom/ep19/english/npc/merchants/barters/quests_19_misc.yml
-  - Path: npc/re/custom/ep19/english/npc/merchants/barters/ep19_new_content.yml
+  - Path: npc/re/ep19/merchants/barters/quests_19_daily.yml
+  - Path: npc/re/ep19/merchants/barters/quests_19_misc.yml
+  - Path: npc/re/ep19/merchants/barters/ep19_new_content.yml
