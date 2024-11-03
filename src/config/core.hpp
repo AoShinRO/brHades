@@ -75,6 +75,10 @@
 #define MAX_CHAR_BILLING 0 // This must be less than MAX_CHARS
 #endif
 
+#define MAX_WALKPATH_NAVI 1024
+
+#define MAX_WALKPATH 32
+
 /// Comment to disable warnings for deprecated script commands
 #define SCRIPT_COMMAND_DEPRECATION
 
@@ -104,16 +108,12 @@
 #define DETAILED_LOADING_OUTPUT
 #endif
 
-#define MAX_WALKPATH_NAVI 1024
-
-#define MAX_WALKPATH 32
-
 /// Uncomment to forcibly disable the detailed loading output.
 /// This will noticeably decrease the boot time of the map server by not having to print so many status messages.
 //#undef DETAILED_LOADING_OUTPUT
 
 /// Descomente para habilitar o uso de APIs da google para traducao de npcs com o atcommand @langtype. PS: Isso pode ser lento...
-#define TRANSLATION_API
+//#define TRANSLATION_API
 
 #if defined(TRANSLATION_API)
 /// Descomente para usar o translator.py (python script not-builded) na pasta tools/. python 3 requerido, para fins de testes, mais lento que buildado
