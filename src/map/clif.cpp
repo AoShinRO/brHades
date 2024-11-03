@@ -11842,7 +11842,7 @@ void clif_parse_Emotion(int fd, map_session_data *sd){
 		}
 
 		if(battle_config.client_reshuffle_dice && emoticon>=ET_DICE1 && emoticon<=ET_DICE6) {// re-roll dice
-			emoticon = util::clamp<e_emotion_type>( rnd()%6+ET_DICE1 );
+			emoticon = util::clamp<decltype(emoticon)>( rnd()%6+ET_DICE1 );
 		}
 
 		clif_emotion(sd->bl, emoticon);
