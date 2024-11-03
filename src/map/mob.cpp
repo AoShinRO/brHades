@@ -6112,7 +6112,7 @@ static bool mob_parse_row_mobskilldb( char** str, size_t columns, size_t current
 	if(*str[17]){
 		int temp_emotion = atoi(str[17]);
 		if(temp_emotion > ET_BLANK && temp_emotion < ET_MAX)
-			ms->emotion = hades_cast<e_emotion_type>(temp_emotion);
+			ms->emotion = util::clamp<e_emotion_type>(temp_emotion);
 	}
 
 	if (*str[18]) {

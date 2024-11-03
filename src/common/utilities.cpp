@@ -3,7 +3,6 @@
 
 #include "utilities.hpp"
 
-#include <algorithm>
 #include <chrono>
 #include <iostream>
 #include <numeric> //iota
