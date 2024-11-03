@@ -4,7 +4,8 @@
 #ifndef UTILILITIES_HPP
 #define UTILILITIES_HPP
 
-#include <algorithm>
+#include <algorithm>     
+#include <limits>       
 #include <locale>
 #include <map>
 #include <memory>
@@ -316,6 +317,15 @@ namespace brhades {
 		std::string base62_encode( uint32 val );
 
 		bool ansi_or_utf_check(std::string_view text, uint32 npcid);
+
+		// Cap input to numeric limits of target value and safecast it
+		// @param input: any value
+		// @return static_cast<decltype(T)> capped min/max value
+		template <typename TargetType, typename InputType>
+		constexpr forceinline TargetType clamp(InputType input) {
+			return static_cast<TargetType>(std::clamp(input, static_cast<InputType>(std::numeric_limits<TargetType>::min()), static_cast<InputType>(std::numeric_limits<TargetType>::max())));	
+		}
+
 
 		class ThreadPool {
 		private:
