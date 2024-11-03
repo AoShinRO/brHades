@@ -2459,7 +2459,7 @@ void map_foreachnpc(int (*func)(struct npc_data* nd, va_list args), ...)
 	iter = db_iterator(id_db);
 	for( bl = (struct block_list*)dbi_first(iter); dbi_exists(iter); bl = (struct block_list*)dbi_next(iter) )
 	{
-		if( bl->type == BL_NPC )
+		if(bl != nullptr && bl->type == BL_NPC )
 		{
 			struct npc_data* nd = (struct npc_data*)bl;
 			va_list args;

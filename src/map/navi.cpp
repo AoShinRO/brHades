@@ -24,62 +24,17 @@
 #include "npc.hpp"
 #include "path.hpp"
 
+using namespace brhades;
+using namespace util;
 
 std::string filePrefix = "generated/clientside/data/luafiles514/lua files/navigation/";
 
 /// @name A* pathfinding related functions
 /// @{
 
-#define calc_index(x,y) (((x)+(y)*MAX_WALKPATH_NAVI) & (MAX_WALKPATH_NAVI*MAX_WALKPATH_NAVI-1))
-
 /// Binary heap of path nodes
-BHEAP_STRUCT_DECL(node_heap, struct path_node*);
-static BHEAP_STRUCT_VAR(node_heap, heap);	// use static heap for all path calculations
+static BinaryHeap navi_openset;	// use static heap for all path calculations
 												// it get's initialized in do_init_path, freed in do_final_path.
-
-/// @param dx: Horizontal distance
-/// @param dy: Vertical distance
-/// @return Manhattan distance -> Radius.DIAMOND
-static inline unsigned char manhattan_distance(char dx, char dy) {
-	return static_cast<unsigned char>(std::abs(dx) + std::abs(dy));
-}
-
-// Estimates the cost from (x0,y0) to (x1,y1).
-// The walkpath uses a Diamond distance instead of the square one.
-// @param x0: Cell X
-// @param y0: Cell y
-// @param x1: Target cell X
-// @param y1: Target cell y
-// @return movecost X manhattan distance (This is inadmissible (overestimating) heuristic used by game client)
-static inline unsigned short heuristic(uint16 x0,uint16 y0,uint16 x1,uint16 y1) {
-	return MOVE_COST * manhattan_distance((x1)-(x0), (y1)-(y0));
-}
-
-/// Pushes path_node to the binary node_heap.
-/// Ensures there is enough space in array to store new element.
-
-static void heap_push_node(path_node *node)
-{
-#ifndef __clang_analyzer__ // TODO: Figure out why clang's static analyzer doesn't like this
-	BHEAP_ENSURE2(heap, 1, 256, struct path_node **);
-	BHEAP_PUSH2(heap, node, NODE_MINTOPCMP);
-#endif // __clang_analyzer__
-}
-
-/// Updates path_node in the binary node_heap.
-static int heap_update_node(path_node& node)
-{
-	int i;
-	ARR_FIND(0, BHEAP_LENGTH(heap), i, BHEAP_DATA(heap)[i] == &node);
-	if (i == BHEAP_LENGTH(heap)) {
-		ShowError("heap_update_node: node not found\n");
-		return 1;
-	}
-	BHEAP_UPDATE(heap, i, NODE_MINTOPCMP);
-	return 0;
-}
-// end 1:1 copy of definitions from path.cpp
-
 
 // So we don't have to allocate every time, use static structures
 static struct path_node tp[MAX_WALKPATH_NAVI * MAX_WALKPATH_NAVI + 1];
@@ -89,7 +44,7 @@ static int tpused[MAX_WALKPATH_NAVI * MAX_WALKPATH_NAVI + 1];
 /// Adds new node to heap and updates/re-adds old ones if necessary.
 static int add_path(uint16 x, uint16 y, unsigned short g_cost, path_node& parent, unsigned short h_cost)
 {
-	int i = calc_index(x, y);
+	int i = navi_openset.calc_index_naviwalkpath(x, y);
 
 	if (tpused[i] && tpused[i] == 1 + (x << 16 | y)) { // We processed this node before
 		if (g_cost < tp[i].g_cost) { // New path to this node is better than old one
@@ -98,9 +53,9 @@ static int add_path(uint16 x, uint16 y, unsigned short g_cost, path_node& parent
 			tp[i].parent = &parent;
 			tp[i].f_cost = g_cost + h_cost;
 			if (tp[i].flag == SET_CLOSED) {
-				heap_push_node(&tp[i]); // Put it in open set again
+				navi_openset.push_node(&tp[i]);// Put it in open set again
 			}
-			else if (heap_update_node(tp[i])) {
+			else if (navi_openset.update_node(tp[i])) {
 				return 1;
 			}
 			tp[i].flag = SET_OPEN;
@@ -119,7 +74,7 @@ static int add_path(uint16 x, uint16 y, unsigned short g_cost, path_node& parent
 	tp[i].f_cost = g_cost + h_cost;
 	tp[i].flag = SET_OPEN;
 	tpused[i] = 1 + (x << 16 | y);
-	heap_push_node(&tp[i]);
+	navi_openset.push_node(&tp[i]);
 	return 0;
 }
 ///@}
@@ -183,12 +138,13 @@ static bool navi_path_search(struct navi_walkpath_data *wpd, const struct navi_p
 	// A* (A-star) pathfinding
 	// We always use A* for finding walkpaths because it is what game client uses.
 	// Easy pathfinding cuts corners of non-walkable cells, but client always walks around it.
-	BHEAP_RESET(heap);
+	navi_openset.clear();
+	navi_openset.ensure(MAX_WALKPATH_NAVI * MAX_WALKPATH_NAVI + 1);
 
 	memset(tpused, 0, sizeof(tpused));
 
 	// Start node
-	i = calc_index(from->x, from->y);
+	i = navi_openset.calc_index_naviwalkpath(from->x, from->y);
 	tp[i].parent = nullptr;
 	tp[i].x = from->x;
 	tp[i].y = from->y;
@@ -197,18 +153,18 @@ static bool navi_path_search(struct navi_walkpath_data *wpd, const struct navi_p
 	tp[i].flag = SET_OPEN;
 	tpused[i] = 1 + (from->x << 16 | from->y);
 
-	heap_push_node(&tp[i]); // Put start node to 'open' set
+	navi_openset.push_node(&tp[i]); // Put start node to 'open' set
 	
 	for (;;) {
 	
 		allowed_dirs = 0;
 
-		if (BHEAP_LENGTH(heap) == 0) {
+		if (navi_openset.length() == 0) {
 			return false;
 		}
 
-		current = BHEAP_PEEK(heap); // Look for the lowest f_cost node in the 'open' set
-		BHEAP_POP2(heap, NODE_MINTOPCMP); // Remove it from 'open' set
+		current = navi_openset.peek(); // Look for the lowest f_cost node in the 'open' set
+		navi_openset.pop(); // Remove it from 'open' set
 
 		x = current->x;
 		y = current->y;
@@ -624,7 +580,6 @@ void write_map_distances() {
 
 
 void navi_create_lists() {
-	BHEAP_INIT(heap);
 
 	auto starttime = std::chrono::system_clock::now();
 
@@ -642,7 +597,6 @@ void navi_create_lists() {
 	currenttime = std::chrono::system_clock::now();
 	ShowInfo("Link Distances took %ums\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime));
 
-	BHEAP_CLEAR(heap);
 }
 
 #endif

@@ -104,6 +104,10 @@
 #define DETAILED_LOADING_OUTPUT
 #endif
 
+#define MAX_WALKPATH_NAVI 1024
+
+#define MAX_WALKPATH 32
+
 /// Uncomment to forcibly disable the detailed loading output.
 /// This will noticeably decrease the boot time of the map server by not having to print so many status messages.
 //#undef DETAILED_LOADING_OUTPUT

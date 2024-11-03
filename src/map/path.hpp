@@ -5,13 +5,12 @@
 #define PATH_HPP
 
 #include <common/cbasetypes.hpp>
+#include <config/core.hpp>
 
 enum cell_chk : uint8;
 
 #define MOVE_COST 10
 #define MOVE_DIAGONAL_COST 14
-
-#define MAX_WALKPATH 32
 
 #define SET_OPEN false
 #define SET_CLOSED true
@@ -23,16 +22,6 @@ enum cell_chk : uint8;
 
 /// @name Structures and defines for A* pathfinding
 /// @{
-
-/// Path node
-struct path_node {
-	struct path_node *parent; ///< pointer to parent (for path reconstruction)
-	uint16 x; ///< X-coordinate
-	uint16 y; ///< Y-coordinate
-	unsigned short g_cost; ///< Actual cost from start to this node
-	unsigned short f_cost; ///< g_cost + heuristic(this, goal)
-	bool flag; ///< SET_OPEN / SET_CLOSED
-};
 
 /// Comparator for binary heap of path nodes (minimum cost at top)
 #define NODE_MINTOPCMP(i,j) ((i)->f_cost - (j)->f_cost)
@@ -103,6 +92,12 @@ unsigned char distance_client(char dx, char dy);
 bool direction_diagonal( enum directions direction );
 bool direction_opposite( enum directions direction );
 
+inline double euclidean_distance(char dx, char dy);
+inline double euclidean_range(char dx, char dy);
+inline unsigned char chebyshev_distance(char dx, char dy);
+inline unsigned char chebyshev_range(char dx, char dy);
+inline unsigned char manhattan_distance(char dx, char dy);
+inline unsigned short heuristic(uint16 x0,uint16 y0,uint16 x1,uint16 y1);
 //
 void do_init_path();
 void do_final_path();
