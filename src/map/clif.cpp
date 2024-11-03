@@ -1617,7 +1617,7 @@ void clif_class_change_target(struct block_list *bl,int class_,int type, enum se
 
 		p.packetType = HEADER_ZC_NPCSPRITE_CHANGE;
 		p.gid = bl->id;
-		p.type = hades_cast<decltype(p.type)>(type);
+		p.type = util::clamp<decltype(p.type)>(type);
 		p.class_ = class_;
 		clif_send(&p,sizeof(p),(sd == nullptr ? bl : &(sd->bl)),target);
 	}
@@ -5660,13 +5660,13 @@ void clif_getareachar_skillunit(block_list &bl, skill_unit &unit, enum send_targ
 	p.srcId = unit.group->src_id;
 	p.x = unit.bl.x;
 	p.y = unit.bl.y;
-	p.viewId = hades_cast<decltype(p.viewId)>( unit_id );
+	p.viewId = util::clamp<decltype(p.viewId)>( unit_id );
 	p.isVisible = visible;
 #if PACKETVER > 20120702
 	p.packetLen = sizeof(p);
-	p.range = hades_cast<decltype(p.range)>( unit.range );
+	p.range = util::clamp<decltype(p.range)>( unit.range );
 #if PACKETVER >= 20130731
-	p.skillLv = hades_cast<decltype(p.skillLv)>( unit.group->skill_lv );
+	p.skillLv = util::clamp<decltype(p.skillLv)>( unit.group->skill_lv );
 #endif
 #endif
 
@@ -5686,7 +5686,7 @@ void clif_skill_unit_test(block_list &bl, uint16 x, uint16 y, uint16 unit_id, ui
 	p.srcId = 2000;
 	p.x = x;
 	p.y = y;
-	p.viewId = hades_cast<decltype(p.viewId)>( unit_id );
+	p.viewId = util::clamp<decltype(p.viewId)>( unit_id );
 	p.isVisible = true;
 #if PACKETVER > 20120702
 	p.packetLen = sizeof(p);
@@ -11842,7 +11842,7 @@ void clif_parse_Emotion(int fd, map_session_data *sd){
 		}
 
 		if(battle_config.client_reshuffle_dice && emoticon>=ET_DICE1 && emoticon<=ET_DICE6) {// re-roll dice
-			emoticon = hades_cast<e_emotion_type>( rnd()%6+ET_DICE1 );
+			emoticon = util::clamp<e_emotion_type>( rnd()%6+ET_DICE1 );
 		}
 
 		clif_emotion(sd->bl, emoticon);
