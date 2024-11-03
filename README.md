@@ -13,8 +13,8 @@ Qualquer bug encontrado deve ser postado em: [Reportar Bug](https://github.com/A
 
 # 
 
-[Discord](https://discord.com/invite/DAPWeV677z)|[SharpPatcher](https://github.com/AoShinRO/SharpPatcher)|[AzzyAI-RE](https://github.com/AoShinRO/AzzyAI-RE)|[ServerMonitor](https://github.com/AoShinRO/rAthena-ServMonitor-ByAoShinHo)|[Crowdfunding](https://brHades.org/board/crowdfunding/)|[Fork and Pull Request Q&A](https://brHades.org/board/topic/86913-pull-request-qa/)
---------|--------|--------|--------|--------|--------
+[Discord](https://discord.com/invite/DAPWeV677z)|[AzzyAI-RE](https://github.com/AoShinRO/AzzyAI-RE)|[ServerMonitor](https://github.com/AoShinRO/rAthena-ServMonitor-ByAoShinHo)|[Crowdfunding](https://brHades.org/board/crowdfunding/)|[Fork and Pull Request Q&A](https://brHades.org/board/topic/86913-pull-request-qa/)
+--------|--------|--------|--------|--------
 
 ### Leia-me
 1. [Requisitos](#1-requisitos)
