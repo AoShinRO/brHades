@@ -13,6 +13,7 @@
 #include <chrono>
 #include <queue>
 #include <vector>
+#include <thread>
 
 #include <common/db.hpp>
 #include <common/malloc.hpp>
@@ -580,23 +581,33 @@ void write_map_distances() {
 
 
 void navi_create_lists() {
+    auto starttime = std::chrono::system_clock::now();
 
-	auto starttime = std::chrono::system_clock::now();
+	std::filesystem::create_directories(filePrefix);
 
-	npc_event_runall(script_config.navi_generate_name);
+    npc_event_runall(script_config.navi_generate_name);
 
-	write_object_lists();
-	auto currenttime = std::chrono::system_clock::now();
-	ShowInfo("Object lists took %ums\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime));
-	starttime = std::chrono::system_clock::now();
-	write_npc_distances();
-	currenttime = std::chrono::system_clock::now();
-	ShowInfo("NPC Distances took %ums\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime));
-	starttime = std::chrono::system_clock::now();
-	write_map_distances();
-	currenttime = std::chrono::system_clock::now();
-	ShowInfo("Link Distances took %ums\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime));
+    // Iniciar threads para funções que podem ser paralelizadas
+    std::thread t1(write_object_lists);
+    std::thread t2(write_npc_distances);
+    std::thread t3(write_map_distances);
 
+    // Esperar cada thread terminar
+    t1.join();
+    auto currenttime = std::chrono::system_clock::now();
+    ShowInfo("Object lists took %ums\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime).count());
+
+    t2.join();
+    currenttime = std::chrono::system_clock::now();
+    ShowInfo("NPC Distances took %ums\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime).count());
+
+    t3.join();
+    currenttime = std::chrono::system_clock::now();
+    ShowInfo("Link Distances took %ums\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime).count());
+
+    // Exibir tempo total
+    currenttime = std::chrono::system_clock::now();
+    ShowInfo("Total execution time: %ums\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime).count());
 }
 
 #endif
