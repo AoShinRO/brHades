@@ -57,6 +57,7 @@ static int add_path(uint16 x, uint16 y, unsigned short g_cost, path_node& parent
 				navi_openset.push_node(&tp[i]);// Put it in open set again
 			}
 			else if (navi_openset.update_node(tp[i])) {
+				ShowInfo("fail update node %d\n", i);
 				return 1;
 			}
 			tp[i].flag = SET_OPEN;
@@ -591,16 +592,12 @@ void navi_create_lists() {
     std::thread t1(write_object_lists);
     std::thread t2(write_npc_distances);
     std::thread t3(write_map_distances);
-
-    // Esperar cada thread terminar
-    t1.join();
+    t1.join();    // Esperar cada thread terminar
     auto currenttime = std::chrono::system_clock::now();
     ShowInfo("Object lists took %ums\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime).count());
-
     t2.join();
     currenttime = std::chrono::system_clock::now();
     ShowInfo("NPC Distances took %ums\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime).count());
-
     t3.join();
     currenttime = std::chrono::system_clock::now();
     ShowInfo("Link Distances took %ums\n", std::chrono::duration_cast<std::chrono::milliseconds>(currenttime - starttime).count());
