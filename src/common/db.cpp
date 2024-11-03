@@ -2050,7 +2050,7 @@ static int db_obj_vforeach(DBMap* self, DBApply func, va_list args)
 			}
 			while (node) {
 				parent = node->parent;
-				if (parent && parent->right && parent->left == node) {
+				if (parent != nullptr && parent->right != nullptr && parent->left == node) {
 					node = parent->right;
 					break;
 				}

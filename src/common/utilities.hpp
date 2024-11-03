@@ -16,7 +16,7 @@
 #include <queue>
 #include <condition_variable>
 #include <future>
-
+#include <config/core.hpp>
 #include "cbasetypes.hpp"
 #include "random.hpp"
 
@@ -420,6 +420,124 @@ namespace brhades {
 		    }
 #endif
 		}; // Fim da classe ThreadPool
+
+		/// Path node
+		struct path_node {
+			struct path_node *parent; ///< pointer to parent (for path reconstruction)
+			uint16 x; ///< X-coordinate
+			uint16 y; ///< Y-coordinate
+			unsigned short g_cost; ///< Actual cost from start to this node
+			unsigned short f_cost; ///< g_cost + heuristic(this, goal)
+			bool flag; ///< SET_OPEN / SET_CLOSED
+		};
+		class BinaryHeap {
+		public:
+			std::vector<path_node*> g_openset;
+
+			int calc_index_walkpath(uint16 x,uint16 y) const {
+				return (((x)+(y)*MAX_WALKPATH) & (MAX_WALKPATH*MAX_WALKPATH-1));
+			}
+
+			int calc_index_naviwalkpath(uint16 x,uint16 y) const {
+				return (((x)+(y)*MAX_WALKPATH_NAVI) & (MAX_WALKPATH_NAVI*MAX_WALKPATH_NAVI-1));
+			}
+
+			// Returns the length of the heap
+			size_t length() const {
+				return g_openset.size();
+			}
+			
+			// Returns the capacity of the heap
+			size_t capacity() const {
+				return g_openset.capacity();
+			}
+		
+			void ensure(size_t n) {
+				if (capacity() < n) {
+					g_openset.reserve(n); // Reservar espaço adicional, como especificado por 'step'
+				}
+			}
+		
+			// Returns the top value of the heap
+			path_node* peek() const {
+				return g_openset.front();
+			}
+			
+			// Inserts a value in the heap and restores the heap property
+			void push(path_node& val) {
+				g_openset.push_back(&val);
+				size_t i = g_openset.size() - 1;
+				siftDown(0, i);
+			}
+			
+			// Removes the top value of the heap and restores the heap property
+			void pop() {
+				g_openset.front() = g_openset.back();
+				g_openset.pop_back();
+				if (g_openset.empty()) return;  // Se não restar nenhum elemento, não há mais nada a fazer
+				siftUp(0);
+			}
+			
+			// Updates the heap after modifying an element
+			void update(size_t idx) {
+				siftDown(0, idx);
+				siftUp(idx);
+			}
+			
+			// Clears the heap
+			void clear() {
+				if(g_openset.empty()) return; // Se não tiver nenhum elemento, não há nada a fazer
+				g_openset.clear();
+			}
+		
+			/// Pushes path_node to the binary node_heap.
+			/// Ensures there is enough space in array to store new element.
+			void push_node(path_node* node) {
+				push(*node); 
+			}
+		
+			/// Updates path_node in the binary node_heap.
+			int update_node(path_node& node)
+			{
+				auto it = std::find(g_openset.begin(), g_openset.end(), &node);
+				if (it == g_openset.end()) {
+					return 1;
+				}
+				size_t i = std::distance(g_openset.begin(), it);
+				update(i);
+				return 0;
+			}
+		
+			std::function<int(const path_node*, const path_node*)> node_min_to_comp = [](const path_node* i, const path_node* j) {
+				return i->f_cost - j->f_cost;
+			};
+		
+			// Helper function to sift down
+			void siftDown(size_t startIdx, size_t idx) {
+				while (idx > startIdx) {
+					size_t parent = (idx - 1) / 2;
+					if (node_min_to_comp(g_openset[parent], g_openset[idx]) <= 0) break;
+					std::swap(g_openset[parent], g_openset[idx]);
+					idx = parent;
+				}
+			}
+		
+			// Helper function to sift up
+			void siftUp(size_t idx) {
+				size_t leftChild = idx * 2 + 1;
+				while (leftChild < g_openset.size()) {
+					size_t rightChild = idx * 2 + 2;
+					size_t swapChild = (rightChild < g_openset.size() && node_min_to_comp(g_openset[leftChild], g_openset[rightChild]) > 0) ? rightChild : leftChild;
+					if (node_min_to_comp(g_openset[idx], g_openset[swapChild]) <= 0) break;
+					std::swap(g_openset[idx], g_openset[swapChild]);
+					idx = swapChild;
+					leftChild = idx * 2 + 1;
+				}
+			}
+		};
+
+
+
 
 	}
 }

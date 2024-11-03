@@ -20,110 +20,12 @@
 #include "battle.hpp"
 #include "map.hpp"
 
+using namespace brhades;
+using namespace util;
+
 /// Binary heap of path nodes
 /// c++ A*
-
-class BinaryHeap {
-public:
-	std::vector<path_node*> heap;
-
-	// Returns the length of the heap
-	size_t length() const {
-		return heap.size();
-	}
-	
-	// Returns the capacity of the heap
-	size_t capacity() const {
-		return heap.capacity();
-	}
-
-	void ensure(size_t n) {
-		if (capacity() < n) {
-			heap.reserve(n); // Reservar espaço adicional, como especificado por 'step'
-		}
-	}
-
-	// Returns the top value of the heap
-	path_node* peek() const {
-		return heap.front();
-	}
-	
-	// Inserts a value in the heap and restores the heap property
-	void push(path_node& val) {
-		heap.push_back(&val);
-		size_t i = heap.size() - 1;
-		siftDown(0, i);
-	}
-	
-	// Removes the top value of the heap and restores the heap property
-	void pop() {
-		heap.front() = heap.back();
-		heap.pop_back();
-		if (heap.empty()) return;  // Se não restar nenhum elemento, não há mais nada a fazer
-		siftUp(0);
-	}
-	
-	// Updates the heap after modifying an element
-	void update(size_t idx) {
-		siftDown(0, idx);
-		siftUp(idx);
-	}
-	
-	// Clears the heap
-	void clear() {
-		if(heap.empty()) return; // Se não tiver nenhum elemento, não há nada a fazer
-		heap.clear();
-	}
-
-	/// Pushes path_node to the binary node_heap.
-	/// Ensures there is enough space in array to store new element.
-	void push_node(path_node* node) {
-		push(*node); 
-	}
-
-	/// Updates path_node in the binary node_heap.
-	int update_node(path_node& node)
-	{
-		auto it = std::find(heap.begin(), heap.end(), &node);
-		if (it == heap.end()) {
-			return 1;
-		}
-		size_t i = std::distance(heap.begin(), it);
-		update(i);
-		return 0;
-	}
-
-	std::function<int(const path_node*, const path_node*)> node_min_to_comp = [](const path_node* i, const path_node* j) {
-		return i->f_cost - j->f_cost;
-	};
-
-	// Helper function to sift down
-	void siftDown(size_t startIdx, size_t idx) {
-		while (idx > startIdx) {
-			size_t parent = (idx - 1) / 2;
-			if (node_min_to_comp(heap[parent], heap[idx]) <= 0) break;
-			std::swap(heap[parent], heap[idx]);
-			idx = parent;
-		}
-	}
-
-	// Helper function to sift up
-	void siftUp(size_t idx) {
-		size_t leftChild = idx * 2 + 1;
-		while (leftChild < heap.size()) {
-			size_t rightChild = idx * 2 + 2;
-			size_t swapChild = (rightChild < heap.size() && node_min_to_comp(heap[leftChild], heap[rightChild]) > 0) ? rightChild : leftChild;
-			if (node_min_to_comp(heap[idx], heap[swapChild]) <= 0) break;
-			std::swap(heap[idx], heap[swapChild]);
-			idx = swapChild;
-			leftChild = idx * 2 + 1;
-		}
-	}
-};
-
-static BinaryHeap heap; 	// use static heap for all path calculations
-
-#define calc_index(x,y) (((x)+(y)*MAX_WALKPATH) & (MAX_WALKPATH*MAX_WALKPATH-1))
+static BinaryHeap g_openset; 	// use static heap for all path calculations
 
 /// @}
 
@@ -133,7 +35,7 @@ static BinaryHeap heap; 	// use static heap for all path calculations
 /// @param dx: Horizontal distance
 /// @param dy: Vertical distance
 /// @return Manhattan distance -> Radius.DIAMOND
-static inline unsigned char manhattan_distance(char dx, char dy) {
+inline unsigned char manhattan_distance(char dx, char dy) {
 	return static_cast<unsigned char>(std::abs(dx) + std::abs(dy));
 }
 
@@ -146,14 +48,14 @@ static inline unsigned char manhattan_distance(char dx, char dy) {
 // @param dx: Horizontal distance
 // @param dy: Vertical distance
 // @return Chebyshev range -> Radius.SQUARE
-static inline unsigned char chebyshev_range(char dx, char dy) {
+inline unsigned char chebyshev_range(char dx, char dy) {
 	return static_cast<unsigned char>(std::max(std::abs(dx), std::abs(dy)));
 }
 
 // @param dx: Horizontal distance
 // @param dy: Vertical distance
 // @return Chebyshev distance -> Radius.SQUARE
-static inline unsigned char chebyshev_distance(char dx, char dy) {
+inline unsigned char chebyshev_distance(char dx, char dy) {
 	return static_cast<unsigned char>((123.0 / 128.0 * chebyshev_range(dx, dy)) + (51.0 / 128.0 * std::min(std::abs(dx), std::abs(dy))));
 }
 
@@ -164,25 +66,25 @@ static inline unsigned char chebyshev_distance(char dx, char dy) {
 // @param dx: Horizontal distance
 // @param dy: Vertical distance
 // @return Euclidean range -> Radius.CIRCLE 
-static inline double euclidean_range(char dx, char dy) {
+inline double euclidean_range(char dx, char dy) {
 	return std::pow(std::abs(dx), 2) + std::pow(std::abs(dy), 2);
 }
 
 // @param dx: Horizontal distance
 // @param dy: Vertical distance
 // @return Euclidean distance -> Radius.CIRCLE
-static inline double euclidean_distance(char dx, char dy) {
+inline double euclidean_distance(char dx, char dy) {
 	return std::sqrt(euclidean_range(dx,dy));
 }
 
 /// @}
 
 void do_init_path(){
-	heap.clear();	// already initialized the heap, this is rudendant & just for code-conformance/readability
+	g_openset.clear();	// already initialized the heap, this is rudendant & just for code-conformance/readability
 }//
 
 void do_final_path(){
-	heap.clear();	// already clearing the heap, this is rudendant & just for code readability
+	g_openset.clear();	// already clearing the heap, this is rudendant & just for code readability
 }//
 
 
@@ -315,7 +217,7 @@ bool path_search_long(struct shootpath_data *spd,int16 m,int16 x0,int16 y0,int16
 // @param x1: Target cell X
 // @param y1: Target cell y
 // @return movecost X manhattan distance (This is inadmissible (overestimating) heuristic used by game client)
-static inline unsigned short heuristic(uint16 x0,uint16 y0,uint16 x1,uint16 y1) {
+inline unsigned short heuristic(uint16 x0,uint16 y0,uint16 x1,uint16 y1) {
 	return MOVE_COST * manhattan_distance((x1)-(x0), (y1)-(y0));
 }
 
@@ -323,7 +225,7 @@ static inline unsigned short heuristic(uint16 x0,uint16 y0,uint16 x1,uint16 y1) 
 /// Adds new node to heap and updates/re-adds old ones if necessary.
 static unsigned char add_path(std::vector<path_node>& tp, uint16 x, uint16 y, unsigned short g_cost, path_node& parent, unsigned short h_cost)
 {
-	int i = calc_index(x, y);
+	int i = g_openset.calc_index_walkpath(x, y);
 
 	if (tp[i].x == x && tp[i].y == y) { // We processed this node before
 		if (g_cost < tp[i].g_cost) { // New path to this node is better than old one
@@ -332,9 +234,9 @@ static unsigned char add_path(std::vector<path_node>& tp, uint16 x, uint16 y, un
 			tp[i].parent = &parent;
 			tp[i].f_cost = g_cost + h_cost;
 			if (tp[i].flag == SET_CLOSED) {
-				heap.push_node(&tp[i]); // Put it in open set again
+				g_openset.push_node(&tp[i]); // Put it in open set again
 			}
-			else if (heap.update_node(tp[i])) {
+			else if (g_openset.update_node(tp[i])) {
 				ShowError("heap_update_node: node not found\n");
 				return 1;
 			}
@@ -353,7 +255,7 @@ static unsigned char add_path(std::vector<path_node>& tp, uint16 x, uint16 y, un
 	tp[i].parent = &parent;
 	tp[i].f_cost = g_cost + h_cost;
 	tp[i].flag = SET_OPEN;
-	heap.push_node(&tp[i]);
+	g_openset.push_node(&tp[i]);
 	return 0;
 }
 ///@}
@@ -393,11 +295,11 @@ static bool aegis_pathfinding(walkpath_data& wpd, int16 m, uint16 x0, uint16 y0,
 	// static struct path_node tp[MAX_WALKPATH * MAX_WALKPATH]; < old
 	std::vector<path_node> tp(MAX_WALKPATH * MAX_WALKPATH); // fix C6262.
 
-	heap.clear();
-	heap.ensure(MAX_WALKPATH * MAX_WALKPATH); // Aloca a memoria completa para nao precisar realocar toda hora
+	g_openset.clear();
+	g_openset.ensure(MAX_WALKPATH * MAX_WALKPATH); // Aloca a memoria completa para nao precisar realocar toda hora
 
 	// Start node
-	i = calc_index(x0, y0);
+	i = g_openset.calc_index_walkpath(x0, y0);
 	tp[i].parent = nullptr;
 	tp[i].x      = x0;
 	tp[i].y      = y0;
@@ -405,18 +307,18 @@ static bool aegis_pathfinding(walkpath_data& wpd, int16 m, uint16 x0, uint16 y0,
 	tp[i].f_cost = heuristic(x0, y0, x1, y1);
 	tp[i].flag   = SET_OPEN;
 
-	heap.push_node(&tp[i]); // Put start node to 'open' set
+	g_openset.push_node(&tp[i]); // Put start node to 'open' set
 
 	for(;;) {
 
 		allowed_dirs = 0;
 
-		if (heap.length() == 0) {
+		if (g_openset.length() == 0) {
 			return false;
 		}
 
-		current = heap.peek(); // Look for the lowest f_cost node in the 'open' set
-		heap.pop(); // Remove it from 'open' set
+		current = g_openset.peek(); // Look for the lowest f_cost node in the 'open' set
+		g_openset.pop(); // Remove it from 'open' set
 
 		x      = current->x;
 		y      = current->y;
@@ -436,21 +338,21 @@ static bool aegis_pathfinding(walkpath_data& wpd, int16 m, uint16 x0, uint16 y0,
 #define chk_dir(d) ((allowed_dirs & (d)) == (d))
 		// Process neighbors of current node
 		if (chk_dir(PATH_DIR_SOUTH|PATH_DIR_EAST) && !map_getcellp(mapdata, x+1, y-1, cell))
-			e += add_path(tp, x+1, y-1, g_cost + MOVE_DIAGONAL_COST, *current, heuristic(x+1, y-1, x1, y1)); // (x+1, y-1) 5
+			e += add_path(std::ref(tp), x+1, y-1, g_cost + MOVE_DIAGONAL_COST, *current, heuristic(x+1, y-1, x1, y1)); // (x+1, y-1) 5
 		if (chk_dir(PATH_DIR_EAST))
-			e += add_path(tp, x+1, y, g_cost + MOVE_COST, *current, heuristic(x+1, y, x1, y1)); // (x+1, y) 6
+			e += add_path(std::ref(tp), x+1, y, g_cost + MOVE_COST, *current, heuristic(x+1, y, x1, y1)); // (x+1, y) 6
 		if (chk_dir(PATH_DIR_NORTH|PATH_DIR_EAST) && !map_getcellp(mapdata, x+1, y+1, cell))
-			e += add_path(tp, x+1, y+1, g_cost + MOVE_DIAGONAL_COST, *current, heuristic(x+1, y+1, x1, y1)); // (x+1, y+1) 7
+			e += add_path(std::ref(tp), x+1, y+1, g_cost + MOVE_DIAGONAL_COST, *current, heuristic(x+1, y+1, x1, y1)); // (x+1, y+1) 7
 		if (chk_dir(PATH_DIR_NORTH))
-			e += add_path(tp, x, y+1, g_cost + MOVE_COST, *current, heuristic(x, y+1, x1, y1)); // (x, y+1) 0
+			e += add_path(std::ref(tp), x, y+1, g_cost + MOVE_COST, *current, heuristic(x, y+1, x1, y1)); // (x, y+1) 0
 		if (chk_dir(PATH_DIR_NORTH|PATH_DIR_WEST) && !map_getcellp(mapdata, x-1, y+1, cell))
-			e += add_path(tp, x-1, y+1, g_cost + MOVE_DIAGONAL_COST, *current, heuristic(x-1, y+1, x1, y1)); // (x-1, y+1) 1
+			e += add_path(std::ref(tp), x-1, y+1, g_cost + MOVE_DIAGONAL_COST, *current, heuristic(x-1, y+1, x1, y1)); // (x-1, y+1) 1
 		if (chk_dir(PATH_DIR_WEST))
-			e += add_path(tp, x-1, y, g_cost + MOVE_COST, *current, heuristic(x-1, y, x1, y1)); // (x-1, y) 2
+			e += add_path(std::ref(tp), x-1, y, g_cost + MOVE_COST, *current, heuristic(x-1, y, x1, y1)); // (x-1, y) 2
 		if (chk_dir(PATH_DIR_SOUTH|PATH_DIR_WEST) && !map_getcellp(mapdata, x-1, y-1, cell))
-			e += add_path(tp, x-1, y-1, g_cost + MOVE_DIAGONAL_COST, *current, heuristic(x-1, y-1, x1, y1)); // (x-1, y-1) 3
+			e += add_path(std::ref(tp), x-1, y-1, g_cost + MOVE_DIAGONAL_COST, *current, heuristic(x-1, y-1, x1, y1)); // (x-1, y-1) 3
 		if (chk_dir(PATH_DIR_SOUTH))
-			e += add_path(tp, x, y-1, g_cost + MOVE_COST, *current, heuristic(x, y-1, x1, y1)); // (x, y-1) 4
+			e += add_path(std::ref(tp), x, y-1, g_cost + MOVE_COST, *current, heuristic(x, y-1, x1, y1)); // (x, y-1) 4
 #undef chk_dir
 		if (e) {
 			return false;

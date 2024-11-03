@@ -4,9 +4,10 @@
 #ifndef NAVI_H
 #define NAVI_H
 
+#ifdef MAP_GENERATOR
+
 #include <config/core.hpp>
 
-#ifdef MAP_GENERATOR
 struct navi_pos {
 	int m;
 	int x;
@@ -31,15 +32,10 @@ struct navi_link {
 	std::string name; // custom name
 };
 
-
-// We need a bigger max path length than stock walkpath
-#define MAX_WALKPATH_NAVI 1024
-
 struct navi_walkpath_data {
 	uint8 path_len, path_pos;
 	uint8 path[MAX_WALKPATH_NAVI];
 };
-
 
 void navi_create_lists();
 #endif // ifdef MAP_GENERATOR
