@@ -237,7 +237,7 @@ static unsigned char add_path(std::vector<path_node>& tp, uint16 x, uint16 y, un
 				g_openset.push_node(&tp[i]); // Put it in open set again
 			}
 			else if (g_openset.update_node(tp[i])) {
-				ShowError("heap_update_node: node not found\n");
+				ShowInfo("heap_update_node: node not found\n");
 				return 1;
 			}
 			tp[i].flag = SET_OPEN;

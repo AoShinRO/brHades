@@ -47,6 +47,10 @@ Body:
     Value: 5
   - Name: REPUTATION_EP18
     Value: 3
+  - Name: IG_ICE_F_STONE_BOX2
+    Value: 1000
+  - Name: IG_D_GW_EXTRACTOR
+    Value: 1001
 
 Footer:
   Imports:

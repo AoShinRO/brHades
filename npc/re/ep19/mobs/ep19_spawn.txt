@@ -1,0 +1,56 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Monster spawn from episode 19
+//===== Description: =========================================
+//= The file include several new monster spawn locations.
+//===== Additional Comments: =================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+jor_ab01	monster	--ja--	21538,70	//  EP19_WASTED_RGAN_A
+jor_ab01	monster	--ja--	21540,70	//  EP19_CAVE_CALMARING
+jor_ab01	monster	--ja--	21541,60	//  EP19_CAVE_FLOWER
+jor_ab01	monster	--ja--	21543,60	//  EP19_HALLUCIGENIA_BABY
+jor_ab01	monster	--ja--	21600,10	//  EP19_RE_RGAN_E
+
+jor_ab02	monster	--ja--	21539,70	//  EP19_WASTED_RGAN_C
+jor_ab02	monster	--ja--	21542,70	//  EP19_HALLUCIGENIA
+jor_ab02	monster	--ja--	21544,60	//  EP19_ONE_EYE_DOLLOCARIS
+jor_ab02	monster	--ja--	21545,60	//  EP19_DOLLOCARIS
+jor_ab02	monster	--ja--	21601,10	//  EP19_ET_RGAN_D
+
+jor_back1	monster	--ja--	21524,60	//  EP19_SHINING_SEAWEED
+jor_back1	monster	--ja--	21525,60	//  EP19_ICE_GANGU
+jor_back1	monster	--ja--	21523,80	//  EP19_ICE_STRAW
+
+jor_back2	monster	--ja--	21521,70	//  EP19_UNFROST_FLOWER
+jor_back2	monster	--ja--	21525,25	//  EP19_ICE_GANGU
+jor_back2	monster	--ja--	21523,35	//  EP19_ICE_STRAW
+jor_back2	monster	--ja--	21520,70	//  EP19_LIMACINA
+
+jor_back3	monster	--ja--	21526,30	//  EP19_RGAN_A
+jor_back3	monster	--ja--	21527,15	//  EP19_RGAN_B
+jor_back3	monster	--ja--	21525,20	//  EP19_ICE_GANGU
+jor_back3	monster	--ja--	21522,70	//  EP19_CALMARING
+jor_back3	monster	--ja--	21520,70	//  EP19_LIMACINA
+// unknown delay
+jor_back3	boss_monster	--ja--	21537,1,7200000,600000,1	//  EP19_LIMACINA_BOSS
+
+jor_dun01	monster	--ja--	21526,110	//  EP19_RGAN_A
+jor_dun01	monster	--ja--	21527,60	//  EP19_RGAN_B
+jor_dun01	monster	--ja--	21528,20	//  EP19_RGAN_C
+jor_dun01	monster	--ja--	21599,10	//  EP19_HEARTHUNTER_AT
+
+jor_dun02	monster	--ja--	21527,90	//  EP19_RGAN_B
+jor_dun02	monster	--ja--	21528,80	//  EP19_RGAN_C
+jor_dun02	monster	--ja--	21529,20	//  EP19_RGAN_D
+jor_dun02	monster	--ja--	21599,10	//  EP19_HEARTHUNTER_AT
+
+jor_tail	monster	--ja--	21524,80	//  EP19_SHINING_SEAWEED
+jor_tail	monster	--ja--	21525,90	//  EP19_ICE_GANGU
+
+jor_tail	monster	--ja--	21524,80	//  EP19_SHINING_SEAWEED
+jor_tail	monster	--ja--	21525,90	//  EP19_ICE_GANGU
+
+jor_que	monster	--ja--	21534,3	//  EP19_MD_RGAN_E
+jor_que	monster	--ja--	21535,5	//  EP19_MD_RGAN_D

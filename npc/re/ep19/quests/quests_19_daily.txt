@@ -1,0 +1,5627 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Issgard Land of Snow Flowers
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- Daily quests for Episode 19
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Daily quest - Select Menu for Lunch
+jor_back2,250,30,0	script	Lunch Appearance#flunch	HIDDEN_WARP_NPC,20,20,{
+	end;
+OnTouch:
+	if (ep19_main == 12) {
+		cloakoffnpcself( "ep19_flunch_1" );
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Huh?! That young man?", bc_self;
+		end;
+	}
+	if (ep19_main > 12) {
+		cloakoffnpcself( "ep19_flunch_2" );
+		end;
+	}
+}
+
+jor_back2,250,30,2	script	Young man in question#flunch::ep19_flunch_1	4_EP19_LUNCH,{
+	if (ep19_main == 12) {
+		cutin "ep19_lunch01.png",2;
+		mes "[Young man in question]";
+		mes "Huh?! See you again!";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Ah! It's you, test subject friend!";
+		next;
+		mes "[Young man in question]";
+		mes "Oh! You're a friend. I'm new to you. Friends.. I like friends.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Really! By the way, you didn't even have a full name? Us. What's your name? What should I call you?";
+		next;
+		mes "[Young man in question]";
+		mes "Name?";
+		next;
+		mes "[Young man in question]";
+		mes "Ah! Are you talking about a name? If that's the case, it's called HU-210426.";
+		next;
+		mes "[Young man in question]";
+		mes "You can tell by looking at the barcode engraved on my head..";
+		next;
+		mes "[Young man in question]";
+		mes "I'm not a scientist in Illusion, so I guess you don't have that kind of equipment. It's reassuring in many ways.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Ah! I'm sorry I forgot you were a test subject. It's hard to call you HU-210426 though.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "How about lunch? The morning is more like a hyung, and if you look at it, I don't think it's completely different from the morning?";
+		next;
+		cloakonnpcself( "ep19_flunch_1" );
+		cloakoffnpcself( "ep19_flunch_2" );
+		mes "[Young man in question]";
+		mes "Lunch.. Lunch..";
+		mes "That's a good name to call. Then call me lunch.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Yes lunch! And it can be painful, can you tell me how you managed to escape?";
+		next;
+		mes "[Lunch]";
+		mes "It's annoying. Where should I start talking? Oh! I'll start with that.";
+		next;
+		mes "[Lunch]";
+		mes "It was a day when scientists were experimenting with things like usual in a big mansion.";
+		next;
+		mes "[Lunch]";
+		mes "But all of a sudden the scientists just started packing things.";
+		next;
+		mes "[Lunch]";
+		mes "There were many specimens that were thrown away or discarded in the process, but I came here by airship with scientists.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Is it hard?";
+		next;
+		mes "[Lunch]";
+		mes "It's hard. It's common to get thrown away or discarded. I'll continue.";
+		next;
+		mes "[Lunch]";
+		mes "Scientists came here and met these slender guys. They're a race called Rgan.";
+		next;
+		mes "[Lunch]";
+		mes "I don't know what scientists do with those races, but I've lost interest in the subjects I brought from the big mansion, including myself.";
+		next;
+		mes "[Lunch]";
+		mes "No, rather than not being interested in it, it seemed that they were distracted by other experiments and forgot about our existence.";
+		next;
+		mes "[Lunch]";
+		mes "Well, it's common for scientists obsessed with experiments.";
+		next;
+		mes "[Lunch]";
+		mes "Other subjects left unattended fell one by one. Well, I was an entity that could eat anything to produce energy...";
+		next;
+		mes "[Lunch]";
+		mes "Because other subjects did not.";
+		next;
+		mes "[Lunch]";
+		mes "As time passed, even the last remaining specimen fell asleep and stopped moving.";
+		next;
+		mes "[Lunch]";
+		mes "I was bored, and I escaped the cage by turning into a small animal that was passing by.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "What? Turned into a little animal?";
+		next;
+		mes "[Lunch]";
+		mes "Ah! One of my abilities is the ability to transform into other beings.";
+		next;
+		mes "[Lunch]";
+		mes "Isn't that great?";
+		mes "It's an incredibly advanced ability that early entities could not do! Scientists probably brought me here because of this ability.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Can you transform other beings by any chance?";
+		next;
+		mes "[Lunch]";
+		mes "Uh.. Unlike me, I need some materials.. Not all of them can transform..";
+		next;
+		mes "[Lunch]";
+		mes "It's not impossible. For example, the Rgan race? Anyone can easily transform it.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Yes! Could you make it for me too?";
+		next;
+		mes "[Lunch]";
+		mes "If you only give me a few ingredients. About 2 low-grade magic cores and about 2,000 jenny?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Jenny? Are you talking about money?";
+		next;
+		mes "[Lunch]";
+		mes "Yes!! I heard that Prontera is a place where anyone can live without discrimination as long as they have the ability.";
+		next;
+		mes "[Lunch]";
+		mes "I will collect a lot of Jenny and buy a house in Prontera and live there for the rest of my life!";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "It will be difficult, but I will support you..";
+		next;
+		mes "[Lunch]";
+		mes "Oh! I have a favor to ask of a friend.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "A request? What is your request?";
+		next;
+		mes "[Lunch]";
+		mes "I'll be here for a while and there's very little here to eat and use for energy.";
+		next;
+		mes "[Lunch]";
+		mes "Ice's energy conversion efficiency is too low.. Can a friend prepare a meal for me?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "It's that easy.";
+		next;
+		mes "[Lunch]";
+		mes "Hehe, I thought that if you were a friend who came back to me, I would do your favor.";
+		next;
+		ep19_main = 13;
+		erasequest 5983;
+		setquest 5984;
+		setquest 5985;
+		getitem 101162,1;	// Ep19_Rgan_Scroll
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		mes "[Lunch]";
+		mes "This is a gift I give to my friend. Please take care of me from tomorrow.";
+		close2;
+		navigateto("icecastle",27,126);
+		cutin "",255;
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(5983) == 1" );
+	cloakonnpc();
+	end;
+}
+
+jor_back2,250,30,2	script	Lunch#lunch::ep19_flunch_2	4_EP19_LUNCH,{
+	if (ep19_main < 12)
+		end;
+	if (checkweight(1000608,2) == 0) {	// Ep19_Snow_Flower
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+
+	setpcblock PCBLOCK_NPC, true;
+	cutin "ep19_lunch01.png",2;
+
+	setarray .@data[0],	// <quest id>, <item required>
+		5986, 7158,	// Broken_Wine_Vessel
+		5987, 7162,	// Cloud_Piece
+		5988, 7299,	// Bamboo_Basket
+		5989, 7266,	// Dragon_Fang
+		5990, 7762,	// Yaga_Pestle
+		5991, 7171,	// Leopard_Skin
+		5992, 6405,	// Cendrawasih_F
+		5993, 6498,	// Jejellopy
+		5994, 25285,	// BrownRatTail
+		5995, 7150;	// Bamboo_Cut
+	.@size = getarraysize(.@data);
+
+	for ( .@i = 0; .@i < .@size; .@i += 2 ) {
+		if (isbegin_quest(.@data[.@i]) > 0)
+			break;
+	}
+
+	if (.@i < .@size) {
+		if (countitem(.@data[.@i+1]) > 9) {	// Note: condition splitted, short-circuiting not implemented yet
+			npctalk "Lunch: Oh!", "", bc_self;
+			sleep2 1000;
+			cutin "ep19_lunch02.png",2;
+			erasequest .@data[.@i];
+			delitem .@data[.@i+1], 10;
+			setquest 5985;
+			// note: no reputation given
+			getitem 101162,1;	// Ep19_Rgan_Scroll
+			getitem 1000608,2;	// Ep19_Snow_Flower
+			sleep2 1000;
+			npctalk "Lunch: Thank you for the energy source. You will be blessed.", "", bc_self;
+			cutin "",255;
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		npctalk .@data[.@i+1] + " : ffffffffffff";
+	}
+
+	.@playtime = checkquest(5985,PLAYTIME);
+	switch( .@playtime ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		.@waiting$ = "[waiting]";
+		break;
+	case 2:
+		erasequest 5985;
+		.@playtime = -1;
+		sleep2 1000;
+		cutin "ep19_lunch03.png",2;
+		emotion ET_HUK;
+		emotion ET_STARE_ABOUT;
+		npctalk "k-----", "", bc_self;
+		sleep2 500;
+		emotion ET_SCRATCH;
+		sleep2 500;
+		break;
+	}
+	npctalk "Lunch: - - · · 　· 　- - 　- - · 　- - · - 　· - · · 　　· - - · 　· · · · 　- · -", "", bc_self;
+	sleep2 500;
+	emotion ET_HUK;
+	sleep2 500;
+	npctalk "Lunch: Oh! Are you here?", "", bc_self;
+	setpcblock PCBLOCK_NPC, false;
+
+	if (.@i < .@size)	// quest ongoing
+		.@menu$ = "^777777Lunch will take care of you.^000000";
+	else
+		.@menu$ = .@waiting$ + "Lunch will bring you a meal.";
+
+	switch( select( .@menu$, "I want to make a transformation scroll..", "Chat with lunch" ) ) {
+	case 1:
+		if (.@i < .@size) {	// quest ongoing
+			npctalk "Lunch: requested " + getitemname(.@data[.@i+1]) + "Is it still there?", "", bc_self;
+			sleep2 500;
+			npctalk "Lunch: If you switch to energy saving mode, you can save a year, but some data may be lost..", "", bc_self;
+			sleep2 1000;
+			npctalk "Lunch: I don't really want to.", "", bc_self;
+			cutin "",255;
+			end;
+		}
+		if (.@playtime == 0 || .@playtime == 1) {
+			npctalk "Lunch: I've heard that other creatures eat 3 times a day...", "", bc_self;
+			sleep2 849;
+			npctalk "Lunch: Because I'm an efficient subject.", "", bc_self;
+			sleep2 967;
+			npctalk "Lunch: If you consume energy source once a day, that's enough. I'll take my heart.", "", bc_self;
+			cutin "",255;
+			end;
+		}
+		.@i = rand(.@size/2) * 2;
+		npctalk "Lunch: Now... " + getitemname(.@data[.@i+1]) + " I think the energy conversion efficiency is the best.", "", bc_self;
+		sleep2 1000;
+		npctalk "Lunch: And I think 10 is enough.", "", bc_self;
+		if (select( "I got it", "I have an urgent business." ) == 2) {
+			cutin "ep19_lunch03.png",2;
+			sleep2 500;
+			npctalk "Lunch: Oh! You seem busy.", "", bc_self;
+			sleep2 1000;
+			npctalk "Lunch: Then I'll figure out how to get my own energy source.", "", bc_self;
+			cutin "",255;
+			end;
+		}
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Lunch, I'll bring it to you.", bc_self;
+		setquest .@data[.@i];
+		sleep2 1000;
+		cutin "ep19_lunch02.png",2;
+		npctalk "Lunch: I'll wait then", "", bc_self;
+		sleep2 500;
+		cutin "",255;
+		end;
+	case 2:
+		cutin "ep19_lunch02.png",2;
+		npctalk "Lunch: hehe, I'll make it for you. How many do you need?", "", bc_self;
+		callshop "barter_Ep19_Rgan_Scroll";
+		sleep2 1000;
+		cutin "",255;
+		end;
+	case 3:
+		npctalk "Lunch: By the way, are you friendly with Irwins in the Ice Castle?", "", bc_self;
+		sleep2 1000;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : I'm from there, so maybe that's it?", bc_self;
+		sleep2 1000;
+		npctalk "Lunch: I'm envious. I want to get to know you because Awin is cute..", "", bc_self;
+		sleep2 1000;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : You just need to be friendly.", bc_self;
+		sleep2 1000;
+		npctalk "Lunch: Ice Castle has a lot of resources, so I tried a few times to move my residence there.", "", bc_self;
+		sleep2 1000;
+		cutin "ep19_lunch03.png",2;
+		sleep2 500;
+		emotion ET_CRY;
+		npctalk "Lunch: My waist is getting longer, so they mistook me for a Rgan and attacked", "", bc_self;
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Oh..", bc_self;
+		sleep2 500;
+		cutin "",255;
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep19_main > 12 && checkquest(5985,PLAYTIME) == -1 && queststatus_between(5986,5995) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(5985,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5986) == 1 && countitem(7158) > 9" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5987) == 1 && countitem(7162) > 9" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5988) == 1 && countitem(7299) > 9" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5989) == 1 && countitem(7266) > 9" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5990) == 1 && countitem(7762) > 9" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5991) == 1 && countitem(7171) > 9" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5992) == 1 && countitem(6405) > 9" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5993) == 1 && countitem(6498) > 9" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5994) == 1 && countitem(25285) > 9" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5995) == 1 && countitem(7150) > 9" );
+	end;
+}
+//
+
+
+
+// Daily quest : Finding an Underground Hideout
+// (part of the Main Quest: Step 16, 61)
+icecastle,27,126,0	script	#e19ms00	HIDDEN_WARP_NPC,3,5,{
+	end;
+OnTouch:
+	if (ep19_main == 13 || ep19_main == 51 || ep19_main == 100) {
+		cloakoffnpcself( "ep19_if19msdq" );
+		end;
+	}
+	end;
+}
+
+icecastle,27,126,3	script	Horr#if19msdq::ep19_if19msdq	4_EP19_IWIN,{
+	if (ep19_main < 13)
+		end;
+	if (ep19_main == 13) {
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "Human?? Why are humans...?";
+		emotion ET_QUESTION;
+		next;
+		cutin "ep19_iwin06.png",2;
+		mes "[Horr]";
+		mes "Ah!! You're an adventurer from beyond the barrier this time? Nice to meet you. Is this your first time in Isgard? It's your first time. Yeah, what's your name?";
+		emotion ET_SURPRISE;
+		next;
+		cutin "",255;
+		select( "Who are you...?" );
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "Hey, I didn't even introduce myself. I'm not such a rude person, but when I came back from a long reconnaissance, I got a little excited because there were strangers.";
+		next;
+		cutin "ep19_iwin06.png",2;
+		mes "[Horr]";
+		mes "^0000cd Horr^000000. There is an official name, but humans find it difficult to say? Just call me Horr.";
+		mes "By the way, where are you going? It's okay to go alone around here, but don't go too far. It's dangerous.";
+		next;
+		cutin "",255;
+		select( "I went to reconnaissance." );
+		cutin "ep19_iwin06.png",2;
+		mes "[Horr]";
+		mes "Reconnaissance? Ho... Do you think you're good enough? Then you're on your way to report?";
+		mes "I'm on the way too, so come with me. After I'm done eating, I'll be at <NAVI>[restaurant]<INFO>icas_in,34,189,0,101,0</INFO></NAVI>";
+		ep19_main = 14;
+		erasequest 5984;
+		setquest 17639;
+		close2;
+		cutin "",255;
+		cloakonnpcself();
+		end;
+	}
+	if (ep19_main == 51) {
+		cutin "ep19_iwin07.png",2;
+		mes "[Horr]";
+		mes "What is this? Why did you bring Rgan here??";
+		next;
+		cutin "",255;
+		select( "I need a place to lay down." );
+		cutin "ep19_iwin06.png",2;
+		mes "[Horr]";
+		mes "My <NAVI>[home]<INFO>icas_in,247,116,0,101,0</INFO></NAVI> is near here, so let's go there. There are some guests who have been invited, so let's go and listen." ;
+		erasequest 16661;
+		setquest 17640;
+		ep19_main = 52;
+		close2;
+		cutin "",255;
+		cloakonnpcself();
+		navigateto("icas_in",247,116);
+		end;
+	}
+	if (ep19_main != 100) {
+		cloakonnpcself();
+		end;
+	}
+
+	// daily
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "You cannot proceed with the conversation due to the large number of items you have.";
+		mes "Please clean up your items and try again.";
+		close;
+	}
+	switch( checkquest(17662,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		cutin "ep19_iwin06.png",2;
+		mes "[Horr]";
+		mes "Adventurer, have you rested for a while? But why are you here? If you're asking for a " + getitemname(1000842) + ", you don't have to worry. The battery is still a long way off. You'd better get some rest.";
+		close3;
+	case 2:
+		cutin "ep19_iwin06.png",2;
+		mes "[Horr]";
+		mes "Are you an adventurer? I want to replace the battery of the " + getitemname(1000842) + " before it runs out. Can you help me today?";
+		next;
+		if (select( "Okay.", "It just happened." ) == 2) {
+			mes "[Horr]";
+			mes "Is that so? You caught my busy man. Then go for a walk. Have a nice day!";
+			close3;
+		}
+		mes "[Horr]";
+		mes "Thanks for the help. Then bury this in the ^0000cd10 locations^000000 marked on ^0000cd Frozen Scale Plains and Glaciers^000000. Both are where the gangs used to enter and exit.";
+		erasequest 17662;
+		setquest 17651;
+		setquest 17652;
+		setquest 17653;
+		setquest 17654;
+		setquest 17655;
+		setquest 17656;
+		setquest 17657;
+		setquest 17658;
+		setquest 17659;
+		setquest 17660;
+		getitem 1000842,10;	// Ep19_HS_FEELER
+		close3;
+	}
+	if (isbegin_quest(17650) == 1) {	// Side quest : Surveillance for an Underground Hideout (2)
+		cutin "ep19_iwin06.png",2;
+		mes "[Horr]";
+		mes "Didn't we decide to search the snake den and find another entrance from the outside?";
+		next;
+		mes "[Horr]";
+		mes "We've already sent a watchdog inside the snake's den. We need to find the entrance to and from the outside...";
+		next;
+		mes "[Horr]";
+		mes "We found a few places on the surface of the snake's lair where we could dig the entrance, mainly on the weak ground.";
+		next;
+		cutin "",255;
+		select( "That's fast" );
+		cutin "ep19_iwin06.png",2;
+		mes "[Horr]";
+		mes "So we have to search there. Since there aren't one or two places, we don't have enough manpower, so we asked adventurers for help.";
+		next;
+		cutin "",255;
+		select( "Can I come back there once?" );
+		cutin "ep19_iwin06.png",2;
+		mes "[Horr]";
+		mes "No, you have to reside there ^0000cd^000000";
+		next;
+		cutin "",255;
+		sleep2 500;
+		emotion ET_HUK, playerattached();
+		select( "Yes???" );
+		cutin "ep19_iwin08.png",2;
+		mes "[Horr]";
+		mes "Do you mean when they know when they'll dig a new entrance and leave?";
+		cloakoffnpcself( "ep19_icecastle_25_126" );
+		cloakoffnpcself( "ep19_icecastle_29_125" );
+		next;
+		cutin "ep19_leizi01.png",0;
+		mes "[Lazy]";
+		mes "Adventurer!! You're here. I'm here to help because you're on a search mission!";
+		next;
+		cutin "ep19_juncea04.png",2;
+		mes "[Juncea]";
+		mes "You said you would stay in the presumed entrance and watch over it? In this cold?";
+		next;
+		cutin "ep19_iwin06.png",1;
+		mes "[Horr]";
+		mes "It's okay because we don't get cold.";
+		next;
+		cutin "ep19_juncea04.png",2;
+		mes "[Juncea]";
+		mes "Everyone who lives here has turned around. Isn't this cold?";
+		next;
+		cutin "ep19_leizi02.png",0;
+		mes "[Lazy]";
+		mes "Juncea-nim, what do you mean when a human is dressed so thinly?";
+		next;
+		cutin "ep19_juncea03.png",2;
+		mes "[Juncea]";
+		mes "Of course I made and installed a heating device.";
+		npctalk "Our Juncea, humans are so capable.", "ep19_icecastle_25_126", bc_self;
+		next;
+		cutin "ep19_juncea04.png",2;
+		mes "[Juncea]";
+		mes "You like that? Why did you wear it thick at the best and unravel the front?";
+		next;
+		cutin "ep19_leizi01.png",0;
+		mes "[Lazy]";
+		mes "Oh, this? I have a lot of heat in my body and I hate stuffiness.";
+		next;
+		cutin "ep19_leizi02.png",0;
+		mes "[Lazy]";
+		mes "Actually, it's okay not to wear something like this in this kind of weather, but I wore it out of fear that people watching would get cold.";
+		next;
+		cutin "ep19_leizi03.png",0;
+		mes "[Lazy]";
+		mes "I'm in this place in this weather, dressed as a tourist. Wouldn't it be colder for people watching?";
+		next;
+		select( "That would be a bit difficult." );
+		cutin "ep19_leizi01.png",0;
+		mes "[Lazy]";
+		mes "Isn't that right? I'm considering other people's eye temperature, so I wore it while putting up with stuffiness. I'm such a caring person.";
+		next;
+		cutin "ep19_juncea03.png",2;
+		mes "[Juncea]";
+		mes "Oh, ah. Okay, so don't say any more. Just listening to what you say makes you tired.";
+		next;
+		cutin "ep19_juncea01.png",2;
+		mes "[Juncea]";
+		mes "But I don't need you, so why the hell did you follow me? You're not running away. You can't break through that barrier anyway, so if you ran away, you'd be here. You don't have to monitor.";
+		next;
+		cutin "ep19_leizi01.png",0;
+		mes "[Lazy]";
+		mes "What are you talking about? Of course, you came out to see. Why did you, Juncea-nim, come here? I said I'd give it to you?";
+		next;
+		cutin "ep19_juncea03.png",2;
+		mes "[Juncea]";
+		mes "...to bask in the sun.";
+		next;
+		cutin "ep19_leizi02.png",0;
+		mes "[Lazy]";
+		mes "Oh, yes. Juncea, humans need some sunlight. How long have you been in that burrow?";
+		npctalk "Who can give him some sunlight?", "ep19_icecastle_25_126", bc_self;
+		next;
+		cutin "ep19_iwin06.png",1;
+		mes "[Horr]";
+		mes "But why is everyone here? Are you all here to help monitor?";
+		next;
+		cutin "ep19_leizi01.png",0;
+		mes "[Lazy]";
+		mes "Ah, yes. Here, this Juncea-nim human has made something useful to help with surveillance. To convey that. Now, from here on, let the experts explain.";
+		next;
+		mes "[Lazy]";
+		mes "All those people over there are ignorant of science, so please explain so that even a newborn born today can understand.";
+		npctalk "Actually, I was just born. Ae-", "ep19_icecastle_25_126", bc_self;
+		npctalk "...I really hate it", "ep19_icecastle_29_125", bc_self;
+		next;
+		cutin "ep19_juncea01.png",2;
+		mes "[Juncea]";
+		mes "Remember that I said that there was not much magic left in the den of rgans? It's a device that uses it the other way around.";
+		next;
+		mes "[Juncea]";
+		mes "It only detects the wavelength of magic that is unique to the Rgan, bury it nearby, wait, and when the Rgan appears near this device, it catches it and sends a signal to it.";
+		next;
+		mes "[Juncea]";
+		mes "You can know the coordinates of the buried place, so the people here who are waiting nearby will be able to respond quickly.";
+		next;
+		cutin "ep19_iwin06.png",1;
+		mes "[Horr]";
+		mes "If you bury this in a place where a ^0000cd Rgan would appear, would it be ^000000?";
+		next;
+		cutin "ep19_juncea01.png",2;
+		mes "[Juncea]";
+		mes "Yes. But there is a downside. It's very minor? The battery life is about a day.";
+		npctalk "It's a great skill to be able to withstand that much in this cold. Juncea, humans did it.", "ep19_icecastle_25_126", bc_self;
+		npctalk "......", "ep19_icecastle_29_125", bc_self;
+		next;
+		select( "I need to replace it with a new one every day." );
+		cutin "ep19_iwin06.png",1;
+		sleep2 500;
+		npctalk "Yes", "ep19_icecastle_29_125", bc_self;
+		mes "[Horr]";
+		mes "It's easy. It's better than standing around and monitoring 24/7. Thank you. Thanks to you, we can move our guards elsewhere.";
+		next;
+		select( "It looks like a clam." );
+		cutin "ep19_juncea01.png",2;
+		mes "[Juncea]";
+		mes "So the creatures around it wouldn't be interested? By the way, I didn't name it.";
+		next;
+		cutin "ep19_leizi01.png",0;
+		mes "[Lazy]";
+		mes "I came up with the name! ^0000cd " + getitemname(1000842) + "^000000! Isn't it really intuitive? I thought I'd made it so anyone would know right away.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Lazy shouldn't set up a naming place later.", bc_self;
+		npctalk "I agree.", "ep19_icecastle_29_125", bc_self;
+		npctalk "Heh! Juncea or human would have built something like HSF-001!!", "ep19_icecastle_25_126", bc_self;
+		next;
+		cutin "ep19_iwin06.png",1;
+		mes "[Horr]";
+		mes "Thank you very much for your help. The crew can share and bury them quickly. I'll ask for 10 ^0000cd from adventurers ^000000.";
+		next;
+		cutin "",255;
+		select("Okay." );
+		cutin "ep19_iwin06.png",1;
+		mes "[Horr]";
+		mes "Then, bury this in the places marked on ^0000cd Frozen Scale Plains and Glacier^000000. Both are places where the ragans often appear.";
+		next;
+		cutin "ep19_leizi01.png",0;
+		mes "[Lazy]";
+		mes "Goodbye!!";
+		completequest 17650;
+		setquest 17651;
+		setquest 17652;
+		setquest 17653;
+		setquest 17654;
+		setquest 17655;
+		setquest 17656;
+		setquest 17657;
+		setquest 17658;
+		setquest 17659;
+		setquest 17660;
+		getitem 1000842,10;	// Ep19_HS_FEELER
+		set_reputation_points(3, (get_reputation_points(3) + 5));
+		close3;
+	}
+	if (queststatus_between(17651,17660) != 0) {
+		if (countitem(1000842) < 1) {	// note: one by one only
+			cutin "ep19_iwin06.png",2;
+			mes "[Horr]";
+			mes "It seems that you haven't been able to bury all of your " + getitemname(1000842) + " in ^0000cd Frozen Scale Plains^000000 yet.";
+			next;
+			mes "[Horr]";
+			mes "Are you here because you need more " + getitemname(1000842) + "?";
+			next;
+			if (select( "No, that's fine.", "Give me one more." ) == 1) {
+				mes "[Horr]";
+				mes "Okay. Please take care.";
+				close3;
+			}
+			mes "[Horr]";
+			mes "Okay. I just got enough. Be careful not to lose it this time.";
+			getitem 1000842,1;	// Ep19_HS_FEELER
+			close3;
+		}
+		cutin "ep19_iwin06.png",2;
+		mes "[Horr]";
+		mes "It seems that you haven't been able to bury all of your " + getitemname(1000842) + " in ^0000cd Frozen Scale Plains^000000 yet.";
+		mes "Please do your best.";
+		close3;
+	}
+	if (isbegin_quest(17661) == 1) {
+		cutin "ep19_iwin06.png",2;
+		mes "[Horr]";
+		mes "Adventurer, I hope you are here. Did the work go smoothly? You've worked hard. Please take a break for today and try again tomorrow.";
+		erasequest 17661;
+		setquest 17662;
+		set_reputation_points(3, (get_reputation_points(3) + 5));
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		if (get_reputation_points(3) >= 3000)
+			getitem 1000608,1;	// Ep19_Snow_Flower
+		getexp2 52243795,0;
+		getexp 0,3000000;
+		close3;
+	}
+	// (shouldn't happen)
+	end;
+
+OnInit:
+	cloakonnpc();
+
+	// (main quest)
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5984) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(16661) == 1" );
+
+	// (daily quest)
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(17650) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17661) == 1" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(17650) == 2 && queststatus_between(17651,17661) == 0 && checkquest(17662,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(17662,PLAYTIME) == 2" );
+	end;
+}
+
+icecastle,25,126,5	script	Lazy#if19msdq::ep19_icecastle_25_126	4_EP19_LAZY,{
+	npctalk "Have you looked around here?", "", bc_self;
+	end;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+icecastle,29,125,3	script	Juncea#if19msdq::ep19_icecastle_29_125	4_EP19_JUNCEA,{
+	npctalk "It's cold, but the air is fresh and clean.", "", bc_self;
+	end;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+jor_back2,222,123,7	script	Where indicated#e19ms01::ep19_jor_back2_222_123	4_POINT_WHITE,{
+	if (isbegin_quest(17661) == 1) {
+		mes "[" + strcharinfo(0) + "]";
+		mes "<NAVI>[Horr]<INFO>icecastle,27,126,0,101,0</INFO></Let's go back to Mr. NAVI> and report that the antennae are all buried.";
+		close;
+	}
+	.@num = atoi( replacestr(strnpcinfo(2), "e19ms", "") );
+	.@quest_id = 17650 + .@num;
+
+	if (isbegin_quest(.@quest_id) == 1) {
+		if (countitem(1000842) < 1) {
+			unittalk getcharid(3), "" + strcharinfo(0) + " : Huh? Where did the " + getitemname(1000842) + " go? I'll have to get it back from Mr. Hor.", bc_self;
+			end;
+		}
+		mes "[" + strcharinfo(0) + "]";
+		mes "Are you here? Can I bury the green onion here?";
+		next;
+		progressbar_npc "FFFF00",1;
+		if (rand(100) < 50) {
+			mes "[" + strcharinfo(0) + "]";
+			mes "It doesn't dig as well as I thought. Let's try again.";
+			close;
+		}
+		mes "[" + strcharinfo(0) + "]";
+		mes "You can ask me about this!";
+		if (countitem(1000842) < 1)	// shouldn't happen
+			close;
+		delitem 1000842,1;	// Ep19_HS_FEELER
+		erasequest .@quest_id;
+		questinfo_refresh();
+		if (queststatus_between(17651,17660) != 0) {
+			mes "Now I have to go bury it somewhere else.";
+			close;
+		}
+		mes "Now I can go back to <NAVI>[Horre]<INFO>icecastle,27,126,0,101,0</INFO></NAVI> and report.";
+		setquest 17661;
+		close;
+	}
+	unittalk getcharid(3), "" + strcharinfo(0) + " : A land of white snow and ice.", bc_self;
+	end;
+
+OnInit:
+	.@num = atoi( replacestr(strnpcinfo(2), "e19ms", "") );
+	.@quest_id = 17650 + .@num;
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(" + .@quest_id + ") == 1" );
+	end;
+}
+jor_back2,49,175,7	duplicate(ep19_jor_back2_222_123)	Where indicated#e19ms02	4_POINT_WHITE
+jor_back2,308,99,7	duplicate(ep19_jor_back2_222_123)	Where indicated#e19ms03	4_POINT_WHITE
+jor_back2,113,235,7	duplicate(ep19_jor_back2_222_123)	Where indicated#e19ms04	4_POINT_WHITE
+jor_back2,279,307,7	duplicate(ep19_jor_back2_222_123)	Where indicated#e19ms05	4_POINT_WHITE
+jor_back3,152,359,7	duplicate(ep19_jor_back2_222_123)	Where indicated#e19ms06	4_POINT_WHITE
+jor_back3,328,277,7	duplicate(ep19_jor_back2_222_123)	Where indicated#e19ms07	4_POINT_WHITE
+jor_back3,128,138,7	duplicate(ep19_jor_back2_222_123)	Where indicated#e19ms08	4_POINT_WHITE
+jor_back3,264,133,7	duplicate(ep19_jor_back2_222_123)	Where indicated#e19ms09	4_POINT_WHITE
+jor_back3,46,324,7	duplicate(ep19_jor_back2_222_123)	Where indicated#e19ms10	4_POINT_WHITE
+//
+
+
+// Daily quest : Secret Fun
+icas_in,33,53,8	script	Private Holly#in_iwp	EP19_NPC_IWIN,{
+	if (ep19_main < 11) {
+		setpcblock PCBLOCK_NPC, true;
+		cutin "ep19_iwin05.png",2;
+		sleep2 500;
+		setpcblock PCBLOCK_NPC, false;
+		npctalk "z Z zz Z..", "", bc_self;
+		mes "An Iwin is dozing on his bed.";
+		close3;
+	}
+	if (isbegin_quest(5980) == 0) {
+		mes "One Iwin is bustling alone in the patrol barracks where most of Iwin sleeps. What's going on?";
+		next;
+		select( "Let's talk." );
+		cutin "ep19_iwin08.png",2;
+		emotion ET_BLABLA;
+		npctalk "Private Holly: Private Holly!", "", bc_self;
+		sleep2 1000;
+		cutin "ep19_iwin09.png",2;
+		mes "[Private Holly]";
+		mes "Oh! What is it, you're not Senior Iwin. A.. Kim Sae..";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "What's going on?";
+		next;
+		cutin "ep19_iwin07.png",2;
+		emotion ET_FRET;
+		mes "[Private Holly]";
+		mes "Have we seen each other? Why are you talking nonsense all of a sudden?";
+		next;
+		emotion ET_THINK;
+		sleep2 500;
+		emotion ET_THINK, playerattached();
+		sleep2 1000;
+		cutin "ep19_iwin10.png",2;
+		mes "[Private Holly]";
+		mes "Hahaha I'm joking not to be scared. It's a test to see if there's a distribution.";
+		next;
+		mes "[Private Holly]";
+		mes "I'll explain the situation a bit. Adventurers will know if they look around here, but it's all ice.";
+		next;
+		cutin "ep19_iwin05.png",2;
+		sleep2 500;
+		emotion ET_OTL;
+		mes "[Private Holly]";
+		mes "Everywhere I look, it's all ice! It's cold! It's too cold even if it's cold!!";
+		next;
+		cutin "ep19_iwin10.png",2;
+		mes "[Private Holly]";
+		mes "At the same time, I heard rumors of adventurers coming from outside..";
+		next;
+		cutin "ep19_iwin04.png",2;
+		mes "[Private Holly]";
+		mes "Before that, adventurer friend, I want to ask you one thing.. Is it outside the world with a lot of warm feathers?";
+		next;
+		emotion ET_QUESTION, playerattached();
+		mes "[" + strcharinfo(0) + "]";
+		mes "Yes warm three.. yes?! Feathers?";
+		next;
+		emotion ET_QUESTION;
+		sleep2 500;
+		cutin "ep19_iwin09.png",2;
+		mes "[Private Holly]";
+		mes "Why are you surprised? Of course";
+		mes "Isn't [ warm = feather ] official?";
+		next;
+		mes "[Private Holly]";
+		mes "Anyway! Adventurer friends seem to be able to roam freely outside, so get some feathers outside.";
+		next;
+		cutin "ep19_iwin11.png",2;
+		mes "[Private Holly]";
+		mes "If you bring 10 of the same type, we will give you an appropriate reward based on the feather condition.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Why 10?";
+		next;
+		mes "[Private Holly]";
+		mes "Because that's secretly changing supplies. That's right. First of all, I have to change mine first and then the new recruits one by one.";
+		next;
+		mes "[Private Holly]";
+		mes "How are you? Can you help me?";
+		next;
+		if (select( "That's about it.", "I'm busy.." ) == 2) {
+			setquest 5980;
+			completequest 5980;
+			emotion ET_HNG;
+			mes "[Private Holly]";
+			mes "If you're busy, there's nothing you can do about it. Ask for time later, because we'll be cold all this time.";
+			close3;
+		}
+		setquest 5980;
+		completequest 5980;
+		emotion ET_HNG;
+		mes "[Private Holly]";
+		mes "If you're busy, there's nothing you can do about it. Ask for time later, because we'll be cold all this time.";
+		close3;
+	}
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "- You cannot proceed because you have too many items. -";
+		close;
+	}
+	switch( checkquest(5981,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		cutin "ep19_iwin08.png",2;
+		mes "[Private Holly]";
+		mes "Shhh! Is there any rumor in the neighborhood that you are secretly exchanging supplies for something else? I'll come to you secretly tomorrow.";
+		close3;
+	case 2:
+		erasequest 5981;
+		emotion ET_SPARK;
+		npctalk "Private Horiryu: Shh! You know you have to be secretive, right?", "", bc_self;
+		break;
+	}
+	switch( isbegin_quest(5982) ) {
+	case 0:
+		cutin "ep19_iwin10.png",2;
+		mes "[Private Holly]";
+		mes "Could you secretly bring me the feather?";
+		next;
+		if (select( "I'll get it", "I'm busy" ) == 2) {
+			mes "[Private Holly]";
+			mes "If you're busy, there's nothing you can do about it. Ask for time later, because we'll be cold all this time.";
+			close3;
+		}
+		cutin "ep19_iwin09.png",2;
+		setquest 5982;
+		mes "[Private Holly]";
+		mes "Secretly... you know?";
+		close3;
+	case 1:
+		cutin "ep19_iwin10.png",2;
+		mes "[Private Holly]";
+		mes "Hey did you bring your adventurer friend feathers?";
+		next;
+		if (select( "fetched", "yet.." ) == 2) {
+			mes "[Private Holly]";
+			mes "Okay! Any feather is fine, so 10 of the same type, please. I'll wait for you!";
+			close3;
+		}
+		cutin "ep19_iwin11.png",2;
+		mes "[Private Holly]";
+		mes "I'll take a look at your bag for a moment.";
+
+		while(1) {
+			next;
+			cutin "ep19_iwin11.png",2;
+			// note: the order may be wrong
+			// Round_Feather, Soft_Feather, BurningFeather, Feather_Of_Birds, Red_Feather,
+			// Cendrawasih_F, Peco_Wing_Feather, Blue_Feather, Harpy's_Feather
+			callsub( S_Item, 6393,	45713321, 2500000, "Hmm... this feather? It has a similar feel to our Iwin's.. Do these guys even live in forest grass? Warm In terms of grade, it's intermediate." );
+			callsub( S_Item, 7063,	45713321, 2500000, "Hmm.. this feather? It's a vague feather. It's soft, but a warm grade would be intermediate." ) ;
+			callsub( S_Item, 6691,	52243795, 3000000, "Oh.. this feather? It's warm just looking at it. If I'm not lucky, I risk burning my feathers. . If it's warm, it's superior." );
+			callsub( S_Item, 916,	39182846, 2000000, "What? This crude feather is not much different from the feathers in the supply supplies, a warm grade would give you a lot of lower grades." ) ;
+			callsub( S_Item, 7440,	52243795, 3000000, "Hmm... this feather? It's like a feather from this gentle magician quite dangerous? " );
+			callsub( S_Item, 6405,	39182846, 2000000, "Hmm.. is this feather? Is it the tail feather of a guy that lives in a damp place? It's gorgeous and coveted, but... warm grade. It's inferior." );
+			callsub( S_Item, 7101,	45713321, 2500000, "Hmm.. is this feather? Is this a feather from some of those who live in the desert? It's about intermediate in warm grades." );
+			callsub( S_Item, 7441,	52243795, 3000000, "Hmm.. is this feather? It's like a feather from this gentle magician quite dangerous? " );
+			callsub( S_Item, 7115,	45713321, 2500000, "Hmm.. is this feather? Is this feather from a guy living in a dry area? It's intermediate in warm grades." ) ;
+			cutin "ep19_iwin10.png",2;
+			mes "[Private Holly]";
+			mes "It looks like there are no feathers in the bag. Shall we take a look?";
+			next;
+			if (select( "Check again", "Stop" ) == 2) {
+				mes "[Private Holly]";
+				mes "Okay! Any feather is fine, so 10 of the same type, please. I'll wait for you!";
+				close3;
+			}
+		}
+	}
+	end;
+
+// give the reward according to the feather found (if the player accept)
+
+S_Item:
+	.@item_id = getarg(0);
+	.@baseexp = getarg(1);
+	.@jobexp = getarg(2);
+	.@string$ = getarg(3);
+
+	if (countitem(.@item_id) < 10)
+		return;
+
+	mes "[Private Holly]";
+	mes .@string$;
+	next;
+	mes "[Private Holly]";
+	mes "Can you give me this <ITEM>[" + getitemname(.@item_id) + "]<INFO>" + .@item_id + "</INFO></ITEM>?";
+	next;
+	if (select( "I will", "I brought another feather" ) == 1) {
+		erasequest 5982;
+		setquest 5981;
+		delitem .@item_id,10;
+		set_reputation_points(3, (get_reputation_points(3) + 5));
+		if (get_reputation_points(3) >= 3000)
+			getitem 1000608,1;	// Ep19_Snow_Flower
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		getexp2 .@baseexp,0;
+		getexp 0,.@jobexp;
+		mes "[Private Holly]";
+		mes "The <ITEM>[" + getitemname(.@item_id) + "]<INFO>" + .@item_id + "</INFO></ITEM> that I just received has this amount of compensation. No negotiation. So don't vomit.";
+		next;
+		cutin "ep19_iwin10.png",2;
+		mes "[Private Holly]";
+		mes "Okay! The <ITEM>[" + getitemname(.@item_id) + "]<INFO>" + .@item_id + "</INFO></ITEM> that you brought today I trade for my suppliesI'll let it go, so ask again tomorrow.";
+		close3;
+	}
+	mes "[Private Holly]";
+	mes "Another feather..";
+	next;
+	return;
+
+OnInit:
+	setunittitle( getnpcid(0), "<Eagle Patrol>" );
+
+	questinfo( QTYPE_QUEST, QMARK_NONE, "ep19_main >= 11 && isbegin_quest(5980) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(5980) == 2 && isbegin_quest(5982) == 0 && checkquest(5981,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(5981,PLAYTIME) == 2" );
+
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(5982) == 1 && countitem(6393) >= 10" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(5982) == 1 && countitem(7063) >= 10" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(5982) == 1 && countitem(6691) >= 10" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(5982) == 1 && countitem(916) >= 10" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(5982) == 1 && countitem(7440) >= 10" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(5982) == 1 && countitem(6405) >= 10" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(5982) == 1 && countitem(7101) >= 10" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(5982) == 1 && countitem(7441) >= 10" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(5982) == 1 && countitem(7115) >= 10" );
+	end;
+}
+//
+
+
+// Daily quest : Procurement of Research Materials for Vellgunde
+icas_in,185,63,3	script	Vellgunde#ep19vell02	4_EP19_VELLGUNDE,{
+	if (ep19_main < 11) {
+		cutin "ep19_vellgunde01.png",2;
+		mes "[Vellgunde]";
+		mes "Are you the adventurer who came over from the continent this time?";
+		mes "I? I'm Vellgunde Geoborg. I'm researching the magic of Jormungand here.";
+		close3;
+	}
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "You can't proceed with the quest because you have too many items.";
+		mes "Please clean up your items and try again.";
+		close;
+	}
+	.@playtime = checkquest(18131,PLAYTIME);
+	if (.@playtime == 2) {
+		erasequest 18131;
+		.@playtime = -1;
+	}
+
+	if (isbegin_quest(18130) == 1 && countitem(1000706) >= 3) {
+		cutin "ep19_vellgunde01.png",2;
+		mes "[Vellgunde]";
+		mes "What's going on?";
+		mes "Oh, you brought a " + getitemname(1000706) + "!";
+		mes "Thank you every time";
+		mes "It's definitely comfortable because people get better.";
+		next;
+		cutin "ep19_vellgunde03.png",2;
+		mes "[Vellgunde]";
+		mes "I'll give you a " + getitemname(1000608) + " instead.";
+		mes "You will need it to strengthen your weapons or armor.";
+		delitem 1000706,3;	// Ep19_Purified_Core
+		erasequest 18130;
+		setquest 18131;
+		.@playtime = 1;
+		set_reputation_points(3, (get_reputation_points(3) + 5));
+		if (get_reputation_points(3) >= 3000)
+			.@bonus = 1;
+		getitem 1000608,2+.@bonus;	// Ep19_Snow_Flower
+		getexp2 52243795,0;
+		getexp 0,3000000;
+		next;
+	}
+	cutin "ep19_vellgunde01.png",2;
+	mes "[Vellgunde]";
+	mes "What's your business?";
+	mes "Usually, I'm researching the magic of Jormungand and Rgan.";
+	mes "If we can help each other, let's help each other.";
+	next;
+	switch( select( "Procurement of Vellgunde's research materials", "Ice Fire Mana Exchange", "Ice Fire Mana Extraction", "Snow Armor, Glacier Enchant" ) ) {
+	case 1:
+		switch( .@playtime ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			cutin "ep19_vellgunde02.png",2;
+			mes "[Vellgunde]";
+			mes "Huh? No, it's okay.";
+			mes "I still have enough of the magic core you brought me.";
+			mes "I'll ask for it later if I need it again.";
+			close3;
+		case 2:
+			end;
+		}
+		switch( isbegin_quest(18130) ) {
+		case 0:
+			cutin "ep19_vellgunde01.png",2;
+			mes "[Vellgunde]";
+			mes "What I need is to purify the Magic Core of Rgan.";
+			mes "If you kill the rgans, you will be able to get the rgans' low-grade magic core.";
+			next;
+			mes "[Vellgunde]";
+			mes "Is that also the crystallization of Jormungand's remaining magical power?";
+			mes "If you purify it well, you can use it like a " + getitemname(1000608) + ".";
+			next;
+			cutin "ep19_vellgunde02.png",2;
+			mes "[Vellgunde]";
+			mes "Of course, it will be less efficient and will only be used as firewood.";
+			mes "I need it because I'm researching the magical composition of Rgan and Jormungand.";
+			next;
+			mes "[Vellgunde]";
+			mes "Something like ^4d4dff Friederike^000000, who has gathered enough low-level magical cores, he came from the cathedral.";
+			mes "He doesn't know how to purify, will you take it and bring it to me?";
+			mes "3^4d4dff^000000 would suffice.";
+			next;
+			if (select( "I will", "Next time" ) == 2) {
+				cutin "ep19_vellgunde01.png",2;
+				mes "[Vellgunde]";
+				mes "It's ok. You don't have to worry about it.";
+				mes "Because I can do Lehar.";
+				close3;
+			}
+			cutin "ep19_vellgunde01.png",2;
+			mes "[Vellgunde]";
+			mes "Then I'll look forward to it.";
+			setquest 18130;
+			close3;
+		case 1:
+			cutin "ep19_vellgunde01.png",2;
+			mes "[Vellgunde]";
+			mes "Something like ^4d4dff Friederike^000000, who has gathered enough low-level magical cores, he came from the cathedral.";
+			mes "He doesn't know how to purify, will you take it and bring it to me?";
+			mes "3^4d4dff^000000 is enough.";
+			next;
+			cutin "ep19_vellgunde02.png",2;
+			mes "[Vellgunde]";
+			mes "Lgan's low-grade magic core can be obtained by defeating " + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + " or low-grade rgans.";
+			close3;
+		case 2:
+			end;
+		}
+		end;
+	case 2:
+		cutin "ep19_vellgunde01.png",2;
+		mes "[Vellgunde]";
+		mes "You need an Ice Fire Manastone?";
+		mes "It can be made from " + getitemname(1000608) + "...";
+		mes "Because this is a bit of luck.";
+		next;
+		mes "[Vellgunde]";
+		mes "If you can afford some bad luck, I can make it for you.";
+		mes "^4d4dff 35 " + getitemname(1000608) + "^000000 must be ground and compressed.";
+		while(1) {
+			next;
+			if (select( "Extract the Ice Fire Gem", "Don't do it." ) == 2) {
+				cutin "ep19_vellgunde02.png",2;
+				mes "[Vellgunde]";
+				mes "I'll come to you later if you need anything.";
+				close3;
+			}
+			if (countitem(1000608) < 35) {
+				mes "[Vellgunde]";
+				mes "To make an Ice Flower Manastone, you need ^4d4dff35 " + getitemname(1000608) + "^000000.";
+				mes "Is that a magical crystal?";
+				mes "That's why it's used as fuel here and there.";
+				next;
+				mes "[Vellgunde]";
+				mes "It also acts as a currency among Iwin, so please do the work of the Irwins around you.";
+				mes "Maybe you can get petals.";
+				close3;
+			}
+			delitem 1000608,35;	// Ep19_Snow_Flower
+			getgroupitem(IG_ICE_F_STONE_BOX2);
+			mes "[Vellgunde]";
+			mes "Now, here are the results of the Manastone.";
+			mes "Are you as good as you need to be?";
+			specialeffect2 EF_SPHERE;
+			next;
+			mes "[Vellgunde]";
+			mes "Are you going to extract more gemstones?";
+		}
+		end;
+	case 3:
+		cutin "ep19_vellgunde01.png",2;
+		mes "[Vellgunde]";
+		mes "I want to extract the magic of ice...?";
+		mes "Did you bring all the ingredients?";
+		mes "Let's try putting something into the extractor here.";
+		close2;
+		cutin "",255;
+		laphine_synthesis("Ice_F_Stone_Box2");
+		end;
+	case 4:
+		cutin "ep19_vellgunde01.png",2;
+		mes "[Vellgunde]";
+		mes "I mean. When I started researching the magical powers of Rgan and Jormungand, I didn't know they could even touch a weapon like this.";
+		mes "Anyway, you're helping a lot here, so should I help you too?";
+		next;
+		mes "[Vellgunde]";
+		mes "So what kind of equipment would you like to enchant?";
+		next;
+		switch( select( "Snow Flower Armor/Robe", "Snow Flower Cloak/Muffler", "Snow Flower Boots/Shoes", "Snow Flower Pendant/Necklace", "Snow Flower Ring/Earring", "Glacier Weapon" ) ) {
+		case 1:
+			mes "[Vellgunde]";
+			mes "Good good.";
+			mes "It's a piece of armor I put a lot of effort into.";
+			mes "Let's do something.";
+			close2;
+			cutin "",255;
+			item_enchant(26);
+			end;
+		case 2:
+			mes "[Vellgunde]";
+			mes "Good good.";
+			mes "It's something I put my heart and soul into.";
+			mes "Let's put something on it.";
+			close2;
+			cutin "",255;
+			item_enchant(27);
+			end;
+		case 3:
+			mes "[Vellgunde]";
+			mes "Aha, shoes?";
+			mes "Certainly, shoes are important in a place like this.";
+			mes "Come on, what do you want?";
+			close2;
+			cutin "",255;
+			item_enchant(28);
+			end;
+		case 4:
+			mes "[Vellgunde]";
+			mes "Actually, ornaments are the best for any enchantment.";
+			mes "Jewels are friendly with magic.";
+			close2;
+			cutin "",255;
+			item_enchant(29);
+			end;
+		case 5:
+			mes "[Vellgunde]";
+			mes "Actually, ornaments are the best for any enchantment.";
+			mes "Jewels are friendly with magic.";
+			close2;
+			cutin "",255;
+			item_enchant(30);
+			end;
+		case 6:
+			mes "[Vellgunde]";
+			mes "Anything Glacier's weapon will stick.";
+			mes "So whatever.";
+			close2;
+			cutin "",255;
+			item_enchant(31);
+			end;
+		}
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(18130) == 1 && countitem(1000706) >= 3" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(18131,PLAYTIME) == -1 && isbegin_quest(18130) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(18131,PLAYTIME) == 2" );
+	end;
+}
+//
+
+
+// Daily quest - Help Moryara Fish
+// (Kill 20x Shining Seaweed)
+jor_tail,48,241,3	script	Moryara#0kb20	4_EP19_MORYARA,{
+	if (ep19_main < 11) {
+		mes "[Moryara]";
+		mes "I heard that humans are coming...";
+		mes "Do you have permission to go out? It is dangerous to act alone without permission.";
+		mes "Go back to our nest.";
+		close;
+	}
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "- You cannot proceed with the quest because you have many items. -";
+		close;
+	}
+	switch( checkquest(8785,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[Moryara]";
+		mes "I have enough seaweed for today.";
+		mes "Kids will love it.";
+		close;
+	case 2:
+		erasequest 8785;
+		break;
+	}
+	switch( isbegin_quest(8784) ) {
+	case 0:	// first time
+	case 1:
+		switch( checkquest(8784,HUNTING) ) {
+		case -1:
+			mes "[Moryara]";
+			mes "...";
+			mes "shh.";
+			mes "Run away. Prey.";
+			next;
+			mes "Iwin, who was fishing, said quietly, without turning his head as he approached.";
+			next;
+			mes "[Moryara]";
+			mes "Human, no matter how small you are, you are bigger than a fish, so please walk gently around here.";
+			mes "Moryara is fishing now.";
+			next;
+			select( "Is such a small fish worth eating?", "Are you good at fishing?" );
+			mes "[Moryara]";
+			mes "It is important to prepare several kinds of fish, even if not every time.";
+			mes "If only the table could be more colorful.";
+			mes "Human, are you good at fishing?";
+			next;
+			select("I've done it", "I've done it before", "a little" );
+			mes "[" + strcharinfo(0) + "]";
+			mes "Sometimes as an adventurer, there are things to do.";
+			next;
+			mes "[Moryara]";
+			mes "Hey...";
+			mes "Then you must have done the bait. Can you help me with this for a moment?";
+			next;
+			mes "Iwin then turned around and pointed to his side.";
+			next;
+			mes "[Moryara]";
+			mes "Now, put the bait on this side of the fishing rod that has not been installed here...";
+			next;
+			mes "[Moryara]";
+			mes "Like this...";
+			mes "Like that...";
+			next;
+			mes "[Moryara]";
+			mes "...";
+			next;
+			mes "It's more fun than I thought.";
+			mes "It's the perfect place to clear your mind while looking at the cold sea.";
+			next;
+			mes "[Moryara]";
+			mes "...!";
+			next;
+			mes "The fisherman Iwin moved a large body with agility and pulled a fishing rod.";
+			next;
+			mes "[Moryara]";
+			mes "Heh... I caught a big one today.";
+			mes "Thanks to the human beings who helped me.";
+			mes "Why don't humans try fishing once?";
+			next;
+			select("Only once" );
+			mes "[Moryara]";
+			mes "Then let me lend you this fishing rod. Just put the bait back on and throw it.";
+			next;
+			mes "I took the bait as Iwin said, and cast the fishing line back into the sea.";
+			next;
+			mes "I took the bait as Iwin said, and cast the fishing line back into the sea.";
+			mes "...";
+			next;
+			mes "I took the bait as Iwin said, and cast the fishing line back into the sea.";
+			mes "...";
+			mes "......";
+			next;
+			mes "I took the bait as Iwin said, and cast the fishing line back into the sea.";
+			mes "...";
+			mes "......";
+			mes ".........";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "!";
+			next;
+			mes "[Moryara]";
+			mes "Oh! This is... seaweed.";
+			mes "It must be delicious. You have a real talent.";
+			next;
+			mes "[Moryara]";
+			mes "It would be a great help to our food stockpile!";
+			mes "I know you're busy, but would you like to lend me a little more?";
+			next;
+			select("I don't think I'm good at fishing" );
+			mes "[" + strcharinfo(0) + "]";
+			mes "...I think I'm better at hunting than fishing.";
+			next;
+			mes "[Moryara]";
+			mes "Oh! That's right, just catching from the water isn't enough. As expected, the warriors of white-fighting have a different mindset.";
+			mes "Then near here...";
+			mes "The " + getmonsterinfo("EP19_SHINING_SEAWEED", MOB_NAME) + " is growing wild. Can you bring me only 20?";
+			next;
+			if (select( "I accept.", "I'm busy." ) == 2) {
+				mes "[Moryara]";
+				mes "I can't help being busy.";
+				mes "Ah... no one is born with a talent for catching seaweed...";
+				close;
+			}
+			mes "[Moryara]";
+			mes "Thank you so much!";
+			mes "They sound cute, but they don't do cute things. Be careful.";
+			setquest 8784;
+			close;
+		case 0:
+		case 1:
+			mes "[Moryara]";
+			mes "native to this neighborhood";
+			mes "Subdue 20 ^0000FF " + getmonsterinfo("EP19_SHINING_SEAWEED", MOB_NAME) + "^000000.";
+			close;
+		case 2:
+			mes "[Moryara]";
+			mes "Oh, the humans are back.";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "..." + strcharinfo(0) + ".";
+			mes "Call me by name.";
+			next;
+			mes "[Moryara]";
+			mes "Ooooh, " + strcharinfo(0) + "!";
+			mes "Isn't that a cool name?";
+			mes "You can call me Moryara, but in a pronunciation that is easier for a human to call, Asha Scarlett Baby.It's called Lacia Cassia Carena Eva Aloha.";
+			mes "Call me comfortably.";
+			next;
+			mes "[Moryara]";
+			mes "You caught a " + getmonsterinfo("EP19_SHINING_SEAWEED", MOB_NAME) + "?";
+			mes "Thank you for this. As you can see, I only catch fish. The children in the nest will love it.";
+			mes "If you have time, how about fishing again tomorrow?";
+			completequest 8784;
+			setquest 8785;
+			set_reputation_points(3, (get_reputation_points(3) + 5));
+			if (get_reputation_points(3) >= 3000)
+				getitem 1000608,1;	// Ep19_Snow_Flower
+			getitem 1000608,2;	// Ep19_Snow_Flower
+			getexp2 9280800,6821600;
+			close;
+		}
+		end;
+	case 2:	// daily
+		break;
+	}
+	switch( checkquest(8786,HUNTING) ) {
+	case -1:
+		mes "[Moryara]";
+		mes "Are you here again, " + strcharinfo(0) + "?";
+		mes "How is fishing today?";
+		mes "...don't like it?";
+		mes "Then, if you have time, would you please bring me only 20 " + getmonsterinfo("EP19_SHINING_SEAWEED", MOB_NAME) + " that grow wild around this area?";
+		next;
+		if (select( "I accept.", "I'm busy." ) == 2) {
+			mes "[Moryara]";
+			mes "I can't help being busy.";
+			mes "Even fishing...";
+			mes "No. No.";
+			close;
+		}
+		mes "[Moryara]";
+		mes "Thank you so much!";
+		mes "They sound cute, but they don't do cute things. Be careful.";
+		setquest 8786;
+		close;
+	case 0:
+	case 1:
+		mes "[Moryara]";
+		mes "Native to this neighborhood";
+		mes "Subdue 20 ^0000FF" + getmonsterinfo("EP19_SHINING_SEAWEED", MOB_NAME) + "^000000.";
+		close;
+	case 2:
+		mes "[Moryara]";
+		mes "Oh, " + strcharinfo(0) + "! You're back.";
+		next;
+		mes "[Moryara]";
+		mes "You caught a " + getmonsterinfo("EP19_SHINING_SEAWEED", MOB_NAME) + "?";
+		mes "Thank you for this. As you can see, I only catch fish. The children in the nest will love it.";
+		mes "If there is time, tomorrow is fishing...";
+		erasequest 8786;
+		setquest 8785;
+		set_reputation_points(3, (get_reputation_points(3) + 5));
+		if (get_reputation_points(3) >= 3000)
+			getitem 1000608,1;	// Ep19_Snow_Flower
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		getexp 9280800,6821600;	// (affected by drop modifier)
+		next;
+		mes "[Moryara]";
+		mes "Let's think about it tomorrow!";
+		close;
+	}
+	end;
+
+OnInit:
+	// first time
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep19_main >= 11 && isbegin_quest(8784) == 0 && checkquest(8785,PLAYTIME) == -1" );	// note: !
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(8784,HUNTING) == 2" );
+
+	// daily
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8784) == 2 && isbegin_quest(8786) == 0 && checkquest(8785,PLAYTIME) == -1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(8786,HUNTING) == 2" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8785,PLAYTIME) == 2" );
+	end;
+}
+//
+
+
+// Daily quest : For Safe Work
+// (Kill 20x Limacina and 20x Calmaring)
+jor_nest,257,26,5	script	Hana the Sara Gand#ep19r	EP19_RGAN_D,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[Hana the Sara Gand]";
+		mes "Kyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!! Workplace!! Not here!!!";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	if (ep19_main < 21) {
+		mes "[Hana the Sara Gand]";
+		mes "Did Yogurmansa live...";
+		mes "I inherited that dasara...";
+		mes "Uh...?";
+		close;
+	}
+	if (checkweight(1000608,2) == 0) {	// Ep19_Snow_Flower
+		mes "You can't proceed with the quest because you have too many items.";
+		mes "Please clean up your items and try again.";
+		close;
+	}
+	switch( checkquest(18144,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[Hana the Sara Gand]";
+		mes "I'm going to go digging for ice. I'm going.";
+		mes "Safe? Is it safe, Priest?";
+		mes "I'm going to dig ice.";
+		close;
+	case 2:
+		erasequest 18144;
+		break;
+	}
+	switch( checkquest(18143,HUNTING) ) {
+	case -1:
+		mes "[Hana the Sara Gand]";
+		mes "Priest, Priest";
+		mes "Call for help.. Urgent. Help me.";
+		mes "It's too scary";
+		next;
+		if (select( "What's going on?", "Find another priest." ) == 2) {
+			mes "[Hana the Sara Gand]";
+			mes "I understand";
+			mes "Another priest. Another priest...";
+			close;
+		}
+		mes "[Hana the Sara Gand]";
+		mes "" + getmonsterinfo("EP19_LIMACINA", MOB_NAME) + " in front of the cave entrance is scary.";
+		mes "Save me, Priest.";
+		mes "" + getmonsterinfo("EP19_CALMARING", MOB_NAME) + " is also scary. Priest.";
+		next;
+		mes "[Hana the Sara Gand]";
+		mes "Help the poor worker dig the ice.";
+		mes "Scary " + getmonsterinfo("EP19_LIMACINA", MOB_NAME) + " and " + getmonsterinfo("EP19_CALMARING", MOB_NAME) + ". Please put it away.";
+		next;
+		select( "You want me to get rid of the monsters outside the cave?" );
+		mes "[Hana the Sara Gand]";
+		mes "That's right. That's right.";
+		mes "Ice digging killed one. Two died.";
+		mes "Hana the Sara wants to dig ice.";
+		mes "Help me, Priest.";
+		next;
+		if (select( "Okay.", "Find another priest." ) == 2) {
+			mes "[Hana the Sara Gand]";
+			mes "I understand";
+			mes "Another priest. Another priest...";
+			close;
+		}
+		mes "[Hana the Sara Gand]";
+		mes "Then clear the cave and tell me.";
+		mes "Please. I need to go digging for ice.";
+		mes "Please. Priest.";
+		setquest 18143;
+		close;
+	case 0:
+	case 1:
+		mes "[Hana the Sara Gand]";
+		mes "" + getmonsterinfo("EP19_LIMACINA", MOB_NAME) + " in front of the cave entrance is scary.";
+		mes "Save me, Priest.";
+		mes "" + getmonsterinfo("EP19_CALMARING", MOB_NAME) + " is also scary. Priest.";
+		next;
+		mes "[Hana the Sara Gand]";
+		mes "Help the poor worker dig the ice.";
+		mes "Scary " + getmonsterinfo("EP19_LIMACINA", MOB_NAME) + " and " + getmonsterinfo("EP19_CALMARING", MOB_NAME) + ". Please put it away.";
+		close;
+	case 2:
+		mes "[Hana the Sara Gand]";
+		mes "Can I go now?";
+		mes "Priest. Can I go digging for ice?";
+		mes "Thank you. Thank you.";
+		mes "I'll give you everything I collected. Thank you.";
+		erasequest 18143;
+		setquest 18144;
+		// note: no reputation nor additional reward when the reputation is 3000
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		getexp 20508000,5000000;
+		getexp 0,5000000;	// note: 5000000 x2
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep19_main >= 21 && checkquest(18143,HUNTING) == -1 && checkquest(18144,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(18144,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(18143,HUNTING) == 2" );
+	end;
+}
+//
+
+
+// Daily quest : Rgan to Work
+// (Kill 20x Primitive Rgan)
+jor_nest,239,244,5	script	Sidrgand#1	4_EP19_RGAN_SR3,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[" + strnpcinfo(1) + "]";
+		mes "Kyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!! Workplace!! Not here!!!";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	if (ep19_main < 21) {
+		mes "It's difficult to get caught talking to a Rgan by mistake.";
+		mes "I'll have to take a look.";
+		close;
+	}
+	switch( checkquest(8797,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[Sidrgand]";
+		mes "See you tomorrow!";
+		mes "Let's make friendship for our faction tomorrow too.";
+		close;
+	case 2:
+		erasequest 8797;
+		break;
+	}
+	if (checkweight(1000608,10) == 0) {	// Ep19_Snow_Flower
+		mes "- You cannot proceed with the quest because you have many items. -";
+		close;
+	}
+	if (isbegin_quest(8796) < 2) {
+		switch( checkquest(8796,HUNTING) ) {	// first time
+		case -1:
+			mes "[Sidrgand]";
+			mes "Oh my gosh!";
+			mes "It's the first time I've seen him!";
+			mes "Oh my~ Look at the scales. It's shiny~";
+			mes "I've never seen such a clean kid~";
+			next;
+			mes "[Sidrgand]";
+			mes "I like you";
+			mes "Aren't you from the hatchery?";
+			mes "I haven't seen any good eggs when I've been out lately~";
+			mes "Suddenly, this slick kid popped out~";
+			next;
+			mes "[Sidrgand]";
+			mes "Because my eyes are still far away~";
+			mes "I am Sidrgand";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "I'm Sidrgand Organd.";
+			next;
+			mes "[Sidrgand]";
+			mes "Can you give me some scales?";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "Yes??";
+			next;
+			mes "[Sidrgand]";
+			mes "Don't worry, Priest.";
+			mes "I have a high rank, but that doesn't mean I'll do anything recklessly...";
+			mes "Oh, how's the blood?";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "Yes??";
+			next;
+			mes "[Sidrgand]";
+			mes "I can't... Then I can't.";
+			mes "Are you going to molt anyway? How about the shell then?";
+			next;
+			mes "[Sidrgand]";
+			mes "Aww... Don't make such a blatantly hateful face.";
+			mes "You're cute, but there's a wrinkle on your forehead.";
+			next;
+			mes "[Sidrgand]";
+			mes "It won't pass.";
+			next;
+			select( "Ask if you ever got what you want" );
+			mes "[" + strcharinfo(0) + "]";
+			mes "...Given the scales...";
+			mes "...do you have any kin...?";
+			next;
+			mes "[Sidrgand]";
+			mes "No!";
+			mes "Oh my, what if I ask you that!";
+			next;
+			mes "[Sidrgand]";
+			mes "I told him to change my scales, but he said he didn't like it!";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "(Of course you don't like it...)";
+			next;
+			mes "[Sidrgand]";
+			mes "Although I haven't been around for a while.";
+			mes "Anyway, I think it's true that our people are at a very disadvantaged place!";
+			next;
+			mes "[Sidrgand]";
+			mes "Likewise, it's funny to talk like this to you, who seems to have just been born.";
+			mes "Sur-Rug-Sur-Ruck...";
+			next;
+			mes "He sounds like a snake crawling out of his mouth.";
+			mes "He seems to be smiling.";
+			next;
+			mes "[Sidrgand]";
+			mes "You will know when you go outside. It's cold!";
+			mes "Isn't it great to seek revenge in such a barren place?";
+			next;
+			mes "[Sidrgand]";
+			mes "Then you should do whatever you can!";
+			mes "Increase my power... and my sympathizers...";
+			mes "You! You, won't you come under me?";
+			next;
+			mes "[Sidrgand]";
+			mes "What are you doing with old people? They just tell them to wait, don't give them scales, don't give them blood...";
+			mes "So what will we do?";
+			next;
+			mes "[Sidrgand]";
+			mes "Aren't you missing any scales?";
+			next;
+			select("Nothing" );
+			mes "[" + strcharinfo(0) + "]";
+			mes "...I don't know.";
+			next;
+			mes "[Sidrgand]";
+			mes "I just rubbed the scales and it didn't help.";
+			mes "Then go out and take a look and catch only 20 " + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + ".";
+			next;
+			mes "[Sidrgand]";
+			mes "And I want you to tell me your impressions.";
+			mes "Sur-Rug-Sur-Ruck...";
+			next;
+			if (select( "Accept", "Refuse" ) == 2) {
+				mes "[" + strcharinfo(0) + "]";
+				mes "...I'm sorry.";
+				next;
+				mes "[Sidrgand]";
+				mes "No way!";
+				mes "Hey, hey!";
+				mes "Then... even the scales...";
+				mes "...Hey, where are you going?";
+				mes "Hey!";
+				close;
+			}
+			mes "[Sidrgand]";
+			mes "Yeah, you'll be better off than being nagged by old people!";
+			mes "Be careful!";
+			setquest 8796;
+			close;
+		case 0:
+		case 1:
+			mes "[Sidrgand]";
+			mes "I hope you catch 20 ^0000FF " + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + "^000000 and tell me how you feel about the difference.";
+			close;
+		case 2:
+			mes "[Sidrgand]";
+			mes "Uh, are you here?";
+			next;
+			mes "[Sidrgand]";
+			mes "An old man once told me that there are many animals in nature that kill their own people.";
+			mes "Neither I nor an old man have ever gone out of this cold continent, so I don't know...";
+			mes "Maybe humans are the same.";
+			next;
+			mes "[Sidrgand]";
+			mes "Isn't it just that? Resources need to be conserved.";
+			mes "Yeah, have you caught a " + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + "?";
+			mes "Do you feel like a kin?";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "...not so much.";
+			next;
+			mes "[Sidrgand]";
+			mes "Is that right? So did I.";
+			mes "And when it disappears like that, all that's left is a small magic stone, why are we being born?";
+			mes "If I ask an inspirational man named Bernagandra who preaches the doctrine over there, will he teach you?";
+			completequest 8796;
+			setquest 8797;
+			getitem 1000608,10;	// Ep19_Snow_Flower
+			getexp2 10154320,0;
+			getexp 0,7254000;
+			next;
+			mes "[Sidrgand]";
+			mes "See you tomorrow!";
+			mes "Let's make friendship for our faction tomorrow too.";
+			close;
+		}
+		end;
+	}
+	switch( checkquest(8798,HUNTING) ) {
+	case -1:
+		mes "[Sidrgand]";
+		mes "Are you missing any teeth?";
+		mes "The scales?";
+		mes "...isn't it?";
+		next;
+		mes "[Sidrgand]";
+		mes "Then how about 20 ^0000FF " + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + "^000000?";
+		next;
+		if (select( "Accept", "Refuse" ) == 2) {
+			mes "[Sidrgand]";
+			mes "what do you have to do?";
+			mes "Would you like to go somewhere else?";
+			mes "Don't do that, let's eat with me, okay?";
+			mes "Hey, hey!";
+			mes "Don't go! Play!";
+			close;
+		}
+		mes "[SidrGand]";
+		mes "Yeah, you'll be better off than being nagged by old people!";
+		mes "Be careful!";
+		setquest 8798;
+		close;
+	case 0:
+	case 1:
+		mes "[Sidrgand]";
+		mes "Go out there";
+		mes "Catch 20 ^0000FF " + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + "^000000 and come.";
+		close;
+	case 2:
+		mes "[Sidrgand]";
+		mes "Then let's discuss the feeling of hunting our own people today...";
+		mes "Well, don't be so blatantly distasteful!";
+		mes "...ah, I want you to play!";
+		erasequest 8798;
+		setquest 8797;
+		// note: no reputation nor additional reward when the reputation is 3000
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		getexp 10154320,7254000;	// affected by server drop rate
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep19_main >= 21 && isbegin_quest(8796) == 0 && checkquest(8796,HUNTING) == -1 && checkquest(8797,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8796) == 2 && checkquest(8798,HUNTING) == -1 && checkquest(8797,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8797,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(8796,HUNTING) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(8798,HUNTING) == 2" );
+	end;
+}
+//
+
+
+// Daily quest : Elegant Hobbies
+// (Gather items)
+jor_nest,37,75,1	script	Berbergand#ep19r	4_EP19_RGAN_R1,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[" + strnpcinfo(1) + "]";
+		mes "Kyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!! Workplace!! Not here!!!";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	if (isbegin_quest(18138) != 2) {	// First time quest: "Our Precious Food" required
+		mes "[Berbergand]";
+		mes "What? Baby Priest!";
+		mes "You're the protagonist of the rumor that you woke up from an egg in a lower hatchery?";
+		next;
+		mes "[Berbergand]";
+		mes "What are you looking at like that?";
+		mes "There, Mimirgand-sama is calling you.";
+		close;
+	}
+	if (checkweight(1000608,2) == 0) {	// Ep19_Snow_Flower
+		mes "You can't proceed with the quest because you have too many items.";
+		mes "Please clean up your items and try again.";
+		close;
+	}
+	switch( checkquest(18142,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[Berbergand]";
+		mes "Hmm. What do you make?";
+		mes "A belt? Shoes? Soother?";
+		mes "Ah, hairpins will be fine.";
+		mes "If it's made great, you should be honest with Rasgand.";
+		next;
+		mes "[Berbergand]";
+		mes "If there are leftovers, would you like to make yours too?";
+		mes "Ah, I'm busy. I'm busy.";
+		close;
+	case 2:
+		erasequest 18142;
+		break;
+	}
+	switch( isbegin_quest(18141) ) {
+	case 0:
+		mes "[Berbergand]";
+		mes "Huh? Something cluttered?";
+		mes "No, it happens sometimes.";
+		mes "We're moving to a place with more magical power than here.";
+		mes "That's probably good.";
+		next;
+		mes "[Berbergand]";
+		mes "Son, can you help me if you have time?";
+		mes "I'm trying to make some jewelry, but the materials are vague.";
+		next;
+		mes "[Berbergand]";
+		mes "I like what the non-believers bring, but I also prefer the traditional ones.";
+		mes "I mean, handicraft.";
+		next;
+		mes "[Berbergand]";
+		mes "I made Mimirgand-sama's ornaments, you know?";
+		mes "Jormungand-sama's scales are pretty, but it's even more glamorous with coral decorations.";
+		next;
+		mes "[Berbergand]";
+		mes "But the materials you can get here are limited.";
+		mes "You need some outside things to make it more colorful.";
+		mes "Can you help me?";
+		next;
+		if (select( "Is that so?", "Sorry, I'm busy right now." ) == 2) {
+			mes "[Berbergand]";
+			mes "If you ever go out to a glacier or plain area to drink, let me know.";
+			mes "I have a favor for you.";
+			close;
+		}
+		mes "[Berbergand]";
+		mes "Okay! Then I'll call you the materials you need to make delicate ornaments!";
+		mes "You can get them all by catching those that live in glaciers and plains.";
+		next;
+		mes "[Berbergand]";
+		mes "10 " + getitemname(1000824) + " of " + getmonsterinfo("EP19_CALMARING", MOB_NAME) + "";
+		mes "10 " + getitemname(7326) + " of " + getmonsterinfo("EP19_LIMACINA", MOB_NAME) + "";
+		mes "10 " + getitemname(1000829) + "of Unfrost Flower";
+		mes "10 " + getitemname(1000830) + " of Ice Straw";
+		next;
+		mes "[Berbergand]";
+		mes "Did you remember? Can't you forget it?";
+		mes "I'll be there while I'm trimming the scales, so come get them!";
+		setquest 18141;
+		close;
+	case 1:
+		if (countitem(1000824) < 10 || countitem(7326) < 10 || countitem(1000829) < 10 || countitem(1000830) < 10) {
+			mes "[Berbergand]";
+			mes "Um? Recall the ingredients? Listen carefully.";
+			mes "10 " + getitemname(1000824) + " of " + getmonsterinfo("EP19_CALMARING", MOB_NAME) + "";
+			mes "10 " + getitemname(7326) + " of " + getmonsterinfo("EP19_LIMACINA", MOB_NAME) + "";
+			mes "10 " + getitemname(1000829) + "of Unfrost Flower";
+			mes "10 " + getitemname(1000830) + " of Ice Straw";
+			next;
+			mes "[Berbergand]";
+			mes "Things that can be found in both glaciers and plains.";
+			mes "Is it difficult?";
+			mes "I think you will be enough. If you save me, I will give you the " + getitemname(1000608) + " I have collected.";
+			mes "Isn't that tempting?";
+			close;
+		}
+		mes "[Berbergand]";
+		mes "Glazed Calafie!";
+		mes "Fluorescent liquid to be used as a dye!";
+		mes "Dongle Dongle Bellflower!";
+		mes "And even the skins that are good for knitting...!";
+		next;
+		mes "[Berbergand]";
+		mes "Great, great!";
+		mes "Were you also a priest who received abundant grace?";
+		next;
+		mes "[Berbergand]";
+		mes "Well, was this a deal?";
+		mes "It is a reward for your hard work.";
+		mes "I'll ask again next time if I have time.";
+		delitem 1000824,10;	// EP19_Calapy
+		delitem 7326,10;	// Fluorescent_Liquid
+		delitem 1000829,10;	// EP19_Bell_Flower
+		delitem 1000830,10;	// EP19_Thin_Shell
+		erasequest 18141;
+		setquest 18142;
+		// note: no reputation nor additional reward when the reputation is 3000
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		getexp2 32652372,0;
+		getexp 0,3000000;
+		close;
+	case 2:
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(18138) == 2 && isbegin_quest(18141) == 0 && checkquest(18142,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(18142,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(18141) == 1 && countitem(1000824) >= 10 && countitem(7326) >= 10 && countitem(1000829) >= 10 && countitem(1000830) >= 10" );
+	end;
+}
+//
+
+
+// Daily quest : Priest, Have Mercy??
+// (Gather 30 Shell of Rgan)
+jor_nest,235,57,3	script	Pabuyasavigand#1	EP19_RGAN_D,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[Intermediate Rgan]";
+		mes "Human! A human has appeared!";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	if (ep19_main < 21) {
+		mes "[Pabuyasavigand]";
+		mes "...";
+		close;
+	}
+	if (checkweight(1000608,10) == 0) {	// Ep19_Snow_Flower
+		mes "- You cannot proceed with the quest because you have many items. -";
+		close;
+	}
+	switch( checkquest(8791,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[Pabuyasavigand]";
+		mes "Thank you, Priest, for the shell you saved earlier!";
+		mes "We're not eating, so don't worry!";
+		close;
+	case 2:
+		erasequest 8791;
+		break;
+	}
+	switch( isbegin_quest(8790) ) {	// first time
+	case 0:
+		mes "[Pabuyasavigand]";
+		mes "...";
+		mes "...";
+		mes "...?";
+		mes "Priest I've never seen before.";
+		mes "I am Pabuyasavigand.";
+		next;
+		mes "[Pabuyasavigand]";
+		mes "Rasgand-sama's direct subordinate.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Direct?";
+		next;
+		mes "[Pabuyasavigand]";
+		mes "I've never seen you before, but with me...";
+		next;
+		mes "[Pabuyasavigand]";
+		mes "Here is Kanurizamigand.";
+		mes "And Sumov and Nugand, who went to work... and some other direct subordinates. Yo";
+		mes "I collect shells and offer them to Rasgand. Yo.";
+		next;
+		mes "[Pabuyasavigand]";
+		mes "Yes. We do things that are very helpful. Yo";
+		mes "Even though it's intermediate...";
+		next;
+		mes "Durgan suddenly became gloomy.";
+		next;
+		mes "[Pabuyasavigand]";
+		mes "Fortress... Our mission is difficult.";
+		mes "Non-Rgan humans came and went in and out of our area, making it difficult to collect the shells.";
+		next;
+		select( "There's a hatchery here too" );
+		mes "[" + strcharinfo(0) + "]";
+		mes "There's a hatchery here too.";
+		next;
+		mes "[Pabuyasavigand]";
+		mes "We are not in charge of the hatchery.";
+		mes "Our job is to find the skins for Rasgand-sama from the warmth of the snake god.";
+		next;
+		mes "[Pabuyasavigand]";
+		mes "But there, humans come in and out and use the road we've been working hard on at will.";
+		mes "But, as you can see, we are laymen.";
+		mes "There's no way to stop it... but I don't have the strength to break through any more.";
+		next;
+		mes "[Pabuyasavigand]";
+		mes "It's the first time I've seen a priest, but he seems very strong.";
+		mes "Maybe...";
+		mes "Maybe...";
+		next;
+		mes "[Pabuyasavigand]";
+		mes "<ITEM>[Shell]<INFO>1000822</INFO></ITEM> If you have any left over... I'll give it to Rasgand... just a little bit...";
+		mes "only 30...";
+		next;
+		mes "I don't know if I'm blatant or brave.";
+		next;
+		if (select( "I agree to share", "I refuse" ) == 2) {
+			mes "[Pabuyasavigand]";
+			mes "The luster of the priest was also shiny and cool, so I asked for it...";
+			mes "I won't listen, yo.";
+			mes "Rasgand... I'm sorry...";
+			close;
+		}
+		mes "[Pabuyasavigand]";
+		mes "Thank you!";
+		mes "We'll be here near the entrance.";
+		setquest 8790;
+		close;
+	case 1:
+		if (countitem(1000822) < 30) {
+			mes "[Pabuyasavigand]";
+			mes "<ITEM>[Shell]<INFO>1000822</INFO></ITEM>...I need it...";
+			mes "Priest...";
+			mes "30 pieces...";
+			close;
+		}
+		mes "[Pabuyasavigand]";
+		mes "Priest!";
+		mes "Did you pick up the shells?";
+		mes "For us?";
+		next;
+		mes "[Pabuyasavigand]";
+		mes "Thank you so much!";
+		mes "The grace of Jormungand!";
+		mes "Thank you!";
+		npctalk "Thank you!", "ep19_jor_nest_232_55", bc_self;
+		mes "I need another tomorrow...";
+		mes "Think of that when tomorrow comes, yo!";
+		delitem 1000822,30;	// EP19_Shell_Of_Rgan
+		completequest 8790;
+		setquest 8791;
+		getitem 1000608,10;	// Ep19_Snow_Flower
+		getexp2 52243795,0;
+		getexp 0,3000000;
+		close;
+	case 2:
+		break;
+	}
+	switch( isbegin_quest(8792) ) {
+	case 0:
+		mes "[Pabuyasavigand]";
+		mes "Priest... Today, <ITEM>[Shell]<INFO>1000822</INFO></ITEM> If there's anything left... I'll give it to Rasgand... Just a little bit...";
+		mes "only 30...";
+		next;
+		mes "I don't know if I'm blatant or brave.";
+		next;
+		if (select( "I agree to share", "I refuse" ) == 2) {
+			mes "[Pabuyasavigand]";
+			mes "The luster of the priest was also shiny and cool, so I asked for it...";
+			mes "I won't listen, yo.";
+			mes "Rasgand... I'm sorry...";
+			close;
+		}
+		mes "[Pabuyasavigand]";
+		mes "Thank you!";
+		mes "We'll be here near the entrance.";
+		setquest 8792;
+		close;
+	case 1:
+	case 2:
+		if (countitem(1000822) < 30) {
+			mes "[Pabuyasavigand]";
+			mes "<ITEM>[Shell]<INFO>1000822</INFO></ITEM>...I need it...";
+			mes "Priest...";
+			mes "30 pieces...";
+			close;
+		}
+		mes "[Pabuyasavigand]";
+		mes "Priest!";
+		mes "Did you pick up the shells?";
+		mes "For us?";
+		next;
+		mes "[Pabuyasavigand]";
+		mes "Thank you so much!";
+		mes "The grace of Jormungand!";
+		mes "Thank you!";
+		npctalk "Thank you!", "ep19_jor_nest_232_55", bc_self;
+		mes "I need another tomorrow...";
+		mes "Think of that when tomorrow comes, yo!";
+		delitem 1000822,30;	// EP19_Shell_Of_Rgan
+		erasequest 8792;
+		setquest 8791;
+		// note: no reputation nor additional reward when the reputation is 3000
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		getexp2 52243795,0;
+		getexp 0,3000000;
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep19_main >= 21 && isbegin_quest(8790) == 0 && checkquest(8791,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8790) == 2 && isbegin_quest(8792) == 0 && checkquest(8791,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8791,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8790) == 1 && countitem(1000822) >= 30" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8792) == 1 && countitem(1000822) >= 30" );
+	end;
+}
+
+jor_nest,232,55,7	script	Ganurizamigand#1::ep19_jor_nest_232_55	EP19_RGAN_D,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[Intermediate Rgan]";
+		mes "Human! A human has appeared!";
+		close;
+	}
+	mes "[Ganurizamigand]";
+	mes "I still don't know what it is";
+	mes "Yes.";
+	close;
+}
+//
+
+
+// Daily quest : Our Precious Food
+// (Gather 30 Rgan's Low-Grade Magic Core)
+jor_nest,34,79,5	script	Mimirgand#ep19r	4_EP19_RGAN_SR1,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[" + strnpcinfo(1) + "]";
+		mes "Kyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!! Workplace!! Not here!!!";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	if (ep19_main < 21) {
+		mes "[Berbergand]";
+		mes "Hmmmmmm.";
+		mes "Unbelievers don't know?";
+		mes "The grace of Jormungand...";
+		close;
+	}
+	if (checkweight(1000608,10) == 0) {	// Ep19_Snow_Flower
+		mes "You can't proceed with the quest because you have too many items.";
+		mes "Items organizedPlease try again later.";
+		close;
+	}
+	switch( checkquest(18140,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[Mimirgand]";
+		mes "Young priest.";
+		mes "You have a duty to lead other followers.";
+		mes "I'll look around the nest slowly and figure out what you're doing for yourself.";
+		close;
+	case 2:
+		erasequest 18140;
+		break;
+	}
+	switch( isbegin_quest(18138) ) {	// first time
+	case 0:
+		mes "[Mimirgand]";
+		mes "Ho, are you a new born priest?";
+		mes "Come here and sit here.";
+		mes "Tell me a story.";
+		next;
+		mes "[Mimirgand]";
+		mes "In harsh environments, there are harsh ways to survive.";
+		mes "We are the heirs of the great Jormungand-sama's magic.";
+		next;
+		mes "[Mimirgand]";
+		mes "Do you know what that means?";
+		next;
+		select( "The source of our life!" );
+		mes "[Mimirgand]";
+		mes "Listen well";
+		mes "Past ancestors ruled the Midgard continent based on Jormungand-sama's magical powers.";
+		next;
+		mes "[Mimirgand]";
+		mes "However, Jormungand-sama was sealed because of the evil humans.";
+		mes "But even at that moment, Jormungand-sama left your body for us.";
+		next;
+		mes "[Mimirgand]";
+		mes "Yes. That's Isgard.";
+		mes "We are rooted in the blood of Rasgand, the last ragan protected by Jormungand";
+		mes "You grow with the magic of your body that Jormungand-sama left behind.";
+		next;
+		mes "[Mimirgand]";
+		mes "However, they did not receive the grace that was bestowed upon them by giving up their bodies, so they were born together.";
+		mes "Do you know what it is?";
+		next;
+		select( "Rgans lesser?" );
+		mes "[Mimirgand]";
+		mes "Oh, it's like a priest, isn't it?";
+		mes "You know it right.";
+		mes "Yes, those who do not receive the grace of magical powers are thrown away and sinners.";
+		next;
+		mes "[Mimirgand]";
+		mes "They lust after each other's magical powers, and lust after their superiors.";
+		mes "Originally, all Rgans have a craving for magical powers, but they can't tell the difference between them.";
+		next;
+		mes "[Mimirgand]";
+		mes "I can't watch the lowly ones crave the size of a rat's tail any longer.";
+		mes "Don't entrust me with a heavy task.";
+		next;
+		mes "[Mimirgand]";
+		mes "It is to recover Jormungand-sama's magical powers that sinners and buggers have.";
+		mes "Your magic power is limited.";
+		mes "That's not the magic they dare to harbor.";
+		next;
+		mes "[Mimirgand]";
+		mes "Magic power is limited, and we can't waste our power if we are to work hard to fulfill Jormungand-sama's will, Rasgand-sama's will.";
+		next;
+		mes "[Mimirgand]";
+		mes "Recovering the magical powers taken away by criminals and reusing them for the future of Rgan.";
+		mes "That's what we do now.";
+		next;
+		mes "[Mimirgand]";
+		mes "And we must recover the magic for the children of grace like you.";
+		next;
+		select( "Isn't it kin?" );
+		mes "[Mimirgand]";
+		mes "I don't think they are of the same species.";
+		mes "They are sins.";
+		mes "They are also sacrifices.";
+		mes "It is natural to recover magical powers from unfavorable sins.";
+		next;
+		mes "[Mimirgand]";
+		mes "This is our way of surviving in the icy land.";
+		mes "So young priest.";
+		mes "Go and punish the sinners and collect their magic.";
+		setquest 18138;
+		close;
+	case 1:
+		if (countitem(1000707) < 10 || checkquest(18138,HUNTING) != 2) {
+			mes "[Mimirgand]";
+			mes "Where is the iniquity?";
+			mes "Young priest. Didn't you say you woke up in a lesser hatchery?";
+			next;
+			mes "[Mimirgand]";
+			mes "I mean the lowly things that fill it.";
+			mes "^4d4dff " + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + ", " + getmonsterinfo("EP19_RGAN_B", MOB_NAME) + "^000000 are sinful and abandoned.";
+			next;
+			mes "[Mimirgand]";
+			mes "It's your job to deal with them and recover ^4d4dff10 " + getitemname(1000707) + "^000000 Rgan.";
+			close;
+		}
+		mes "[Mimirgand]";
+		mes "Looks like you did a good job.";
+		mes "Come here.";
+		mes "Magic Core must be circulated.";
+		next;
+		mes "[Mimirgand]";
+		mes "Isn't it stronger if you absorb a magic core?";
+		mes "It could be.";
+		mes "Doesn't it actually exist there?";
+		next;
+		select( "Are you talking about lesser ragan?" );
+		mes "[Mimirgand]";
+		mes "Yeah. Sometimes there are juniors with intelligence.";
+		mes "They do their labor and wash away their sins.";
+		next;
+		mes "[Mimirgand]";
+		mes "But that doesn't mean that the lower class eats the lower class and becomes a middle class.";
+		mes "In any case, the size of the vessel that each of us is born with is different.";
+		next;
+		mes "[Mimirgand]";
+		mes "Does that mean throwing a stone into the sea?";
+		mes "But if you carve a mountain into a small pond, it will have a different result.";
+		next;
+		mes "[Mimirgand]";
+		mes "Only the instinct to lust for magical powers remains, but sometimes a guy who eats and eats each other and fills a bowl in the end appears.";
+		next;
+		mes "[Mimirgand]";
+		mes "But it doesn't change the size of the bowl.";
+		mes "Isn't that also the difference of innate grace?";
+		next;
+		mes "[Mimirgand]";
+		mes "But I don't know if Rasgand-sama is looking for a way to save those things.";
+		mes "I can't ask for anything more if I can increase the size of my grace.";
+		next;
+		select( "Then where do you use the magic core?" );
+		mes "[Mimirgand]";
+		mes "What does a living thing need to function?";
+		mes "Yes. I need a form.";
+		next;
+		mes "[Mimirgand]";
+		mes "We form this.";
+		mes "Some will be used for Rasgand-sama's research, and some will be used to restore consumed magic.";
+		next;
+		mes "[Mimirgand]";
+		mes "When you feel that your magic has been exhausted, absorb the magic core.";
+		mes "It will be easier.";
+		next;
+		mes "[Mimirgand]";
+		mes "Anyway, thank you for helping me with my work.";
+		mes "This is also what you, a priest, have to do.";
+		mes "Good job.";
+		delitem 1000707,10;	// Ep19_Rgan_Core_F
+		completequest 18138;
+		getitem 1000608,10;	// Ep19_Snow_Flower
+		getexp2 32652372,0;
+		getexp 0,3000000;
+		close;
+	case 2:
+		break;
+	}
+	switch( isbegin_quest(18139) ) {
+	case 0:
+		mes "[Mimirgand]";
+		mes "Young priest.";
+		mes "Aren't you going to dedicate yourself to the denomination today as well?";
+		mes "To do the sacred work.";
+		next;
+		if (select( "What's going on?", "I'm going to pray." ) == 2) {
+			mes "[Mimirgand]";
+			mes "Pray?";
+			mes "Really?";
+			mes "Are you going to declare your faith with a sincere heart?";
+			mes "It shouldn't be a lie";
+			close;
+		}
+		mes "[Mimirgand]";
+		mes "Get rid of the bugs crawling on the snake's warmth and recover your magic.";
+		mes "You can't see the people working so hungry.";
+		next;
+		mes "[Mimirgand]";
+		mes "It's our job anyway";
+		mes "Someone has to do it.";
+		mes "So I'll go.";
+		setquest 18139;
+		close;
+	case 1:
+		if (countitem(1000707) < 30) {
+			mes "[Mimirgand]";
+			mes "I will collect ^4d4dff30 " + getitemname(1000707) + " ^000000 from Rgan.";
+			mes "That is our sacred duty.";
+			close;
+		}
+		mes "[Mimirgand]";
+		mes "You have gathered daily bread like this today.";
+		mes "This is the blood, sweat and flesh of other organs.";
+		mes "It will become the blood of other gangs, and it will become flesh and soul.";
+		next;
+		mes "[Mimirgand]";
+		mes "sin will be cleansed and reborn with new blood.";
+		mes "You did your best today.";
+		delitem 1000707,30;	// Ep19_Rgan_Core_F
+		erasequest 18139;
+		setquest 18140;
+		// note: no reputation nor additional reward when the reputation is 3000
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		getexp2 32652372,0;
+		getexp 0,3000000;
+		close;
+	case 2:
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep19_main >= 21 && isbegin_quest(18138) == 0 && checkquest(18140,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(18138) == 2 && isbegin_quest(18139) == 0 && checkquest(18140,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(18140,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(18138) == 1 && countitem(1000707) >= 10 && checkquest(18138,HUNTING) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(18139) == 1 && countitem(1000707) >= 30" );
+	end;
+}
+//
+
+
+// Side quest
+jor_nest,74,100,5	script	Arleigand#1	4_EP19_RGAN_SR3,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[" + strnpcinfo(1) + "]";
+		mes "Kyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!! Workplace!! Not here!!!";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	if (ep19_main < 21) {
+		mes "It's difficult to get caught talking to a Rgan by mistake.";
+		mes "I'll have to take a look.";
+		close;
+	}
+	if (checkweight(1000608,10) == 0) {	// Ep19_Snow_Flower
+		mes "- You cannot proceed with the quest because you have many items. -";
+		close;
+	}
+	switch( isbegin_quest(8794) ) {
+	case 0:
+		mes "[Arleigand]";
+		mes "...?";
+		mes "You.";
+		mes "I see you for the first time. Come here.";
+		next;
+		mes "Before he could even finish speaking, the superlative ragan grabbed his forearm and pulled him back and slammed it into his teeth!";
+		mes "Did you notice!?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Ouch!";
+		next;
+		mes "[Arleigand]";
+		mes "Ttt. It's hard.";
+		mes "I didn't ask, I didn't ask.";
+		mes "I haven't eaten";
+		next;
+		mes "[Arleigand]";
+		mes "Isn't he a bit strict?";
+		mes "You seem to be a coward. Are you afraid of this Arlegand?";
+		next;
+		select( "not scary", "not scary" );	// the selection doesn't change the dialog
+		mes "[Arleigand]";
+		mes "The answer is...";
+		mes "I haven't eaten at all.";
+		next;
+		if (select( "Ask why you are doing this", "Let's run away..." ) == 2) {
+			mes "[Arleigand]";
+			mes "Ha ha! Coward!";
+			close;
+		}
+		mes "[" + strcharinfo(0) + "]";
+		mes "Why are you acting like this...?";
+		next;
+		mes "[Arleigand]";
+		mes "Have you just been born? It doesn't look like it, but you talk like a layman?";
+		mes "But a layman wouldn't even think like this. He must be smart.";
+		next;
+		mes "[Arleigand]";
+		mes "Everyone is born the same under the same conditions, so why are they all so different in their personalities and thoughts? Isn't it so much fun!";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "????";
+		next;
+		mes "[Arleigand]";
+		mes "What is it? I was kidding you.";
+		mes "How can you be so naive?";
+		mes "Does anyone really know if someone can rip off an arm?";
+		next;
+		mes "[Arleigand]";
+		mes "I mean~. I don't do it because Gumumi Gand doesn't do it.";
+		mes "Do you know Gumumi Gand? Have you ever met him?";
+		mes "I don't know? You can't.";
+		next;
+		mes "[Arleigand]";
+		mes "Anyway, I'm thinking about how to eat " + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + ", so he said that.";
+		mes "No matter what you do, nothing will change, so why bother with it?";
+		mes "Oops, it's ridiculous.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "(This side is ridiculous...)";
+		next;
+		mes "[Arleigand]";
+		mes "No matter how much we are in a land that is imbued with divine magical powers... even if we are made with the blood of our ancestors and gain life as a magical body like this, we are a little different from other creatures.";
+		mes "Don't make it into nuclear stone, just absorb itIsn't that okay?";
+		next;
+		mes "[Arleigand]";
+		mes "Humans say that when they eat something, they cook it?";
+		mes "I wanted to try that~!!";
+		mes "I've never done anything until this day...";
+		next;
+		mes "[Arleigand]";
+		mes "So Gumumi Gand...";
+		mes "...because...";
+		mes "That's...";
+		next;
+		mes "I have heard very scary stories.";
+		mes "However, if the Gumumi Gand in the story has the mindset of a regular Rgan, in principle, it seems that he will not eat the " + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + " directly.";
+		next;
+		mes "[Arleigand]";
+		mes "...Then go and get about 15 <ITEM>[Rgan's low-grade magic core]<INFO>1000707</INFO></ITEM>.";
+		mes "If you don't have it, you'll find it.";
+		next;
+		mes "[Arleigand]";
+		mes "Come on!";
+		setquest 8794;
+		close;
+	case 1:
+		if (countitem(1000707) < 15) {
+			mes "I have heard very scary stories.";
+			mes "However, if the Gumumi Gand in the story has the mindset of a regular Rgan, in principle, it seems that he will not eat the " + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + " directly.";
+			next;
+			mes "[Arleigand]";
+			mes "...Then go and get about 15 <ITEM>[Rgan's low-grade magic core]<INFO>1000707</INFO></ITEM>.";
+			mes "If you don't have it, you'll find it.";
+			next;
+			mes "[Arleigand]";
+			mes "Come on!";
+			close;
+		}
+		mes "[Arleigand]";
+		mes "Are you really going to bring this?";
+		mes "He's going to be really big...";
+		mes "How did this kid come out?";
+		mes "From whose blood are you born? It's not me, am I?";
+		next;
+		mes "[Arleigand]";
+		mes "Wow... I'm sorry for this... Hey. Take it.";
+		mes "Wherever you go, don't tell me to make you so naive again. Okay?";
+		delitem 1000707,15;	// Ep19_Rgan_Core_F
+		completequest 8794;
+		getitem 1000608,10;	// Ep19_Snow_Flower
+		getexp2 32652372,0;
+		getexp 0,3000000;
+		close;
+	case 2:
+		mes "[Arleigand]";
+		mes "Shut up.";
+		mes "Don't come close.";
+		mes "I feel bad";
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep19_main >= 21 && isbegin_quest(8794) == 0" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8794) == 1 && countitem(1000707) >= 15" );
+	end;
+}
+//
+
+
+// Daily quest : Do not Feed Wildlife
+// (Retrieve 1 Monster's Feed from a sand pile)
+icecastle,97,177,4	script	Supplier#iws	EP19_NPC_IWIN_SR,{
+	if (ep19_main < 11) {
+		emotion ET_FRET;
+		mes "[Supplier Goror]";
+		mes "No, what kind of bastards bring their food to the frozen Scale Hill with worms?";
+		next;
+		mes "[Supplier Goror]";
+		mes "Huh? Are you?";
+		mes "Ah! Are you an adventurer who's been pouring in lately? You'd better not do anything nonsense, as my bitter eyes are staring at you.";
+		close;
+	}
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "- You cannot proceed because you have too many items. -";
+		close;
+	}
+
+	if (getstatus(SC_MONSTER_TRANSFORM,1) == 21530) {
+		setpcblock PCBLOCK_NPC, true;
+		emotion ET_HUK;
+		sleep2 500;
+		npctalk "Supplier Goror: Ah! Surprise.", "", bc_self;
+		sleep2 500;
+		npctalk "Supplier Goror: Huh? Rgan here?", "", bc_self;
+		sleep2 1000;
+		emotion ET_THINK;
+		sleep2 500;
+		npctalk "Supplier Goror: ... ... ...", "", bc_self;
+		sleep2 2500;
+		emotion ET_SURPRISE;
+		sleep2 500;
+		npctalk "Supplier Goror: You were the agent who turned into Rgan. Yes, if you're an agent, you should do that.", "", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+	}
+
+	switch( checkquest(5977,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		emotion ET_STARE_ABOUT;
+		mes "[Supplier Goror]";
+		mes "Ahaha.. The weather is so warm today. I hope adventurers have a good day too..";
+		next;
+		mes "Supplier Goror seems to be desperately trying to pretend he doesn't know me. Is there any rule of thumb for not knowing when not on a mission?";
+		close;
+	case 2:
+		erasequest 5977;
+		emotion ET_SPARK;
+		npctalk "Supplier Goror: The tip is coming.. the tip is coming..", "", bc_self;
+		break;
+	}
+	if (isbegin_quest(5979) == 1) {	// completed
+		if (countitem(528) < 1) {
+			emotion ET_QUESTION;
+			mes "[Supplier Goror]";
+			mes "Are you here? Yes, Agent! Of course you have retrieved the items, haven't you?";
+			next;
+			mes "[Supplier Goror]";
+			mes "But why are you empty-handed? You must have misunderstood the agent. It could be during the mission. I'll wait for you.";
+			close;
+		}
+		emotion ET_QUESTION;
+		mes "[Supplier Goror]";
+		mes "Are you here? Yes, Agent! Of course you have retrieved the items, haven't you?";
+		next;
+		mes "[Supplier Goror]";
+		mes "Is that the thing you're holding in your hand? Hmm.. It's the food that came out yesterday. It's quite an unknown existence to hide this.";
+		next;
+		erasequest 5979;
+		setquest 5977;
+		delitem 528,1;	// Monster's_Feed
+		set_reputation_points(3, (get_reputation_points(3) + 5));
+		if (get_reputation_points(3) >= 3000)
+			getitem 1000608,1;	// Ep19_Snow_Flower
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		getexp2 52243795,0;
+		getexp 0,3000000;
+		mes "[Supplier Goror]";
+		mes "In return for your devotion and consideration, agent. Of course, you wouldn't want this. I know how you feel..";
+		next;
+		emotion ET_COOL;
+		mes "[Supplier Goror]";
+		mes "But please think of it as my small heart to ask for tomorrow as well.";
+		close;
+	}
+	if (isbegin_quest(5976) == 0) {	// first time
+		mes "[Supplier Goror]";
+		mes "Recently, we have been informed that an unidentified entity is bringing food to the wildlife of Frozen Scale Hill.";
+		next;
+		mes "[Supplier Goror]";
+		mes "If left as it is, it is a situation that can cause various problems such as entanglement of insects.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Are you there?";
+		next;
+		mes "[Supplier Goror]";
+		mes "You can feed sympathy, and at first glance it may seem like a good action, but if you take it all together, it is a very dangerous action that can destroy the ecosystem.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "There...";
+		next;
+		mes "[Supplier Goror]";
+		mes "Huh? There is an idle agent here as if he was just waiting. Agent! I'll give you a mission.";
+		next;
+		mes "[Supplier Goror]";
+		mes "Let the unknown being retrieve the prey brought to the Frozen Scale Hill!";
+		next;
+		select( "I'll do it", "I'll be happy to do it", "I'll do whatever I want", "No option status?" );
+		emotion ET_STARE;
+		mes "[Supplier Goror]";
+		mes "Rejection does not exist for the original agent.";
+		next;
+		setquest 5976;
+		completequest 5976;
+		setquest 5978;
+		mes "[Supplier Goror]";
+		mes "Agent! I always appreciate your dedication.";
+		next;
+		mes "[Supplier Goror]";
+		mes "The retrieval mission is top secret. Whether it's during a patrol mission or personally passing the frozen Scale Hill..";
+		next;
+		mes "[Supplier Goror]";
+		mes "It's up to you, agent, to decide when to deal with it.";
+		next;
+		emotion ET_BEST;
+		mes "[Supplier Goror]";
+		mes "Then good luck agent!";
+		close;
+	}
+	switch( isbegin_quest(5978) ) {
+	case 0:
+		mes "[Supplier Goror]";
+		mes "An information has come in that someone has brought food again. Would you like to join us again this time, Agent?";
+		next;
+		if (select( "I'll join you", "That's false information." ) == 2) {
+			emotion ET_HUK;
+			mes "[Supplier Goror]";
+			mes "Huh! Misinformation? I almost made a big mistake with this. I'll check more and pass on the mission.";
+			close;
+		}
+		setquest 5978;
+		mes "[Supplier Goror]";
+		mes "Once again, I'll leave everything to you, Agent. Good luck Agent!";
+		close;
+	case 1:
+		mes "[Supplier Goror]";
+		mes "Everything about this mission will be left entirely up to you, Agent.";
+		next;
+		mes "[Supplier Goror]";
+		mes "Ah! If it's advice, it's advice, if it's not, it's not.";
+		next;
+		emotion ET_BEST;
+		mes "[Supplier Goror]";
+		mes "It must have been hideously hidden from anyone looking at it with the complacency of thinking that this would be invisible. Good luck agent!";
+		close;
+	case 2:
+		end;
+	}
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<Eagle Patrol>" );
+
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(5979) == 1 && countitem(528) > 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep19_main >= 11 && isbegin_quest(5976) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(5976) == 2 && isbegin_quest(5978) == 0 && checkquest(5977,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(5977,PLAYTIME) == 2" );
+	end;
+}
+
+jor_back1,359,349,0	script	Something#ff01::hode_ff00	HODE,{
+	if (checkweight(1201,1) == 0) {
+		mes "- You cannot proceed because you have too many items. -";
+		close;
+	}
+	mes "^4A94F7Something^000000 seems to be slightly covered with dirt. It seems to be moving. Is this dirt?";
+	next;
+	if (select( "Look at it", "Leave it alone" ) == 2) {
+		mes "Yeah! A scary something might come out, so let's just leave it alone.";
+		close;
+	}
+	progressbar "FFFFFF",1;
+
+	.@r = rand(100);
+	if (.@r < 35 || isbegin_quest(5978) == 0) {
+		mes "Ah.. what is it, just plain dirt?";
+		disablenpc();
+		initnpctimer;
+		close;
+	}
+	if (.@r < 50) {
+		mes "Ugh! It's a bug? What the hell happened?!";
+		disablenpc();
+		initnpctimer;
+		getmapxy .@map$,.@x,.@y, BL_NPC;
+		monster .@map$,.@x,.@y,"--ja--","G_THIEF_BUG__",5, strnpcinfo(0) + "::OnMobDead";
+		close;
+	}
+	erasequest 5978;
+	setquest 5979;
+	getitem 528,1;	// Monster's_Feed
+	disablenpc();
+	initnpctimer;
+	mes "Someone has found food here. Let's bring it to Supply Officer Goror.";
+	close;
+
+OnTimer30000:
+	enablenpc();
+	stopnpctimer;
+	killmonster "jor_back1", strnpcinfo(0) + "::OnMobDead";
+	end;
+
+OnMobDead:
+	end;
+}
+jor_back1,113,142,0	duplicate(hode_ff00)	Something#ff01	HODE
+jor_back1,342,292,0	duplicate(hode_ff00)	Something#ff02	HODE
+jor_back1,292,259,0	duplicate(hode_ff00)	Something#ff03	HODE
+jor_back1,265,154,0	duplicate(hode_ff00)	Something#ff04	HODE
+jor_back1,278,103,0	duplicate(hode_ff00)	Something#ff05	HODE
+jor_back1,152,60,0	duplicate(hode_ff00)	Something#ff06	HODE
+jor_back1,100,70,0	duplicate(hode_ff00)	Something#ff07	HODE
+jor_back1,136,175,0	duplicate(hode_ff00)	Something#ff08	HODE
+jor_back1,149,239,0	duplicate(hode_ff00)	Something#ff09	HODE
+//
+
+
+// Daily quest : Searching for Survivors
+icas_in,42,252,5	script	Guardian Leon#ep19leon02	4_EP19_LEON,{
+	switch( isbegin_quest(18133) ) {	// side quest
+	case 0:
+		break;
+	case 1:
+		mes "[Leon]";
+		mes "It's good that the castle has more staff.";
+		mes "Before that, Lehar was passionate about himself.";
+		mes "Then let's talk about it with Miriam.";
+		close;
+	case 2:
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "Isn't it strange to have a fireplace in a snowy field where no grass grows?";
+		mes "It uses as fuel the " + getitemname(1000608) + ", which are crystals of magical power that are occasionally found, and the magic cores accumulated by the rgans.";
+		next;
+		mes "[Leon]";
+		mes "Come and warm yourself up a little.";
+		close3;
+	}
+	switch( isbegin_quest(18132) ) {
+	case 0:
+		mes "[Leon]";
+		mes "Anything you need?";
+		mes "Others will be in the dormitory or restaurant.";
+		close;
+	case 1:
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "Did you come here after receiving a message from Lehar?";
+		mes "I'm sorry to go up and down while you're very busy.";
+		next;
+		cutin "ep19_leon04.png",2;
+		mes "[Leon]";
+		mes "I had something to ask of you, welcome.";
+		mes "Nothing else but did you not rescue the laborers when Rgan last searched his place?";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[Miriam]";
+		mes "The people who were rescued then returned home led by Maram and Lazy...?";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "It seems that there were some who escaped from the abode of Rgan at that time.";
+		mes "Iwin on patrol seems to have found a survivor in the glaciers and plains.";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[Miriam]";
+		mes "I'm sure it will you must have the ability.";
+		mes "There may be multiple survivors.";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "Iwin's are scouting around, but it's difficult to see all the areas thoroughly, so I'd like to ask for your help.";
+		next;
+		cutin "ep19_leon05.png",2;
+		mes "[Leon]";
+		mes ".....";
+		next;
+		select( "Anything that bothers you?" );
+		mes "[Leon]";
+		mes "The barrier was created to completely separate Midgard from Isgard.";
+		mes "Clearly speaking, it is the separation of the Rgan...";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "The fact that there are people coming and going without invitations is clearly evidence that the barrier has been weakened.";
+		mes "Hundreds of years of immortality and our existence that has endured for the sake of this day crossed my mind.";
+		next;
+		select("Hundreds of years.." );
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "Me and Aurelie are defending this place, following the will of Jormungand.";
+		mes "As you know, Jormungand is not an evil spirit.";
+		next;
+		cutin "ep19_leon04.png",2;
+		mes "[Leon]";
+		mes "The reason Jormungand is considered an evil god is because of the organgans who called themselves the Jormungand Church and plunged the continent into chaos.";
+		next;
+		select( "The curse of Jormungand?" );
+		cutin "ep19_leon05.png",2;
+		mes "[Leon]";
+		mes "The head of the Jormungand Church cast a blood curse as the last act.";
+		mes "They always put jormungands on their flags, so that's how it was said.";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "At any rate, Jormungand is a demigod who helped save the continent by giving up his own body.";
+		mes "Rgan must not leave this land to succeed Jormungand's will.";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[Miriam]";
+		mes "It's a heavy story.";
+		mes "I understand that recorded history may not be true, but...";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "Then and now, we just have to do the best we can, right?";
+		mes "The barrier will be maintained by me and Aurelie.";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "Can you help rescue the victims first?";
+		mes "I will leave it up to the victims.";
+		next;
+		cutin "ep19_leon03.png",2;
+		mes "[Leon]";
+		mes "Of course, I plan to do everything without sparing my support.";
+		mes "How did you get the continent?";
+		mes "Shouldn't their descendants be protected?";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[Miriam]";
+		mes "I understand the meaning of Leon-sama.";
+		mes "Adventurer, shall we make a concrete plan then?";
+		completequest 18132;
+		setquest 18133;
+		close3;
+	case 2:
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(18132) == 1" );
+	end;
+}
+
+icas_in,48,252,3	script	Miriam#ep19miriam05	4_EP18_MIRIAM,{
+	switch( isbegin_quest(18133) ) {	// side quest
+	case 0:
+		cutin "ep18_miriam_01.png",0;
+		mes "[Miriam]";
+		mes "Leon-sama has something to say.";
+		close3;
+	case 1:
+		cutin "ep18_miriam_01.png",0;
+		mes "[Miriam]";
+		mes "I think we should search the Frozen Scale Glacier area and the Plains area separately. How about it?";
+		next;
+		select( "Are you rescued?" );
+		mes "[Miriam]";
+		mes "First, you should bring him to the lodgings of the ice castle, cool himself off, and then send him to the continent through Maram and Lazy.";
+		next;
+		mes "[Miriam]";
+		mes "If an adventurer takes over one area, I'll look for the rest.";
+		mes "I will ask Iwin and Lehar to search for the residence of Rgan as well.";
+		next;
+		mes "[Miriam]";
+		mes "I think it would be better for those people to take over a place with a clear target.";
+		mes "The search time will be short.";
+		next;
+		mes "[Miriam]";
+		mes "I and the adventurer should look back at the difficult environment in which the search for the survivors itself is difficult.";
+		mes "Talk to me when you're ready.";
+		completequest 18133;
+		close3;
+	case 2:
+		break;
+	}
+	switch( checkquest(18137,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		cutin "ep18_miriam_01.png",0;
+		mes "[Miriam]";
+		mes "You can't get lost in the snow forever.";
+		mes "I hope you get enough rest and start your search again.";
+		close3;
+	case 2:
+		erasequest 18137;
+		break;
+	}
+	if (isbegin_quest(18136) == 1) {	// final step
+		cutin "ep18_miriam_01.png",0;
+		mes "[Miriam]";
+		mes "The rescued survivors will be guided to the adventurers' quarters.";
+		mes "Maram will be waiting for you.";
+		close3;
+	}
+	if (isbegin_quest(18134) == 1) {
+		cutin "ep18_miriam_01.png",0;
+		mes "[Miriam]";
+		mes "Search the Frozen Scale Glacier Area.";
+		mes "I will search the plains.";
+		mes "If you find a survivor, you must bring them to the Ice Castle Lodge.";
+		close3;
+	}
+	if (isbegin_quest(18135) == 1) {
+		cutin "ep18_miriam_01.png",0;
+		mes "[Miriam]";
+		mes "Search the Frozen Scale Plains area.";
+		mes "I will search the glacier.";
+		mes "If you find a survivor, you must bring them to the Ice Castle Lodge.";
+		close3;
+	}
+	cutin "ep18_miriam_01.png",0;
+	mes "[Miriam]";
+	mes "Then shall we divide the search area for survivors?";
+	mes "Choose either Glacier or Plains, and I will search the rest of the area.";
+	next;
+	switch( select( "Search the glacier", "Search the plains" ) ) {
+	case 1:
+		mes "[Miriam]";
+		mes "Then let me check the plains.";
+		mes "If you find a survivor, you can immediately bring them to the ice castle's lodgings.";
+		next;
+		mes "[Miriam]";
+		mes "I told Maram in advance.";
+		mes "If we find one, we'll make sure to return it immediately.";
+		setquest 18134;
+		ep19_survivor = rand(1,10);	// note: the npc to talk to doesn't change
+		close3;
+	case 2:
+		cutin "ep18_miriam_01.png",0;
+		mes "[Miriam]";
+		mes "Then I'll take a look at the glacial area.";
+		mes "If you find a survivor, you can immediately bring them to the ice castle's lodgings.";
+		next;
+		mes "[Miriam]";
+		mes "I told Maram in advance.";
+		mes "If we find one, we'll make sure to return it immediately.";
+		setquest 18135;
+		ep19_survivor = rand(1,10);	// note: the npc to talk to doesn't change
+		close3;
+	}
+	end;
+
+OnInit:
+	// side quest
+	questinfo( QTYPE_QUEST, QMARK_NONE, "isbegin_quest(18133) == 1" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(18133) == 2 && isbegin_quest(18134) == 0 && isbegin_quest(18135) == 0 && isbegin_quest(18136) == 0 && checkquest(18137,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(18137,PLAYTIME) == 2" );
+	end;
+}
+
+jor_back2,365,39,3	script	Pit#ep19_2_1::ep19_jor_back2_365_39	4_CRACK,{
+	.@num = atoi( replacestr(strnpcinfo(2), "ep19_2_", "") );
+
+	if (ep19_survivor == .@num && isbegin_quest(18135) == 1) {
+		mes "A hole is dug through the snow.";
+		if (select( "Dig a hole", "Cover well" ) == 2) {
+			mes "It covered the snow well.";
+			close;
+		}
+		progressbar "4D4DFF",2;
+		mes "No way!";
+		mes "The shipwreck was crouching in a snow pit.";
+		mes "Take us to the Ice Castle and warm ourselves.";
+		ep19_survivor = 0;
+		erasequest 18135;
+		setquest 18136;
+		close;
+	}
+	mes "There are traces of digging through the snow.";
+	mes "I don't see anything special around";
+	close;
+
+OnInit:
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "isbegin_quest(18135) == 1" );
+	end;
+}
+jor_back2,354,53,3	duplicate(ep19_jor_back2_365_39)	Pit#ep19_2_2	4_CRACK
+jor_back2,256,197,3	duplicate(ep19_jor_back2_365_39)	Pit#ep19_2_3	4_CRACK
+jor_back2,125,295,3	duplicate(ep19_jor_back2_365_39)	Pit#ep19_2_4	4_CRACK
+jor_back2,195,161,3	duplicate(ep19_jor_back2_365_39)	Pit#ep19_2_5	4_CRACK
+jor_back2,274,178,3	duplicate(ep19_jor_back2_365_39)	Pit#ep19_2_6	4_CRACK
+jor_back2,216,336,3	duplicate(ep19_jor_back2_365_39)	Pit#ep19_2_7	4_CRACK
+jor_back2,142,91,3	duplicate(ep19_jor_back2_365_39)	Pit#ep19_2_8	4_CRACK
+jor_back2,127,34,3	duplicate(ep19_jor_back2_365_39)	Pit#ep19_2_9	4_CRACK
+jor_back2,20,130,3	duplicate(ep19_jor_back2_365_39)	Pit#ep19_2_10	4_CRACK
+
+jor_back3,344,296,3	script	Pit#ep19_3_1::ep19_jor_back3_344_296	4_CRACK,{
+	.@num = atoi( replacestr(strnpcinfo(2), "ep19_3_", "") );
+
+	if (ep19_survivor == .@num && isbegin_quest(18134) == 1) {
+		mes "A hole is dug through the snow.";
+		if (select( "Dig a hole", "Cover well" ) == 2) {
+			mes "It covered the snow well.";
+			close;
+		}
+		progressbar "4D4DFF",2;
+		mes "No way!";
+		mes "The shipwreck was crouching in a snow pit.";
+		mes "Take us to the Ice Castle and warm ourselves.";
+		ep19_survivor = 0;
+		erasequest 18134;
+		setquest 18136;
+		close;
+	}
+	mes "There are traces of digging through the snow.";
+	mes "I don't see anything special around";
+	close;
+
+OnInit:
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "isbegin_quest(18134) == 1" );
+	end;
+}
+jor_back3,320,208,3	duplicate(ep19_jor_back3_344_296)	Pit#ep19_3_2	4_CRACK
+jor_back3,182,305,3	duplicate(ep19_jor_back3_344_296)	Pit#ep19_3_3	4_CRACK
+jor_back3,110,269,3	duplicate(ep19_jor_back3_344_296)	Pit#ep19_3_4	4_CRACK
+jor_back3,277,208,3	duplicate(ep19_jor_back3_344_296)	Pit#ep19_3_5	4_CRACK
+jor_back3,197,178,3	duplicate(ep19_jor_back3_344_296)	Pit#ep19_3_6	4_CRACK
+jor_back3,107,298,3	duplicate(ep19_jor_back3_344_296)	Pit#ep19_3_7	4_CRACK
+jor_back3,231,68,3	duplicate(ep19_jor_back3_344_296)	Pit#ep19_3_8	4_CRACK
+jor_back3,151,74,3	duplicate(ep19_jor_back3_344_296)	Pit#ep19_3_9	4_CRACK
+jor_back3,39,322,3	duplicate(ep19_jor_back3_344_296)	Pit#ep19_3_10	4_CRACK
+
+icas_in,253,171,0	script	#ep19_evt07_	HIDDEN_WARP_NPC,2,2,{
+	end;
+OnTouch:
+	if (isbegin_quest(18136) == 1) {
+		cloakoffnpcself( "ep19_icas_in_262_179" );
+		cloakoffnpcself( "ep19_icas_in_260_180" );
+		cloakoffnpcself( "ep19_icas_in_261_186" );
+		cloakoffnpcself( "ep19_icas_in_262_184" );
+		end;
+	}
+	end;
+}
+
+icas_in,262,179,3	script	Maram#ep19maram05::ep19_icas_in_262_179	4_EP18_MARAM,{
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "You can't proceed with the quest because you have too many items.";
+		mes "Please clean up your items and try again.";
+		close;
+	}
+	if (isbegin_quest(18136) == 1) {
+		cutin "ep18_maram_01.png",2;
+		mes "[Maram]";
+		mes "The rescued survivors are warming themselves.";
+		mes "These people I'm going to take you to the airship.";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[Miriam]";
+		mes "I'm glad I found it before it happened.";
+		mes "It was difficult to make a living, so I knew Jormungandra as a new religion and followed it.I think there are these too.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[Maram]";
+		mes "Hmm. Anyways, I and Lazy-san will read through these people and send them home.";
+		mes "The adventurer worked hard too. Take a break.";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[Miriam]";
+		mes "Yes.";
+		mes "Take a break for today, and search again tomorrow.";
+		erasequest 18136;
+		setquest 18137;
+		set_reputation_points(3, (get_reputation_points(3) + 5));
+		if (get_reputation_points(3) >= 3000)
+			.@bonus = 1;
+		getitem 1000608,2+.@bonus;	// Ep19_Snow_Flower
+		getexp2 52243795,0;
+		getexp 0,3000000;
+		close3;
+	}
+	cutin "ep18_maram_01.png",2;
+	mes "[Maram]";
+	mes "We will wait until the survivors find some stability before leaving.";
+	mes "If there are any necessary items, I will buy them at the same time.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(18136) == 1" );
+	cloakonnpc();
+	end;
+}
+
+icas_in,260,180,5	script	Miriam#ep19miriam06::ep19_icas_in_260_180	4_EP18_MIRIAM,{
+	cutin "ep18_miriam_01.png",0;
+	mes "[Miriam]";
+	mes "Isn't the search difficult?";
+	mes "Why don't you warm up for a while?";
+	close3;
+
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+icas_in,261,186,7	script	Successor rescued#ep19_01::ep19_icas_in_261_186	4_M_SITDOWN,{
+	npctalk "..this..I miss this.. the taste of warm fire..!", "", bc_self;
+	end;
+
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+icas_in,262,184,7	script	Rescued Distress#ep19_02::ep19_icas_in_262_184	4_F_SITDOWN,{
+	npctalk "Gu.. Thank you for saving me. Uh huh.. I thought I was going to freeze to death.", "", bc_self;
+	end;
+
+OnInit:
+	cloakonnpc();
+	end;
+}
+//
+
+
+// Daily quest : Happy Lunch Time with Zoryara
+// (Gather 15 Tough Thin Shell)
+icas_in,241,66,3	script	Zoryara#ep19in::ep19_icas_in_241_66	4_EP19_ZORYARA,{
+	if (ep19_main < 11) {
+		mes "[Zoryara]";
+		mes "I heard that humans are coming...";
+		mes "Did you get permission to go out? We are in a state of war, so to speak, it is dangerous to act alone without permission.";
+		mes "Go back to our nest.";
+		close;
+	}
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "- You cannot proceed with the quest because you have many items. -";
+		close;
+	}
+	switch( checkquest(8788,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[Zoryara]";
+		mes "The kids are happy, so I saved an hour.";
+		mes "To have other races participate in our childcare like this... Heh heh.";
+		close;
+	case 2:
+		erasequest 8788;
+		break;
+	}
+	switch( isbegin_quest(8787) ) {	// first time
+	case 0:
+		mes "[Zoryara]";
+		mes "Are you a human who came with Helock this time? Nice to meet you.";
+		mes "I am Joe...";
+		mes "Alvin Alexandria Adele David Cassia Harry Apollo.";
+		mes "Call me comfortably";
+		next;
+		mes "[Horyara]";
+		mes "My eldest brother's name is Joryara!";
+		mes "I am Horya.";
+		next;
+		mes "[Zoryara]";
+		mes "...Holyara!";
+		next;
+		mes "[Zoryara]";
+		mes "....";
+		mes "My assistant made a mistake.";
+		next;
+		mes "[Zoryara]";
+		mes "As you can see, this is a kitchen/dining room.";
+		mes "The kitchen is open to everyone, but I take care of the plants.";
+		mes "It's all about cooking... but if you need to cut, mince, or use it, I'll do it.";
+		next;
+		mes "[Zoryara]";
+		mes "It's all frozen anyway...";
+		mes "I'm glad I don't have to worry about getting hurt.";
+		mes "And using fire reduces the output.";
+		mes "There are times when I have to take care of the quantity anyway.";
+		next;
+		mes "[Zoryara]";
+		mes "...I was talking all the time by myself.";
+		mes "If Moryara goes fishing, I have to see Horya...";
+		npctalk "Horyara: I'm looking at you!", "ep19_icas_in_235_57", bc_self;
+		next;
+		mes "[Zoryara]";
+		mes "My parents are in the patrol.";
+		mes "Holyara was almost raised by me and my second son, Moryara.";
+		npctalk "Horyara: I took care of you!", "ep19_icas_in_235_57", bc_self;
+		next;
+		mes "[Zoryara]";
+		mes "Your assistant. Are you talking to a customer?";
+		npctalk "Horyara: Yep!", "ep19_icas_in_235_57", bc_self;
+		next;
+		mes "[Zoryara]";
+		mes "Please understand.";
+		npctalk "Horyara: I want to eat ice straw!", "ep19_icas_in_235_57", bc_self;
+		next;
+		mes "[Zoryara]";
+		mes "...";
+		next;
+		mes "[Zoryara]";
+		mes "<ITEM>[Thin and Tough Shell]<INFO>1000830</INFO></ITEM> You mean... It's out of stock.";
+		mes "What would happen if there were 20 or so...";
+		npctalk "Toralung: Nadu!", "ep19_icas_in_232_59", bc_self;
+		next;
+		mes "[Zoryara]";
+		mes "...";
+		next;
+		mes "I think it was a nursery.";
+		next;
+		if (select( "Go hunting instead", "Comfort" ) == 1) {
+			mes "[Zoryara]";
+			mes "It always happens...";
+			mes "Yes. It always happens...";
+			npctalk "Toralung: Joryara, play with me!", "ep19_icas_in_232_59", bc_self;
+			close;
+		}
+		mes "[Zoryara]";
+		mes "Thank you so much!";
+		mes "The children will be taken care of by me... Ah, of course human, you have nothing to do with our children...";
+		mes "<ITEM>[Thin and tough shell]<INFO>1000830</INFO></ITEM> can be obtained by hunting Ice Straws.";
+		mes "Twenty, please!";
+		setquest 8787;
+		close;
+	case 1:
+		if (countitem(1000830) < 15) {
+			mes "[Zoryara]";
+			mes "Can you get me 15 <ITEM>[Thin and tough shells]<INFO>1000830</INFO></ITEM>...";
+			mes "I can't help it because the kids want to eat it.";
+			npctalk "Holyara: Zoryara can't hunt!", "ep19_icas_in_235_57", bc_self;
+			npctalk "Toralung: Use your sword well!", "ep19_icas_in_232_59", bc_self;
+			npctalk "Zoryara: These guys...", "", bc_self;
+			close;
+		}
+		mes "[Zoryara]";
+		mes "Thank you, human!";
+		npctalk "Horyara: Thank you, human!", "ep19_icas_in_235_57", bc_self;
+		npctalk "Thank you, human!", "ep19_icas_in_232_59", bc_self;
+		delitem 1000830,15;	// EP19_Thin_Shell
+		completequest 8787;
+		setquest 8788;
+		set_reputation_points(3, (get_reputation_points(3) + 5));
+		if (get_reputation_points(3) >= 3000)
+			getitem 1000608,1;	// Ep19_Snow_Flower
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		next;
+		mes "[Zoryara]";
+		mes "...";
+		mes "Ugh...";
+		emotion ET_CRY;
+		next;
+		mes "[Zoryara]";
+		mes "Come on... I'll chop it up, so stay away.";
+		mes "It is dangerous if ice cubes splash.";
+		mes "Human, step back a little if you're going to watch.";
+		mes "Now, shall we try a knife...";
+		npctalk "Zoryara: Deadly! Iwin's Guardian-type Quicksword!", "", bc_self;
+		npctalk "Holyara: Joryara is cool!", "ep19_icas_in_235_57", bc_self;
+		npctalk "Joryara is cool!", "ep19_icas_in_232_59", bc_self;
+		close;
+	case 2:
+		break;
+	}
+
+	if (isbegin_quest(8789) == 1) {
+		if (countitem(1000830) < 15) {
+			mes "[Zoryara]";
+			mes "Can you get me 15 <ITEM>[Thin and tough shells]<INFO>1000830</INFO></ITEM>...";
+			mes "I can't help it because the kids want to eat it.";
+			npctalk "Holyara: Zoryara can't hunt!", "ep19_icas_in_235_57", bc_self;
+			npctalk "Toralung: Use your sword well!", "ep19_icas_in_232_59", bc_self;
+			npctalk "Zoryara: These guys...", "", bc_self;
+			close;
+		}
+		mes "[Zoryara]";
+		mes "Thank you, human!";
+		npctalk "Horyara: Thank you, human!", "ep19_icas_in_235_57", bc_self;
+		npctalk "Toralung: Thank you, human!", "ep19_icas_in_232_59", bc_self;
+		delitem 1000830,15;	// EP19_Thin_Shell
+		erasequest 8789;
+		setquest 8788;
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		set_reputation_points(3, (get_reputation_points(3) + 5));
+		if (get_reputation_points(3) >= 3000)
+			getitem 1000608,1;	// Ep19_Snow_Flower
+		getexp2 52243795,0;
+		getexp 0,3000000;
+		next;
+		mes "[Zoryara]";
+		mes "...";
+		mes "Ugh...";
+		emotion ET_CRY;
+		next;
+		mes "[Zoryara]";
+		mes "Come on... I'll chop it up, so stay away.";
+		mes "It is dangerous if ice cubes splash.";
+		mes "Human, step back a little if you're going to watch.";
+		mes "Now, shall we try a knife...";
+		npctalk "Zoryara: Deadly! Iwin's Guardian-type Quicksword!", "", bc_self;
+		npctalk "Holyara: Joryara is cool!", "ep19_icas_in_235_57", bc_self;
+		npctalk "Joryara is cool!", "ep19_icas_in_232_59", bc_self;
+		close;
+	}
+	mes "[Zoryara]";
+	mes "Heh, heh heh...";
+	mes "Human, nice to meet you...";
+	next;
+	select( "You are busy today" );
+	mes "[Zoryara]";
+	mes "No... So there.";
+	npctalk "Horyara: I want to eat Jellopi!", "ep19_icas_in_235_57", bc_self;
+	npctalk "Toralung: Me too!", "ep19_icas_in_232_59", bc_self;
+	next;
+	mes "[Zoryara]";
+	mes "...so there.";
+	mes "It's not that the inventory can't be managed... it's because the kids really like it.";
+	mes "Could you bring me 15 <ITEM>[thin and tough shells]<INFO>1000830</INFO></ITEM>...";
+	next;
+	if (select( "Accept", "I'm busy" ) == 2) {
+		mes "[Zoryara]";
+		mes "I can't help it...";
+		npctalk "Horyara: Is the tide coming?", "ep19_icas_in_235_57", bc_self;
+		npctalk "Toralung: I want to go too!", "ep19_icas_in_232_59", bc_self;
+		npctalk "Zoryara: You're still far away! Come on, let's play here... here.", "", bc_self;
+		close;
+	}
+	mes "[Zoryara]";
+	mes "Thank you...";
+	mes "<ITEM>[Thin and tough shell]<INFO>1000830</INFO></ITEM> can be obtained by hunting Ice Straws.";
+	npctalk "Horyara: Play until humans return!", "ep19_icas_in_235_57", bc_self;
+	npctalk "Me too!", "ep19_icas_in_232_59", bc_self;
+	setquest 8789;
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_NONE, "isbegin_quest(8787) == 0 && ep19_main >= 11" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(8787) == 1 && countitem(1000830) >= 15" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(8789) == 1 && countitem(1000830) >= 15" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(8788,PLAYTIME) == -1 && isbegin_quest(8789) == 0 && isbegin_quest(8787) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(8788,PLAYTIME) == 2" );
+	end;
+}
+
+icas_in,235,57,3	script	Horyara#ep19in::ep19_icas_in_235_57	4_EP19_IWIN,{
+	mes "[Horyara]";
+	mes "I am Horyara!";
+	mes "You will be a great guardian in the future!";
+	close;
+}
+
+icas_in,232,59,5	script	Toralung#ep19in::ep19_icas_in_232_59	4_EP19_IWIN,{
+	mes "[Toralung]";
+	mes "I am Toralung!";
+	mes "In the future...";
+	mes "In the future... you will be a great guardian!";
+	mes "Are you saying this right?";
+	npctalk "Horyara: That's right!", "ep19_icas_in_235_57", bc_self;
+	npctalk "Toralung: Whew.", "ep19_icas_in_232_59", bc_self;
+	close;
+}
+//
+
+// (cloakoff in side quest)
+// icas_in,33,112,0	script	#Internal number limit	HIDDEN_WARP_NPC,1,1,{
+
+// Daily quest : Friederike's Day
+// (Kill 10x Primitive Rgan and 10x Lowest Rgan)
+// (Gather 10 Rgan's Magic Core)
+// Side quest : Frozen Sea. Step 7, 20
+icas_in,32,123,5	script	Friederike#ep19_room	4_EP19_FRIEDERIKE,{
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "- Wait here!! -";
+		mes "- You have too many items -";
+		mes "- The quest cannot be completed. -";
+		mes "- lighten your body -";
+		mes "- Please try again. -";
+		close;
+	}
+	// Side quest Purification Saint
+	// Unlock the 2 Side Quests : Frozen Sea / Friederike's Day
+	if (ep19_side_saint == 18) {
+		mes "[Friederike]";
+		mes "Is this my room?";
+		mes "Cute!";
+		cutin "ep19_friederike03.png",2;
+		cloakoffnpcself( "ep19_healrock_4" );
+		cloakoffnpcself( "ep19_healrock_5" );
+		cloakoffnpcself( "ep19_healrock_6" );
+		cloakoffnpcself( "ep19_healrock_7" );
+		cloakoffnpcself( "ep19_healrock_8" );
+		next;
+		mes "[Voglinde]";
+		mes "My children are here.";
+		mes "It was hard to come.";
+		cutin "ep19_voglinde01.png",0;
+		cloakoffnpcself( "ep19_healrock_3" );
+		next;
+		mes "[Friederike]";
+		mes "Ah!!!";
+		mes "Bocklind, I'm here~";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Mark]";
+		mes "Ah... hello!";
+		mes "Your Majesty the Princess!!!";
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[Dew]";
+		mes "<FONT SIZE = 16><B>and... Her Majesty?!</FONT></B>";
+		cutin "ep18_dew_02.png",2;
+		next;
+		mes "[Voglinde]";
+		mes "Oh my!";
+		mes "You are Elise's younger brother.";
+		mes "You don't have to be so rigid.";
+		mes "Call me Aunt Voglinde.";
+		mes "Are you friends next to me?";
+		cutin "ep19_voglinde01.png",0;
+		next;
+		mes "[Mark]";
+		mes "Yes.";
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[Voglinde]";
+		mes "Welcome!";
+		mes "Even if not, there are not enough people.";
+		mes "<FONT SIZE = 16><B>Ho ho ho!</FONT></B>";
+		cutin "ep19_voglinde01.png",0;
+		next;
+		mes "[Voglinde]";
+		mes "Then I have confirmed that Iman Friederike is here, so I'll go back.";
+		mes "There's too much to do.";
+		cutin "ep19_voglinde03.png",0;
+		next;
+		mes "[Friederike]";
+		mes "Ah~";
+		mes "Are you going already?";
+		cutin "ep19_friederike04.png",2;
+		npctalk "Friederike: We just met!", "", bc_self;
+		next;
+		mes "[Voglinde]";
+		mes "I'll call you when I'm free.";
+		mes "I have prepared some delicious tea and sweets.";
+		cutin "ep19_voglinde03.png",0;
+		next;
+		mes "[Friederike]";
+		mes "Really?";
+		cutin "ep19_friederike03.png",2;
+		next;
+		mes "[Voglinde]";
+		mes "That's right~~";
+		mes "I asked you for something special because you came.";
+		cutin "ep19_voglinde01.png",0;
+		next;
+		mes "[Voglinde]";
+		mes "Ugh!";
+		mes "Time is already like this!";
+		mes "I must go very soon.";
+		mes "^e5555e Lehar^000000 Please take care of me.";
+		mes "I believe";
+		cutin "ep19_voglinde01.png",0;
+		npctalk "Voglinde: The two of you follow me.", "ep19_healrock_3", bc_self;
+		next;
+		mes "[Lehar]";
+		mes "Yes...? Yes!";
+		cutin "ep19_lehar05.png",2;
+		npctalk "Dew: yes?!", "ep19_healrock_4", bc_self;
+		npctalk "Magi: Yes!", "ep19_healrock_6", bc_self;
+		cloakonnpcself( "ep19_healrock_3" );
+		cloakonnpcself( "ep19_healrock_4" );
+		cloakonnpcself( "ep19_healrock_6" );
+		ep19_side_saint = 19;
+		erasequest 11810;
+		setquest 11811;
+		close3;
+	}
+	if (ep19_side_saint == 19) {
+		mes "[Friederike]";
+		mes "Lehar.";
+		mes "What did Boklind say?";
+		cutin "ep19_friederike02.png",2;
+		close3;
+	}
+	if (ep19_side_saint < 20)	// the player shouldn't be able to come here without the pre-requisite quests
+		end;
+
+	// Side quest : Frozen Sea. Step 7
+	if (ep19_side_sea == 7) {
+		mes "[Friederike]";
+		mes "Are you here?";
+		mes "It's very cold, isn't it?";
+		mes "Everyone, come here.";
+		mes "It's very warm here because it's covered with feathers.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Mark]";
+		mes "The thought of resting is like a chimney, but now is not the time.";
+		cloakoffnpcself( "ep19_healrock_5" );
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[Mark]";
+		mes "Put on your coat.";
+		mes "I have a place to go";
+		next;
+		mes "[Friederike]";
+		mes "Where are you going?";
+		mes "Are you going out?";
+		mes "Is it this cold?";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Mark]";
+		mes "^e5555eIf you found a pit full of poison^000000, it's probably because the tamarin fell into it.";
+		mes "If you don't purify it, another victim will come.";
+		mes "Shururu's magic core is also broken.";
+		cutin "ep18_mark_01.png",0;
+		npctalk "Tataring: I'm going to die!!!", "ep19_healrock_2", bc_self;
+		next;
+		mes "[Friederike]";
+		mes "As long as the magic core is broken, you may die if you just fall out.";
+		mes "Because I don't want anyone to get hurt...";
+		mes "Let's go.";
+		cutin "ep19_friederike02.png",2;
+		ep19_side_sea = 8;
+		erasequest 11820;
+		setquest 11821;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_healrock_5" );
+		end;
+	}
+	if (ep19_side_sea == 8) {
+		mes "[Friederike]";
+		mes "As long as the magic core is broken, you may die if you just fall out.";
+		mes "Because I don't want anyone to get hurt...";
+		mes "Let's go.";
+		cutin "ep19_friederike02.png",2;
+		close3;
+	}
+	// Side quest : Frozen Sea. Step final
+	if (ep19_side_sea == 16) {
+		mes "[Friederike]";
+		mes "Are you here?";
+		mes "Are you hurt anywhere?";
+		cutin "ep19_friederike02.png",2;
+		cloakoffnpcself( "ep19_healrock_5" );
+		cloakoffnpcself( "ep19_healrock_7" );
+		next;
+		mes "[Lehar]";
+		mes "I'm really glad you're safe.";
+		mes "How surprised I was to hear the news from Magi.";
+		cutin "ep19_lehar01.png",2;
+		cloakoffnpcself( "ep19_healrock_8" );
+		next;
+		mes "[Lehar]";
+		mes "So how about the inside?";
+		mes "Depending on the degree of danger, if you don't report it to your aunt quickly...";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[Voglinde]";
+		mes "No way";
+		cutin "ep19_voglinde01.png",0;
+		cloakoffnpcself( "ep19_healrock_3" );
+		cloakoffnpcself( "ep19_healrock_4" );
+		cloakoffnpcself( "ep19_healrock_6" );
+		next;
+		mes "[Lehar]";
+		mes "<FONT SIZE = 16> Auntie!</FONT>";
+		mes "How...";
+		cutin "ep19_lehar05.png",2;
+		next;
+		mes "[Voglinde]";
+		mes "How proud that Friederike came and cleared the rot ^000000 ^e5555e.";
+		mes "So I came to check what's going on.";
+		cutin "ep19_voglinde02.png",0;
+		next;
+		mes "[Voglinde]";
+		mes "It seems like everyone has returned safely.";
+		mes "I'm really glad I didn't get hurt.";
+		cutin "ep19_voglinde01.png",0;
+		next;
+		mes "[Voglinde]";
+		mes "We find things like that, and our babies don't disappoint their aunt's expectations either.";
+		mes "Awesome!";
+		next;
+		mes "[Voglinde]";
+		mes "It's not good news that such a thing exists, but how fortunate it was to find out before a major accident happened.";
+		cutin "ep19_voglinde04.png",0;
+		next;
+		mes "[Surr]";
+		mes "<FONT SIZE = 14><B>Voglinde!</FONT></B>";
+		mes "<FONT SIZE = 14><B>The pit was quite wide on the inside, but it didn't look like it was connected anywhere else.</FONT></B>";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Surr]";
+		mes "<FONT SIZE = 14><B>But I think it's dangerous to leave it alone because it's full of deformed Rgans and monsters!</FONT></B>";
+		next;
+		mes "[Voglinde]";
+		mes "Yes?";
+		mes "How are they different?";
+		cutin "ep19_voglinde01.png",0;
+		next;
+		mes "[Surr]";
+		mes "<FONT SIZE = 14><B>The Rgans were somehow unnatural and grotesquely warped.</FONT></B>";
+		mes "<FONT SIZE = 14><B>The colors of the monsters are strange... Some of them I haven't seen from the outside!</FONT></B>";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Voglinde]";
+		mes "It's a bizarrely twisted Rgan...";
+		mes "Then...it could have been a natural occurrence, but we can't rule out the possibility that ^e5555e an Rgan's trash can^000000";
+		cutin "ep19_voglinde02.png",0;
+		next;
+		select( "Trash can?" );
+		mes "[Voglinde]";
+		mes "Rgans brutally discriminate against those of the same race that do not meet their desired standards.";
+		mes "You throw it away like that.";
+		cutin "ep19_voglinde04.png",0;
+		next;
+		mes "[Surr]";
+		mes "<FONT SIZE = 14><B>I also brought some meat here</FONT></B>";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Voglinde]";
+		mes "Ah... yes?";
+		mes "My...smells really great.";
+		cutin "ep19_voglinde03.png",0;
+		next;
+		mes "[Voglinde]";
+		mes "Can you clean up Friederike?";
+		mes "Your nose will be crooked";
+		cutin "ep19_voglinde02.png",0;
+		next;
+		mes "[Friederike]";
+		mes "Yes.";
+		mes "I cleaned it up";
+		cutin "ep19_friederike05.png",2;
+		next;
+		mes "[Surr]";
+		mes "Well.";
+		mes "When it is purified, there is no smell and the meat is soft and savory.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Dew]";
+		mes "Have you eaten?!";
+		cutin "ep18_dew_02.png",2;
+		next;
+		mes "[Voglinde]";
+		mes "Well, by our standards, it's a little strange, but by their standards, the Rgan is just ^e5555e a bug^000000, nothing more, nothing less.";
+		cutin "ep19_voglinde01.png",0;
+		next;
+		mes "[Surr]";
+		mes "I firmly believe that Friederike-sama will cleanse you if you have an upset stomach.";
+		mes "Whoops.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Surr]";
+		mes "Then I'll go hunting again.";
+		next;
+		mes "[Lehar]";
+		mes "Isn't that too much of a stretch?";
+		mes "Why don't you take a break?";
+		cutin "ep19_lehar05.png",2;
+		next;
+		mes "[Surr]";
+		mes "Tataring also collapsed, so if you don't overdo it, you'll run out of food ^e5555e^000000.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Lehar]";
+		mes "I understand, but...";
+		cutin "ep19_lehar04.png",2;
+		next;
+		mes "[Tataring]";
+		mes "I'll help you as soon as your body recovers, so get some rest for now.";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[Surr]";
+		mes "Yes...";
+		mes "Okay.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Voglinde]";
+		mes "Yes.";
+		mes "Get some rest for now, as the other kids will also help with food procurement.";
+		mes "There is still a lot of work to be done.";
+		cutin "ep19_voglinde01.png",0;
+		next;
+		mes "[Voglinde]";
+		mes "Then I'm busy...";
+		mes "Have a good rest.";
+		next;
+		mes "[Lehar]";
+		mes "It would be good not only for us, but for Auntie to get some rest...";
+		mes "I'm worried.";
+		cutin "ep19_lehar04.png",2;
+		cloakonnpcself( "ep19_healrock_3" );
+		cloakonnpcself( "ep19_healrock_6" );
+		cloakonnpcself( "ep19_healrock_4" );
+		ep19_side_sea = 17;
+		completequest 11829;
+		getitem 1000608,10;	// Ep19_Snow_Flower
+		set_reputation_points(3, (get_reputation_points(3) + 10));
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_healrock_7" );
+		cloakonnpcself( "ep19_healrock_5" );
+		cloakonnpcself( "ep19_healrock_8" );
+		end;
+	}
+	//
+
+	// Daily quest - Friederike's Day
+	if (checkquest(11813,HUNTING) == 2 && countitem(1000705) >= 10) {
+		mes "[Friederike]";
+		mes "" + strcharinfo(0) + "Sir!!!";
+		mes "You're back already.";
+		mes "How are you?";
+		mes "Did the blessing work?";
+		cutin "ep19_friederike01.png",2;
+		delitem 1000705,10;	// Ep19_Rgan_Core
+		erasequest 11813;
+		setquest 11814;
+		getitem 1000608,2;	// Ep19_Snow_Flower
+		set_reputation_points(3, (get_reputation_points(3) + 5));
+		if (get_reputation_points(3) >= 3000)
+			getitem 1000608,1;	// Ep19_Snow_Flower
+		getexp 10000000,7000000;	// affected by server drop rate
+		next;
+		mes "[Friederike]";
+		mes "Wow!";
+		mes "Looking at the magical cores I brought, it must have had some effect.";
+		mes "Not sticky!";
+		cutin "ep19_friederike03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "With an intact magic core like this, you can make amazing things more easily!";
+		mes "Come on, let Vellgunde know the results today!";
+		cutin "ep19_friederike05.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Thank you so much for your help.";
+		mes "" + strcharinfo(0) + "You too, get a good rest.";
+		mes "I will always pray";
+		cutin "ep19_friederike03.png",2;
+		close3;
+	}
+	if (isbegin_quest(11812) == 0) {
+		mes "[Friederike]";
+		mes "Come to think of it, I heard from Voglinde earlier.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Leon-sama and Aurelie-sama can purify the Pollution and Lgan's magic core, but they must have suffered a lot because of the high consumption of magic.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Friederike]";
+		mes "If you purify the magic core, ^e5555eVellgunde^000000...";
+		mes "Um... you explained it, but I'm not familiar with the field...";
+		cutin "ep19_friederike03.png",2;
+		npctalk "Friederike: Something like this...", "", bc_self;
+		next;
+		mes "[Friederike]";
+		mes "Anyway, they extracted it and made it into various magical crystals.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "You're using it for multiple purposes.";
+		mes "Cooking food or lighting a room...";
+		npctalk "Friederike: Putting it on a wetsuit...", "", bc_self;
+		next;
+		mes "[Friederike]";
+		mes "I was scolded by Voglinde for saying that it was a waste to use the magical cores purified through such hard work.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Voglinde-sama is the trifles that you would normally enjoy in a resource-rich Rune-Midgarts,";
+		npctalk "Friederike: No trees grow here.", "", bc_self;
+		next;
+		mes "[Friederike]";
+		mes "In Isgard, lighting a room, purifying the water, every little thing is essential to life.";
+		next;
+		mes "[Friederike]";
+		mes "So, from now on, I will replace Leon-sama and Aurelie-sama, who specializes in purification!";
+		mes "The magic core has been purged!";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[Friederike]";
+		mes "So " + strcharinfo(0) + "If you also get ^e5555eMagic Core^000000 from Rgan, bring it to me.";
+		mes "I will clean it up and return it to you.";
+		next;
+		mes "[Friederike]";
+		mes "Ah!";
+		mes "And I thought of it because I heard that there is a warehouse with a huge amount of magic cores that have not been purged.";
+		npctalk "Friederike: This is my homework for the future.", "", bc_self;
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Ordinary magic cores are obtained from Lgan^000000 with a lower rank of ^e5555e.";
+		mes "It is dirty and difficult to process...";
+		mes "It smells and the land around it is polluted...";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Friederike]";
+		mes "So, I'm trying to figure out how much of the purification effect will be if I receive the blessing of my purification and get ^e5555e Rgan's low-grade magic core^000000.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Because that alone will make my work much easier.";
+		mes "" + strcharinfo(0) + "If you are interested, would you like to participate?";
+		cutin "ep19_friederike05.png",2;
+		setquest 11812;
+		completequest 11812;
+	}
+	else {
+		mes "[Friederike]";
+		mes "Is the Isgard investigation going well?";
+		mes "It's very cold outside, isn't it?";
+		mes "It would be good to rest in your room after work.";
+		cutin "ep19_friederike02.png",2;
+	}
+	next;
+	switch( select( "Help Friederike.", "Clean the low-level magic core.", "Let's chat." ) ) {
+	case 1:
+		switch( checkquest(11814,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[Friederike]";
+			mes "With an intact magic core like this, you can make amazing things more easily!";
+			mes "Come on, let Vellgunde know the results today!";
+			cutin "ep19_friederike05.png",2;
+			next;
+			mes "[Friederike]";
+			mes "Thank you so much for your help.";
+			mes "" + strcharinfo(0) + "You too, get a good rest.";
+			mes "I will always pray";
+			cutin "ep19_friederike03.png",2;
+			close3;
+		case 2:
+			erasequest 11814;
+			break;
+		}
+		switch( checkquest(11813,HUNTING) ) {
+		case -1:
+			mes "[Friederike]";
+			mes "Then, kill at least ^e5555e 10 ^000000 each of ^e5555e " + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + "^000000 and ^e5555e " + getmonsterinfo("EP19_RGAN_B", MOB_NAME) + "^000000, and bring back ^e5555e10 or more ^000000 of ^e5555e Mana Core^000000.";
+			cutin "ep19_friederike01.png",2;
+			next;
+			mes "[Friederike]";
+			mes "If my prediction is correct, you'll get better ^e5555e Magic Core^000000, not ^e5555e Low-grade Magic Core^000000.";
+			next;
+			mes "[Friederike]";
+			mes "Don't push yourself too hard and come back safely!";
+			mes "Okay?";
+			cutin "ep19_friederike04.png",2;
+			setquest 11813;
+			close3;
+		case 0:
+		case 1:
+			mes "[Friederike]";
+			mes "Then, kill at least ^e5555e 10 ^000000 each of ^e5555e " + getmonsterinfo("EP19_RGAN_A", MOB_NAME) + "^000000 and ^e5555e " + getmonsterinfo("EP19_RGAN_B", MOB_NAME) + "^000000, and bring back ^e5555e10 or more ^000000 of ^e5555e Mana Core^000000.";
+			cutin "ep19_friederike01.png",2;
+			next;
+			mes "[Friederike]";
+			mes "If my prediction is correct, you'll get better ^e5555e Magic Core^000000, not ^e5555e Low-grade Magic Core^000000.";
+			next;
+			mes "[Friederike]";
+			mes "Don't push yourself too hard and come back safely!";
+			mes "Okay?";
+			cutin "ep19_friederike04.png",2;
+			close3;
+		case 2:
+			end;
+		}
+		end;
+	case 2:
+		if (countitem(1000707) < 10) {
+			mes "[Friederike]";
+			mes "Okay!";
+			mes "Then let's show our skills, shall we?";
+			next;
+			mes "[Friederike]";
+			mes "Hey...";
+			mes "^e5555e You need 10 pieces of ^e5555e^000000 for low-grade magic cores of Rgan to make something useful.";
+			cutin "ep19_friederike02.png",2;
+			next;
+			mes "[Friederike]";
+			mes "It's too weak magic...";
+			close3;
+		}
+		mes "[Friederike]";
+		mes "Okay!";
+		mes "Then let's show our skills, shall we?";
+		next;
+		mes "[Friederike]";
+		mes "^e5555e If Rgan's low-grade magic core^000000 is purified, the magic core debris is well put together!!!";
+		mes "This is a very useful ^e5555e" + getitemname(1000706) + "^000000!";
+		delitem 1000707,10;	// Ep19_Rgan_Core_F
+		getitem 1000706,1;	// Ep19_Purified_Core
+		next;
+		mes "[Friederike]";
+		mes "^e5555eBring it to Vellgunde^000000 and he'll love it!";
+		cutin "ep19_friederike03.png",2;
+		close3;
+	case 3:
+		mes "[Friederike]";
+		mes "Wow!";
+		mes "What interesting story are you going to tell us today?";
+		cutin "ep19_friederike03.png",2;
+		close3;
+	}
+	end;
+
+OnInit:
+	// Side quest : Frozen Sea. Step 7 and final
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11820) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11829) == 1" );
+
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11810) == 1" );
+
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "checkquest(11813,HUNTING) == 2 && countitem(1000705) >= 10" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "ep19_side_saint == 20 && checkquest(11814,PLAYTIME) == -1 && checkquest(11813,HUNTING) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(11814,PLAYTIME) == 2" );
+	end;
+}
+
+
+// Side quest : Frozen Sea (Purification Saint side quest pre-requise). Step 1
+// Daily quests : Abandoned Pit Fl 1, Abandoned Pit Fl 2, Dig and Dig
+icas_in,27,116,5	script	Surr#ep19_room::ep19_healrock_1	4_EP19_IWIN,{
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "- Wait here!! -";
+		mes "- You have too many items -";
+		mes "- The quest cannot be completed. -";
+		mes "- lighten your body -";
+		mes "- Please try again. -";
+		close;
+	}
+	if (ep19_side_saint < 20) {
+		mes "[Surr]";
+		mes "When the feathers are wet, the body is heavy and it is easy to catch a cold.";
+		mes "It is always important to dry well indoors.";
+		cutin "ep19_iwin03.png",2;
+		close3;
+	}
+
+	// Side quest : Frozen Sea
+	if (ep19_side_sea == 1) {
+		mes "[Surr]";
+		mes "Lehar!!";
+		mes "I brought you!";
+		cutin "ep19_iwin03.png",2;
+		cloakoffnpcself( "ep19_healrock_2" );
+		next;
+		mes "[Lehar]";
+		mes "What... what.";
+		mes "This strange smell...";
+		cutin "ep19_lehar03.png",2;
+		cloakoffnpcself( "ep19_healrock_8" );
+		next;
+		mes "[Surr]";
+		mes "I don't know the details.";
+		mes "You'll find out when he wakes up.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Lehar]";
+		mes "Friederike-nim, please cleanse this person first...";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "You keep doing weird things...";
+		mes "It smells...";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[???]";
+		mes "Ugh...";
+		cutin "ep19_tamarin03.png",2;
+		next;
+		mes "[???]";
+		mes "<FONT SIZE = 16><B>Wow!!!!</FONT></B>";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[Surr]";
+		mes "Are you in the mood for Tataring?";
+		mes "Are you okay!?";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Surr]";
+		mes "Thank you";
+		mes "Lehar!";
+		mes "Fri...Derike-nim...?";
+		next;
+		mes "[Tataring]";
+		mes "Heh heh heh heh";
+		mes "I'm dead and alive...";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[Dew]";
+		mes "Ah!!!";
+		mes "Tamarin!!";
+		mes "What are you doing here!";
+		cutin "ep18_dew_02.png",2;
+		cloakoffnpcself( "ep19_healrock_4" );
+		next;
+		mes "[Tataring]";
+		mes "헛!!";
+		mes "Dew!";
+		mes "How did you get here!!!";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[Dew]";
+		mes "I don't know!!";
+		cutin "ep18_dew_01.png",2;
+		next;
+		mes "[Mark]";
+		mes "What really happened?";
+		cloakoffnpcself( "ep19_healrock_5" );
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[Tataring]";
+		mes "Up to the Mark?";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[Lehar]";
+		mes "Do you know anyone?";
+		mes "^e5555eIsgard wouldn't be able to enter without an invitation.^000000 How did you get here?";
+		cutin "ep19_lehar04.png",2;
+		ep19_side_sea = 2;
+		setquest 11815;
+		close3;
+	}
+	if (ep19_side_sea == 2) {
+		mes "[Surr]";
+		mes "Are you in the mood for Tataring?";
+		mes "Are you okay!?";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Surr]";
+		mes "Thank you";
+		mes "Lehar!";
+		mes "Pri...Derike-nim...?";
+		next;
+		mes "[Tataring]";
+		mes "Heh heh heh heh";
+		mes "I'm dead and alive...";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[Dew]";
+		mes "Ah!!!";
+		mes "Tamarin!!";
+		mes "What are you doing here!";
+		cutin "ep18_dew_02.png",2;
+		cloakoffnpcself( "ep19_healrock_4" );
+		next;
+		mes "[Tataring]";
+		mes "헛!!";
+		mes "Dew!";
+		mes "How did you get here!!!";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[Dew]";
+		mes "I don't know!!";
+		cutin "ep18_dew_01.png",2;
+		next;
+		mes "[Mark]";
+		mes "What really happened?";
+		cloakoffnpcself( "ep19_healrock_5" );
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[Tataring]";
+		mes "Up to the Mark?";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[Lehar]";
+		mes "Do you know anyone?";
+		mes "^e5555eIsgard wouldn't be able to enter without an invitation.^000000 How did you get here?";
+		cutin "ep19_lehar04.png",2;
+		close3;
+	}
+	if (ep19_side_sea < 17) {	// Frozen Sea completed
+		mes "[Surr]";
+		mes "When the feathers are wet, the body is heavy and it is easy to catch a cold.";
+		mes "It is always important to dry well indoors.";
+		cutin "ep19_iwin03.png",2;
+		close3;
+	}
+
+	// daily
+	// quest(s) completed
+	if (checkquest(11831,HUNTING) == 2 && countitem(1000708) >= 20 || checkquest(11833,HUNTING) == 2 && countitem(1000708) >= 20 || isbegin_quest(11849) == 1) {
+		mes "[Surr]";
+		mes "You're back.";
+		mes "I'm really glad you're safe.";
+		cutin "ep19_iwin03.png",2;
+		if (checkquest(11833,HUNTING) == 2 && countitem(1000708) >= 20) {
+			delitem 1000708,20;	// Ep19_Ice_Meat
+			erasequest 11833;
+			setquest 11834;
+			set_reputation_points(3, (get_reputation_points(3) + 5));
+			getitem 1000608,3;	// Ep19_Snow_Flower	// Note: 3 is not a mistake!
+			if (get_reputation_points(3) >= 3000)
+				getitem 1000608,1;	// Ep19_Snow_Flower
+			getexp 20000000,0;	// (affected by drop modifier)
+			getexp 0,14000000;	// unknown jexp
+			next;
+			// Note: this text is only for 11833
+			mes "[Surr]";
+			mes "every time you get a bunch of meat like this";
+			next;
+			mes "[Surr]";
+			mes "There is a huge struggle between the desire to keep the pit well maintained and the desire to quickly fill such a terrible pit.";
+			close3;
+		}
+		if (checkquest(11831,HUNTING) == 2 && countitem(1000708) >= 20) {
+			delitem 1000708,20;	// Ep19_Ice_Meat
+			erasequest 11831;
+			setquest 11832;
+			set_reputation_points(3, (get_reputation_points(3) + 5));
+			getitem 1000608,2;	// Ep19_Snow_Flower
+			if (get_reputation_points(3) >= 3000)
+				getitem 1000608,1;	// Ep19_Snow_Flower
+			getexp 18000000,0;	// (affected by drop modifier)
+			getexp 0,14000000;
+		}
+		if (isbegin_quest(11849) == 1) {
+			erasequest 11835;
+			erasequest 11849;
+			setquest 11850;
+			set_reputation_points(3, (get_reputation_points(3) + 5));
+			getitem 1000608,2;	// Ep19_Snow_Flower
+			if (get_reputation_points(3) >= 3000)
+				getitem 1000608,1;	// Ep19_Snow_Flower
+			getexp2 52243795,0;
+			getexp 0,3000000;
+		}
+		close3;
+	}
+
+	if (isbegin_quest(11830) == 0) {
+		mes "[Surr]";
+		mes "후...";
+		mes "It was a terrible pit.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Surr]";
+		mes "It is troublesome to find such a thing, but fortunately it seems that ^e5555e Advanced Rgan^000000 does not exist.";
+		next;
+		mes "[Surr]";
+		mes "Rgan is just a monster if he doesn't know how to use his head.";
+		next;
+		mes "[Surr]";
+		mes "Besides, if you don't see the higher rgans, they don't even care about the pits,";
+		next;
+		mes "[Surr]";
+		mes "It won't get worse if we block it well from our side.";
+		mes "If you have a car, you will have no choice but to borrow the power of Friederike-sama.";
+		next;
+		mes "[Surr]";
+		mes "If that happens, there will be more places to gather food, and that's not the only bad thing.";
+		next;
+		mes "[Surr]";
+		mes "I will continue to investigate the pit, but I'm short on staff right now, so I hope you all can help when you have time.";
+		setquest 11830;
+		completequest 11830;
+	}
+	else {
+		mes "[Surr]";
+		mes "Hello";
+		mes "How are you?";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Surr]";
+		mes "If you have any symptoms of poisoning or a sore spot, it is better to seek treatment.";
+	}
+	next;
+	switch( select( "Place to be abandoned(1)-220lv", "Place likely to be abandoned(2)-240lv", "Digging and digging", "Talking" ) ) {
+	case 1:
+		if (BaseLevel < 220) {
+			mes "[Surr]";
+			mes "It's too dangerous to go there now.";
+			mes "Because there are plenty of other things to do";
+			mes "Why don't you try something else?";
+			cutin "ep19_iwin03.png",2;
+			next;
+			mes "^4d4dff This quest can be performed at level 220 or higher.^000000";
+			close;
+		}
+		switch( checkquest(11832,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[Surr]";
+			mes "Today is here!";
+			mes "You're already helping a lot, so get some rest.";
+			cutin "ep19_iwin03.png",2;
+			close3;
+		case 2:
+			erasequest 11832;
+			break;
+		}
+		if (checkquest(11831,HUNTING) == -1) {
+			mes "[Surr]";
+			mes "You want to go to such a dangerous place again" + strcharinfo(0) + "I can't stop you either.";
+			cutin "ep19_iwin03.png",2;
+			next;
+			mes "[Surr]";
+			mes "Then ^e5555eThe 1st floor of the abandoned pit^000000, kill about ^e5555e40^000000 monsters, and bring ^e5555e20 ^000000 ^e5555efrozen meat^000000 .";
+			cutin "ep19_iwin03.png",2;
+			next;
+			mes "[Surr]";
+			mes "And if you think it's dangerous, just come back.";
+			mes "There is nothing more precious than life.";
+			setquest 11831;
+			close2;
+			cutin "",255;
+			navigateto("jor_ab01",113,10);
+			end;
+		}
+		// note: same text without items/hunting ongoing
+		mes "[Surr]";
+		mes "^e5555eIn the 1st floor of the abandoned pit^000000, kill about ^e5555e40^000000 monsters and bring ^e5555e20 ^000000 ^e5555efrozen meat^000000.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Surr]";
+		mes "And if you think it's dangerous, just come back.";
+		mes "There is nothing more precious than life.";
+		close2;
+		cutin "",255;
+		navigateto("jor_ab01",113,10);
+		end;
+	case 2:
+		if (BaseLevel < 240) {
+			mes "[Surr]";
+			mes "It's too dangerous to go there now.";
+			mes "Because there are plenty of other things to do";
+			mes "Why don't you try something else?";
+			cutin "ep19_iwin03.png",2;
+			next;
+			mes "^4d4dff This quest can be performed at level 240 or higher.^000000";
+			close3;
+		}
+		switch( checkquest(11834,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[Surr]";
+			mes "Today is here!";
+			mes "You're already helping a lot, so get some rest.";
+			cutin "ep19_iwin03.png",2;
+			close3;
+		case 2:
+			erasequest 11834;
+			break;
+		}
+		if (checkquest(11833,HUNTING) == -1) {
+			mes "[Surr]";
+			mes "You want to go to such a dangerous place again" + strcharinfo(0) + "I can't stop you either.";
+			cutin "ep19_iwin03.png",2;
+			next;
+			mes "[Surr]";
+			mes "Then ^e5555eThe 2nd floor of the abandoned pit^000000, kill about ^e5555e40^000000 monsters and bring ^e5555e20 ^000000 ^e5555efrozen meat^000000.";
+			cutin "ep19_iwin03.png",2;
+			next;
+			mes "[Surr]";
+			mes "And if you ever feel in danger, just come back.";
+			mes "There is nothing more precious than life.";
+			setquest 11833;
+			close2;
+			cutin "",255;
+			navigateto("jor_ab02",281,87);
+			end;
+		}
+		mes "[Surr]";
+		mes "^e5555e2nd floor of the abandoned pit^000000 Kill about ^e5555e40^000000 monsters and bring ^e5555e20 ^000000 ^e5555efrozen meat^000000.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Surr]";
+		mes "And if you ever feel in danger, just come back.";
+		mes "There is nothing more precious than life.";
+		close2;
+		cutin "",255;
+		navigateto("jor_ab02",281,87);
+		end;
+	case 3:
+		switch( checkquest(11850,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[Surr]";
+			mes "Today is here!";
+			mes "You're already helping a lot, so get some rest.";
+			cutin "ep19_iwin03.png",2;
+			close3;
+		case 2:
+			erasequest 11850;
+			break;
+		}
+		switch( isbegin_quest(11835) ) {
+		case 0:
+			mes "[Surr]";
+			mes "Abandoned pits have not been found to have any major problems yet, but they are always being closely investigated because you never know what will happen when.";
+			cutin "ep19_iwin03.png",2;
+			next;
+			mes "[Surr]";
+			mes "Today, ^e5555eAlp^000000 went to investigate first, but it takes a long time and is dangerous to do alone, so please go and ask if there is anything you can do to help.";
+			setquest 11835;
+			close2;
+			cutin "",255;
+			navigateto("jor_ab01",115,14);
+			end;
+		case 1:
+			mes "[Surr]";
+			mes "Abandoned pits have not been found to have any major problems yet, but they are always being closely investigated because you never know what will happen when.";
+			cutin "ep19_iwin03.png",2;
+			next;
+			mes "[Surr]";
+			mes "Today, ^e5555eAlp^000000 went to investigate first, but it takes a long time and is dangerous to do alone, so please go and ask if there is anything you can do to help.";
+			close2;
+			cutin "",255;
+			navigateto("jor_ab01",115,14);
+			end;
+		case 2:
+			mes "[Surr]";
+			mes "^e5555eHave you met Alf^000000?";
+			cutin "ep19_iwin03.png",2;
+			close2;
+			cutin "",255;
+			navigateto("jor_ab01",115,14);
+			end;
+		}
+		end;
+	case 4:
+		mes "[Surr]";
+		mes "Ha ha ha ha ha.";
+		mes "Because Iwin looks better with more feathers.";
+		cutin "ep19_iwin03.png",2;
+		close3;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+
+	// side quest
+	questinfo( QTYPE_QUEST, QMARK_NONE, "ep19_side_saint == 20 && ep19_side_sea == 1" );
+
+	// daily
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "checkquest(11831,HUNTING) == 2 && countitem(1000708) >= 20" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "checkquest(11833,HUNTING) == 2 && countitem(1000708) >= 20" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11849) == 1" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(11829) == 2 && isbegin_quest(11831) == 0 && checkquest(11832,PLAYTIME) == -1 && BaseLevel >= 220" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(11832,PLAYTIME) == 2" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(11829) == 2 && isbegin_quest(11833) == 0 && checkquest(11834,PLAYTIME) == -1 && BaseLevel >= 240" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(11834,PLAYTIME) == 2" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(11829) == 2 && isbegin_quest(11835) == 0 && checkquest(11850,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(11850,PLAYTIME) == 2" );
+	end;
+}
+
+// Side quest : Frozen Sea. Step 2
+// icas_in,27,122,5	script	Tataring#ep19_room::ep19_healrock_2	4_EP19_TAMARIN,{
+
+// Side quest : Frozen Sea. Step 3
+jor_back1,300,272,3	script	Hunting trap#ep19_1	4_ROPEPILE,{
+	if (ep19_side_sea == 4) {
+		mes "- Cold frozen hunting trap.";
+		mes "It doesn't seem to be a problem other than the old one. -";
+		next;
+		mes "- I think you should investigate further north. -";
+		close2;
+		cutin "",255;
+		navigateto("jor_back2",346,203);
+		end;
+	}
+	if (ep19_side_sea == 3) {
+		mes "- Cold frozen hunting trap.";
+		mes "It doesn't seem to be a problem other than the old one. -";
+		next;
+		mes "[Icewind Huntress]";
+		mes "Who are you!";
+		mes "I don't think you're a hunter, but why are you touching our trap?";
+		mes "Enemy?!";
+		cutin "ep19_iwin09.png",2;
+		next;
+		select( "Talk about the situation" );
+		mes "[Icewind Huntress]";
+		mes "Okay.";
+		mes "Excuse me.";
+		next;
+		mes "[Icewind Huntress]";
+		mes "There are no problems around here.";
+		mes "I feel a bit less prey, but...";
+		next;
+		mes "[Icewind Huntress]";
+		mes "I think it would be better to investigate further north than here.";
+		mes "Certainly, these days, the monsters seem to have gotten more ferocious...";
+		ep19_side_sea = 4;
+		erasequest 11816;
+		setquest 11817;
+		close2;
+		cutin "",255;
+		navigateto("jor_back2",346,203);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11816) == 1" );
+	end;
+}
+
+// Side quest : Frozen Sea. Step 4
+jor_back2,346,203,3	script	Hunting trap#ep19_2	4_ROPEPILE,{
+	if (ep19_side_sea == 5) {
+		mes "- Cold frozen hunting trap.";
+		mes "It doesn't seem to be a problem other than the old one. -";
+		next;
+		mes "- You'd better investigate the area around the pit. -";
+		close2;
+		navigateto("jor_back2",260,294);
+		end;
+	}
+	if (ep19_side_sea == 4) {
+		mes "- Cold frozen hunting trap.";
+		mes "It doesn't seem to be a problem other than the old one. -";
+		next;
+		mes "- You'd better investigate the area around the pit. -";
+		ep19_side_sea = 5;
+		erasequest 11817;
+		setquest 11818;
+		close2;
+		navigateto("jor_back2",260,294);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11817) == 1" );
+	end;
+}
+
+// Side quest : Frozen Sea. Step 5
+jor_back2,260,294,3	script	Hunting trap#ep19_3	4_ROPEPILE,{
+	if (ep19_side_sea == 5) {
+		mes "- Cold frozen hunting trap.";
+		mes "There are strange signs of corruption -";
+		next;
+		mes "[Alp]";
+		mes "...Is it poison?";
+		mes "I think it's a similar ingredient to the one on tamarin...";
+		cutin "ep18_alf_01.png",2;
+		cloakoffnpcself( "ep19_jor_back2_260_296" );
+		cloakoffnpcself( "ep19_jor_back2_258_295" );
+		next;
+		mes "[Mark]";
+		mes "Is there something else?";
+		mes "The monster that fell into the pit was caught in a trap...";
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[Alp]";
+		mes "Well, here's the connection part...";
+		mes "here is concentrated poison";
+		mes "Like someone trying to break ^e5555e on purpose^000000.";
+		cutin "ep18_alf_01.png",2;
+		next;
+		mes "[Alp]";
+		mes "...let's report to Shuru first.";
+		mes "I don't know who broke the trap, but it seems to have something to do with the pit anyway...";
+		ep19_side_sea = 6;
+		erasequest 11818;
+		setquest 11819;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_jor_back2_260_296" );
+		cloakonnpcself( "ep19_jor_back2_258_295" );
+		navigateto("jor_back2",251,310);
+		end;
+	}
+	if (ep19_side_sea == 6) {
+		mes "- Cold frozen hunting trap.";
+		mes "There is a strange trace of corruption.";
+		mes "Let's report to Shuru -";
+		close2;
+		cutin "",255;
+		navigateto("jor_back2",251,310);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11818) == 1" );
+	end;
+}
+
+jor_back2,260,296,5	duplicate(dummy_cloaked_npc)	Alp#ep19_jor2::ep19_jor_back2_260_296	4_EP18_ALF
+jor_back2,258,295,3	duplicate(dummy_cloaked_npc)	Mark#ep19_jor2::ep19_jor_back2_258_295	4_EP18_MARK
+
+
+// Side quest : Frozen Sea. Step 6, 9, 10
+jor_back2,255,312,5	script	Surr#ep19_1	4_EP19_IWIN_DIVER,{
+	if (ep19_side_sea == 6) {
+		mes "[Surr]";
+		mes "You are here";
+		mes "The poison in the pit is worse than I thought.";
+		cutin "ep19_iwin_diver01.png",2;
+		next;
+		mes "[Surr]";
+		mes "I thought the wetsuit could hold up to a certain extent ^e5555e As soon as it entered the pit, the magic core attached to the wetsuit broke^000000 and threw it away.";
+		next;
+		mes "[Mark]";
+		mes "Hmm...";
+		mes "I don't think any further investigation would be meaningful.";
+		mes "Let's go back and pick up ^e5555e Friederike^000000";
+		cutin "ep18_mark_01.png",0;
+		cloakoffnpcself( "ep19_jor_back2_255_312" );
+		next;
+		mes "[Mark]";
+		mes "I've purged the tamarin's venom, so I'll be able to purify this pit as well.";
+		next;
+		mes "[Mark]";
+		mes "If I had known this would be the case, I would have brought it from the beginning.";
+		cutin "ep18_mark_03.png",0;
+		ep19_side_sea = 7;
+		erasequest 11819;
+		setquest 11820;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_jor_back2_255_312" );
+		navigateto("icas_in",32,120);
+		end;
+	}
+	if (ep19_side_sea == 7) {
+		mes "[Surr]";
+		mes "I think it's best to go to the Ice Castle and fetch ^e5555e Friederike^000000.";
+		cutin "ep19_iwin_diver01.png",2;
+		close3;
+	}
+	if (ep19_side_sea == 8) {
+		mes "[Surr]";
+		mes "Friederike-sama is also here, so let's clean up ^e5555e pit^000000!";
+		cutin "ep19_iwin_diver01.png",2;
+		close2;
+		cutin "",255;
+		navigateto("jor_back2",258,314);
+		end;
+	}
+	switch( checkquest(11822,HUNTING) ) {
+	case -1:
+		end;	// note: no text
+	case 0:
+	case 1:
+		mes "[Surr]";
+		mes "Other people, please arrange ^000000 so that monsters do not approach around ^e5555e.";
+		mes "And if possible, would you please collect about 3^000000 pieces of frozen meat ^e5555e?";
+		cutin "ep19_iwin_diver01.png",2;
+		next;
+		mes "[Surr]";
+		mes "I think we need to investigate if there are any monsters affected by this pit.";
+		close3;
+	case 2:
+		if (countitem(1000708) < 3) {
+			mes "[Surr]";
+			mes "Other people, please arrange ^000000 so that monsters do not approach around ^e5555e.";
+			mes "And if possible, would you please collect about 3^000000 pieces of frozen meat ^e5555e?";
+			cutin "ep19_iwin_diver01.png",2;
+			next;
+			mes "[Surr]";
+			mes "I think we need to investigate if there are any monsters affected by this pit.";
+			close3;
+		}
+		mes "[Surr]";
+		mes "Ha...";
+		mes "Maybe we've found something terrible...";
+		cutin "ep19_iwin_diver01.png",2;
+		delitem 1000708,3;	// Ep19_Ice_Meat
+		ep19_side_sea = 10;
+		erasequest 11822;
+		setquest 11823;
+		next;
+		mes "[Surr]";
+		mes "I dived into the pit, and there was a passage that was narrow enough for only one person to pass through, and at the end was blocked by a rock.";
+		mes "The rock was removed and the water drained, leaving a huge space.";
+		next;
+		mes "[Surr]";
+		mes "^e5555e I think I saw something that looked like an Rgan^000000, but I thought it was too dangerous to investigate alone, so I carefully ran away.";
+		next;
+		mes "[Surr]";
+		mes "I'd like to go down ^e5555e again and do research^000000.";
+		mes "If this pit is really dangerous, you should tell Voglinde.";
+		close2;
+		cutin "",255;
+		navigateto("jor_back2",258,314);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11819) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(11822,HUNTING) == 2 && countitem(1000708) >= 5" );
+	end;
+}
+
+jor_back2,261,312,3	duplicate(dummy_cloaked_npc)	Mark#ep19_ab::ep19_jor_back2_255_312	4_EP18_MARK
+
+// Side quest : Frozen Sea. Step 7
+// icas_in,32,123,5	script	Friederike#ep19_room	4_EP19_FRIEDERIKE,{
+
+
+// Side quest : Frozen Sea. Step 8
+jor_back2,258,315,0	script	#to_jor_ab01	WARPNPC,1,1,{
+	end;
+OnTouch:
+	if (ep19_side_sea < 8) {
+		mes "- Can't get in because it's blocked by a cloudy, sticky liquid. -";
+		close;
+	}
+	if (ep19_side_sea == 8) {
+		mes "[Friederike]";
+		mes "It's cold...";
+		cutin "ep19_friederike02.png",2;
+		cloakoffnpcself( "ep19_jor_back2_263_311" );
+		cloakoffnpcself( "ep19_jor_back2_255_312" );
+		cloakoffnpcself( "ep19_jor_back2_260_312" );
+		next;
+		mes "[Friederike]";
+		mes "I feel bad here...";
+		mes "Even if you purify the entire area, poison will come back.";
+		mes "I feel there is something that keeps spewing poison from the depths.";
+		next;
+		mes "[Surr]";
+		mes "It's unreasonable to purify everything around here.";
+		mes "For now, let's purify and investigate the poisonous part of this pit.";
+		cutin "ep19_iwin_diver01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "The pit has already been cleansed...Drunk!";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[Mark]";
+		mes "Ah!";
+		mes "Then we'll investigate later, so come back.";
+		mes "If I catch a cold, I might go to jail.";
+		cutin "ep18_mark_04.png",0;
+		next;
+		mes "[Friederike]";
+		mes "Then I'll return to teleport.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "And I'll attach one of these to the clothes of each of the magic cores I purified earlier.";
+		mes "Come back without getting hurt.";
+		cutin "ep19_friederike03.png",2;
+		next;
+		cloakonnpcself( "ep19_jor_back2_260_312" );
+		mes "[Surr]";
+		mes "I don't know how lucky I am that someone like Friederike came to this ice castle.";
+		mes "Please prepare a magic core like this...";
+		cutin "ep19_iwin_diver01.png",2;
+		next;
+		mes "[Surr]";
+		mes "How could a pit that looked like vomit just before turn into such clear water...";
+		next;
+		mes "[Surr]";
+		mes "...Ah!";
+		mes "I'm not doing this, I'll go in first before the poison rises again.";
+		next;
+		mes "[Surr]";
+		mes "Other people, please arrange ^000000 so that monsters do not approach around ^e5555e.";
+		mes "And if possible, would you please collect about 3^000000 pieces of frozen meat ^e5555e?";
+		next;
+		mes "[Surr]";
+		mes "I think we need to investigate if there are any monsters affected by this pit.";
+		ep19_side_sea = 9;
+		erasequest 11821;
+		setquest 11822;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_jor_back2_263_311" );
+		cloakonnpcself( "ep19_jor_back2_255_312" );
+		end;
+	}
+	if (ep19_side_sea == 9) {
+		if (checkquest(11822,HUNTING) != 2 && countitem(1000708) < 5) {
+			mes "- Defeat 10 surrounding monsters ^e5555e and collect about 3 pieces of frozen meat^000000 to avoid monsters approaching while Shuru is investigating.";
+			close;
+		}
+		mes "- It seems that Surr has completed his investigation.";
+		mes "^e5555e Let's talk to Shuru first ^000000 -";
+		close2;
+		navigateto("jor_back2",251,310);
+		end;
+	}
+	if (ep19_side_sea == 10) {
+		ep19_side_sea = 11;
+		erasequest 11823;
+		setquest 11824;
+	}
+	warp "jor_ab01",113,10;
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11821) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11823) == 1" );
+	end;
+}
+jor_back2,263,311,5	duplicate(dummy_cloaked_npc)	Alp#ep19_ab::ep19_jor_back2_263_311	4_EP18_ALF
+jor_back2,260,312,5	duplicate(dummy_cloaked_npc)	Friederike#ep19_ab::ep19_jor_back2_260_312	4_EP19_FRIEDERIKE
+
+// Side quest : Frozen Sea. Step 9, 10
+// jor_back2,255,312,5	script	Surr#ep19_1	4_EP19_IWIN_DIVER,{
+
+
+// Side quest : Frozen Sea - Step 11
+jor_ab01,116,11,3	duplicate(dummy_cloaked_npc)	Surr#ep19_ab::ep19_jor_ab01_116_11	4_EP19_IWIN_DIVER
+
+jor_ab01,115,14,3	script	Alp#ep19_1_ab	4_EP18_ALF,{
+	if (ep19_side_sea == 11 || ep19_side_sea == 12) {
+		mes "[Alp]";
+		mes "What are all these?";
+		mes "Is it a snake?";
+		mes "Earthworm??";
+		cutin "ep18_alf_01.png",2;
+		next;
+		mes "[Surr]";
+		mes "This is a race called Rgan.";
+		mes "The troublemakers who serve Jormungand.";
+		cloakoffnpcself( "ep19_jor_ab01_116_11" );
+		cutin "ep19_iwin_diver01.png",2;
+		next;
+		mes "[Surr]";
+		mes "The snake's nest must be a little further inside, but in such a place, a group of organoids can be found.";
+		mes "Let's examine the inside a little more.";
+		next;
+		mes "[Surr]";
+		mes "It is better not to stimulate the Rgan as much as possible, but it would be better to quietly catch a few ^e5555e while moving and investigate ^000000.";
+		cutin "ep19_iwin_diver02.png",2;
+		if (ep19_side_sea == 11) {
+			ep19_side_sea = 12;
+			erasequest 11824;
+			setquest 11825;
+		}
+		close2;
+		cloakonnpcself( "ep19_jor_ab01_116_11" );
+		cutin "",255;
+		navigateto("jor_ab01",222,107);
+		end;
+	}
+	if (isbegin_quest(11835) > 0) {
+		mes "[Alp]";
+		mes "I'm here...";
+		mes "Then I'll investigate this side, and you'll look elsewhere.";
+		cutin "ep18_alf_01.png",2;
+		next;
+		mes "[Alp]";
+		mes "Report directly to ^e5555eShurr^000000 when the abandoned pit is surveyed.";
+		if (isbegin_quest(11835) == 1) {
+			completequest 11835;
+			setquest 11836;
+			// give 2 quests in ab01 and 2 quests in ab02 (not random)
+			switch( rand(3) ) {
+			case 0:
+				setquest 11839;
+				setquest 11840;
+				setquest 11845;
+				setquest 11846;
+				break;
+			case 1:
+				setquest 11837;
+				setquest 11838;
+				setquest 11847;
+				setquest 11848;
+				break;
+			case 2:
+				setquest 11841;
+				setquest 11842;
+				setquest 11843;
+				setquest 11844;
+				break;
+			}
+		}
+		close3;
+	}
+	if (isbegin_quest(11849) == 1) {
+		mes "[Alp]";
+		mes "Are you done?";
+		mes "Then go back to the castle of ice and report directly to ^e5555eShurr^000000.";
+		cutin "ep18_alf_01.png",2;
+		close2;
+		navigateto("icas_in",27,116);
+		end;
+	}
+	mes "[Alp]";
+	mes "...uh.";
+	mes "It's a terrible place.";
+	cutin "ep18_alf_01.png",2;
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11824) == 1" );
+
+	// daily
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11835) == 1" );
+	end;
+}
+
+// Side quest : Frozen Sea - Step 12, 13
+jor_ab01,223,107,3	script	Suspicious Trace#ep19_1_ab1	4_ENERGY_BLACK,{
+	switch( checkquest(11825,HUNTING) ) {
+	case -1:
+		end;
+	case 0:
+	case 1:
+		mes "- It would be good to kill a few in order to investigate the monsters around the area. -";
+		close;
+	case 2:
+		mes "[Mark]";
+		mes "Is poison leaking out of this place?";
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[Alp]";
+		mes "흠...";
+		mes "Looks like some sort of corruption poison...";
+		mes "I don't know if it's natural or artificial...";
+		cutin "ep18_alf_01.png",2;
+		next;
+		mes "[Surr]";
+		mes "Certainly the monsters look a little weird.";
+		mes "^e5555e Let's move a little further while dealing with disturbing monsters^000000.";
+		cutin "ep19_iwin_diver01.png",2;
+		ep19_side_sea = 13;
+		erasequest 11825;
+		setquest 11826;
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(11825,HUNTING) == 2" );
+	end;
+}
+
+// Side quest : Frozen Sea - Step 14, 15
+jor_ab01,104,270,3	script	Suspicious Trace#ep19_1_ab2	4_ENERGY_BLACK,{
+	switch( checkquest(11826,HUNTING) ) {
+	case -1:
+		end;
+	case 0:
+	case 1:
+		end;
+	case 2:
+		mes "[Alp]";
+		mes "It's the same here...";
+		mes "The poison is leaking out.";
+		cutin "ep18_alf_01.png",2;
+		next;
+		mes "[Surr]";
+		mes "Besides, here, it's bigger than I thought.";
+		mes "I don't think this is a problem that can be easily dealt with at this size.";
+		cutin "ep19_iwin_diver01.png",2;
+		next;
+		mes "[Mark]";
+		mes "Whoops...";
+		mes "It's a big deal.";
+		mes "Everyone.";
+		cutin "ep18_mark_04.png",0;
+		next;
+		mes "[Surr]";
+		mes "What's going on?";
+		cutin "ep19_iwin_diver01.png",2;
+		next;
+		mes "[Mark]";
+		mes "There is a passage inside that seems to lead to something else.";
+		cutin "ep18_mark_04.png",0;
+		next;
+		mes "[Surr]";
+		mes "Isn't this the end?!";
+		mes "Let's go.";
+		mes "I'd love to tell you about monster transformations.";
+		mes "On the way, I will kill the monsters ^e5555e and collect some samples of frozen meat^000000.";
+		cutin "ep19_iwin_diver01.png",2;
+		next;
+		mes "[Mark]";
+		mes "That would be nice.";
+		mes "Follow me this way";
+		cutin "ep18_mark_04.png",0;
+		ep19_side_sea = 14;
+		erasequest 11826;
+		setquest 11827;
+		close2;
+		cutin "",255;
+		navigateto("jor_ab01",16,235);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(11826,HUNTING) == 2" );
+	end;
+}
+
+// Side quest : Frozen Sea - Step 16, 17
+jor_ab01,8,238,0	script	#to_jor_ab02	WARPNPC,1,1,{
+	end;
+OnTouch:
+	if (ep19_side_sea == 15) {
+		warp "jor_ab02",281,87;
+		navigateto("jor_ab02",28,253);
+		end;
+	}
+	if (ep19_side_sea > 15) {
+		warp "jor_ab02",281,87;
+		end;
+	}
+	switch( checkquest(11827,HUNTING) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		break;
+	case 2:
+		if (countitem(1000708) < 2)
+			break;
+		mes "[Mark]";
+		mes "Here.";
+		mes "Can you see?";
+		mes "This passage...";
+		cutin "ep18_mark_01.png",0;
+		delitem 1000708,2;	// Ep19_Ice_Meat
+		ep19_side_sea = 15;
+		erasequest 11827;
+		setquest 11828;
+		next;
+		mes "[Surr]";
+		mes "Ha...";
+		mes "It's not as much as it was stagnant at the entrance, but it seems that poison is accumulating little by little.";
+		mes "The magic core seems to be almost at its limit, and it's dangerous any more, so we'll quickly investigate below and return.";
+		cutin "ep19_iwin_diver01.png",2;
+		next;
+		mes "[Surr]";
+		mes "^e5555e While killing monsters, collect some samples of frozen meat^000000 and meet you at the end of the road.";
+		close3;
+	}
+	mes "- can't go yet";
+	mes "^e5555e It would be good to collect some samples of frozen meat while killing monsters^000000 -";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(11827,HUNTING) == 2 && countitem(1000708) >= 2" );
+	end;
+}
+
+// Side quest : Frozen Sea - Step 18, 19
+jor_ab02,28,254,3	script	End of Pit#ep19_1_ab	4_ENERGY_BLACK,{
+	switch( checkquest(11828,HUNTING) ) {
+	case -1:
+		end;
+	case 0:
+	case 1:
+		end;
+	case 2:
+		if (countitem(1000708) < 3) {
+			end;
+		}
+		mes "[Surr]";
+		mes "I think this is the end.";
+		mes "There doesn't seem to be anything special other than the fact that there was a monster you've never seen. Have you discovered anything?";
+		cutin "ep19_iwin_diver01.png",2;
+		delitem 1000708,2;	// Ep19_Ice_Meat
+		ep19_side_sea = 16;
+		erasequest 11828;
+		setquest 11829;
+		next;
+		mes "[Mark]";
+		mes "Fortunately, I don't think I can see any further roads leading to other places.";
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[Alp]";
+		mes "...";
+		cutin "ep18_alf_01.png",2;
+		next;
+		mes "[Surr]";
+		mes "If this is the end, I'm lucky...";
+		cutin "ep19_iwin_diver01.png",2;
+		next;
+		mes "[Surr]";
+		mes "Then go back and report to Lehar.";
+		mes "I don't want to be here anymore";
+		next;
+		mes "[Mark]";
+		mes "I think I'm getting a little nauseous too...";
+		mes "Come back soon.";
+		cutin "ep18_mark_01.png",0;
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(11828,HUNTING) == 2 && countitem(1000708) >= 2" );
+	end;
+}
+
+jor_ab02,286,87,0	warp2	#to_jor_ab01_	1,1,jor_ab01,12,238
+
+// Side quest : Frozen Sea - Step 20
+// icas_in,32,123,5	script	Friederike#ep19_room	4_EP19_FRIEDERIKE,{
+//
+
+
+// Daily quest : Do We Need a Refrigerator? (Kill 20x Monsters in jor_back2 and gather 10 Frozen Meat - not 20)
+// Daily quest : Crispy Tools
+icas_in,27,122,5	script	Tataring#ep19_room::ep19_healrock_2	4_EP19_TAMARIN,{
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "- Wait here!! -";
+		mes "- You have too many items -";
+		mes "- The quest cannot be completed. -";
+		mes "- lighten your body -";
+		mes "- Please try again. -";
+		close;
+	}
+	// Side quest : Frozen Sea. Step 2
+	if (ep19_side_sea == 2) {
+		mes "[Tataring]";
+		mes "It's long to talk about...";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[Tataring]";
+		mes "So...";
+		mes "It was when I was working in the Barmund mansion.";
+		mes "I heard that the underground waterway was broken again and went to repair it, but suddenly ^e5555eIllusions^000000 appeared and attacked me.";
+		cutin "ep19_tamarin03.png",2;
+		next;
+		mes "[Tataring]";
+		mes "^e5555e Airship^000000 I think I was onboard...";
+		mes "When I woke up ^e5555eIt was like a cave where my rotten me vibrates^000000";
+		next;
+		mes "[Tataring]";
+		mes "There were a lot of ^e5555e people like me ^000000 who were captured around me, some managed to escape, but I don't know if others are safe.";
+		next;
+		mes "[Tataring]";
+		mes "I barely escaped from the cave, and while I was running away, Shuru found me and saved me.";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[Surr]";
+		mes "Ah!";
+		mes "Tataring, weren't you Ice Wind?";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Tataring]";
+		mes "No, from where I saw it, it's Ice Wind.";
+		mes "He kept giving me feathers because he felt pity for some reason...";
+		cutin "ep19_tamarin03.png",2;
+		next;
+		mes "[Surr]";
+		mes "That's right!";
+		mes "Then let go of such trivial things.";
+		mes "What happened to you? Do you know how shocked I was to suddenly fall to the floor?";
+		cutin "ep19_iwin03.png",2;
+		npctalk "Tataring: No trivial...", "ep19_healrock_2", bc_self;
+		next;
+		mes "[Surr]";
+		mes "My mind is losing my mind, my body is getting colder and I thought I was going to die!";
+		next;
+		mes "[Tataring]";
+		mes "I was just hunting " + getmonsterinfo("EP19_LIMACINA", MOB_NAME) + " as usual...";
+		mes "Suddenly the floor went off and I fell out.";
+		cutin "ep19_tamarin03.png",2;
+		next;
+		mes "[Tataring]";
+		mes "At first I thought I was just falling into the water as the ice broke, but the color of the water was strange and I quickly got out.";
+		mes "And then... I don't remember.";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[Lehar]";
+		mes "Um...";
+		mes "Isn't that dangerous?";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[Tataring]";
+		mes "That's right";
+		mes "Come to think of it, the ^e5555e trap I looked at before falling into the pit was also broken ^000000.";
+		mes "Thanks to you, the trapped " + getmonsterinfo("EP19_LIMACINA", MOB_NAME) + " was released and attacked.";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[Surr]";
+		mes "The trap is brokenis common.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Tataring]";
+		mes "It's not that... there were traces of someone intentionally breaking it.";
+		cutin "ep19_tamarin03.png",2;
+		next;
+		mes "[Surr]";
+		mes "I can't help but doubt the pit...";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Tataring]";
+		mes "I think it would be better to investigate.";
+		mes "It's difficult if someone else gets hurt.";
+		cutin "ep19_tamarin03.png",2;
+		next;
+		mes "[Surr]";
+		mes "Don't overdo it!";
+		mes "You are resting";
+		mes "I will go and investigate.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Mark]";
+		mes "We'll help too.";
+		mes "If you get into an accident while investigating by yourself, it's a big deal.";
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[Surr]";
+		mes "Thank you";
+		mes "Then, please investigate the traps around you.";
+		mes "I will first investigate the area where I found Tataring.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		select("Dangerous" );
+		mes "[Surr]";
+		mes "Don't worry.";
+		mes "^e5555e I'm wearing diving gear that is enhanced with " + getitemname(1000706) + "^000000, so I can hold out to a certain extent.";
+		next;
+		mes "[Surr]";
+		mes "Then ^e5555eIf you find something while investigating the trap^000000, please come to the northwest of the Frozen Scale Plains.";
+		ep19_side_sea = 3;
+		erasequest 11815;
+		setquest 11816;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_healrock_8" );
+		cloakonnpcself( "ep19_healrock_4" );
+		cloakonnpcself( "ep19_healrock_5" );
+		navigateto("jor_back1",300,272);
+		end;
+	}
+	if (ep19_side_sea == 3) {
+		mes "[Tataring]";
+		mes "Come to think of it, the ^e5555e trap I looked at before falling into the pit was also broken ^000000.";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[Tataring]";
+		mes "There were signs that someone had intentionally broken it.";
+		cutin "ep19_tamarin03.png",2;
+		next;
+		mes "[Tataring]";
+		mes "I think it would be better to investigate.";
+		mes "It's difficult if someone else gets hurt.";
+		cutin "ep19_tamarin03.png",2;
+		close3;
+	}
+	if (ep19_side_sea < 17) {	// Frozen Sea completed
+		mes "[Tataring]";
+		mes "Ah... I'm going to die.";
+		cutin "ep19_tamarin03.png",2;
+		close3;
+	}
+	// daily
+	if (checkquest(11852,HUNTING) == 2 && countitem(1000708) >= 10 || isbegin_quest(11858) == 1) {	// quest completed
+		mes "[Tataring]";
+		mes "Ugh...";
+		mes "" + strcharinfo(0) + "You are here.";
+		mes "I fell asleep.";
+		cutin "ep19_tamarin02.png",2;
+		if (checkquest(11852,HUNTING) == 2 && countitem(1000708) >= 10) {
+			delitem 1000708,10;	// Ep19_Ice_Meat
+			erasequest 11852;
+			setquest 11853;
+			set_reputation_points(3, (get_reputation_points(3) + 5));
+			getitem 1000608,2;	// Ep19_Snow_Flower
+			if (get_reputation_points(3) >= 3000)
+				getitem 1000608,1;	// Ep19_Snow_Flower
+			getexp 9000000,7000000;	// affected by server drop rate
+		}
+		if (isbegin_quest(11858) == 1) {
+			erasequest 11854;
+			erasequest 11855;
+			erasequest 11856;
+			erasequest 11857;
+			erasequest 11858;
+			setquest 11859;
+			set_reputation_points(3, (get_reputation_points(3) + 5));
+			getitem 1000608,2;	// Ep19_Snow_Flower
+			if (get_reputation_points(3) >= 3000)
+				getitem 1000608,1;	// Ep19_Snow_Flower
+			getexp2 52243795,0;
+			getexp 0,3000000;
+		}
+		next;
+		mes "[Tataring]";
+		mes "You worked really hard.";
+		mes "I will recover soon and join you.";
+		cutin "ep19_tamarin04.png",2;
+		close3;
+	}
+	if (isbegin_quest(11851) == 0) {
+		mes "[Tataring]";
+		mes "Ah... Oh my gosh...";
+		mes "The speed is rumbling...";
+		mes "My feet are tingling...";
+		cutin "ep19_tamarin03.png",2;
+		next;
+		mes "[Tataring]";
+		mes "Your body is not recovering as expected.";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[Tataring]";
+		mes "If you don't go hunting quickly, the refrigerator will run out soon.";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[Tataring]";
+		mes "Friederike-sama says he's lucky that he's not dead...";
+		cutin "ep19_tamarin04.png",2;
+		next;
+		mes "[Tataring]";
+		mes "Currently, Shuru is unable to participate in the hunt due to the investigation of the pit, so other hunters say they are busy working.";
+		next;
+		mes "[Tataring]";
+		mes "The environment is like this, so hunting tools and traps seem to become crispy quickly.";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[Tataring]";
+		mes "" + strcharinfo(0) + "If you also catch a monster, don't pass it by, capture it and bring it.";
+		next;
+		mes "[Tataring]";
+		mes "You can keep it fresh for a long time if you put it in the refrigerator.";
+		cutin "ep19_tamarin04.png",2;
+		setquest 11851;
+		completequest 11851;
+	}
+	else {
+		mes "[Tataring]";
+		mes "Ah... Oh my gosh...";
+		mes "The speed is rumbling...";
+		mes "My feet are tingling...";
+		cutin "ep19_tamarin03.png",2;
+		next;
+		mes "[Tataring]";
+		mes "Your body is not recovering as expected.";
+		cutin "ep19_tamarin01.png",2;
+	}
+	next;
+	switch( select( "Do you need a refrigerator?", "Crunchy tools", "I'm worried" ) ) {
+	case 1:
+		switch( checkquest(11853,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[Tataring]";
+			mes "Because I have enough for today's needs.";
+			mes "Don't overdo it and take a good rest.";
+			mes "Tomorrow needs the meat of tomorrow!";
+			cutin "ep19_tamarin04.png",2;
+			close3;
+		case 2:
+			erasequest 11853;
+			break;
+		}
+		if (checkquest(11852,HUNTING) == -1) {
+			mes "[Tataring]";
+			mes "Okay!";
+			mes "If you leave the meat outside in this weather, it will freeze and crumble.";
+			cutin "ep19_tamarin04.png",2;
+			next;
+			mes "[Tataring]";
+			mes "I'll ask other Arwins to put it in the refrigerator " + strcharinfo(0) + " you only need to get meat!";
+			next;
+			mes "[Tataring]";
+			mes "Then ^e5555eFrozen Scale Plains^000000 Hunt at least ^e5555e20 monsters^000000 and get ^e5555eFrozen Meat^000000 ^e5555e10 or more^000000.";
+			next;
+			mes "[Tataring]";
+			mes "I think I need to fill up the refrigerator a bit so I can stretch out and rest.";
+			cutin "ep19_tamarin03.png",2;
+			setquest 11852;
+			close2;
+			cutin "",255;
+			navigateto("jor_back2",211,26);
+			end;
+		}
+		// note: same text without items/hunting ongoing
+		mes "[Tataring]";
+		mes "Then ^e5555eFrozen Scale Plains^000000 Hunt at least ^e5555e20 monsters^000000 and get ^e5555eFrozen Meat^000000 ^e5555e10 or more^000000.";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[Tataring]";
+		mes "I think I need to fill up the refrigerator a bit so I can stretch out and rest.";
+		close2;
+		cutin "",255;
+		navigateto("jor_back2",211,26);
+		end;
+	case 2:
+		switch( checkquest(11859,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[Tataring]";
+			mes "Because I have enough for today's needs.";
+			mes "Don't overdo it and take a good rest.";
+			mes "Tomorrow needs the meat of tomorrow!";
+			cutin "ep19_tamarin04.png",2;
+			close3;
+		case 2:
+			erasequest 11859;
+			break;
+		}
+		mes "[Tataring]";
+		mes "It's hard to believe, but it really does.";
+		mes "That's why we need to keep maintenance.";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[Tataring]";
+		mes "I touched a trap that had been neglected for a few days before, but it turned into powder and was blown away by the wind.";
+		next;
+		mes "[Tataring]";
+		mes "Before that happens ^e5555e look at the traps^000000 in the Frozen Scale Plains.";
+		next;
+		mes "[Tataring]";
+		mes "If it breaks, it's more painful to find new materials to make.";
+		cutin "ep19_tamarin03.png",2;
+		if (isbegin_quest(11854) == 0)
+			setquest 11854;
+		close2;
+		cutin "",255;
+		if (isbegin_quest(11854) == 1)
+			navigateto("jor_back2",367,36);
+		else if (isbegin_quest(11855) == 1)
+			navigateto("jor_back2",84,88);
+		else if (isbegin_quest(11856) == 1)
+			navigateto("jor_back2",158,320);
+		else if (isbegin_quest(11857) == 1)
+			navigateto("jor_back2",190,184);
+		end;
+	case 3:
+		mes "[Tataring]";
+		mes "It's ok";
+		mes "You'll get better soon.";
+		cutin "ep19_tamarin04.png",2;
+		close3;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11815) == 1" );
+
+	// daily
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(11829) == 2 && checkquest(11852,HUNTING) == -1 && checkquest(11853,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(11853,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "checkquest(11852,HUNTING) == 2 && countitem(1000708) >= 10" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(11829) == 2 && isbegin_quest(11854) == 0 && checkquest(11859,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(11859,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11858) == 1" );
+	end;
+}
+
+jor_back2,367,36,3	script	Frozen Trap#ep19_1::ep19_jor_back2_367_36	4_ROPEPILE,{
+	.@num = atoi( replacestr(strnpcinfo(2), "ep19_", "") );
+	.@quest_id = 11854 + .@num - 1;
+
+	switch( isbegin_quest(.@quest_id) ) {
+	case 0:
+		mes "- Cold frozen hunting trap.";
+		mes "It is very old, but it can still be used if properly maintained. -";
+		close;
+	case 1:
+		mes "- Cold frozen hunting trap.";
+		mes "It is very old, but it can still be used if properly maintained. -";
+		next;
+		progressbar "FFFF00",3;
+		mes "[" + strcharinfo(0) + "]";
+		mes "It would be nice if you could endure it...";
+		next;
+		mes "- Maintenance completed.";
+		if (.@quest_id != 11857)
+			mes "Let's look at the next trap -";
+		else
+			mes "Let's go back to Tataring and report. -";
+		completequest .@quest_id;
+		setquest .@quest_id+1;
+		break;
+	case 2:
+		mes "- Maintenance completed.";
+		mes "Let's look at the next trap -";
+		break;
+	}
+	close2;
+	switch( .@quest_id ) {
+	case 11854:
+		navigateto("jor_back2",84,88);
+		break;
+	case 11855:
+		navigateto("jor_back2",158,320);
+		break;
+	case 11856:
+		navigateto("jor_back2",190,184);
+		break;
+	case 11857:
+		navigateto("icas_in",28,119);
+		break;
+	}
+	end;
+
+OnInit:
+	.@num = atoi( replacestr(strnpcinfo(2), "ep19_", "") );
+	.@quest_id = 11854 + .@num - 1;
+
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(" + .@quest_id + ") == 1" );
+	end;
+}
+jor_back2,84,88,3	duplicate(ep19_jor_back2_367_36)	Frozen Trap#ep19_2	4_ROPEPILE
+jor_back2,158,320,3	duplicate(ep19_jor_back2_367_36)	Frozen Trap#ep19_3	4_ROPEPILE
+jor_back2,190,184,3	duplicate(ep19_jor_back2_367_36)	Frozen Trap#ep19_4	4_ROPEPILE
+//
+
+
+// Daily quest : Dig and Dig - Step 3
+jor_ab01,163,253,3	script	Ominous trail#ep19_1::ep19_jor_ab01_163_253	4_ENERGY_BLACK,{
+	if (isbegin_quest(11849) == 1) {
+		mes "- All investigations completed.";
+		mes "Let's go back to Shuru -";
+		close2;
+		navigateto("icas_in",27,116);
+		end;
+	}
+	if (isbegin_quest(11836) == 0)
+		end;
+	.@num = atoi( replacestr(strnpcinfo(2), "ep19_", "") );
+	.@quest_id = 11837 + .@num - 1;
+
+	if (isbegin_quest(.@quest_id) == 1) {
+		progressbar "B04A23",3;
+		switch( .@quest_id ) {
+		case 11837:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : Knock... disgusting smell...", bc_self;
+			break;
+		case 11838:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : Looks like it was ripped...", bc_self;
+			break;
+		case 11839:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : suspicious handprint", bc_self;
+			break;
+		case 11840:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : There is a trace.", bc_self;
+			break;
+		case 11841:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : Uh... it's sticky...", bc_self;
+			break;
+		case 11842:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : trace of something buried?", bc_self;
+			break;
+
+		case 11843:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : something keeps coming out?", bc_self;
+			break;
+		case 11844:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : I feel like vomiting...", bc_self;
+			break;
+		case 11845:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : traces of something...", bc_self;
+			break;
+		case 11846:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : completely rotten...", bc_self;
+			break;
+		case 11847:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : what?", bc_self;
+			break;
+		case 11848:
+			unittalk getcharid(3), "" + strcharinfo(0) + " : It looks like a nail scratch...", bc_self;
+			break;
+		}
+		erasequest .@quest_id;
+		questinfo_refresh();
+		if (queststatus_between(11837,11848) == 0) {// all removed
+			erasequest 11836;
+			setquest 11849;
+			mes "- All investigations completed.";
+			mes "Let's go back to Shuru -";
+			close2;
+			navigateto("icas_in",27,116);
+			end;
+		}
+		end;
+	}
+	end;
+
+OnInit:
+	.@num = atoi( replacestr(strnpcinfo(2), "ep19_", "") );
+	.@quest_id = 11837 + .@num - 1;
+
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(" + .@quest_id + ") == 1" );
+	end;
+}
+
+jor_ab01,117,141,3	duplicate(ep19_jor_ab01_163_253)	Ominous trail#ep19_2	4_ENERGY_BLACK
+jor_ab01,222,125,3	duplicate(ep19_jor_ab01_163_253)	Ominous trail#ep19_3	4_ENERGY_BLACK
+jor_ab01,196,260,3	duplicate(ep19_jor_ab01_163_253)	Ominous trail#ep19_4	4_ENERGY_BLACK
+jor_ab01,112,62,3	duplicate(ep19_jor_ab01_163_253)	Ominous trail#ep19_5	4_ENERGY_BLACK
+jor_ab01,25,265,3	duplicate(ep19_jor_ab01_163_253)	Ominous trail#ep19_6	4_ENERGY_BLACK
+
+jor_ab02,151,272,3	duplicate(ep19_jor_ab01_163_253)	Ominous trail#ep19_7	4_ENERGY_BLACK
+jor_ab02,139,148,3	duplicate(ep19_jor_ab01_163_253)	Ominous Traces#ep19_8	4_ENERGY_BLACK
+jor_ab02,182,83,3	duplicate(ep19_jor_ab01_163_253)	Ominous trail#ep19_9	4_ENERGY_BLACK
+jor_ab02,48,27,3	duplicate(ep19_jor_ab01_163_253)	Ominous Traces#ep19_10	4_ENERGY_BLACK
+jor_ab02,208,48,3	duplicate(ep19_jor_ab01_163_253)	Ominous Traces#ep19_11	4_ENERGY_BLACK
+jor_ab02,201,184,3	duplicate(ep19_jor_ab01_163_253)	Ominous trail#ep19_12	4_ENERGY_BLACK

@@ -1,0 +1,1520 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Issgard Land of Snow Flowers
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- Misc NPCs for Episode 19
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// jor_tail
+//-------------------------------------
+
+jor_tail,221,57,3	script	Iwin Soldier#ep19iwin01	EP19_NPC_IWIN_SY,{
+	if (ep19_main == 8) {
+		cutin "ep19_iwin11.png",2;
+		mes "[Iwin Soldier]";
+		mes "The tongue is a bit too complicated for an ice frown.";
+		mes "Follow me with this sign.";
+		close3;
+	}
+	cutin "ep19_iwin11.png",2;
+	mes "[Iwin Soldier]";
+	mes "You can go here without worrying.";
+	mes "This injustice has been guarded by Woodel.";
+	close3;
+}
+
+jor_tail,223,54,3	script	Iwin Soldier#ep19iwin02	EP19_NPC_IWIN_SY,{
+	cutin "ep19_iwin04.png",2;
+	mes "[Iwin Soldier]";
+	mes "Uzzano, not a single feather.";
+	mes "Is it very cold?";
+	close3;
+}
+
+jor_tail,239,40,5	script	Gori#ep19in	EP19_NPC_IWIN_SY,{
+	mes "[Gori]";
+	mes "There is nothing wrong with work!";
+	close;
+}
+
+jor_tail,291,91,5	script	Hamur#e19c00	4_EP19_IWIN,{
+	npctalk "Is this the end of the sea?", "", bc_self;
+	end;
+}
+
+jor_tail,285,94,5	script	Doraro#ep19in	EP19_NPC_IWIN_SY,{
+	mes "[Doraro]";
+	mes "On duty... um? You're a human I've never seen.";
+	mes "Be careful not to catch a cold.";
+	mes "Not even a feather... Tsutsui.";
+	close;
+}
+
+jor_tail,216,79,3	script	Rachho#e19c00	4_EP19_IWIN,{
+	npctalk "Do you know what happens if you carefully clear the snow? It's snowing again! Wahahahahahaha!!!", "", bc_self;
+	end;
+}
+
+jor_tail,209,72,5	script	Patrol#e19c02	EP19_NPC_IWIN_SG,{
+	npctalk "Watching! Strange! Welcome to Isgard!", "", bc_self;
+	end;
+}
+
+jor_tail,168,86,3	script	Gorr#e19c00	4_EP19_IWIN,{
+	npctalk "First time seeing someone buried in snow? I'm testing the waterproof and cold protection of the feather care agent I developed.", "", bc_self;
+	end;
+}
+
+jor_tail,153,76,3	script	Nordor#e19c00	4_EP19_IWIN,{
+	npctalk "when will this basket be full", "", bc_self;
+	end;
+}
+
+jor_tail,150,81,5	script	Bazaar#e19c00	4_EP19_IWIN,{
+	npctalk "Well, when you're done, do you want to work?", "", bc_self;
+	end;
+}
+
+jor_tail,181,158,5	script	Hoho#e19c00	4_EP19_IWIN,{
+	npctalk "See the footprints over there? They're sacred footprints. They're all over the place, so look for them.", "", bc_self;
+	end;
+}
+
+jor_tail,216,269,5	script	Harya#e19c00	4_EP19_IWIN,{
+	npctalk "The road is narrow, so walk carefully. If it collapses, it will take a long time to rescue it. ... You don't believe it?", "", bc_self;
+	end;
+}
+
+jor_tail,250,273,7	script	Joorong#e19c00	4_EP19_IWIN,{
+	npctalk "There is a piece of ice behind the Ice Castle, and one of them is wearing something like this on his head. It's odd.", "", bc_self;
+	end;
+}
+
+jor_tail,56,196,3	script	Poryaryo#ep19in	EP19_NPC_IWIN_SY,{
+	mes "[Poryaryo]";
+	mes "Shhh... be quiet";
+	mes "Do not disturb the fishing";
+	mes "Go to another fishing spot.";
+	close;
+}
+
+
+// jor_back1
+//-------------------------------------
+
+jor_back1,376,247,5	script	Illustration#ep19in	EP19_NPC_IWIN_SY,{
+	mes "[Illustration]";
+	mes "There is nothing wrong with work.";
+	close;
+}
+
+jor_back1,81,266,5	script	Koruro#ep19in	EP19_NPC_IWIN_SB,{
+	mes "[Koruro]";
+	mes "There's nothing wrong with working ahhhhhhhhhhhhh!";
+	close;
+}
+
+jor_back1,95,256,5	script	Tororo#ep19in	EP19_NPC_IWIN_SY,{
+	mes "[Tororo]";
+	mes "Human, don't climb on those ice crystals.";
+	mes "It sinks. Be careful.";
+	close;
+}
+
+
+// jor_nest
+//-------------------------------------
+
+function	script	F_ep19_checkTransform	{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {	// custom text (copy from another npc)
+		mes "[" + getarg(0) + "]";
+		mes "Human?! Go away.";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	return;
+}
+
+jor_nest,24,251,0	script	#whl_warp	HIDDEN_WARP_NPC,3,3,{
+	end;
+OnTouch:
+	removespecialeffect( EF_ITEM_LIGHT, AREA, "#whl_effect" );
+	specialeffect( EF_ITEM_LIGHT, AREA, "#whl_effect" );
+	end;
+}
+jor_nest,21,258,1	duplicate(dummy_npc)	#whl_effect	CLEAR_NPC
+
+
+jor_nest,108,79,0	script	#e19ms100	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_108_79");
+		end;
+	}
+	end;
+}
+jor_nest,108,79,5	script	Rgan Priest#e19ms100::ep19_jor_nest_108_79	4_EP19_RGAN_R2,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	npctalk "Only me... Only me...", "", bc_self;
+	end;
+}
+
+jor_nest,29,251,5	script	Guard Logan#e19ms91	4_EP19_RGAN_R1,5,5,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	npctalk "......", "", bc_self;
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself();
+		cloakonnpcself("ep19_jor_nest_23_247");
+		end;
+	}
+	end;
+}
+jor_nest,23,247,5	script	Guard Logan#e19ms92::ep19_jor_nest_23_247	4_EP19_RGAN_R2,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	npctalk "......", "", bc_self;
+	end;
+}
+
+jor_nest,37,257,0	script	#e19ms92	HIDDEN_WARP_NPC,3,3,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_35_270");
+		cloakonnpcself("ep19_jor_nest_41_270");
+		end;
+	}
+	end;
+}
+jor_nest,35,270,5	script	Guard Logan#e19ms94::ep19_jor_nest_35_270	4_EP19_RGAN_SR2,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	npctalk "......", "", bc_self;
+	end;
+}
+jor_nest,41,270,3	script	Guard Logan#e19ms93::ep19_jor_nest_41_270	4_EP19_RGAN_SR1,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	npctalk "......", "", bc_self;
+	end;
+}
+
+
+jor_nest,115,212,0	script	#e19ms101	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_115_212");
+		end;
+	}
+	end;
+}
+jor_nest,115,212,3	script	Rgan Priest#e19ms101::ep19_jor_nest_115_212	4_EP19_RGAN_R1,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[Rgan Priest]";
+		mes "Humans are not allowed here. Go away.";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	if (ep19_main < 33) {
+		npctalk "Are you born today? Where are you going?", "", bc_self;
+		end;
+	}
+	npctalk "Are you used to walking now?", "", bc_self;
+	end;
+}
+
+jor_nest,109,184,0	script	#e19ms107	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_109_184");
+		end;
+	}
+	end;
+}
+jor_nest,109,184,5	script	Heart Hunter#e19ms107::ep19_jor_nest_109_184	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 33) {
+		npctalk "Don't wander around here. This is not the place for you to come.", "", bc_self;
+		end;
+	}
+	npctalk "Are you again?", "", bc_self;
+	end;
+}
+
+jor_nest,80,150,0	script	#e19ms108	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_80_180");
+		end;
+	}
+	end;
+}
+jor_nest,80,150,1	script	Heart Hunter#e19ms108::ep19_jor_nest_80_180	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 33) {
+		npctalk "Do you know what is written here? Turn around and go your way.", "", bc_self;
+		end;
+	}
+	npctalk "Isn't this the place you're looking for?", "", bc_self;
+	end;
+}
+
+jor_nest,24,169,0	script	#e19ms109	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_24_169");
+		end;
+	}
+	end;
+}
+jor_nest,24,169,5	script	Heart Hunter#e19ms109::ep19_jor_nest_24_169	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 33) {
+		npctalk "Uh, are you involved? No, you can't come here.", "", bc_self;
+		end;
+	}
+	npctalk "Even if you come and go, please don't come here.", "", bc_self;
+	end;
+}
+
+jor_nest,186,173,0	script	#e19ms103	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_186_173");
+		end;
+	}
+	end;
+}
+jor_nest,186,173,3	script	Rgan Priest#e19ms102::ep19_jor_nest_186_173	4_EP19_RGAN_R3,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	npctalk "Fam's shout: 3 Rookie Beginner Expert Advanced Shadow Live Ear", "", bc_self;
+	end;
+}
+
+jor_nest,219,38,0	script	#e19ms106	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 21) {
+		cloakonnpcself("ep19_jor_nest_219_38");
+		end;
+	}
+	end;
+}
+jor_nest,219,38,5	script	Rgan Priest#e19ms104::ep19_jor_nest_219_38	4_EP19_RGAN_R3,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[Rgan Priest]";
+		mes "Why are humans here supposed to be in the lower sector?";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	if (ep19_main < 21) {
+		npctalk "Huh? I haven't seen...? Ah, new born??", "", bc_self;
+		end;
+	}
+	npctalk "If anyone is bullying, tell me. Okay?", "", bc_self;
+	end;
+}
+
+jor_nest,76,22,0	script	#e19ms102	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 21) {
+		cloakonnpcself("ep19_jor_nest_76_22");
+		cloakonnpcself("ep19_jor_nest_123_132");
+		end;
+	}
+	setpcblock PCBLOCK_NPC, true;
+	npctalk "Uh~ Are you the new born child?", "ep19_jor_nest_76_22", bc_self;
+	sleep2 1000;
+	npctalk "Yes, have you decided on a career path?", "ep19_jor_nest_73_17", bc_self;
+	sleep2 1500;
+	npctalk "No, there's nothing you can't say to a child born today! You shouldn't say such things these days.", "ep19_jor_nest_76_22", bc_self;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+}
+jor_nest,76,22,3	script	Bishop Rgan#e19ms100::ep19_jor_nest_76_22	4_EP19_RGAN_SR1,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "If you don't know something, feel free to ask, okay?", "", bc_self;
+		end;
+	}
+	npctalk "Would you like some snacks?", "", bc_self;
+	end;
+}
+jor_nest,73,17,7	script	Bishop Rgan#e19ms101::ep19_jor_nest_73_17	4_EP19_RGAN_SR2,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "We always welcome children", "", bc_self;
+		end;
+	}
+	npctalk "Are you hungry?", "", bc_self;
+	end;
+}
+
+jor_nest,123,132,0	script	#e19ms105	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 21) {
+		cloakonnpcself("ep19_jor_nest_123_132");
+		end;
+	}
+	end;
+}
+jor_nest,123,132,5	script	Rgan Priest#e19ms103::ep19_jor_nest_123_132	4_EP19_RGAN_R1,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "Are you a new born child? I hope you grow up and work with me.", "", bc_self;
+		end;
+	}
+	npctalk "Did you get used to this place?", "", bc_self;
+	end;
+}
+
+jor_nest,179,144,0	script	#e19ms104	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 21) {
+		cloakonnpcself("ep19_jor_nest_179_144");
+		end;
+	}
+	end;
+}
+jor_nest,179,144,3	script	Bishop Rgan#e19ms102::ep19_jor_nest_179_144	4_EP19_RGAN_SR2,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "It's a child I haven't seen? Oh, isn't it? Sorry, I can't remember the face well.", "", bc_self;
+		end;
+	}
+	npctalk "You're a new born child! How are you?", "", bc_self;
+	end;
+}
+
+jor_nest,224,207,3	script	Heart Hunter#e19ms100	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21)
+		end;
+	npctalk "I want to enter the center, too. To protect the facilities here.", "", bc_self;
+	end;
+}
+
+jor_nest,231,186,5	script	Heart Hunter#e19ms102	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21)
+		end;
+	npctalk "Should I keep this here?", "", bc_self;
+	end;
+}
+
+jor_nest,190,203,5	script	Heart Hunter#e19ms106	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 33) {
+		npctalk "This is a very important facility, what if it breaks down because of you? So don't come!", "", bc_self;
+		end;
+	}
+	npctalk "Is this so important? All the organs are in, but why only us...?", "", bc_self;
+	end;
+}
+
+jor_nest,253,75,7	script	Mirarasimigand#1	EP19_RGAN_D,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[Mirarasimigand]";
+	mes "...";
+	mes "쿨.";
+	mes "You worked hard today. Take a break...";
+	mes "Jormungand-sama will forgive you.";
+	mes "Sniff...";
+	next;
+	mes "I'm sleeping on the wall with a tired face that I can't tell even if I'm not a ragan.";
+	close;
+}
+
+jor_nest,152,108,5	script	Viranimalgand#1	4_EP19_RGAN_R1,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 33) {
+		mes "[Birani Malgand]";
+		mes "I worked hard for Rasgand-sama today as well. Whoa.";
+		close;
+	}
+	mes "[Viranimalgand]";
+	mes "What's going on? Unless you're looking for me, leave me alone.";
+	close;
+}
+
+
+jor_nest,23,91,1	script	Alnagusdagand#1	EP19_RGAN_D,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[Ulnagus Dagand]";
+	mes "...";
+	mes "Do. work.";
+	mes "Work hard. Atonement.";
+	close;
+}
+
+jor_nest,24,97,3	script	Handi Marigand#1	4_EP19_RGAN_R1,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[Handi Marigand]";
+	mes "Because it's a kind sermon that catches your ears.";
+	close;
+}
+
+jor_nest,272,196,5	script	Mirediyamilgand#1	EP19_RGAN_D,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[Mirediyamilgand]";
+	mes "I work. I am a good worker.";
+	close;
+}
+
+jor_nest,243,223,3	script	LacruzGand#1	4_EP19_RGAN_R3,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[LacruzGand]";
+	mes "Why don't you play some jokes. It's all in God's arrangement.";
+	next;
+	mes "[LacruzGand]";
+	mes "But it's really hard to tell.";
+	close;
+}
+
+jor_nest,241,223,5	script	Dumpling Gigande#1	4_EP19_RGAN_R1,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[Dumpling Gigande]";
+	mes "I think there are kids playing pranksters, but I can't tell.";
+	close;
+}
+
+jor_nest,261,233,3	script	GandGand#1	4_EP19_RGAN_R3,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		mes "[Gand]";
+		mes "A priest you've never seen before?";
+		mes "May God bless you in the future.";
+		close;
+	}
+	mes "[Gand]";
+	mes "How do we know what Rasgand means?";
+	close;
+}
+
+jor_nest,278,219,5	script	 Yunalgosulgand#1	EP19_RGAN_D,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[Yunalgosulgand]";
+	mes "I work. I am a nice worker.";
+	mes "I don't know what's good if it's cool, but it is.";
+	close;
+}
+
+jor_nest,272,257,7	script	Hanukorimagand#1	EP19_RGAN_D,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[Hanukorimagand]";
+	mes "I work. I am a great worker.";
+	close;
+}
+
+jor_nest,251,279,7	script	Casbyramigand#1	EP19_RGAN_D,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[Casbyramigand]";
+	mes "I work. Wherever I go, I hear that there is a job.";
+	close;
+}
+
+jor_nest,231,253,5	script	Heart Hunter#e19ms101	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "Baby, step away.", "", bc_self;
+		end;
+	}
+	npctalk "It's a bit scary to keep it here.", "", bc_self;
+	end;
+}
+
+jor_nest,232,161,3	script	Heart Hunter#e19ms103	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "Why? Do you have any business?", "", bc_self;
+		end;
+	}
+	npctalk "Who is coming, is this coming?", "", bc_self;
+	end;
+}
+
+jor_nest,217,144,5	script	Heart Hunter#e19ms104	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "Oh, you can't come here, didn't you hear?", "", bc_self;
+		end;
+	}
+	npctalk "Could you give me a shift...? I don't want to stay here.", "", bc_self;
+	end;
+}
+
+jor_nest,239,143,3	script	Heart Hunter#e19ms105	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "You don't look good when you get close?", "", bc_self;
+		end;
+	}
+	npctalk "Huh- I'd rather be here than in the center... would it be better?", "", bc_self;
+	end;
+}
+
+jor_nest,273,23,3	script	Shayara#ep19iwin07	EP19_RGAN_D,{
+	if (ep19_main < 21) {
+		mes "[Shayara Laragand]";
+		mes "Things are pouring in... Sharararararara~";
+		close;
+	}
+	mes "[Shayara]";
+	mes "Son! It's me, Shayara";
+	mes "Are you going back to the ice castle?";
+	mes "Would you like to go with me?";
+	next;
+	switch( select( "We still have work to do.", "Let's go back to the Ice Castle!" ) ) {
+	case 1:
+		mes "[Shayara]";
+		mes "Because I'm the super fast Iwin in the Ice Castle?";
+		mes "I'll help you not to fall on the ice, so let's go fast!";
+		close;
+	case 2:
+		mes "[Shayara]";
+		mes "Because I'm the super fast Iwin in the Ice Castle?";
+		mes "I'll help you not to fall on the ice, so let's go fast!";
+		close2;
+		warp "icecastle",55,120;
+		if (ep19_main == 44)
+			navigateto("icas_in",245,197);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "ep19_main >= 21" );
+	end;
+}
+
+
+// icecastle
+//------------------------------------------------
+
+icecastle,101,216,5	script	Goryuro#ep19in	4_EP19_IWIN,{
+	mes "[Goryuro]";
+	mes "Huh? Do you have many friends with similar names?";
+	mes "Is it different?";
+	mes "You just don't understand.";
+	close;
+}
+
+icecastle,103,216,3	script	Goruro#ep19in	4_EP19_IWIN,{
+	mes "You are grooming without a word.";
+	close;
+}
+
+icecastle,99,119,3	script	goyl#e19c00	4_EP19_IWIN,{
+	npctalk "Peek-a-boo!", "", bc_self;
+	end;
+}
+
+icecastle,130,136,5	script	Sororyo#ep19in	EP19_NPC_IWIN_SN,{
+	mes "[Sororyo]";
+	mes "Do not come close, human.";
+	mes "I'm practicing my spear technique that won't slip even on ice.";
+	mes "You could get hurt.";
+	close;
+}
+
+icecastle,129,121,3	script	Hora dragon#1	4_EP19_IWIN,{
+	mes "The children of Iwin are looking into the sea with twinkling eyes.";
+	mes "Looks like you're watching a fish.";
+	close;
+}
+
+icecastle,131,121,3	script	Doryarung#ep19in	4_EP19_IWIN,{
+	mes "The children of Iwin are looking into the sea with twinkling eyes.";
+	mes "Looks like you're watching a fish.";
+	close;
+}
+
+icecastle,62,229,6	script	Aurarang#icecastle	EP19_NPC_IWIN,{
+	npctalk "" + strnpcinfo(1) + ": Huh?! You're an outsider!!", "", bc_self;
+	mes "[Feather Bed and Breakfast Aurarang]";
+	mes "Welcome. This is a feather bed and breakfast.";
+	mes "Because I told outsiders to get a Jenny? 5,000z for a break!!";
+	next;
+	switch( select( "Save", "Take a break - 5000z", "Stop" ) ) {
+	case 1:
+		emotion ET_HNG;
+		mes "[Feather Bed and Breakfast Aurarang]";
+		mes "Ice castle is my home. Think and rest in peace~";
+		savepoint "icas_in",87,114,1,1;
+		close;
+	case 2:
+		if (Zeny < 5000) {
+			emotion ET_FRET;
+			mes "[Feather Bed and Breakfast Aurarang]";
+			mes "If you do this without the customer's money, you will be in trouble.";
+			close;
+		}
+		mes "[Feather Bed and Breakfast Aurarang]";
+		mes "Warmly proud of you~";
+		close2;
+		Zeny -= 5000;
+		warp "icas_in",87,114;
+		end;
+	case 3:
+		emotion ET_HNG;
+		mes "[Feather Bed and Breakfast Aurarang]";
+		mes "Heh~ Don't hate it!";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<Feather guesthouse>" );
+	end;
+}
+
+icecastle,118,270,3	script	Homer#e19c00	4_EP19_IWIN,{
+	npctalk "You know what? There's a legend about this waterfall. But nobody knows about it.", "", bc_self;
+	end;
+}
+
+icecastle,172,153,3	script	Noriri#ep19in	4_EP19_IWIN,{
+	mes "Looking at a very distant place with vague eyes.";
+	mes "What are the circumstances...";
+	mes "It doesn't appear to be";
+	close;
+}
+
+icecastle,25,113,4	script	Notice#iwp_1::ep19_icecastle_25_113	4_BOARD3,{
+	mes "[Notice]";
+	mes "We are looking for responsible adventurers to patrol with the Eagle Patrol.";
+	next;
+	mes "[Eligibility]";
+	mes "All races that are physically healthy and capable of communicating, except for rgans";
+	next;
+	mes "[Subscription inquiry]";
+	mes "<Eagle Patrol>";
+	mes "<NAVI>[Captain Marsha Gigi Happy Rev Eve<INFO>icecastle,23,115,0,101,0</INFO></NAVI>";
+	mes "<NAVI>Alice Lloyd Broad-Minded<INFO>icecastle,23,115,0,101,0</INFO></NAVI>";
+	mes "<NAVI>Tess Vortex]<INFO>icecastle,23,115,0,101,0</INFO></NAVI>";
+	mes "Thank you for your support.";
+	close;
+}
+icecastle,178,229,4	duplicate(ep19_icecastle_25_113)	Notice#iwp_2	4_BOARD3
+
+icecastle,43,104,5	script	Choruryong#1::ep19_260	4_EP19_IWIN,{
+	donpcevent strnpcinfo(3) + "::OnTalk";
+	mes "[Choruryong]";
+	mes "Are humans an adult?";
+	mes "Adults are real patrols. Don't snoop on what we do.";
+	close;
+OnTalk:
+	npctalk "Zororo: Two!", "ep19_257";
+	sleep 500;
+	npctalk "Nororu: Two!", "ep19_258";
+	sleep 500;
+	npctalk "Doryaro: Three!", "ep19_259";
+	sleep 500;
+	npctalk "Choruryong: Four!", "ep19_260";
+	end;
+}
+
+icecastle,45,102,5	script	Doryaro#1::ep19_259	4_EP19_IWIN,{
+	donpcevent strnpcinfo(3) + "::OnTalk";
+	mes "[Doryaro]";
+	mes "Are humans an adult?";
+	mes "Adults do real patrols. Don't disturb our training.";
+	close;
+OnTalk:
+	npctalk "Zororo: I'm disappointed with you guys!", "ep19_257";
+	sleep 500;
+	npctalk "Nororu: Blind!", "ep19_258";
+	sleep 500;
+	npctalk "Doryaro: It's a name!", "ep19_259";
+	sleep 500;
+	npctalk "Choru Dragon: Invention!", "ep19_260";
+	end;
+}
+
+icecastle,47,100,5	script	Nororu#1::ep19_258	4_EP19_IWIN,{
+	donpcevent strnpcinfo(3) + "::OnTalk";
+	mes "[Nororu]";
+	mes "Are humans an adult?";
+	mes "Adults do real patrols. We're in charge of this yard.";
+	close;
+OnTalk:
+	npctalk "Zororo: Feet!", "ep19_257";
+	sleep 500;
+	npctalk "Nororu: Bottom!", "ep19_258";
+	sleep 500;
+	npctalk "Doryaro: Jo!", "ep19_259";
+	sleep 500;
+	npctalk "Choruryong: Sim!", "ep19_260";
+	end;
+}
+
+icecastle,49,98,5	script	Zororo#1::ep19_257	4_EP19_IWIN,{
+	donpcevent strnpcinfo(3) + "::OnTalk";
+	mes "[Zororo]";
+	mes "Are humans an adult?";
+	mes "Adults can do real patrols, so I can't put them in our patrol games.";
+	close;
+OnTalk:
+	npctalk "Zororo: Beware overhead!", "ep19_257";
+	sleep 500;
+	npctalk "Nororu: Be careful over your head!", "ep19_258";
+	sleep 500;
+	npctalk "Doryaro: MmmBeware Lee Wie!", "ep19_259";
+	sleep 500;
+	npctalk "Choruryong: Beware!", "ep19_260";
+	end;
+}
+
+icecastle,73,101,7	script	Choralung#ep19in::ep19_262	4_EP19_IWIN,{
+	mes "Watching Mororyo's craftsmanship with twinkling eyes.";
+	npctalk "Mororyo: I'll teach you when you grow up a little.", "ep19_261", bc_self;
+	npctalk "Choralung: Yeah!", "ep19_262", bc_self;
+	close;
+}
+
+icecastle,77,106,3	script	Mororyo#ep19in::ep19_261	4_EP19_IWIN,{
+	mes "[Mororyo]";
+	mes "A fish that is not fresh, it depends on the care.";
+	mes "There is a technique that goes down from generation to generation.";
+	mes "Can you teach me?";
+	next;
+	if (select( "yes", "no" ) == 2) {
+		mes "[Mororyo]";
+		mes "It's a pity.";
+		close;
+	}
+	mes "[Mororyo]";
+	mes "Okay. Now, let's use the gills to beak...";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "...";
+	next;
+	mes "[Mororyo]";
+	mes "...";
+	next;
+	mes "[Mororyo]";
+	mes "Humans have no beaks.";
+	mes "I overlooked";
+	close;
+}
+
+icecastle,89,94,3	script	olir#ep19in::ep19_266	4_EP19_IWIN,{
+	mes "[Orir]";
+	mes "Human, if you're an adult, you can drink.";
+	mes "You cannot drink water outside. Drink it indoors by melting ice.";
+	close;
+}
+
+icecastle,85,95,5	script	Toriro#ep19in	4_EP19_IWIN,{
+	mes "[Toriro]";
+	mes "I won't give you!";
+	mes "If humans want to eat it, get some ice over there.";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "What is it?";
+	next;
+	mes "[Toriro]";
+	mes "Snow Slush!";
+	mes "If you grind ice with your beak and sprinkle with chopped calamari...";
+	mes "I'll be...";
+	next;
+	mes "[Toriro]";
+	mes "Humans have no beaks.";
+	mes "It will be uncomfortable.";
+	npctalk "Porara: Oh, no beak...", "ep19_264", bc_self;
+	npctalk "Orir: Oh...", "ep19_266", bc_self;
+	npctalk "Nororyong: Hiccup.", "ep19_263", bc_self;
+	close;
+}
+
+icecastle,86,100,5	script	Porara#ep19in::ep19_264	4_EP19_IWIN,{
+	mes "[Porara]";
+	mes "Human, do you like to drink?";
+	mes "Drinking this will warm you up.";
+	mes "It's edible with seaweed stems.";
+	next;
+	mes "A very strong odor of alcohol is harmonious with that of the deep sea.";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "...I will decline.";
+	next;
+	mes "[Porara]";
+	mes "This seaweed is also delicious to eat separately.";
+	mes "I'm sorry.";
+	close;
+}
+
+icecastle,90,100,3	script	Nororyong#ep19in::ep19_263	4_EP19_IWIN,{
+	mes "[Nororyong]";
+	mes "Would you like a drink too?";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "What is it?";
+	next;
+	mes "[Nororyong]";
+	mes "Adkara. I'm getting hot.";
+	next;
+	mes "It has a very strong alcohol smell";
+	mes "It feels like Iwin's face, which is hidden from view, is dyed red.";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "I will decline.";
+	next;
+	mes "[Nororyong]";
+	mes "It's delicious.";
+	close;
+}
+
+icecastle,82,111,3	script	Sashasha#e19c00	4_EP19_IWIN,{
+	npctalk "You know what? He who pulls out this spear wins the world. That's what my uncle did.", "", bc_self;
+	end;
+}
+
+icecastle,84,129,3	script	Bangir#e19c00	4_EP19_IWIN,{
+	npctalk "Isn't it pretty? It's so pretty even when I see it, I brought it out for everyone to see.", "", bc_self;
+	end;
+}
+
+icecastle,55,124,3	script	Shayala#ep19iwin06	EP19_NPC_IWIN_SY,{
+	if (ep19_main < 21) {
+		cutin "ep19_iwin04.png",2;
+		mes "[Shayara]";
+		mes "Are you careful of the ice?";
+		mes "It's very slippery~?";
+		close3;
+	}
+	cutin "ep19_iwin04.png",2;
+	mes "[Shayara]";
+	mes "These days, it's hard to work while infiltrating Rgan's nest.";
+	mes "Are you going to infiltrate again today?";
+	mes "It must be difficult to walk on the icy road, can you help me?";
+	next;
+	switch( select( "Can you send me to the snake's nest?", "It's okay, it's okay." ) ) {
+	case 1:
+		mes "[Shayara]";
+		mes "Didn't you just transform into a ragan last time?";
+		mes "It was really fun. I remembered the road well.";
+		mes "I'll blow you right into the nest entrance, so hurry in. Okay?";
+		close2;
+		cutin "",255;
+		warp "jor_nest",275,19;
+		end;
+	case 2:
+		mes "[Shayara]";
+		mes "If you think you will fall on the way, just tell me.";
+		mes "I am Iwin, the express delivery of the ice castle.";
+		mes "It's nothing to blow a human away.";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "ep19_main >= 21" );
+	end;
+}
+
+icecastle,59,123,6	script	Koraryo#icecastle	EP19_NPC_IWIN,{
+	mes "[Koraryo]";
+	mes "Snow here, ice everywhere";
+	mes "A castle of ice full of snow and ice";
+	mes "Welcome to strangers!";
+	mes "This ^B47096 by Silky Well-Balanced Thomas Joy^000000";
+	mes "I'm in charge of the sex service, so let me ask you a question.";
+	next;
+	mes "[Koraryo]";
+	mes "If you click ^000000 on ^B9062F [base name] you are curious about, we will kindly guide you to ^B9062F navigation^000000.";
+	while(1) {
+		next;
+		switch( select( "[Castle of Ice]", "[Barracks]", "[Vellgunde Lab]", "[Restaurant]", "[B&B]", "Clear mini map display", " quit." ) ) {
+		case 1:
+			mes "[Koraryo]";
+			mes "<NAVI>[Ice Castle]<INFO>icecastle,213,174,0,101,0</INFO></NAVI>";
+			mes "If you click, I'll give you directions. You may be wondering where you want to go, so I'll Mark it on the minimap as well!";
+			mes "Do you need guidance elsewhere?";
+			viewpoint 0,213,174,1,0x0A82FF;
+			break;
+		case 2:
+			mes "[Koraryo]";
+			mes "<NAVI>[Barracks]<INFO>icecastle,186,222,0,101,0</INFO></NAVI>";
+			mes "If you click, I'll give you directions. You may be wondering where you want to go, so I'll Mark it on the minimap as well!";
+			mes "Do you need guidance elsewhere?";
+			viewpoint 1,186,222,1,0xAAFF00;
+			break;
+		case 3:
+			mes "[Koraryo]";
+			mes "<NAVI>[Vellgunde Lab]<INFO>icas_in,167,61,0,101,0</INFO></NAVI>";
+			mes "If you click, I will guide you. In Vellgunde-nim's lab, a man named Maram said that he was selling everything necessary for adventurers.";
+			mes "Do you need guidance elsewhere?";
+			viewpoint 2,186,222,1,0x008080;
+			break;
+		case 4:
+			mes "[Koraryo]";
+			mes "<NAVI>[Restaurant]<INFO>icecastle,124,171,0,101,0</INFO></NAVI>";
+			mes "If you click this, I will guide you. The restaurant also runs a daycare center for working Iwin. They take the kids because they are cute and then they wear eye drops!!";
+			mes "Do you need guidance elsewhere?";
+			viewpoint 3,124,171,1,0xFF1493;
+			break;
+		case 5:
+			mes "[Koraryo]";
+			mes "<NAVI>[B&B]<INFO>icecastle,64,224,0,101,0</INFO></NAVI>";
+			mes "Click on this and I will guide you. Oh! If you want to stay overnight, ask the owner of the house on the roof if accommodation is available.";
+			mes "Do you need guidance elsewhere?";
+			viewpoint 4,64,224,1,0x8B4513;
+			break;
+		case 6:
+			mes "[Koraryo]";
+			mes "The Mark has been removed!";
+			mes "Do you need any other help?";
+			viewpoint 0,1,1,2,0xFFFFFF;
+			viewpoint 1,1,1,2,0xFFFFFF;
+			viewpoint 2,1,1,2,0xFFFFFF;
+			viewpoint 3,1,1,2,0xFFFFFF;
+			viewpoint 4,1,1,2,0xFFFFFF;
+			break;
+		case 7:
+			mes "[Koraryo]";
+			mes "Foreigners have little hair, so it would be cold, but don't catch a cold by wandering around in a warm building.";
+			close;
+		}
+	}
+	end;
+OnInit:
+	setunittitle( getnpcid(0), "<Ice Castle Guide>" );
+	end;
+}
+
+icecastle,35,224,7	script	Bora#ep19in	EP19_NPC_IWIN_SB,{
+	if (ep19_main < 11) {
+		mes "[Behold]";
+		mes "Is there anything wrong with work... Etch.";
+		close;
+	}
+	mes "[Behold]";
+	mes "There is nothing wrong with work.";
+	close;
+}
+
+icecastle,71,255,5	script	Ayar#e19c00	4_EP19_IWIN,{
+	npctalk "Uh uh- stop!!! Be careful not to erase it. It's a sacred footprint.", "", bc_self;
+	end;
+}
+
+icecastle,103,227,5	script	Jjoriru#ep19in	4_EP19_IWIN,{
+	mes "[Jjoriru]";
+	mes "What do you eat for dinner...";
+	close;
+}
+
+icecastle,105,227,3	script	Torura#ep19in	4_EP19_IWIN,{
+	mes "[Torura]";
+	mes "I want to eat something other than what I ate yesterday...";
+	close;
+}
+
+icecastle,149,216,3	script	Barley#ep19in	EP19_NPC_IWIN_SB,{
+	mes "[Barley]";
+	mes "There is nothing wrong with work.";
+	close;
+}
+
+icecastle,118,245,5	script	Girl#e19c00	EP19_NPC_IWIN_SN,{
+	npctalk "Hold on. I'm going to catch all the fish here today.", "", bc_self;
+	end;
+}
+
+icecastle,190,217,3	script	Iwin Soldier#ep19iwin03	EP19_NPC_IWIN_SY,{
+	cutin "ep19_iwin04.png",2;
+	mes "[Iwin Soldier]";
+	mes "What's going on in the barracks?";
+	mes "The room on the left of the barracks is the patrol room, and Vellgunde is the room on the right.";
+	mes "A man named Maram was also doing business.";
+	mes "There are many strange things.";
+	close3;
+}
+
+icecastle,180,206,3	script	Iwin Soldier#ep19iwin04	EP19_NPC_IWIN_SY,{
+	cutin "ep19_iwin09.png",2;
+	mes "[Iwin Soldier]";
+	mes "No, no matter how much this is a gymnasium...";
+	mes "Does this mean to clear the snow?";
+	next;
+	cutin "ep19_iwin10.png",2;
+	mes "[Iwin Soldier]";
+	mes "Ah... It's enough to get rid of it before it piles up?";
+	mes "That's right.";
+	mes "noThis...but...";
+	close3;
+}
+
+icecastle,248,211,1	script	Doluri#ep19in	4_EP19_IWIN,{
+	mes "[Doruri]";
+	mes "This work does not contain the names of animals.";
+	mes "Does this mean that our ancestors looked like this?";
+	close;
+}
+
+icecastle,261,179,7	script	Goryu#ep19in	4_EP19_IWIN,{
+	mes "[Goryu]";
+	mes "...";
+	next;
+	mes "[Goryu]";
+	mes "You don't know how grateful I am to have a peaceful day with nothing.";
+	mes "When that happens, even that cold sea looks warm.";
+	close;
+}
+
+icecastle,241,146,7	script	Chorari#ep19in	4_EP19_IWIN,{
+	mes "[Chorari]";
+	mes "There are no creatures that look like this around here.";
+	mes "Does the real thing your ancestors see look like this?";
+	close;
+}
+
+icecastle,195,170,3	script	Expense#e19c00	EP19_NPC_IWIN_SG,{
+	npctalk "on alert.", "", bc_self;
+	end;
+}
+
+icecastle,209,156,3	script	Guard#e19c01	EP19_NPC_IWIN_SG,{
+	npctalk "Nothing wrong.", "", bc_self;
+	end;
+}
+
+icecastle,241,115,5	script	Boraria#ep19in	EP19_NPC_IWIN_SY,{
+	if (ep19_main < 11) {
+		mes "[Boraria]";
+		mes "There is nothing wrong with work.";
+		close;
+	}
+	mes "[Boraria]";
+	mes "There's nothing wrong with working ahhhhhhhhhhhhh!";
+	close;
+}
+
+icecastle,170,142,3	script	Chorirong#ep19in	4_EP19_IWIN,{
+	mes "[Chorirong]";
+	mes "Occasionally I have friends who have crush marks on their feathers, but it's like some other animal has been cheating on them.";
+	next;
+	mes "[Chorirong]";
+	mes "But you've never seen an animal that isn't afraid of a cage of that size?";
+	mes "Where is the rumored cat or dog?";
+	close;
+}
+
+icecastle,133,165,5	script	Harr#e19c00	4_EP19_IWIN,{
+	npctalk "Isn't it pretty? I put it together.", "", bc_self;
+	end;
+}
+
+icecastle,116,147,5	script	Sunyari#e19c00	EP19_NPC_IWIN_SN,{
+	npctalk "Did you see the fool fishing in the waterfall over there? All the fish are here.", "", bc_self;
+	end;
+}
+
+
+// icas_in
+//-------------------------------------
+
+icas_in,235,65,7	script	Book#2	HIDDEN_NPC,{
+	npctalk "Joryara: Human, it's a thousand-year-old recipe for salted calamari, but humans can't eat it. I'm really sorry.", "ep19_icas_in_241_66", bc_self;
+	end;
+}
+
+icas_in,237,66,7	script	Jangdok#1	HIDDEN_NPC,{
+	npctalk "Zoryara: It's a soy sauce that has been passed down for millennia. Don't touch it.", "ep19_icas_in_241_66", bc_self;
+	end;
+}
+
+icas_in,251,60,3	script	Horari#ep19in	4_EP19_IWIN,{
+	mes "[Horari]";
+	mes "Is Mom doing well on patrol?";
+	close;
+}
+
+icas_in,245,53,5	script	Jorrori#ep19in	4_EP19_IWIN,{
+	mes "[Jorrori]";
+	mes "What are you playing with today?";
+	mes "Do you want to groom Zoraria?";
+	close;
+}
+
+icas_in,119,62,3	script	Vellgunde Lab	4_BULLETIN_BOARD2,{
+	npctalk "Vellgunde Lab", "", bc_self;
+	end;
+}
+
+icas_in,95,57,6	script	Eagle Patrol#iwp1	4_BULLETIN_BOARD2,{
+	npctalk "[Eagle Patrol]", "", bc_self;
+	end;
+}
+
+icas_in,95,62,6	script	Eagle Patrol#iwp2	4_BULLETIN_BOARD2,{
+	npctalk "[Eagle Patrol]", "", bc_self;
+	end;
+}
+
+icas_in,42,53,8	script	Recruit Pororon#s_iw	EP19_NPC_IWIN,{
+	setpcblock PCBLOCK_NPC, true;
+	cutin "ep19_iwin05.png",2;
+	sleep2 500;
+	npctalk "Z.....z....z...", "", bc_self;
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : You fell asleep. Are you tired?", bc_self;
+	sleep2 500;
+	cutin "",255;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<Eagle Patrol>" );
+	end;
+}
+
+icas_in,51,53,8	script	Recruit Horulung#s_iw	EP19_NPC_IWIN,{
+	setpcblock PCBLOCK_NPC, true;
+	cutin "ep19_iwin05.png",2;
+	npctalk "z Z z Z z", "", bc_self;
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : seems to be sleeping", bc_self;
+	cutin "",255;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<Eagle Patrol>" );
+	end;
+}
+
+icas_in,33,68,4	script	???? Gorori#s_iw	EP19_NPC_IWIN,{
+	setpcblock PCBLOCK_NPC, true;
+	cutin "ep19_iwin05.png",2;
+	sleep2 500;
+	npctalk "zzzz..ZZ..zzz", "", bc_self;
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : Are you sleeping?", bc_self;
+	sleep2 500;
+	cutin "",255;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<Eagle Patrol>" );
+	end;
+}
+
+icas_in,42,68,4	script	Private Torari#s_iw	EP19_NPC_IWIN,{
+	setpcblock PCBLOCK_NPC, true;
+	cutin "ep19_iwin05.png",2;
+	sleep2 500;
+	npctalk "zz zZz zz zZz", "", bc_self;
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : You fell asleep. Are you tired?", bc_self;
+	sleep2 500;
+	cutin "",255;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<Eagle Patrol>" );
+	end;
+}
+
+icas_in,51,68,4	script	Lee Byeong Toralong#s_iw	EP19_NPC_IWIN,{
+	setpcblock PCBLOCK_NPC, true;
+	cutin "ep19_iwin05.png",2;
+	sleep2 500;
+	npctalk "...z ....Z ...Z ...z", "", bc_self;
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : You fell asleep. Are you tired?", bc_self;
+	sleep2 500;
+	cutin "",255;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<Eagle Patrol>" );
+	end;
+}
+
+// Exchange npc - Snow Flower Magic Stone
+icas_in,175,63,3	script	Hoyoyo#ep19trader	4_EP19_IWIN,{
+	if (ep19_main < 11) {
+		cutin "ep19_iwin02.png",2;
+		mes "[Hoyoyo]";
+		mes "You are the adventurer who came to the ice castle this time.";
+		mes "This body's original name is Hoyoyo Hoyoyo Hoyoyo (Royal Signature Bergamot).";
+		next;
+		select( "Hoyo? Hoyo?" );
+		mes "[Hoyoyo]";
+		mes "Yeah. It sounds like a ho-yo-yo to the human ear even if you come up with a cool name.";
+		mes "Call me Hoyoyo comfortably.";
+		close3;
+	}
+	cutin "ep19_iwin02.png",2;
+	mes "[Hoyoyo]";
+	mes "I'm researching Jormungand's magic with Vellgunde.";
+	mes "There are times when Vellgunde needs raw manastone, and if you need an adventurer, I'll take care of it.";
+	next;
+	switch( select( "Exchange of various fairy tale gemstones", "exchange snowflake petals", "Is your original name Hoyoyoya?" ) ) {
+	case 1:
+		mes "[Hoyoyo]";
+		mes "I'll exchange the Snowflake Manastone for a Snowflake Manastone, and the Snowflake Manastone for a Shining Snowflake Manastone.";
+		mes "Where are you going to use it? Will Vellgunde make something good with it?";
+		close2;
+		cutin "",255;
+		callshop( "barter_ep19_snow_stone" );
+		end;
+	case 2:
+		if (get_reputation_points(3) < 1000) {
+			mes "[Hoyoyo]";
+			mes "Huh? Do you want to do something with the flower petals?";
+			mes "Vellgunde-sama has been doing a lot of research lately.";
+			next;
+			mes "[Hoyoyo]";
+			mes "Wouldn't it be nice if you put a little more effort into the ice castle?";
+			mes "Hoyoyoyoyo~ Hoyoyoyoyoyo~";
+			close3;
+		}
+		mes "[Hoyoyo]";
+		mes "Come here, human friend~";
+		mes "What do you need?";
+		close2;
+		cutin "",255;
+		if (get_reputation_points(3) == 1000)
+			callshop( "barter_ep19_repu_1" );
+		else
+			callshop( "barter_ep19_repu_2" );
+		end;
+	case 3:
+		mes "[Hoyoyo]";
+		mes "This body's original name is Hoyoyo Hoyoyo Hoyoyo (Royal Signature Bergamot).";
+		next;
+		select( "Hoyo? Hoyo?" );
+		mes "[Hoyoyo]";
+		mes "Yeah. It sounds like a ho-yo-yo to human ears even if it's a cool name.";
+		mes "Call me Hoyoyo comfortably.";
+		close3;
+	}
+}
+
+-	shop	ep19_basic_supply	-1,611:-1,602:-1,601:-1,23280:-1,23288:-1,645:-1,656:-1,657:-1,501:-1,502:-1,503:-1,504:-1,506:-1,610:-1,713:-1,717:-1,1771:-1
+-	shop	ep19_glacier_melee	-1,600027:150000,630018:150000,500049:150000,500050:150000,530025:150000,620017:150000,520017:150000,590038:150000,590039:150000,510061:150000,510062:150000,700052:150000,560032:150000,540049:150000,610037:150000,570029:150000,580030:150000
+-	shop	ep19_glacier_range	-1,550069:150000,640033:150000,550070:150000,650025:150000,800014:150000,810010:150000,820008:150000,830013:150000,840009:150000
+
+icas_in,180,61,5	script	Maram#ep19trader	4_EP18_MARAM,{
+	if (ep19_main < 11) {
+		cutin "ep18_maram_01.png",2;
+		mes "[Maram]";
+		mes "I have one thing to do here.";
+		mes "It is to airlift your supplies.";
+		mes "Aren't continental things supposed to be comfortable?";
+		close3;
+	}
+	cutin "ep18_maram_01.png",2;
+	mes "[Maram]";
+	mes "Do you need anything?";
+	mes "We airlifted things that adventurers usually use.";
+	next;
+	switch( select( "Look at tools and miscellaneous goods", "Look at armor", "Look at weapons", "Dispose of your belongings", "What's going on?" ) ) {
+	case 1:
+		mes "[Maram]";
+		mes "We have prepared a sufficient quantity, so check it out as much as you need.";
+		close2;
+		cutin "",255;
+		callshop( "ep19_basic_supply", 1 );
+		end;
+	case 2:
+		mes "[Maram]";
+		mes "These are armors made by Vellgunde.";
+		mes "It was made with the magic of the fairy tale, so I'm exchanging it for the petals of the fairy tale.";
+		close2;
+		cutin "",255;
+		callshop( "ep19_snow_armor" );	// barter
+		end;
+	case 3:
+		mes "[Maram]";
+		mes "These are weapons that I airlifted from basic materials and completed by Vellgunde.";
+		mes "I'll probably get a small amount of Jenny for basic ingredients.";
+		next;
+		switch( select( "Look at melee weapons and bows.", "Look at shurikens, guns, and staffs." ) ) {
+		case 1:
+			mes "[Maram]";
+			mes "Weapons are very good.";
+			close2;
+			cutin "",255;
+			callshop( "ep19_glacier_melee", 1 );
+			end;
+		case 2:
+			mes "[Maram]";
+			mes "Weapons are very good.";
+			close2;
+			cutin "",255;
+			callshop( "ep19_glacier_range", 1 );
+			end;
+		}
+		end;
+	case 4:
+		mes "[Maram]";
+		mes "If there are any unnecessary items, I will buy them for you.";
+		close2;
+		cutin "",255;
+		callshop( "ep19_basic_supply", 2 );
+		end;
+	case 5:
+		mes "[Maram]";
+		mes "I've been thinking about what I can do here...";
+		mes "Probably I've only been involved in logistics procurement.";
+		next;
+		mes "[Maram]";
+		mes "This is a place where existing supplies are scarce, so we decided to regularly and unofficially deliver supplies in consultation with Ginger-nim.";
+		next;
+		cutin "ep18_maram_02.png",2;
+		mes "[Maram]";
+		mes "Vellgunde also helped and opened a shop.";
+		mes "Probably because there is a distribution channel, I am receiving the basic Jenny.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[Maram]";
+		mes "Don't worry and do what you want, we'll always make sure you don't run out of supplies!";
+		close3;
+	}
+}
+
+icas_in,142,201,3	script	Torre#ep19iwin05	EP19_NPC_IWIN,{
+	cutin "ep19_iwin03.png",2;
+	mes "[Torre]";
+	mes "Before. Barmund-nim ??came to play often, didn't you?";
+	mes "There is a human-only dormitory and a restaurant that I made at that time.";
+	next;
+	mes "[Torre]";
+	mes "The restaurant is on the left, the hostel is on the right.";
+	mes "Do you understand?";
+	close3;
+}
+
+icas_in,109,242,5	script	Gyuru#ep19iwin05	EP19_NPC_IWIN,{
+	cutin "ep19_iwin04.png",2;
+	mes "[Gyuru]";
+	mes "I like that a lot of people come these days.";
+	mes "Because you didn't even know the time passed before you came.";
+	mes "Leon-sama and Aurely-sama were almost asleep...";
+	next;
+	select( "You only slept?" );
+	mes "[Gyuru]";
+	mes "Still, if something happens like a ghost, get up.";
+	mes "You see everything in your dreams.";
+	mes "Isn't it amazing?";
+	close3;
+}
+
+icas_in,251,46,7	script	Sorarang#ep19in::ep19_227	4_EP19_IWIN,{
+	mes "[Sorarang]";
+	mes "I'll be a patrol trooper when I grow up!";
+	mes "A patrol cap? I like yellow. Red is ugly.";
+	npctalk "Koriri: That's right. It's true that red is ugly.", "ep19_226", bc_self;
+	close;
+}
+
+icas_in,252,50,5	script	Coryri#ep19in::ep19_226	4_EP19_IWIN,{
+	mes "[Coriri]";
+	mes "I'll be a patrol trooper when I grow up!";
+	mes "A patrol hat, I like green. I want green.";
+	npctalk "Sorarang: Yellow is cooler!", "ep19_227", bc_self;
+	npctalk "Koriri: Green is better!", "ep19_226", bc_self;
+	close;
+}
+
+icas_in,248,47,3	script	Soori#ep19in	4_EP19_IWIN,{
+	mes "[Soori]";
+	mes "Wait a minute, let's eat and play...";
+	mes "No, I'm not a kid. If you have time, how about playing with our kids?";
+	mes "I'm sure you'll like the story of a man from the outside.";
+	close;
+}
+
+icas_in,241,49,3	script	Jororuru#ep19in	4_EP19_IWIN,{
+	mes "[Jororuru]";
+	mes "I feel sleepy after eating...";
+	close;
+}
+
+icas_in,236,45,5	script	Goryar#ep19in	4_EP19_IWIN,{
+	mes "[Goryar]";
+	mes "I want to eat a little more seaweed";
+	close;
+}
+
+icas_in,234,49,3	script	Full#ep19in	4_EP19_IWIN,{
+	mes "I'm too busy eating";
+	close;
+}
+
+icas_in,251,59,7	script	Torira#ep19in	4_EP19_IWIN,{
+	mes "[Torira]";
+	mes "I'm going to be a great grown-up just like my dad.";
+	close;
+}
+
+icas_in,244,63,1	script	Jororo#ep19in	4_EP19_IWIN,{
+	mes "[Jororo]";
+	mes "I grew up~";
+	mes "I'll help Zoryara!";
+	npctalk "Zoryara: I can help you now...", "ep19_219", bc_self;
+	close;
+}
+
+// Storage
+icas_in,81,121,4	script	Chasanggo#warehouse	HIDDEN_NPC,{
+	.@total_storage = 1;	// by default rAthena just open the basic storage (but 3 on kRO)
+
+	unittalk getcharid(3), "" + strcharinfo(0) + " : Chasanggo?", bc_self;
+	mes "This is a frozen jar with a strange name. It has piles of change and notes from the guest house owner.";
+	mes "The warehouse is ^389DD4 per 500 Jenny^000000. If you leave it next to it, you will get it later~";
+	mes "Feather Bed and Breakfast Aurarang";
+	next;
+	for ( .@i = 0; .@i < .@total_storage; .@i++ )
+		.@menu$ += "Storage " + (.@i+1) + ":";
+	.@s = select( .@menu$ ) - 2;
+
+	if (Zeny < 500) {
+		unittalk getcharid(3), "" + strcharinfo(0) + " : I can't use it because I don't have change.", bc_self;
+		end;
+	}
+	Zeny -= 500;
+	if (.@s == -1)	// basic storage
+		openstorage;
+	else	// "premium" storage starting from index 0
+		openstorage2 .@s, STOR_MODE_GET|STOR_MODE_PUT;	// note: opened before close button
+	end;
+}
+
+
+/*
+// unknown npcs (hidden)
+icas_in,42,57,6	duplicate(dummy_npc)	Recruit Pororon#m_iw	EP19_NPC_IWIN_SN
+icas_in,42,65,6	duplicate(dummy_npc)	Pilky Torari#m_iw	EP19_NPC_IWIN_SY
+icas_in,49,65,6	duplicate(dummy_npc)	People Toralong#m_iw	EP19_NPC_IWIN_SY
+icas_in,52,57,6	duplicate(dummy_npc)	Recruit Horulung#m_iw	EP19_NPC_IWIN_SN
+icas_in,56,60,2	duplicate(dummy_npc)	Rookie Executive Oriryo#c_iw	EP19_NPC_IWIN_SR
+icecastle,123,173,4	duplicate(dummy_npc)	Zorilla's Dinner#Restaurant	HIDDEN_NPC
+icecastle,177,221,4	duplicate(dummy_npc)	barracks#left	HIDDEN_NPC
+icecastle,194,221,4	duplicate(dummy_npc)	barrac#woo	HIDDEN_NPC
+icecastle,199,148,4	duplicate(dummy_npc)	Ice Castle#Left	HIDDEN_NPC
+icecastle,213,148,4	duplicate(dummy_npc)	Ice Castle#Woo	HIDDEN_NPC
+icecastle,243,147,7	duplicate(dummy_npc)	Ice Statue#1	HIDDEN_NPC
+icecastle,244,213,7	duplicate(dummy_npc)	Ice Statue#2	HIDDEN_NPC
+*/
