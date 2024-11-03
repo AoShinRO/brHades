@@ -1,0 +1,93 @@
+//===== rAthena Script =======================================
+//= Mapflags for episode 19
+//===== Description: =========================================
+//= The file include basics mapflags.
+//===== Additional Comments: =================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Towns
+icecastle	mapflag	nomemo
+icecastle	mapflag	nobranch
+icecastle	mapflag	nowarp
+icecastle	mapflag	nowarpto
+icecastle	mapflag	restricted	7
+
+jor_nest	mapflag	nomemo
+jor_nest	mapflag	nobranch
+jor_nest	mapflag	nowarp
+jor_nest	mapflag	nowarpto
+jor_nest	mapflag	restricted	7
+
+jor_que	mapflag	nomemo
+jor_que	mapflag	nobranch
+jor_que	mapflag	nowarp
+jor_que	mapflag	nowarpto
+jor_que	mapflag	restricted	7
+
+// Inside
+icas_in	mapflag	nomemo
+icas_in	mapflag	nobranch
+icas_in	mapflag	nowarp
+icas_in	mapflag	nowarpto
+icas_in	mapflag	noteleport
+icas_in	mapflag	noicewall
+
+// Fields
+jor_tail	mapflag	nomemo
+jor_back1	mapflag	nomemo
+jor_back2	mapflag	nomemo
+jor_back3	mapflag	nomemo
+
+// Dungeons
+jor_ab01	mapflag	nomemo
+jor_ab02	mapflag	nomemo
+jor_dun01	mapflag	nomemo
+jor_dun02	mapflag	nomemo
+
+// Instances
+1@iwp	mapflag	nomemo
+1@iwp	mapflag	nosave	SavePoint
+1@iwp	mapflag	nobranch
+1@iwp	mapflag	nowarp
+1@iwp	mapflag	nowarpto
+1@iwp	mapflag	noteleport
+1@iwp	mapflag	monster_noteleport
+1@iwp	mapflag	noicewall
+1@iwp	mapflag	partylock
+1@iwp	mapflag	restricted	6
+
+1@jorlab	mapflag	nomemo
+1@jorlab	mapflag	nosave	SavePoint
+1@jorlab	mapflag	nobranch
+1@jorlab	mapflag	nowarp
+1@jorlab	mapflag	nowarpto
+1@jorlab	mapflag	noteleport
+1@jorlab	mapflag	monster_noteleport
+1@jorlab	mapflag	noicewall
+1@jorlab	mapflag	partylock
+1@jorlab	mapflag	restricted	6
+
+1@whl	mapflag	nomemo
+1@whl	mapflag	nosave	SavePoint
+1@whl	mapflag	nobranch
+1@whl	mapflag	nowarp
+1@whl	mapflag	nowarpto
+1@whl	mapflag	noteleport
+1@whl	mapflag	monster_noteleport
+1@whl	mapflag	noicewall
+1@whl	mapflag	partylock
+1@whl	mapflag	nolootnormalmob
+1@whl	mapflag	no_npc_selfdestruction_on_all
+1@whl	mapflag	restricted	6
+
+1@jorchs	mapflag	nomemo
+1@jorchs	mapflag	nosave	SavePoint
+1@jorchs	mapflag	nobranch
+1@jorchs	mapflag	nowarp
+1@jorchs	mapflag	nowarpto
+1@jorchs	mapflag	noteleport
+1@jorchs	mapflag	monster_noteleport
+1@jorchs	mapflag	noicewall
+1@jorchs	mapflag	partylock
+1@jorchs	mapflag	restricted	6

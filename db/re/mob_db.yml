@@ -113829,72 +113829,1255 @@ Body:
 #    AegisName: SEASON_MOB_109
 #  - Id: 21512
 #    AegisName: SEASON_MOB_110
-#  - Id: 21513
-#    AegisName: EP19_NPC_IWIN
-#  - Id: 21514
-#    AegisName: EP19_NPC_IWIN_SN
-#  - Id: 21515
-#    AegisName: EP19_NPC_IWIN_SY
-#  - Id: 21516
-#    AegisName: EP19_NPC_IWIN_SB
-#  - Id: 21517
-#    AegisName: EP19_NPC_IWIN_SG
-#  - Id: 21518
-#    AegisName: EP19_NPC_IWIN_SR
-#  - Id: 21519
-#    AegisName: EP19_NPC_LEHAR
-#  - Id: 21520
-#    AegisName: EP19_LIMACINA
-#  - Id: 21521
-#    AegisName: EP19_UNFROST_FLOWER
-#  - Id: 21522
-#    AegisName: EP19_CALMARING
-#  - Id: 21523
-#    AegisName: EP19_ICE_STRAW
-#  - Id: 21524
-#    AegisName: EP19_SHINING_SEAWEED
-#  - Id: 21525
-#    AegisName: EP19_ICE_GANGU
-#  - Id: 21526
-#    AegisName: EP19_RGAN_A
-#  - Id: 21527
-#    AegisName: EP19_RGAN_B
-#  - Id: 21528
-#    AegisName: EP19_RGAN_C
-#  - Id: 21529
-#    AegisName: EP19_RGAN_D
-#  - Id: 21530
-#    AegisName: EP19_RGAN_E
-#  - Id: 21531
-#    AegisName: EP19_MD_AQUILA
-#  - Id: 21532
-#    AegisName: EP19_MD_JUNCEA
-#  - Id: 21533
-#    AegisName: EP19_MD_JUNCEA_S
-#  - Id: 21534
-#    AegisName: EP19_MD_RGAN_E
-#  - Id: 21535
-#    AegisName: EP19_MD_RGAN_D
-#  - Id: 21536
-#    AegisName: EP19_MD_HEARTHUNTER_AT
-#  - Id: 21537
-#    AegisName: EP19_LIMACINA_BOSS
-#  - Id: 21538
-#    AegisName: EP19_WASTED_RGAN_A
-#  - Id: 21539
-#    AegisName: EP19_WASTED_RGAN_C
-#  - Id: 21540
-#    AegisName: EP19_CAVE_CALMARING
-#  - Id: 21541
-#    AegisName: EP19_CAVE_FLOWER
-#  - Id: 21542
-#    AegisName: EP19_HALLUCIGENIA
-#  - Id: 21543
-#    AegisName: EP19_HALLUCIGENIA_BABY
-#  - Id: 21544
-#    AegisName: EP19_ONE_EYE_DOLLOCARIS
-#  - Id: 21545
-#    AegisName: EP19_DOLLOCARIS
+  - Id: 21513
+    AegisName: EP19_NPC_IWIN
+    Name: EP19_NPC_IWIN
+    Level: 200
+    WalkSpeed: 150
+  - Id: 21514
+    AegisName: EP19_NPC_IWIN_SN
+    Name: EP19_NPC_IWIN_SN
+    Level: 200
+    WalkSpeed: 150
+  - Id: 21515
+    AegisName: EP19_NPC_IWIN_SY
+    Name: EP19_NPC_IWIN_SY
+    Level: 200
+    WalkSpeed: 150
+  - Id: 21516
+    AegisName: EP19_NPC_IWIN_SB
+    Name: EP19_NPC_IWIN_SB
+    Level: 200
+    WalkSpeed: 150
+  - Id: 21517
+    AegisName: EP19_NPC_IWIN_SG
+    Name: EP19_NPC_IWIN_SG
+    Level: 200
+    WalkSpeed: 150
+  - Id: 21518
+    AegisName: EP19_NPC_IWIN_SR
+    Name: EP19_NPC_IWIN_SR
+    Level: 200
+    WalkSpeed: 150
+  - Id: 21519
+    AegisName: EP19_NPC_LEHAR
+    Name: EP19_NPC_LEHAR
+    Level: 200
+    WalkSpeed: 150
+  - Id: 21520
+    AegisName: EP19_LIMACINA
+    Name: Limacina
+    Level: 213
+    Hp: 5145174
+    Attack: 6000
+    Attack2: 1000
+    Defense: 240
+    MagicDefense: 168
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 7
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Fish
+    Element: Water
+    ElementLevel: 2
+    WalkSpeed: 175
+    AttackDelay: 46
+    AttackMotion: 768
+    DamageMotion: 576
+    Ai: 04
+    Drops:
+      - Item: Fluorescent_Liquid
+        Rate: 3000
+      - Item: Ice_Piece
+        Rate: 3000
+      - Item: EP19_Transparency_Shell
+        Rate: 3000
+      - Item: Limacina_Card   # Limacina Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21521
+    AegisName: EP19_UNFROST_FLOWER
+    Name: Unfrost Flower
+    Level: 212
+    Hp: 5286316
+    Attack: 6000
+    Attack2: 1000
+    Defense: 600
+    MagicDefense: 100
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Fish
+    Element: Water
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 297
+    AttackMotion: 864
+    DamageMotion: 576
+    Ai: 04
+    Drops:
+      - Item: EP19_Bell_Flower
+        Rate: 3000
+      - Item: Scales_Shell
+        Rate: 3000
+      - Item: Unfrost_Flower_card   # Unfrost Flower Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21522
+    AegisName: EP19_CALMARING
+    Name: Calmaring
+    Level: 209
+    Hp: 5163610
+    Attack: 6000
+    Attack2: 1000
+    Defense: 600
+    MagicDefense: 100
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Plant
+    Element: Water
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 672
+    AttackMotion: 1248
+    DamageMotion: 480
+    Ai: 04
+    Drops:
+      - Item: EP19_Calapy
+        Rate: 3000
+      - Item: Germinating_Sprout
+        Rate: 3000
+      - Item: Sticky_Poison
+        Rate: 3000
+      - Item: Zelunium_Ore
+        Rate: 100
+      - Item: Zelunium
+        Rate: 10
+      - Item: Calmaring_Card   # Calmaring Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21523
+    AegisName: EP19_ICE_STRAW
+    Name: Ice Straw
+    Level: 211
+    Hp: 4980352
+    Attack: 6000
+    Attack2: 1000
+    Defense: 600
+    MagicDefense: 100
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Fish
+    Element: Water
+    ElementLevel: 3
+    WalkSpeed: 200
+    AttackDelay: 610
+    AttackMotion: 1152
+    DamageMotion: 576
+    Ai: 04
+    Drops:
+      - Item: Ice_Heart
+        Rate: 3000
+      - Item: Ice_Piece
+        Rate: 3000
+      - Item: EP19_Thin_Shell
+        Rate: 3000
+      - Item: Ep19_Rgan_Core_F
+        Rate: 300
+      - Item: Zelunium_Ore
+        Rate: 100
+      - Item: Zelunium
+        Rate: 10
+      - Item: Ice_Straw_Card   # Ice Straw Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21524
+    AegisName: EP19_SHINING_SEAWEED
+    Name: Shining Seaweed
+    Level: 210
+    Hp: 4305590
+    Attack: 6000
+    Attack2: 1000
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Plant
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 100
+    AttackDelay: 577
+    AttackMotion: 576
+    DamageMotion: 576
+    Ai: 01
+    Drops:
+      - Item: EP19_Shiny_Seaweed
+        Rate: 3000
+      - Item: Stone_Piece
+        Rate: 3000
+      - Item: Coral_Reef
+        Rate: 3000
+      - Item: Etel_Dust
+        Rate: 300
+      - Item: Shining_Seaweed_Card   # Shining Seaweed Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21525
+    AegisName: EP19_ICE_GANGU
+    Name: Ice Gangu
+    Level: 208
+    Hp: 4698470
+    Attack: 6000
+    Attack2: 1000
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Insect
+    Element: Water
+    ElementLevel: 2
+    WalkSpeed: 200
+    AttackDelay: 205
+    AttackMotion: 576
+    DamageMotion: 180
+    Ai: 02
+    Modes:
+      Detector: true
+    Drops:
+      - Item: Insect_Feeler
+        Rate: 3000
+      - Item: Round_Shell
+        Rate: 3000
+      - Item: EP19_Frozen_Shell
+        Rate: 3000
+      - Item: Ice_Gangu_Card   # Ice Gangu Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21526
+    AegisName: EP19_RGAN_A
+    Name: Primitive Rgan
+    Level: 210
+    Hp: 4620550
+    Attack: 6000
+    Attack2: 1000
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Poison
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 796
+    AttackMotion: 1200
+    DamageMotion: 648
+    Ai: 04
+    Drops:
+      - Item: EP19_Shell_Of_Rgan
+        Rate: 3000
+      - Item: EP19_Unknown_Cell
+        Rate: 3000
+      - Item: Ep19_Rgan_Core_F
+        Rate: 3000
+      - Item: Primitive_Rgan_Card   # Primitive Rgan Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21527
+    AegisName: EP19_RGAN_B
+    Name: Lowest Rgan
+    Level: 212
+    Hp: 4983460
+    Attack: 6000
+    Attack2: 1000
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Earth
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 444
+    AttackMotion: 1200
+    DamageMotion: 864
+    Ai: 04
+    Drops:
+      - Item: EP19_Shell_Of_Rgan
+        Rate: 3000
+      - Item: EP19_Unknown_Cell
+        Rate: 3000
+      - Item: Ep19_Rgan_Core_F
+        Rate: 3000
+      - Item: D_Glacier_Humma
+        Rate: 250
+      - Item: D_Glacier_Rifle
+        Rate: 250
+      - Item: Lowest_Rgan_Card   # Lowest Rgan Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21528
+    AegisName: EP19_RGAN_C
+    Name: Lesser Rgan
+    Level: 214
+    Hp: 5109580
+    Attack: 6000
+    Attack2: 1000
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 44
+    AttackMotion: 864
+    DamageMotion: 576
+    Ai: 04
+    Drops:
+      - Item: EP19_Shell_Of_Rgan
+        Rate: 3000
+      - Item: EP19_Unknown_Cell
+        Rate: 3000
+      - Item: Ep19_Rgan_Core_F
+        Rate: 3000
+      - Item: Shadowdecon_Ore
+        Rate: 300
+      - Item: D_Glacier_B_Sword
+        Rate: 250
+      - Item: D_Glacier_Foxtail
+        Rate: 250
+      - Item: Etel_Dust
+        Rate: 100
+      - Item: Snow_F_Ore
+        Rate: 100
+      - Item: Ep19_Snow_Flower
+        Rate: 10
+      - Item: Junior_Rgan_Card   # Lesser Rgan Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21529
+    AegisName: EP19_RGAN_D
+    Name: Intermediate Rgan
+    Level: 215
+    Hp: 5809080
+    Attack: 6000
+    Attack2: 1000
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Water
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 336
+    AttackMotion: 1008
+    DamageMotion: 576
+    Ai: 04
+    Drops:
+      - Item: EP19_Shell_Of_Rgan
+        Rate: 3000
+      - Item: EP19_Unknown_Cell
+        Rate: 3000
+      - Item: Ep19_Rgan_Core_F
+        Rate: 3000
+      - Item: D_Glacier_Lance
+        Rate: 250
+      - Item: D_Glacier_Staff
+        Rate: 250
+      - Item: Shadowdecon
+        Rate: 100
+      - Item: Etel_Dust
+        Rate: 100
+      - Item: Snow_F_Ore
+        Rate: 100
+      - Item: Ep19_Snow_Flower
+        Rate: 10
+      - Item: Middle_G_Rgan_Card   # Intermediate Rgan Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21530
+    AegisName: EP19_RGAN_E
+    Name: Rgan # TODO
+    Level: 200
+    Hp: 3000000
+    Attack: 6000
+    Attack2: 1000
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 576
+    AttackMotion: 576
+    DamageMotion: 478
+    Ai: 04
+  - Id: 21531
+    AegisName: EP19_MD_AQUILA
+    Name: Aquila
+    Level: 215
+    Hp: 600000000
+    Defense: 456
+    MagicDefense: 112
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Dark
+    ElementLevel: 4 # TODO
+    WalkSpeed: 150
+    AttackDelay: 1585
+    AttackMotion: 1584
+    DamageMotion: 480
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: Snow_F_Stone1
+        Rate: 3000
+      - Item: Snow_F_Stone2
+        Rate: 3000
+      - Item: Snow_F_Stone3
+        Rate: 3000
+      - Item: EP19_Luminant
+        Rate: 3000
+      - Item: Snow_F_Ore
+        Rate: 3000
+      - Item: Aquila_Card   # Aquila Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21532
+    AegisName: EP19_MD_JUNCEA
+    Name: Simulation Juncea
+    Level: 215
+    Hp: 72847380
+    Attack: 6000
+    Attack2: 1000
+    Defense: 600
+    MagicDefense: 100
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 2017
+    AttackMotion: 2016
+    DamageMotion: 478
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+  - Id: 21533
+    AegisName: EP19_MD_JUNCEA_S
+    Name: Simulation Juncea
+    Level: 215
+    Hp: 300000000
+    Attack: 6000
+    Attack2: 1000
+    Defense: 600
+    MagicDefense: 100
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 1011
+    AttackMotion: 1008
+    DamageMotion: 478
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    MvpDrops:
+      - Item: Snow_F_Stone1
+        Rate: 9000
+      - Item: Snow_F_Stone2
+        Rate: 1000
+    Drops:
+      - Item: Snow_F_Stone1
+        Rate: 3000
+      - Item: Snow_F_Stone2
+        Rate: 3000
+      - Item: Snow_F_Stone3
+        Rate: 3000
+      - Item: Simulation_Juncea_Card   # Simulation Juncea Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21534
+    AegisName: EP19_MD_RGAN_E
+    Name: Frightened Ragan
+    Level: 213
+    Hp: 5305150
+    Attack: 6000
+    Attack2: 1000
+    Defense: 600
+    MagicDefense: 100
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 504
+    AttackMotion: 1008
+    DamageMotion: 478
+    Ai: 04
+  - Id: 21535
+    AegisName: EP19_MD_RGAN_D
+    Name: Split Ragan
+    Level: 211
+    Hp: 4815450
+    Attack: 6000
+    Attack2: 1000
+    Defense: 600
+    MagicDefense: 100
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 419
+    AttackMotion: 792
+    DamageMotion: 478
+    Ai: 04
+  - Id: 21536
+    AegisName: EP19_MD_HEARTHUNTER_AT
+    Name: Modified Heart Hunter
+    Level: 210
+    Hp: 4807050
+    Attack: 6000
+    Attack2: 1000
+    Defense: 600
+    MagicDefense: 100
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Demihuman
+    Element: Neutral
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 441
+    AttackMotion: 1080
+    DamageMotion: 478
+    Ai: 04
+  - Id: 21537
+    AegisName: EP19_LIMACINA_BOSS
+    Name: Ultra Limacina
+    Level: 245
+    Hp: 3000000
+    Attack: 6000
+    Attack2: 1000
+    Defense: 600
+    MagicDefense: 100
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 7
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless   # TODO
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 235
+    AttackMotion: 234
+    DamageMotion: 576
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: Ultra_Limacina_Card   # Ultra Limacina Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21538
+    AegisName: EP19_WASTED_RGAN_A
+    Name: Wasted Primitive Rgan
+    Level: 234
+    Hp: 6920300
+    Attack: 6000
+    Attack2: 1000
+    Defense: 214
+    MagicDefense: 147
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Poison
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 216
+    AttackMotion: 792
+    DamageMotion: 576
+    Ai: 04
+    Drops:
+      - Item: EP19_Shell_Of_Rgan
+        Rate: 3000
+      - Item: EP19_Unknown_Cell
+        Rate: 3000
+      - Item: Ep19_Rgan_Core_F
+        Rate: 3000
+      - Item: Rotten_Bandage
+        Rate: 3000
+      - Item: Shadowdecon_Ore
+        Rate: 300
+      - Item: D_Glacier_Wand
+        Rate: 250
+      - Item: D_Glacier_Whip
+        Rate: 250
+      - Item: Discarded_P_R_Card   # Wasted Primitive Rgan Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21539
+    AegisName: EP19_WASTED_RGAN_C
+    Name: Wasted Intermediate Rgan
+    Level: 253
+    Hp: 8453210
+    Attack: 6000
+    Attack2: 1000
+    Defense: 316
+    MagicDefense: 201
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Wind
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 232
+    AttackMotion: 648
+    DamageMotion: 576
+    Ai: 04
+    Drops:
+      - Item: EP19_Shell_Of_Rgan
+        Rate: 3000
+      - Item: EP19_Unknown_Cell
+        Rate: 3000
+      - Item: Rotten_Bandage
+        Rate: 3000
+      - Item: Etel_Dust
+        Rate: 300
+      - Item: D_Glacier_Violin
+        Rate: 250
+      - Item: D_Glacier_M_Mace
+        Rate: 250
+      - Item: Discarded_L_R_Card   # Wasted Intermediate Rgan Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21540
+    AegisName: EP19_CAVE_CALMARING
+    Name: Cave Calmaring
+    Level: 232
+    Hp: 7450800
+    Attack: 6000
+    Attack2: 1000
+    Defense: 287
+    MagicDefense: 190
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Plant
+    Element: Water
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 66
+    AttackMotion: 576
+    DamageMotion: 478
+    Ai: 04
+    Drops:
+      - Item: EP19_CaCalapy
+        Rate: 3000
+      - Item: Sticky_Poison
+        Rate: 3000
+      - Item: Fluorescent_Liquid
+        Rate: 3000
+      - Item: Etel_Dust
+        Rate: 300
+      - Item: D_Glacier_Mace
+        Rate: 250
+      - Item: D_Glacier_T_Axe
+        Rate: 250
+      - Item: Cave_Calmaring_Card   # Cave Calmaring Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21541
+    AegisName: EP19_CAVE_FLOWER
+    Name: Cave Flower
+    Level: 233
+    Hp: 7652220
+    Attack: 6000
+    Attack2: 1000
+    Defense: 219
+    MagicDefense: 150
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Fish
+    Element: Water
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 336
+    AttackMotion: 864
+    DamageMotion: 480
+    Ai: 04
+    Drops:
+      - Item: EP19_Unknown_Cell
+        Rate: 3000
+      - Item: Solid_Shell
+        Rate: 3000
+      - Item: Etel_Dust
+        Rate: 300
+      - Item: D_Glacier_Bow
+        Rate: 250
+      - Item: D_Glacier_Launcher
+        Rate: 250
+      - Item: Snow_F_Stone1
+        Rate: 30
+      - Item: Cave_Un_Flower_Card   # Cave Flower Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21542
+    AegisName: EP19_HALLUCIGENIA
+    Name: Hallucigenia
+    Level: 252
+    Hp: 9106120
+    Attack: 6000
+    Attack2: 1000
+    Defense: 229
+    MagicDefense: 155
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Insect
+    Element: Water
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 272
+    AttackMotion: 864
+    DamageMotion: 478
+    Ai: 04
+    Modes:
+      Detector: true
+    Drops:
+      - Item: Solid_Shell
+        Rate: 3000
+      - Item: Sticky_Poison
+        Rate: 3000
+      - Item: Prickly_Fruit_
+        Rate: 3000
+      - Item: EP19_Prickle_Shell
+        Rate: 3000
+      - Item: Zelunium_Ore
+        Rate: 300
+      - Item: Etel_Dust
+        Rate: 300
+      - Item: D_Glacier_B_Knife
+        Rate: 250
+      - Item: D_Glacier_Axe
+        Rate: 250
+      - Item: Hallucigenia_Card   # Hallucigenia Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21543
+    AegisName: EP19_HALLUCIGENIA_BABY
+    Name: Hallucigenia Baby
+    Level: 234
+    Hp: 7459700
+    Attack: 6000
+    Attack2: 1000
+    Defense: 113
+    MagicDefense: 165
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Insect
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 315
+    AttackMotion: 1008
+    DamageMotion: 576
+    Ai: 04
+    Modes:
+      Detector: true
+    Drops:
+      - Item: Sticky_Poison
+        Rate: 3000
+      - Item: Prickly_Fruit_
+        Rate: 3000
+      - Item: EP19_Prickle_Shell
+        Rate: 3000
+      - Item: D_Glacier_Revolver
+        Rate: 250
+      - Item: D_Glacier_Knuckle
+        Rate: 250
+      - Item: B_Hallucigenia_Card   # Hallucigenia Baby Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21544
+    AegisName: EP19_ONE_EYE_DOLLOCARIS
+    Name: One Eye Dollocaris
+    Level: 251
+    Hp: 8115484
+    Attack: 6000
+    Attack2: 1000
+    Defense: 240
+    MagicDefense: 161
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Fish
+    Element: Dark
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 440
+    AttackMotion: 1056
+    DamageMotion: 478
+    Ai: 04
+    Drops:
+      - Item: Solid_Shell
+        Rate: 3000
+      - Item: Nipper
+        Rate: 3000
+      - Item: EP19_Thin_Nipper
+        Rate: 3000
+      - Item: Scropion's_Nipper
+        Rate: 3000
+      - Item: D_Glacier_Sword
+        Rate: 250
+      - Item: D_Glacier_R_Knife
+        Rate: 250
+      - Item: One_E_Dollocaris_Card   # One Eye Dollocaris Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21545
+    AegisName: EP19_DOLLOCARIS
+    Name: Two Eyes Dollocaris
+    Level: 253
+    Hp: 8895080
+    Attack: 6000
+    Attack2: 1000
+    Defense: 600
+    MagicDefense: 100
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Fish
+    Element: Earth
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 576
+    AttackMotion: 576
+    DamageMotion: 478
+    Ai: 04
+    Drops:
+      - Item: Solid_Shell
+        Rate: 3000
+      - Item: Nipper
+        Rate: 3000
+      - Item: EP19_Thin_Nipper
+        Rate: 3000
+      - Item: Scropion's_Nipper
+        Rate: 3000
+      - Item: Zelunium_Ore
+        Rate: 300
+      - Item: D_Glacier_T_Sword
+        Rate: 250
+      - Item: D_Glacier_Katar
+        Rate: 250
+      - Item: Eyes_Dollocaris_Card   # Two Eyes Dollocaris Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21588
+    AegisName: EP19_MD_AQUILA_B
+    Name: Aquila
+    Level: 215
+    Hp: 600000000
+    Defense: 456
+    MagicDefense: 112
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Dark
+    ElementLevel: 4 # TODO
+    WalkSpeed: 150
+    AttackDelay: 1595
+    AttackMotion: 1584
+    DamageMotion: 480
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: Snow_F_Stone1
+        Rate: 3000
+      - Item: Snow_F_Stone2
+        Rate: 3000
+      - Item: Snow_F_Stone3
+        Rate: 3000
+      - Item: EP19_Luminant
+        Rate: 3000
+      - Item: Snow_F_Ore
+        Rate: 3000
+      - Item: Aquila_Card   # Aquila Card
+        Rate: 1
+  - Id: 21589
+    AegisName: G_EP19_LIMACINA
+    Name: Limacina
+    Level: 213
+    Hp: 5145174
+    Attack: 6000
+    Attack2: 1000
+    Defense: 600
+    MagicDefense: 100
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Fish
+    Element: Water
+    ElementLevel: 2
+    WalkSpeed: 175
+    AttackDelay: 46
+    AttackMotion: 768
+    DamageMotion: 576
+    Ai: 04
+  - Id: 21590
+    AegisName: EP19_MD_RGAN_ES
+    Name: Ragan the furious
+    Level: 213
+    Hp: 6896695
+    Attack: 6000
+    Attack2: 1000
+    Defense: 600
+    MagicDefense: 100
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 504
+    AttackMotion: 1008
+    DamageMotion: 478
+    Ai: 04
+  - Id: 21599
+    AegisName: EP19_HEARTHUNTER_AT
+    Name: Heart Hunter AT
+    Level: 210
+    Hp: 4807050
+    Attack: 6000
+    Attack2: 1000
+    Defense: 600
+    MagicDefense: 100
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    Resistance: 1
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 334
+    AttackMotion: 1080
+    DamageMotion: 478
+    Ai: 04
+    Drops:
+      - Item: Vroken_Sword
+        Rate: 3000
+      - Item: Heart_Hunter_Seal
+        Rate: 3000
+      - Item: Etel_Dust
+        Rate: 300
+      - Item: Heart_Hunter_AT_Card   # Heart Hunter AT Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21600
+    AegisName: EP19_RE_RGAN_E
+    Name: Modified Senior Rgan
+    Level: 234
+    Hp: 7266315
+    Attack: 6000
+    Attack2: 1000
+    Defense: 600
+    MagicDefense: 100
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    Resistance: 1
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Earth
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 191
+    AttackMotion: 1008
+    DamageMotion: 478
+    Ai: 04
+    Drops:
+      - Item: EP19_Shell_Of_Rgan
+        Rate: 3000
+      - Item: EP19_Unknown_Cell
+        Rate: 3000
+      - Item: D_Glacier_Shotgun
+        Rate: 250
+      - Item: D_Glacier_Gatling
+        Rate: 250
+      - Item: R_Superior_Rgan_Card   # Modified Senior Rgan Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21601
+    AegisName: EP19_ET_RGAN_D
+    # Name: Entangled Intermediate Rgan
+    Name: Entangled Medium Rgan
+    Level: 252
+    Hp: 8621258
+    Attack: 6000
+    Attack2: 1000
+    Defense: 600
+    MagicDefense: 100
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    Resistance: 1
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Poison
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 481
+    AttackMotion: 792
+    DamageMotion: 478
+    Ai: 04
+    Drops:
+      - Item: EP19_Shell_Of_Rgan
+        Rate: 3000
+      - Item: EP19_Unknown_Cell
+        Rate: 3000
+      - Item: D_Glacier_Spear
+        Rate: 250
+      - Item: D_Glacier_Book
+        Rate: 250
+      - Item: E_Inter_Rgan_Card   # Entangled Intermediate Rgan Card
+        Rate: 1
+        StealProtected: true
 #  - Id: 21546
 #    AegisName: MD_COMMON
 #  - Id: 21547
@@ -113973,12 +115156,6 @@ Body:
 #    AegisName: BD_KUJAKA_REWARD_TW
 #  - Id: 21587
 #    AegisName: NPC_EDDGA
-#  - Id: 21588
-#    AegisName: EP19_MD_AQUILA_B
-#  - Id: 21589
-#    AegisName: G_EP19_LIMACINA
-#  - Id: 21590
-#    AegisName: EP19_MD_RGAN_ES
 #  - Id: 21591
 #    AegisName: E_CRYSTAL_C
 #  - Id: 21592
@@ -113996,11 +115173,6 @@ Body:
 #  - Id: 21598
 #    AegisName: CHEWY_TTEOK
 #  - Id: 21599
-#    AegisName: EP19_HEARTHUNTER_AT
-#  - Id: 21600
-#    AegisName: EP19_RE_RGAN_E
-#  - Id: 21601
-#    AegisName: EP19_ET_RGAN_D
 #  - Id: 21602
 #    AegisName: C5_KASA_VEINS
 #  - Id: 21603

@@ -1,0 +1,15 @@
+
+Header:
+  Type: BARTER_DB
+  Version: 1
+
+Body:
+  - Name: barter_Ep19_Rgan_Scroll
+    Items:
+      - Index: 0
+        Item: Ep19_Rgan_Scroll
+        Zeny: 2000
+        RequiredItems:
+          - Index: 0
+            Item: Ep19_Rgan_Core_F
+            Amount: 2
