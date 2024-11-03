@@ -10319,6 +10319,21 @@ ACMD_FUNC(langtype)
 			pc_setaccountreg(sd, add_str(LANGTYPE_VAR), lang); //For login/char
 			sd->langtype = lang;
 			sprintf(output,msg_txt(sd,461),msg_langtype2langstr(lang)); // Language is now set to %s.
+#ifdef TRANSLATION_API
+			std::unordered_map<unsigned char, std::string> ISO639 = {
+				{0, "en"},
+				{1, "ru"},
+				{2, "es"},
+				{3, "de"},
+				{4, "zh-CN"},
+				{5, "mg"},
+				{6, "id"},
+				{7, "fr"},
+				{8, "pt"},
+				{9, "th"},
+			};
+			sd->translation_api.translate_langtype = ISO639[lang];
+#endif
 			clif_displaymessage(fd,output);
 			return 0;
 		} else if (lang != -1) { //defined langage but failed check

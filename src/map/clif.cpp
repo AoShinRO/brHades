@@ -341,6 +341,109 @@ uint16 clif_getport(void)
 	return map_port;
 }
 
+
+#ifndef MAP_GENERATOR
+#ifdef TRANSLATION_API
+std::string translate_api_call(map_session_data& sd, const std::string& text, const std::string& target_lang){
+
+	std::string result;
+	int estimated_time_ms = std::min(60000, static_cast<int>(text.size() * 100)); // 100 ms por caractere, máximo de 60000 ms
+	int second = estimated_time_ms / 1000;
+	std::string tempbuf = "Tranlating to: "+target_lang + ", Wait...";
+	
+	if(sd.st != nullptr){
+		sd.st->is_translating = true;
+	}
+
+	clif_messagecolor_target(&sd.bl, color_table[COLOR_CYAN],tempbuf.c_str(), false, SELF, &sd);
+	clif_progressbar(&sd, strtol("#FFFFFF", (char**)nullptr, 0), second); 
+	
+	char buffer[2048];
+
+#ifdef TRANSLATION_API_PY
+	std::string cmd = "python3 tools/translator.py \"" + text + "\" \"en\" \"" + target_lang + "\"";
+#else
+	std::string cmd = "translator.exe \"" + text + "\" \"en\" \"" + target_lang + "\"";
+#endif
+
+#if defined(_MSC_VER)
+	std::shared_ptr<FILE> pipe(_popen(cmd.c_str(), "r"), _pclose);
+#else
+	std::shared_ptr<FILE> pipe(popen(cmd.c_str(), "r"), pclose);
+#endif
+
+	if (pipe) {
+		while (fgets(buffer, sizeof(buffer), pipe.get()) != nullptr) {
+			result += buffer;
+		}
+		if (!result.empty() && result.back() == '\n') {
+			while(result.back() == '\n')
+				result.pop_back();
+		}
+		map_set_translate(text, target_lang, result);
+	}
+
+	if( sd.st != nullptr )
+		sd.st->is_translating = false;
+
+	clif_progressbar_abort(&sd);
+
+    if (result.empty()) 
+        return text;
+    
+	return result;
+}
+
+void api_restore_npc_state(map_session_data& sd, uint16 npcid){
+	if(sd.st == nullptr || sd.st->state == END || sd.st->state == CLOSE || !sd.st->mes_active){
+		sd.translation_api.resend_state_packet = false;
+		clif_scriptclose( sd, npcid );
+	}
+	else if ((sd.st != nullptr && sd.st->state == STOP) && sd.translation_api.resend_state_packet) {
+		sd.translation_api.resend_state_packet = false;
+		clif_scriptnext( sd, npcid );
+	}
+}
+
+void clif_parse_apitranslate(map_session_data& sd, const std::string text, const uint32 npcid, const int16 header) {
+	std::unique_lock lock(sd.translation_api.api_lock);
+	switch(header){
+		case HEADER_ZC_MENU_LIST:
+		{
+			std::string result = translate_api_call(std::ref(sd), text, sd.translation_api.translate_langtype);
+			
+			PACKET_ZC_MENU_LIST* new_packet = reinterpret_cast<PACKET_ZC_MENU_LIST*>( packet_buffer );
+			int16 length = static_cast<int16>(result.size() + 1);
+			new_packet->packetType = header;
+			new_packet->packetLength = sizeof(*new_packet) + length;
+			new_packet->npcId = npcid;
+			safestrncpy(new_packet->menu, result.c_str(), length);
+	
+			clif_send(new_packet, new_packet->packetLength, &sd.bl, SELF);
+			api_restore_npc_state(std::ref(sd), npcid);					
+			break;
+		}
+		case HEADER_ZC_SAY_DIALOG:
+		{
+			std::string result = translate_api_call(std::ref(sd), text, sd.translation_api.translate_langtype);
+
+			PACKET_ZC_SAY_DIALOG* new_packet = reinterpret_cast<PACKET_ZC_SAY_DIALOG*>( packet_buffer );
+			int16 length = static_cast<int16>(result.size() + 1);
+			new_packet->PacketType = header;
+			new_packet->PacketLength = sizeof(*new_packet) + length;
+			new_packet->NpcID = npcid;
+			safestrncpy(new_packet->message, result.c_str(), length);
+	
+			clif_send(new_packet, new_packet->PacketLength, &sd.bl, SELF);
+			api_restore_npc_state(std::ref(sd), npcid);		
+			break;
+		}
+		default: ShowFatalError("Packet desconhecido foi chamado no tradutor \n"); break;
+	}
+}
+#endif
+#endif
+
 #if PACKETVER >= 20071106
 enum e_clif_bl_types : unsigned char{
 	C_PC_TYPE = 0x0,
@@ -2459,18 +2562,6 @@ void clif_parse_NPCMarketPurchase(int fd, map_session_data *sd) {
 #endif
 }
 
-static void clif_check_utf(std::string_view text, uint32 npcid) {
-	bool utf = false;
-	for (size_t i = 0; i < text.size(); ++i) {
-		if (text[i] > 0x7F) {
-			utf = true;
-			break;
-	    }
-	}
-	if (utf) 
-		ShowDebug("[brHades] Atencao: o npc: '%s' contem caracteres fora do padrao ANSI. Considere salvar o arquivo como ANSI. \n", map_id2nd(npcid)->name );
-}
-
 /// Displays an NPC dialog message.
 /// 00b4 <packet len>.W <npc id>.L <message>.?B (ZC_SAY_DIALOG)
 /// Client behavior (dialog window):
@@ -2482,7 +2573,27 @@ static void clif_check_utf(std::string_view text, uint32 npcid) {
 void clif_scriptmes( map_session_data& sd, uint32 npcid, const char *mes ){
 	PACKET_ZC_SAY_DIALOG* p = reinterpret_cast<PACKET_ZC_SAY_DIALOG*>( packet_buffer );
 
-	clif_check_utf(mes,npcid);
+	if(util::ansi_or_utf_check(mes,npcid))
+		ShowDebug("[brHades] Atencao: o npc: '%s' contem caracteres fora do padrao ANSI. Considere salvar o arquivo como ANSI. \n", map_id2nd(npcid)->name );
+
+#ifndef MAP_GENERATOR
+#ifdef TRANSLATION_API
+	if(sd.translation_api.translate_langtype != "en"){
+		if(mes[0] != '[')
+		{
+			std::string result = map_get_translate(mes, sd.translation_api.translate_langtype);
+			if (result.empty())
+			{
+				std::thread thread(clif_parse_apitranslate, std::ref(sd), mes, npcid, HEADER_ZC_SAY_DIALOG);
+				thread.detach(); // Detach the thread to run independently
+				return;
+			}
+			else
+				mes = std::move(result.c_str());
+		}
+	}
+#endif
+#endif
 
 	int16 length = (int16)( strlen( mes ) + 1 );
 
@@ -2648,6 +2759,20 @@ void clif_scriptmenu( map_session_data& sd, uint32 npcid, const char* mes ){
 	   bl->x<sd.bl.x-AREA_SIZE-1 || bl->x>sd.bl.x+AREA_SIZE+1 ||
 	   bl->y<sd.bl.y-AREA_SIZE-1 || bl->y>sd.bl.y+AREA_SIZE+1))))
 	   clif_sendfakenpc( sd, npcid );
+
+#ifndef MAP_GENERATOR
+#ifdef TRANSLATION_API
+	std::string result = map_get_translate(mes, sd.translation_api.translate_langtype);
+	if(result.empty())
+	{
+		std::thread thread(clif_parse_apitranslate, std::ref(sd), mes, npcid, HEADER_ZC_MENU_LIST);
+		thread.detach(); // Detach the thread to run independently
+		return;
+	}
+	else
+		mes = std::move(result.c_str());
+#endif
+#endif
 
 	// String length + 1 byte for zero termination
 	size_t mes_length = strlen( mes ) + 1;
@@ -13374,6 +13499,14 @@ void clif_parse_NpcSelectMenu(int fd,map_session_data *sd){
 /// 00b9 <npc id>.L
 void clif_parse_NpcNextClicked(int fd,map_session_data *sd)
 {
+#ifdef TRANSLATION_API
+	if(sd->st != nullptr){
+		if(sd->st->is_translating){
+			sd->translation_api.resend_state_packet = true;
+			return;
+		}
+	}
+#endif
 	if( battle_config.idletime_option&IDLE_NPC_NEXT ){
 		sd->idletime = last_tick;
 	}
@@ -13430,6 +13563,15 @@ void clif_parse_NpcCloseClicked(int fd,map_session_data *sd)
 {
 	if (!sd->npc_id) //Avoid parsing anything when the script was done with. [Skotlex]
 		return;
+
+#ifdef TRANSLATION_API
+	if(sd->st != nullptr){
+		if(sd->st->is_translating){
+			sd->translation_api.resend_state_packet = true;
+			return;
+		}
+	}
+#endif
 
 	if( battle_config.idletime_option&IDLE_NPC_CLOSE ){
 		sd->idletime = last_tick;

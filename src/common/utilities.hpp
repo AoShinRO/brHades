@@ -315,6 +315,8 @@ namespace brhades {
 		**/
 		std::string base62_encode( uint32 val );
 
+		bool ansi_or_utf_check(std::string_view text, uint32 npcid);
+
 		class ThreadPool {
 		private:
 			struct Task {

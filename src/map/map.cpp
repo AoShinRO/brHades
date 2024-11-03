@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <filesystem>
+#include <fstream>
 
 #include <config/core.hpp>
 
@@ -4929,12 +4930,94 @@ static int cleanup_db_sub(DBKey key, DBData *data, va_list va)
 	return cleanup_sub((struct block_list *)db_data2ptr(data), va);
 }
 
+#ifndef MAP_GENERATOR
+#ifdef TRANSLATION_API
+#define TRANSLATED_DB_NAME "db/translated/database_"
+
+std::map<std::string, std::string> codepage_por_idioma = {
+    {"en", "utf-8"}, {"ru", "cp1251"}, {"es", "cp1252"}, {"de", "cp1252"},
+    {"zh-CN", "gbk"}, {"mg", "utf-8"}, {"id", "utf-8"},
+    {"fr", "cp1252"}, {"pt", "cp1252"}, {"th", "tis-620"}
+};
+std::map<std::tuple<std::string, std::string>, std::string> map_dialogue_translations;
+void map_set_translate(const std::string& origin, const std::string& lang_type, const std::string& result) {
+    map_dialogue_translations[std::make_tuple(origin, lang_type)] = result;
+}
+
+std::string map_get_translate(const std::string& origin, const std::string& lang_type) {
+    auto it = map_dialogue_translations.find(std::make_tuple(origin, lang_type));
+    if (it != map_dialogue_translations.end()) {
+        return it->second;
+    } else {
+        return ""; // Retorna uma string vazia se a tradução não for encontrada
+    }
+}
+
+// Função para salvar as traduções em arquivos específicos para cada idioma
+void map_save_translation_db() {
+    for (const auto& lang : codepage_por_idioma) {
+        std::string lang_code = lang.first;
+        std::string encoding = lang.second;
+        
+        // Define o nome do arquivo específico para o idioma
+        std::string filename = TRANSLATED_DB_NAME + lang_code + ".lua";
+        std::ofstream arquivo(filename, std::ios::binary); // Abre em modo binário para evitar problemas com encoding
+        
+        if (arquivo.is_open()) {
+            for (const auto& par : map_dialogue_translations) {
+                const auto& [frase_original, lang_type] = par.first;
+                if (lang_type == lang_code) { // Somente salva as traduções do idioma correspondente
+                    const auto& traducao = par.second;
+                    arquivo << frase_original << "|" << lang_type << "|" << traducao << std::endl;
+                }
+            }
+        }
+    }
+}
+
+// Função para carregar as traduções a partir dos arquivos específicos para cada idioma
+void map_load_translation_db() {
+    for (const auto& lang : codepage_por_idioma) {
+        std::string lang_code = lang.first;
+        std::string filename = TRANSLATED_DB_NAME + lang_code + ".lua";
+        
+        std::ifstream arquivo(filename, std::ios::binary);
+        if (arquivo.is_open()) {
+            uint64 count = 0;
+            std::string frase_original, lang_type, traducao;
+            
+            while (std::getline(arquivo, frase_original, '|')) {
+                std::getline(arquivo, lang_type, '|');
+                std::getline(arquivo, traducao);
+                map_set_translate(frase_original, lang_type, traducao);
+                count++;
+            }
+            ShowStatus("Concluida a leitura de %" PRIu64 " entradas para o idioma %s\n", count, lang_code.c_str());
+        } else {
+			std::ofstream novoArquivo(filename, std::ios::binary);
+			if (!novoArquivo) {
+				ShowDebug("Falha ao criar o arquivo: %s \n", filename.c_str());
+				return;
+			}
+        }
+    }
+}
+
+#endif
+#endif
+
 /*==========================================
  * map destructor
  *------------------------------------------*/
 void MapServer::finalize(){
 	ShowStatus("Finalizando...\n");
 	channel_config.closing = true;
+
+#ifndef MAP_GENERATOR
+#ifdef TRANSLATION_API
+	map_save_translation_db();
+#endif
+#endif
 
 	//Ladies and babies first.
 	struct s_mapiterator* iter = mapit_getallusers();
@@ -5046,6 +5129,11 @@ static int map_abort_sub(map_session_data* sd, va_list ap)
 // has received a crash signal.
 //------------------------------
 void MapServer::handle_crash(){
+#ifndef MAP_GENERATOR
+#ifdef TRANSLATION_API
+	map_save_translation_db();
+#endif
+#endif
 	static int run = 0;
 	//Save all characters and then flush the inter-connection.
 	if (run) {
@@ -5240,8 +5328,12 @@ void map_data::copyFlags(const map_data& other) {
 
 /// Called when a terminate signal is received.
 void MapServer::handle_shutdown(){
+#ifndef MAP_GENERATOR
+#ifdef TRANSLATION_API
+	map_save_translation_db();
+#endif
+#endif
 	ShowStatus("Desligando...\n");
-
 	map_session_data* sd;
 	struct s_mapiterator* iter = mapit_getallusers();
 	for( sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); sd = (TBL_PC*)mapit_next(iter) )
@@ -5378,6 +5470,11 @@ bool MapServer::initialize( int argc, char *argv[] ){
 	do_init_vending();
 	do_init_buyingstore();
 
+#ifndef MAP_GENERATOR
+#ifdef TRANSLATION_API
+	map_load_translation_db();
+#endif
+#endif
 	// Fim do benchmark
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double, std::milli> duration = end - start; // Tempo em milissegundos
