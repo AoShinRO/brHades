@@ -1,78 +1,111 @@
-import sys
+import codecs
 import re
-from googletrans import Translator
-from deep_translator import GoogleTranslator, MyMemoryTranslator
+import sys
 
-codepage_por_idioma = {
-    "en": "utf-8",         # Inglês - Universalmente UTF-8
-    "ru": "cp1251",        # Russo - Codepage Windows para russo
-    "es": "cp1252",        # Espanhol - Codepage Windows para espanhol
-    "de": "cp1252",        # Alemão - Codepage Windows para alemão
-    "zh-CN": "gbk",           # Chinês Simplificado
-    "mg": "utf-8",         # Malaio - UTF-8 é amplamente suportado
-    "id": "utf-8",         # Indonésio
-    "fr": "cp1252",        # Francês
-    "pt": "cp1252",        # Português Brasileiro
-    "th": "tis-620",       # Tailandês
+from googletrans import Translator
+from loguru import logger
+
+SERVICE_URLS = ['translate.google.com']
+
+CODEPAGE_BY_LANGUAGE = {
+    "en": "utf-8",  # Inglês - Universalmente UTF-8
+    "ru": "cp1251",  # Russo - Codepage Windows para russo
+    "es": "cp1252",  # Espanhol - Codepage Windows para espanhol
+    "de": "cp1252",  # Alemão - Codepage Windows para alemão
+    "zh-CN": "gbk",  # Chinês Simplificado
+    "mg": "utf-8",  # Malaio - UTF-8 é amplamente suportado
+    "id": "utf-8",  # Indonésio
+    "fr": "cp1252",  # Francês
+    "pt": "cp1252",  # Português Brasileiro
+    "th": "tis-620",  # Tailandês
 }
 
-def definir_codepage(idioma):
-    return sys.stdout.reconfigure(encoding=codepage_por_idioma.get(idioma))
+TRANSLATORS = {
+    "GoogleTranslator": Translator(service_urls=SERVICE_URLS)
+}
 
-def traduzir(texto, origem='en', destino='pt'):
-    tradutores = [
-        ('Google'),
-        ('GoogleTranslator'),
-        ('MyMemory'),
-    ]
-    for nome in tradutores:
+
+def configure_logger(level="INFO"):
+    """
+    Configures the Loguru logger to output UTF-8 encoded logs to console.
+    """
+    utf8_stdout = codecs.getwriter("utf-8")(sys.stdout.buffer)
+
+    logger.remove()  # remove the default logger
+
+    logger.add(utf8_stdout, format="{time: YYYY-MM-DD - HH:mm:ss} {level} - <level>{message}</level>", level=level)
+
+
+def translate_text(text, source='en', target='pt'):
+    """
+        Attempts to translate text from source to target language using available translators.
+
+        :param text: The text to translate
+        :param source: Code for the source language (default: 'en')
+        :param target: Code for the target language (default: 'pt')
+        :return: Translated text or original text if translation fails
+        """
+    for translator in TRANSLATORS.keys():
         try:
-            if nome == 'Google':
-                translator = Translator(service_urls=['translate.google.com'])
-                traducao = translator.translate(texto, src=origem, dest=destino)
-                return traducao.text
-            elif nome == 'GoogleTranslator':
-                translator = GoogleTranslator()
-                traducao = translator.translate(texto, target=destino)
-                return traducao
-            elif nome == 'MyMemory':
-                translator = MyMemoryTranslator()
-                traducao = translator.translate(texto, target=destino)
-                return traducao
-        except Exception as e:
+            return TRANSLATORS[translator].translate(text, src=source, dest=target).text
+        except Exception:
+            logger.exception(f"{translator}: Erro ao tentar traduzir de {source} para {target}")
             continue
-    else:
-        return texto  # Retorna o texto original se todas as tentativas falharem
 
-def traduzir_com_padroes(texto, origem='en', destino='pt'):
+    return text  # Retorna o texto original se todas as tentativas falharem
+
+
+def translate_with_patterns(text, source='en', target='pt'):
+    """
+    Translates text while preserving specific patterns like HTML tags and color codes.
+
+    :param text: The text to translate
+    :param source: Code for the source language
+    :param target: Code for the target language
+    :return: Translated text with patterns preserved
+    """
     pattern_tags = r"<[^>]+>[^<]*<\/[^>]+>"
     pattern_color = r"\^([A-Fa-f0-9]{6})[^\^]*\^000000"
 
     ignored_parts = []
-    
-    def replace_with_marker(match):
-        ignored_parts.append(match.group())
-        return f"_{len(ignored_parts)-1}"
 
-    temp_text = re.sub(pattern_tags, replace_with_marker, texto)
-    temp_text = re.sub(pattern_color, replace_with_marker, temp_text)
-    
-    translated_text = traduzir(temp_text, origem=origem, destino=destino)
-    
+    placeholder_text = text
+    placeholder_offset = 0
+
+    for match in re.finditer(f"{pattern_tags}|{pattern_color}", text):
+        start, end = match.span()
+        ignored_text = match.group()
+        ignored_parts.append(ignored_text)
+
+        # Replace the matched text with a unique placeholder
+        marker = f"_{len(ignored_parts) - 1}"
+        placeholder_text = (
+                placeholder_text[:start + placeholder_offset] +
+                marker +
+                placeholder_text[end + placeholder_offset:]
+        )
+        placeholder_offset += len(marker) - len(ignored_text)
+
+    translated_text = translate_text(placeholder_text, source=source, target=target)
+
     for i, original_text in enumerate(ignored_parts):
         translated_text = translated_text.replace(f"_{i}", original_text)
-    
+
     return translated_text
+
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
         sys.exit(1)
 
-    texto_para_traduzir = sys.argv[1]
-    lingua_origem = sys.argv[2]
-    lingua_destino = sys.argv[3]
-    codepage = definir_codepage(lingua_destino)
-    
-    traducao = traduzir_com_padroes(texto_para_traduzir, origem=lingua_origem, destino=lingua_destino)
+    configure_logger("INFO")
 
-    print(traducao) 
+    text_to_translate = sys.argv[1]
+    source_lang = sys.argv[2]
+    target_lang = sys.argv[3]
+
+    translation = translate_with_patterns(text_to_translate, source=source_lang, target=target_lang)
+
+    # Output the translation with the specified encoding
+    with codecs.getwriter(CODEPAGE_BY_LANGUAGE.get(target_lang))(sys.stdout.buffer) as encoded_stdout:
+        encoded_stdout.write(translation)
