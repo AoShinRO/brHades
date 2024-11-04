@@ -1,0 +1,62 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Monster spawn from episode 20
+//===== Description: =========================================
+//= .
+//===== Additional Comments: =================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// note: MVP spawn times are customs
+jor_back4	monster	--ja--	21969,50	// EP20_RABBIT_ICESLUG
+jor_back4	monster	--ja--	21983,50	// EP20_ANGEL_ICESLUG
+jor_back4	monster	--ja--	21976,30	// EP20_FAKE_IWIN_SB
+jor_back4	monster	--ja--	21977,30	// EP20_FAKE_IWIN_SG
+jor_back4	monster	--ja--	21978,20	// EP20_FAKE_IWIN_SR
+jor_back4	monster	--ja--	21522,10	// EP19_CALMARING
+jor_back4	monster	--ja--	21523,10	// EP19_ICE_STRAW
+jor_back4	boss_monster	--ja--	21996,1,7200000,0,0	// EP20_SNOW_ANGEL
+
+jor_back5	monster	--ja--	21966,60	// EP20_ICEWIND1
+jor_back5	monster	--ja--	21965,40	// EP20_COPO
+jor_back5	monster	--ja--	21968,40	// EP20_EGGCOPO
+jor_back5	monster	--ja--	21984,10	// EP20_ICEEGG
+jor_back5	monster	--ja--	21974,20	// EP20_FAKE_IWIN_SN
+jor_back5	monster	--ja--	21975,20	// EP20_FAKE_IWIN_SY
+jor_back5	monster	--ja--	21524,10	// EP19_SHINING_SEAWEED
+
+jor_back6	monster	--ja--	21967,100	// EP20_ICEWIND2
+jor_back6	monster	--ja--	21971,75	// EP20_ICEBEAR
+jor_back6	monster	--ja--	23060,55	// EP20_ARMOERDCOPO
+jor_back6	monster	--ja--	21978,20	// EP20_FAKE_IWIN_SR
+jor_back6	monster	--ja--	21524,10	// EP19_SHINING_SEAWEED
+
+jor_maze	monster	--ja--	21972,35	// EP20_JORMUNGUARD1
+jor_maze	monster	--ja--	21973,35	// EP20_JORMUNGUARD2
+jor_maze	monster	--ja--	21989,30	// EP20_JORGAN_GUARDIAN
+
+jor_root1	monster	--ja--	21972,20	// EP20_JORMUNGUARD1
+jor_root1	monster	--ja--	21973,10	// EP20_JORMUNGUARD2
+jor_root1	monster	--ja--	21985,80	// EP20_RGAN_WARLOCK
+jor_root1	monster	--ja--	21986,70	// EP20_RGAN_HEALER
+jor_root1	monster	--ja--	21989,20	// EP20_JORGAN_GUARDIAN
+
+jor_root2	monster	--ja--	21972,5	// EP20_JORMUNGUARD1
+jor_root2	monster	--ja--	21973,15	// EP20_JORMUNGUARD2
+jor_root2	monster	--ja--	21987,40	// EP20_JORGAN_WARLOCK
+jor_root2	monster	--ja--	21988,30	// EP20_JORGAN_HEALER
+jor_root2	monster	--ja--	21989,60	// EP20_JORGAN_GUARDIAN
+
+jor_root3	monster	--ja--	21990,130	// EP20_JORGAN_CLEANER
+jor_root3	monster	--ja--	21970,110	// EP20_MELIBE_ICESLUG
+jor_root3	monster	--ja--	21971,30	// EP20_ICEBEAR
+jor_root3	boss_monster	--ja--	21980,1,7200000,0,0	// EP20_BOSS_CLANER
+
+jor_twice	monster	--ja--	21972,20	// EP20_JORMUNGUARD1
+jor_twice	monster	--ja--	21973,20	// EP20_JORMUNGUARD2
+jor_twice	monster	--ja--	21983,60	// EP20_ANGEL_ICESLUG
+jor_twice	monster	--ja--	21969,60	// EP20_RABBIT_ICESLUG
+jor_twice	monster	--ja--	21987,40	// EP20_JORGAN_WARLOCK
+
+jor_twig	monster	--ja--	21997,20	// G_EP20_JORMUNGUARD1
+jor_twig	monster	--ja--	21998,20	// G_EP20_JORMUNGUARD2

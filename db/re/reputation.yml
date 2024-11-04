@@ -50,10 +50,15 @@ Body:
     Minimum: -5000
     Maximum: 5000
   - Id: 4
-    Name: Isgard
-    Variable: RepPointsIsgard
+    Name: White cat alliance
+    Variable: RepPointsWhiteCatAlliance
     Minimum: -3000
     Maximum: 3000
+#  - Id: 4
+#    Name: Isgard
+#    Variable: RepPointsIsgard
+#    Minimum: -3000
+#    Maximum: 3000
 
 Footer:
   Imports:

@@ -1467,4 +1467,7 @@ void clif_specialpopup(map_session_data& sd, int32 id);
 void clif_hit_frame(block_list&,int);
 void clif_parse_restore_animation(map_session_data* sd, block_list& target, uint16 skill_id, uint16 skill_lv);
 
+// Body Size Controller
+void clif_body_size(block_list* bl, int val1);
+
 #endif /* CLIF_HPP */

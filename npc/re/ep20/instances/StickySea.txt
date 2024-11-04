@@ -1,0 +1,1038 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Episode 20: Immortals
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- Instance Sticky Sea from Episode 20 (daily quest)
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Sidequest - Step 18
+jor_back4,103,264,3	duplicate(dummy_cloaked_npc)	Friederike#ep20_7::ep20_jor_back4_103_264	4_EP19_FRIEDERIKE
+
+jor_back4,101,265,3	script	Cocopo#ep20_5	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 < 17)
+		end;	// note: no text before and after exit
+	if (ep20_sidequest_1 == 17) {
+		mes "[Friederike]";
+		mes "Oops!!";
+		mes "There's a child in this place!";
+		cutin "ep19_friederike01.png",2;
+		cloakoffnpcself( "ep20_jor_back4_103_264" );
+		next;
+		mes "[Friederike]";
+		mes "Is it okay?";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Copo]";
+		mes "…";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Are you hurt?";
+		mes "I'll treat you right away.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Copo]";
+		mes "…";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "How did you come this far?";
+		mes "Dangerous.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "But I don't think I've seen you in town...";
+		next;
+		mes "[Copo]";
+		mes "…";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Why didn't you say anything?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Copo]";
+		mes "…T.T";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Oh why are you crying all of a sudden!!";
+		mes "Don't cry~";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Copo]";
+		mes "Beep...beep";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Oops!";
+		mes "This fluff is from Rorohu!!!";
+		mes "Do you know where Rorohu is?";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Copo]";
+		mes "Beep";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "So..couldn't something have happened to Rorohu?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Copo]";
+		mes "…";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "" + strcharinfo(0) + " you don't seem to be able to communicate with children, and something is strange.";
+		mes "Something childish and feathery...";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Copo]";
+		mes "…beep beep";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Copo]";
+		mes "Beep…T.T";
+		next;
+		mes "[Friederike]";
+		mes "Huh?";
+		mes "What are you doing?";
+		mes "Somi...";
+		mes "Hole...";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Friederike]";
+		mes "No way!";
+		mes "Is Rorohu in here?";
+		next;
+		mes "[Copo]";
+		mes "Beep…T.T";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "How did Rorohu get here...";
+		mes "If what it said is true, it must have fallen into a pit...";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Mmmmm...";
+		mes "There's no such thing as a poisonous cave like the one I saw last time...";
+		next;
+		mes "[Friederike]";
+		mes "" + strcharinfo(0) + " the situation seems too bad to be waiting for the guards right now.";
+		mes "Even by ourselves, let's go in first!";
+		next;
+		mes "[Friederike]";
+		mes "This kid might know how to get inside!";
+		ep20_sidequest_1 = 18;
+		erasequest 11944;
+		setquest 11945;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep20_jor_back4_103_264" );
+		end;
+	}
+	if (ep20_sidequest_1 == 18 || (ep20_sidequest_1 == 20 && isbegin_quest(11948) > 0 && checkquest(11949,HUNTING) < 2)) {
+		if (getcharid(1) < 1) {
+			mes "[Copo]";
+			mes "Beep!!";
+			mes "Poof!!";
+			next;
+			mes "[Copo]";
+			mes "Oops~~";
+			mes "- ^ff0000 You might want to form a party^000000. -";
+			close;
+		}
+		mes "[Copo]";
+		mes "Beep!!";
+		mes "Poof!!";
+		next;
+		.@md_name$ = "Sticky Sea";
+
+		switch( select( "Look at the entrance to the pit.", "Enter the pit.", "Quit." ) ) {
+		case 1:
+			mes "[Copo]";
+			mes "Beep";
+			mes "- Let's wait until the entrance opens. -";
+
+			if (is_party_leader() == true)	// note: members can see this menu?
+				instance_create(.@md_name$);
+
+			// note: the quest is given back in this menu for each instance creation
+			if (ep20_sidequest_1 == 18 && isbegin_quest(11946) == 1) {
+				erasequest 11946;
+				setquest 11945;
+			}
+			if (ep20_sidequest_1 == 20 && isbegin_quest(11948) == 2) {
+				if (isbegin_quest(11948) == 2)
+					erasequest 11948;
+				if (isbegin_quest(11949) > 0)
+					erasequest 11949;
+				setquest 11948;
+			}
+			close;
+		case 2:
+			switch( instance_enter(.@md_name$) ) {
+			case IE_OTHER:
+				mes "^ff0000An unknown error occurred.^000000";
+				close;
+			case IE_NOINSTANCE:
+			case IE_NOMEMBER:
+				mes "[Copo]";
+				mes "Poop?";
+				mes "- It seems that the ^ff0000entrance is not open yet^000000. Let's try again. -";
+				close;
+			case IE_OK:
+				mapannounce "jor_back4", "" + strcharinfo(0) + " of the party " + getpartyname(getcharid(1)) + " is sinking into " + .@md_name$ + ".", bc_map, 0xFF99;
+				// warp "1@slug",44,56;
+				end;
+			}
+			end;
+		case 3:
+			end;
+		}
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11944) == 1" );
+
+	// daily
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11948) == 1" );
+	end;
+}
+
+1@slug,40,52,0	script	#slugout	WARPNPC,2,2,{
+	end;
+OnTouch:
+	mes "- You can get out of the dungeon -";
+	if (select( "Exit dungeon", "Continue exploration" ) == 2) {
+		mes "- Explore the dungeon as it is. -";
+		close;
+	}
+	mes "- Exit the dungeon -";
+	close2;
+	warp "jor_back4",100,253;
+	end;
+
+OnMobDead:
+	monster 'map_slug$,0,0,"--ja--","EP20_NPC_COCOPO",1, instance_npcname("#slugout") + "::OnMobDead";
+	end;
+
+OnInstanceInit:
+	'map_slug$ = instance_mapname("1@slug");
+	'step = 0;
+
+	// Spawn the mini monsters Cocopo
+	monster 'map_slug$,0,0,"--ja--","EP20_NPC_COCOPO",80, instance_npcname("#slugout") + "::OnMobDead";
+	end;
+
+}
+
+// Step 1
+1@slug,50,61,5	duplicate(dummy_cloaked_npc)	Friederike#sl1::ep20_1slug_50_61	4_EP19_FRIEDERIKE
+
+1@slug,52,61,3	script	Rorohu#sl1	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 == 18) {
+		if ('step == 0) {
+			mes "[Rorohu]";
+			mes "Oops!!!";
+			mes "" + strcharinfo(0) + "!";
+			mes "Friederike!!";
+			cutin "ep20_cocopo02.png",2;
+			cloakoffnpcself( instance_npcname("ep20_1slug_50_61") );
+			next;
+			mes "[Friederike]";
+			mes "Rorohu!";
+			mes "You're all right!";
+			mes "I was worried!";
+			cutin "ep19_friederike02.png",2;
+			next;
+			mes "[Friederike]";
+			mes "Where am I?";
+			mes "How did you end up in such a dangerous place?";
+			next;
+			mes "[Rorohu]";
+			mes "uh...";
+			mes "That...that's...";
+			cutin "ep20_cocopo01.png",2;
+			next;
+			mes "[Friederike]";
+			mes "Are you hurt?";
+			mes "Let's go back.";
+			cutin "ep19_friederike02.png",2;
+			next;
+			mes "[Rorohu]";
+			mes "uh...";
+			mes "Not yet.";
+			cutin "ep20_cocopo03.png",2;
+			next;
+			mes "[Friederike]";
+			mes "Not yet... but";
+			mes "it's too dangerous here.";
+			cutin "ep19_friederike02.png",2;
+			next;
+			mes "[Rorohu]";
+			mes "That...that's...";
+			cutin "ep20_cocopo03.png",2;
+			next;
+			mes "[Friederike]";
+			mes "What's up?";
+			mes "If you don't tell me honestly, I'll take you back right now.";
+			cutin "ep19_friederike04.png",2;
+			next;
+			mes "[Rorohu]";
+			mes "That...";
+			mes "A friend… sniff";
+			mes "The monster… snatched… snipped… caught!";
+			cutin "ep20_cocopo03.png",2;
+			next;
+			mes "[Rorohu]";
+			mes "" + strcharinfo(0) + "…";
+			mes "Friederike...";
+			mes "Save my friend!!!";
+			mes "Aaaaaaaa!!!!";
+			next;
+			mes "[Friederike]";
+			mes "What?!";
+			mes "That's a big deal!";
+			mes "Gotta save it!";
+			cutin "ep19_friederike02.png",2;
+			next;
+			mes "[Friederike]";
+			mes "Which way did the monster that took your friend Rorohu go?";
+			next;
+			mes "[Rorohu]";
+			mes "Sniff...";
+			mes "This way.";
+			cutin "ep20_cocopo03.png",2;
+			next;
+			mes "[Friederike]";
+			mes "" + strcharinfo(0) + " let's go find Rorohu's friend.";
+			mes "If you've been caught by a monster, there's no time to hesitate.";
+			cutin "ep19_friederike02.png",2;
+			next;
+			mes "[Friederike]";
+			mes "It's dangerous to leave Rorohu alone, so we'd better keep him until the guards arrive.";
+			next;
+			mes "- To go to the next step, the party leader is required. -";
+			cloakonnpcself( instance_npcname("ep20_1slug_50_61") );
+			cutin "",255;
+			if (isbegin_quest(11945) == 1) {
+				erasequest 11945;
+				setquest 11946;
+			}
+			if ('step == 0 && is_party_leader() == true) {
+				'step = 1;
+				donpcevent instance_npcname("slug_mob_1") + "::OnStart";
+			}
+			close2;
+			navigateto("1@slug",83,127);
+			end;
+		}
+		end;
+	}
+	if (ep20_sidequest_1 < 20)
+		end;
+
+	// daily
+	if (isbegin_quest(11948) == 1 || 'step == 0) {
+		mes "[Rorohu]";
+		mes "Oops!!!";
+		mes "" + strcharinfo(0) + "!";
+		mes "Friederike!!";
+		cutin "ep20_cocopo02.png",2;
+		cloakoffnpcself( instance_npcname("ep20_1slug_50_61") );
+		next;
+		mes "[Friederike]";
+		mes "Rorohu!!!!";
+		mes "Why are you here again!";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Rorohu]";
+		mes "I was worried about Friederike, so I followed you!";
+		cutin "ep20_cocopo02.png",2;
+		next;
+		mes "[Friederike]";
+		mes "If we don't go back quickly, we'll end up with Voglinde!";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[Rorohu]";
+		mes "Chi… ok";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Rorohu keeps following me, and there are many Copo who come to eat snails...";
+		mes "You can't tell them not to come, so you'd better get rid of the dangerous monsters.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "- To go to the next step, the party leader is required. -";
+		cloakonnpcself( instance_npcname("ep20_1slug_50_61") );
+		cutin "",255;
+		if (isbegin_quest(11948) == 1) {
+			completequest 11948;
+			setquest 11949;
+		}
+		if ('step == 0 && is_party_leader() == true) {
+			'step = 1;
+			donpcevent instance_npcname("slug_mob_1") + "::OnStart";
+		}
+		close2;
+		navigateto("1@slug",83,127);
+		end;
+	}
+	end;
+
+OnInstanceInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11945) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11948) == 1" );
+	end;
+}
+
+// unknown usage
+// 1@slug,52,61,3	script	Rorohu#sl1_1	EP20_NPC_COCOPO,{
+	// end;
+// OnInstanceInit:
+	// disablenpc instance_npcname("Rorohu#sl1_1");
+	// end;
+// }
+// unknown usage
+// 1@slug,143,313,0	script	#slsl11	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,109,313,0	script	#slsl12	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,106,330,0	script	#slsl13	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,48,314,0	script	#slsl14	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,59,315,0	script	#slsl15	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,69,310,0	script	#slsl16	HIDDEN_WARP_NPC,4,4,{
+// 1@slug,55,295,0	script	#slsl17	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,143,313,0	script	#slsl21	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,109,313,0	script	#slsl22	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,106,330,0	script	#slsl23	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,48,314,0	script	#slsl24	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,59,315,0	script	#slsl25	HIDDEN_WARP_NPC,7,7,{
+// 1@slug,69,310,0	script	#slsl26	HIDDEN_WARP_NPC,4,4,{
+// 1@slug,55,295,0	script	#slsl27	HIDDEN_WARP_NPC,7,7,{
+
+1@slug,83,98,0	script	#slsl01	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	// note: no ignoretimeout on official
+	if ('step == 0 || (ep20_sidequest_1 != 18 && ep20_sidequest_1 != 20) || (ep20_sidequest_1 == 18 && isbegin_quest(11945) == 0 && isbegin_quest(11946) == 0) || (ep20_sidequest_1 == 20 && isbegin_quest(11948) != 2)) {
+		mes "- You need to complete the quest to move to the next area. -";
+		close2;
+		warp 'map_slug$,44,56;
+		end;
+	}
+	end;
+}
+1@slug,92,95,0	duplicate(#slsl01)	#slsl02	HIDDEN_WARP_NPC,5,5
+1@slug,111,77,0	duplicate(#slsl01)	#slsl03	HIDDEN_WARP_NPC,5,5
+
+
+// Step 2
+1@slug,1,1,5	script	slug_mob_1	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("slug_mob_1") + "::OnMobDead";
+	monster 'map_slug$,66,69,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,60,73,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,61,74,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,65,68,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,73,82,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,81,100,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,86,121,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,88,124,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount( 'map_slug$, instance_npcname("slug_mob_1") + "::OnMobDead" ) > 0)
+		end;
+	enablenpc instance_npcname("ep20_1slug_83_127");
+	'step = 2;
+	end;
+}
+
+1@slug,86,127,3	duplicate(dummy_cloaked_npc)	Rorohu#sl2::ep20_1slug_86_127	EP20_NPC_COCOPO
+1@slug,85,126,3	duplicate(dummy_cloaked_npc)	Friederike#sl2::ep20_1slug_85_126	4_EP19_FRIEDERIKE
+
+1@slug,83,127,5	script(DISABLED)	Cocopo#sl2::ep20_1slug_83_127	EP20_NPC_COCOPO,{
+	if (is_party_leader() == false)
+		end;
+	if (ep20_sidequest_1 != 18 && ep20_sidequest_1 != 20)
+		end;
+	if (isbegin_quest(11948) != 2 && isbegin_quest(11946) == 0)
+		end;
+	if ('step == 2 || 'step == 3) {
+		if (ep20_sidequest_1 == 20) {
+			mes "[Copo]";
+			mes "Beep!!!";
+			mes "Beep!!!";
+			cloakoffnpcself( instance_npcname("ep20_1slug_85_126") );
+			next;
+			mes "[Friederike]";
+			mes "This is also a haunted area, so check carefully.";
+			cutin "ep19_friederike02.png",2;
+			next;
+			cutin "",255;
+			cloakonnpcself( instance_npcname("ep20_1slug_85_126") );
+			mes "- To go to the next step, the party leader is required. -";
+			if ('step == 2) {
+				'step = 3;
+				donpcevent instance_npcname("slug_mob_2") + "::OnStart";
+			}
+			close2;
+			navigateto("1@slug",46,186);
+			end;
+		}
+		mes "[Copo]";
+		mes "Oops?";
+		cloakoffnpcself( instance_npcname("ep20_1slug_85_126") );
+		cloakoffnpcself( instance_npcname("ep20_1slug_86_127") );
+		next;
+		mes "[Rorohu]";
+		mes "What really?";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Can you understand that?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Rorohu]";
+		mes "Huh?";
+		mes "Huh?";
+		mes "A little…?";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "I see.";
+		mes "By the way, what's the name of the friend you're looking for?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Rorohu]";
+		mes "uh...";
+		mes "Name?";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Shouldn't you know the name, in case you find it scattered later?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Rorohu]";
+		mes "That's right, it name is Beep-Beep...";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Beep?";
+		mes "That's a name I've never heard of.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Rorohu]";
+		mes "Maybe you haven't met it...";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Is that so?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Rorohu]";
+		mes "This way… but snails are blocking it!";
+		mes "Let's kill it quickly and go.";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "- To go to the next step, the party leader is required. -";
+		cloakonnpcself( instance_npcname("ep20_1slug_86_127") );
+		cloakonnpcself( instance_npcname("ep20_1slug_85_126") );
+		cutin "",255;
+		if ('step == 2) {
+			'step = 3;
+			donpcevent instance_npcname("slug_mob_2") + "::OnStart";
+		}
+		close2;
+		navigateto("1@slug",46,186);
+		end;
+	}
+	end;
+}
+
+
+// Step 3
+1@slug,1,1,5	script	slug_mob_2	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("slug_mob_2") + "::OnMobDead";
+	monster 'map_slug$,68,141,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,68,141,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,68,141,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,69,145,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,62,147,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,47,182,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,44,181,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,47,167,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount( 'map_slug$, instance_npcname("slug_mob_2") + "::OnMobDead" ) > 0)
+		end;
+	disablenpc instance_npcname("ep20_1slug_83_127");
+	enablenpc instance_npcname("ep20_1slug_46_186");
+	'step = 4;
+	end;
+}
+
+
+1@slug,49,185,3	duplicate(dummy_cloaked_npc)	Friederike#sl3::ep20_1slug_49_185	4_EP19_FRIEDERIKE
+1@slug,50,186,3	duplicate(dummy_cloaked_npc)	Rorohu#sl3::ep20_1slug_50_186	EP20_NPC_COCOPO
+
+1@slug,46,186,5	script(DISABLED)	Cocopo#sl3::ep20_1slug_46_186	EP20_NPC_COCOPO,{
+	if (is_party_leader() == false)
+		end;
+	if (ep20_sidequest_1 != 18 && ep20_sidequest_1 != 20)
+		end;
+	if (isbegin_quest(11948) != 2 && isbegin_quest(11946) == 0)
+		end;
+	if ('step == 4 || 'step == 5) {
+		if (ep20_sidequest_1 == 20) {
+			mes "[Copo]";
+			mes "Beep beep beep";
+			mes "Beep";
+			cloakoffnpcself( instance_npcname("ep20_1slug_49_185") );
+			next;
+			mes "[Friederike]";
+			mes "Even though it's so cute, it's stronger than expected, so it's said that it can easily hunt ordinary snails.";
+			mes "Is it a problem because something out of the ordinary is coming out?";
+			cutin "ep19_friederike05.png",2;
+			next;
+			cloakonnpcself( instance_npcname("ep20_1slug_49_185") );
+			mes "- The progress of the party leader is required to go to the next stage. -";
+			cutin "",255;
+			if ('step == 4) {
+				'step = 5;
+				donpcevent instance_npcname("slug_mob_3") + "::OnStart";
+			}
+			close2;
+			navigateto("1@slug",159,309);
+			end;
+		}
+		mes "[Copo]";
+		mes "Beep beep!";
+		mes "Beep Beep!";
+		cloakoffnpcself( instance_npcname("ep20_1slug_49_185") );
+		cloakoffnpcself( instance_npcname("ep20_1slug_50_186") );
+		next;
+		mes "[Rorohu]";
+		mes "It saw a monster going this way!";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Thanks for the directions.";
+		cutin "ep19_friederike03.png",2;
+		next;
+		cutin "",255;
+		mes "[Copo]";
+		mes "Oops.";
+		next;
+		mes "[Rorohu]";
+		mes "Let's go quickly!";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Come to think of it.";
+		mes "How did you get out of town?";
+		mes "The guard at the entrance of the village didn't say anything.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Rorohu]";
+		mes "I'm sure he didn't see me.";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Rorohu]";
+		mes "You didn't even know I was going out because you were fooled by a fake made of cotton.";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Right!";
+		mes "Playing such a prank on a busy guard!";
+		mes "You know you'll get scolded if I go back.";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[Rorohu]";
+		mes "Hey...";
+		mes "Another snail!!!";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Don't even think about fooling around!";
+		cutin "ep19_friederike04.png",2;
+		next;
+		cloakonnpcself( instance_npcname("ep20_1slug_50_186") );
+		cloakonnpcself( instance_npcname("ep20_1slug_49_185") );
+		cutin "",255;
+		mes "- To go to the next step, the party leader is required. -";
+		if ('step == 4) {
+			'step = 5;
+			donpcevent instance_npcname("slug_mob_3") + "::OnStart";
+		}
+		close2;
+		navigateto("1@slug",159,309);
+		end;
+	}
+	end;
+}
+
+
+
+// step 4
+1@slug,1,1,5	script	slug_mob_3	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("slug_mob_3") + "::OnMobDead";
+	monster 'map_slug$,63,205,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,68,207,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,76,227,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,76,234,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,82,229,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,81,240,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,110,271,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,138,282,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,148,303,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,152,305,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,155,305,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,155,307,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount( 'map_slug$, instance_npcname("slug_mob_3") + "::OnMobDead" ) > 0)
+		end;
+	disablenpc instance_npcname("ep20_1slug_46_186");
+	enablenpc instance_npcname("ep20_1slug_159_309");
+	'step = 6;
+	end;
+}
+
+
+1@slug,157,307,5	duplicate(dummy_cloaked_npc)	Friederike#sl4::ep20_1slug_157_307	4_EP19_FRIEDERIKE
+1@slug,161,307,3	duplicate(dummy_cloaked_npc)	Rorohu#sl4::ep20_1slug_161_307	EP20_NPC_COCOPO
+
+1@slug,159,309,3	script(DISABLED)	Cocopo#sl4::ep20_1slug_159_309	EP20_NPC_COCOPO,{
+	if (is_party_leader() == false)
+		end;
+	if (ep20_sidequest_1 != 18 && ep20_sidequest_1 != 20)
+		end;
+	if (isbegin_quest(11948) != 2 && isbegin_quest(11946) == 0)
+		end;
+	if ('step == 6 || 'step == 7) {
+		if (ep20_sidequest_1 == 20) {
+			mes "[Copo]";
+			mes "Beep beep!!!";
+			mes "Beep?";
+			cloakoffnpcself( instance_npcname("ep20_1slug_157_307") );
+			next;
+			mes "[Friederike]";
+			mes "But is it delicious enough to take such a risk?";
+			mes "I'll have to ask Lehar later.";
+			cutin "ep19_friederike05.png",2;
+			next;
+			cloakonnpcself( instance_npcname("ep20_1slug_157_307") );
+			mes "- To go to the next step, the party leader is required. -";
+			cutin "",255;
+			if ('step == 6) {
+				donpcevent instance_npcname("slug_mob_4") + "::OnStart";
+				enablenpc instance_npcname("#slsl001");
+				enablenpc instance_npcname("#slsl002");
+				'step = 7;
+			}
+			close2;
+			navigateto("1@slug",66,336);
+			end;
+		}
+		mes "[Copo]";
+		mes "Poop?";
+		cloakoffnpcself( instance_npcname("ep20_1slug_157_307") );
+		cloakoffnpcself( instance_npcname("ep20_1slug_161_307") );
+		next;
+		mes "[Rorohu]";
+		mes "This way!";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Wait... that's suspicious.";
+		mes "Rorohu, are you hiding something?";
+		mes "Tell me honestly.";
+		cutin "ep19_friederike05.png",2;
+		next;
+		mes "[Rorohu]";
+		mes "What's suspicious!";
+		mes "I'm not hiding anything.";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Rorohu, when you hide something, you keep avoiding my eyes?";
+		mes "There's no point in lying.";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[Rorohu]";
+		mes "...";
+		mes "That's... that's...";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Rorohu]";
+		mes "Actually...";
+		mes "…";
+		next;
+		mes "[Rorohu]";
+		mes "To be honest, don't tell it to mom?";
+		cutin "ep20_cocopo02.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Okay.";
+		cutin "ep19_friederike05.png",2;
+		next;
+		mes "[Rorohu]";
+		mes "…";
+		mes "Beep-poop doesn't live in an ice castle, it lives in an ancient ice canyon...";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "What?";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Rorohu]";
+		mes "If grown-ups knew about it, I wouldn't be able to meet Beep-Beep.";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Okay...";
+		mes "But you can't come to such a dangerous place...";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Rorohu]";
+		mes "This is the first time I've seen such a scary monster.";
+		mes "Usually, it's just a place where people come to eat.";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Rorohu]";
+		mes "Just…";
+		mes "I wanted to eat the new Poringle Chip with Beep-Beep.";
+		next;
+		mes "[Friederike]";
+		mes "Rorohuu...";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Yes.";
+		mes "Come on, let's go find Beep-Beep and go back.";
+		mes "First of all, we have to deal with the snails blocking the road, right?";
+		cutin "ep19_friederike05.png",2;
+		next;
+		mes "- To go to the next step, the party leader is required. -";
+		cloakonnpcself( instance_npcname("ep20_1slug_161_307") );
+		cloakonnpcself( instance_npcname("ep20_1slug_157_307") );
+		cutin "",255;
+		if ('step == 6) {
+			donpcevent instance_npcname("slug_mob_4") + "::OnStart";
+			enablenpc instance_npcname("#slsl001");
+			enablenpc instance_npcname("#slsl002");
+			'step = 7;
+		}
+		close2;
+		navigateto("1@slug",66,336);
+		end;
+	}
+	end;
+}
+
+1@slug,148,309,0	warp2(DISABLED)	#slsl001	2,2,1@slug,88,340
+1@slug,100,340,0	warp2(DISABLED)	#slsl002	2,2,1@slug,155,300
+
+
+// step 5
+1@slug,1,1,5	script	slug_mob_4	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("slug_mob_4") + "::OnMobDead";
+	monster 'map_slug$,76,339,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,83,339,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,62,330,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,58,331,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,58,340,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	monster 'map_slug$,55,336,"--ja--","G_EP20_ANGEL_ICESLUG",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount( 'map_slug$, instance_npcname("slug_mob_4") + "::OnMobDead" ) > 0)
+		end;
+	disablenpc instance_npcname("ep20_1slug_159_309");
+	enablenpc instance_npcname("ep20_1slug_66_336");
+	'step = 8;
+	end;
+}
+
+1@slug,68,337,3	duplicate(dummy_cloaked_npc)	Friederike#sl5::ep20_1slug_68_337	4_EP19_FRIEDERIKE
+1@slug,67,334,3	duplicate(dummy_cloaked_npc)	Rorohu#sl5::ep20_1slug_67_334	EP20_NPC_COCOPO
+
+1@slug,66,336,5	script(DISABLED)	Cocopo#sl5::ep20_1slug_66_336	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 != 18 && ep20_sidequest_1 != 20)
+		end;
+	if (isbegin_quest(11948) != 2 && isbegin_quest(11946) == 0)
+		end;
+	if ('step == 8) {
+		if (is_party_leader() == false)
+			end;
+		if (ep20_sidequest_1 == 20) {
+			mes "[Beep beep]";
+			mes "Beep!";
+			cloakoffnpcself( instance_npcname("ep20_1slug_68_337") );
+			next;
+			mes "[Friederike]";
+			mes "Dangerous!";
+			mes "That monster has appeared again!!";
+			cutin "ep19_friederike02.png",2;
+			next;
+			mes "- To go to the next step, the party leader is required. -";
+			cutin "",255;
+			cloakonnpcself( instance_npcname("ep20_1slug_68_337") );
+			close2;
+			if ('step == 8) {
+				donpcevent instance_npcname("slug_mob_5") + "::OnStart";
+				'step = 9;
+			}
+			disablenpc();
+			end;
+		}
+		mes "[Rorohu]";
+		mes "Beep!!!";
+		cutin "ep20_cocopo01.png",2;
+		cloakoffnpcself( instance_npcname("ep20_1slug_68_337") );
+		cloakoffnpcself( instance_npcname("ep20_1slug_67_334") );
+		next;
+		mes "[Beep beep]";
+		mes "Beep!";
+		cutin "",255;
+		next;
+		mes "[Friederike]";
+		mes "Dangerous!";
+		mes "Rorohu!!!";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "- To go to the next step, the party leader is required. -";
+		cloakonnpcself( instance_npcname("ep20_1slug_68_337") );
+		cloakonnpcself( instance_npcname("ep20_1slug_67_334") );
+		cutin "",255;
+		close2;
+		if ('step == 8) {
+			donpcevent instance_npcname("slug_mob_5") + "::OnStart";
+			'step = 9;
+		}
+		disablenpc();
+		end;
+	}
+	if ('step == 10) {
+		if (ep20_sidequest_1 == 18) {
+			mes "[Rorohu]";
+			mes "Thank you";
+			mes "" + strcharinfo(0) + ",";
+			mes "Friederike.";
+			cutin "ep20_cocopo02.png",2;
+			cloakoffnpcself( instance_npcname("ep20_1slug_68_337") );
+			cloakoffnpcself( instance_npcname("ep20_1slug_67_334") );
+			next;
+			mes "[Friederike]";
+			mes "Phew…";
+			mes "I'm glad you're both okay.";
+			cutin "ep19_friederike03.png",2;
+			next;
+			mes "[Friederike]";
+			mes "You're not hurt anywhere even if you bleep?";
+			cutin "ep19_friederike01.png",2;
+			next;
+			mes "[Friederike]";
+			mes "Everyone is safe, so let's go back to the village quickly.";
+			mes "It's too dangerous for kids here.";
+			cutin "ep19_friederike02.png",2;
+			ep20_sidequest_1 = 19;
+			erasequest 11946;
+			setquest 11947;
+			close2;
+			cloakonnpcself( instance_npcname("ep20_1slug_68_337") );
+			cloakonnpcself( instance_npcname("ep20_1slug_67_334") );
+			cutin "",255;
+			warp "jor_back4",100,253;
+			end;
+		}
+		if (ep20_sidequest_1 == 20) {
+			if (checkquest(11949,HUNTING) == 2) {
+				if (checkweight(1001217,3) == 0) {
+					mes "- Wait here!! -";
+					mes "- You have too many items -";
+					mes "- so you're unable to proceed with the quest. -";
+					mes "- Lighten your body -";
+					mes "- and try again -";
+					close;
+				}
+				mes "[Beep beep]";
+				mes "Beep!";
+				cloakoffnpcself( instance_npcname("ep20_1slug_68_337") );
+				next;
+				mes "[Friederike]";
+				mes "Yes!";
+				mes "Looking at these kids, I can't understand them, but I can feel them with my heart.";
+				cutin "ep19_friederike05.png",2;
+				next;
+				mes "[Friederike]";
+				mes "I think I've gotten a little closer with Beep-Beep...";
+				next;
+				mes "[Beep beep]";
+				mes "Poop!";
+				cutin "",255;
+				erasequest 11948;
+				erasequest 11949;
+				setquest 11950;
+				getitem 1001217,3;	// Ep20_Cat_Whiskers
+				if (get_reputation_points( REPU_EP20 ) >= 3000)
+					getitem 1001217,1;	// Ep20_Cat_Whiskers
+				getexp2 34152989,0;
+				getexp 0,4283013;
+				add_reputation_points( REPU_EP20, 5 );
+				close2;
+				cloakonnpcself( instance_npcname("ep20_1slug_68_337") );
+				warp "jor_back4",100,253;
+				end;
+			}
+			// (fall through)
+		}
+		// (fall through)
+	}
+	mes "[Beep beep]";
+	mes "Pooh??";
+	if (select( "Exit dungeon", "Continue exploration" ) == 2) {
+		mes "- Explore the dungeon as it is. -";
+		close;
+	}
+	mes "- Exit the dungeon -";
+	close2;
+	warp "jor_back4",100,253;
+	end;
+
+OnInstanceInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(11946,HUNTING) == 2" );
+
+	// daily
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(11949,HUNTING) == 2" );
+	end;
+}
+
+// Step 6
+1@slug,1,1,5	script	slug_mob_5	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("slug_mob_5") + "::OnMobDead";
+	monster 'map_slug$,50,338,"--ja--","MD_EP20_FALLENANGEL",1, .@event$;	// 21982
+	end;
+OnMobDead:
+	if (mobcount( 'map_slug$, instance_npcname("slug_mob_5") + "::OnMobDead" ) > 0)
+		end;
+	'step = 10;
+	disablenpc instance_npcname("#slsl001");
+	disablenpc instance_npcname("#slsl002");
+	enablenpc instance_npcname("ep20_1slug_66_336");
+	end;
+}

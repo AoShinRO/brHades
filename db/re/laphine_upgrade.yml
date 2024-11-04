@@ -5243,13 +5243,14 @@ Body:
 #  - Item: Loki_Coin
 #    TargetItems:
 #      - Item: Gambler_Seal_KR_
-#  - Item: Glacier_Armor_9Refine
-#    NotSocketEnchantItem: false
-#    TargetItems:
-#      - Item: Glacier_Armor
-#      - Item: Glacier_Robe
-#      - Item: Glacier_Manteau
-#      - Item: Glacier_Muffler
-#      - Item: Glacier_Boots
-#      - Item: Glacier_Shoes
-#      - Item: Glacier_Guard
+  - Item: Glacier_Armor_9Refine    # 102227
+    ResultRefine: 9
+    CardsAllowed: false
+    TargetItems:
+      - Item: Glacier_Armor    # 450264
+      - Item: Glacier_Robe    # 450265
+      - Item: Glacier_Manteau    # 450266
+      - Item: Glacier_Muffler    # 450267
+      - Item: Glacier_Boots    # 470196
+      - Item: Glacier_Shoes    # 450268
+      - Item: Glacier_Guard    # 460040

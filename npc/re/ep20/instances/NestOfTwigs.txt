@@ -1,0 +1,511 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Episode 20: Immortals
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- Instance Nest of Twigs from Episode 20 (main quest)
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Main quest - Step 44 (instance NestOfTwigs)
+jor_twice,164,244,5	script(CLOAKED)	Lehar#e20pn05::ep20_jor_twice_164_244	4_EP19_LEHAR,{
+	if (ep20_main < 42)
+		end;
+	if (ep20_main == 42) {
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "What is Lazy doing by himself over there? What's between the ice?";
+		close3;
+	}
+	// note: (debug) ep20_main == 44 is custom (need check on official)
+	if (ep20_main == 43 || ep20_main == 44) {
+		if (is_party_leader() == false) {
+			cutin "ep19_lehar01.png",2;
+			mes "[Lehar]";
+			mes "Ah, adventurer! If you want to leave, make a one-man party and talk to me again!";
+			close3;
+		}
+		.@md_name$ = "Nest of Twigs";
+		
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "" + strcharinfo(0) + "! I'm in a hurry. Come with me to find Leon and Aurelie. Come on!";
+		next;
+		switch( select( "Ready to explore " + .@md_name$ + "", "Enter " + .@md_name$ + "", "Just a moment..." ) ) {
+		case 1:
+			cutin "ep19_lehar01.png",2;
+			mes "[Lehar]";
+			mes "If you're ready, let's start following? Phew, I'm nervous because I can't anticipate what's going to happen.";
+			if (is_party_leader() == true)
+				instance_create(.@md_name$);
+			close3;
+		case 2:
+			if (is_party_leader() == false)
+				end;
+			switch( instance_enter(.@md_name$) ) {
+			case IE_OTHER:
+				mes "^ff0000An unknown error occurred.^000000";
+				close;
+			case IE_NOINSTANCE:
+			case IE_NOMEMBER:
+				mes "[Lehar]";
+				mes "How can you be so unconcerned?";
+				mes "I'm in such a hurry!";
+				next;
+				mes "[Lehar]";
+				mes "When you're ready, you should talk to me without delay, okay? Yes?";
+				close3;
+			case IE_OK:
+				// warp "1@twig",209,176;
+				end;
+			}
+			end;
+		case 3: 
+			cutin "ep19_lehar01.png",2;
+			mes "[Lehar]";
+			mes "Wait a minute, I missed something. Wait a minute and talk to me again!";
+			close3;
+		}
+		end;
+	}
+	if (ep20_main == 45) {
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "It's nice we can do something, right?";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(23106) == 1" );
+	end;
+}
+
+
+1@twig,209,176,0	script	#ep20_twig1	HIDDEN_WARP_NPC,2,2,{
+	end;
+OnTouch:
+	if (is_party_leader() == false)
+		end;
+	if ('step == 0) {
+		'step = 1;
+		enablenpc instance_npcname("ep20_1twig_207_178_A");
+		end;
+	}
+	end;
+OnInstanceInit:
+	'step = 0;
+	'map_twig$ = instance_mapname("1@twig");
+	end;
+}
+
+1@twig,66,181,3	duplicate(dummy_disabled_npc)	Jormungand Guardian#twig::ep20_1twig_66_181	EP20_JORMUNGUARD1
+1@twig,62,182,3	duplicate(dummy_disabled_npc)	Jormungand Guardian#twig::ep20_1twig_62_182	EP20_JORMUNGUARD2
+1@twig,67,177,3	duplicate(dummy_disabled_npc)	Jormungand Guardian#twig::ep20_1twig_67_177	EP20_JORMUNGUARD2
+1@twig,135,65,3	duplicate(dummy_disabled_npc)	Jormungand Guardian#twig::ep20_1twig_135_65	EP20_JORMUNGUARD2
+1@twig,135,61,3	duplicate(dummy_disabled_npc)	Jormungand Guardian#twig::ep20_1twig_135_61	EP20_JORMUNGUARD1
+1@twig,135,69,3	duplicate(dummy_disabled_npc)	Jormungand Guardian#twig::ep20_1twig_135_69	EP20_JORMUNGUARD2
+
+
+1@twig,207,178,5	script(DISABLED)	Lehar#ep20twigtemp::ep20_1twig_207_178_A	EP19_NPC_LEHAR,{
+	if (is_party_leader() == false)
+		end;
+	if ('step != 1)
+		end;
+	cutin "ep19_lehar05.png",2;
+	mes "[Lehar]";
+	mes "Wow, what is this all about? It's the first time I've seen terrain like this...";
+	next;
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "I can see the footprints over there. It looks like Leon and Aurelie went along this road, so let's do our best!";
+	specialeffect2 EF_POTION8;
+	sc_start SC_INCREASEAGI,240000,10;
+	next;
+	mes "[Lehar]";
+	mes "I've made your feet light, let's hurry!";
+	close2;
+	cutin "",255;
+	if ('step == 1) {
+		'step = 2;
+		disablenpc();
+		donpcevent instance_npcname("ep20_1twig_207_178_B") + "::OnMove_1";	// move 1
+	}
+	end;
+}
+
+
+1@twig,207,178,5	script(DISABLED)	Lehar#e20twig::ep20_1twig_207_178_B	EP19_NPC_LEHAR,{
+	if (is_party_leader() == false)
+		end;
+	if ('step < 3)
+		end;
+	if ('step == 3) {	// spawn 1
+		'step = 4;
+		donpcevent instance_npcname("ep20_1twig_207_178_B") + "::OnSpawn_1";
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "Eh, what the hell is that...? It's standing like it's trying to stop us...";
+		close2;
+		npctalk "Lehar: Huh? Huh?";
+		cutin "",255;
+		end;
+	}
+	if ('step == 4) {
+		npctalk "Lehar: Adventurer, now is not the time to talk!";
+		end;
+	}
+	if ('step == 5) {	// move 2
+		'step = 6;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "I thought they would attack all of a sudden! I was surprised. Enemies are everywhere... Shall we start again?";
+		specialeffect2 EF_POTION8;
+		sc_start SC_INCREASEAGI,240000,10;
+		close2;
+		if ('step == 6)
+			donpcevent instance_npcname("ep20_1twig_207_178_B") + "::OnMove_2";
+		cutin "",255;
+		end;
+	}
+	if ('step == 6)	// (npc is moving)
+		end;
+	if ('step == 7) {	// spawn 2
+		'step = 8;
+		donpcevent instance_npcname("ep20_1twig_207_178_B") + "::OnSpawn_2";
+		cutin "ep19_lehar04.png",2;
+		mes "[Lehar]";
+		mes "Uh, are those guys from earlier? Let's deal with it again and move on!";
+		close3;
+	}
+	if ('step == 8) {
+		npctalk "Lehar: Adventurer, there are still some guys to punish!";
+		end;
+	}
+	if ('step == 9) {	// move 3
+		'step = 10;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "How did Leon and Aurelie get through this gap...?";
+		specialeffect2 EF_POTION8;
+		sc_start SC_INCREASEAGI,240000,10;
+		close2;
+		if ('step == 10)
+			donpcevent instance_npcname("ep20_1twig_207_178_B") + "::OnMove_3";
+		cutin "",255;
+		end;
+	}
+	if ('step == 10)	// (npc is moving)
+		end;
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "I've thought about it before, but I don't think it's easy for a human being to agree with God.";
+	next;
+	cutin "ep19_lehar02.png",2;
+	mes "[Lehar]";
+	mes "Heh, did I say something too obvious? Forget it!";
+	close3;
+
+OnMove_1:
+	enablenpc();
+	enablenpc instance_npcname("ep20_1twig_66_181");
+	enablenpc instance_npcname("ep20_1twig_62_182");
+	enablenpc instance_npcname("ep20_1twig_67_177");
+
+	npcspeed 150;
+	'npc_gid = getnpcid(0);
+	'npc_name$ = instance_npcname("ep20_1twig_207_178_B");
+	'move[0] = 0;
+	donpcevent 'npc_name$ + "::OnMove_1_ByStep";
+	end;
+OnMove_1_ByStep:
+	setarray .@coord[0],
+		197,188,
+		187,198,
+		177,208,
+		167,211,
+		157,216,	// npctalk
+		147,216,
+		137,217,
+		124,215,
+		114,213,
+		104,210,
+		 94,204,
+		 84,194,
+		 74,184;
+	.@size = getarraysize(.@coord) / 2;
+
+	if ('move[0] == 4)
+		npctalk "Lehar: Here, it looks amazing!";
+	else if ('move[0] == .@size) {
+		npctalk "Lehar: Huh, there's something strange blocking the front?";
+		'step = 3;	// move final
+		end;
+	}
+	.@r = 'move[0] * 2;
+	unitwalk 'npc_gid, .@coord[.@r],.@coord[.@r+1], 'npc_name$ + "::OnMove_1_ByStep";
+	'move[0]++;
+	end;
+OnSpawn_1:
+	disablenpc instance_npcname("ep20_1twig_66_181");
+	disablenpc instance_npcname("ep20_1twig_62_182");
+	disablenpc instance_npcname("ep20_1twig_67_177");
+	monster 'map_twig$,66,181,"--ja--","EP20_JORMUNGUARD1",1, 'npc_name$ + "::OnDead_1";
+	setunitdata $@mobid[0], UMOB_HP, 10;
+	monster 'map_twig$,62,182,"--ja--","EP20_JORMUNGUARD2",1, 'npc_name$ + "::OnDead_1";
+	setunitdata $@mobid[0], UMOB_HP, 10;
+	monster 'map_twig$,67,177,"--ja--","EP20_JORMUNGUARD2",1, 'npc_name$ + "::OnDead_1";
+	setunitdata $@mobid[0], UMOB_HP, 10;
+	end;
+OnDead_1:
+	if (mobcount( 'map_twig$, 'npc_name$ + "::OnDead_1" ) > 0)
+		end;
+	npctalk "Lehar: You worked hard!";
+	'step = 5;
+	end;
+
+OnMove_2:
+	enablenpc instance_npcname("ep20_1twig_135_65");
+	enablenpc instance_npcname("ep20_1twig_135_61");
+	enablenpc instance_npcname("ep20_1twig_135_69");
+	'move[1] = 0;
+	donpcevent 'npc_name$ + "::OnMove_2_ByStep";
+	end;
+OnMove_2_ByStep:
+	setarray .@coord[0],
+		64,174,
+		57,164,
+		56,154,
+		56,144,
+		56,134,
+		60,124,
+		61,114,	// npctalk
+		68,104,
+		78,94,
+		88,84,
+		98,74,
+		108,67,
+		118,65,
+		128,65;
+	.@size = getarraysize(.@coord) / 2;
+
+	if ('move[1] == 6)
+		npctalk "Lehar: Why... why is it so long?";
+	else if ('move[1] == .@size) {
+		npctalk "Lehar: No, you're here again?";
+		'step = 7;	// move final
+		end;
+	}
+	.@r = 'move[1] * 2;
+	unitwalk 'npc_gid, .@coord[.@r],.@coord[.@r+1], 'npc_name$ + "::OnMove_2_ByStep";
+	'move[1]++;
+	end;
+OnSpawn_2:
+	disablenpc instance_npcname("ep20_1twig_135_65");
+	disablenpc instance_npcname("ep20_1twig_135_61");
+	disablenpc instance_npcname("ep20_1twig_135_69");
+	monster 'map_twig$,135,61,"--ja--","EP20_JORMUNGUARD1",1, 'npc_name$ + "::OnDead_2";
+	setunitdata $@mobid[0], UMOB_HP, 10;
+	monster 'map_twig$,135,69,"--ja--","EP20_JORMUNGUARD1",1, 'npc_name$ + "::OnDead_2";
+	setunitdata $@mobid[0], UMOB_HP, 10;
+	monster 'map_twig$,135,65,"--ja--","EP20_JORMUNGUARD2",1, 'npc_name$ + "::OnDead_2";
+	setunitdata $@mobid[0], UMOB_HP, 10;
+	end;
+OnDead_2:
+	if (mobcount( 'map_twig$, 'npc_name$ + "::OnDead_2" ) > 0)
+		end;
+	npctalk "Lehar: You worked hard!";
+	'step = 9;
+	end;
+
+OnMove_3:
+	'move[2] = 0;
+	donpcevent 'npc_name$ + "::OnMove_3_ByStep";
+	enablenpc instance_npcname("ep20_1twig_117_151");
+	enablenpc instance_npcname("ep20_1twig_116_145");
+	enablenpc instance_npcname("ep20_1twig_119_149");
+	end;
+OnMove_3_ByStep:
+	setarray .@coord[0],
+		138,65,
+		148,72,
+		158,78,
+		166,88,
+		173,98,
+		178,108,
+		179,118,
+		176,128,
+		168,138,
+		158,148,
+		148,154,
+		138,155,
+		128,158;
+	.@size = getarraysize(.@coord) / 2;
+	
+	if ('move[2] == .@size) {
+		'step = 11;	// move final
+		end;
+	}
+	.@r = 'move[2] * 2;
+	unitwalk 'npc_gid, .@coord[.@r],.@coord[.@r+1], 'npc_name$ + "::OnMove_3_ByStep";
+	'move[2]++;
+	end;
+}
+
+// unknown effect
+// 1@twig,121,156,0	script	#ep20_twig2	HIDDEN_WARP_NPC,2,2
+
+1@twig,117,151,3	script(DISABLED)	Aurelie#e20pn06::ep20_1twig_117_151	4_EP19_AURELIE,{
+	cutin "ep19_aurelie01.png",2;
+	mes "[Aurelie]";
+	mes "It's only natural that we haven't been able to find it since we've set up a barrier like this. The structure of this magical power is...";
+	next;
+	mes "[Aurelie]";
+	mes "(She mumbles, engrossed in his own thoughts.)";
+	close3;
+}
+
+1@twig,116,145,7	script(DISABLED)	White cat#e20pn06::ep20_1twig_116_145	4_EP20_NYAR,{
+	cutin "ep20_nyar04.png",2;
+	mes "[White cat]";
+	mes "Awesome.";
+	close3;
+}
+
+1@twig,119,149,3	script(DISABLED)	Leon#e20pn06::ep20_1twig_119_149	4_EP19_LEON,{
+	if ('step < 11)
+		end;
+	if ('step == 11) {
+		if (is_party_leader() == false)
+			end;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "Ahh, I finally found it. Leon and Aurelie!";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "Ah, Lehar. I'm surprised everyone is gone. I've been waiting.";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "That's what we're talking about! He went away without saying a word! How fast he walked!";
+		next;
+		mes "[Lehar]";
+		mes "How did you get here when strange objects are attacking you?";
+		next;
+		cutin "ep19_leon04.png",2;
+		mes "[Leon]";
+		mes "Yes? It can't be... Didn't everyone notice? It's the power of Jormungand. It can't attack us...";
+		next;
+		cutin "ep19_leon05.png",2;
+		mes "[Leon]";
+		mes "...Ah, dear.";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "Sorry, I felt Jormungandr's will so strongly that I mistook it for all of us.";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "I didn't miss anything though, so that's okay. Please explain what happened, please!";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "Well, to begin with, we must protect this place and this world tree here.";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "...Leon-nim, the progress is too fast! I don't understand at all. Can you explain it step by step?";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "Oh, so is he... Could you give me a moment to gather my thoughts? We'll tell you what we've heard here.";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "It's not unusual to share a god's magical power and become a guardian...";
+		if ('step == 11)
+			'step = 12;
+		close3;
+	}
+	if ('step == 12) {
+		if (checkweight(1001217,20) == 0) {	// custom
+			mes "Conversation cannot proceed because you have too many items.";
+			mes "Please clean up your items and try again.";
+			close;
+		}
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "Okay, let's talk it out from the beginning. Aurelie, can you help me?";
+		next;
+		cutin "ep19_aurelie01.png",2;
+		mes "[Aurelie]";
+		mes "As I said before, Leon and I are the guardians of Isgard. Instead of defending Isgard, we receive Jormungandr's blessing and live forever. That's why we can't be ignorant of Jormungandr's magical power.";
+		next;
+		mes "[Aurelie]";
+		mes "I've heard that the Iwins have found traces of an animal presumed to be Jormungandan until then... but it's never really been shown. Seeing what's in front of us now, things may be worse than we thought.";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "We are not the only ones who can feel the magic of Jormungand in this land. The Rgans of the Jormungand Church were also born from the magic of Jormungand, so they should be able to feel the same.";
+		next;
+		mes "[Leon]";
+		mes "Did you say you met the gang around here? If so, I don't know if they feel the same thing one step ahead of us and are trying to find the source. We shouldn't be slowing down.";
+		next;
+		cutin "ep19_aurelie01.png",2;
+		mes "[Aurelie]";
+		mes "This place is the center of Isgard's barrier, holding the branches of the World Tree. It's now covered by a protective shield, but if the Jormungand Church senses something, it's only a matter of time before they break into this place.";
+		next;
+		mes "[Aurelie]";
+		mes "If this holy place is destroyed, Isgard's barrier will be broken, and Lasgand, who was captured on this continent, will be able to reach Midgard.";
+		next;
+		mes "[Aurelie]";
+		mes "So we have to stay here. Do you understand this?";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "If you say protect... how exactly do you protect it?";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "It would be nice to be able to add strength to this barrier, but the problem is where to use the magic power. Aurelie and I should do what we can.";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "Well then.... Until we find a way, why don't we keep it simple?";
+		next;
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "Neither I nor the adventurer can help the barrier itself, but wouldn't it be effective if at least the investigation was prevented? We'll beat up every legan that comes and send it back!";
+		npctalk "" + strcharinfo(0) + " : Are you serious?", "";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "Hmm, sure. I think that's for the best for now. While you're working, we'll try to figure out a better way.";
+		npctalk "" + strcharinfo(0) + " : Really? Like this?", "";
+		next;
+		cutin "ep19_aurelie01.png",2;
+		mes "[Aurelie]";
+		mes "You'd better do as Lehar says. Jormungand also doesn't want the Rgans to damage the shields and harvest magic from this area. They don't do one harm to this land...";
+		next;
+		mes "[Aurelie]";
+		mes "Then, shall we leave this place? The people waiting outside should also know the situation.";
+		if ('step == 12 && ep20_main == 43) {
+			ep20_main = 44;
+			erasequest 23106;
+			setquest 23108;
+			getitem 1001217,10;	// Ep20_Cat_Whiskers
+			getexp2 136611959,0;
+			getexp 0,22271670;
+			add_reputation_points( REPU_EP20, 70 );
+		}
+		close2;
+		cutin "",255;
+		warp "jor_safty1",331,150;
+		end;
+	}
+	// debug
+	warp "jor_safty1",331,150;
+	end;
+}

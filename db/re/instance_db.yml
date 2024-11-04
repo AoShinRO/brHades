@@ -576,3 +576,52 @@ Body:
       Map: 1@jorlab
       X: 57
       Y: 45
+  - Id: 300
+    Name: "Sticky Sea"
+    TimeLimit: 1800
+    Enter:
+      Map: 1@slug
+      X: 44
+      Y: 56
+  - Id: 301
+    Name: "Canyon Exploration"
+    Enter:
+      Map: 1@20cn1
+      X: 94
+      Y: 79
+    AdditionalMaps:
+      1@20cn2: true
+  - Id: 302
+    Name: "Drift Ice Zone"
+    Enter:
+      Map: 1@twsd
+      X: 318
+      Y: 76
+  - Id: 303
+    Name: "Nest of Twigs"
+    TimeLimit: 1200
+    Enter:
+      Map: 1@twig
+      X: 209
+      Y: 176
+  - Id: 304
+    Name: "Separated Sanctuary"
+    TimeLimit: 1800
+    Enter:
+      Map: 1@twas
+      X: 96
+      Y: 66
+  - Id: 305
+    Name: "Immortal"
+    TimeLimit: 1800
+    Enter:
+      Map: 1@twbs
+      X: 86
+      Y: 68
+  - Id: 306
+    Name: "Immortal (Hard)"
+    TimeLimit: 1800
+    Enter:
+      Map: 1@twbs
+      X: 101
+      Y: 68

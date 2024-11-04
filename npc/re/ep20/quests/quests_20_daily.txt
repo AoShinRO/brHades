@@ -1,0 +1,4914 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Episode 20: Immortals
+//===== Description: ========================================= 
+//= [Walkthrough Conversion]
+//--- Daily quests from Episode 20
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+
+// Daily quest [item gathering] - "Example of silent answer"
+// Also pre-re quest 1 for Main quest - Step 27
+// (ep20_main = 27 unlocks the daily quest, quest "Fakes Feigning Help")
+jor_sanct,257,115,3	script	Pamosugand#1	4_EP19_RGAN_SR2,{ 
+	callfunc( "F_ep20_checkTransform" );
+	if (checkweight(1201,1) == 0) {
+		mes "- You cannot proceed with the quest because you have too many items. -";
+		close;
+	}
+	if (ep20_main < 26) {
+		mes "Now is not the time to be thinking about other things.";
+		close;
+	}
+	if (ep20_main == 26 && isbegin_quest(8843) < 2) {
+		if (isbegin_quest(8843) == 0) {
+			mes "[Pamosugand]";
+			mes "Do you want to discuss?";
+			next;
+			select( "Surprise", "Yes" );	// note: the selection doesn't change the text
+			mes "[Pamosugand]";
+			mes "You're new to me.";
+			mes "Well, since I've always served Lasgand up until now, I don't even know the faces of those who work in lower places...";
+			next;
+			mes "[Pamosugand]";
+			mes "...obviously!";
+			mes "Haha, you feel my loyalty in a place like this.";
+			mes "At this cramped sacred root, you gain enlightenment again.";
+			next;
+			mes "[Pamosugand]";
+			mes "Okay, let's have a discussion.";
+			mes "Because this side of Dorily Logand is silent, we can't discuss it.";
+			next;
+			mes "Superior Rgan behind Pamosugand glanced this way, then looked away again.";
+			next;
+			mes "[Pamosugand]";
+			mes "Do you know that silent practice is?";
+			mes "Not speaking itself is a practice for enlightenment...";
+			next;
+			mes "[Pamosugand]";
+			mes "So from some time ago, this Dorily Logand has been practicing silently while waiting on me.";
+			mes "How can this not be a welcome thing to say that we will obtain meaning through silence?";
+			next;
+			mes "[Pamosugand]";
+			mes "I respected his wishes and let him continue his training, but it's a pity that I have no one to talk to about Master Lasgand's teachings.";
+			next;
+			mes "I can feel it gaze.";
+			mes "Dorily Logand is looking this way.";
+			next;
+			mes "It shook his head.";
+			mes "Does it mean the same as human?";
+			next;
+			mes "[Pamosugand]";
+			mes "You trifle, how much do you know about the Jormungand Church?";
+			next;
+			mes "[Pamosugand]";
+			mes "Of course, since you've come this far, you must have been fairly loyal and studied our history.";
+			mes "The most important thing is that, unlike other races, we are all descendants of Lasgand.";
+			next;
+			mes "[Pamosugand]";
+			mes "Isn't it terrifying to think what it's like to die of old age?";
+			mes "Isn't Lasgand dreaming of a world without it?";
+			unittalk getcharid(3), "" + strcharinfo(0) + " : (You can ask directly!)", bc_self;
+			next;
+			select( "Okay" );
+			setquest 8843;
+			mes "[Pamosugand]";
+			mes "How did Lasgand come all the way here? He's a holly bigand, a human, even a Sarek Gand. They say they brought him here...";
+			mes "I'm tired and irritable.";
+			next;
+			mes "[Pamosugand]";
+			mes "Pamoshgand, I'm always leaving time to listen to Lasgand's sermons and doctrinal research...";
+			mes "Not a single high-ranking Rgan coming to hear the doctrine, eh!";
+			next;
+			select( "I have time" );
+			mes "[Pamosugand]";
+			mes "Huh? What?";
+			mes "You came to listen to my sermon?";
+			next;
+			mes "[Pamosugand]";
+			mes "Heh heh, true.";
+			mes "Heh heh, that's true";
+			next;
+			emotion ET_BLABLA;
+			mes "Pamosugandd began spinning in place admiring himself.";
+			mes "You seem to be in a good mood.";
+			next;
+			mes "[Dorily Logand]";
+			mes "...";
+			emotion ET_THINK, getnpcid(0,"ep20_jor_sanct_258_117");
+			next;
+			mes "I suddenly felt a gaze and looked at Senior Rgan again, and even though it was Rgan, I could understand that look.";
+			mes "It's a pitiful look.";
+			next;
+			emotion ET_SURPRISE;
+			mes "[Pamosugand]";
+			mes "Ah!";
+			mes "So, are you a scout capable of combat?";
+			next;
+			mes "[Pamosugand]";
+			mes "Then for this busy body";
+			mes "Can you get me some " + mesitemlink(1001244) + "?";
+			mes "I think 20 will be enough.";
+			mes "Go now!";
+			next;
+			mes "[Pamosugand]";
+			mes "You have no right to veto!";
+			mes "Ahem.";
+			emotion ET_OHNO, getnpcid(0,"ep20_jor_sanct_258_117");
+			close;
+		}
+		if (countitem(1001244) < 20) {
+			mes "[Pamosugand]";
+			mes "Come to think of " + mesitemlink(1001244) + ", I ordered someone to bring me about 20 of them, but who was...";
+			close;
+		}
+		mes "[Pamosugand]";
+		mes "What's the matter, trifle";
+		mes "... Huh?";
+		mes "This is...";
+		mes "" + mesitemlink(1001244) + "!";
+		next;
+		mes "[Pamosugand]";
+		mes "Come to think of it, I had to ask someone for something like this.";
+		mes "That must have been you.";
+		mes "Let's see...";
+		mes "How much do you know about the Jormungand Church?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "What you asked for, I brought you...";
+		next;
+		mes "[Pamosugand]";
+		mes "That's not the point";
+		mes "I want to give a sermon now.";
+		emotion ET_THINK, getnpcid(0,"ep20_jor_sanct_258_117");
+		next;
+		mes "Dorily Logand is looking at Pamosugandd from behind.";
+		close;
+	}
+
+	// daily
+	switch( checkquest(8844,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[Pamosugand]";
+		mes "I really enjoyed today";
+		mes "How about discussing again tomorrow?";
+		close;
+	case 2:
+		erasequest 8844;
+		break;
+	}
+	switch( isbegin_quest(8845) ) {
+	case 0:
+		mes "[Pamosugand]";
+		mes "...The trivial things are still there.";
+		next;
+		mes "[Dorily Logand]";
+		mes ".........";
+		next;
+		mes "[Pamosugand]";
+		mes "Hmm?";
+		mes "Dorily Logand, what's wrong?";
+		next;
+		mes "Dorily Logand stares at Pamoshgand, and Pamoshgand seems to understand what's going on.";
+		next;
+		mes "[Pamosugand]";
+		mes "Unfortunately, Dorily Logand seems to be very busy right now. Help him.";
+		mes "Bring 20 " + mesitemlink(1001244) + ".";
+		mes "It's a discussion, so you can do it with other high-ranking Rgans passing by.";
+		next;
+		if (select( "Help Dorily Logand", "Quickly run away" ) == 2) {
+			mes "[Dorily Logand]";
+			mes "......";
+			close;
+		}
+		mes "The one who really realized the reason might be Dorily Logand.";
+		setquest 8845;
+		close;
+	case 1:
+		if (countitem(1001244) < 20) {
+			mes "[Pamosugand]";
+			mes "" + mesitemlink(1001244) + "... I don't think there are 20 of them?";
+			mes "Or are you back to discuss doctrine with me?";
+			next;
+			mes "Close your mouth and smile.";
+			next;
+			mes "[Pamosugand]";
+			mes "Um... not now?";
+			mes "I got it.";
+			next;
+			mes "I think I heard Dorily Logand laugh, but I didn't hear anything.";
+			close;
+		}
+		mes "[Pamosugand]";
+		mes "Are you here already? Then discuss doctrine with me...";
+		next;
+		mes "Dorily Logand quickly reached out and took the requested item.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "See you next time!";
+		next;
+		mes "[Pamosugand]";
+		mes "Uh, hey! What a small thing!";
+		delitem 1001244,20;
+		erasequest 8845;
+		setquest 8844;
+		getexp 15415360,10790760;
+		close;
+	case 2:
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep20_main == 26 && isbegin_quest(8843) == 0" );
+
+	// daily
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8844,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8843) == 2 && checkquest(8844,PLAYTIME) == -1 && isbegin_quest(8845) == 0" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8845) == 1 && countitem(1001244) >= 20" );
+	end;
+}
+
+jor_sanct,258,117,5	script	Dorily Logand#1::ep20_jor_sanct_258_117	4_EP19_RGAN_R1,{
+	callfunc( "F_ep20_checkTransform" );
+	if (checkweight(1201,1) == 0) {
+		mes "- You cannot proceed with the quest because you have too many items. -";
+		close;
+	}
+	if (ep20_main < 25) {
+		mes "Now is not the time to be thinking about other things.";
+		close;
+	}
+	if (ep20_main == 26 && isbegin_quest(8843) == 1) {
+		if (countitem(1001244) < 20) {
+			mes "[Dorily Logand]";
+			mes "...";
+			close;
+		}
+		mes "Looked at Dorily Logand asking for help.";
+		next;
+		mes "[Dorily Logand]";
+		mes "...";
+		next;
+		mes "Dorily Logand closed his eyes and shook his head.";
+		mes "This seems to mean the same thing as humans.";
+		next;
+		select( "How can I help" );
+		mes "He sent an earnest look for help.";
+		next;
+		mes "[Dorily Logand]";
+		mes "......";
+		next;
+		select( "Don't do that" );
+		mes "Looked sadly for help.";
+		next;
+		mes "[Dorily Logand]";
+		mes ".........";
+		next;
+		select("Dorily Logand" );
+		mes "He looked desperately for help.";
+		next;
+		mes "[Dorily Logand]";
+		mes "............";
+		next;
+		mes "Dorily Logand opened his eyes at the silent entreaty.";
+		next;
+		select( "Dorily Logand!" );
+		mes "I didn't call it out loud, but Dorily Logand seemed to understand everything I was trying to say.";
+		mes "I feel like I've really enlightened myself thanks to Pamosugand.";
+		next;
+		mes "Dorily Logand turned his gaze to Pamosugand.";
+		mes "Then Pamosugand answered as if his name had been called.";
+		next;
+		mes "[Pamosugand]";
+		mes "Why do you do that, Dorily Logand?";
+		next;
+		mes "[Dorily Logand]";
+		mes "......";
+		next;
+		mes "Dorily Logand looked away a little, then looked back at Pamosugand.";
+		emotion ET_THINK;
+		next;
+		mes "[Pamosugand]";
+		mes "Then it can't be helped.";
+		next;
+		mes "Pamosugand is a man...";
+		mes "No, as if Rgan had changed, he looked at me with a benevolent face and said.";
+		next;
+		mes "[Pamosugand]";
+		mes "You little thing, it's time for me to take a nap.";
+		mes "I'll put this feather to good use.";
+		mes "Rest is precious. Doctrine is precious, but cherish your own peace.";
+		delitem 1001244,20;
+		completequest 8843;
+		if (isbegin_quest(17701) == 1) {
+			erasequest 17701;
+			setquest 8839;
+		}
+		if (isbegin_quest(8841) == 2 && isbegin_quest(8842) == 2 && isbegin_quest(8843) == 2 && isbegin_quest(8846) == 2 && isbegin_quest(8854) == 2) {
+			ep20_main = 27;
+			erasequest 8839;
+			setquest 8840;
+		}
+		setquest 8844;
+		getexp 23123040,10790760;
+		next;
+		mes "Looking back at Dorily Logand, he closed his eyes and nodded his head.";
+		close;
+	}
+	mes "When Dorily Logand felt the presence, he looked this way and smiled.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "ep20_main == 26 && isbegin_quest(8843) == 1 && countitem(1001244) >= 20" );
+	end;
+}
+//-------------------
+
+
+
+// Daily quest
+// Also pre-re quest 4 for Main quest - Step 27
+// (ep20_main = 27 unlocks the daily quest, quest "Fakes Feigning Help")
+jor_sanct,264,160,5	script	Numkasaigargand#1::ep20_jor_sanct_264_160	EP19_RGAN_D,{
+	callfunc( "F_ep20_checkTransform" );
+	if (ep20_main < 26) {
+		mes "Now is not the time to be thinking about other things.";
+		close;
+	}
+	if (ep20_main == 26) {
+		mes "[Numkasaigargand]";
+		mes "To do... if you have nothing to do...";
+		mes "I'm anxious...";
+		close;
+	}
+	mes "[Numkasaigargand]";
+	mes "Whew...";
+	mes "I am satisfied with my work.";
+	close;
+}
+
+jor_sanct,266,155,7	script	Onnaecheramelgand#1::ep20_jor_sanct_266_155	EP19_RGAN_D,{
+	callfunc( "F_ep20_checkTransform" );
+	if (ep20_main < 26) {
+		mes "Now is not the time to be minding other things.";
+		close;
+	}
+	if (ep20_main == 26) {
+		mes "[Onnaecheramelgand]";
+		mes "Work...";
+		mes "Give me a job...";
+		close;
+	}
+	mes "[Onnaecheramelgand]";
+	mes "Whew...";
+	mes "I am satisfied with my work.";
+	close;
+}
+
+jor_sanct,268,160,3	script	Jakdagumigand#1::ep20_jor_sanct_268_160	EP19_RGAN_D,{
+	callfunc( "F_ep20_checkTransform" );
+	if (ep20_main < 26) {
+		mes "Now is not the time to be thinking about other things.";
+		close;
+	}
+	if (ep20_main == 26) {
+		mes "[Jakdagumigand]";
+		mes "Work...";
+		mes "Give me a job...";
+		close;
+	}
+	mes "[Jakdagumigand]";
+	mes "Whew...";
+	mes "I am satisfied with my work.";
+	close;
+}
+
+jor_sanct,267,161,5	script	Kljainamogand#1::ep20_jor_sanct_267_161	EP19_RGAN_D,{
+	callfunc( "F_ep20_checkTransform" );
+	if (ep20_main < 26) {
+		mes "Now is not the time to be thinking about other things.";
+		close;
+	}
+	if (ep20_main == 26) {
+		mes "[Kljainamogand]";
+		mes "Work...";
+		mes "Give me a job...";
+		close;
+	}
+	mes "[Kljainamogand]";
+	mes "Whew...";
+	mes "I am satisfied with my work.";
+	close;
+}
+
+jor_sanct,271,156,3	script	Narsioramigand#1	EP19_RGAN_D,{
+	callfunc( "F_ep20_checkTransform" );
+	if (checkweight(1201,1) == 0) {
+		mes "- You cannot proceed with the quest because you have too many items. -";
+		close;
+	}
+	if (ep20_main < 26) {
+		mes "Now is not the time to be thinking about other things.";
+		close;
+	}
+	if (ep20_main == 26) {
+		if (isbegin_quest(8846) == 0) {
+			mes "There are intermediate Rgans standing around and fidgeting.";
+			next;
+			if (select( "Speak", "Ignore" ) == 2) {
+				mes "I have a lot of other things to do now";
+				close;
+			}
+			mes "[" + strcharinfo(0) + "]";
+			mes "What are you doing?";
+			next;
+			mes "[Narsioramigand]";
+			mes "!";
+			mes "It's a priest!";
+			npctalk "Numkasaigargand: Priest!", "ep20_jor_sanct_264_160", bc_self;
+			npctalk "Onnaecheramelgand: The priest is here!", "ep20_jor_sanct_266_155", bc_self;
+			npctalk "Jakdagumigand: Priest!", "ep20_jor_sanct_268_160", bc_self;
+			next;
+			mes "[Narsioramigand]";
+			mes "Give me something to do...";
+			mes "We... have to work";
+			mes "I have nothing to do.";
+			npctalk "Onnaecheramelgand: I'm nervous...", "ep20_jor_sanct_266_155", bc_self;
+			next;
+			select( "If you find something to do yourself?" );
+			mes "[" + strcharinfo(0) + "]";
+			mes "Can't you just find something to do?";
+			mes "Cleaning...";
+			next;
+			mes "[Narsioramigand]";
+			mes "That's out of our control, priest.";
+			npctalk "Numkasaigargand: If you do something you didn't order... you'll get scolded.", "ep20_jor_sanct_264_160", bc_self;
+			next;
+			if (select( "Intermediate Rgan's work", "I'll find it for you later" ) == 2) {
+				mes "Now I have to finish my work.";
+				close;
+			}
+			mes "What do you want the intermediate Rgan to do?";
+			next;
+			switch( select( "Cleaning", "Taking care of the hatchery", "Soothing the Nervous Super Super Rgan" ) ) {
+			case 1:
+				mes "I looked around the bleak interior. Originally, Rgan's nest didn't have much of a sense of life, but this is really just a cave.";
+				break;
+			case 2:
+				mes "It didn't look like there was a hatchery here. After all, doesn't Lasgand need more men?";
+				break;
+			case 3:
+				mes "Come to think of it, I think I saw that the first-class Rgan had a subordinate attached to wait on him. Each of them would do it on their own.";
+				break;
+			}
+			next;
+			select( "Ask" );
+			mes "[" + strcharinfo(0) + "]";
+			mes "What were you doing before you came here?";
+			mes "Tell me one by one";
+			next;
+			mes "[Narsioramigand]";
+			mes "Clean up.";
+			npctalk "Narsioramigand: But it's so dirty here... There's no experiment trash coming out.", "", bc_self;
+			next;
+			mes "[Numkasaigargand]";
+			mes "Take care of the hatchery.";
+			next;
+			mes "[Kljainamogand]";
+			mes "I was supposed to wait on Eri Ligand when he came here, but Sarekh Gand sent him here after biting his tail.";
+			mes "He said he would eat you if he came any closer.";
+			next;
+			mes "[Jakdagumigand]";
+			mes "Clean up.";
+			next;
+			mes "[Onnaecheramelgand]";
+			mes "Manage the warehouse.";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "...";
+			next;
+			if (select( "I'll search something to do", "I'll search later" ) == 2) {
+				mes "Now I have to finish my work.";
+				close;
+			}
+			mes "[" + strcharinfo(0) + "]";
+			mes "I'll search something to do...";
+			mes "Wait for now.";
+			npctalk "Nalshioramigand: Yes, priest!", "", bc_self;
+			npctalk "Numkasaigargand: Yes, priest!", "ep20_jor_sanct_264_160", bc_self;
+			npctalk "Onnaecheramelgand: Yes, priest!", "ep20_jor_sanct_266_155", bc_self;
+			npctalk "Jakdagumigand: Yes! Priest!", "ep20_jor_sanct_268_160", bc_self;
+			npctalk "Kljainamogand: Got it, priest!", "ep20_jor_sanct_267_161", bc_self;
+			setquest 8846;
+			next;
+			mes "^0000FFWe have decided to improve the treatment of the restless middle-class Rgans who want to work.^000000";
+			mes "^0000FFLet's find a place where simple tasks are needed in the sacred root, the root of the snake god, and call them.^000000";
+			close;
+		}
+		mes "[Narsioramigand]";
+		mes "Do you have any... chores yet...?";
+		next;
+		mes "It doesn't seem like any harm will come to us by helping these Rgans.";
+		mes "Let's find something to do in moderation.";
+		close;
+	}
+	// daily
+	switch( checkquest(8852,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[Narsioramigand]";
+		mes "I worked hard today...";
+		mes "I'll work hard tomorrow too...";
+		close;
+	case 2:
+		erasequest 8852;
+		break;
+	}
+	mes "Today, as well, there are middle-class Rgans standing around and fidgeting.";
+	next;
+	if (select( "Speak", "Ignore" ) == 2) {
+		mes "I'm busy right now.";
+		close;
+	}
+	mes "[" + strcharinfo(0) + "]";
+	mes "What are you doing?";
+	next;
+	mes "[Narsioramigand]";
+	mes "!";
+	mes "It's a priest!";
+	npctalk "Numkasaigargand: Priest!", "ep20_jor_sanct_264_160", bc_self;
+	npctalk "Onnaecheramelgand: The priest is here!", "ep20_jor_sanct_266_155", bc_self;
+	npctalk "Jakdagumigand: Priest!", "ep20_jor_sanct_268_160", bc_self;
+	next;
+	mes "[Narsioramigand]";
+	mes "Give me something to do...";
+	mes "We... have to work";
+	mes "I have nothing to do.";
+	npctalk "Onnaecheramelgand: I'm nervous...", "ep20_jor_sanct_266_155", bc_self;
+	next;
+	if (select( "I'll search something to do", "I'll search later" ) == 2) {
+		mes "Now I have to finish my work.";
+		close;
+	}
+	mes "[" + strcharinfo(0) + "]";
+	mes "I'll search something to do...";
+	mes "Wait for now.";
+	npctalk "Nalshioramigand: Yes, priest!", "", bc_self;
+	npctalk "Numkasaigargand: Yes, priest!", "ep20_jor_sanct_264_160", bc_self;
+	npctalk "Onnaecheramelgand: Yes, priest!", "ep20_jor_sanct_266_155", bc_self;
+	npctalk "Jakdagumigand: Yes! Priest!", "ep20_jor_sanct_268_160", bc_self;
+	npctalk "Kljainamogand: Got it, priest!", "ep20_jor_sanct_267_161", bc_self;
+	if (isbegin_quest(8853) == 0)
+		setquest 8853;
+	next;
+	mes "^0000FFWe have decided to improve the treatment of the restless middle-class Rgans who want to work.^000000";
+	mes "^0000FFLet's find a place where simple tasks are needed in the sacred root, the root of the snake god, and call them.^000000";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep20_main == 26 && isbegin_quest(8846) == 0" );
+
+	// daily
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep20_main > 26 && checkquest(8852,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep20_main > 26 && checkquest(8852,PLAYTIME) == -1 && isbegin_quest(8853) == 0" );
+	end;
+}
+
+
+jor_sanct,48,159,3	script	Puddle#1-1	HIDDEN_NPC,{
+	if (checkweight(1201,1) == 0) {
+		mes "I'm not sure what it's for, but it's a well-cleaned tower.";
+		close;
+	}
+	if (isbegin_quest(8846) == 1)	// first time
+		.@quest_type = 1;
+	else if (isbegin_quest(8853) == 1)	// daily
+		.@quest_type = 2;
+
+	if (.@quest_type > 0) {
+		if (isbegin_quest(8847) > 0)
+			end;	// note: no text
+		if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+			mes "You mustn't call Intermediate Rgan in this state.";
+			close;
+		}
+		if (.@quest_type == 1) {	// first time
+			mes "It's a poorly maintained puddle.";
+			next;
+		}
+		else {	// daily
+			mes "It's a pool of water that will never be completely clean, but needs cleaning.";
+			next;
+		}
+		mes "Should I call Narsioramigand?";
+		next;
+		if (select( "Call", "Maybe there's more to do" ) == 2) {
+			mes "It may be trivial to satisfy Narsioramigand.";
+			close;
+		}
+		cloakoffnpcself( "ep20_jor_sanct_46_157" );
+		mes "[Narsioramigand]";
+		mes "Priest! You gave me a job!";
+		mes "Thank you!";
+		mes "I'll make it clean!";
+		next;
+		mes "...I feel proud that I did a good job.";
+		setquest 8847;
+		if (isbegin_quest(8847) == 0 || isbegin_quest(8848) == 0 || isbegin_quest(8849) == 0 || isbegin_quest(8850) == 0 || isbegin_quest(8851) == 0) {
+			mes "I have to find the work of the other mid-level Rgans.";
+			close;
+		}
+		if (.@quest_type == 2)	// daily
+			erasequest 8853;
+		else {	// first time
+			completequest 8846;
+			if (isbegin_quest(8841) == 2 && isbegin_quest(8842) == 2 && isbegin_quest(8843) == 2 && isbegin_quest(8846) == 2 && isbegin_quest(8854) == 2) {
+				ep20_main = 27;
+				erasequest 8839;
+				setquest 8840;
+			}
+		}
+		setquest 8852;
+		erasequest 8847;
+		erasequest 8848;
+		erasequest 8849;
+		erasequest 8850;
+		erasequest 8851;
+		getexp2 34152989,0;
+		getexp 0,4283013;
+		// note: no item reward
+		mes "I found a job for all the mid-level Rgans.";
+		close;
+	}
+	mes "Incorruptible stagnant water seems to be isolated from the world.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8846) == 1 && isbegin_quest(8847) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8853) == 1 && isbegin_quest(8847) == 0" );
+	end;
+}
+
+jor_sanct,46,157,3	script	Narsioramigand#2::ep20_jor_sanct_46_157	EP19_RGAN_D,{
+	callfunc( "F_ep20_checkTransform" );
+	mes "[Narsioramigand]";
+	mes "Whew... It's not long...";
+	close;
+}
+
+
+jor_sanct,95,152,3	script	Tower#1-2	HIDDEN_NPC,{
+	if (checkweight(1201,1) == 0) {
+		mes "I'm not sure what it's for, but it's a well-cleaned tower.";
+		close;
+	}
+	if (isbegin_quest(8846) == 1)	// first time
+		.@quest_type = 1;
+	else if (isbegin_quest(8853) == 1)	// daily
+		.@quest_type = 2;
+
+	if (.@quest_type > 0) {
+		if (isbegin_quest(8848) > 0)
+			end;	// note: no text
+		if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+			mes "You mustn't call Intermediate Rgan in this state.";
+			close;
+		}
+		if (.@quest_type == 1) {	// first time
+			mes "A fairly dusty tower.";
+			next;
+		}
+		else {	// daily
+			mes "It's a well-cleaned tower.";
+			next;
+			mes "It's a well-cleaned tower, but...";
+		}
+		mes "Should I call Numkasaigargand?";
+		next;
+		if (select( "Call", "Maybe there's more to do" ) == 2) {
+			mes "This may be trivial to satisfy Numkasaigargand";
+			close;
+		}
+		cloakoffnpcself( "ep20_jor_sanct_90_153" );
+		mes "[Numkasaigargand]";
+		mes "Priest! You gave me a job!";
+		mes "Thank you!";
+		next;
+		mes "...I feel proud that I did a good job.";
+		setquest 8848;
+		if (isbegin_quest(8847) == 0 || isbegin_quest(8848) == 0 || isbegin_quest(8849) == 0 || isbegin_quest(8850) == 0 || isbegin_quest(8851) == 0) {
+			mes "I'll have to find work for other mid-level Rgans.";
+			close;
+		}
+		if (.@quest_type == 2)	// daily
+			erasequest 8853;
+		else {	// first time
+			completequest 8846;
+			if (isbegin_quest(8841) == 2 && isbegin_quest(8842) == 2 && isbegin_quest(8843) == 2 && isbegin_quest(8846) == 2 && isbegin_quest(8854) == 2) {
+				ep20_main = 27;
+				erasequest 8839;
+				setquest 8840;
+			}
+		}
+		setquest 8852;
+		erasequest 8847;
+		erasequest 8848;
+		erasequest 8849;
+		erasequest 8850;
+		erasequest 8851;
+		getexp2 34152989,0;
+		getexp 0,4283013;
+		// note: no item reward
+		mes "I found a job for all the mid-level Rgans.";
+		close;
+	}
+	mes "I'm not sure what it's for, but it's a well-cleaned tower.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8846) == 1 && isbegin_quest(8848) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8853) == 1 && isbegin_quest(8848) == 0" );
+	end;
+}
+
+jor_sanct,90,153,3	script(CLOAKED)	Numkasaigargand#2::ep20_jor_sanct_90_153	EP19_RGAN_D,{
+	callfunc( "F_ep20_checkTransform" );
+	mes "[Numkasaigargand]";
+	mes "After, after...";
+	close;
+}
+
+
+jor_safty2,195,355,3	script	Dump#1-3	HIDDEN_NPC,{
+	if (checkweight(1201,1) == 0) {
+		mes "All sorts of things thrown around in a jumbled mess prove that those who just piled them up gave up on tidying up...";
+		close;
+	}
+	if (isbegin_quest(8846) == 1)	// first time
+		.@quest_type = 1;
+	else if (isbegin_quest(8853) == 1)	// daily
+		.@quest_type = 2;
+
+	if (.@quest_type > 0) {
+		if (isbegin_quest(8849) > 0)
+			end;	// note: no text
+		if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+			mes "You mustn't call Intermediate Rgan in this state.";
+			close;
+		}
+		if (.@quest_type == 1) {	// first time
+			mes "It's a moderately messy dump.";
+			next;
+		}
+		else {	// daily
+			mes "It's been cleaned up a bit, but it's still a dump.";
+			next;
+		}
+		mes "Should I call Onnaecheramelgand?";
+		next;
+		if (select( "Call", "Maybe there's more to do" ) == 2) {
+			mes "It may be trivial to satisfy Onnaecheramelgand.";
+			close;
+		}
+		cloakoffnpcself( "ep20_jor_safty2_191_358" );
+		mes "[Onnaecheramelgand]";
+		mes "Priest! You gave me a job!";
+		mes "Thank you!";
+		next;
+		mes "...I feel proud that I did a good job.";
+		setquest 8849;
+		if (isbegin_quest(8847) == 0 || isbegin_quest(8848) == 0 || isbegin_quest(8849) == 0 || isbegin_quest(8850) == 0 || isbegin_quest(8851) == 0) {
+			mes "I'll have to find work for other mid-level Rgans.";
+			close;
+		}
+		if (.@quest_type == 2)	// daily
+			erasequest 8853;
+		else {	// first time
+			completequest 8846;
+			if (isbegin_quest(8841) == 2 && isbegin_quest(8842) == 2 && isbegin_quest(8843) == 2 && isbegin_quest(8846) == 2 && isbegin_quest(8854) == 2) {
+				ep20_main = 27;
+				erasequest 8839;
+				setquest 8840;
+			}
+		}
+		setquest 8852;
+		erasequest 8847;
+		erasequest 8848;
+		erasequest 8849;
+		erasequest 8850;
+		erasequest 8851;
+		getexp2 34152989,0;
+		getexp 0,4283013;
+		// note: no item reward
+		mes "I found a job for all the mid-level Rgans.";
+		close;
+	}
+	mes "It's been cleaned up a bit, but it's still a dump.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8846) == 1 && isbegin_quest(8849) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8853) == 1 && isbegin_quest(8849) == 0" );
+	end;
+}
+
+jor_safty2,191,358,5	script(CLOAKED)	Onnaecheramelgand#2::ep20_jor_safty2_191_358	EP19_RGAN_D,{
+	mes "[Onnaecheramelgand]";
+	mes "Zeroth, zeroth...";
+	close;
+}
+
+
+jor_safty2,303,349,3	script	Mountain of Junk#1-4	HIDDEN_NPC,{
+	if (checkweight(1201,1) == 0) {
+		mes "All sorts of things thrown around in a jumbled mess prove that those who just piled them up gave up on tidying up...";
+		close;
+	}
+	if (isbegin_quest(8846) == 1)	// first time
+		.@quest_type = 1;
+	else if (isbegin_quest(8853) == 1)	// daily
+		.@quest_type = 2;
+	if (.@quest_type > 0) {
+		if (isbegin_quest(8850) > 0)
+			end;	// note: no text
+		if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+			mes "You mustn't call Intermediate Rgan in this state.";
+			close;
+		}
+		if (.@quest_type == 1) {	// first time
+			mes "A mountain of clutter is piled up.";
+			next;
+		}
+		else {	// daily
+			mes "A mountain of clutter is piled up.";
+			next;
+		}
+		mes "Should I call Jakdagumigand?";
+		next;
+		if (select( "Call", "Maybe there's more to do" ) == 2) {
+			mes "It may be a trivial thing to satisfy Gumigand.";
+			close;
+		}
+		cloakoffnpcself( "ep20_jor_safty2_306_349" );
+		mes "[Jakdagumigand]";
+		mes "Priest! You gave me a job!";
+		mes "Thank you!";
+		next;
+		mes "...I feel proud that I did a good job.";
+		setquest 8850;
+		if (isbegin_quest(8847) == 0 || isbegin_quest(8848) == 0 || isbegin_quest(8849) == 0 || isbegin_quest(8850) == 0 || isbegin_quest(8851) == 0) {
+			mes "I'll have to find work for other mid-level Rgans.";
+			close;
+		}
+		if (.@quest_type == 2)	// daily
+			erasequest 8853;
+		else {	// first time
+			completequest 8846;
+			if (isbegin_quest(8841) == 2 && isbegin_quest(8842) == 2 && isbegin_quest(8843) == 2 && isbegin_quest(8846) == 2 && isbegin_quest(8854) == 2) {
+				ep20_main = 27;
+				erasequest 8839;
+				setquest 8840;
+			}
+		}
+		setquest 8852;
+		erasequest 8847;
+		erasequest 8848;
+		erasequest 8849;
+		erasequest 8850;
+		erasequest 8851;
+		getexp2 34152989,0;
+		getexp 0,4283013;
+		// note: no item reward
+		mes "I found a job for all the mid-level Rgans.";
+		close;
+	}
+	mes "It seems to be a place where junk things are not currently used.";
+	mes "Still nothing useful.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8846) == 1 && isbegin_quest(8850) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8853) == 1 && isbegin_quest(8850) == 0" );
+	end;
+}
+
+jor_safty2,306,349,3	script(CLOAKED)	Jakdagumigand#2::ep20_jor_safty2_306_349	EP19_RGAN_D,{
+	mes "[Jakdagumigand]";
+	mes "Zeroth, zeroth...";
+	close;
+}
+
+
+jor_safty2,318,254,3	script	Warehouse#1-5	HIDDEN_NPC,{
+	if (checkweight(1201,1) == 0) {
+		mes "All sorts of things thrown around in a jumbled mess prove that those who just piled them up gave up on tidying up...";
+		close;
+	}
+	if (isbegin_quest(8846) == 1)	// first time
+		.@quest_type = 1;
+	else if (isbegin_quest(8853) == 1)	// daily
+		.@quest_type = 2;
+
+	if (.@quest_type > 0) {
+		if (isbegin_quest(8851) > 0)
+			end;	// note: no text
+		if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+			mes "You mustn't call Intermediate Rgan in this state.";
+			close;
+		}
+		if (.@quest_type == 1) {	// first time
+			mes "It's a warehouse where you can't find anything useful.";
+			next;
+		}
+		else {	// daily
+			mes "It's a warehouse with nothing useful.";
+			next;
+		}
+		mes "Should I call Kljainamogand?";
+		next;
+		if (select( "Call", "Maybe there's more to do" ) == 2) {
+			mes "This may be trivial to satisfy Kljainamogand.";
+			close;
+		}
+		cloakoffnpcself( "ep20_jor_safty2_314_254" );
+		mes "[Kljainamogand]";
+		mes "Priest! You gave me a job!";
+		mes "Thank you!";
+		next;
+		mes "...I feel proud that I did a good job.";
+		setquest 8851;
+		if (isbegin_quest(8847) == 0 || isbegin_quest(8848) == 0 || isbegin_quest(8849) == 0 || isbegin_quest(8850) == 0 || isbegin_quest(8851) == 0) {
+			mes "I'll have to find work for other mid-level Rgans.";
+			close;
+		}
+		if (.@quest_type == 2)	// daily
+			erasequest 8853;
+		else {	// first time
+			completequest 8846;
+			if (isbegin_quest(8841) == 2 && isbegin_quest(8842) == 2 && isbegin_quest(8843) == 2 && isbegin_quest(8846) == 2 && isbegin_quest(8854) == 2) {
+				ep20_main = 27;
+				erasequest 8839;
+				setquest 8840;
+			}
+		}
+		setquest 8852;
+		erasequest 8847;
+		erasequest 8848;
+		erasequest 8849;
+		erasequest 8850;
+		erasequest 8851;
+		getexp2 34152989,0;
+		getexp 0,4283013;
+		// note: no item reward
+		mes "I found a job for all the mid-level Rgans.";
+		close;
+	}
+	mes "All sorts of things thrown around in a jumbled mess prove that those who just piled them up gave up on tidying up...";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8846) == 1 && isbegin_quest(8851) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8853) == 1 && isbegin_quest(8851) == 0" );
+	end;
+}
+
+jor_safty2,314,254,5	script(CLOAKED)	Kljainamogand#2::ep20_jor_safty2_314_254	EP19_RGAN_D,{
+	mes "[Kljainamogand]";
+	mes "Zeroth, zeroth...";
+	close;
+}
+
+
+
+// Daily quest 17710: "Where the maze ends"
+// Part of Main quest - Step 29, 30
+// (unlocked when ep20_main = 36, main quest "Hideout Report")
+jor_sanct,22,283,5	script	Supervisor#20ms30	4_EP19_RGAN_SR1,5,5,{
+	if (checkweight(1001217,10) == 0) {
+		mes "Conversation cannot proceed because you have too many items.";
+		mes "Please clean up your items and try again.";
+		close;
+	}
+	callfunc( "F_ep20_checkTransform" );
+	if (ep20_main < 28) {
+		mes "[Supervisor]";
+		mes "When will you come... would you like to see me today?";
+		mes "That would be nice. How do I get Lasgand's attention?";
+		close;
+	}
+	if (ep20_main == 28) {
+		mes "[Supervisor]";
+		mes "What the hell!!";
+		mes "Why is there a priest I've never seen before!";
+		npctalk "Human? Are you human?", "", bc_self;
+		next;
+		emotion ET_THINK, playerattached();
+		select( "Oh, that's Sarekgandh..." );
+		mes "[Supervisor]";
+		mes "Sarekgandh? What are you talking about?";
+		next;
+		specialeffect EF_HIT1, AREA, "ep20_jor_sanct_26_283";
+		cloakoffnpcself( "ep20_jor_sanct_26_283" );
+		mes "[Sarekgandh]";
+		mes "It's me. What's the fuss?";
+		next;
+		mes "[Supervisor]";
+		mes "Sarekgandh. This priest mentions your name.";
+		next;
+		mes "[Sarekgandh]";
+		mes "Yes, yes, I brought them.";
+		npctalk "Is that true?", "", bc_self;
+		next;
+		mes "[Supervisor]";
+		mes "Yes, it's you! My senses are talking.";
+		mes "Right? Hurry up and say yes. I'll make it right even if it's not.";
+		next;
+		select( "What do you mean?" );
+		mes "[Supervisor]";
+		mes "As a cleaning crew! Right, Sarekgandh?";
+		next;
+		mes "[Sarekgandh]";
+		mes "You'd better be careful with your behavior. Lasgand is coming and going. If it see you like that, you'll be kicked out.";
+		npctalk "It would be good to have a general manners education.", "ep20_jor_sanct_26_283", bc_self;
+		next;
+		mes "[Supervisor]";
+		mes "It can't be. There's no way it can kick me out, who cleans harder than anyone else.";
+		mes "Are you the only one who leaves me alone while saying that?";
+		next;
+		mes "[Supervisor]";
+		mes "Why did you bring the priest anyway?";
+		mes "Besides, you're new to it? Are there any bishops inside?";
+		npctalk "Can't be? The surplus manpower I've seen is enough?", "", bc_self;
+		next;
+		mes "[Sarekgandh]";
+		mes "This is a newcomer. The road for Lasgand should be clean and noise-free.";
+		next;
+		mes "[Supervisor]";
+		mes "Right, I didn't have enough hands, but it worked.";
+		mes "Thank you so much for this.";
+		next;
+		mes "[Supervisor]";
+		mes "Anyway, this priest is trustworthy, right? I've heard humans mess around with them before.";
+		next;
+		mes "[Sarekgandh]";
+		mes "If the shaman has passed through the watched roots, at least it means they're not human.";
+		mes "These men were brought by Nadyagand.";
+		next;
+		mes "[Supervisor]";
+		mes "These 'those'? Not one? That's great. Send them all this way. I'll put them all to good use.";
+		npctalk "This is the most pleasant sound I've heard today.", "", bc_self;
+		emotion ET_SMILE;
+		next;
+		mes "[Sarekgandh]";
+		mes "Speak politely-";
+		next;
+		mes "[Supervisor]";
+		mes "Ah, that's all right. We've safely handed over the manpower, so you can go do your business now.";
+		mes "You're busy, don't you live with busy?";
+		next;
+		mes "[Sarekgandh]";
+		mes "Hmm- then, I'll trust you.";
+		mes "This should be done so as not to offend Lasgand. I'm on my way to pick you up right now, so take care of it as quickly as possible.";
+		next;
+		mes "[Supervisor]";
+		mes "Oh, that's it. Trust me and leave it to me. Have you ever seen me do nothing? I'll grind my body, so go ahead.";
+		next;
+		select( "I'll accompany you!" );
+		mes "[Sarekgandh]";
+		mes "Don't you have work to do here?";
+		mes "Keep in mind that I'm watching you.";
+		next;
+		specialeffect EF_HIT1, AREA, "ep20_jor_sanct_26_283";
+		cloakonnpcself( "ep20_jor_sanct_26_283" );
+		mes "[Supervisor]";
+		mes "Okay, now there are only two of us left. The priest will be the first to do this service, so I'll tell you more.";
+		next;
+		mes "[Supervisor]";
+		mes "That nasty parasite. Catch that.";
+		next;
+		select( "Is it a parasite?" );
+		mes "[Supervisor]";
+		mes "If you look closely or at first glance, it looks unpleasant, doesn't it?";
+		mes "They've been called ^0000cdJormungand Guardian^000000 since a long time ago, but I don't know who gave them that name.";
+		emotion ET_FRET;
+		next;
+		mes "[Supervisor]";
+		mes "Wherever you look at that, it's a guardian, it's a parasite.";
+		mes "The person who named it first should have been deprived of naming rights after that...";
+		mes "Doesn't the priest see it that way?";
+		npctalk "Parasite is perfect.", "", bc_self;
+		next;
+		select( "Yes" );
+		mes "[Supervisor]";
+		mes "Isn't it? It's just a parasite sucking nutrients from here.";
+		next;
+		mes "[Supervisor]";
+		mes "Oh! I don't have time to be like this.";
+		mes "Soon ^0000cdLord Lasgand will pass by here^000000, so we need to sort them out in advance.";
+		mes "It's our job to make the way back comfortable.";
+		next;
+		select( "Where are you coming from?" );
+		mes "[Supervisor]";
+		mes "Isn't that something we need to know about?";
+		npctalk "We just have to clean up hard.", "", bc_self;
+		next;
+		mes "[Supervisor]";
+		mes "Recently, he often brings humans back and forth, and he's very uncomfortable as if things aren't going well.";
+		mes "So, when he passes this place, we can just clean up without disturbing anything.only.";
+		next;
+		mes "[Supervisor]";
+		mes "So, just get rid of ^0000cd3 Jormungand Guardians^000000 wandering around here. Apparently, that should be enough.";
+		ep20_main = 29;
+		erasequest 17702;
+		setquest 17703;
+		close;
+	}
+	if (ep20_main == 29) {
+		switch( checkquest(17703,HUNTING) ) {
+		case -1:
+			end;
+		case 0:
+		case 1:
+			mes "[Supervisor]";
+			mes "Are you done?";
+			next;
+			mes "[Supervisor]";
+			mes "Aww, what a surprise! Isn't that right! Hey, he's walking around there!";
+			mes "Go ahead and kill 3 ^0000cdJormungandr Guardians^000000!";
+			close;
+		case 2:
+			mes "[Supervisor]";
+			mes "Are you done?";
+			next;
+			select( "Yes, I've done it." );
+			mes "[" + strcharinfo(0) + "]";
+			mes "But why does it attack us? ^0000cdIs there something important here^000000?";
+			mes "Seems to attack anyone who approaches.";
+			next;
+			mes "[Supervisor]";
+			mes "Ah~ why?";
+			mes "I don't know about that.";
+			npctalk "Who knows.", "", bc_self;
+			emotion ET_SWEAT, playerattached();
+			next;
+			mes "[Supervisor]";
+			mes "Isn't it because he's a very stupid guy who attacks everyone who sets foot here?";
+			mes "I don't even want to know what they think.";
+			next;
+			mes "[Supervisor]";
+			mes "Probably, it's close to the sanctuary where Lord Lasgand first woke up, so it's a place rich in magic, so they flocked to it.";
+			next;
+			mes "[Supervisor]";
+			mes "^0000cdIt may be to protect something^000000, but this is already our Rgan's territory.";
+			mes "Even if you get rid of them, they keep appearing and they're very troublesome.";
+			next;
+			specialeffect EF_HIT1, AREA, "ep20_jor_sanct_26_282";
+			specialeffect EF_HIT1, AREA, "ep20_jor_sanct_25_280";
+			cloakoffnpcself( "ep20_jor_sanct_26_282" );
+			cloakoffnpcself( "ep20_jor_sanct_25_280" );
+			mes "[Supervisor]";
+			mes "What kind of people are you!";
+			next;
+			mes "[Lehar]";
+			mes "Uh... Lord Sarekgandh told me to help clean this place...?";
+			next;
+			mes "[Supervisor]";
+			mes "Sarekgandh? New hires? So you guys are the 'those'?";
+			mes "It's nice to hear. There are a lot of new priests? What's wrong?";
+			emotion ET_DELIGHT;
+			next;
+			mes "[Miriam]";
+			mes "Can I clean it up?";
+			next;
+			mes "[Supervisor]";
+			mes "Yes. This priest here has done everything for this area, but there is no news from the other side.";
+			mes "Leave it to the bishops, and you're a senior who's worse than a newcomer.";
+			npctalk "Is this a secret?", "", bc_self;
+			next;
+			mes "[Supervisor]";
+			mes "You scatter and help others clearing up.";
+			mes "Because we still have some time until Lasgand comes back.";
+			next;
+			mes "[Supervisor]";
+			mes "You seem to be taking a long time today. You must have a lot to do as the time is near.";
+			mes "Thanks for that. Buying me time to clean up.";
+			mes "You sleep there.";
+			next;
+			select( "Yes, me?" );
+			mes "[Supervisor]";
+			mes "Okay. I'll have to learn geography to clean every nook and cranny of this place, so take these priests to the workhouse.";
+			mes "You will be the leader of these priests from now on.";
+			npctalk "How is it? How does it feel to be promoted to captain?", "", bc_self;
+			next;
+			mes "[Supervisor]";
+			mes "Work hard. When that glorious day comes, you might even reserve a seat for yourself.";
+			mes "Well done!";
+			next;
+			mes "[Lehar]";
+			mes "<FONT SIZE = 10>Where can we go?</FONT>";
+			next;
+			select( "Lasgand's right hand..." );
+			mes "[Miriam]";
+			mes "<FONT SIZE = 10>He's going to meet Lasgand? Then we'll have to track him down.</FONT>";
+			npctalk "Hurry up!", "ep20_jor_sanct_26_282", bc_self;
+			ep20_main = 30;
+			erasequest 17703;
+			setquest 17704;
+			getitem 1001217,10;	// Ep20_Cat_Whiskers
+			getexp2 136611959,0;
+			getexp 0,22271670;
+			add_reputation_points( REPU_EP20, 60 );
+			close2;
+			cloakonnpcself( "ep20_jor_sanct_26_282" );
+			cloakonnpcself( "ep20_jor_sanct_25_280" );
+			end;
+		}
+		end;
+	}
+	if (ep20_main < 35) {
+		mes "[Supervisor]";
+		mes "You'll have to clean it up so we don't offend Lasgand!";
+		close;
+	}
+	switch( checkquest(17711,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[Supervisor]";
+		mes "No, why are you here already?";
+		mes "You don't have to clean up now.";
+		next;
+		mes "[Supervisor]";
+		mes "Go and help the other bishops.";
+		mes "Oh, but don't forget to clean up. Come back after dawn.";
+		close;
+	case 2:
+		erasequest 17711;
+		break;
+	}
+	switch( checkquest(17710,HUNTING) ) {
+	case -1:
+		mes "[Supervisor]";
+		mes "You can't run away...";
+		next;
+		select( "Hello" );
+		mes "[Supervisor]";
+		mes "It's you. You've arrived at the right time.";
+		mes "Looks like a human infiltrated the other side and caused a stir.";
+		next;
+		mes "[Supervisor]";
+		mes "I heard that Lasgand isn't feeling well these days.";
+		next;
+		mes "[Supervisor]";
+		mes "So I have to clean even harder.";
+		next;
+		mes "[Supervisor]";
+		mes "It would be nice to close it like before. You don't order that...";
+		mes "Lasgand must have an idea.";
+		next;
+		mes "[Supervisor]";
+		mes "Once again, get rid of those parasites, ^0000cdJormungandr Guardians^000000, 10 of each color.";
+		mes "If you don't see them, you won't have any wishes.";
+		next;
+		if (select( "I'll be back soon.", "I want to rest today." ) == 2) {
+			mes "[Supervisor]";
+			mes "What? Taking a break?";
+			mes "Hmm... yes, well. But it's better than not coming without a word. Take a good rest today and come back next time.";
+			close;
+		}
+		mes "[Supervisor]";
+		mes "Okay. Come on.";
+		setquest 17710;
+		close;
+	case 0:
+	case 1:
+		mes "[Supervisor]";
+		mes "Is cleaning up yet?";
+		mes "Is it hard?";
+		next;
+		mes "[Supervisor]";
+		mes "Work hard with the mindset of training.";
+		mes "If the time of resurrection draws near, will not even a priest be able to work for him?";
+		next;
+		mes "[Supervisor]";
+		mes "Besides, 20 ^0000cdJormungandr Guardians^000000 isn't many.";
+		mes "Hurry up, Lasgand will be back soon.";
+		close;
+	case 2:
+		mes "[Supervisor]";
+		mes "You came back unscathed this time too.";
+		next;
+		mes "[Supervisor]";
+		mes "Thanks to the priest's diligent service, it has become very clean.";
+		mes "It feels like my insides have been pierced from below!!!";
+		next;
+		mes "[Supervisor]";
+		mes "Okay then, take a break for today and come back when it's time.";
+		mes "When the time of resurrection draws near, I will remember you, priest. Throw some of these away on the way.";
+		erasequest 17710;
+		setquest 17711;
+		getitem 1001217,3;	// Ep20_Cat_Whiskers
+		if (get_reputation_points( REPU_EP20 ) >= 3000)
+			getitem 1001217,1;	// Ep20_Cat_Whiskers
+		getexp 16589920,11586300;
+		// note: no reputation
+		close;
+	}
+	end;
+
+OnTouch:
+	if (ep20_main == 28)
+		npctalk "Is it you? Is it you?", "", bc_self;
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17702) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(17703,HUNTING) == 2" );
+
+	// daily
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(17711,PLAYTIME) == 2 && ep20_main >= 36" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(17709) == 2 && checkquest(17710,HUNTING) == -1 && checkquest(17711,PLAYTIME) == -1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(17710,HUNTING) == 2" );
+	end;
+}
+
+
+
+// Daily quest "Uprooting Ragan"
+// Part of the Main quest - Step 41
+// (daily quest unlocked after the final of the main quest : "He Who Never Dies")
+jor_twice,235,111,3	script	Cororo#e20pn03	4_EP19_IWIN,{
+	if (ep20_main < 40)
+		end;	// note: no text
+	if (ep20_main == 40) {
+		cutin "ep19_iwin03.png",2;
+		mes "[Cororo]";
+		mes "Others left first. Let's walk down the right path!";
+		ep20_main = 41;
+		erasequest 23103;
+		setquest 23104;
+		close3;
+	}
+	if (ep20_main < 46) {
+		cutin "ep19_iwin03.png",2;
+		mes "[Cororo]";
+		mes "Are you done here? Are you going back to the ice castle now?";
+		next;
+		if (select( "Going back", "Not going" ) == 2) {
+			cutin "ep19_iwin03.png",2;
+			mes "[Cororo]";
+			mes "Aaaaaa, bored, bored...";
+			close3;
+		}
+		mes "[Cororo]";
+		mes "Hold your feathers tight, be careful as the water is very cold!";
+		close2;
+		cutin "",255;
+		warp "icecastle",141,208;
+		end;
+	}
+	cutin "ep19_iwin03.png",2;
+	mes "[Cororo]";
+	mes "" + strcharinfo(0) + "! You look busy today. Leon asked me to, so I decided to help move here especially for the time being. Would you like to go to the drift ice area?";
+	next;
+	switch( select( "Shall we punish Rgan?", "Go to the ice castle.", "I just talked to you." ) ) {
+	case 1:
+		if (checkweight(1001217,3) == 0) {
+			mes "Couldn't proceed with the conversation because you have too many items in your possession.";
+			mes "Please clean up your items and try again.";
+			close3;
+		}
+		switch( checkquest(23110,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[Cororo]";
+			mes "Rgan? Now?";
+			mes "I'd like to say I won't refuse if you step forward, but...";
+			next;
+			mes "[Cororo]";
+			mes "Rgans are also smart, so if you catch too many at once, they hide and it's annoying.";
+			mes "Enough for today. Come back tomorrow!";
+			close3;
+		case 2:
+			erasequest 23110;
+			break;
+		}
+		switch( checkquest(23111,HUNTING) ) {
+		case -1:
+			mes "[Cororo]";
+			mes "Adventurer, you've finally caught Lasgand! I'm standing here in a cool way, but I'm really scared.";
+			mes "No more, no less than 15 ^4d4dff" + getmonsterinfo("EP20_JORGAN_WARLOCK", MOB_NAME) + "^000000, are you catching them?";
+			next;
+			if (select( "Accept", "Reject" ) == 2) {
+				mes "[Cororo]";
+				mes "...Really?";
+				mes "You said you'd help first! Why do you make me expect Iwin? Cruel man...";
+				close3;
+			}
+			mes "[Cororo]";
+			mes "Whew, I believed you. Take care of your body! So I can help you tomorrow too!";
+			setquest 23111;
+			close3;
+		case 0:
+		case 1:
+			mes "[Cororo]";
+			mes "At first I thought it was a simple ignorant method, but it worked quite well?";
+			next;
+			mes "[Cororo]";
+			mes "So don't get tired and help me for a long time. 15 ^4d4dff" + getmonsterinfo("EP20_JORGAN_WARLOCK", MOB_NAME) + "^000000!";
+			close3;
+		case 2:
+			mes "[Cororo]";
+			mes "Oh! You're back. Just looking here, the Rgans have decreased a lot...";
+			next;
+			mes "[Cororo]";
+			mes "Yeah? How do you know just by looking? Hehehe. Have I been here for a day or two? If you look at me, I'm pretending.";
+			next;
+			mes "[Cororo]";
+			mes "If adventurers visit a few more times, you'll feel the difference. In that sense, one more time tomorrow?";
+			erasequest 23111;
+			setquest 23110;
+			getitem 1001217,3;	// Ep20_Cat_Whiskers
+			if (get_reputation_points( REPU_EP20 ) >= 3000)
+				getitem 1001217,1;	// Ep20_Cat_Whiskers
+			getexp 13548720,9484110;
+			add_reputation_points( REPU_EP20, 5 );
+			close3;
+		}
+		end;
+	case 2:
+		mes "[Cororo]";
+		mes "Hold the feather tight, I don't know if it slips!";
+		close2;
+		cutin "",255;
+		warp "icecastle",141,208;
+		end;
+	case 3:
+		cutin "ep19_iwin05.png",2;
+		mes "[Cororo]";
+		mes "Are you free? If you have time, you can bring me some snacks~";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : That's it!", bc_self;
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(23103) == 1" );
+
+	// daily quest
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep20_main >= 100 && checkquest(23110,PLAYTIME) == -1 && checkquest(23111,HUNTING) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep20_main >= 100 && checkquest(23110,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(23111,HUNTING) == 2" );
+	end;
+}
+
+
+
+// Daily quest: Collect soft delicacies
+// (instance Nest of Twigs - ep20_main = 44 - unlock the quest, main quest "Over the Iceberg, Over the Ice Sea")
+icas_in,243,66,5	script	Toryoryo#ep20in	4_EP19_IWIN,{
+	if (checkweight(1001217,3) == 0) {
+		mes "- You cannot proceed with the quest because you have too many items. -";
+		close;
+	}
+	if (ep20_main < 44) {
+		mes "[Toryoryo]";
+		mes "Human, I have no hair, but I have a lot of trouble.";
+		mes "I'd like to ask you something when you're a little more trustworthy.";
+		close;
+	}
+	if (isbegin_quest(8855) < 2) {
+		switch( checkquest(8855,HUNTING) ) {
+		case -1:
+			mes "[Toryoryo]";
+			mes "Nice to meet you, human.";
+			mes "As for me...";
+			next;
+			mes "[Horyara]";
+			mes "Our cousin!";
+			npctalk "Horyara: He's my father's brother's son!", "ep19_icas_in_235_57", bc_self;
+			next;
+			mes "[Zoryara]";
+			mes "...that's our cousin";
+			next;
+			mes "[Toryoryo]";
+			mes "...well.";
+			mes "Toryoryo assigned to the daycare center this time.";
+			npctalk "Zoryara: Restaurant. Restaurant.", "ep19_icas_in_241_66", bc_self;
+			next;
+			mes "[Toryoryo]";
+			mes "...This is a fee assigned to the kitchen of the restaurant.";
+			npctalk "Horyara: Kyareuk!", "ep19_icas_in_235_57", bc_self;
+			npctalk "Toralung: Kkurluk!", "ep19_icas_in_232_59", bc_self;
+			next;
+			mes "[Toryoryo]";
+			mes "I'm on patrol outside, but I don't think the aptitude is right for me...";
+			mes "So I'm here to do what I'm good at.";
+			mes "Even so, it's very good at putting kids to bed.";
+			next;
+			mes "[Toryoryo]";
+			mes "By the way... It's a different story, but I heard from Zoryara that you, human, are bartering a lot of things with us.";
+			next;
+			mes "[Toryoryo]";
+			mes "Now that I'm assigned here, I'd like to ask for some good things to seduce kids.";
+			mes "Hunt 20 " + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + " and 20 " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + ".";
+			mes "And you can get them by hunting them";
+			mes "10 " + mesitemlink(1001233) + " and ";
+			mes "10 " + mesitemlink(1001232) + ", I think I'll be fine today.";
+			next;
+			mes "[Toryoryo]";
+			mes "I'm already excluded from patrol because I don't fit the aptitude...";
+			mes "You're much stronger than me, can you help us?";
+			next;
+			if (select( "Go hunting instead", "Comfort" ) == 2) {
+				mes "[Toryoryo]";
+				mes "It happens all the time, but...";
+				mes "Yes, it always happens...";
+				npctalk "Zoryara: Don't stand there and help me!", "ep19_icas_in_241_66", bc_self;
+				npctalk "Toryoryo: Ouch, go, go! Wait a minute!", "", bc_self;
+				close;
+			}
+			mes "[Toryoryo]";
+			mes "Thank you, human!";
+			mes "Hunt 20 " + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + " and 20 " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + ".";
+			mes "And you can get them by hunting them";
+			mes "10 " + mesitemlink(1001233) + " and ";
+			mes "10 " + mesitemlink(1001232) + ", I think I'll be fine today.";
+			setquest 8855;
+			close;
+		case 0:
+		case 1:
+			mes "[Toryoryo]";
+			mes "Hunt 20 " + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + " and 20 " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + ".";
+			mes "And you can get them by hunting them";
+			mes "10 " + mesitemlink(1001233) + " and ";
+			mes "10 " + mesitemlink(1001232) + ", I think I'll be fine today.";
+			close;
+		case 2:
+			if (countitem(1001233) < 10 || countitem(1001232) < 10) {
+				mes "[Toryoryo]";
+				mes "Hunt 20 " + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + " and 20 " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + ".";
+				mes "And you can get them by hunting them";
+				mes "10 " + mesitemlink(1001233) + " and ";
+				mes "10 " + mesitemlink(1001232) + ", I think I'll be fine today.";
+				close;
+			}
+			mes "[Toryoryo]";
+			mes "Thanks, human!";
+			npctalk "Horyara: Thank you, human!", "ep19_icas_in_235_57", bc_self;
+			npctalk "Thanks, human!", "ep19_icas_in_232_59", bc_self;
+			npctalk "Zoryara: Thank you for your help, human!", "ep19_icas_in_241_66", bc_self;
+			delitem 1001232,10;
+			delitem 1001233,10;
+			completequest 8855;
+			setquest 8856;
+			getitem 1001217,3;	// Ep20_Cat_Whiskers
+			getexp 31264560,21832001;
+			add_reputation_points( REPU_EP20, 5 );
+			next;
+			mes "[Toryoryo]";
+			mes "...";
+			mes "Is this the original atmosphere here?";
+			emotion ET_CRY;
+			next;
+			mes "[Toryoryo]";
+			mes "Oh, another human tasted this yesterday and was shocked.";
+			mes "Maybe not compatible with humans. Don't try.";
+			mes "Then I'll ask again tomorrow.";
+			close;
+		}
+		end;
+	}
+	switch( checkquest(8856,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[Toryoryo]";
+		mes "I'm the best at putting the kids to bed.";
+		mes "I finally found a job that suits my aptitude.";
+		close;
+	case 2:
+		erasequest 8856;
+		break;
+	}
+	.@hunting_8857 = checkquest(8857,HUNTING);
+	.@hunting_8858 = checkquest(8858,HUNTING);
+
+	if (.@hunting_8857 == -1 && .@hunting_8858 == -1) {
+		mes "[Toryoryo]";
+		mes "Ha ha ha...";
+		mes "Human, nice to meet you...";
+		next;
+		select( "You're busy too" );
+		mes "[Toryoryo]";
+		mes "Eh, I'm used to it.";
+		mes "...I knew it was physically difficult.";
+		next;
+		mes "[Toryoryo]";
+		mes "Can I ask for another soft fluorescent cell?";
+		next;
+		if (BaseLevel < 230)
+			.@menu$[0] = "Accept.";
+		else {
+			.@menu$[1] = "[215] Salty and Sweet";
+			.@menu$[2] = "[230] Salty, Sweet and Sour";
+		}
+		switch( select( .@menu$[0], .@menu$[1], .@menu$[2], "I'm busy" ) ) {
+		case 1:
+			mes "[Toryoryo]";
+			mes "Hunt 20 " + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + " and 20 " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + ".";
+			mes "And you can get them by hunting them";
+			mes "10 " + mesitemlink(1001233) + " and ";
+			mes "10 " + mesitemlink(1001232) + ", I think I'll be fine today.";
+			npctalk "Horyara: Play until the humans return!", "ep19_icas_in_235_57", bc_self;
+			npctalk "Toralung: Me too!", "ep19_icas_in_232_59", bc_self;
+			setquest 8857;
+			close;
+		case 2:
+			mes "[Toryoryo]";
+			mes "Thank you, human!";
+			mes "Hunt 20 " + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + " and 20 " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + ".";
+			mes "And you can get them by hunting them";
+			mes "10 " + mesitemlink(1001233) + " and ";
+			mes "10 " + mesitemlink(1001232) + ", I think I'll be fine today.";
+			npctalk "Horyara: Play until the humans return!", "ep19_icas_in_235_57", bc_self;
+			npctalk "Toralung: Me too!", "ep19_icas_in_232_59", bc_self;
+			setquest 8857;
+			close;
+		case 3:
+			mes "[Toryoryo]";
+			mes "Thank you, human!";
+			mes "Hunt 20 " + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + " and 20 " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + ".";
+			mes "And you can get them by hunting them";
+			mes "10 " + mesitemlink(1001233) + ",";
+			mes "10 " + mesitemlink(1001232) + " and";
+			mes "10 " + mesitemlink(1001231) + ", I think I'll be fine today.";
+			npctalk "Horyara: Play until the humans return!", "ep19_icas_in_235_57", bc_self;
+			npctalk "Toralung: Me too!", "ep19_icas_in_232_59", bc_self;
+			setquest 8858;
+			close;
+		case 4:
+			mes "[Toryoryo]";
+			mes "It would make parenting a little easier...but not much!";
+			npctalk "Horyara: Not much!", "ep19_icas_in_235_57", bc_self;
+			npctalk "Torarung: Not much!", "ep19_icas_in_232_59", bc_self;
+			close2;
+			emotion ET_CRY;
+			end;
+		}
+		end;
+	}
+	switch( .@hunting_8857 ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[Toryoryo]";
+		mes "Hunt 20 " + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + " and 20 " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + ".";
+		mes "And you can get them by hunting them";
+		mes "10 " + mesitemlink(1001233) + " and ";
+		mes "10 " + mesitemlink(1001232) + ", I think I'll be fine today.";
+		close;
+	case 2:
+		if (countitem(1001233) < 10 || countitem(1001232) < 10) {
+			mes "[Toryoryo]";
+			mes "Hunt 20 " + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + " and 20 " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + ".";
+			mes "And you can get them by hunting them";
+			mes "10 " + mesitemlink(1001233) + " and ";
+			mes "10 " + mesitemlink(1001232) + ", I think I'll be fine today.";
+			close;
+		}
+		mes "[Toryoryo]";
+		mes "Thanks, human!";
+		npctalk "Horyara: Thank you, human!", "ep19_icas_in_235_57", bc_self;
+		npctalk "Thanks, human!", "ep19_icas_in_232_59", bc_self;
+		npctalk "Zoryara: Thank you for your help, human!", "ep19_icas_in_241_66", bc_self;
+		delitem 1001232,10;
+		delitem 1001233,10;
+		erasequest 8857;
+		setquest 8856;
+		getitem 1001217,3;	// Ep20_Cat_Whiskers
+		if (get_reputation_points( REPU_EP20 ) >= 3000)
+			getitem 1001217,1;	// Ep20_Cat_Whiskers
+		getexp 31264560,21832000;
+		add_reputation_points( REPU_EP20, 5 );
+		next;
+		mes "[Toryoryo]";
+		mes "...";
+		mes "Heh heh heh...";
+		emotion ET_CRY;
+		next;
+		mes "[Toryoryo]";
+		mes "Don't worry. I'm used to my new job.";
+		mes "It's not that I didn't interact with my cousins at first, but I'm so happy because I'm with them all day.";
+		mes "Then I'll ask again tomorrow.";
+		close;
+	}
+	switch( .@hunting_8858 ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[Toryoryo]";
+		mes "Hunt 20 " + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + ", 20 " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + " and 20 " + getmonsterinfo("EP20_MELIBE_ICESLUG", MOB_NAME) + ".";
+		mes "And you can get them by hunting them";
+		mes "10 " + mesitemlink(1001233) + ",";
+		mes "10 " + mesitemlink(1001232) + " and";
+		mes "10 " + mesitemlink(1001231) + ", I think I'll be fine today.";
+		close;
+	case 2:
+		if (countitem(1001233) < 10 || countitem(1001232) < 10 || countitem(1001231) < 10) {
+			mes "[Toryoryo]";
+			mes "Hunt 20 " + getmonsterinfo("EP20_ANGEL_ICESLUG", MOB_NAME) + ", 20 " + getmonsterinfo("EP20_RABBIT_ICESLUG", MOB_NAME) + " and 20 " + getmonsterinfo("EP20_MELIBE_ICESLUG", MOB_NAME) + ".";
+			mes "And you can get them by hunting them";
+			mes "10 " + mesitemlink(1001233) + ",";
+			mes "10 " + mesitemlink(1001232) + " and";
+			mes "10 " + mesitemlink(1001231) + ", I think I'll be fine today.";
+			close;
+		}
+		mes "[Toryoryo]";
+		mes "Thanks, human!";
+		npctalk "Horyara: Thank you, human!", "ep19_icas_in_235_57", bc_self;
+		npctalk "Zoryara: Thank you, human!", "", bc_self;
+		npctalk "Toralung: Thank you for your help, human!", "ep19_icas_in_232_59", bc_self;
+		delitem 1001231,10;
+		delitem 1001232,10;
+		delitem 1001233,10;
+		erasequest 8858;
+		setquest 8856;
+		getitem 1001217,3;	// Ep20_Cat_Whiskers
+		if (get_reputation_points( REPU_EP20 ) >= 3000)
+			getitem 1001217,1;	// Ep20_Cat_Whiskers
+		getexp 56052602,39183640;
+		add_reputation_points( REPU_EP20, 5 );
+		next;
+		mes "[Toryoryo]";
+		mes "...";
+		mes "Heh heh heh...";
+		emotion ET_CRY, getnpcid(0,"Cryo charge#ep20in");
+		next;
+		mes "[Toryoryo]";
+		mes "Don't worry. I'm used to my new job.";
+		mes "It's not that I didn't interact with my cousins at first, but I'm so happy because I'm with them all day.";
+		mes "Then I'll ask again tomorrow.";
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_NONE, "ep20_main >= 44 && isbegin_quest(8855) == 0" );
+
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "checkquest(8855,HUNTING) == 2 && countitem(1001233) >= 10 && countitem(1001232) >= 10" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "checkquest(8857,HUNTING) == 2 && countitem(1001233) >= 10 && countitem(1001232) >= 10" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "checkquest(8858,HUNTING) == 2 && countitem(1001233) >= 10 && countitem(1001232) >= 10 && countitem(1001231) >= 10" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(8856,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(8855) == 2 && checkquest(8856,PLAYTIME) == -1 && checkquest(8857,HUNTING) == -1 && checkquest(8858,HUNTING) == -1" );
+	end;
+}
+//-----------------
+
+
+
+// Daily quests A & B : 'Spy search' and 'Intelligence information collection'
+// (unlocked when ep20_main >= 12, main quest "Expert than any Iwin")
+icas_in,104,60,2	script(CLOAKED)	Supplier Gorir#ep20iw::ep20_icas_in_104_60	EP19_NPC_IWIN_SR,{
+	setpcblock PCBLOCK_NPC, true;
+	npctalk "Supplier Gorir: Gorori~ Come out and do some work~ I know you're inside.", "", bc_self;
+	sleep2 1500;
+	npctalk "Supplier Gorir: I can hear you running away. You're not strong enough to run away.", "", bc_self;
+	sleep2 1500;
+	cloakonnpcself( "ep20_icas_in_104_60" );
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<Eagle Patrol>" );
+	end;
+}
+
+icas_in,99,57,6	script(CLOAKED)	Patrol Captain Hororyo#ep20iw::ep20_icas_in_99_57	EP19_NPC_IWIN_SR,{
+	setpcblock PCBLOCK_NPC, true;
+	npctalk "Patrol Captain Hororyo: Hmmmm.. I sneaked a peek to see if you're doing well. I have to go now.", "ep20_icas_in_99_57", bc_self;
+	sleep2 1500;
+	cloakonnpcself( "ep20_icas_in_99_57" );
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<Eagle Patrol>" );
+	end;
+}
+
+icas_in,100,62,4	script	Duck Ryo Mania#ep20iw	EP19_NPC_IWIN_SR,{
+	if (checkweight(1001217,4) == 0) {
+		mes "- You cannot proceed because you have too many items. -";
+		close;
+	}
+	if (ep19_main < 100) {
+		mes "[Duck Ryo Mania]";
+		mes "I'm sorry, but I'm busy. Why don't we go somewhere else to play?";
+		close;
+	}
+	if (ep20_main < 12) {
+		mes "[Duck Ryo Mania]";
+		mes "Are you a rumored adventurer in the castle lately?";
+		next;
+		mes "[Duck Ryo Mania]";
+		mes "You look capable. You'd better not be too mean, though.";
+		next;
+		mes "[Duck Ryo Mania]";
+		mes "Unlike other Iwin, I'm suspicious of adventurers.";
+		close;
+	}
+	if (isbegin_quest(19161) < 2) {
+		if (isbegin_quest(19158) == 1) {	// Step 1 of 4
+			mes "[Duck Ryo Mania]";
+			mes "Are you a rumored adventurer in the castle lately?";
+			next;
+			mes "[Duck Ryo Mania]";
+			mes "You look capable. You'd better not be too mean, though.";
+			next;
+			mes "[Duck Ryo Mania]";
+			mes "Unlike other Iwin, I'm suspicious of adventurers.";
+			next;
+			cloakoffnpcself( "ep20_icas_in_104_60" );
+			sleep2 500;
+			emotion ET_HUK;
+			npctalk "Duck Ryo Mania: Duck Ryo!!", "", bc_self;
+			mes "[Duck Ryo Mania]";
+			mes "Are you here, Supplier? An adventurer just arrived here.";
+			next;
+			mes "[Supplier Gorir]";
+			mes "Adventurer? Oh?! Who is this? " + strcharinfo(0) + ", isn't that an agent? It's been too long since I've seen one.";
+			next;
+			mes "[Duck Ryo Mania]";
+			mes "Yo.. Are you an agent? Were you an agent? I didn't know how to meet you, and there were many examples.";
+			next;
+			mes "<B>It's saying that, but it's making an unfair expression, asking why I didn't tell it earlier.</B>";
+			next;
+			mes "[Supplier Gorir]";
+			mes "Yeah, how's your job these days? Well, you've become famous, so I've been hearing about it from time to time.";
+			next;
+			cloakoffnpcself( "ep20_icas_in_99_57" );
+			sleep2 500;
+			npctalk "Hororyo: Hmm.. Hmm..", "ep20_icas_in_99_57", bc_self;
+			sleep2 1000;
+			npctalk "Duck Ryo Mania: Duck Ryo!", "", bc_self;
+			mes "[Duck Ryo Mania]";
+			mes "Is the captain here?";
+			next;
+			mes "[Patrol Captain Hororyo]";
+			mes "Let's hear it on the way home. Agent Hani said something..";
+			next;
+			mes "[Patrol Captain Hororyo]";
+			mes "Supplier, are you still trying to catch someone and call them agents? I think I told you not to do that?";
+			next;
+			npctalk "Gorir: Cartridge! Gorir!", "ep20_icas_in_104_60", bc_self;
+			mes "[Supplier Gorir]";
+			mes "Ah.. no, sir..";
+			next;
+			mes "[Supplier Gorir]";
+			mes "This guy here is a really good agent who's been on a couple of missions with me.";
+			next;
+			mes "[Supplier Gorir]";
+			mes "Isn't it? Look, you should say something too.";
+			next;
+			mes "<B>Supplier Gonir is staring at me as if I have to answer quickly. This situation? I'm somehow familiar with it.</B>";
+			next;
+			switch( select( "Haha, even if you look like Captain, you're an agent.", "I'm indebted to the Supplier here.", "So, what's the next mission?", "No, what's the option status?" ) ) {
+			case 1:
+				emotion ET_STARE, getnpcid(0,"ep20_icas_in_104_60");
+				break;
+			case 2:
+				emotion ET_SURPRISE, getnpcid(0,"ep20_icas_in_99_57");
+				mes "[Patrol Captain Hororyo]";
+				mes "Oh! The personality that cuts off everything before and after this! It's an agent for sure.";
+				break;
+			case 3:
+				emotion ET_QUESTION, getnpcid(0,"ep20_icas_in_99_57");
+				mes "[Patrol Captain Hororyo]";
+				mes "You're indebted? Indebtedness, everyone's indebted.";
+				break;
+			case 4:
+				emotion ET_OK, getnpcid(0,"ep20_icas_in_99_57");
+				mes "[Patrol Captain Hororyo]";
+				mes "Yeah, it's not easy to think of me as an agent.";
+				break;
+			}
+			next;
+			mes "[Patrol Captain Hororyo]";
+			mes "Well! Great. What does it matter if you're an actual agent or not?";
+			next;
+			mes "[Patrol Captain Hororyo]";
+			mes "At a time when we are suffering from a shortage of manpower, if you're on your own, we're pretty sure of your identity, so trusting and putting them into the operation won't be a big problem.";
+			next;
+			mes "[Patrol Captain Hororyo]";
+			mes "The Supplier Gorir was the right talent of recommendation at the right time.";
+			next;
+			npctalk "Gorir: Cartridge! Gorir!", "ep20_icas_in_104_60", bc_self;
+			mes "[Supplier Gorir]";
+			mes "Thank you, chief.";
+			next;
+			erasequest 19158;
+			setquest 19159;
+			mes "[Patrol Captain Hororyo]";
+			mes "Then let's proceed with the operation briefing.";
+			close;
+		}
+		if (isbegin_quest(19159) == 1) {	// Step 2 of 4
+			cloakoffnpcself( "ep20_icas_in_104_60" );
+			cloakoffnpcself( "ep20_icas_in_99_57" );
+			mes "[Duck Ryo Mania]";
+			mes "Let's start the briefing.";
+			next;
+			mes "[Duck Ryo Mania]";
+			mes "As you may know, we have seen great results in the sluggish war against Rgan.";
+			next;
+			mes "[Duck Ryo Mania]";
+			mes "Our patrol analysis team analyzed the reason for the performance!";
+			next;
+			mes "[Duck Ryo Mania]";
+			mes "Analysis came out that being able to easily infiltrate with the Rgan transformation scrolls that were saved by outside adventurers played an important role.";
+			next;
+			mes "[Patrol Captain Hororyo]";
+			mes "Yes, around that time patrols using transformation scrolls were also introduced.";
+			next;
+			mes "[Duck Ryo Mania]";
+			mes "Yes, that's right. There were actually results and there is a feeling that it went too far into the dangerous area, but the analysis was that the method was not bad.";
+			next;
+			mes "[Duck Ryo Mania]";
+			mes "Just as we achieved results by introducing a new method, Rgan also developed something called the Iwin Transformation Scroll, and began to infiltrate us in reverse.";
+			next;
+			mes "[Supplier Gorir]";
+			mes "No, then doesn't that mean that Rgan might be infiltrating the castle?";
+			next;
+			mes "[Duck Ryo Mania]";
+			mes "Yes, that's where the problem lies.";
+			next;
+			mes "[Duck Ryo Mania]";
+			mes "There's no problem with adventurers who are distinctly different from us, but...";
+			next;
+			mes "[Duck Ryo Mania]";
+			mes "Currently, there is no way to identify Rgan who has infiltrated the Ice Castle using the Iwin Transformation Scroll.";
+			next;
+			mes "[Patrol Captain Hororyo]";
+			mes "That's right. To solve this problem, I've hired Gorir Supplier and an Adventurer.";
+			next;
+			select( "Yes?! Me?" );
+			erasequest 19159;
+			setquest 19160;
+			mes "[Patrol Captain Hororyo]";
+			mes "Even a small one is fine. If you have an idea, tell it to the duck manor. Then I'll trust you and leave it to you.";
+			close2;
+			cloakonnpcself( "ep20_icas_in_99_57" );
+			end;
+		}
+		if (isbegin_quest(19160) == 1) {	// Step 3 of 4
+			cloakoffnpcself( "ep20_icas_in_104_60" );
+			cloakonnpcself( "ep20_icas_in_99_57" );
+			mes "[Duck Ryo Mania]";
+			mes "Agent! Any good ideas?";
+			next;
+			mes "<B>I don't think this is the meeting I'm going to be in. I'll apologize and leave.</B>";
+			next;
+			select( "I'm sorry, but I'm..." );
+			mes "[Supplier Gorir]";
+			mes "Agent " + strcharinfo(0) + " sorry midway through, but I have a good idea. Maybe you'll understand when you hear it.";
+			next;
+			mes "[Supplier Gorir]";
+			mes "That's just creating a password. If you can't recognize it from the outside, why not create a system that only we know?";
+			next;
+			select( "You're saying something surprisingly convincing?" );
+			mes "[Supplier Gorir]";
+			mes "If you're an agent, I thought you'd say that. Now then, shall we summarize? There are two main things we need to do.";
+			next;
+			mes "[Supplier Gorir]";
+			mes "First, deliver the daily changed password to the dispatched personnel in the Rgan area.";
+			next;
+			mes "[Supplier Gorir]";
+			mes "Second, ask the Iwin inside the castle for the password, and it you can't answer, arrest it.";
+			next;
+			select( "I guess so." );
+			mes "[Duck Ryo Mania]";
+			mes "I guess so.";
+			next;
+			mes "[Supplier Gorir]";
+			mes "Okay! Then let's divide the work. First of all, the task of changing the password every day should be done by Duck Ryo.";
+			next;
+			mes "[Supplier Gorir]";
+			mes "You'll have to prepare variously so that they don't overlap as much as possible.";
+			next;
+			mes "[Duck Ryo Mania]";
+			mes "Yes! I see.";
+			next;
+			mes "[Supplier Gorir]";
+			mes "It would be nice if Agent " + strcharinfo(0) + " took over the task of going to the dispatcher, giving them the changed password, and bringing back the retrieved information.";
+			next;
+			mes "[Supplier Gorir]";
+			mes "Anyway, adventurer's more free to move than us.";
+			next;
+			select( "Again anyway", "A strange choice", "I'll suggest it, so I'll gladly do it", "I'll do it." );	// note: the selection doesn't change the text
+			emotion ET_QUESTION, playerattached();
+			mes "[Supplier Gorir]";
+			mes "Lastly, it's a matter of capturing Behemoth in the Ice Castle. I hope agent " + strcharinfo(0) + " will take care of this as well.";
+			next;
+			mes "[Supplier Gorir]";
+			mes "A skilled agent is more observant than a slightly distracted Iwin.";
+			next;
+			select( "Wait! What else does the Supplier do?" );
+			mes "[Supplier Gorir]";
+			mes "Me? I have to do supply work. Can I become a soldier and run in the field? I'll leave it to the new executive who grows like a maniac here.";
+			next;
+			mes "[Supplier Gorir]";
+			mes "Then I'll go to my job, I will trust you two.";
+			next;
+			cloakonnpcself( "ep20_icas_in_104_60" );
+			sleep2 500;
+			emotion ET_STARE_ABOUT;
+			sleep2 1000;
+			emotion ET_SMILE;
+			mes "[Duck Ryo Mania]";
+			mes "Hahaha.. Great management skills for the position. We should emulate. If you have time, can we talk more?";
+			next;
+			mes "[Duck Ryo Mania]";
+			mes "It's not grandiose, but I've already briefed on 95% of everything.. Why are you talking like you're hearing it for the first time...";
+			next;
+			erasequest 19160;
+			setquest 19161;
+			mes "[Duck Ryo Mania]";
+			mes "If I get a higher rank, will I blink like a goldfish? Anyway, let's talk for a while.";
+			close;
+		}
+		if (isbegin_quest(19161) == 1) {	// Step 4 of 4
+			mes "[Duck Ryo Mania]";
+			mes "Let me explain the job you will be in charge of. Which job should I start with?";
+			while(1) {
+				next;
+				switch( select( "How to know the changed password?", "Password and information recovery", "Search for hidden spy", "Enough." ) ) {
+				case 1:
+					mes "[Duck Ryo Mania]";
+					mes "You are a skilled agent, so as you know, passwords can only be delivered verbally, so if you come to me, I will inform you of the changed password.";
+					next;
+					mes "[Duck Ryo Mania]";
+					mes "Oh, and the password is changed every day at 04:00. Please be punctual so that you don't go on an operation with the changed password.";
+					next;
+					mes "[Duck Ryo Mania]";
+					mes "If you forgot, don't worry. We'll come back and let you know.";
+					next;
+					mes "[Duck Ryo Mania]";
+					mes "Have more questions?";
+					break;
+				case 2:
+					mes "[Duck Ryo Mania]";
+					mes "It is also very important to bring back the information recovered by dispatched members.";
+					next;
+					mes "[Duck Ryo Mania]";
+					mes "Your job is to go to the place I designated, make contact with our agent, and then retrieve the information collected by that agent.";
+					next;
+					mes "[Duck Ryo Mania]";
+					mes "Of course, you must use the password to confirm that you are one of our agents. I believe you will do well as you are an experienced agent.";
+					next;
+					mes "[Duck Ryo Mania]";
+					mes "Have more questions?";
+					break;
+				case 3:
+					mes "[Duck Ryo Mania]";
+					mes "No one knows when and where Rgan, who infiltrated the ice castle with the Iwin Transformation Scroll, will be retrieving his own information.";
+					next;
+					mes "[Duck Ryo Mania]";
+					mes "If you see a suspicious Behemoth while wandering around the ice castle, please check it with the password.";
+					next;
+					mes "[Duck Ryo Mania]";
+					mes "Have more questions?";
+					break;
+				case 4:
+					completequest 19161;
+					mes "[Duck Ryo Mania]";
+					mes "When you are ready to go on a mission, please visit us anytime. We will give you the password.";
+					close;
+				}
+			}
+			end;
+		}
+		// (shouldn't happen)
+		end;
+	}
+
+	.@playtime_19162 = checkquest(19162,PLAYTIME);
+	.@playtime_19163 = checkquest(19163,PLAYTIME);
+	.@playtime_19165 = checkquest(19165,PLAYTIME);
+
+	if (.@playtime_19163 == 2) {
+		erasequest 19163;
+		.@playtime_19163 = -1;
+	}
+	if (.@playtime_19165 == 2) {
+		erasequest 19165;
+		.@playtime_19165 = -1;
+	}
+
+	// menu 1
+	switch( .@playtime_19162 ) {
+	case -1:
+		.@menu$[0] = "What is today's password?";
+		break;
+	case 0:
+	case 1:
+		.@menu$[0] = "Remind me of today's password!";
+		break;
+	case 2:
+		.@menu$[0] = "Tell me the new password!";
+		break;
+	}
+
+	// menu 2
+	if (.@playtime_19163 == 0 || .@playtime_19163 == 1)
+		.@menu$[1] = "Ask about captured spies.";
+	if (isbegin_quest(19164) == 0)
+		.@menu$[1] = "Ask for information about spies.";
+	else
+		.@menu$[1] = "Receive a reward for searching for spies.";
+
+	// menu 3 (using index 2 and 3)
+	if (.@playtime_19165 == 0 || .@playtime_19165 == 1)
+		.@menu$[3] = "Can you tell us about the information you got?";
+	else if (isbegin_quest(19167) == 1)	// failed
+		.@menu$[2] = "[Failure] Retrieve Spy information";
+	else if (isbegin_quest(19166) == 1)	// success
+		.@menu$[2] = "[Success] Retrieve Spy information";
+	else if (isbegin_quest(19177) > 0 || isbegin_quest(19169) > 0)	// progress
+		.@menu$[2] = "[Progress] Retrieve Spy Information";
+	else	// daily
+		.@menu$[2] = "[Daily] Retrieve Spy Information";
+
+	switch( select( .@menu$[0], .@menu$[1], .@menu$[2], .@menu$[3], "Have small talk" ) ) {
+	case 1:
+		switch( .@playtime_19162 ) {
+		case -1:
+			mes "[Duck Ryo Mania]";
+			mes "Okay. I'll tell you today's password. As you know, to prevent leaks, don't write it down and memorize it.";
+			next;
+			setquest 19162;
+			break;
+		case 0:
+		case 1:
+			mes "[Duck Ryo Mania]";
+			mes "You forgot your password. I'll say it again.";
+			next;
+			break;
+		case 2:
+			erasequest 19162;
+			mes "[Duck Ryo Mania]";
+			mes "The password has been changed. We'll give you the new one.";
+			next;
+			setquest 19162;
+			break;
+		}
+		mes "[Duck Ryo Mania]";
+		mes "Today's password is ^FF0000" + $@ep20_spy_password$ + "^000000. Answer is ^0000FF" + $@ep20_spy_answer$ + "^000000. Please note that this password is reset every day at 04:00.";
+		close;
+	case 2:
+		switch( .@playtime_19163 ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[Duck Ryo Mania]";
+			mes "The captured spy is interrogated by the Information Division.";
+			next;
+			mes "[Duck Ryo Mania]";
+			mes "The Information Division doesn't tell you that the details are confidential, but they say they're interrogating in an orderly manner, so you don't have to worry too much.";
+			next;
+			mes "[Duck Ryo Mania]";
+			mes "Wouldn't they take care of it? If I caught them here, wouldn't I have done all I had to do?";
+			next;
+			mes "[Duck Ryo Mania]";
+			mes "Oh, I'm sorry. I've been busy lately, so I'm in tears without realizing it...";
+			close;
+		case 2:
+			break;
+		}
+		if (.@playtime_19162 == 2) {	// password changed
+			npctalk "Ducky Manic: Did I tell you today's password? You'll have to take care of it...", "", bc_self;
+			mes "[Duck Ryo Mania]";
+			mes "We don't have any information about spies either. Don't spies wear the word spy on their feathers?";
+			next;
+			mes "[Duck Ryo Mania]";
+			mes "I just expect you to catch Iwin, a place that an ordinary Iwin wouldn't go, and why it wants to do that, with your trained and excellent eyesight.";
+			close;
+		}
+		switch( isbegin_quest(19164) ) {
+		case 0:
+			mes "[Duck Ryo Mania]";
+			mes "We don't have any information about spies either. Don't spies wear the word spy on their feathers?";
+			next;
+			mes "[Duck Ryo Mania]";
+			mes "I just expect you to catch Iwin, a place that an ordinary Iwin wouldn't go, and why it wants to do that, with your trained and excellent eyesight.";
+			close;
+		case 1:
+			mes "[Duck Ryo Mania]";
+			mes "Ah! I heard that you did a great job in the search for the spy in the Ice Castle.";
+			next;
+			erasequest 19164;
+			setquest 19163;
+			if (get_reputation_points( REPU_EP20 ) >= 3000)
+				getitem 1001217,1;	// Ep20_Cat_Whiskers
+			getitem 1001217,3;	// Ep20_Cat_Whiskers
+			getexp2 34152989,0;
+			getexp 0,4283013;
+			add_reputation_points( REPU_EP20, 5 );
+			mes "[Duck Ryo Mania]";
+			mes "This is the compensation set above. I know you're struggling... but what can I do? I can't give you more than this...";
+			close;
+		case 2:
+			end;
+		}
+		end;
+	case 3:
+		// notes:
+		// - playtime 1 is in menu 4
+		// - player can take the quest even if the answer changed
+		if (isbegin_quest(19166) == 1) {	// success
+			mes "[Duck Ryo Mania]";
+			mes "Is what you have in hand the information you brought? Hmm.. these seals and seals.. seem certain.";
+			next;
+			erasequest 19166;
+			setquest 19165;
+			if (get_reputation_points( REPU_EP20 ) >= 3000)
+				getitem 1001217,1;	// Ep20_Cat_Whiskers
+			getitem 1001217,3;	// Ep20_Cat_Whiskers
+			getexp2 34152989,0;
+			getexp 0,4283013;
+			add_reputation_points( REPU_EP20, 5 );
+			mes "[Duck Ryo Mania]";
+			mes "This is a set reward. I know the agent is having a hard time... but what can I do? I can't give you more than this...";
+			close;
+		}
+		if (isbegin_quest(19167) == 1) {	// failed
+			mes "[Duck Ryo Mania]";
+			mes "Huh?! Failed to get the information? Surely an experienced agent didn't forget the answer?";
+			next;
+			mes "[Duck Ryo Mania]";
+			mes "I'm assuming there must have been an unavoidable accident. So what are you going to do? Could you pay me another retrieval mission?";
+			next;
+			if (select( "I want to do it again", "I won't do it today" ) == 2) {
+				erasequest 19167;
+				mes "[Duck Ryo Mania]";
+				mes "I see. Agents can make mistakes too.";
+				next;
+				mes "<B>I'm sure that little beak is sarcastic</B>";
+				close;
+			}
+			erasequest 19167;
+
+			.@quest_id = rand(19168,19177);
+			setquest .@quest_id;
+			mes "[Duck Ryo Mania]";
+			mes "This is a new mission you want. Good luck this time. If you forgot your answer, ask for it again.";
+			next;
+			mes "<B>I'm sure that little beak is sarcastic</B>";
+			close2;
+			open_quest_ui(.@quest_id);
+			end;
+		}
+		// Give the quest
+		if (F_queststatus(HAVEQUEST,19168,19169,19170,19171,19172,19173,19174,19175,19176,19177) == 0) {
+			mes "[Duck Ryo Mania]";
+			mes "The rendez-vous point with the contingent has been written down on the paper I just gave you.";
+			next;
+			mes "[Duck Ryo Mania]";
+			mes "If you go to that location, the agent will contact you first, so you can check it with the answer and receive the information given to you.";
+			next;
+			.@quest_id = rand(19168,19177);
+			setquest .@quest_id;
+			mes "[Duck Ryo Mania]";
+			mes "If you forgot your answer, please check again before starting the mission.";
+			close2;
+			open_quest_ui(.@quest_id);
+			end;
+		}
+		mes "[Duck Ryo Mania]";
+		mes "If you go to the place written on the paper I gave you, our agent will contact you first. Please check the answer and get the information.";
+		next;
+		mes "[Duck Ryo Mania]";
+		mes "And just in case, if you forgot the answer, please check it again before going on a mission.";
+		close;
+	case 4:	// (playtime 1)
+		mes "[Duck Ryo Mania]";
+		mes "The dispatched members sent a lot of useless information, such as the food they ate in the field, the inconvenience of sleeping, the inconvenience after transforming into Rgan, and letters to friends...";
+		next;
+		mes "[Duck Ryo Mania]";
+		mes "The Information Division is having difficulties with analysis. Ha.. What do the dispatched members think of the reason for the dispatch..";
+		next;
+		select( "You seem to be smiling?" );
+		mes "[Duck Ryo Mania]";
+		mes "No, I'm glad that the Information Division has been busy with this, and I'm not that narrow-minded. Trust me.";
+		close;
+	case 5:
+		emotion ET_CRY;
+		mes "[Duck Ryo Mania]";
+		mes "Are you in the mood for small talk? Am I the only one busy right now? Yes?";
+		close;
+	}
+	end;
+
+S_Data:
+	// Succinct list
+	setarray .@data$[0],
+		"Driller",		"Pork feet",
+		"Peko",			"Petbal",
+		"Tukan",		"Sweet and sour pork",
+		"Savage",		"Popcorn",
+		"Get out",		"Cocktail",
+		"Miming",		"Pizza",
+		"Whip Girl",	"Giblets",
+		"Clark",		"Strawberry",
+		"Solider",		"Yukgaejang",
+		"Jaguar",		"Curry",
+		"Creamy",		"Albab",
+		"Clamp",		"Peanuts",
+		"Freezer",		"Ravage",
+		"Mist",			"Yukhoe",
+		"Wolf",			"Giblets",
+		"Vitata",		"Shabu",
+		"Shinobi",		"Jjajangmyeon",
+		"Fire Serpent",	"Yukgaejang",
+		"Kraven",		"Almond",
+		"Perseal",		"Pork cutlet",
+		"Jaguar",		"Persimmon",
+		"The Whip Girl","Katsudon",
+		"Lizard",		"Cocktail",
+		"Driller",		"Pizza",
+		"Driller",		"United States",
+		"Peko",			"Jjajangmyeon",
+		"Green Snake",	"Strawberry",
+		"Hati",			"Fried dumplings",
+		"Basketball",	"Hamburger",
+		"Savage",		"Pork cutlet",
+		"Basketball",	"Strawberry",
+		"Venatu",		"Tobacco",
+		"Green Snake",	"Tomato",
+		"Smoky",		"Pork cutlet",
+		"Smoky",		"Squid",
+		"Condor",		"Chicken",
+		"Perseal",		"Ribs",
+		"Green Snake",	"Bossam",
+		"Sea Otter",	"Lobster",
+		"Smoky",		"Fried dumplings";
+
+	.@size = getarraysize(.@data$) / 2;
+	.@r = rand(.@size) * 2;
+	$@ep20_spy_password$ = .@data$[.@r];
+	$@ep20_spy_answer$ = .@data$[.@r+1];
+	return;
+
+OnHour04:
+	callsub( S_Data );
+	end;
+
+OnInit:
+	callsub( S_Data );
+	setunittitle( getnpcid(0), "<Eagle Patrol>" );
+
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "ep20_main >= 12 && isbegin_quest(19161) < 2" );
+
+	questinfo( QTYPE_CLICKME, QMARK_NONE, "isbegin_quest(19161) == 2 && (checkquest(19162,PLAYTIME) == -1 || checkquest(19162,PLAYTIME) == 2)" );
+
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(19164) == 1" );	// Quest 1
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(19166) == 1" );	// Quest 2 success
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(19167) == 1" );	// Quest 2 failed
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(19163,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(19165,PLAYTIME) == 2" );
+
+	// note: no questinfo for checkquest(19163,PLAYTIME) == -1
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(19161) == 2 && checkquest(19165,PLAYTIME) == -1 && F_queststatus(HAVEQUEST,19168,19169,19170,19171,19172,19173,19174,19175,19176,19177) == 0" );
+	end;
+}
+
+
+// Daily quest A : 'Intelligence information collection'
+jor_nest,171,84,4	script	Tangent Place#Q19168::ep20_jor_nest_171_84	4_POINT_BLUE,5,5,{
+	.@num = atoi( replacestr( strnpcinfo(2), "Q" , "" ) );
+
+	if (isbegin_quest(.@num) == 0) {
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (I can't feel a presence).", bc_self;
+		end;
+	}
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (I can feel a presence to the place that Ryo told me about.)", bc_self;
+	mes "[Someone]";
+	mes "Stop! Are you working for Iwin? Miming.";
+	next;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (give the answer).", bc_self;
+	input .@string$;
+	if (.@string$ != $@ep20_spy_answer$ || checkquest(19162,PLAYTIME) == -1 || checkquest(19162,PLAYTIME) == 2) {	// Failed
+		mes "[Someone]";
+		mes "Tch! Caught?!";
+		erasequest .@num;
+		setquest 19167;
+		cloakonnpcself();
+		next;
+		mes "(Someone has left in a hurry. Let's report the results to Ryo.)";
+		close;
+	}
+	mes "[Someone]";
+	mes "This is the information you have obtained. Hurry up and take it before the Rgans find it out!";
+	next;
+	erasequest .@num;
+	setquest 19166;
+	cloakonnpcself();
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (Someone gave a piece of paper with information on it and left in a hurry. Let's report the result to Ryo.)", bc_self;
+	end;
+
+OnTouch:
+	.@num = atoi( replacestr( strnpcinfo(2), "Q" , "" ) );
+	if (isbegin_quest(.@num) == 1) {
+		emotion ET_BLABLA;
+		end;
+	}
+	cloakonnpcself();
+	end;
+
+OnInit:
+	.@num = atoi( replacestr( strnpcinfo(2), "Q" , "" ) );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(" + .@num + ") == 1" );
+	end;
+}
+jor_back5,296,149,4	duplicate(ep20_jor_nest_171_84)	Tangent Place#Q19169	4_POINT_BLUE,5,5
+jor_twice,76,100,4	duplicate(ep20_jor_nest_171_84)	Tangent Place#Q19170	4_POINT_BLUE,5,5
+jor_maze,253,267,4	duplicate(ep20_jor_nest_171_84)	Tangent Place#Q19171	4_POINT_BLUE,5,5
+jor_root1,39,93,4	duplicate(ep20_jor_nest_171_84)	Tangent Place#Q19172	4_POINT_BLUE,5,5
+jor_root2,19,44,4	duplicate(ep20_jor_nest_171_84)	Tangent Place#Q19173	4_POINT_BLUE,5,5
+jor_twig,192,211,4	duplicate(ep20_jor_nest_171_84)	Tangent Place#Q19174	4_POINT_BLUE,5,5
+jor_sanct,120,86,4	duplicate(ep20_jor_nest_171_84)	Tangent Place#Q19175	4_POINT_BLUE,5,5
+jor_root3,347,147,4	duplicate(ep20_jor_nest_171_84)	Tangent Place#Q19176	4_POINT_BLUE,5,5
+jor_back6,353,260,4	duplicate(ep20_jor_nest_171_84)	Tangent Place#Q19177	4_POINT_BLUE,5,5
+
+
+// Daily quest B : 'Spy search'
+icecastle,1,1,4	script	ep20_spy_search_control	-1,{
+	end;
+OnInit:
+	initnpctimer;
+	callsub( S_Chosen );
+	end;
+OnTimer60000:
+	initnpctimer;
+	callsub( S_Chosen );
+	end;
+
+// Choose a random NPC as a spy
+// Maybe the same NPC can be chosen in a row, but I haven't encountered this scenario
+S_Chosen:
+	setarray .@id[0],1,2,3,4,5,6,7,8,9,10;
+	.@size = 10;
+
+	// Remove the previous id, if exists
+	if ($@ep20_spy_search_id > 0) {
+		deletearray .@id[$@ep20_spy_search_id-1],1;
+		.@size--;
+	}
+	$@ep20_spy_search_id = .@id[ rand(.@size) ] + 1;
+	end;
+}
+
+icecastle,207,240,4	script(CLOAKED)	Corporal Morulang#SSQ01::ep20_icecastle_207_240	EP19_NPC_IWIN_SG,{
+	end;
+OnInit:
+	setunittitle( getnpcid(0), "<Eagle Patrol>" );
+	end;
+}
+
+icecastle,204,238,2	script	Suspicious Iwin#SSQ01	4_EP19_IWIN,7,7,{
+	if (checkweight(1201,1) == 0) {
+		mes "- You cannot proceed because you have too many items. -";
+		close;
+	}
+	.@saved_spy_id = $@ep20_spy_search_id;	// it seems player can complete the quest even if time is up
+
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (Iwin looks suspicious. Should I check to see if it's Rgan who infiltrated with the Iwin transformation scroll?)", bc_self;
+	sleep2 1500;
+	setpcblock PCBLOCK_NPC, false;
+	if (isbegin_quest(19164) == 1 || isbegin_quest(19163) == 1) {
+		cloakonnpcself();
+		emotion ET_STARE_ABOUT, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (Oh! It's gone. Am I mistaken?)", bc_self;
+		end;
+	}
+	if (select( "Confirm password", "Do not confirm" ) == 2) {
+		npctalk "Suspicious Iwin: Huh?", "", bc_self;
+		end;
+	}
+	input .@string$;
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : Excuse me. Iwin, let me check your password.", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : " + .@string$ + ".. " + .@string$ + " ? Can you tell me the answer?", bc_self;
+	sleep2 1500;
+	if (.@string$ == $@ep20_spy_password$ && (checkquest(19162,PLAYTIME) == 0 || checkquest(19162,PLAYTIME) == 1)) {
+		if (.@saved_spy_id != 1) {	// is not the spy
+			npctalk "Suspicious Iwin: Secret word? Is the answer " + $@ep20_spy_answer$ + "?", "", bc_self;
+			sleep2 2000;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : yes that's right, verified. Excuse me", bc_self;
+			sleep2 500;
+			emotion ET_SMILE;
+			sleep2 500;
+			npctalk "Suspicious Iwin: Heh heh, it's doing something like this these days. It's having a hard time.", "", bc_self;
+			cloakonnpcself();
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		// spy
+		emotion ET_HUK;
+		sleep2 500;
+		npctalk "Suspicious Iwin: Any answer? What is that?! I don't know such a thing", "", bc_self;
+		sleep2 1000;
+		cloakoffnpcself( "ep20_icecastle_207_240" );
+		sleep2 500;
+		npctalk "Corporal Morulang: I've received reports of a disturbance.", "ep20_icecastle_207_240", bc_self;
+		sleep2 500;
+		npctalk "Suspicious Iwin: Ugh! Patrol? Let's run...", "", bc_self;
+		sleep2 500;
+		cloakonnpcself();
+		sleep2 500;
+		emotion ET_FRET, getnpcid(0,"ep20_icecastle_207_240");
+		sleep2 500;
+		npctalk "Corporal Morulang: Is it a spy? There!", "ep20_icecastle_207_240", bc_self;
+		cloakonnpcself( "ep20_icecastle_207_240" );
+		sleep2 1000;
+		emotion ET_QUESTION, playerattached();
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : ?", bc_self;
+		setquest 19164;
+		sleep2 1500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (The search for the spy hiding in the ice castle was successful. Let's report to Ryo.)", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+	emotion ET_ANGER;
+	sleep2 500;
+	npctalk "Suspicious Iwin: " + .@string$ + "? Is that right? It's different from the phrase I know? Aren't you a spy?", "", bc_self;
+	sleep2 1000;
+	cloakoffnpcself( "ep20_icecastle_207_240" );
+	sleep2 500;
+	npctalk "Corporal Morulang: I've received reports of a disturbance.", "ep20_icecastle_207_240", bc_self;
+	sleep2 500;
+	npctalk "Suspicious Iwin: Oops, welcome back. This guy looks like a spy. He used a strange octopus?", "", bc_self;
+	sleep2 1500;
+	emotion ET_HUM, getnpcid(0,"ep20_icecastle_207_240");
+	sleep2 500;
+	npctalk "Corporal Morulang: Ah! Adventurer? And aren't you, senior? What's up to this point?", "ep20_icecastle_207_240", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: Oh! Junior know me? What is this guy here?", "", bc_self;
+	sleep2 1000;
+	emotion ET_SCRATCH, getnpcid(0,"ep20_icecastle_207_240");
+	sleep2 500;
+	npctalk "Corporal Morulang: You're helping us. Did you forget the password...?", "ep20_icecastle_207_240", bc_self;
+	sleep2 1000;
+	npctalk "Suspicious Iwin: Gee... I don't think you're a very smart race... I don't know. Say hello to the Supplier.", "", bc_self;
+	sleep2 1500;
+	npctalk "Corporal Morulang: Are you leaving?", "ep20_icecastle_207_240", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: I came here because I was doing military defense training. I'm in a bad mood. Maybe next time.", "", bc_self;
+	sleep2 1500;
+	npctalk "Corporal Morulang: Take a look, senior.", "ep20_icecastle_207_240", bc_self;
+	sleep2 1500;
+	emotion ET_WRAP;
+	npctalk "Suspicious Iwin: Good job~", "", bc_self;
+	sleep2 500;
+	cloakonnpcself();
+	sleep2 500;
+	npctalk "Corporal Morulang: Adventurer, then I'll go too. For the password you forgot, go to Officer Ryo and listen to it again.", "ep20_icecastle_207_240", bc_self;
+	sleep2 1000;
+	npctalk "Corporal Morulang: Please suffer.", "ep20_icecastle_207_240", bc_self;
+	sleep2 1000;
+	cloakonnpcself( "ep20_icecastle_207_240" );
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnTouch:
+	if ($@ep20_spy_search_id == 1)
+		emotion ET_PROFUSELY_SWEAT;
+	else
+		emotion ET_FRET;
+	end;
+}
+
+icecastle,240,187,4	duplicate(ep20_icecastle_207_240)	Private Loruru#SSQ02::ep20_icecastle_240_187	EP19_NPC_IWIN_SY
+
+icecastle,238,185,2	script	Suspicious Iwin#SSQ02	4_EP19_IWIN,7,7,{
+	if (checkweight(1201,1) == 0) {
+		mes "- You cannot proceed because you have too many items. -";
+		close;
+	}
+	.@saved_spy_id = $@ep20_spy_search_id;	// it seems player can complete the quest even if time is up
+
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (Iwin looks suspicious. Should I check to see if it's Rgan who infiltrated with the Iwin transformation scroll?)", bc_self;
+	sleep2 1500;
+	setpcblock PCBLOCK_NPC, false;
+	if (isbegin_quest(19164) == 1 || isbegin_quest(19163) == 1) {
+		cloakonnpcself();
+		emotion ET_STARE_ABOUT, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (Oh! It's gone. Am I mistaken?)", bc_self;
+		end;
+	}
+	if (select( "Confirm password", "Do not confirm" ) == 2) {
+		npctalk "Suspicious Iwin: Huh?", "", bc_self;
+		end;
+	}
+	input .@string$;
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : Excuse me. Iwin, let me check your password.", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : " + .@string$ + ".. " + .@string$ + " ? Can you tell me the answer?", bc_self;
+	sleep2 1000;
+
+	if (.@string$ == $@ep20_spy_password$ && (checkquest(19162,PLAYTIME) == 0 || checkquest(19162,PLAYTIME) == 1)) {
+		if (.@saved_spy_id != 2) {	// is not the spy
+			npctalk "Suspicious Iwin: A dark word? Oh! You're talking about that bizarre word Ryo told me about earlier, " + $@ep20_spy_answer$ + "?", "", bc_self;
+			sleep2 1500;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : yes that's right, verified. Excuse me.", bc_self;
+			sleep2 1500;
+			emotion ET_SCRATCH;
+			sleep2 500;
+			npctalk "Suspicious Iwin: Adventurer has a lot of trouble. Oh, be careful with the village stuff. It's annoying to fix. It's a board.", "", bc_self;
+			cloakonnpcself();
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		// spy
+		emotion ET_OTL;
+		sleep2 500;
+		npctalk "Suspicious Iwin: Gwh.. how hard I've come this far to get caught here...", "", bc_self;
+		sleep2 1000;
+		cloakoffnpcself( "ep20_icecastle_240_187" );
+		sleep2 1000;
+		npctalk "Private Lorur: I've received reports of a disturbance.", "ep20_icecastle_240_187", bc_self;
+		sleep2 1000;
+		npctalk "Suspicious Iwin: I'll be captured. Please don't treat me harshly as a prisoner.", "", bc_self;
+		sleep2 1500;
+		emotion ET_CONFUSE, getnpcid(0,"ep20_icecastle_240_187");
+		sleep2 500;
+		npctalk "Private Loruru: Ah! Adventurer, you did one thing.", "ep20_icecastle_240_187", bc_self;
+		sleep2 1000;
+		emotion ET_BEST, getnpcid(0,"ep20_icecastle_240_187");
+		sleep2 500;
+		npctalk "Private Loruru: Then I'll take over as a spy. Good job. Adventurer.", "ep20_icecastle_240_187", bc_self;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : ???", bc_self;
+		sleep2 500;
+		cloakonnpcself( "ep20_icecastle_240_187" );
+		cloakonnpcself();
+		setquest 19164;
+		sleep2 1000;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (The search for the spy hiding in the ice castle was successful. Let's report to Ryo.)", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+	emotion ET_HUK;
+	sleep2 500;
+	npctalk "Suspicious Iwin: Ugh? " + .@string$ + "? Is that correct? Is it different from what Foreman Po told you about? What is that, spy?", "", bc_self;
+	sleep2 500;
+	cloakoffnpcself( "ep20_icecastle_240_187" );
+	sleep2 500;
+	npctalk "Private Lorur: I've received reports of a disturbance.", "ep20_icecastle_240_187", bc_self;
+	sleep2 1000;
+	emotion ET_COOL;
+	sleep2 500;
+	npctalk "Suspicious Iwin: Oops, not the patrol boys. How's Captain Geo? Huh!? What's up here, Spay! It looks like Spay.", "", bc_self;
+	sleep2 1000;
+	emotion ET_QUESTION, getnpcid(0,"ep20_icecastle_240_187");
+	npctalk "Private Lorur: Spy? Ah, spy? This one? Oh, I think he's mistaken. He's an adventurer helping us.", "ep20_icecastle_240_187", bc_self;
+	sleep2 1000;
+	npctalk "Suspicious Iwin: Ying? You're not a spy? You're not a spy, so why did you do that?", "", bc_self;
+	sleep2 1500;
+	npctalk "Private Lorur: You know, those words are so strange. You must have forgotten them.", "ep20_icecastle_240_187", bc_self;
+	sleep2 1000;
+	emotion ET_SCRATCH;
+	sleep2 500;
+	npctalk "Suspicious Iwin: Oops... I don't know if I can take care of things like this, you look a little mean. Oops! I'll have to check my mind before I can use it.", "", bc_self;
+	sleep2 1000;
+	npctalk "Private Lorur: Are you busy?", "ep20_icecastle_240_187", bc_self;
+	sleep2 1000;
+	npctalk "Suspicious Iwin: Oh, don't say that. You said you warmed me up a bit, but when it's cold, it's all messed up with ice.", "", bc_self;
+	sleep2 1500;
+	npctalk "Private Lorur: Take a look.", "ep20_icecastle_240_187", bc_self;
+	npctalk "Suspicious Iwin: Oh, the patrol brother did a good job too", "", bc_self;
+	sleep2 500;
+	cloakonnpcself();
+	sleep2 500;
+	npctalk "Private Loruru: Adventurer, I'll go too. You forgot the password, Ryo will tell it to you again.", "ep20_icecastle_240_187", bc_self;
+	sleep2 1500;
+	emotion ET_WRAP, getnpcid(0,"ep20_icecastle_240_187");
+	npctalk "Private Loruru: I'm coming~", "ep20_icecastle_240_187", bc_self;
+	cloakonnpcself( "ep20_icecastle_240_187" );
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnTouch:
+	if ($@ep20_spy_search_id == 2)
+		emotion ET_PROFUSELY_SWEAT;
+	else
+		emotion ET_SWEAT;
+	end;
+}
+
+
+icecastle,129,184,6	duplicate(ep20_icecastle_207_240)	Private Hori#SSQ03::ep20_icecastle_129_184	EP19_NPC_IWIN_SB
+
+icecastle,132,182,6	script	Suspicious Iwin#SSQ03	4_EP19_IWIN,7,7,{
+	if (checkweight(1201,1) == 0) {
+		mes "- You cannot proceed because you have too many items. -";
+		close;
+	}
+	.@saved_spy_id = $@ep20_spy_search_id;	// it seems player can complete the quest even if time is up
+
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (Iwin looks suspicious. Should I check to see if it's Rgan who infiltrated with the Iwin transformation scroll?)", bc_self;
+	sleep2 1500;
+	setpcblock PCBLOCK_NPC, false;
+	if (isbegin_quest(19164) == 1 || isbegin_quest(19163) == 1) {
+		cloakonnpcself();
+		emotion ET_STARE_ABOUT, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (Oh! It's gone. Am I mistaken?)", bc_self;
+		end;
+	}
+	if (select( "Confirm password", "Do not confirm" ) == 2) {
+		npctalk "Suspicious Iwin: Huh?", "", bc_self;
+		end;
+	}
+	input .@string$;
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : Excuse me. Iwin, let me check your password.", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : " + .@string$ + ".. " + .@string$ + " ? Can you tell me the answer?", bc_self;
+	sleep2 1500;
+	if (.@string$ == $@ep20_spy_password$ && (checkquest(19162,PLAYTIME) == 0 || checkquest(19162,PLAYTIME) == 1)) {
+		if (.@saved_spy_id != 3) {	// is not the spy
+			npctalk "Suspicious Iwin: Huh? Secret word? Hiccup.. That.. What is that?", "", bc_self;
+			sleep2 1500;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : yes that's right, verified. Excuse me.", bc_self;
+			sleep2 1500;
+			npctalk "Suspicious Iwin: Ugh... I need to go in before I get any more drunk. Go back to the beak.", "", bc_self;
+			sleep2 500;
+			cloakonnpcself();
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		// spy
+		emotion ET_OHNO;
+		sleep2 500;
+		npctalk "Suspicious Iwin: Chit! I think I'm getting used to this hairball a little bit now, but is the play over?", "", bc_self;
+		sleep2 500;
+		cloakoffnpcself( "ep20_icecastle_129_184" );
+		sleep2 500;
+		npctalk "Private Hori: I came here after receiving a report of a disturbance, but it seems the situation has already been resolved.", "ep20_icecastle_129_184", bc_self;
+		sleep2 1000;
+		npctalk "Suspicious Iwin: Are you the leader who will take me as a prisoner? I would like to request that you treat me as a prisoner.", "", bc_self;
+		sleep2 1500;
+		emotion ET_FRET, getnpcid(0,"ep20_icecastle_129_184");
+		npctalk "Private Hori: I saw this guy when I saw him. I don't treat him with respect, he just follows me.", "ep20_icecastle_129_184", bc_self;
+		sleep2 1000;
+		npctalk "Private Hori: Adventurer, then I will lead you. Thank you for your hard work.", "ep20_icecastle_129_184", bc_self;
+		sleep2 1000;
+		cloakonnpcself();
+		cloakonnpcself( "ep20_icecastle_129_184" );
+		setquest 19164;
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (The search for the spy hiding in the ice castle was successful. Let's report to Ryo.)", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+	emotion ET_SPIT;
+	sleep2 500;
+	emotion ET_PROFUSELY_SWEAT, playerattached();
+	npctalk "Suspicious Iwin: Ugh? " + .@string$ + "? Isn't that right? You're just ignoring me because I'm drunk? Eh!", "", bc_self;
+	sleep2 500;
+	cloakoffnpcself( "ep20_icecastle_129_184" );
+	sleep2 500;
+	npctalk "Private Hori: Received reports of disturbance.. These are all familiar faces..", "ep20_icecastle_129_184", bc_self;
+	sleep2 1500;
+	emotion ET_ANGER;
+	sleep2 500;
+	npctalk "Suspicious Iwin: What?! It's you again? Are you the only patrol here? Why is it you every time? Huh?!", "", bc_self;
+	sleep2 1000;
+	npctalk "Private Hori: That's right. I'm bored too. I'm bored. By the way, Adventurer, what are you doing with drunks here?", "ep20_icecastle_129_184", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: What? You know him? He... That's a spy! A spy! He's using a weird octopus? Catch him, not me.", "", bc_self;
+	sleep2 1500;
+	npctalk "Private Hori: The spy looks more suspicious at first glance, so who wants to sleep and wander in a place like this? ", "ep20_icecastle_129_184", bc_self;
+	sleep2 1500;
+	emotion ET_SPIT;
+	sleep2 500;
+	npctalk "Suspicious Iwin: No.. Oh, this is frustrating.. @.@ hiccup..", "", bc_self;
+	sleep2 1000;
+	npctalk "Private Hori: Alright... alright, let's go home. Look at this, how often we meet, I remember all of your house.", "ep20_icecastle_129_184", bc_self;
+	sleep2 1500;
+	emotion ET_SLEEPY;
+	sleep2 500;
+	npctalk "Suspicious Iwin: Ahh... sleepy... z.Z.z..zZ", "", bc_self;
+	sleep2 1000;
+	npctalk "Private Hori: Ugh! Don't sleep, mister. If you fall asleep in a place like this, your beak will return!", "ep20_icecastle_129_184", bc_self;
+	sleep2 1500;
+	emotion ET_KEK, getnpcid(0,"ep20_icecastle_129_184");
+	sleep2 500;
+	npctalk "Private Hori: Uh-uh-uh... I'm leaving. For the forgotten password, go to Ryo and hear it again or not.", "ep20_icecastle_129_184", bc_self;
+	sleep2 1000;
+	npctalk "Private Hori: Uhhhhh! Mister wake up! Huh?!", "ep20_icecastle_129_184", bc_self;
+	sleep2 1000;
+	cloakonnpcself( "ep20_icecastle_129_184" );
+	cloakonnpcself();
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnTouch:
+	if ($@ep20_spy_search_id == 3)
+		emotion ET_PROFUSELY_SWEAT;
+	else
+		emotion ET_SPIT;
+	end;
+}
+
+
+icecastle,62,73,6	duplicate(ep20_icecastle_207_240)	Private Sourr#SSQ04::ep20_icecastle_62_73	EP19_NPC_IWIN_SB
+
+icecastle,66,71,8	script	Suspicious Iwin#SSQ04	4_EP19_IWIN,7,7,{
+	if (checkweight(1201,1) == 0) {
+		mes "- You cannot proceed because you have too many items. -";
+		close;
+	}
+	.@saved_spy_id = $@ep20_spy_search_id;	// it seems player can complete the quest even if time is up
+
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (Iwin looks suspicious. Should I check to see if it's Rgan who infiltrated with the Iwin transformation scroll?)", bc_self;
+	sleep2 1500;
+	setpcblock PCBLOCK_NPC, false;
+	if (isbegin_quest(19164) == 1 || isbegin_quest(19163) == 1) {
+		cloakonnpcself();
+		emotion ET_STARE_ABOUT, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (Oh! It's gone. Am I mistaken?)", bc_self;
+		end;
+	}
+	if (select( "Confirm password", "Do not confirm" ) == 2) {
+		npctalk "Suspicious Iwin: Huh?", "", bc_self;
+		end;
+	}
+	input .@string$;
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : Excuse me. Iwin, let me check your password.", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : " + .@string$ + ".. " + .@string$ + " ? Can you tell me the answer?", bc_self;
+	sleep2 1500;
+	if (.@string$ == $@ep20_spy_password$ && (checkquest(19162,PLAYTIME) == 0 || checkquest(19162,PLAYTIME) == 1)) {
+		if (.@saved_spy_id != 4) {	// is not the spy
+			npctalk "Suspicious Iwin: ●●●? ●●● Albab ●●?", "", bc_self;
+			sleep2 500;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : (It was a small voice, but I heard it clearly for some reason.)", bc_self;
+			sleep2 1000;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : yes that's right, verified. Excuse me", bc_self;
+			sleep2 1500;
+			npctalk "Suspicious Iwin: ●●● ●●. ●● ●●!", "", bc_self;
+			sleep2 500;
+			cloakonnpcself();
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		// spy
+		emotion ET_OTL;
+		sleep2 500;
+		npctalk "Suspicious Iwin: Ah... that's an answer... that's too much.", "", bc_self;
+		sleep2 500;
+		cloakoffnpcself( "ep20_icecastle_62_73" );
+		sleep2 500;
+		npctalk "Private Sourr: I've received a report of a disturbance.", "ep20_icecastle_62_73", bc_self;
+		sleep2 1500;
+		npctalk "Suspicious Iwin: Oh really. Why did the guards come so soon. They finally infiltrated through the cold sea...", "", bc_self;
+		sleep2 1500;
+		emotion ET_GO, getnpcid(0,"ep20_icecastle_62_73");
+		npctalk "Suspicious Iwin: Why!!!!!!!!!!!!!!!", "", bc_self;
+		npctalk "Private Sourr: Okay, it looks like Rgan has infiltrated. Let's go. Adventurer, thank you for your cooperation. Let's go!", "ep20_icecastle_62_73", bc_self;
+		sleep2 500;
+		cloakonnpcself();
+		sleep2 500;
+		cloakonnpcself( "ep20_icecastle_62_73" );
+		setquest 19164;
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (The search for the spy hiding in the ice castle was successful. Let's report to Ryo.)", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+
+	emotion ET_QUESTION;
+	sleep2 500;
+	npctalk "Suspicious Iwin: " + .@string$ + "? ●●●? ●●? ● ●●●●?", "", bc_self;
+	sleep2 500;
+	cloakoffnpcself( "ep20_icecastle_62_73" );
+	sleep2 500;
+	npctalk "Private Sourr: I've received a report of a disturbance.", "ep20_icecastle_62_73", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: ●? ●● ●●●? ●●●●●●? ●●●●●?", "", bc_self;
+	sleep2 1500;
+	npctalk "Private Sourr: Huh?! Isn't that Corporal Pollyo's father? Are there any adventurers out there? Oh, I understand the situation roughly.", "ep20_icecastle_62_73", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: ●● ● ●●●● ●●●● ●●●! ●●● ●●●?", "", bc_self;
+	sleep2 1500;
+	npctalk "Private Sourr: No, father. You're helping us. What's the password! You can forget it. We sometimes do that too.", "ep20_icecastle_62_73", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: ●●● ●●●●. ●● ●● ●●● ●●● ●●● ●●●!", "", bc_self;
+	sleep2 1500;
+	npctalk "Private Sourr: Hahaha, adventurer doesn't seem to understand, so I'll tell you.", "ep20_icecastle_62_73", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: ●● ● ●● ●●! ●● ●●●● ● ●● ●● ●● ●●● ●●●●.", "", bc_self;
+	sleep2 500;
+	cloakonnpcself();
+	sleep2 500;
+	npctalk "Private Sourr: Take care of your father.", "ep20_icecastle_62_73", bc_self;
+	sleep2 1000;
+	npctalk "Private Sourr: Adventurer, then I'll go too. For the password you forgot, go to Officer Ryo and listen to it again.", "ep20_icecastle_62_73", bc_self;
+	sleep2 1500;
+	emotion ET_WRAP, getnpcid(0,"ep20_icecastle_62_73");
+	sleep2 500;
+	npctalk "Private Thorr: Good luck.", "ep20_icecastle_62_73", bc_self;
+	cloakonnpcself( "ep20_icecastle_62_73" );
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnTouch:
+	if ($@ep20_spy_search_id == 4)
+		emotion ET_PROFUSELY_SWEAT;
+	else
+		emotion ET_THINK;
+	end;
+}
+
+
+icecastle,61,221,2	duplicate(ep20_icecastle_207_240)	Private Torari#SSQ05::ep20_icecastle_61_221	EP19_NPC_IWIN_SY
+
+icecastle,58,223,8	script	Suspicious Iwin#SSQ05	4_EP19_IWIN,7,7,{
+	if (checkweight(1201,1) == 0) {
+		mes "- You cannot proceed because you have too many items. -";
+		close;
+	}
+	.@saved_spy_id = $@ep20_spy_search_id;	// it seems player can complete the quest even if time is up
+
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (Iwin looks suspicious. Should I check to see if it's Rgan who infiltrated with the Iwin transformation scroll?)", bc_self;
+	sleep2 1000;
+	setpcblock PCBLOCK_NPC, false;
+	if (isbegin_quest(19164) == 1 || isbegin_quest(19163) == 1) {
+		cloakonnpcself();
+		emotion ET_STARE_ABOUT, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (Oh! It's gone. Am I mistaken?)", bc_self;
+		end;
+	}
+	if (select( "Confirm password", "Do not confirm" ) == 2) {
+		npctalk "Suspicious Iwin: Huh?", "", bc_self;
+		end;
+	}
+	input .@string$;
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : Excuse me. Iwin, let me check your password.", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : " + .@string$ + ".. " + .@string$ + " ? Can you tell me the answer?", bc_self;
+	sleep2 1500;
+	if (.@string$ == $@ep20_spy_password$ && (checkquest(19162,PLAYTIME) == 0 || checkquest(19162,PLAYTIME) == 1)) {
+		if (.@saved_spy_id != 5) {	// is not the spy
+			npctalk "Suspicious Iwin: Pizza.", "", bc_self;
+			sleep2 1500;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : yes that's right, verified. Excuse me", bc_self;
+			sleep2 1500;
+			npctalk "Suspicious Iwin: Just in case, I'm telling you, I'm not a thief. I'm just trying to collect the Chang'Aango bills piled up in the inn.", "", bc_self;
+			sleep2 1500;
+			emotion ET_WRAP;
+			npctalk "Suspicious Iwin: Retrieved, I'm done!", "", bc_self;
+			cloakonnpcself();
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		// spy
+		npctalk "Suspicious Iwin: Ah... they got caught. The money was thrown through the window, so I tried to pick it up and use it to fund my activities...", "", bc_self;
+		sleep2 500;
+		cloakoffnpcself( "ep20_icecastle_61_221" );
+		sleep2 1000;
+		npctalk "Private Torari: I've received a report of a disturbance.", "ep20_icecastle_61_221", bc_self;
+		sleep2 1000;
+		emotion ET_HUK;
+		sleep2 500;
+		npctalk "Suspicious Iwin: Ah... is it safe here? It's a pity that I can't pass on such advanced information..", "", bc_self;
+		sleep2 1000;
+		npctalk "Private Torari: You're an adventurer as expected. Then I'll take over this spy.", "ep20_icecastle_61_221", bc_self;
+		sleep2 1000;
+		cloakonnpcself();
+		cloakonnpcself( "ep20_icecastle_61_221" );
+		setquest 19164;
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (The search for the spy hiding in the ice castle was successful. Let's report to Ryo.)", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+	emotion ET_PANIC;
+	npctalk "Suspicious Iwin: Huh?! " + .@string$ + "? Octopus isn't that? ", "", bc_self;
+	sleep2 500;
+	cloakoffnpcself( "ep20_icecastle_61_221" );
+	sleep2 500;
+	npctalk "Private Torari: I've received a report of a disturbance.", "ep20_icecastle_61_221", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: Wow... Eagle Rangers are really fast. Here! Here! Spy. Spy!!", "", bc_self;
+	sleep2 1500;
+	emotion ET_X, getnpcid(0,"ep20_icecastle_61_221");
+	sleep2 500;
+	npctalk "Private Torari: Awesome~ The correct answer was an adventurer helping us.", "ep20_icecastle_61_221", bc_self;
+	sleep2 1000;
+	npctalk "Suspicious Iwin: Oh what.. but why is the octopus wrong?", "", bc_self;
+	sleep2 1500;
+	npctalk "Private Torari: Yes. Why is it wrong? It's strange and eccentric, but it's a short word...", "ep20_icecastle_61_221", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: Well, that could be the case. I'm glad I'm not a spy anyway. I thought I was getting ssuk-ssuk-kwak!", "", bc_self;
+	sleep2 1500;
+	emotion ET_OK, getnpcid(0,"ep20_icecastle_61_221");
+	sleep2 500;
+	npctalk "Private Torari: Adventurer and we are diligently searching for it. Well, this often happens.", "ep20_icecastle_61_221", bc_self;
+	sleep2 1000;
+	npctalk "Suspicious Iwin: You're working hard. Anyway, I've seen everything and I'm going to go. Good job.", "", bc_self;
+	sleep2 1500;
+	npctalk "Private Torari: Yep! Check it out.", "ep20_icecastle_61_221", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: Good job.", "", bc_self;
+	sleep2 500;
+	cloakonnpcself();
+	sleep2 500;
+	npctalk "Private Torari: Adventurer, go and listen to the password you forgot, go to Ryo and listen again. Then I will go too.", "ep20_icecastle_61_221", bc_self;
+	sleep2 1500;
+	npctalk "Private Torari: Good luck.", "ep20_icecastle_61_221", bc_self;
+	sleep2 500;
+	cloakonnpcself( "ep20_icecastle_61_221" );
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnTouch:
+	if ($@ep20_spy_search_id == 5)
+		emotion ET_PROFUSELY_SWEAT;
+	else
+		emotion ET_AHA;
+	end;
+}
+
+
+icecastle,52,207,0	duplicate(ep20_icecastle_207_240)	Private Porarang#SSQ06::ep20_icecastle_52_207	EP19_NPC_IWIN_SB
+
+icecastle,54,209,0	script	Suspicious Iwin#SSQ06	4_EP19_IWIN,7,7,{
+	if (checkweight(1201,1) == 0) {
+		mes "- You cannot proceed because you have too many items. -";
+		close;
+	}
+	.@saved_spy_id = $@ep20_spy_search_id;	// it seems player can complete the quest even if time is up
+
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (Iwin looks suspicious. Should I check if it's Rgan who infiltrated with the Iwin transformation scroll?)", bc_self;
+	sleep2 1000;
+	setpcblock PCBLOCK_NPC, false;
+	if (isbegin_quest(19164) == 1 || isbegin_quest(19163) == 1) {
+		cloakonnpcself();
+		emotion ET_STARE_ABOUT, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (Oh! It's gone. Am I mistaken?)", bc_self;
+		end;
+	}
+	if (select( "Confirm password", "Do not confirm" ) == 2) {
+		npctalk "Suspicious Iwin: Huh?", "", bc_self;
+		end;
+	}
+	input .@string$;
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : Excuse me. Iwin, let me check your password.", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : " + .@string$ + ".. " + .@string$ + " ? Can you tell me the answer?", bc_self;
+	sleep2 1500;
+	if (.@string$ == $@ep20_spy_password$ && (checkquest(19162,PLAYTIME) == 0 || checkquest(19162,PLAYTIME) == 1)) {
+		if (.@saved_spy_id != 6) {	// is not the spy
+			npctalk "Suspicious Iwin: Pizza! Is this right? I'm not a spy. Be quiet. I'm observing something important.", "", bc_self;
+			sleep2 1000;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : yes that's right, verified. Excuse me", bc_self;
+			sleep2 1500;
+			npctalk "Suspicious Iwin: Oops! Caught. Running.", "", bc_self;
+			sleep2 500;
+			cloakonnpcself();
+			sleep2 1000;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : (what was that?)", bc_self;
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		// spy
+		emotion ET_HNG;
+		npctalk "Suspicious Iwin: Uhm... Are the adventurers searching, not the lame Iwin? You're careless.", "", bc_self;
+		sleep2 1000;
+		cloakoffnpcself( "ep20_icecastle_52_207" );
+		sleep2 500;
+		npctalk "Private Porarang: Hello, I've been reporting that there are strange shadows in the window.", "ep20_icecastle_52_207", bc_self;
+		sleep2 1500;
+		npctalk "Suspicious Iwin: Chit! Are you a soldier? It's hard to run away. I won't resist. Just be an apostle.", "", bc_self;
+		sleep2 1500;
+		emotion ET_DELIGHT, getnpcid(0,"ep20_icecastle_52_207");
+		sleep2 500;
+		emotion ET_QUESTION, playerattached();
+		npctalk "Private Porarang: Wow...? You're here for something else?! Catch a spy? Awesome...", "ep20_icecastle_52_207", bc_self;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : ?", bc_self;
+		sleep2 1000;
+		npctalk "Private Porarang: Thank you, Adventurer. Let's go, Spy. The Information Division will treat you kindly.", "ep20_icecastle_52_207", bc_self;
+		npctalk "Suspicious Iwin: Huh? Porarang? What do you mean by that?", "", bc_self;
+		sleep2 1000;
+		cloakonnpcself();
+		cloakonnpcself( "ep20_icecastle_52_207" );
+		setquest 19164;
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (The search for the spy hiding in the ice castle was successful. Let's report to Ryo.)", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+	emotion ET_STARE;
+	sleep2 500;
+	npctalk "Suspicious Iwin: " + .@string$ + "? " + .@string$ + "?? " + .@string$ + "???", "", bc_self;
+	sleep2 1000;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (Otherwise, little Iwin's eyes get smaller and smaller, and he looks at me suspiciously.)", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (I feel like the little wings that were slightly stiff are moving... after a while...)", bc_self;
+	sleep2 500;
+	cloakoffnpcself( "ep20_icecastle_52_207" );
+	sleep2 500;
+	emotion ET_FRET, getnpcid(0,"ep20_icecastle_52_207");
+	sleep2 500;
+	npctalk "Private Porarang: I got a report... No, you've reported it again? Why? This time again?", "ep20_icecastle_52_207", bc_self;
+	sleep2 1000;
+	npctalk "Suspicious Iwin: (Spy. Spy.. Wrong password, anyway. Spy.)", "", bc_self;
+	sleep2 1500;
+	npctalk "Private Polarang: Hey~ Adventurer? I think I know someone, are you a spy?", "ep20_icecastle_52_207", bc_self;
+	sleep2 1500;
+	emotion ET_THINK, playerattached();
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : ... ... ... ...", bc_self;
+	sleep2 1000;
+	npctalk "Private Porarang: Right? No? By the way, didn't you get banned from the building here? Why are you here again?", "ep20_icecastle_52_207", bc_self;
+	sleep2 1500;
+	emotion ET_HUM;
+	sleep2 500;
+	npctalk "Suspicious Iwin: Uh.. that.. yes, I can forget the password and do that. Are you all good adventurers?", "", bc_self;
+	sleep2 1000;
+	emotion ET_FRET, getnpcid(0,"ep20_icecastle_52_207");
+	sleep2 2000;
+	npctalk "Private Porarang: No, don't talk back, mister. Why are you here again?", "ep20_icecastle_52_207", bc_self;
+	emotion ET_KEK;
+	npctalk "Suspicious Iwin: Now that you've said that, let's talk about it. You must have seen the frozen yellow-haired man enter this house?", "", bc_self;
+	npctalk "Private Porarang: So?", "ep20_icecastle_52_207", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: What's that? Hey! I peek through the window and there are no yellow haired people, only two Iwins and Friederike?", "", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: The yellow-haired man must have been kidnapped somewhere or something! A spy!", "", bc_self;
+	sleep2 1500;
+	emotion ET_OHNO, getnpcid(0,"ep20_icecastle_52_207");
+	sleep2 500;
+	npctalk "Private Porarang: Uh... First of all, I understand. First of all, you violated the residence restraining order. Why would you steal someone's house? Let's go.", "ep20_icecastle_52_207", bc_self;
+	sleep2 1000;
+	npctalk "Private Porarang: Huh.. Adventurer, go to Officer Ryo and listen to the changed password again. I'll be on my way.", "ep20_icecastle_52_207", bc_self;
+	sleep2 1500;
+	npctalk "Private Porarang: Let's go, mister.", "ep20_icecastle_52_207", bc_self;
+	sleep2 500;
+	npctalk "Suspicious Iwin: Hmm...", "", bc_self;
+	sleep2 500;
+	cloakonnpcself( "ep20_icecastle_52_207" );
+	sleep2 500;
+	cloakonnpcself();
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnTouch:
+	if ($@ep20_spy_search_id == 6)
+		emotion ET_PROFUSELY_SWEAT;
+	else
+		emotion ET_PANIC;
+	end;
+}
+
+
+icecastle,99,243,2	duplicate(ep20_icecastle_207_240)	Corporal Pollyo#SSQ07::ep20_icecastle_99_243	EP19_NPC_IWIN_SG
+
+icecastle,96,245,2	script	Suspicious Iwin#SSQ07	4_EP19_IWIN,7,7,{
+	if (checkweight(1201,1) == 0) {
+		mes "- You cannot proceed because you have too many items. -";
+		close;
+	}
+	.@saved_spy_id = $@ep20_spy_search_id;	// it seems player can complete the quest even if time is up
+
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (Iwin looks suspicious. Should I check to see if it's Rgan who infiltrated with the Iwin transformation scroll?)", bc_self;
+	sleep2 1500;
+	setpcblock PCBLOCK_NPC, false;
+	if (isbegin_quest(19164) == 1 || isbegin_quest(19163) == 1) {
+		cloakonnpcself();
+		emotion ET_STARE_ABOUT, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (Oh! It's gone. Am I mistaken?)", bc_self;
+		end;
+	}
+	if (select( "Confirm password", "Do not confirm" ) == 2) {
+		npctalk "Suspicious Iwin: Huh?", "", bc_self;
+		end;
+	}
+	input .@string$;
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : Excuse me. Iwin, let me check your password.", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : " + .@string$ + ".. " + .@string$ + " ? Can you tell me the answer?", bc_self;
+	sleep2 1500;
+	if (.@string$ == $@ep20_spy_password$ && (checkquest(19162,PLAYTIME) == 0 || checkquest(19162,PLAYTIME) == 1)) {
+		if (.@saved_spy_id != 7) {	// is not the spy
+			npctalk "Suspicious Iwin: Answer.. !! Oh, I remembered! Pizza, right?", "", bc_self;
+			sleep2 1500;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : yes that's right, verified. Excuse me", bc_self;
+			sleep2 1500;
+			npctalk "Suspicious Iwin: I thought they wouldn't take care of it because it's in a slightly obscured place, but they're patrolling here too. Should I live here too?", "", bc_self;
+			sleep2 500;
+			cloakonnpcself();
+			sleep2 500;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : (said something incomprehensible and disappeared)", bc_self;
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		// spy
+		emotion ET_OHNO;
+		sleep2 500;
+		npctalk "Suspicious Iwin: Ha.. I purposely sneaked into a dark place.. This is what caught me..", "", bc_self;
+		sleep2 500;
+		cloakoffnpcself( "ep20_icecastle_99_243" );
+		sleep2 1000;
+		emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_99_243");
+		sleep2 500;
+		npctalk "Corporal Pollyo: (≥▽≤)/ .. .. ...~", "ep20_icecastle_99_243", bc_self;
+		sleep2 1500;
+		emotion ET_QUESTION;
+		sleep2 500;
+		emotion ET_QUESTION, playerattached();
+		npctalk "Suspicious Iwin: ?", "", bc_self;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : ?", bc_self;
+		sleep2 1000;
+		npctalk "Suspicious Iwin: I don't know what you're saying, but you've come? I won't resist, so take it.", "", bc_self;
+		sleep2 1500;
+		emotion ET_QUESTION, getnpcid(0,"ep20_icecastle_99_243");
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Suspicious? Why is it so easily caught?", bc_self;
+		npctalk "Corporal Pollyo: ?", "ep20_icecastle_99_243", bc_self;
+		sleep2 1500;
+		emotion ET_SWEAT;
+		npctalk "Suspicious Iwin: I have been ordered to surrender quickly when captured and devour the Iwin's food. Oops! I shouldn't have said this...", "", bc_self;
+		sleep2 1500;
+		npctalk "Suspicious Iwin: Please treat me like an apostle...", "", bc_self;
+		sleep2 1500;
+		emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_99_243");
+		sleep2 500;
+		npctalk "Corporal Pollyo: (-_-a);; ...(...). .... ...(...).. ......", "ep20_icecastle_99_243", bc_self ;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : ?", bc_self;
+		sleep2 1500;
+		emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_99_243");
+		npctalk "Corporal Pollyo: .... ........ .. .......", "ep20_icecastle_99_243", bc_self;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : ?", bc_self;
+		sleep2 500;
+		cloakonnpcself();
+		sleep2 500;
+		cloakonnpcself( "ep20_icecastle_99_243" );
+		setquest 19164;
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (The search for the spy hiding in the ice castle was successful. Let's report to Ryo.)", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+	npctalk "Suspicious Iwin: You said " + .@string$ + "?, right?", "", bc_self;
+	sleep2 1500;
+	emotion ET_STARE_ABOUT;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (Suspicious Iwin glared nervously.)", bc_self;
+	sleep2 500;
+	cloakoffnpcself( "ep20_icecastle_99_243" );
+	sleep2 500;
+	emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_99_243");
+	sleep2 500;
+	npctalk "Corporal Pollyo: (≥▽≤)/ .. .. ...~", "ep20_icecastle_99_243", bc_self;
+	sleep2 1000;
+	npctalk "Suspicious Iwin: Huh? What are you talking about? Don't look unnecessarily happy!", "", bc_self;
+	sleep2 1000;
+	emotion ET_CRY, getnpcid(0,"ep20_icecastle_99_243");
+	sleep2 500;
+	npctalk "Corporal Pollyo: ...... (ㅠ_ㅠ)ㆀ ", "ep20_icecastle_99_243", bc_self;
+	sleep2 1000;
+	emotion ET_ANGER;
+	npctalk "Suspicious Iwin: What is Lee?I really don't know.", "", bc_self;
+	sleep2 1000;
+	npctalk "Suspicious Iwin: Don't be unnecessarily glum! Ah! I don't know. I'll speak my way, so if you understand, you're welcome!", "", bc_self;
+	sleep2 1500;
+	emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_99_243");
+	npctalk "Corporal Pollyo: (*'▼'*)b ●~", "ep20_icecastle_99_243", bc_self;
+	sleep2 1000;
+	npctalk "Suspicious Iwin: I came here to see an empty house. An adventurer here asked for a password...", "", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: But today it's not a password! I knew then that this is a spy!", "", bc_self;
+	sleep2 1000;
+	emotion ET_X, getnpcid(0,"ep20_icecastle_99_243");
+	sleep2 500;
+	npctalk "Corporal Pollyo: X(≥▽≤)X ....!", "ep20_icecastle_99_243", bc_self;
+	sleep2 1000;
+	npctalk "Suspicious Iwin: What? You're saying no? Uhh- well then...", "", bc_self;
+	sleep2 1000;
+	npctalk "Suspicious Iwin: Patrol friend, I'm asking just in case, I'm thinking of buying a house here... Is there any news about development in this area?", "", bc_self;
+	sleep2 1500;
+	emotion ET_HUM, getnpcid(0,"ep20_icecastle_99_243");
+	npctalk "Corporal Pollyo: (*'▽'*)", "ep20_icecastle_99_243", bc_self;
+	sleep2 1000;
+	npctalk "Suspicious Iwin: Just looking at it, I don't know.. Okay.. Well, looking at the dispatch time, it seems like a safe place.", "", bc_self;
+	sleep2 1500;
+	emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_99_243");
+	npctalk "Suspicious Iwin: I'll stop going. Be careful next time, too, adventurers.", "", bc_self;
+	npctalk "Corporal Pollyo: ('_')(._ .)('_')(._ .)", "ep20_icecastle_99_243", bc_self;
+	sleep2 1000;
+	cloakonnpcself();
+	sleep2 1500;
+	emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_99_243");
+	npctalk "Corporal Pollyo: (*'▼'*)b ....! ●●●! .... ... .... .....", "ep20_icecastle_99_243", bc_self;
+	sleep2 1000;
+	emotion ET_WRAP, getnpcid(0,"ep20_icecastle_99_243");
+	sleep2 500;
+	npctalk "Corporal Pollyo: (￣▽￣)~.. ..", "ep20_icecastle_99_243", bc_self;
+	sleep2 500;
+	cloakonnpcself( "ep20_icecastle_99_243" );
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnTouch:
+	if ($@ep20_spy_search_id == 7)
+		emotion ET_PROFUSELY_SWEAT;
+	else
+		emotion ET_SPARK;
+	end;
+}
+
+
+icecastle,130,269,6	duplicate(ep20_icecastle_207_240)	Private Toralong#SSQ08::ep20_icecastle_130_269	EP19_NPC_IWIN_SY
+
+icecastle,134,268,4	script	Suspicious Iwin#SSQ08	4_EP19_IWIN,7,7,{
+	if (checkweight(1201,1) == 0) {
+		mes "- You cannot proceed because you have too many items. -";
+		close;
+	}
+	.@saved_spy_id = $@ep20_spy_search_id;	// it seems player can complete the quest even if time is up
+
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (Iwin looks suspicious. Should I check to see if it's Rgan who infiltrated with the Iwin transformation scroll?)", bc_self;
+	sleep2 1500;
+	setpcblock PCBLOCK_NPC, false;
+	if (isbegin_quest(19164) == 1 || isbegin_quest(19163) == 1) {
+		cloakonnpcself();
+		emotion ET_STARE_ABOUT, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (Oh! It's gone. Am I mistaken?)", bc_self;
+		end;
+	}
+	if (select( "Confirm password", "Do not confirm" ) == 2) {
+		npctalk "Suspicious Iwin: Huh?", "", bc_self;
+		end;
+	}
+	input .@string$;
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : Excuse me. Iwin, let me check your password.", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : " + .@string$ + ".. " + .@string$ + " ? Can you tell me the answer?", bc_self;
+	sleep2 1500;
+	if (.@string$ == $@ep20_spy_password$ && (checkquest(19162,PLAYTIME) == 0 || checkquest(19162,PLAYTIME) == 1)) {
+		if (.@saved_spy_id != 8) {	// is not the spy
+			npctalk "Suspicious Iwin: The answer is six. And hush! Be quiet. I'm investigating the traces left on this cliff...", "", bc_self;
+			sleep2 1500;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : yes that's right, verified. Excuse me", bc_self;
+			sleep2 1500;
+			emotion ET_ANGER;
+			sleep2 500;
+			npctalk "Suspicious Iwin: Eight- be quiet!", "", bc_self;
+			cloakonnpcself();
+			sleep2 500;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : (He left in anger)", bc_self;
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		// spy
+		npctalk "Suspicious Iwin: You know what? This cliff has a legend. But nobody knows about it.", "", bc_self;
+		sleep2 1000;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Suspicious. Didn't I ask for a password?", bc_self;
+		sleep2 500;
+		cloakoffnpcself( "ep20_icecastle_130_269" );
+		sleep2 500;
+		emotion ET_DELIGHT, getnpcid(0,"ep20_icecastle_130_269");
+		sleep2 500;
+		npctalk "Private Toralong: Ta-da~ I got a report from Private Toralong and appeared~", "ep20_icecastle_130_269", bc_self;
+		sleep2 1000;
+		emotion ET_STARE_ABOUT, getnpcid(0,"ep20_icecastle_130_269");
+		sleep2 500;
+		npctalk "Suspicious Iwin: Wow! The preparations were perfect! What an unexpected password!", "", bc_self;
+		sleep2 1000;
+		emotion ET_AHA, getnpcid(0,"ep20_icecastle_130_269");
+		sleep2 500;
+		npctalk "Private Toralong: It was a good attempt... We're not fools either. Of course we changed the confirmation system.", "ep20_icecastle_130_269", bc_self;
+		sleep2 1000;
+		npctalk "Private Toralong: Haha Adventurer, you've worked hard day and night instead of us today", "ep20_icecastle_130_269", bc_self;
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : instead of us?", bc_self;
+		sleep2 1000;
+		npctalk "Private Toralong: A-Oh! It's so sad, why? It's that I'm grateful for the adventurer's help.", "ep20_icecastle_130_269", bc_self;
+		sleep2 1500;
+		npctalk "Private Toralong: Anyway! I'll take over as a spy.", "ep20_icecastle_130_269", bc_self;
+		sleep2 500;
+		cloakonnpcself();
+		sleep2 500;
+		cloakonnpcself( "ep20_icecastle_130_269" );
+		setquest 19164;
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (The search for the spy hiding in the ice castle was successful. Let's report to Ryo.)", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+	npctalk "Suspicious Iwin: " + .@string$ + ".. " + .@string$ + "La.. Hmm.. You're starting to think something's wrong, don't you?", "", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: Where did you get that strange word from an octopus? What can you do?", "", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: As usual, report to the guards, and after the guards come and check...", "", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: I'll have to go through a complicated process to capture you or me, but I won't.", "", bc_self;
+	sleep2 1500;
+	emotion ET_THANKS, playerattached();
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : Thanks", bc_self;
+	sleep2 1000;
+	npctalk "Suspicious Iwin: Thank goodness I only know your face. I don't do this to just anyone!", "", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: I've seen you suffer in the ice castle many times. Oh, by the way, do you like legends?", "", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: A legend I've been working on lately. If you look at the ice cliffs here, you can see scratch marks.", "", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: And if you go outside, there are scale-like patterns between the ice...", "", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: There are also unidentified footprints.. Putting all of this together, it must be like a legendary lizard!", "", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: Juicy... delicious. I'm hungry. I'm going to eat. Good job.", "", bc_self;
+	sleep2 500;
+	cloakonnpcself();
+	unittalk getcharid(3), "" + strcharinfo(0) + " : ??????????", bc_self;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnTouch:
+	if ($@ep20_spy_search_id == 8)
+		emotion ET_PROFUSELY_SWEAT;
+	else
+		emotion ET_STARE_ABOUT;
+	end;
+}
+
+
+icecastle,152,244,8	duplicate(ep20_icecastle_207_240)	Corporal Anvil#SSQ09::ep20_icecastle_152_244	EP19_NPC_IWIN_SG
+
+icecastle,154,247,6	script	Suspicious Iwin#SSQ09	4_EP19_IWIN,7,7,{
+	if (checkweight(1201,1) == 0) {
+		mes "- You cannot proceed because you have too many items. -";
+		close;
+	}
+	.@saved_spy_id = $@ep20_spy_search_id;	// it seems player can complete the quest even if time is up
+
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (Iwin looks suspicious. Should I check to see if it's Rgan who infiltrated with the Iwin transformation scroll?)", bc_self;
+	sleep2 1500;
+	setpcblock PCBLOCK_NPC, false;
+	if (isbegin_quest(19164) == 1 || isbegin_quest(19163) == 1) {
+		cloakonnpcself();
+		emotion ET_STARE_ABOUT, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (Oh! It's gone. Am I mistaken?)", bc_self;
+		end;
+	}
+	if (select( "Confirm password", "Do not confirm" ) == 2) {
+		npctalk "Suspicious Iwin: Huh?", "", bc_self;
+		end;
+	}
+	input .@string$;
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : Excuse me. Iwin, let me check your password.", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : " + .@string$ + ".. " + .@string$ + " ? Can you tell me the answer?", bc_self;
+	sleep2 1500;
+	if (.@string$ == $@ep20_spy_password$ && (checkquest(19162,PLAYTIME) == 0 || checkquest(19162,PLAYTIME) == 1)) {
+		if (.@saved_spy_id != 9) {	// is not the spy
+			npctalk "Suspicious Iwin: The answer to the password is pizza! Good job adventurer!", "", bc_self;
+			sleep2 1500;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : yes that's right, verified. Excuse me", bc_self;
+			sleep2 1500;
+			npctalk "Suspicious Iwin: Wow, that's the rumored adventurer. You should brag to the kids that you met~", "", bc_self;
+			sleep2 500;
+			cloakonnpcself();
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		// spy
+		sleep2 1000;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (Rgan wearing Iwin's mask is embarrassed.)", bc_self;
+		sleep2 1500;
+		npctalk "Suspicious Iwin: Oh... a squid?", "", bc_self;
+		sleep2 1000;
+		emotion ET_X, playerattached();
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Ding! Are you a spy?", bc_self;
+		sleep2 1000;
+		npctalk "Suspicious Iwin: Ugh... It's a shame to be caught by such a fierce-looking adventurer.", "", bc_self;
+		sleep2 500;
+		cloakoffnpcself( "ep20_icecastle_152_244" );
+		sleep2 500;
+		emotion ET_SEXY, getnpcid(0,"ep20_icecastle_152_244");
+		npctalk "Corporal Anvil: I got a report.. Wow.. It's a spy.. It's a spy at first glance.", "ep20_icecastle_152_244", bc_self;
+		sleep2 1500;
+		npctalk "Corporal Anvil: Transformation is good, but even if I choose, that faceI wonder if I made a choice... It's a pity... Now- let's go. Information department~", "ep20_icecastle_152_244", bc_self;
+		sleep2 1000;
+		emotion ET_ANGER;
+		sleep2 500;
+		npctalk "Suspicious Iwin: What's with this face?!", "", bc_self;
+		sleep2 1000;
+		npctalk "Corporal Anvil: That's our captain's face. E! I've come all the way here, but I didn't manage to see it. If you see it, you'll be arrested right away... tsk tsk", "ep20_icecastle_152_244", bc_self;
+		sleep2 1000;
+		emotion ET_GO, getnpcid(0,"ep20_icecastle_152_244");
+		sleep2 500;
+		npctalk "Corporal Anvil: Thank you for your hard work, Adventurer. Let's go...", "ep20_icecastle_152_244", bc_self;
+		npctalk "Suspicious Iwin: Oops.. ", "", bc_self;
+		sleep2 500;
+		cloakonnpcself( "ep20_icecastle_152_244" );
+		cloakonnpcself();
+		setquest 19164;
+		sleep2 500;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (The search for the spy hiding in the ice castle was successful. Let's report to Ryo.)", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+	emotion ET_PANIC;
+	sleep2 500;
+	npctalk "Suspicious Iwin: " + .@string$ + "? Huh... Huh? Huh?! You can't do that...", "", bc_self;
+	sleep2 1000;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (The young-looking Iwin flapped his wings in bewilderment.)", bc_self;
+	sleep2 500;
+	cloakoffnpcself( "ep20_icecastle_152_244" );
+	sleep2 500;
+	emotion ET_QUESTION, getnpcid(0,"ep20_icecastle_152_244");
+	sleep2 500;
+	npctalk "Corporal Anvil: Came here after receiving a report.", "ep20_icecastle_152_244", bc_self;
+	sleep2 1000;
+	npctalk "Suspicious Iwin: Huh?! You're Instructor Anvil. This adventurer here reported the wrong password!", "", bc_self;
+	sleep2 1500;
+	npctalk "Corporal Anvil: Oh! Training is worthwhile. Adventurer got the password wrong! How about it? Right? Are you helping us?", "ep20_icecastle_152_244", bc_self;
+	sleep2 1500;
+	emotion ET_SHY, playerattached();
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : haha.. yes.. well.. I guess I got the password wrong.", bc_self;
+	sleep2 1000;
+	npctalk "Corporal Moru: hahaha I don't know where I'm bothering to put my mind on this...", "ep20_icecastle_152_244", bc_self;
+	sleep2 1500;
+	npctalk "Corporal Anvil: Well that could be. How could all life be perfect?", "ep20_icecastle_152_244", bc_self;
+	sleep2 1500;
+	npctalk "Corporal Anvil: Go and listen to the secret slogan again. Let's see! Recruit?", "ep20_icecastle_152_244", bc_self;
+	sleep2 1500;
+	emotion ET_BLABLA;
+	sleep2 500;
+	npctalk "Suspicious Iwin: Yes! Instructor Anvil!", "", bc_self;
+	sleep2 1000;
+	npctalk "Corporal Anvil: Thanks for reporting it. Fortunately, you're an adventurer helping us out.", "ep20_icecastle_152_244", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: Phew - Thank God. How scary it was.", "", bc_self;
+	sleep2 1500;
+	npctalk "Corporal Anvil: But what brought you here? I know that the patrol has not been confirmed yet...", "ep20_icecastle_152_244", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: I feel like I'm going to pass, so I want to make a house within reach if I tip over. I'm here to see the house.", "", bc_self;
+	sleep2 1500;
+	npctalk "Corporal Anvil: Ah.. I see. Why don't we have a cup of tea at the barracks after we met like this?", "ep20_icecastle_152_244", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: Huh?! Is that okay?", "", bc_self;
+	sleep2 1500;
+	npctalk "Corporal Anvil: Let's go. Then, adventurer, be careful. Good job.", "ep20_icecastle_152_244", bc_self;
+	sleep2 500;
+	cloakonnpcself();
+	sleep2 500;
+	cloakonnpcself( "ep20_icecastle_152_244" );
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnTouch:
+	if ($@ep20_spy_search_id == 9)
+		emotion ET_PROFUSELY_SWEAT;
+	else
+		emotion ET_DELIGHT;
+	end;
+}
+
+
+icecastle,225,136,6	duplicate(ep20_icecastle_207_240)	Corporal Pollyo#SSQ10::ep20_icecastle_225_136	EP19_NPC_IWIN_SG
+
+icecastle,228,134,8	script	Suspicious Iwin#SSQ10	4_EP19_IWIN,7,7,{
+	if (checkweight(1201,1) == 0) {
+		mes "- You cannot proceed because you have too many items. -";
+		close;
+	}
+	.@saved_spy_id = $@ep20_spy_search_id;	// it seems player can complete the quest even if time is up
+
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (Iwin looks suspicious. Should I check to see if it's Rgan who infiltrated with the Iwin transformation scroll?)", bc_self;
+	setpcblock PCBLOCK_NPC, true;
+	sleep2 1500;
+	setpcblock PCBLOCK_NPC, false;
+	if (isbegin_quest(19164) == 1 || isbegin_quest(19163) == 1) {
+		cloakonnpcself();
+		emotion ET_STARE_ABOUT, playerattached();
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (Oh! It's gone. Am I mistaken?)", bc_self;
+		end;
+	}
+	if (select( "Confirm password", "Do not confirm" ) == 2) {
+		npctalk "Suspicious Iwin: Huh?", "", bc_self;
+		end;
+	}
+	input .@string$;
+	setpcblock PCBLOCK_NPC, true;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : Excuse me. Iwin, let me check your password.", bc_self;
+	sleep2 1500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : " + .@string$ + ".. " + .@string$ + " ? Can you tell me the answer?", bc_self;
+	sleep2 1500;
+	if (.@string$ == $@ep20_spy_password$ && (checkquest(19162,PLAYTIME) == 0 || checkquest(19162,PLAYTIME) == 1)) {
+		if (.@saved_spy_id != 10) {	// is not the spy
+			npctalk "Suspicious Iwin: You got six answers, right?", "", bc_self;
+			sleep2 1500;
+			unittalk getcharid(3), "" + strcharinfo(0) + " : yes that's right, verified. Excuse me", bc_self;
+			sleep2 1500;
+			npctalk "Suspicious Iwin: Ah, I thought you were the one who came out after seeing the second-hand trading board... It looks like it was a fake sale again. I'll go.", "", bc_self;
+			sleep2 500;
+			cloakonnpcself();
+			setpcblock PCBLOCK_NPC, false;
+			end;
+		}
+		// spy
+		npctalk "Suspicious Iwin: Even though security is important, they made me embarrassingly do something like this?", "", bc_self;
+		sleep2 1000;
+		emotion ET_SHY;
+		sleep2 500;
+		npctalk "Suspicious Iwin: Carat~ Carat! Carat~ Carat!", "", bc_self;
+		sleep2 2000;
+		emotion ET_PROFUSELY_SWEAT;
+		sleep2 500;
+		npctalk "Suspicious Iwin: Isn't this? Uh.. So I just got caught?", "", bc_self;
+		sleep2 1000;
+		emotion ET_THINK;
+		emotion ET_THINK, playerattached();
+		npctalk "Suspicious Iwin: ... ... ...", "", bc_self;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : ... ... ...", bc_self;
+		sleep2 500;
+		cloakoffnpcself( "ep20_icecastle_225_136" );
+		sleep2 1000;
+		emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_225_136");
+		npctalk "Corporal Pollyo: (≥▽≤)/ .. .. ...~", "ep20_icecastle_225_136", bc_self;
+		sleep2 1500;
+		emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_225_136");
+		npctalk "Corporal Pollyo: (⊙_⊙)? . ... ...?", "ep20_icecastle_225_136", bc_self;
+		sleep2 1000;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : We found the infiltrated spy, Rgan. Let's take him quickly as we are both embarrassed now.", bc_self;
+		sleep2 1500;
+		emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_225_136");
+		emotion ET_THINK;
+		npctalk "Corporal Pollyo: (-_-a)? .. ...... ........ .....", "ep20_icecastle_225_136", bc_self;
+		npctalk "Suspicious Iwin: ... ... ...", "", bc_self;
+		sleep2 500;
+		cloakonnpcself();
+		cloakonnpcself( "ep20_icecastle_225_136" );
+		setquest 19164;
+		sleep2 1000;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : (The search for the spy hiding in the ice castle was successful. Let's report to Ryo.)", bc_self;
+		setpcblock PCBLOCK_NPC, false;
+		end;
+	}
+	npctalk "Suspicious Iwin: ? Ah.. It's really hard to trade used goods. Now even spies? Hey~ Patrol!", "", bc_self;
+	sleep2 500;
+	cloakoffnpcself( "ep20_icecastle_225_136" );
+	sleep2 500;
+	emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_225_136");
+	sleep2 500;
+	npctalk "Corporal Pollyo: (⊙▽⊙).. ... ... ...?", "ep20_icecastle_225_136", bc_self;
+	sleep2 1000;
+	npctalk "Suspicious Iwin: Huh?! Maybe it's Pollyo? That's right! It's clear that the voice is quieter than the sound of ice gongs crawling. It's me!", "", bc_self;
+	sleep2 1500;
+	npctalk "Corporal Pollyo: (θ_θ?) .. ...?", "ep20_icecastle_225_136", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: Yes! It's a pimple. How is your father? Are you still fishing?", "", bc_self;
+	sleep2 1500;
+	emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_225_136");
+	sleep2 500;
+	npctalk "Corporal Pollyo: (⊙_⊙) ..! . ... ... .. .. ...?", "ep20_icecastle_225_136", bc_self;
+	sleep2 1000;
+	npctalk "Suspicious Iwin: I should have gotten more from your father. By the way, you're a patrolman.", "", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: I heard it's hard to get in there, but you made it?", "", bc_self;
+	sleep2 1500;
+	emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_225_136");
+	sleep2 500;
+	npctalk "Corporal Pollyo: (*'ω'*) ... .. .! .... . .. ..? .. .. .... ... .. ..?", "ep20_icecastle_225_136 ", bc_self;
+	sleep2 1000;
+	npctalk "Suspicious Iwin: Oh right! I'm so glad I almost forgot. Huh? Does anyone know?", "", bc_self;
+	sleep2 1500;
+	emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_225_136");
+	sleep2 500;
+	npctalk "Corporal Pollyo: ('▽') .. ... ... .... ...", "ep20_icecastle_225_136", bc_self;
+	npctalk "Suspicious Iwin: I see...", "", bc_self;
+	sleep2 1000;
+	npctalk "Suspicious Iwin: Hey, let's be careful about that. Why did you use the wrong octopus to confuse good Iwin?", "", bc_self;
+	sleep2 1500;
+	npctalk "Suspicious Iwin: What's going on with this, I'm out for a used deal. See you next time Pollyo!", "", bc_self;
+	sleep2 500;
+	cloakonnpcself();
+	sleep2 500;
+	emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_225_136");
+	sleep2 500;
+	npctalk "Corporal Pollyo: (≥▽≤)/ ..~", "ep20_icecastle_225_136", bc_self;
+	sleep2 1000;
+	emotion ET_BLABLA, getnpcid(0,"ep20_icecastle_225_136");
+	sleep2 500;
+	npctalk "Corporal Pollyo: (-_-a);; ..... ...... .. .. ....", "ep20_icecastle_225_136", bc_self;
+	sleep2 1000;
+	cloakonnpcself( "ep20_icecastle_225_136" );
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : (Hmm.. what did he say? I don't know)", bc_self;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnTouch:
+	if ($@ep20_spy_search_id == 10)
+		emotion ET_PROFUSELY_SWEAT;
+	else
+		emotion ET_SMILE;
+	end;
+}
+
+// End of the daily quests A & B : 'Spy search' and 'Intelligence information collection'
+//-------------------------
+
+
+
+// Daily quests "Voglinde's Extermination Operation 1" and "Voglinde's Extermination Operation 2"
+// Part of the Main quest - Step 62 (final)
+// (unlocked after the final of the main quest : "The Undying")
+icas_in2,253,118,3	script	Voglinde#ep20_end03	4_EP19_VOGLINDE,{
+	if (checkweight(1001217,30) == 0) {
+		mes "You cannot proceed with the quest because you have too many items.";
+		mes "Please clean up your items and try again.";
+		close;
+	}
+	if (ep20_main < 61)
+		end;
+	if (ep20_main == 61) {
+		cutin "ep19_voglinde01.png",0;
+		mes "[Voglinde]";
+		mes "As you can see, Bagot is properly restrained.";
+		mes "By the way baby.. what the hell happened...?";
+		next;
+		select( "Shows the corrupted Ymir's heart fragment." );
+		mes "[Voglinde]";
+		mes "is this?";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[Maram]";
+		mes "The shape seems to have changed a bit, but it's a piece of Ymir's heart.";
+		mes "It was kept at Sesrumnir.";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[Miriam]";
+		mes "Maram and I came all this way to retrieve Ymir's heart fragment";
+		mes "Bargot took it.";
+		next;
+		cutin "ep18_bagot_01.png",2;
+		mes "[Bagot]";
+		mes "Why do you have that?";
+		mes "Could it be that Lasgand didn't absorb all of his power?";
+		next;
+		select( "Is that so?" );
+		cutin "ep18_bagot_02.png",2;
+		mes "[Bagot]";
+		mes "That can't be...";
+		mes "My calculations were perfect.";
+		mes "Hey guys. Is that a lie?";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[Maram]";
+		mes "How could Ymir's heart fragment be here if he lied?";
+		mes "Your ploy is broken. Admit it now";
+		next;
+		cutin "ep19_leizi01.png",1;
+		mes "[Lazy]";
+		mes "Okay! Let's just admit it and go home with me.";
+		mes "Did you suffer a lot in this cold land?";
+		mes "How nice to see your friends when you go back to your country!";
+		next;
+		mes "[Lazy]";
+		mes "The airship is ready!";
+		mes "It's so good you're going to die?";
+		mes "Let's go and do some life behind bars.";
+		next;
+		cutin "ep18_bagot_02.png",0;
+		mes "[Bagot]";
+		mes "What happened to Lasgand?";
+		mes "Why are you not talking?";
+		next;
+		mes "[Bagot]";
+		mes "Wow... are you all ignoring me right now?";
+		next;
+		cloakoffnpcself( "ep20_icas_in2_245_115" );
+		sleep2 500;
+		cloakoffnpcself( "ep20_icas_in2_246_112" );
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "Everyone is here.";
+		mes "What will Rachel and those from Schwarzwald do now?";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[Miriam]";
+		mes "Lazy will take Bagot, and Maram and I will take the piece of Ymir's heart.";
+		mes "Is there something wrong?";
+		next;
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "Hmm? No problem that way.";
+		mes "So we're left with our own business?";
+		next;
+		cutin "ep18_bagot_02.png",2;
+		mes "[Bagot]";
+		mes "You guys! Can't you hear me?";
+		mes "You ask what happened to Lasgand!!!!!";
+		next;
+		select( "It's dead" );
+		cutin "ep19_voglinde01.png",0;
+		mes "[Voglinde]";
+		mes "So the curse is lifted?";
+		mes "Are the Jormungand Church's damn relationship finally over?";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "He's not actually dead.";
+		mes "Lasgand is fusing with some of Ymir's Heart Fragment's power.";
+		mes "It is temporarily sealed by the power of Nyar.";
+		next;
+		cutin "ep18_bagot_01.png",2;
+		mes "[Bagot]";
+		mes "Haha! Hahahaha!!! That's right! I didn't fail!";
+		mes "Are you guys going to have a hard time?";
+		next;
+		mes "[Bagot]";
+		mes "When Lasgand perfectly absorbs the power of Ymir's Heart Fragment and the magic he gathered in Isgard, he will become a god!";
+		next;
+		mes "[Bagot]";
+		mes "It will only take a moment for this crappy barrier to collapse!";
+		mes "I, Bagot, made a god!!!";
+		mes "Evil!";
+		specialeffect EF_BLUELINE, AREA, "ep20_icas_in2_247_122";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[Miriam]";
+		mes "Sorry, you're too mean, so stop.";
+		next;
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "No no. Good job.";
+		mes "But you solved two of the big cases.";
+		mes "But the fragments of Ymir's heart appear to be corrupted... Let them be cleansed deep within Sethrumnir.";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[Maram]";
+		mes "Okay.";
+		mes "Is there anything else we can do to help?";
+		next;
+		cutin "ep19_leizi01.png",1;
+		mes "[Lazy]";
+		mes "Why don't you go in and out as usual and find something to do?";
+		next;
+		cutin "ep19_voglinde01.png",0;
+		mes "[Voglinde]";
+		mes "That's right";
+		mes "If you deal with Lasgand captured by Nyar, the old curse will be resolved.";
+		mes "It should be so...";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "I checked when I was helping Nyar to check the seal.";
+		mes "It looks like you interrupted Lasgand by attacking him before he could fuse perfectly.";
+		next;
+		mes "[Leon]";
+		mes "While Nyar maintains the seal, if the adventurers continue to disrupt Lasgand's magical fusion, the odds seem high.";
+		next;
+		cutin "ep19_aurelie01.png",0;
+		mes "[Aurelie]";
+		mes "You probably won't be able to kill him in one shot.";
+		mes "It could be a long and tedious fight ahead.";
+		mes "Maybe it's impossible, but we have to do it.";
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "I need your help in the future.";
+		mes "Nyar asked me to come to the Branch's Nest at any time for a challenge.";
+		next;
+		cutin "ep19_voglinde01.png",0;
+		mes "[Voglinde]";
+		mes "...Okay. Aga's power works on that villain. In the meantime, I'll root out the remaining Rgans.";
+		mes "Please take good care of me in the future.";
+		next;
+		cutin "ep19_leizi01.png",2;
+		mes "[Lazy]";
+		mes "Then shall we go and put the criminal and the treasure back?";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[Maram]";
+		mes "Then I'll be back!";
+		ep20_main = 100;
+		completequest 18233;
+		delitem 1001254,1;	// Ep20_Ymir_Heart
+		getitem 1001217,30;	// Ep20_Cat_Whiskers
+		getexp2 136611959,0;
+		getexp 0,22271670;
+		add_reputation_points( REPU_EP20, 70 );
+		next;
+		cutin "ep19_leon01.png",2;
+		mes "[Leon]";
+		mes "Me and Aurelie will help Nyar's magic not run out.";
+		mes "It looks like it's going to be a long fight... but it feels like the end is in sight.";
+		next;
+		cutin "ep19_aurelie01.png",0;
+		mes "[Aurelie]";
+		mes "Yeah, that's it.";
+		mes "I guess it was for today that we slept for a long time~";
+		mes "It's all thanks to you. Then let's go!";
+		next;
+		cutin "ep19_voglinde01.png",1;
+		mes "[Voglinde]";
+		mes "Thank you for being our hope.";
+		mes "You decided to root out the Rgan bastards instead?";
+		mes "Let's go hunting together later.";
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep20_icas_in2_246_119" );
+		cloakonnpcself( "ep20_icas_in2_251_121" );
+		cloakonnpcself( "ep20_icas_in2_247_122" );
+		cloakonnpcself( "ep20_icas_in2_245_115" );
+		cloakonnpcself( "ep20_icas_in2_246_112" );
+		cloakonnpcself( "ep20_icas_in2_252_113" );
+		end;
+	}
+	// daily quests
+	.@playtime_18237 = checkquest(18237,PLAYTIME);
+	.@playtime_18239 = checkquest(18239,PLAYTIME);
+
+	.@hunting_18236 = checkquest(18236,HUNTING);
+	.@hunting_18238 = checkquest(18238,HUNTING);
+
+	if (.@playtime_18237 == 2) {
+		erasequest 18237;
+		.@playtime_18237 = -1;
+	}
+	if (.@playtime_18239 == 2) {
+		erasequest 18239;
+		.@playtime_18239 = -1;
+	}
+
+	if (.@hunting_18236 == 2 || .@hunting_18238 == 2) {
+		if (.@hunting_18236 == 2) {
+			cutin "ep19_voglinde01.png",1;
+			mes "[Voglinde]";
+			mes "How was the dynamics of the first floor of the snake god's root?";
+			mes "Looks like the Rgans are still there.";
+			mes "It's really hard. Aren't you hungry?";
+			erasequest 18236;
+			setquest 18237;
+			if (get_reputation_points( REPU_EP20 ) >= 3000)
+				.@bonus = 1;
+			getitem 1001217,3+.@bonus;	// Ep20_Cat_Whiskers
+			getexp 42122763,29428540;
+			add_reputation_points( REPU_EP20, 5 );
+			next;	// note: dialog continue when the next hunting quest is not completed
+		}
+		if (.@hunting_18238 == 2) {
+			mes "[Voglinde]";
+			mes "Even though Agha works so hard, Rgans are still the same...";
+			mes "You've worked hard. Now, let's get some rest.";
+			erasequest 18238;
+			setquest 18239;
+			if (get_reputation_points( REPU_EP20 ) >= 3000)
+				.@bonus = 1;
+			getitem 1001217,3+.@bonus;	// Ep20_Cat_Whiskers
+			getexp 44065063,30788140;
+			add_reputation_points( REPU_EP20, 5 );
+			close3;
+		}
+	}
+
+	cutin "ep19_voglinde01.png",1;
+	mes "[Voglinde]";
+	mes "Remember when I said we should root out the remaining Rgans?";
+	mes "If you don't mind, why don't you try running it while you're here?";
+	next;
+	switch( select( "Let's rob the first floor of the Snake God's root!", "Let's rob the 2nd floor of the Snake God's root!", "Let's do it together next time!" ) ) {
+	case 1:
+		switch( .@playtime_18237 ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[Voglinde]";
+			mes "Don't you need a break?";
+			mes "I'll take care of the rest, so you can get some rest.";
+			close3;
+		case 2:
+			end;
+		}
+		switch( checkquest(18236,HUNTING) ) {
+		case -1:
+			mes "[Voglinde]";
+			mes "Okay. Lasgand is locked up anyway. In the meantime, let's clean up the roots of the snake god.";
+			mes "Don't leave the 1st floor of the snake god's root to the baby!";
+			mes "Feel free to go wild.";
+			setquest 18236;
+			close3;
+		case 0:
+		case 1:
+			mes "[Voglinde]";
+			mes "Do you know where the snake god's root 1st floor is?";
+			mes "It's a place where top-notch Rgans are the main axis, so you must defeat it.";
+			mes "Don't forget that";
+			close3;
+		case 2:
+			end;
+		}
+		end;
+	case 2:
+		switch( .@playtime_18239 ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[Voglinde]";
+			mes "Don't you need a break?";
+			mes "I'll take care of the rest, so you can get some rest.";
+			close3;
+		case 2:
+			end;
+		}
+		switch( checkquest(18238,HUNTING) ) {
+		case -1:
+			mes "[Voglinde]";
+			mes "Okay. Lasgand is locked up anyway. In the meantime, let's clean up the roots of the snake god.";
+			mes "Don't leave the 2nd floor of the snake god's root to the baby!";
+			mes "Feel free to go wild.";
+			setquest 18238;
+			close3;
+		case 0:
+		case 1:
+			mes "[Voglinde]";
+			mes "Do you know where the second floor of the Snake God's root is?";
+			mes "It's a place where top-notch Rgans are the main axis, so you must defeat it.";
+			mes "Don't forget that";
+			close3;
+		case 2:
+			end;
+		}
+		end;
+	case 3:
+		mes "[Voglinde]";
+		mes "You're really strong.";
+		mes "The end is near and how reliable it is to be with wonderful colleagues.";
+		mes "Then let's rest today and see you next time?";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(18233) == 1" );
+
+	// daily quests
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "checkquest(18236,HUNTING) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "checkquest(18238,HUNTING) == 2" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(18233) == 2 && checkquest(18236,HUNTING) == -1 && checkquest(18237,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "isbegin_quest(18233) == 2 && checkquest(18238,HUNTING) == -1 && checkquest(18239,PLAYTIME) == -1" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(18237,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(18239,PLAYTIME) == 2" );
+	end;
+}
+
+
+
+// Daily quest : 'Taste of hobby'
+// Part of the Sidequest B - Step 2, 5
+// (unlocked when ep20_main = 24 and after the end of the sidequest B, main quest "Holy and Holy")
+icas_in2,30,121,5	script	Nadyagand#20ms60::ep20_icas_in2_30_121	4_EP19_RGAN_SR2,{
+	if (checkweight(1001217,3) == 0) {
+		mes "Conversation cannot proceed because you have too many items.";
+		mes "Please clean up your items and try again.";
+		close;
+	}
+	if (ep20_sidequest_2 == 0)
+		end;
+	if (ep20_sidequest_2 == 1) {
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "Tell me";
+		next;
+		cutin "",255;
+		mes "[Nadyagand]";
+		mes "Ugh... I'm so hungry I don't even have the energy to talk.";
+		npctalk "Is this... dying...", "", bc_self;
+		next;
+		mes "[Iwin soldier]";
+		mes "Eat this. Eat it? Anyone who sees it will think it's not even served?";
+		next;
+		mes "[Nadyagand]";
+		mes "This is... you all eat like bird feed.";
+		next;
+		mes "[Iwin soldier]";
+		mes "Me, me, me!! mouth!! mouth, mouth, mouth!!!";
+		npctalk "Don't stop me. Don't let me go!", "ep20_icas_in2_37_118", bc_self;
+		emotion ET_OHNO, getnpcid(0,"ep20_icas_in2_37_118");
+		next;
+		mes "[Iwin soldier]";
+		mes "I don't like this, I don't like that, I did everything you asked me to do, so why don't you eat a bowl of rice?";
+		npctalk "It's a bird feeder!! What more can I say?", "ep20_icas_in2_34_117", bc_self;
+		emotion ET_FRET, getnpcid(0,"ep20_icas_in2_34_117");
+		next;
+		mes "[Iwin soldier]";
+		mes "What are you complaining about? We got a vase today as a group to please you!";
+		npctalk "Do I need to hear more?", "ep20_icas_in2_29_114", bc_self;
+		npctalk "The heat is about to melt this castle of ice!", "ep20_icas_in2_27_118", bc_self;
+		next;
+		mes "[Nadyagand]";
+		mes "Ah... I'm dizzy... My eyes are spinning.";
+		npctalk "Oh, I'm spinning before my eyes, too.", "ep20_icas_in2_37_115", bc_self;
+		emotion ET_CONFUSE;
+		emotion ET_CONFUSE, getnpcid(0,"ep20_icas_in2_37_115");
+		next;
+		mes "[Nadyagand]";
+		mes "Hey, can you hear my last words?";
+		mes "Maybe this will be the last time...";
+		next;
+		mes "[Iwin soldier]";
+		mes "No, why do you suddenly feel so nostalgic?? Are all Rgans like this?";
+		npctalk "Why are all these words dramatic?", "ep20_icas_in2_27_118", bc_self;
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "Did you refuse everything?";
+		mes"What did the author say he wanted?";
+		next;
+		cutin "",255;
+		mes "[Iwin soldier]";
+		mes "It's like " + getitemname(1001154) + " or dust.";
+		npctalk "What is that?", "ep20_icas_in2_31_116", bc_self;
+		npctalk "If you knew what it was, you would have already given it", "ep20_icas_in2_37_115", bc_self;
+		npctalk "That's right. We're not such bad people.", "ep20_icas_in2_37_118", bc_self;
+		next;
+		mes "[Nadyagand]";
+		if (PACKETVER >= 20230302) {	// (official)
+			mes "^i[1001154]^i[1001154]^i[1001154]^i[1001154]^i[1001154]^i[1001154]^i[1001154]^i[1001154]";
+			mes "^i[1001154] " + getitemname(1001154) + "... " + getitemname(1001154) + "...^e[27] ^i[1001154]";
+			mes "^i[1001154]^i[1001154]^i[1001154]^i[1001154]^i[1001154]^i[1001154]^i[1001154]^i[1001154]";
+		}
+		else {	// (workaround)
+			mes "" + mesitemlink(1001154) + "";
+			mes "" + mesitemlink(1001154) + "" + getitemname(1001154) + "... " + getitemname(1001154) + "... " + mesitemlink(1001154) + "";
+			mes "" + mesitemlink(1001154) + "";
+		}
+		next;
+		mes "[Iwin soldier]";
+		mes "No, if you're caught, you'll eat whatever you give. Why do you cover up so many things?";
+		npctalk "I still haven't had my snack today!", "ep20_icas_in2_34_117", bc_self;
+		next;
+		mes "[Iwin soldier]";
+		mes "You're rushing yourself to death. Well, those things are supposed to be eaten if you starve for a week or so.";
+		npctalk "That's what my grandmother used to say all the time.", "ep20_icas_in2_29_114", bc_self;
+		next;
+		mes "[Iwin soldier]";
+		mes "That's kind of... I haven't heard anything yet, are you starving to death?";
+		npctalk "Right. Somewhat.", "ep20_icas_in2_37_115", bc_self;
+		next;
+		mes "[Iwin soldier]";
+		mes "Who said you starved to death? I told you to starve. Just as long as you don't die!";
+		npctalk "Then... maybe it's okay...?", "ep20_icas_in2_37_118", bc_self;
+		next;
+		mes "[Iwin soldier]";
+		mes "Ugh, at this rate, I'll die with the vase first, I'll die.";
+		npctalk "I am in the seat next to him. I am.", "ep20_icas_in2_27_118", bc_self;
+		emotion ET_OHNO, getnpcid(0,"ep20_icas_in2_37_115");
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "It's really difficult at this rate...";
+		npctalk "What's up...", "ep20_icas_in2_31_116", bc_self;
+		ep20_sidequest_2 = 2;
+		erasequest 17712;
+		setquest 17713;
+		close3;
+	}
+	if (ep20_sidequest_2 == 2) {
+		mes "[Nadyagand]";
+		mes "I don't want to hear anything right now";
+		close;
+	}
+	if (ep20_sidequest_2 == 3) {
+		mes "[Nadyagand]";
+		mes "Life here isn't bad... it's not really bad";
+		close;
+	}
+	if (ep20_sidequest_2 == 4) {
+		mes "[Nadyagand]";
+		mes "Ah... I guess I'm running out of energy. Now...";
+		npctalk "Hi-goo~ Look at how frustrating this person is, Hwa-sang, why does he live like this, why does he live like that?", "ep20_icas_in2_34_117", bc_self;
+		next;
+		mes "[Iwin soldier]";
+		mes "Aren't you hungry yet? You're supposed to eat anything when you're hungry.";
+		mes "The market is a side dish.";
+		npctalk "Hmm... Then should we starve ourselves?", "ep20_icas_in2_27_118", bc_self;
+		npctalk "Well, that's a bit...", "ep20_icas_in2_37_115", bc_self;
+		next;
+		mes "[Nadyagand]";
+		mes "That's not right! Starving me precious! If I starve, I will die! If I die, everyone...!";
+		mes "No. That's it. Phew- I don't have the energy to talk. Everyone go out. I want to be alone.";
+		npctalk "Did you just hear it? It's a precious fly with your own mouth...", "ep20_icas_in2_37_118", bc_self;
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "We are not your men. We don't have to listen to you";
+		mes "You'd better follow us when we have a humane conversation";
+		npctalk "Because that's a prisoner.", "ep20_icas_in2_29_114", bc_self;
+		next;
+		cutin "",255;
+		select("I brought you " + getitemname(1001154) + " here." );
+		mes "[Nadyagand]";
+		mes "" + getitemname(1001154) + "!!!";
+		npctalk "Hey, look at him eating while shaking his head.", "ep20_icas_in2_34_117", bc_self;
+		npctalk "I thought you'd flip your eyes and shove them in your mouth.", "ep20_icas_in2_29_114", bc_self;
+		npctalk "I told you, you're not hungry yet.", "ep20_icas_in2_27_118", bc_self;
+		next;
+		mes "[Nadyagand]";
+		mes "Phew- I'm going to live now.";
+		npctalk "Look at the color change.", "ep20_icas_in2_29_114", bc_self;
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "Yeah, since you've adjusted to that picky personality, now you have to adjust to us as well.";
+		mes "Are you going to buy it? Now tell me everything you know. There is no free meal in the world.";
+		npctalk "Wow- you talk like a real villain.", "ep20_icas_in2_34_117", bc_self;
+		npctalk "Oh... cool.", "ep20_icas_in2_37_118", bc_self;
+		next;
+		cutin "",255;
+		mes "[Nadyagand]";
+		mes "Eh- but I don't know what you want.";
+		mes "Ah! What has Lasgand been doing with humans lately?";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "That, I already know. Where are you and what are you doing?";
+		npctalk "You sound like you had dinner again today.", "ep20_icas_in2_27_118", bc_self;
+		next;
+		cutin "",255;
+		mes "[Nadyagand]";
+		mes "I don't know about that. Oh! And the humans are absorbing magic with the magic recovery device!";
+		next;
+		mes "[Iwin soldier]";
+		mes "You know that too. You're going to use it for Jormungand's resurrection?";
+		npctalk "Everything the kid next door knows.", "ep20_icas_in2_37_118", bc_self;
+		next;
+		mes "[Nadyagand]";
+		mes "What?? It was like that? I didn't know...";
+		npctalk "Are there any secrets in this world?", "", bc_self;
+		next;
+		mes "[Iwin soldier]";
+		mes "Anything else? A goal or an estimate.";
+		npctalk "At least a weakness.", "ep20_icas_in2_37_115", bc_self;
+		next;
+		mes "[Nadyagand]";
+		mes "I don't know that.";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "A superlative Rgan? What's so useless?";
+		next;
+		cutin "",255;
+		mes "[Nadyagand]";
+		mes "You know. I've been having a hard time lately. The bishops called us together because the time was near, and they told us to work there.";
+		mes "I've never done anything like that, and I didn't intend to do it, but I told you to do it...";
+		next;
+		mes "[Iwin soldier]";
+		mes "No, there are all these youngsters.";
+		npctalk "People should do their part.", "ep20_icas_in2_27_118", bc_self;
+		next;
+		mes "[Nadyagand]";
+		mes "But it's so nice to come here. It's so comfortable and nice. I want to live here in the future.";
+		npctalk "Fantastic!!", "ep20_icas_in2_37_115", bc_self;
+		next;
+		mes "[Iwin soldier]";
+		mes "You want to live while being waited upon? There's no way!";
+		npctalk "Something I've never received!", "ep20_icas_in2_34_117", bc_self;
+		next;
+		mes "[Nadyagand]";
+		mes "Then I will escape and tell you all about this place??";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "That's kind of embarrassing.";
+		mes "I was going to send them back when the operation was over, but I'm in trouble now.";
+		npctalk "Is this a bit cheesy?", "ep20_icas_in2_27_118", bc_self;
+		next;
+		cutin "",255;
+		mes "[Nadyagand]";
+		mes "Hey, I just remembered something I want to eat...";
+		next;
+		mes "[Iwin soldier]";
+		mes "No more! People have to be shameless.";
+		npctalk "You just go, go! Go!!", "ep20_icas_in2_29_114", bc_self;
+		next;
+		mes "[Nadyagand]";
+		mes "Hauuu- I'm sleepy after eating. I need to get some sleep, so turn off the lights.";
+		mes "If you take a nap for more than an hour, you will feel unwell, so make sure to wake up on time. And when you wake up, you should eat right away.";
+		npctalk "Ahhh!! Inside me!!!", "ep20_icas_in2_37_118", bc_self;
+		next;
+		mes "[Iwin soldier]";
+		mes "Don't do that, go back. Think of your family and friends.";
+		npctalk "Yes, at least yesterday's leftovers!", "ep20_icas_in2_34_117", bc_self;
+		next;
+		mes "[Nadyagand]";
+		mes "We are the firstborn, what family?? And I have no friends.";
+		npctalk "Fantastic!!", "ep20_icas_in2_37_115", bc_self;
+		next;
+		specialeffect EF_HIT1, AREA, "ep20_icas_in2_32_120";
+		cloakoffnpcself( "ep20_icas_in2_32_120" );
+		cutin "ep19_leizi01.png",0;
+		mes "[Lazy]";
+		mes "Adventurer~ What are you doing here? I've been looking for a while.";
+		npctalk "Adventurer~ What are you doing here? I've been looking for a while.", "ep20_icas_in2_32_120", bc_self;
+		if (countitem(1001154) > 0)	// debug
+			delitem 1001154, countitem(1001154);	// Ep20_Jor_Berry
+		ep20_sidequest_2 = 5;
+		erasequest 17720;
+		setquest 17715;
+		close3;
+	}
+	if (ep20_sidequest_2 == 5 || ep20_sidequest_2 == 6) {
+		mes "[Nadyagand]";
+		mes "Who is...?";
+		close;
+	}
+
+	switch( checkquest(17717,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[Nadyagand]";
+		mes "Whew- what's up. I'm a little tired.";
+		mes "He said he cooked today. Go away.";
+		close;
+	case 2:
+		erasequest 17717;
+		break;
+	}
+	if (isbegin_quest(17721) == 1) {
+		// note: countitem not required
+		mes "[Nadyagand]";
+		mes "" + getitemname(1001154) + "! These days, I live with pleasure waiting for this. Thank you.";
+		next;
+		mes "[Nadyagand]";
+		mes "Then let's do our best today!";
+		if (countitem(1001154) > 0)	// debug
+			delitem 1001154, countitem(1001154);	// Ep20_Jor_Berry
+		erasequest 17721;
+		setquest 17717;
+		getitem 1001217,3;	// Ep20_Cat_Whiskers
+		if (get_reputation_points( REPU_EP20 ) >= 3000)	// note: no reputation given, but extra item given
+			getitem 1001217,1;	// Ep20_Cat_Whiskers
+		getexp2 34152989,0;
+		getexp 0,4283012;
+		// note: give no reputation
+		close;
+	}
+	mes "[Nadyagand]";
+	mes "Oh, welcome. How was the night?";
+	next;
+	mes "[Nadyagand]";
+	mes "" + getitemname(1001154) + ", yes. I haven't brought them yet. Yes...";
+	mes "I'll eat it and cheer up and look around, so I'll get it.";
+	next;
+	if (select( "I'll bring it.", "Be patient today." ) == 2) {
+		mes "[Nadyagand]";
+		mes "What?? Just put up with it today??";
+		mes "I will formally protest this!";
+		close;
+	}
+	mes "[Nadyagand]";
+	mes "Yes, good. ^0000cd10 " + getitemname(1001154) + "^000000. You should eat at least that much every day.";
+	if (isbegin_quest(17718) == 0)
+		setquest 17718;
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(17712) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(17720) == 1" );
+
+	// daily
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "ep20_sidequest_2 == 7 && checkquest(17717,PLAYTIME) == -1 && F_queststatus(HAVEQUEST,17718,17721) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_NONE, "checkquest(17717,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(17721) == 1" );
+	end;
+}
+
+// (part of the main quest - Step 23)
+jor_root2,43,63,5	script	Callout#20ms00::ep20_jor_root2_43_63	4_POINT_RED,{
+	if (ep20_main == 23 || ep20_sidequest_2 == 4 || isbegin_quest(17721) == 1) {
+		unittalk getcharid(3), "" + strcharinfo(0) + " : There is no need to dig the " + getitemname(1001154) + ". Let's go back and report.", bc_self;
+		end;
+	}
+	if (ep20_main == 22)
+		callsub( S_Start, 17698,17719, 3 );
+	if (ep20_sidequest_2 == 3)
+		callsub( S_Start, 17714,17720, 10 );
+	if (isbegin_quest(17718) == 1)	// daily
+		callsub( S_Start, 17718,17721, 10 );
+	end;
+
+S_Start:
+	initnpctimer;
+	if (rand(100) > 50)
+		unittalk getcharid(3), "" + strcharinfo(0) + " : There doesn't seem to be a " + getitemname(1001154) + " here.", bc_self;
+	else {
+		if (checkweight(1001154,1) == 0) {
+			mes "Conversation cannot proceed because you have too many items.";
+			mes "Please clean up your items and try again.";
+			close;
+		}
+		mes "[" + strcharinfo(0) + "]";
+		mes "I got a " + getitemname(1001154) + "!";
+		getitem 1001154,1;	// Ep20_Jor_Berry
+		if (countitem(1001154) >= getarg(2)) {
+			mes "We don't need to dig " + getitemname(1001154) + " any more. Let's go back and report.";
+			if (ep20_main == 22)
+				ep20_main = 23;
+			else if (ep20_sidequest_2 == 3)
+				ep20_sidequest_2 = 4;
+			erasequest getarg(0);
+			setquest getarg(1);
+		}
+		close2;
+	}
+	disablenpc();
+	end;
+
+OnTimer60000:	// 1 min delay
+	enablenpc();
+	stopnpctimer;
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17698) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17714) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17718) == 1" );
+	end;
+}
+jor_root2,90,50,5	duplicate(ep20_jor_root2_43_63)	Callout#20ms01	4_POINT_RED
+jor_root2,235,258,5	duplicate(ep20_jor_root2_43_63)	Callout#20ms02	4_POINT_RED
+jor_root2,77,191,5	duplicate(ep20_jor_root2_43_63)	Callout#20ms03	4_POINT_RED
+jor_root2,118,104,5	duplicate(ep20_jor_root2_43_63)	Callout#20ms04	4_POINT_RED
+jor_root2,143,79,5	duplicate(ep20_jor_root2_43_63)	Callout#20ms05	4_POINT_RED
+jor_root2,234,95,5	duplicate(ep20_jor_root2_43_63)	Callout#20ms06	4_POINT_RED
+jor_root2,114,149,5	duplicate(ep20_jor_root2_43_63)	Callout#20ms07	4_POINT_RED
+jor_root2,53,167,5	duplicate(ep20_jor_root2_43_63)	Callout#20ms08	4_POINT_RED
+jor_root2,211,225,5	duplicate(ep20_jor_root2_43_63)	Callout#20ms09	4_POINT_RED
+jor_root2,217,115,5	duplicate(ep20_jor_root2_43_63)	Callout#20ms10	4_POINT_RED
+jor_root2,171,114,5	duplicate(ep20_jor_root2_43_63)	Callout#20ms11	4_POINT_RED
+jor_root2,76,92,5	duplicate(ep20_jor_root2_43_63)	Callout#20ms12	4_POINT_RED
+jor_root2,45,257,5	duplicate(ep20_jor_root2_43_63)	Callout#20ms13	4_POINT_RED
+jor_root2,83,234,5	duplicate(ep20_jor_root2_43_63)	Callout#20ms14	4_POINT_RED
+jor_root2,147,189,5	duplicate(ep20_jor_root2_43_63)	Callout#20ms15	4_POINT_RED
+jor_root2,122,204,5	duplicate(ep20_jor_root2_43_63)	Callout#20ms16	4_POINT_RED
+jor_root2,48,111,5	duplicate(ep20_jor_root2_43_63)	Callout#20ms17	4_POINT_RED
+jor_root2,211,196,5	duplicate(ep20_jor_root2_43_63)	Callout#20ms18	4_POINT_RED
+jor_root2,170,178,5	duplicate(ep20_jor_root2_43_63)	Callout#20ms19	4_POINT_RED
+//-----------------------------
+
+
+
+// Daily quest 18234: "Iwin's Iwin Worries"
+// (unlocked after the final of the main quest : "The Undying")
+icecastle,75,126,3	script	Chi Chi Ling#ep20	EP19_NPC_IWIN_SY,{
+	if (ep20_main < 100) {
+		mes "[Chi Chi Ling]";
+		mes "Do you know what happens when you pour hot water on a very cold day?";
+		mes "It cools down, evaporates into steam, then freezes to become snow...?";
+		close;
+	}
+	mes "[Chi Chi Ling]";
+	mes "You know, if you have a sacred root or something to go, tell me.";
+	mes "Voglinde has been going that way a lot lately, so I'm helping him.";
+	next;
+	if (select( "I want to go to the holy root", "Iwin's worries about Iwin" ) == 1) {
+		mes "[Chi Chi Ling]";
+		mes "Okay~";
+		mes "The destination will be the corner of the sacred root.";
+		mes "When you come back, come back on your own.";
+		mes "Then let's go. Shoo~";
+		close2;
+		warp "jor_sanct",59,74;
+		end;
+	}
+	if (checkweight(1001217,3) == 0) {
+		mes "You cannot proceed with the quest because you have too many items.";
+		mes "Please clean up your items and try again.";
+		close;
+	}
+	if (BaseLevel < 230) {
+		mes "[Chi Chi Ling]";
+		mes "Looks like you're investigating an ancient ice canyon these days...";
+		mes "There's something I'm worried about";
+		next;
+		mes "[Chi Chi Ling]";
+		mes "But I'm more worried about you, adventurer, than I am.";
+		mes "I hope you get through this rough world.";
+		next;
+		mes "^4d4dffThere are quests available for level 230 or higher.^000000";
+		close;
+	}
+	switch( checkquest(18235,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[Chi Chi Ling]";
+		mes "Even the ancient Icewinds must have had a good time.";
+		mes "I'd love to help you next time.";
+		close;
+	case 2:
+		erasequest 18235;
+		break;
+	}
+	switch( checkquest(18234,HUNTING) ) {
+	case -1:
+		mes "[Chi Chi Ling]";
+		mes "Adventurer~";
+		mes "Now is the time. It's time to tackle the deep root cave that threatens the ancient ice canyon!";
+		next;
+		mes "[Chi Chi Ling]";
+		mes "For the sake of ancient Icewind's safety, I'd like you to punish the bad guys in Deep Roots Cave.";
+		mes "Would you like to do this if you have time?";
+		next;
+		if (select( "Like", "Dislike" ) == 2) {
+			mes "[Chi Chi Ling]";
+			mes "Ah, then I'll have to ask Lehar.";
+			mes "Sorry for talking to you when you're busy.";
+			close;
+		}
+		mes "[Chi Chi Ling]";
+		mes "Okay, then kill the dangerous guys in the deep root cave!";
+		mes "Then the ancient Icewinds who live nearby will be safe.";
+		setquest 18234;
+		close;
+	case 0:
+	case 1:
+		mes "[Chi Chi Ling]";
+		mes "Where is the deep root cave?";
+		mes "It's in the western part of the Ancient Ice Gorge.";
+		mes "I'm worried about the ancient Icewinds, but be careful, they're ferocious too.";
+		close;
+	case 2:
+		mes "[Chi Chi Ling]";
+		mes "Wow~ Good job!";
+		mes "This makes Ancient Ice Gorge safer!";
+		mes "You're amazing! Will you help me again next time?";
+		erasequest 18234;
+		setquest 18235;
+		if (get_reputation_points( REPU_EP20 ) >= 3000)
+			.@bonus = 1;
+		getitem 1001217,3+.@bonus;	// Ep20_Cat_Whiskers
+		getexp 61068800,42626903;
+		add_reputation_points( REPU_EP20, 5 );
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep20_main >= 100 && BaseLevel >= 230 && checkquest(18235,PLAYTIME) == -1 && checkquest(18234,HUNTING) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(18235,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(18234,HUNTING) == 2" );
+	end;
+}
+
+
+
+// Daily quests : 'Escargot!', 'Dangerous!', 'I hope they reconcile.(1)', '[230] I wish we could reconcile (2)'
+// (part of the sidequest A - Step 19)
+// (unlocked after the final of the sidequest A, quest "Koppo's Secret Base". Starting the main quest is not required)
+icecastle,67,218,5	script	Laraha#ep20	4_EP19_IWIN,{
+	if (checkweight(1001217,10) == 0) {
+		mes "- Wait here!! -";
+		mes "- you have too many items -";
+		mes "- Unable to proceed with the quest. -";
+		mes "- lighten your body -";
+		mes "- Please try again -";
+		close;
+	}
+	if (ep20_sidequest_1 < 19)
+		end;
+	if (ep20_sidequest_1 == 19) {
+		mes "[Laraha]";
+		mes "Rorohu!!!";
+		mes "Where the hell have you been!";
+		mes "Do you know how worried I was?!";
+		cutin "ep19_iwin04.png",2;
+		cloakoffnpcself( "ep20_icecastle_70_216" );
+		cloakoffnpcself( "ep20_icecastle_69_217" );
+		next;
+		mes "[Laraha]";
+		mes "" + strcharinfo(0) + " thank you for helping Friederike and Rorohu.";
+		next;
+		mes "[Rorohu]";
+		mes "…";
+		mes "I'm sorry.";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Laraha]";
+		mes "Why is it so downhearted that it's not like you...";
+		mes "What happened?";
+		cutin "ep19_iwin04.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Rorohu looks tired, so let it rest.";
+		mes "More on that later...";
+		cutin "ep19_friederike03.png",2;
+		next;
+		mes "[Laraha]";
+		mes "That's right.";
+		mes "Rorohu, let's go in.";
+		cutin "ep19_iwin04.png",2;
+		next;
+		mes "[Rorohu]";
+		mes "Uhhhhhhhhhhhhhhhh.";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Then shall we go to rest too?";
+		mes "Something has made me very tired.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Friederike]";
+		mes "" + strcharinfo(0) + " you can also visit my room whenever you want to rest.";
+		mes "Because it's the warmest place in the ice castle and has a lot of sweets.";
+		cutin "ep19_friederike03.png",2;
+		ep20_sidequest_1 = 20;
+		completequest 11947;
+		getitem 1001217,10;	// Ep20_Cat_Whiskers
+		getexp2 68305979,11135835;
+		add_reputation_points( REPU_EP20, 10 );
+		close2;
+		cloakonnpcself( "ep20_icecastle_70_216" );
+		cloakonnpcself( "ep20_icecastle_69_217" );
+		cutin "",255;
+		end;
+	}
+	mes "[Laraha]";
+	mes "Hello " + strcharinfo(0) + ".";
+	mes "It's quite chilly today, isn't it?";
+	cutin "ep19_iwin04.png",2;
+	next;
+	mes "[Laraha]";
+	mes "I heard the rough story from Friederike.";
+	next;
+	mes "[Laraha]";
+	mes "Although we have an ambiguous relationship with the ancient Ice Winds, we still want the young Copo to grow up safely.";
+	next;
+	mes "[Laraha]";
+	mes "I would like to help if there is anything I can do.";
+	next;
+	switch( select( "Escargo!", "It's dangerous!", "I wish we could reconcile. (1)", "[230] I wish we could reconcile. (2)", "Small talk" ) ) {
+	case 1:
+		switch( checkquest(11950,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[Laraha]";
+			mes "Um... Take a break today and come back tomorrow.";
+			close3;
+		case 2:
+			erasequest 11950;
+			break;
+		}
+		switch( isbegin_quest(11948) ) {
+		case 0:
+			mes "[Laraha]";
+			mes "I think there are still many children who go to that snail's lair.";
+			mes "Since rice is caught, we can't block the pit, and dealing with dangerous monsters is the best we can do, right?";
+			next;
+			mes "[Laraha]";
+			mes "Those threatening guys like the " + getmonsterinfo("MD_EP20_FALLENANGEL", MOB_NAME) + " that appeared in the (MD) Sticky sea before.";
+			setquest 11948;
+			close2;
+			cutin "",255;
+			navigateto("jor_back4",101,265);
+			end;
+		case 1:
+			break;
+		case 2:
+			if (checkquest(11949,HUNTING) < 2)
+				break;
+			mes "[Laraha]";
+			mes "Oops!";
+			mes "Did something happen in the Sticky sea?";
+			mes "Um... Take a break today and come back tomorrow.";
+			erasequest 11948;
+			erasequest 11949;
+			setquest 11950;
+			getitem 1001217,3;	// Ep20_Cat_Whiskers
+			if (get_reputation_points( REPU_EP20 ) >= 3000)
+				getitem 1001217,1;	// Ep20_Cat_Whiskers
+			getexp2 34152989,0;
+			getexp 0,4283013;
+			add_reputation_points( REPU_EP20, 5 );
+			close3;
+		}
+		mes "[Laraha]";
+		mes "I think there are still many children who go to that snail's lair.";
+		mes "Since rice is caught, we can't block the pit, and dealing with dangerous monsters is the best we can do, right?";
+		next;
+		mes "[Laraha]";
+		mes "Those threatening guys like the " + getmonsterinfo("MD_EP20_FALLENANGEL", MOB_NAME) + " that appeared in the (MD) Sticky sea before.";
+		close2;
+		cutin "",255;
+		navigateto("jor_back4",101,265);
+		end;
+	case 2:
+		switch( checkquest(11952,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[Laraha]";
+			mes "Now take a break today and come back tomorrow.";
+			close3;
+		case 2:
+			erasequest 11952;
+			break;
+		}
+		.@state = checkquest(11951,HUNTING);
+		if (.@state == 2) {
+			mes "[Laraha]";
+			mes "Oops!";
+			mes "The kids got home safely, right?";
+			mes "Now take a break today and come back tomorrow.";
+			erasequest 11951;
+			setquest 11952;
+			getitem 1001217,3;	// Ep20_Cat_Whiskers
+			if (get_reputation_points( REPU_EP20 ) >= 3000)
+				getitem 1001217,1;	// Ep20_Cat_Whiskers
+			getexp2 34152989,0;
+			getexp 0,4283012;
+			add_reputation_points( REPU_EP20, 5 );
+			close3;
+		}
+		mes "[Laraha]";
+		mes "Monsters are monsters, but there seem to be a lot of " + getmonsterinfo("EP20_NPC_COCOPO", MOB_NAME) + " getting lost in the (MD) Sticky sea.";
+		mes "It may be in a state of confusion, so it's better to calm it down and send it back.";
+		next;
+		mes "[Laraha]";
+		mes "Even if it's hard to send them all back, let's start with about 10 people.";
+		if (isbegin_quest(11951) == 0)
+			setquest 11951;
+		close2;
+		cutin "",255;
+		navigateto("jor_back4",101,265);
+		end;
+	case 3:
+		switch( checkquest(11954,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[Laraha]";
+			mes "Now let's take a break today and check the status again tomorrow?";
+			close3;
+		case 2:
+			erasequest 11954;
+			break;
+		}
+		.@state = checkquest(11953,HUNTING);
+		if (.@state == 2) {
+			mes "[Laraha]";
+			mes "How are you?";
+			mes "I hope it works.";
+			mes "Now let's take a break today and check the status again tomorrow?";
+			erasequest 11953;
+			setquest 11954;
+			getitem 1001217,3;	// Ep20_Cat_Whiskers
+			if (get_reputation_points( REPU_EP20 ) >= 3000)
+				getitem 1001217,1;	// Ep20_Cat_Whiskers
+			getexp 7707680,5395380;
+			add_reputation_points( REPU_EP20, 5 );
+			close3;
+		}
+		mes "[Laraha]";
+		mes "Children are also children, but I think the problem is the violent guys who attack and see everyone except their own kind.";
+		mes "If you scold me a little, you'll be calm...";
+		next;
+		mes "[Laraha]";
+		mes "In the eastern part of Ancient Ice Gorge, please return after beating 10 " + getmonsterinfo("EP20_ICEWIND1", MOB_NAME) + ".";
+		mes "Sometimes tough measures are necessary.";
+		if (.@state == -1)
+			setquest 11953;
+		close2;
+		cutin "",255;
+		navigateto("jor_back5",263,49);
+		end;
+	case 4:
+		if (BaseLevel < 230) {
+			mes "[Laraha]";
+			mes "Um... The guys who live here are so violent, You'd better go when you'll be a little stronger.";
+			mes "^ff0000※ This quest is available for level 230 or higher.^000000!";
+			close3;
+		}
+		switch( checkquest(11956,PLAYTIME) ) {
+		case -1:
+			break;
+		case 0:
+		case 1:
+			mes "[Laraha]";
+			mes "Now let's take a break today and check the status again tomorrow?";
+			close3;
+		case 2:
+			erasequest 11956;
+			break;
+		}
+		.@state = checkquest(11955,HUNTING);
+		if (.@state == 2) {
+			mes "[Laraha]";
+			mes "How are you?";
+			mes "I hope it works.";
+			mes "Now let's take a break today and check the status again tomorrow?";
+			erasequest 11955;
+			setquest 11956;
+			getitem 1001217,3;	// Ep20_Cat_Whiskers
+			if (get_reputation_points( REPU_EP20 ) >= 3000)
+				getitem 1001217,1;	// Ep20_Cat_Whiskers
+			getexp 12093820,8461460;
+			add_reputation_points( REPU_EP20, 5 );
+			close3;
+		}
+		mes "[Laraha]";
+		mes "Children are also children, but I think the problem is the violent guys who attack and see everyone except their own kind.";
+		mes "If you scold them a little, they'll be calm...";
+		next;
+		mes "[Laraha]";
+		mes "In Ancient Ice Gorge West, please return after beating 10 " + getmonsterinfo("EP20_ICEWIND2", MOB_NAME) + ".";
+		mes "Sometimes tough measures are necessary.";
+		if (.@state == -1)
+			setquest 11955;
+		close2;
+		cutin "",255;
+		navigateto("jor_back6",324,156);
+		end;
+	case 5:
+		mes "[Laraha]";
+		mes "I think Rorohu listens well these days.";
+		mes "Why?";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11947) == 1" );
+
+	// daily quests
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(11951,HUNTING) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(11953,HUNTING) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(11955,HUNTING) == 2" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(11947) == 2 && isbegin_quest(11948) == 0 && isbegin_quest(11949) == 0 && checkquest(11950,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(11947) == 2 && isbegin_quest(11951) == 0 && checkquest(11952,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(11947) == 2 && isbegin_quest(11953) == 0 && checkquest(11954,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(11947) == 2 && BaseLevel >= 230 && isbegin_quest(11955) == 0 && checkquest(11956,PLAYTIME) == -1" );
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(11950,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(11952,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(11954,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(11956,PLAYTIME) == 2" );
+	end;
+}
+//-----------------------

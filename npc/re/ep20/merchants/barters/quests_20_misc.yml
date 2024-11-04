@@ -1,0 +1,145 @@
+
+Header:
+  Type: BARTER_DB
+  Version: 1
+
+Body:
+  - Name: barter_ep20_shop_1_A
+    Items:
+      - Index: 0
+        Item: Ep20_Fatty_Icegangu
+        RequiredItems:
+          - Index: 0
+            Item: Ep20_Cat_Whiskers
+            Amount: 10
+  - Name: barter_ep20_shop_1_B
+    Items:
+      - Index: 0
+        Item: Ep20_Fatty_Icegangu
+        RequiredItems:
+          - Index: 0
+            Item: Ep20_Cat_Whiskers
+            Amount: 10
+      - Index: 1
+        Item: aegis_400414
+        RequiredItems:
+          - Index: 0
+            Item: Ep20_Cat_Whiskers
+            Amount: 1000
+      - Index: 2
+        Item: aegis_400415
+        RequiredItems:
+          - Index: 0
+            Item: Ep20_Cat_Whiskers
+            Amount: 1000
+      - Index: 3
+        Item: Glacier_Armor_9Refine
+        RequiredItems:
+          - Index: 0
+            Item: Ep20_Cat_Whiskers
+            Amount: 500
+  - Name: barter_ep20_glacier_eq
+    Items:
+      - Index: 0
+        Item: Glacier_Armor
+        RequiredItems:
+          - Index: 0
+            Item: Ep20_Cat_Whiskers
+            Amount: 100
+      - Index: 1
+        Item: Glacier_Robe
+        RequiredItems:
+          - Index: 0
+            Item: Ep20_Cat_Whiskers
+            Amount: 100
+      - Index: 2
+        Item: Glacier_Manteau
+        RequiredItems:
+          - Index: 0
+            Item: Ep20_Cat_Whiskers
+            Amount: 100
+      - Index: 3
+        Item: Glacier_Muffler
+        RequiredItems:
+          - Index: 0
+            Item: Ep20_Cat_Whiskers
+            Amount: 100
+      - Index: 4
+        Item: Glacier_Boots
+        RequiredItems:
+          - Index: 0
+            Item: Ep20_Cat_Whiskers
+            Amount: 100
+      - Index: 5
+        Item: Glacier_Shoes
+        RequiredItems:
+          - Index: 0
+            Item: Ep20_Cat_Whiskers
+            Amount: 100
+      - Index: 6
+        Item: Glacier_Ring
+        RequiredItems:
+          - Index: 0
+            Item: Ep20_Cat_Whiskers
+            Amount: 100
+      - Index: 7
+        Item: Glacier_Pendant
+        RequiredItems:
+          - Index: 0
+            Item: Ep20_Cat_Whiskers
+            Amount: 100
+      - Index: 8
+        Item: Glacier_Earring
+        RequiredItems:
+          - Index: 0
+            Item: Ep20_Cat_Whiskers
+            Amount: 100
+      - Index: 9
+        Item: Glacier_Necklace
+        RequiredItems:
+          - Index: 0
+            Item: Ep20_Cat_Whiskers
+            Amount: 100
+      - Index: 10
+        Item: Glacier_Guard
+        RequiredItems:
+          - Index: 0
+            Item: Ep20_Cat_Whiskers
+            Amount: 100
+  - Name: barter_ep20_shop_2
+    Items:
+      - Index: 0
+        Item: EP20_D_P_Crystal
+        RequiredItems:
+          - Index: 0
+            Item: EP20_D_P_Ore
+            Amount: 10
+          - Index: 1
+            Item: Ep20_Cat_Whiskers
+            Amount: 15
+          - Index: 2
+            Item: Ep19_Snow_Flower
+            Amount: 30
+      - Index: 1
+        Item: EP20_D_P_Extract
+        RequiredItems:
+          - Index: 0
+            Item: EP20_D_P_Crystal
+            Amount: 5
+          - Index: 1
+            Item: Ep20_Cat_Whiskers
+            Amount: 25
+          - Index: 2
+            Item: Ep19_Snow_Flower
+            Amount: 45
+      - Index: 2
+        Item: EP20_DGA_Refine
+        RequiredItems:
+          - Index: 0
+            Item: EP20_D_Scale
+          - Index: 1
+            Item: EP20_D_P_Extract
+            Amount: 15
+          - Index: 2
+            Item: EP20_D_P_Crystal
+            Amount: 25

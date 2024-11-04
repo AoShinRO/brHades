@@ -1,0 +1,144 @@
+//===== rAthena Script =======================================
+//= Mapflags from episode 20
+//===== Description: =========================================
+//= The file include basics mapflags.
+//===== Additional Comments: =================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// New destinations become available for Private Airship
+icecastle	mapflag	privateairship_source
+jor_tail	mapflag	privateairship_source
+jor_back1	mapflag	privateairship_source
+jor_back2	mapflag	privateairship_source
+jor_back3	mapflag	privateairship_source
+jor_back4	mapflag	privateairship_source
+jor_back5	mapflag	privateairship_source
+jor_back6	mapflag	privateairship_source
+
+icecastle	mapflag	privateairship_destination
+jor_tail	mapflag	privateairship_destination
+jor_back1	mapflag	privateairship_destination
+jor_back2	mapflag	privateairship_destination
+jor_back3	mapflag	privateairship_destination
+jor_back4	mapflag	privateairship_destination
+jor_back5	mapflag	privateairship_destination
+jor_back6	mapflag	privateairship_destination
+
+
+// Towns
+jor_sanct	mapflag	nomemo
+jor_sanct	mapflag	nobranch
+jor_sanct	mapflag	nowarp
+jor_sanct	mapflag	nowarpto
+jor_sanct	mapflag	restricted	7
+
+// In
+icas_in2	mapflag	nomemo
+icas_in2	mapflag	nobranch
+icas_in2	mapflag	nowarp
+icas_in2	mapflag	nowarpto
+icas_in2	mapflag	noteleport
+icas_in2	mapflag	noicewall
+
+jor_safty1	mapflag	nomemo
+jor_safty1	mapflag	nobranch
+jor_safty1	mapflag	nowarp
+jor_safty1	mapflag	nowarpto
+jor_safty1	mapflag	noteleport
+jor_safty1	mapflag	noicewall
+
+jor_safty2	mapflag	nomemo
+jor_safty2	mapflag	nobranch
+jor_safty2	mapflag	nowarp
+jor_safty2	mapflag	nowarpto
+jor_safty2	mapflag	noteleport
+jor_safty2	mapflag	noicewall
+
+// Fields (need check)
+jor_twice	mapflag	nomemo
+
+// Dungeons
+jor_maze	mapflag	nomemo
+jor_root1	mapflag	nomemo
+jor_root2	mapflag	nomemo
+jor_root3	mapflag	nomemo
+
+// Instances
+1@slug	mapflag	nomemo
+1@slug	mapflag	nosave	SavePoint
+1@slug	mapflag	nobranch
+1@slug	mapflag	nowarp
+1@slug	mapflag	nowarpto
+1@slug	mapflag	noteleport
+1@slug	mapflag	monster_noteleport
+1@slug	mapflag	noicewall
+1@slug	mapflag	partylock
+1@slug	mapflag	restricted	6
+
+1@20cn1	mapflag	nomemo
+1@20cn1	mapflag	nosave	SavePoint
+1@20cn1	mapflag	nobranch
+1@20cn1	mapflag	nowarp
+1@20cn1	mapflag	nowarpto
+1@20cn1	mapflag	noteleport
+1@20cn1	mapflag	monster_noteleport
+1@20cn1	mapflag	noicewall
+1@20cn1	mapflag	partylock
+1@20cn1	mapflag	restricted	6
+
+1@20cn2	mapflag	nomemo
+1@20cn2	mapflag	nosave	SavePoint
+1@20cn2	mapflag	nobranch
+1@20cn2	mapflag	nowarp
+1@20cn2	mapflag	nowarpto
+1@20cn2	mapflag	noteleport
+1@20cn2	mapflag	monster_noteleport
+1@20cn2	mapflag	noicewall
+1@20cn2	mapflag	partylock
+1@20cn2	mapflag	restricted	6
+
+1@twig	mapflag	nomemo
+1@twig	mapflag	nosave	SavePoint
+1@twig	mapflag	nobranch
+1@twig	mapflag	nowarp
+1@twig	mapflag	nowarpto
+1@twig	mapflag	noteleport
+1@twig	mapflag	monster_noteleport
+1@twig	mapflag	noicewall
+1@twig	mapflag	partylock
+1@twig	mapflag	restricted	6
+1@twig	mapflag	nomobloot
+
+1@twas	mapflag	nomemo
+1@twas	mapflag	nosave	SavePoint
+1@twas	mapflag	nobranch
+1@twas	mapflag	nowarp
+1@twas	mapflag	nowarpto
+1@twas	mapflag	noteleport
+1@twas	mapflag	monster_noteleport
+1@twas	mapflag	noicewall
+1@twas	mapflag	partylock
+1@twas	mapflag	restricted	6
+
+1@twbs	mapflag	nomemo
+1@twbs	mapflag	nosave	SavePoint
+1@twbs	mapflag	nobranch
+1@twbs	mapflag	nowarp
+1@twbs	mapflag	nowarpto
+1@twbs	mapflag	noteleport
+1@twbs	mapflag	monster_noteleport
+1@twbs	mapflag	noicewall
+1@twbs	mapflag	partylock
+1@twbs	mapflag	restricted	6
+
+1@twsd	mapflag	nomemo
+1@twsd	mapflag	nosave	SavePoint
+1@twsd	mapflag	nobranch
+1@twsd	mapflag	nowarp
+1@twsd	mapflag	nowarpto
+1@twsd	mapflag	noteleport
+1@twsd	mapflag	monster_noteleport
+1@twsd	mapflag	noicewall
+1@twsd	mapflag	partylock
+1@twsd	mapflag	restricted	6

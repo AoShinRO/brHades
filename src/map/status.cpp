@@ -5892,6 +5892,12 @@ void status_calc_bl_main(struct block_list& bl, std::bitset<SCB_MAX> flag)
 			status->watk2 = status_calc_watk(&bl, sc, b_status->watk2);
 		}
 		else status->watk = status_calc_watk(&bl, sc, b_status->watk);
+
+		// Monsters still use these in renewal so they are necessary
+		if(bl.type == BL_MOB){
+			status->rhw.atk = status_calc_watk(&bl, sc, b_status->rhw.atk);
+			status->rhw.atk2 = status_calc_watk(&bl, sc, b_status->rhw.atk2);
+		}
 #endif
 	}
 
@@ -6086,6 +6092,7 @@ void status_calc_bl_main(struct block_list& bl, std::bitset<SCB_MAX> flag)
 	* No status changes alter these yet.
 	* if(flag[SCB_SIZE])
 	* if(flag[SCB_RACE])
+	* if(flag[SCB_RANGE])
 	**/
 
 	if (flag[SCB_RANGE]) {
@@ -6157,6 +6164,8 @@ void status_calc_bl_main(struct block_list& bl, std::bitset<SCB_MAX> flag)
 		 * MATK = (sMATK + wMATK + eMATK) * Multiplicative Modifiers
 		 **/
 		int lv = status_get_lv(&bl);
+		// We are using status instead of base_status to include INT changes, but base MATK isn't yet in status so copy it.
+		status->rhw.matk = b_status->rhw.matk;
 		status->matk_min = status_base_matk_min(&bl, status, lv);
 		status->matk_max = status_base_matk_max(&bl, status, lv);
 
