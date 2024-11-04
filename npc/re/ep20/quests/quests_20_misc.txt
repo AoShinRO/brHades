@@ -1,0 +1,566 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Episode 20: Immortals
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- Misc NPCs from Episode 20
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Misc NPCs on icecastle
+//-----------------------
+
+icecastle,134,108,0	script	#20ms61	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	cloakoffnpcself( "ep20_icecastle_134_108" );
+	end;
+}
+
+icecastle,134,108,3	script	Nadyagand#20ms61::ep20_icecastle_134_108	4_EP19_RGAN_SR2,{
+	npctalk "Fishing... It's a hobby that helps me meditate.", "", bc_self;
+	end;
+}
+
+icecastle,106,130,3	script	Cocopo#ex01	EP20_NPC_COCOPO,{
+	npctalk "Bam!", "", bc_self;
+	end;
+}
+
+icecastle,102,126,4	script	Cocopo#ex02	EP20_NPC_COCOPO,{
+	npctalk "Bam!", "", bc_self;
+	end;
+}
+
+icecastle,98,123,3	script	Cocopo#ex03	EP20_NPC_COCOPO,{
+	npctalk "Bap bap bap bap!", "", bc_self;
+	end;
+}
+
+icecastle,96,120,6	script	Cocopo#ex04	EP20_NPC_COCOPO,3,0,{
+	npctalk "Bam!", "", bc_self;
+	end;
+}
+
+icecastle,98,115,4	script	Cocopo#ex05	EP20_NPC_COCOPO,{
+	npctalk "Bap bap bap bap!", "", bc_self;
+	end;
+}
+
+icecastle,99,115,3	script	Cocopo#ex06	EP20_NPC_COCOPO,{
+	npctalk "Drain!", "", bc_self;
+	end;
+}
+
+icecastle,69,107,0	script	#20ms62	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	cloakoffnpcself( "ep20_icecastle_69_107" );
+	end;
+}
+
+icecastle,69,107,5	script(CLOAKED)	Nadyagand#20ms62::ep20_icecastle_69_107	4_EP19_RGAN_SR2,{
+	npctalk "Don't you think grooming these fish is a very practical hobby?", "", bc_self;
+	end;
+}
+//-----------------------
+
+
+
+// Misc NPCs on icas_in
+//---------------------
+
+// icas_in,142,201,3	script	Torr#ep20iwin01	EP19_NPC_IWIN,7,2,{
+icas_in,142,201,3	script	Torr#ep20iwin01	EP19_NPC_IWIN,{
+	cutin "ep19_iwin03.png",2;
+	mes "[Torr]";
+	mes "Before. Barmund came to visit often?";
+	mes "There is a human-only accommodation and restaurant that I made then.";
+	next;
+	mes "[Torr]";
+	mes "Restaurant on the left, lodging on the right.";
+	mes "Okay?";
+	close;
+
+// OnTouch:
+	// todo (unknown effect)
+	// end;
+}
+
+// (Restaurant)
+icas_in,242,45,3	script	Copo#Eoljib01	EP20_NPC_COCOPO,{
+	npctalk "Pw.", "", bc_self;
+	end;
+}
+
+icas_in,243,45,5	script	Copo#Eoljib02	EP20_NPC_COCOPO,{
+	npctalk "Pww.", "", bc_self;
+	end;
+}
+
+icas_in,241,44,5	script	Copo#Eoljib03	EP20_NPC_COCOPO,{
+	npctalk "Kyumkyum.", "", bc_self;
+	end;
+}
+
+icas_in,242,42,3	script	Copo#Eoljib04	EP20_NPC_COCOPO,{
+	npctalk "Kyung.", "", bc_self;
+	end;
+}
+
+icas_in,243,42,1	script	Copo#Eoljib05	EP20_NPC_COCOPO,{
+	npctalk "Pywview. Pwyview.", "", bc_self;
+	end;
+}
+
+icas_in,244,43,7	script	Copo#Eoljib06	EP20_NPC_COCOPO,{
+	npctalk "??", "", bc_self;
+	end;
+}
+
+icas_in,244,44,5	script	Copo#Eoljib07	EP20_NPC_COCOPO,{
+	npctalk "Buff.", "", bc_self;
+	end;
+}
+
+icas_in,253,49,5	script	Copo#Eoljib08	EP20_NPC_COCOPO,{
+	npctalk "Pwwww.", "", bc_self;
+	end;
+}
+
+icas_in,241,58,3	script	Copo#Eoljib09	EP20_NPC_COCOPO,{
+	npctalk "Pw.", "", bc_self;
+	end;
+}
+
+icas_in,240,58,5	script	Copo#Eoljib10	EP20_NPC_COCOPO,{
+	npctalk "Kyumkyum.", "", bc_self;
+	end;
+}
+
+icas_in,252,58,1	script	Copo#Eoljib11	EP20_NPC_COCOPO,{
+	npctalk "Oops!", "", bc_self;
+	end;
+}
+
+icas_in,252,49,5	script	Copo#Eoljib12	EP20_NPC_COCOPO,{
+	npctalk "Pw!", "", bc_self;
+	end;
+}
+
+icas_in,240,49,7	script	Copo#Eoljib13	EP20_NPC_COCOPO,{
+	npctalk "Pops. Pops.", "", bc_self;
+	end;
+}
+//-----------------------
+
+
+
+// Misc NPCs on jor_back5 and jor_back6
+//-------------------------------------
+
+jor_back5,245,38,3	script	Enchanted installation#1	4_EP20_DEVICE_RED,{
+	mes "[Enchanted installation]";
+	mes "A strange object with magical powers is installed.";
+	close;
+}
+jor_back5,365,187,3	duplicate(Enchanted installation#1)	Enchanted installation#2	4_EP20_DEVICE_BLUE
+jor_back5,203,256,3	duplicate(Enchanted installation#1)	Enchanted installation#3	4_EP20_DEVICE_RED
+jor_back5,230,349,3	duplicate(Enchanted installation#1)	Enchanted installation#4	4_EP20_DEVICE_RED
+jor_back5,94,281,3	duplicate(Enchanted installation#1)	Enchanted installation#5	4_EP20_DEVICE_BLUE
+jor_back5,71,204,3	duplicate(Enchanted installation#1)	Enchanted installation#6	4_EP20_DEVICE_BLACK
+jor_back5,170,362,3	duplicate(Enchanted installation#1)	Enchanted installation#7	4_EP20_DEVICE_BLACK
+jor_back6,190,201,3	duplicate(Enchanted installation#1)	Enchanted installation#8	4_EP20_DEVICE_BLACK
+jor_back6,310,304,3	duplicate(Enchanted installation#1)	Enchanted installation#9	4_EP20_DEVICE_BLUE
+jor_back6,214,80,3	duplicate(Enchanted installation#1)	Enchanted installation#10	4_EP20_DEVICE_BLUE
+jor_back6,45,38,3	duplicate(Enchanted installation#1)	Enchanted installation#11	4_EP20_DEVICE_RED
+jor_back6,51,47,3	duplicate(Enchanted installation#1)	Enchanted installation#12	4_EP20_DEVICE_BLACK
+jor_back6,122,180,3	duplicate(Enchanted installation#1)	Enchanted installation#13	4_EP20_DEVICE_RED
+jor_back6,330,22,3	duplicate(Enchanted installation#1)	Enchanted installation#14	4_EP20_DEVICE_BLUE
+//-----------------------
+
+
+
+// Misc NPCs on jor_sanct
+//-----------------------
+
+// note: no text
+jor_sanct,183,131,3	duplicate(dummy_npc)	Magic Recovery Device#20ms4	4_EP20_DEVICE_BLUE
+jor_sanct,184,130,5	duplicate(dummy_npc)	Magic Recovery Device#20ms5	4_EP20_DEVICE_BLUE
+jor_sanct,183,130,7	duplicate(dummy_npc)	Magic Recovery Device#20ms6	4_EP20_DEVICE_BLACK
+jor_sanct,29,127,3	duplicate(dummy_npc)	Magic Recovery Device#20ms1	4_EP20_DEVICE_BLACK
+jor_sanct,28,125,5	duplicate(dummy_npc)	Magic Recovery Device#20ms2	4_EP20_DEVICE_BLUE
+jor_sanct,27,123,7	duplicate(dummy_npc)	Magic Recovery Device#20ms3	4_EP20_DEVICE_BLACK
+jor_sanct,201,115,3	duplicate(dummy_npc)	Magic Recovery Device#20ms7	4_EP20_DEVICE_BLACK
+
+jor_sanct,145,247,7	script	Joysandid#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "I seem to feel Jormungand's energy.", "", bc_self;
+	end;
+}
+
+jor_sanct,147,245,1	script	Hogemlegand#20ms	4_EP19_RGAN_SR2,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "Can I see Rasgand today?", "", bc_self;
+	end;
+}
+
+jor_sanct,91,195,5	script	Mudontegand#20ms	4_EP19_RGAN_SR2,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "I never thought I could set foot in a sanctuary...", "", bc_self;
+	end;
+}
+
+jor_sanct,72,169,3	script	Uriyagand#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "If I'd known I'd do things like this, I wouldn't have come so first!", "", bc_self;
+	end;
+}
+
+jor_sanct,69,170,5	script	Baromogand#20ms	4_EP19_RGAN_SR2,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "See this? My hand, my hand...!", "", bc_self;
+	end;
+}
+
+jor_sanct,185,99,5	script	Sarjangand#20ms	4_EP19_RGAN_SR3,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "Why did you call us to work...", "", bc_self;
+	end;
+}
+
+jor_sanct,243,177,3	script	Kamergand#20ms	4_EP19_RGAN_SR2,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "This is tolerable, considering that all of these are Jormungandr's hardships, but...", "", bc_self;
+	end;
+}
+
+jor_sanct,52,125,3	script	Hugi-sanct#20ms	4_EP19_RGAN_SR3,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "Let's take a break...", "", bc_self;
+	end;
+}
+
+jor_sanct,91,153,7	script	Jurrugand#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "This place is impressive every time I see it. I want to bury my bones here.", "", bc_self;
+	end;
+}
+
+jor_sanct,236,140,3	script	Jegard Gand#20ms	4_EP19_RGAN_SR2,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "You invited us here...! Can I stay here?", "", bc_self;
+	end;
+}
+
+jor_sanct,118,264,5	script	Termangand#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "The more you look at it, the more sacred it is. Mr. Rasgand...", "", bc_self;
+	end;
+}
+
+jor_sanct,125,201,5	script	Sasayogand#20ms	4_EP19_RGAN_SR3,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "We'll have to do it all by hand, but it's not bad.", "", bc_self;
+	end;
+}
+
+jor_sanct,234,155,3	script	Valalegand#20ms	4_EP19_RGAN_SR2,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "Let's work hard for the one who will come someday!", "", bc_self;
+	end;
+}
+
+jor_sanct,98,137,3	script	Oerigand#20ms	4_EP19_RGAN_SR3,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "The filthy humans are making us suffer, but we love this place.", "", bc_self;
+	end;
+}
+
+jor_sanct,138,75,5	script	Pyogigand#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "It was good at first, but it's a bit frustrating. Can I leave?", "", bc_self;
+	end;
+}
+
+jor_sanct,146,210,7	script	Esiogand#20ms	4_EP19_RGAN_SR2,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "We've been chosen! We've been chosen!!", "", bc_self;
+	end;
+}
+
+jor_sanct,137,110,1	script	Myyogand#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "I get excited when I think about that day to come, but I get a little frustrated when I think about when that will be.", "", bc_self;
+	end;
+}
+
+jor_sanct,139,163,5	script	Upo Higand#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "It's been a while since I've been here, and I still can't believe it. I, I'm here...!", "", bc_self;
+	end;
+}
+
+jor_sanct,143,146,5	script	Ramsnugand#20ms	4_EP19_RGAN_SR3,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "I heard that only the chosen can set foot here, but there are more than I thought...?", "", bc_self;
+	end;
+}
+
+jor_sanct,80,88,5	script	Gancho Gingand#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "Isn't it an honor to be able to come here!", "", bc_self;
+	end;
+}
+
+jor_sanct,143,56,5	script	Park Organd#20ms	4_EP19_RGAN_SR3,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "Is it quiet outside now?", "", bc_self;
+	end;
+}
+
+jor_sanct,109,73,1	script	Panipagand#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "Why the hell does Rasgand look after that human? What are you doing?", "", bc_self;
+	end;
+}
+
+jor_sanct,128,203,3	script	Neteorgand#20ms	4_EP19_RGAN_SR2,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "Does anyone have any leftovers?", "", bc_self;
+	end;
+}
+
+jor_sanct,178,205,1	script	Sarabigand#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "When will he come! If only I could see Rasgand's face...!", "", bc_self;
+	end;
+}
+
+jor_sanct,184,97,1	script	Emerigand#20ms	4_EP19_RGAN_SR3,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "Didn't filthy people beat the bow to make you sick?", "", bc_self;
+	end;
+}
+
+jor_sanct,152,226,3	script	Miasogand#20ms	4_EP19_RGAN_SR3,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "Why... were only the bishops chosen?", "", bc_self;
+	end;
+}
+
+jor_sanct,80,103,5	script	Lunarigand#20ms	4_EP19_RGAN_SR1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "It's frustrating because I can't go outside freely, so should I apply for that new transformation...", "", bc_self;
+	end;
+}
+
+jor_sanct,94,105,1	script	Sorbegand#20ms	4_EP19_RGAN_SR2,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "When can we leave?", "", bc_self;
+	end;
+}
+
+jor_sanct,98,135,3	script	Jiagand#20ms	4_EP19_RGAN_SR2,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "I'm a little nervous. You never know when something else will change. What if you and he both transform?", "", bc_self;
+	end;
+}
+
+jor_sanct,168,242,1	script	Kkuorgand#20ms	4_EP19_RGAN_SR3,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "Jormungand is with you! Jormungand bless you!!", "", bc_self;
+	end;
+}
+
+jor_sanct,31,127,3	script	Heart hunter#20ms	EP20_MD_HEARTHUNTER1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	if (rand(2))
+		npctalk "Ha- I didn't know this would happen until I followed you...", "", bc_self;
+	else
+		npctalk "You just postpone everything to us because you're not used to it. I taught you everything like that.", "", bc_self;
+	end;
+}
+
+jor_sanct,30,123,1	script	Heart hunter#20ms1	EP20_MD_HEARTHUNTER1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	if (rand(2))
+		npctalk "Let's do it quickly and rest.", "", bc_self;
+	else
+		npctalk "Can't help it, we can handle it better.", "", bc_self;
+	end;
+}
+
+jor_sanct,202,114,5	script	Heart hunter#20ms2	EP20_MD_HEARTHUNTER1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "Work, work tripled...", "", bc_self;
+	end;
+}
+
+jor_sanct,210,171,3	script	Heart hunter#20ms3	EP20_MD_HEARTHUNTER1,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "Where, is there anywhere to rest...!", "", bc_self;
+	end;
+}
+
+jor_sanct,53,255,3	script	Hirigand#20ms	4_EP19_RGAN_SR3,{
+	callfunc( "F_ep20_checkTransform", 1 );
+	npctalk "It's good that I came to the sanctuary, but no one told me that I would work this far.", "", bc_self;
+	end;
+}
+//-----------------------
+
+
+
+
+
+// Exchange npc
+icas_in,170,65,5	script	Pipiring#ep20reward	4_EP19_IWIN,{
+	if (get_reputation_points( REPU_EP20 ) < 1000) {
+		cutin "ep19_iwin02.png",2;
+		mes "[Pipiring]";
+		mes "You got a new material this time, what is it?";
+		mes "Vellgunde told us to apply for anything that would be helpful to the adventurers.";
+		next;
+		mes "[Pipiring]";
+		mes "I'm working hard on things that might be helpful to adventurers. You can look forward to it.";
+		close3;
+	}
+	cutin "ep19_iwin02.png",2;
+	mes "[Pipiring]";
+	mes "You got a new material this time, what is it?";
+	mes "Vellgunde told us to apply for anything that would be helpful to the adventurers.";
+	next;
+	mes "[Pipiring]";
+	mes "After much research with Vellgunde, we found various ways to apply.";
+	mes "Do you need any of these?";
+	next;
+	switch( select( "" + getitemname(1001217) + " Exchange", "Glacier Armor Exchange", "Glacier Armor/Dim Glacier Armor Enchantment", "Pure Magic/Dim Glacier Armor Enhancement Exchange" ) ) {
+	case 1:
+		mes "[Pipiring]";
+		if (PACKETVER >= 20230302)	// (official)
+			mes "" + getitemname(1001217) + "! ^i[1001217] That's a pretty cool thing.";
+		else	// (workaround)
+			mes "" + getitemname(1001217) + "! " + mesitemlink(1001217) + " That's pretty cool.";
+		mes "Having this mustache means you met a white cat, right?";
+		mes "I'll exchange them for useful ones.";
+		next;
+		switch( select( "Open White Cat Alliance Shop", "Open Mysterious Cache" ) ) {
+		case 1:
+			if (get_reputation_points( REPU_EP20 ) < 2000) {
+				mes "[Pipiring]";
+				mes "Is there a promising butler here?";
+				mes "Okay! I'll show you a very cute guy!";
+				close2;
+				cutin "",255;
+				callshop( "barter_ep20_shop_1_A" );
+				end;
+			}
+			mes "[Pipiring]";
+			mes "I've got some cute, cool, and useful stuff for a Shrine Guardian!";
+			close2;
+			cutin "",255;
+			callshop( "barter_ep20_shop_1_B" );
+			end;
+		case 2:
+			mes "[Pipiring]";
+			mes "I don't even know what's actually going to come out of the mysterious archive?";
+			if (PACKETVER >= 20230302)	// (official)
+				mes "I'll use 70 ^i[1001217]";
+			else	// (workaround)
+				mes "I will use 70 " + mesitemlink(1001217) + "";
+			while(1) {
+				next;
+				if (select( "Open!", "I'll think about it." ) == 2) {
+					mes "[Pipiring]";
+					mes "Good, good. If you need anything else, come back anytime~";
+					close3;
+				}
+				if (checkweight(1201,1) == 0) { // custom
+					mes "Conversation cannot proceed because you have too many items.";
+					mes "Please clean up your inventory and try again.";
+					close;
+				}
+				if (countitem(1001217) < 70) {
+					mes "[Pipiring]";
+					mes "Oops? Not enough " + getitemname(1001217) + "?";
+					if (PACKETVER >= 20230302)	// (official)
+						mes "What do you need? ^i[1001217] 70~!";
+					else	// (workaround)
+						mes "What do you need?" + mesitemlink(1001217) + "70!";
+					close3;
+				}
+				delitem 1001217,70;	// Ep20_Cat_Whiskers
+				// note: unknown list, but it is similar to this group. No new box has been added in the episode patch, which is usually used as dummy for consumeitem.
+				getgroupitem(IG_D_GW_EXTRACTOR);
+				mes "[Pipiring]";
+				mes "What will come out? Let's pray. Meow!";
+				specialeffect2 EF_SPHERE;
+				next;
+				mes "[Pipiring]";
+				mes "Do you want to open more mysterious archives?";
+			}
+			end;
+		}
+		end;
+	case 2:
+		mes "[Pipiring]";
+		mes "I'm always beholden to adventurers";
+		mes "I hope these armors will help";
+		close2;
+		cutin "",255;
+		callshop( "barter_ep20_glacier_eq" );
+		end;
+	case 3:
+		mes "[Pipiring]";
+		mes "Vellgunde's research has finally come to fruition, what?";
+		mes "You can enchant Glacier Armor and Dim Glacier Armor.";
+		next;
+		switch( select( "Glacier Armor Enchantment", "Dim Glacier Armor Enchantment" ) ) {
+		case 1:
+			mes "[Pipiring]";
+			mes "Choose the equipment you want to enchant among the Glacier armor.";
+			mes "Available devices are like this.";
+			if (PACKETVER >= 20230302)	// (official)
+				mes "^i[450264] ^i[450265] ^i[450266] ^i[450267] ^i[470196] ^i[450268] ^i[460040] ^i[490328] ^i[490330] ^i[490327] ^i[490329]";
+			else	// (workaround)
+				mes "" + mesitemlink(450264) + " " + mesitemlink(450265) + " " + mesitemlink(450266) + " " + mesitemlink(450267) + " " + mesitemlink(470196) + " " + mesitemlink(450268) + " " + mesitemlink(460040) + " " + mesitemlink(490328) + " " + mesitemlink(490330) + " " + mesitemlink(490327) + " " + mesitemlink(490329) + "";
+			next;
+			.@s = select( "Glacier Armor/Robe", "Glacier Cloak/Muffler", "Glacier Boots/Shoes", "Glacier Guard", "Glacier Pendant/Necklace", "Glacier Ring/Earrings " ) - 1;
+			.@id = 89 + .@s;
+			mes "[Pipiring]";
+			mes "I wish you luck.";
+			close2;
+			cutin "",255;
+			item_enchant(.@id);
+			end;
+		case 2:
+			mes "[Pipiring]";
+			mes "Choose the equipment you want to enchant among Dim Glacier's armor.";
+			mes "Available devices are like this.";
+			if (PACKETVER >= 20230302)	// (official)
+				mes "^i[450270] ^i[450271] ^i[480283] ^i[480284] ^i[470197] ^i[470198]";
+			else	// (workaround)
+				mes "" + mesitemlink(450270) + " " + mesitemlink(450271) + " " + mesitemlink(480283) + " " + mesitemlink(480284) + " " + mesitemlink(470197) + " " + mesitemlink(470198) + "";
+			next;
+			.@s = select( "Dim Glacier Armor/Robe", "Dim Glacier Cloak/Muffler", "Dim Glacier Boots/Shoes" ) - 1;
+			.@id = 95 + .@s;
+			mes "[Pipiring]";
+			mes "I wish you luck.";
+			close2;
+			cutin "",255;
+			item_enchant(.@id);
+			end;
+		}
+		end;
+	case 4:
+		mes "[Pipiring]";
+		mes "It's an exchange of materials needed for research to support adventurers... and things that are helpful to adventurers.";
+		close2;
+		cutin "",255;
+		callshop( "barter_ep20_shop_2" );
+		end;
+	}
+	end;
+}

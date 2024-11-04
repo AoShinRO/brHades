@@ -1,0 +1,149 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Warps from episode 20
+//===== Description: =========================================
+//= .
+//===== Additional Comments: =================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+jor_back3,159,365,0	warp2	back3_to_back4	1,1,jor_back4,273,19
+jor_back4,277,16,0	warp2	back4_to_back3	1,1,jor_back3,159,360
+
+jor_back4,6,374,0	warp2	back4_to_back5	1,1,jor_back5,340,20
+jor_back5,339,14,0	warp2	back5_to_back4	1,1,jor_back4,10,370
+
+jor_back5,10,239,0	warp2	back5_to_back6	1,1,jor_back6,388,263
+jor_back6,393,263,0	warp2	back6_to_back5	1,1,jor_back5,16,239
+
+jor_back6,30,147,0	warp2	back6_to_root3	1,1,jor_root3,367,129
+jor_root3,372,129,0	warp2	root3_to_back6	1,1,jor_back6,34,147
+
+jor_root1,32,11,0	warp2	roo1_to_nest	1,1,jor_nest,38,270
+
+jor_root1,59,295,0	warp2	root1_to_root2	1,1,jor_root2,25,17
+jor_root2,25,10,0	warp2	root2_to_root1	1,1,jor_root1,59,290
+
+jor_root2,12,172,0	script	safty2-2in	WARPNPC,1,1,{
+	end;
+OnTouch:
+	warp "jor_safty2",199,369;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8846) == 1 && isbegin_quest(8849) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8853) == 1 && isbegin_quest(8849) == 0" );
+	end;
+}
+jor_safty2,199,371,0	warp2	safty2-2out	1,1,jor_root2,14,174
+
+jor_root2,242,124,0	script	safty2-3in	WARPNPC,1,1,{
+	end;
+OnTouch:
+	warp "jor_safty2",297,368;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8846) == 1 && isbegin_quest(8850) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8853) == 1 && isbegin_quest(8850) == 0" );
+	end;
+}
+jor_safty2,295,369,0	warp2	safty2-3out	1,1,jor_root2,240,124
+
+jor_root2,149,125,0	script	safty2-6in	WARPNPC,1,1,{
+	end;
+OnTouch:
+	warp "jor_safty2",310,245;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8849) == 1 && isbegin_quest(8851) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8853) == 1 && isbegin_quest(8851) == 0" );
+	end;
+}
+jor_safty2,310,243,0	warp2	safty2-6out	1,1,jor_root2,149,123
+
+jor_root2,25,291,0	warp2	root2_to_sanct	1,1,jor_sanct,150,47
+jor_sanct,150,43,0	warp2	sanct_to_root2	1,1,jor_root2,25,285
+
+jor_sanct,28,291,0	warp2	enter_maze	1,1,jor_maze,206,16
+jor_maze,206,12,0	warp2	out_maze	1,1,jor_sanct,28,286
+
+jor_maze,198,58,0	warp2	maze_a1_to_b1	1,1,jor_maze,268,116
+jor_maze,268,113,0	warp2	maze_b1_to_a1	1,1,jor_maze,198,54
+
+jor_maze,89,256,0	warp2	maze_c2_to_b2	1,1,jor_maze,268,187
+jor_maze,264,187,0	warp2	maze_b2_to_c2	1,1,jor_maze,85,256
+
+jor_maze,16,12,0	warp2	maze_d3_to_c3	1,1,jor_maze,46,271
+jor_maze,46,275,0	warp2	maze_c3_to_d3	1,1,jor_maze,16,16
+
+jor_maze,88,28,0	warp2	maze_d4_to_e4	1,1,jor_maze,151,281
+jor_maze,151,285,0	warp2	maze_e4_to_d4	1,1,jor_maze,88,32
+
+jor_maze,182,206,0	warp2	maze_e5_to_f5	1,1,jor_maze,192,153
+jor_maze,192,157,0	warp2	maze_f5_to_e5	1,1,jor_maze,182,210
+
+jor_maze,53,162,0	warp2	maze_g6_to_f6	1,1,jor_maze,168,138
+jor_maze,164,138,0	warp2	maze_f6_to_g6	1,1,jor_maze,49,162
+
+jor_maze,50,125,0	warp2	maze_g7_to_f7	1,1,jor_maze,192,106
+jor_maze,192,102,0	warp2	maze_f7_to_g7	1,1,jor_maze,50,121
+
+jor_maze,34,189,0	warp2	maze_g8_to_h8	1,1,jor_maze,104,156
+jor_maze,104,152,0	warp2	maze_h8_to_g8	1,1,jor_maze,34,185
+
+jor_maze,104,207,0	warp2	maze_h9_to_i9	1,1,jor_maze,148,28
+jor_maze,148,24,0	warp	maze_i9_to_h9	1,1,jor_maze,104,203
+
+jor_maze,136,176,0	warp2	maze_h10_to_j10	1,1,jor_maze,260,46
+jor_maze,260,50,0	warp2	maze_j10_to_h10	1,1,jor_maze,136,180
+
+jor_maze,14,283,0	warp2	maze_c11_to_k11	1,1,jor_maze,282,246
+jor_maze,282,242,0	warp2	maze_k11_to_c11	1,1,jor_maze,14,279
+
+jor_maze,217,289,0	warp2	maze_k12_to_b12	1,1,jor_maze,243,156
+jor_maze,243,152,0	warp2	maze_b12_to_k12	1,1,jor_maze,217,285
+
+jor_maze,140,79,0	script	maze_to_twice	WARPNPC,1,1,{
+	end;
+OnTouch:
+	if (ep20_main < 34)
+		end;
+	warp "jor_twice",42,55;
+	end;
+}
+jor_twice,40,52,0	warp2	twice_to_maze	1,1,jor_maze,140,75
+
+icas_in2,33,109,0	warp2	#20ms64	1,1,icecastle,51,164
+
+jor_safty2,65,357,0	warp2	#20ms12	1,1,jor_root2,232,248
+jor_safty2,193,31,0	warp2	#20ms41	1,1,jor_maze,15,40
+jor_safty2,320,36,0	warp2	#20ms43	1,1,jor_maze,17,147
+jor_safty2,66,245,0	warp2	safty2_out	1,1,jor_root1,32,70
+
+icecastle,157,206,0	script	enter_icasin2_room5	WARPNPC,1,1,{
+	end;
+OnTouch:
+	if (ep20_main < 61) {
+		mes "The door is locked.";
+		close;
+	}
+	warp "icas_in2",248,112;
+	end;
+}
+icas_in2,250,109,0	warp2	out_icasin2_room5	1,1,icecastle,160,203
+
+jor_twice,43,331,5	script	White cat#nyar_warp	EP20_NPC_NYAR,{
+	if (ep20_main < 34) {
+		npctalk "Guruk Guruk...", "", bc_self;
+		end;
+	}
+	npctalk "Why?", "", bc_self;
+	if (select( "Please let me into the twig's nest.", "Wow" ) == 2) {
+		npctalk "Meow~", "", bc_self;
+		sleep 500;
+		npctalk "Guruk Guruk...", "", bc_self;
+		end;
+	}
+	warp "jor_twig",212,114;
+	end;
+}
+jor_twig,212,109,0	warp2	out_twig	1,1,jor_twice,47,327

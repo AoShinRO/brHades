@@ -1,0 +1,1180 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Episode 20: Immortals
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- Instance from Episode 20 (main quest)
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Main quest - Step 10
+icecastle,202,168,0	script	#ep20_re08	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep20_main == 9) {
+		cloakoffnpcself( "ep20_icecastle_201_171" );
+		end;
+	}
+	end;
+}
+
+icecastle,201,171,3	script(CLOAKED)	Lehar#ep20_re07::ep20_icecastle_201_171	4_EP19_LEHAR,{
+	if (ep20_main != 9)
+		end;
+	if (is_party_leader() == false) {
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "Please prepare first! So, you can come with a one-person party!";
+		close3;
+	}
+	.@md_name$ = "Canyon Exploration";
+
+	switch( select( "Prepare " + .@md_name$ + "", "Enter " + .@md_name$ + "" ) ) {
+	case 1:
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "You're here! It looks like you're all ready to explore.";
+		mes "Then take a moment to catch your breath and prepare your mind!";
+		if (is_party_leader() == true)
+			instance_create(.@md_name$);
+		close3;
+	case 2:
+		if (is_party_leader() == false)
+			end;
+		switch( instance_enter(.@md_name$) ) {
+		case IE_OTHER:
+			mes "^ff0000An unknown error occurred.^000000";
+			close;
+		case IE_NOINSTANCE:
+		case IE_NOMEMBER:
+			cutin "ep19_lehar01.png",2;
+			mes "[Lehar]";
+			mes "Still preparing! Please wait a little longer and re-enter.";
+			close3;
+		case IE_OK:
+			// warp "1@20cn1",94,79;
+			end;
+		}
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(16701) == 1" );
+	end;
+}
+
+
+// Step 1
+1@20cn1,95,78,0	script	#ep20MD_re00	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if ('step >= 1) {	// re-enabled
+		enablenpc instance_npcname("ep20_120cn1_91_80");
+		end;
+	}
+	end;
+}
+
+1@20cn1,91,80,5	script	Lehar#ep20MD_re01::ep20_120cn1_91_80	4_EP19_LEHAR,2,2,{
+	if ('step == 0) {
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "Then I'll leave here.";
+		mes "If you go a little further to 3 o'clock, you will be in the area designated for you.";
+		next;
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "Reconnaissance! Fighting!";
+		emotion ET_BEST;
+		next;
+		cutin "",255;
+		sleep2 500;
+		npctalk "Lehar: Fighting!";
+		disablenpc();
+		if ('step == 0)
+			'step = 1;
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Let's start exploring...";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "You'd better hide and watch carefully so you don't get attacked again.";
+		navigateto("1@20cn1",171,105);
+		close;
+	}
+	cutin "ep19_lehar02.png",2;
+	mes "[Lehar]";
+	mes "Reconnaissance! Fighting!";
+	close2;
+	cutin "",255;
+	disablenpc();
+	end;
+
+OnTouch:
+	npctalk "Lehar: Here you are, Adventurer!";
+	end;
+}
+
+
+// Step 2
+1@20cn1,165,105,0	script	#ep20MD_re01	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if ('step == 1) {
+		enablenpc instance_npcname("ep20_120cn1_173_103");
+		enablenpc instance_npcname("ep20_120cn1_171_105");
+		end;
+	}
+	end;
+}
+
+1@20cn1,173,103,3	script(DISABLED)	Strange Iwin#ep20MD_re02::ep20_120cn1_173_103	EP20_FAKE_IWIN_SR,{
+	emotion ET_PROFUSELY_SWEAT;
+	mes "[Strange Iwin]";
+	mes "Is this our job?";
+	mes "No, you can't!?";
+	close;
+
+OnInstanceInit:
+	'step = 0;
+	'map_20cn2$ = instance_mapname("1@20cn2");
+	end;
+}
+
+1@20cn1,171,105,5	script(DISABLED)	Strange Iwin#ep20MD_re01::ep20_120cn1_171_105	EP20_FAKE_IWIN_SB,2,2,{
+	if ('step < 1)
+		end;
+	if ('step == 1) {
+		mes "[Strange Iwin]";
+		mes "Wait! Who's there!";
+		mes "I saw it all! Don't think about hiding, come out!";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "I was trying to keep an eye on it... Huh?";
+		mes "Iwin? Are you in charge here?";
+		next;
+		mes "[Strange Iwin]";
+		mes "In charge? Yes, I am in charge, but...";
+		mes "What! You?";
+		next;
+		mes "[Another Stranger Iwin]";
+		mes "That adventurer I saw in the ice castle...!";
+		mes "Oh no. Hmmmm, what's going on here?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Something seems to be twisted. Mr. Lehar said this is my area.";
+		mes "Did you guys decide to patrol this place too? But somehow it looks like a strange face.";
+		next;
+		emotion ET_HUK;
+		sleep2 500;
+		emotion ET_HUK, getnpcid(0, instance_npcname("ep20_120cn1_173_103"));
+		mes "[Strange Iwin]";
+		mes "Startle.";
+		next;
+		mes "[Another Stranger Iwin]";
+		mes "Yes, that's possible. Isn't it because we just became soldiers?";
+		next;
+		emotion ET_SWEAT;
+		mes "[Strange Iwin]";
+		mes "Yes, that's right! Becoming a soldier has been our long-held dream";
+		mes "Being a soldier~ protecting everyone~ was my dream";
+		next;
+		emotion ET_SWEAT, getnpcid(0, instance_npcname("ep20_120cn1_173_103"));
+		mes "[Another Stranger Iwin]";
+		mes "That's right, that's right! Humans don't distinguish our faces very well.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "(Somehow, I'm a little suspicious. But it's probably Iwin.... I guess it's because of my mood.)";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Then let's work hard together.";
+		mes "I'm going to check the area to be patrolled again...";
+		mes "Shall we go?";
+		next;
+		mes "[Strange children]";
+		mes "Okay, take the lead!";
+		mes "We'll start patrol too!";
+		next;
+	}
+	mes "[" + strcharinfo(0) + "]";
+	mes "…….";
+	next;
+	specialeffect2 EF_MAGMA_FLOW;
+	mes "[Strange children]";
+	mes "Attack!";
+	close2;
+	warp 'map_20cn2$,271,138;
+	if ('step == 1)
+		'step = 2;
+	// disablenpc instance_npcname("ep20_120cn1_173_103");
+	// disablenpc instance_npcname("ep20_120cn1_171_105");
+	enablenpc instance_npcname("ep20_120cn2_271_134");
+	if ('step >= 5)	// re-enter
+		enablenpc instance_npcname("ep20_120cn2_269_136");
+	end;
+
+OnTouch:
+	npctalk "Stranger Iwin: Who is it!!";
+	npctalk "Stranger Iwin: stop there!!", instance_npcname("ep20_120cn1_173_103");
+	end;
+}
+
+
+// Step 3, 4
+1@20cn2,264,135,5	duplicate(dummy_disabled_npc)	Bagot#ep20MD_re01::ep20_120cn2_264_135	4_EP18_BAGOT
+
+1@20cn2,271,134,3	script(DISABLED)	Lehar#ep20MD_re02::ep20_120cn2_271_134	4_EP19_LEHAR,2,2,{
+	if ('step == 2) {
+		mes "[" + strcharinfo(0) + "]";
+		mes "…….";
+		next;
+		emotion ET_THINK, playerattached();
+		mes "[" + strcharinfo(0) + "]";
+		mes "………….";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "……………….";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "…….Get ready…!!";
+		next;
+		mes "[Lehar]";
+		mes "Calm down, " + strcharinfo(0) + "!!";
+		next;
+		cutin "",255;
+		sleep2 500;
+		emotion ET_KEK, playerattached();
+		mes "[" + strcharinfo(0) + "]";
+		mes "Ouch! My head hurts... the back of my head is tingling.";
+		mes "I couldn't believe it, but was he really a traitor?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Mr. Lehar was also arrested. Are you okay, Mr. Lehar!?";
+		next;
+		cutin "ep19_lehar03.png",2;
+		mes "[Lehar]";
+		mes "Ugh... I was caught off guard.";
+		mes "I never thought there would be a traitor among Iwin. How did this happen?";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "I didn't even think of that";
+		mes "But we can't go on like this. We'll have to think about a way to escape...";
+		next;
+		cutin "ep19_lehar03.png",2;
+		mes "[Lehar]";
+		mes "Ugh, I mean. I'll have to put my brain together to see if there's a way to escape...";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mapannounce 'map_20cn2$, "Bagot: Mr. Lasgand. Have you considered my suggestion?", bc_map, 0xFFFF99;
+		sleep2 500;
+		emotion ET_SURPRISE;
+		mes "[Lehar]";
+		mes "Oh, I hear something outside! Let's listen!";
+		next;
+		cutin "",255;
+		ignoretimeout(true);
+		// note: timer inaccurate
+		mapannounce 'map_20cn2$, "Bagot: Attempt to 'resurrect' with Jormungandr's body now remaining,", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "Bagot: I told you that even the remaining magic power may be lost.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "Lasgand: Yes, I've heard that story already.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "Lasgand: Did you say that because it's already a shell?", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "Bagot: That's unfortunate.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "Bagot: It means that the efficiency will be lower than the investment invested.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "Lasgand: But what you said is too reckless.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "Lasgand: Do you want me to use that magic myself?", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "Bagot: Yes, yes, and you become a god yourself.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "Bagot: Destroy the barrier and get out of Isgard, and take the continent of Midgard yourself!", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "Bagot: You finally reign here as the true conqueror of the continent!", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "Bagot: Come as the ruler of the world!", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "Lasgand: ....", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "Lasgand: You know how to tell an appetizing story.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "Bagot: Whoops, Bagot is always like that.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "Lasgand: Alright, let me do it. Let's do the research.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "Bagot: Thank you very much for the grace like Hahae.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "Bagot: May Lasgand always be blessed.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "Lasgand: Huh.... He's really good at making fun of his mouth.", bc_map, 0xFFFF99;
+		sleep2 2000;
+		emotion ET_THINK;
+		mapannounce 'map_20cn2$, "Bagot: Did you go?", bc_map, 0xFFFF99;
+		ignoretimeout(false);
+		sleep2 2000;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "Oh, it looks like it's coming into the lab.";
+		next;
+		enablenpc instance_npcname("ep20_120cn2_264_135");
+		sleep2 500;
+		cutin "ep18_bagot_02.png",2;
+		emotion ET_SCRATCH, getnpcid(0, instance_npcname("ep20_120cn2_264_135"));
+		mes "[Bagot]";
+		mes "Hmm.... It's like a tricky snake to please.";
+		mes "But in return, I got what Bargot wanted, so it wasn't a bad deal.";
+		next;
+		cutin "ep18_bagot_01.png",2;
+		mes "[Bagot]";
+		mes "Whoops, pretending to be sleazy and still wanting something like that.";
+		mes "But I can do it thanks to you...!";
+		next;
+		cutin "ep18_bagot_03.png",2;
+		mes "[Bagot]";
+		mes "Bagot becomes a transcendental person who creates 'God'...!";
+		mes "Seriously, a miracle that transcends humans!";
+		next;
+		emotion ET_THINK;
+		sleep2 500;
+		cutin "ep19_lehar04.png",2;
+		mes "[Lehar]";
+		mes "Wow, the front and back words are so different.";
+		next;
+		cutin "ep18_bagot_01.png",2;
+		mes "[Bagot]";
+		mes "Huh? Were you awake? It doesn't matter.";
+		mes "You will soon be the ingredients for this, my offerings.";
+		next;
+		cutin "ep19_lehar03.png",2;
+		mes "[Lehar]";
+		mes "I thought it would be like a sacrifice. Get it out!";
+		next;
+		cutin "ep18_bagot_01.png",2;
+		mes "[Bagot]";
+		mes "I can't do that";
+		mes "We've finally caught the troublesome entity that's been bothering us so much.";
+		next;
+		cutin "ep18_bagot_03.png",2;
+		mes "[Bagot]";
+		mes "Your mana will surely be of sufficient help in the experiment.";
+		mes "Bagot is very happy";
+		next;
+		cutin "ep19_lehar03.png",2;
+		mes "[Lehar]";
+		mes "You think they'll just let us be tested?!";
+		next;
+		cutin "ep18_bagot_01.png",2;
+		mes "[Bagot]";
+		mes "Sure. I think you should rather be happy.";
+		mes "Be proud of the fact that you can become a foundation for God's creation.";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "It's hard to answer because you're so serious about it, isn't it? " + strcharinfo(0) + "....";
+		next;
+		cutin "ep18_bagot_03.png",2;
+		mes "[Bagot]";
+		mes "It won't be long before I can say that";
+		mes "So crapDon't think and stay calm.";
+		close2;
+		if ('step == 2)
+			'step = 3;
+		npctalk "Lehar: Ugh, he's gone.";
+		cutin "",255;
+		disablenpc instance_npcname("ep20_120cn2_264_135");
+		end;
+	}
+	if ('step == 3) {
+		cutin "ep19_lehar03.png",2;
+		mes "[Lehar]";
+		mes "Haha, now what should I do? I can't seem to get out.";
+		next;
+		specialeffect EF_SPR_LIGHTPRINT;
+		mes "[Lehar]";
+		mes "Eight! It! Haaaagh! Hot!";
+		mes "It's hard to break, too. It's locked up tightly!";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "There must be a way. If the prison doesn't have loopholes, it's like trying to get someone to bring you meals...";
+		next;
+		enablenpc instance_npcname("ep20_120cn2_273_136");
+		sleep2 500;
+		cutin "ep20_nyar02.png",1;
+		mes "[White Cat]";
+		mes "…….";
+		next;
+		cutin "ep19_lehar04.png",2;
+		mes "[Lehar]";
+		mes "But it would be difficult if everyone didn't listen to us and just said what I had to say and left...";
+		next;
+		cutin "ep20_nyar03.png",1;
+		sleep2 500;
+		emotion ET_OK, getnpcid(0, instance_npcname("ep20_120cn2_273_136"));
+		mes "[White Cat]";
+		mes "…….";
+		next;
+		cutin "ep19_lehar05.png",2;
+		sleep2 500;
+		emotion ET_HUK;
+		mes "[Lehar]";
+		mes "Ouch! What! Something just brushed my leg! Something very... soft?";
+		next;
+		cutin "",255;
+		select( "What is this?", "Go, Cat?" );	// note: the selection doesn't change the dialog
+		cutin "ep20_nyar02.png",1;
+		mes "[White Cat]";
+		mes "Hey-Ong.";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "It looks like a Cat, but it also seems to meow and meow...";
+		mes "But I've never seen a Cat this long. Eh, since when have you been here?";
+		next;
+		cutin "ep20_nyar01.png",1;
+		mes "[White Cat]";
+		mes "?";
+		close2;
+		cutin "",255;
+		if ('step == 3) {
+			'step = 4;
+			donpcevent instance_npcname("ep20_120cn2_273_136") + "::OnStart";
+		}
+		end;
+	}
+	cutin "ep19_lehar03.png",2;
+	mes "[Lehar]";
+	mes "What should I do? I can't seem to get out.";
+	close3;
+
+OnTouch:
+	npctalk "Lehar: Adventurer! Adventurer!";
+	end;
+}
+
+1@20cn2,273,136,3	script(DISABLED)	Cat#ep20MD_re01::ep20_120cn2_273_136	EP20_NPC_NYAR,{
+	end;
+OnStart:
+	npcspeed 200;
+	unitwalk getnpcid(0),269,136, instance_npcname("ep20_120cn2_273_136") + "::OnMove";
+	end;
+OnMove:
+	'step = 5;
+	disablenpc();
+	enablenpc instance_npcname("ep20_120cn2_269_136");
+	npctalk "Cat: Sheep.", instance_npcname("ep20_120cn2_269_136");
+	end;
+}
+
+
+// Step 5
+1@20cn2,269,136,3	script(DISABLED)	Cat#ep20MD_re01_1::ep20_120cn2_269_136	EP20_NPC_NYAR,{
+	if ('step < 5)
+		end;
+	if ('step == 5) {
+		cutin "ep20_nyar01.png",1;
+		mes "[White Cat]";
+		mes "Munnyak.";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "Oops, I guess it's longer because I'm walking";
+		mes "They approached the door!";
+		next;
+		cutin "",255;
+		select( "It makes a strange noise..." );
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "Cats are like that";
+		mes "Huh? Uh uh, uh uh! Hi " + strcharinfo(0) + ", look at that!";
+		next;
+		specialeffect 1044;
+		mes "[Lehar]";
+		mes "The Cat is scratching with its claws... the lock is breaking down!";
+		mes "How could this happen? Is it possible?";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "Goat, how is this possible?";
+		mes "Could you please explain?";
+		next;
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "Whoa, the lock is completely unlocked!";
+		next;
+		cutin "ep20_nyar05.png",1;
+		mes "[White Cat]";
+		mes "(wags tail as if to follow me and walks out of the cage)";
+		next;
+	}
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "Oh, go ahead and follow me!";
+	close2;
+	cutin "",255;
+	warp 'map_20cn2$,52,283;
+	navigateto("1@20cn2",62,258);
+	if ('step == 5)
+		'step = 6;
+	disablenpc;
+	disablenpc instance_npcname("ep20_120cn2_271_134");
+	enablenpc instance_npcname("ep20_120cn2_69_266");
+	enablenpc instance_npcname("ep20_120cn2_71_264");
+	enablenpc instance_npcname("ep20_120cn2_62_258");
+	enablenpc instance_npcname("ep20_120cn2_63_257");
+	end;
+}
+
+
+// Step 6
+1@20cn2,69,266,3	script(DISABLED)	Lasgand#ep20MD_re02::ep20_120cn2_69_266	EP20_NPC_LASGAND,{
+	npctalk "Lasgand: ...Hmm, it's going really well...";
+	end;
+}
+
+1@20cn2,71,264,1	script(DISABLED)	Bagot#ep20MD_re02::ep20_120cn2_71_264	4_EP18_BAGOT,{
+	npctalk "Bagot: ...so about that place...";
+	end;
+}
+
+1@20cn2,63,257,3	script(DISABLED)	Cat#ep20MD_re02::ep20_120cn2_63_257	EP20_NPC_NYAR,{
+	cutin "ep20_nyar03.png",1;
+	mes "[White Cat]";
+	mes "?yohhh";
+	close3;
+}
+
+1@20cn2,62,258,3	script(DISABLED)	Lehar#ep20MD_re03::ep20_120cn2_62_258	4_EP19_LEHAR,2,2,{
+	if ('step < 6)
+		end;
+	if ('step == 6) {
+		cutin "ep20_nyar02.png",1;
+		mes "[White Cat]";
+		mes "yohhh";
+		next;
+		cutin "ep19_lehar05.png",2;
+		sleep2 500;
+		emotion ET_SURPRISE;
+		mes "[Lehar]";
+		mes "Ah, I guess it means stop here. I cried very little.";
+		mes "There's Bagot and Lasgand! Let's hide!";
+		next;
+		cutin "ep18_bagot_01.png",2;
+		mes "[Bagot]";
+		mes "The plan is going well, Mr. Lasgand.";
+		mes "As well as the plans for that place.";
+		next;
+		cutin "",255;
+		sleep2 500;
+		emotion ET_QUESTION, playerattached();
+		select( "Where is that?" );
+		cutin "ep19_lehar03.png",2;
+		mes "[Lehar]";
+		mes "I mean, let's listen to it first.";
+		mes "It's full of things I don't know yet.";
+		next;
+		cutin "ep20_lasgand01.png",1;
+		mes "[Lasgand]";
+		mes "It's working fine. I haven't been able to find it until now.";
+		mes "Anyway, let's continue attacking. Now that we've got the clue, we should break through at once.";
+		next;
+		cutin "ep18_bagot_03.png",2;
+		mes "[Bagot]";
+		mes "Still, isn't it a big step since you discovered its existence?";
+		next;
+		cutin "ep20_nyar05.png",1;
+		mes "[White Cat]";
+		mes "(somehow restless, spins in place)";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "Something's wrong with the Cat. What's wrong, Cat?";
+		next;
+		cutin "ep20_nyar04.png",1;
+		mes "[White Cat]";
+		mes "Aww....";
+		next;
+		cutin "ep20_lasgand03.png",1;
+		mes "[Lasgand]";
+		mes "Anyway, let's get through that place as soon as possible.";
+		next;
+		cutin "ep18_bagot_02.png",2;
+		mes "[Bagot]";
+		mes "That's right. Then, Mr. Lasgand, what's next...";
+		next;
+		cutin "ep19_lehar05.png",2;
+		sleep2 500;
+		if ('step == 6) {
+			'step = 7;
+			disablenpc instance_npcname("ep20_120cn2_69_266");
+			disablenpc instance_npcname("ep20_120cn2_71_264");
+
+			enablenpc instance_npcname("ep20_120cn2_57_220");
+			enablenpc instance_npcname("ep20_120cn2_57_223");
+			enablenpc instance_npcname("ep20_120cn2_53_219");
+			enablenpc instance_npcname("ep20_120cn2_52_221");
+			enablenpc instance_npcname("ep20_120cn2_54_222");
+			enablenpc instance_npcname("ep20_120cn2_63_227");
+			enablenpc instance_npcname("ep20_120cn2_64_224");
+		}
+		mes "[Lehar]";
+		mes "Oh, they'are gone.";
+		next;
+		cutin "ep20_nyar02.png",1;
+		mes "[White Cat]";
+		mes "Nyaaang.";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "The Cat is walking again.";
+		mes "Can we trust this Cat and follow it?";
+		next;
+		cutin "ep20_nyar01.png",1;
+		mes "[White Cat]";
+		mes "Ungnyang!";
+		next;
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "Oops, you reply as if you understand what I'm saying.";
+		mes "Let's follow along.";
+		close2;
+		cutin "",255;
+		disablenpc();
+		disablenpc instance_npcname("ep20_120cn2_63_257");
+		navigateto("1@20cn2",64,224);
+		end;
+	}
+	cutin "ep19_lehar02.png",2;
+	mes "[Lehar]";
+	mes "Okay, let's follow along.";
+	close2;
+	cutin "",255;
+	disablenpc instance_npcname("ep20_120cn2_69_266");
+	disablenpc instance_npcname("ep20_120cn2_71_264");
+
+	enablenpc instance_npcname("ep20_120cn2_57_220");
+	enablenpc instance_npcname("ep20_120cn2_57_223");
+	enablenpc instance_npcname("ep20_120cn2_53_219");
+	enablenpc instance_npcname("ep20_120cn2_52_221");
+	enablenpc instance_npcname("ep20_120cn2_54_222");
+	enablenpc instance_npcname("ep20_120cn2_63_227");
+	enablenpc instance_npcname("ep20_120cn2_64_224");
+
+	disablenpc();
+	disablenpc instance_npcname("ep20_120cn2_63_257");
+	navigateto("1@20cn2",64,224);
+	end;
+
+OnTouch:
+	npctalk "Lehar: Shh, this way!";
+	end;
+}
+
+
+// Step 7
+1@20cn2,57,220,1	script(DISABLED)	Rgan#ep20MD_re02::ep20_120cn2_57_220	4_EP19_RGAN_SR1,{
+	npctalk "Rgan: Ahaha! Coke, Coke. Don't spit feathers!";
+	end;
+}
+
+1@20cn2,57,223,3	script(DISABLED)	Rgan#ep20MD_re01::ep20_120cn2_57_223	4_EP19_RGAN_SR3,{
+	npctalk "Rgan: Ah... I don't want to work diligently. I want to go lie down.";
+	end;
+}
+
+1@20cn2,53,219,7	script(DISABLED)	Rgan#ep20MD_re03::ep20_120cn2_53_219	4_EP19_RGAN_SR2,{
+	npctalk "Rgan: I'm proud to have to listen to that human.";
+	end;
+}
+
+1@20cn2,52,221,7	script(DISABLED)	Rgan#ep20MD_re04::ep20_120cn2_52_221	4_EP19_RGAN_SR3,{
+	npctalk "Rgan: Hmmm... can you move with a body like that?";
+	end;
+}
+
+1@20cn2,54,222,5	script(DISABLED)	Iwin#ep20MD_re01::ep20_120cn2_54_222	EP20_FAKE_IWIN_SR,{
+	npctalk "Iwin: Cough Cough! Looks like a feather is in your mouth.";
+	end;
+}
+
+1@20cn2,63,227,3	script(DISABLED)	Cat#ep20MD_re03::ep20_120cn2_63_227	EP20_NPC_NYAR,{
+	npctalk "Cat: Nyagalang.";
+	end;
+}
+
+1@20cn2,52,221,7	duplicate(dummy_disabled_npc)	Rgan#ep20MD_re04_1::ep20_120cn2_52_221_B	EP20_FAKE_IWIN_SR
+
+1@20cn2,64,224,3	script(DISABLED)	Lehar#ep20MD_re04::ep20_120cn2_64_224	4_EP19_LEHAR,2,2,{
+	if ('step < 7)
+		end;
+	if ('step == 7) {
+		cutin "ep20_nyar03.png",1;
+		mes "[White Cat]";
+		mes "Woongmya!";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "Huh? The Cat stopped again";
+		mes "Oops, it was a place where there were a lot of Rgans again. I almost got caught if I went out recklessly!";
+		next;
+		cutin "ep19_lehar04.png",2;
+		mes "[Lehar]";
+		mes "Huh? But that one between the Rgans over there...";
+		next;
+		cutin "",255;
+		select("I saw it too" );
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "Isn't that right?! Isn't that Iwin?";
+		mes "No way, who got caught...!";
+		next;
+		cutin "ep20_nyar02.png",1;
+		mes "[White Cat]";
+		mes "Yoonnyang, meow.";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "The hem is being bitten and pulled. It seems to be telling you not to get excited.";
+		mes "Yeah. If we run out now, we'll only get caught. Deep breath, deep breath.";
+		next;
+		cutin "ep19_lehar04.png",2;
+		mes "[Lehar]";
+		mes "Quietly... let's aim for a gap.";
+		next;
+		cutin "",255;
+		mes "[Rgan]";
+		MES "Wow, the trivial human beings are doing something annoying.";
+		next;
+		mes "[Rgan]";
+		mes "But what can I do? He thinks that his words are the same as those of the great Lasgand.";
+		next;
+		mes "[Iwin]";
+		mes "Still, what is this? It's ridiculous, and it's too uncomfortable to walk on.";
+		mes "How the hell do you move with such a huge, hairy body?";
+		next;
+		cutin "ep19_lehar04.png",2;
+		mes "[Lehar]";
+		mes "Huh? Did you hear what Mr. Iwin, now captured? Something's strange.";
+		next;
+		cutin "",255;
+		mes "[Rgan]";
+		mes "I really hate it, but I guess I'll have to change too.";
+		mes "Those guys did a good job transforming into us and went around.";
+		next;
+		disablenpc instance_npcname("ep20_120cn2_52_221");
+		enablenpc instance_npcname("ep20_120cn2_52_221_B");
+		mes "[Rgan]";
+		mes "You idiots. Let's get hit by us this time. Kkyakkyak!!";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "……!!!!!";
+		next;
+		cutin "ep19_lehar04.png",2;
+		mes "[Lehar]";
+		mes "That Rgan... has turned into Iwin!";
+		mes "Rgans figured out how to transform into Iwin just like us!";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "Wow, that's a big deal!";
+		mes "I need to go back to the ice castle and report this!";
+		next;
+		mes "[Lehar]";
+		mes "We'll have to get out of here soon. Ugh, impatient.";
+		close2;
+		cutin "",255;
+		if ('step == 7) {
+			'step = 8;
+			warp 'map_20cn2$,101,95;
+			navigateto("1@20cn2",107,65);
+			disablenpc instance_npcname("ep20_120cn2_57_220");
+			disablenpc instance_npcname("ep20_120cn2_57_223");
+			disablenpc instance_npcname("ep20_120cn2_53_219");
+			disablenpc instance_npcname("ep20_120cn2_52_221");
+			disablenpc instance_npcname("ep20_120cn2_54_222");
+			disablenpc instance_npcname("ep20_120cn2_63_227");
+			disablenpc instance_npcname("ep20_120cn2_64_224");
+			disablenpc instance_npcname("ep20_120cn2_52_221_B");
+
+			enablenpc instance_npcname("ep20_120cn2_107_65");
+			enablenpc instance_npcname("ep20_120cn2_109_63");
+		}
+		end;
+	}
+	cutin "ep19_lehar05.png",2;
+	mes "[Lehar]";
+	mes "Wow, that's a big deal!";
+	mes "I need to go back to the ice castle and report this!";
+	close2;
+	cutin "",255;
+	warp 'map_20cn2$,101,95;
+	navigateto("1@20cn2",107,65);
+	disablenpc instance_npcname("ep20_120cn2_57_220");
+	disablenpc instance_npcname("ep20_120cn2_57_223");
+	disablenpc instance_npcname("ep20_120cn2_53_219");
+	disablenpc instance_npcname("ep20_120cn2_52_221");
+	disablenpc instance_npcname("ep20_120cn2_54_222");
+	disablenpc instance_npcname("ep20_120cn2_63_227");
+	disablenpc instance_npcname("ep20_120cn2_64_224");
+	disablenpc instance_npcname("ep20_120cn2_52_221_B");
+
+	if ('step >= 10) {
+		enablenpc instance_npcname("ep20_120cn2_96_65");
+		enablenpc instance_npcname("ep20_120cn2_98_63");
+	}
+	else {
+		enablenpc instance_npcname("ep20_120cn2_107_65");
+		enablenpc instance_npcname("ep20_120cn2_109_63");
+	}
+	end;
+
+OnTouch:
+	npctalk "Lehar: Huh? The Cat stopped again.";
+	end;
+}
+
+
+// Step 8, 9
+1@20cn2,109,63,3	script(DISABLED)	Lehar#ep20MD_re05::ep20_120cn2_109_63	4_EP19_LEHAR,{
+	npctalk "Lehar: Run!";
+	end;
+}
+
+1@20cn2,107,65,3	script(DISABLED)	Cat#ep20MD_re04::ep20_120cn2_107_65	EP20_NPC_NYAR,2,2,{
+	if ('step < 8)
+		end;
+	if ('step == 8) {
+		cutin "ep20_nyar02.png",1;
+		mes "[White Cat]";
+		mes "Yahhhh.";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[reHar]";
+		mes "Okay. Let's go stealthily. Creepily...";
+		next;
+		cutin "",255;
+		mapannounce 'map_20cn2$, "Alert: Emergency! Emergency!", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "Alert: Remnants of Ice Castle have escaped!", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mapannounce 'map_20cn2$, "ALERT: All back to their places! Reinforce vigilance!", bc_map, 0xFFFF99;
+		sleep2 2000;
+		mes "[Rgan]";
+		mes "What are you talking about all of a sudden?";
+		mes "What escaped?";
+		next;
+		mes "[Rgan]";
+		mes "Alert! Everyone go to your seats!";
+		mes "They can transform into us! Keep an eye on each other and report any missing ones!";
+		next;
+		cutin "ep19_lehar03.png",2;
+		mes "[Lehar]";
+		mes "Ugh, as expected, you're prepared. What should I do?!";
+		next;
+		cutin "ep20_nyar03.png",1;
+		mes "[White Cat]";
+		mes "Nyannyangnyan!";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "The Cat started moving! Ooh! Hurry up and follow it!";
+		close2;
+		cutin "",255;
+		if ('step == 8) {
+			'step = 9;
+			disablenpc instance_npcname("ep20_120cn2_109_63");
+			donpcevent instance_npcname("ep20_120cn2_107_65") + "::OnStart";
+		}
+		end;
+	}
+	end;
+
+OnTouch:
+	npctalk "Cat: Yaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.";
+	end;
+
+OnStart:
+	npcspeed 200;
+	unitwalk getnpcid(0),96,65, instance_npcname("ep20_120cn2_107_65") + "::OnMove";
+	end;
+OnMove:
+	'step = 10;
+	disablenpc();
+	enablenpc instance_npcname("ep20_120cn2_96_65");
+	enablenpc instance_npcname("ep20_120cn2_98_63");
+	end;
+}
+
+
+// Step 10
+1@20cn2,95,60,5	duplicate(dummy_disabled_npc)	Rgan#ep20MD_re06::ep20_120cn2_95_60	4_EP19_RGAN_SR3
+1@20cn2,94,64,1	duplicate(dummy_disabled_npc)	Rgan#ep20MD_re07::ep20_120cn2_94_64	4_EP19_RGAN_SR1
+1@20cn2,92,62,7	duplicate(dummy_disabled_npc)	Rgan#ep20MD_re05::ep20_120cn2_92_62	4_EP19_RGAN_SR2
+
+1@20cn2,98,63,3	script(DISABLED)	Lehar#ep20MD_re05_1::ep20_120cn2_98_63	4_EP19_LEHAR,{
+	npctalk "Lehar: Cat! Cat!";
+	end;
+}
+
+1@20cn2,96,65,3	script(DISABLED)	Cat#ep20MD_re04_1::ep20_120cn2_96_65	EP20_NPC_NYAR,{
+	if ('step < 10)
+		end;
+	if ('step == 10) {
+		enablenpc instance_npcname("ep20_120cn2_95_60");
+		enablenpc instance_npcname("ep20_120cn2_94_64");
+		enablenpc instance_npcname("ep20_120cn2_92_62");
+		select( "Who's coming over there?!" );
+		npctalk "Rgan: Those who escaped, where are they?", instance_npcname("ep20_120cn2_92_62");
+		sleep2 500;
+		npctalk "Rgan: I'm sure he's not hiding nearby. Ugh, that's creepy.", instance_npcname("ep20_120cn2_95_60");
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "Yes! Cat! Who's coming over there!?";
+		mes "Cat! Cat! At this rate, we'll get caught!!";
+		next;
+		npctalk "Rgan: If you find it, you'll have to beat it.", instance_npcname("ep20_120cn2_92_62");
+		sleep2 500;
+		specialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_120cn2_92_62");
+		specialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_120cn2_95_60");
+		npctalk "Rgan: If we find it, Lasgand might praise us!", instance_npcname("ep20_120cn2_94_64");
+		specialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_120cn2_94_64");
+		cutin "ep19_lehar04.png",2;
+		mes "[Lehar]";
+		mes "…….";
+		next;
+		npctalk "Rgan: So let's not miss out on the suspicious ones.", instance_npcname("ep20_120cn2_94_64");
+		sleep2 500;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "How are you?";
+		mes "Ooh, I guess you can't see us";
+		next;
+		disablenpc instance_npcname("ep20_120cn2_92_62");
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_120cn2_92_62");
+		disablenpc instance_npcname("ep20_120cn2_95_60");
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_120cn2_95_60");
+		disablenpc instance_npcname("ep20_120cn2_94_64");
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_120cn2_94_64");
+		cutin "ep19_lehar06.png",2;
+		mes "[Lehar]";
+		mes "This, is this also a Cat's ability? Just like you broke the lock?";
+		next;
+		cutin "",255;
+		select( "I think they're coming soon" );
+		cutin "ep19_lehar06.png",2;
+		mes "[Lehar]";
+		mes "Oops, your clothes will be ripped off. Stop pulling, Cat!";
+		mes "I don't think this ability lasts long.";
+		next;
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "Still, thanks to you, I'm alive. You're really competent.";
+		mes "Where did this smart guy come from?";
+		next;
+		cutin "ep20_nyar01.png",1;
+		mes "[White Cat]";
+		mes "(chins up proudly, tail stiffens, starts running again)";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "Ah, follow me!";
+		close2;
+		cutin "",255;
+		disablenpc();
+		disablenpc instance_npcname("ep20_120cn2_98_63");
+		navigateto("1@20cn2",33,14);
+		if ('step == 10) {
+			'step = 11;
+			enablenpc instance_npcname("ep20_120cn2_34_20");
+			enablenpc instance_npcname("ep20_120cn2_32_22");
+			enablenpc instance_npcname("#ep20MD_re02");
+		}
+		end;
+	}
+	cutin "ep19_lehar05.png",2;
+	mes "[Lehar]";
+	mes "Ah, follow me!";
+	close2;
+	cutin "",255;
+	disablenpc();
+	disablenpc instance_npcname("ep20_120cn2_98_63");
+	navigateto("1@20cn2",33,14);
+	if ('step == 10) {
+		'step = 11;
+		enablenpc instance_npcname("ep20_120cn2_34_20");
+		enablenpc instance_npcname("ep20_120cn2_32_22");
+		enablenpc instance_npcname("#ep20MD_re02");
+	}
+	end;
+}
+
+
+// Step 11
+1@20cn2,34,20,5	script(DISABLED)	Cat#ep20MD_re05::ep20_120cn2_34_20	EP20_NPC_NYAR,{
+	npctalk "Cat: Iyaang.";
+	end;
+}
+
+1@20cn2,32,22,5	script(DISABLED)	Lehar#ep20MD_re06::ep20_120cn2_32_22	4_EP19_LEHAR,2,2,{
+	if ('step == 11) {
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "This is...";
+		mes "This door, where do you think you saw it?";
+		next;
+		cutin "",255;
+		select( "Inside the snake's nest" );
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "That's right! I think we can finally escape.";
+		mes "Let's see..., um! Okay. It's easy to open from the inside.";
+		next;
+		cutin "ep20_nyar04.png",1;
+		mes "[White Cat]";
+		mes "Nyaaong~";
+		next;
+		cutin "",255;
+		select( "Thank you very much" );
+		emotion ET_THROB;
+		sleep2 500;
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "Yes. Thank you so much, nameless Cat.";
+		mes "Thanks to you, I came all the way here safely";
+		next;
+		emotion ET_BIGTHROB;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "If you have nowhere else to go, would you like to come with us?";
+		mes "I'll make you a home in the ice castle.";
+		next;
+		cutin "ep20_nyar03.png",1;
+		mes "[White Cat]";
+		mes "I'm sorry.";
+		next;
+		cutin "ep19_lehar07.png",2;
+		mes "[Lehar]";
+		mes "Didn't he just shake his head? Was it a coincidence? Did he really understand?";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Well, that must be a coincidence";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "There must be people on our side who are still active in the snake's nest.";
+		mes "Let's go!";
+		if ('step == 11)
+			'step = 12;
+		close3;
+	}
+	if ('step == 12) {
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "There must be people on our side who are still active in the snake's nest.";
+		mes "Let's go!";
+		close3;
+	}
+	end;
+
+OnTouch:
+	npctalk "Lehar: Oh, look here!";
+	end;
+}
+
+
+// Step 12
+1@20cn2,31,19,5	duplicate(dummy_disabled_npc)	Lasgand#ep20MD_re03::ep20_120cn2_31_19	EP20_NPC_LASGAND
+1@20cn2,30,21,5	duplicate(dummy_disabled_npc)	Bagot#ep20MD_re03::ep20_120cn2_30_21	4_EP18_BAGOT
+
+1@20cn2,33,15,0	script(DISABLED)	#ep20MD_re02	WARPNPC,2,2,{
+	end;
+OnTouch:
+	if ('step < 12)
+		end;
+	if ('step == 12) {
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "Get out here. Come on!";
+		next;
+		cutin "",255;
+		select( "Let's do that" );
+		disablenpc instance_npcname("ep20_120cn2_34_20");
+		sleep2 500;
+		disablenpc instance_npcname("ep20_120cn2_32_22");
+		specialeffect2 EF_CLOAKING3;
+		mes "…….";
+		next;
+		mes "………….";
+		next;
+		mes "………………";
+		next;
+		enablenpc instance_npcname("ep20_120cn2_31_19");
+		sleep2 500;
+		enablenpc instance_npcname("ep20_120cn2_30_21");
+		npctalk "Bagot: I found it, Mr. Lasgand.", instance_npcname("ep20_120cn2_30_21");
+		emotion ET_THINK, getnpcid(0, instance_npcname("ep20_120cn2_30_21"));
+		cutin "ep18_bagot_02.png",2;
+		mes "[Bagot]";
+		mes "The trail continues all the way here.";
+		mes "This is the door to the snake's nest.";
+		next;
+		mes "[Bagot]";
+		mes "Yes, it's open.";
+		next;
+		cutin "ep20_lasgand02.png",1;
+		mes "[Lasgand]";
+		mes "I'm pretty sure it went in and out this way.";
+		mes "To come all this way without being noticed. Is that an ability possessed by the owner of this trace of magic?";
+		next;
+		cutin "ep18_bagot_02.png",2;
+		mes "[Bagot]";
+		mes "This magical power... Could it be the purple-haired cleric you captured with that adventurer?";
+		mes "Or were there other helpers?";
+		next;
+		cutin "ep20_lasgand02.png",1;
+		mes "[Lasgand]";
+		mes "Another helper. I don't want to make such unpleasant assumptions.";
+		mes "But I guess I'll have to consider it. It showed abilities that ordinary minor creatures can't show.";
+		next;
+		cutin "ep18_bagot_02.png",2;
+		mes "[Bagot]";
+		mes "Yes, I see.";
+		mes "Shall we lock the door here and increase the security?";
+		next;
+		cutin "ep20_lasgand04.png",1;
+		mes "[Lasgand]";
+		mes "There's no need for that. Rather use it as bait.";
+		mes "Keep the door open. Let them come back anytime.";
+		next;
+		mes "[Lasgand]";
+		mes "They definitely come back";
+		mes "Then I will catch you and kneel before me";
+		next;
+		cutin "ep20_lasgand03.png",1;
+		mes "[Lasgand]";
+		mes "I'll make you pay for scorning me.";
+		mes "Be sure to catch it and bring it back.";
+		if (ep20_main == 9) {
+			ep20_main = 10;
+			erasequest 16701;
+			setquest 16702;
+		}
+		if ('step == 12)
+			'step = 13;
+		close2;
+		warp "icecastle",22,123;
+		end;
+	}
+	warp "icecastle",22,123;
+	end;
+}

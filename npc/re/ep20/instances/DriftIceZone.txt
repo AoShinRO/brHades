@@ -1,0 +1,1364 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Episode 20: Immortals
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- Instance Drift Ice Zone from Episode 20 (main quest)
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Main quest - Step 33, 34
+// jor_maze,140,68,0	script	#20ms43	HIDDEN_WARP_NPC,5,5,{
+jor_maze,140,68,0	script	#20ms43_drift_zone	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep20_main == 32 || ep20_main == 33) {
+		cloakoffnpcself( "ep20_jor_maze_140_72" );
+		end;
+	}
+	end;
+}
+
+jor_maze,140,72,3	script(CLOAKED)	Shaky Wall#20ms40::ep20_jor_maze_140_72	GATE_SKYBLUE,{
+	if (ep20_main == 32) {
+		mes "[" + strcharinfo(0) + "]";
+		mes "The road is getting too complicated... Can I go back?";
+		mes "Is this...?";
+		next;
+		mes "Looking at the floor, there are traces of someone passing by.";
+		next;
+		select( "Look around", "Look around the floor" );
+		mes "[" + strcharinfo(0) + "]";
+		mes "Walls... are shaking? ^0000cdIt seems to be a device that blurs spatial perception^000000. The only person capable of making something like this is Bagot... Is it beyond this?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Let's touch the device...";
+		ep20_main = 33;
+		erasequest 17706;
+		setquest 17707;
+		close;
+	}
+	if (ep20_main == 33) {
+		// Todo: transform required?
+		if (getcharid(1) < 1) {
+			mes "[Stealth device]";
+			mes "Please join a party or form a party of 1 or more people and try again.";
+			close;
+		}
+		// note: multiple players allowed to enter
+		.@md_name$ = "Drift Ice Zone";
+
+		if (is_party_leader() == true)
+			.@menu$ = "Create device";
+
+		switch( select( .@menu$, "Go inside", "Cancel" ) ) {
+		case 1:
+			mes "[Stealth device]";
+			mes "User confirmed. Please go.";
+			if (is_party_leader() == true)
+				instance_create(.@md_name$);
+			close;
+		case 2:
+			switch( instance_enter(.@md_name$) ) {
+			case IE_OTHER:
+				mes "^ff0000An unknown error occurred.^000000";
+				close;
+			case IE_NOINSTANCE:
+			case IE_NOMEMBER:
+				mes "[Stealth device]";
+				mes "User confirmation and device creation have not been done. Please confirm the user first and then create.";
+				close;
+			case IE_OK:
+				mes "[Stealth device]";
+				mes "User verification complete. You can move.";
+				mapannounce "jor_maze", "" + strcharinfo(0) + " of the party " + getpartyname(getcharid(1)) + " enter " + .@md_name$ + ".", bc_map, 0xFF99;
+				// warp "1@twsd",318,76;
+				close;
+			}
+			end;
+		case 3:
+			mes "[" + strcharinfo(0) + "]";
+			mes "You might want to look into it a bit more.";
+			close;
+		}
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17706) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(17707) == 1" );
+	end;
+}
+
+
+
+
+1@twsd,318,77,0	script	#20msn00	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if ('step == 0) {
+		navigateto("1@twsd",314,94);
+		end;
+	}
+	end;
+
+OnInstanceInit:
+	'step = 0;
+	'map_twsd$ = instance_mapname("1@twsd");
+	end;
+}
+
+
+// Step 1
+1@twsd,311,93,3	duplicate(dummy_npc)	Rgan Bishop#20msd01::ep20_1twsd_311_93	4_EP19_RGAN_SR3
+1@twsd,309,96,5	duplicate(dummy_npc)	Rgan Bishop#20msd02::ep20_1twsd_309_96	4_EP19_RGAN_SR1
+1@twsd,317,98,3	duplicate(dummy_disabled_npc)	Heart hunter#20msd00::ep20_1twsd_317_98	EP20_MD_HEARTHUNTER1
+1@twsd,319,95,3	duplicate(dummy_disabled_npc)	Heart hunter#20msd01::ep20_1twsd_319_95	EP20_MD_HEARTHUNTER1
+
+1@twsd,314,94,5	script	Rgan Bishop#20msd00	4_EP19_RGAN_SR2,5,5,{
+	if (is_party_leader() == false)
+		end;
+	if ('step == 0) {
+		mes "[Rgan Bishop]";
+		mes "Ayu, where do you keep coming back like this!";
+		npctalk "Ayu, where do you keep coming back like this!";
+		npctalk "Quick, put it away!", instance_npcname("ep20_1twsd_311_93");
+		next;
+		select( "Do you need cleaning staff?" );
+		mes "[Rgan Bishop]";
+		mes "What kind of priest are you? It's the first time I've seen you?";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Need cleaning staff?";
+		npctalk "What kind of priest are you? I've never seen you before?", instance_npcname("ep20_1twsd_309_96");
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "I just returned from an expedition. Lord Sarekgandh sent me.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : I returned from an expedition this time. Sarekgandh sent it.";
+		next;
+		mes "[Rgan Bishop]";
+		mes "So, are you here to clean? But there must be a designated area. Go back.";
+		npctalk "Are you here to clean? But there must be a designated area. Go back.";
+		next;
+		select( "Salekgandh cleans this place..." );
+		mes "[Rgan Bishop]";
+		mes "What? Didn't you say that in passing?";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Sarekgand gave me cleaning here too.";
+		npctalk "What? Didn't you say that in passing?", instance_npcname("ep20_1twsd_311_93");
+		npctalk "Yeah? I've never heard of this before?", instance_npcname("ep20_1twsd_309_96");
+		next;
+		mes "[Rgan Bishop]";
+		mes "Once you know, go back. You can find out about the situation later.";
+		npctalk "Once you know, go back. You can find out later.";
+		next;
+		mes "[Rgan Bishop]";
+		mes "Unauthorized people are not allowed to set foot here.";
+		npctalk "No unauthorized person should set foot here.", instance_npcname("ep20_1twsd_311_93");
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Actually, I'm lost. It's too complicated to find my way...";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Actually, I'm lost. It's too complicated to find my way...";
+		next;
+		mes "[Rgan Bishop]";
+		mes "Just go back the way you came";
+		npctalk "Just go back the way you came.", instance_npcname("ep20_1twsd_309_96");
+		npctalk "Isn't that simple?", instance_npcname("ep20_1twsd_311_93");
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Why don't we go back together after helping? It's a bit scary to go alone...";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Can we help and go back together? It's a bit scary to walk alone...";
+		next;
+		enablenpc instance_npcname("ep20_1twsd_317_98");
+		enablenpc instance_npcname("ep20_1twsd_319_95");
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_317_98");
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_319_95");
+		mes "[Heart hunter]";
+		mes "What's the fuss?";
+		npctalk "What a fuss?", instance_npcname("ep20_1twsd_317_98");
+		next;
+		mes "[Rgan Bishop]";
+		mes "Human. Welcome. This priest here got lost on his first trip. Take him and come back.";
+		npctalk "Here is this priest who got lost on his first trip. Take him and come back.";
+		next;
+		mes "[Heart hunter]";
+		mes "Hmm... that, why, now?";
+		npctalk "Hmm... that, why, now?", instance_npcname("ep20_1twsd_317_98");
+		npctalk "Annoying...", instance_npcname("ep20_1twsd_319_95");
+		next;
+		mes "[Rgan Bishop]";
+		mes "Yes. That. Why. Now.";
+		npctalk "Yes. That. Why. Now.";
+		npctalk "Are you asking the obvious?", instance_npcname("ep20_1twsd_311_93");
+		npctalk "Seeing how arrogant you are, it seems you haven't been scolded yet. I'll tell you about this with a human.", instance_npcname("ep20_1twsd_309_96");
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Humans? What's wrong with filthy humans here?";
+		mes "Are you intimidated by humans?";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Human? What's going on here? Are you being threatened by a human?";
+		next;
+		mes "[Rgan Bishop]";
+		mes "No, this guy? Where do you see us being threatened?";
+		npctalk "No, this guy? Where does he see us being threatened?", instance_npcname("ep20_1twsd_309_96");
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Bishops, if you're being threatened, wag your tail. I'll save you.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : If you are being threatened, wag your tail. I will rescue you.";
+		next;
+		mes "[Rgan Bishop]";
+		mes "Hey, hey! Turns out, you're a crazy priest!";
+		npctalk "I-I! Turns out you were a crazy priest!", instance_npcname("ep20_1twsd_309_96");
+		next;
+		mes "[Rgan Bishop]";
+		mes "He'll be back soon. Go back soon. Won. Priests these days...";
+		npctalk "He'll be back soon, so go back soon. Won. Priests these days...", instance_npcname("ep20_1twsd_311_93");
+		next;
+		mes "[Rgan Bishop]";
+		mes "Didn't you say Sarekgandh brought them? I'll have to make sure they're properly trained.";
+		npctalk "I'm going to tell Sarekgandh to properly train him.";
+		next;
+		mes "[Heart hunter]";
+		mes "That sounds suspicious, but let's just get rid of it. A priest who doesn't know what to do in this place at this time of year.";
+		npctalk "That sounds suspicious, but let's just get rid of it.", instance_npcname("ep20_1twsd_317_98");
+		next;
+		mes "[Heart hunter]";
+		mes "The human who was messing around could have transformed.";
+		npctalk "The human who was messing around may have transformed.", instance_npcname("ep20_1twsd_319_95");
+		next;
+		mes "[Rgan Bishop]";
+		mes "Is that so???!!! But you can't be sure? Shall we call a witch doctor?";
+		npctalk "Is that so???!!! But I'm not sure, should I call a shaman?", instance_npcname("ep20_1twsd_311_93");
+		next;
+		mes "[Heart hunter]";
+		mes "Then it will take time, so let's get it over with and check it out.";
+		npctalk "Then it will take some time, so let's clear it up and check it out.", instance_npcname("ep20_1twsd_317_98");
+		next;
+		mes "[Rgan Bishop]";
+		mes "That's nice. It's much faster and cleaner that way.";
+		npctalk "Nice. It's much faster and cleaner that way.";
+		next;
+		mes "[Rgan Bishop]";
+		mes "But they say it's guaranteed by Sarekgandh. If that's really true...";
+		npctalk "But it's guaranteed by Sarekgandh...", instance_npcname("ep20_1twsd_309_96");
+		next;
+		mes "[Heart hunter]";
+		mes "How can you believe that. Lord Sarekgandh isn't here right now.";
+		npctalk "How can you believe that. Lord Sarekgandh is not here right now.", instance_npcname("ep20_1twsd_319_95");
+		next;
+		mes "[Heart hunter]";
+		mes "Hmm, who cares if I get rid of at least one priest. Just get rid of it. Lord Lasgand will be back soon.";
+		npctalk "Who cares if I get rid of at least one priest. Lasgand will be back soon. Do you have time?", instance_npcname("ep20_1twsd_317_98");
+		next;
+		mes "[Heart hunter]";
+		mes "If you're reluctant, we'll do it. Call in the shaman. Release the suppressing Guardian.";
+		npctalk "If you're reluctant, we'll do it. Call the shaman. The guard who was suppressing.Please release the sentence.", instance_npcname("ep20_1twsd_319_95");
+		next;
+		mes "[Rgan Bishop]";
+		mes "So... I believe!";
+		npctalk "So... I believe!";
+		npctalk "No matter how much you look at it, it seems like it's annoying to do it?", instance_npcname("ep20_1twsd_311_93");
+		npctalk "It's none of our business. Let's go.", instance_npcname("ep20_1twsd_309_96");
+		close2;
+		if ('step == 0) {
+			'step = 1;
+			donpcevent instance_npcname("ep20_1twsd_307_95") + "::OnStart";
+			disablenpc instance_npcname("ep20_1twsd_317_98");
+			disablenpc instance_npcname("ep20_1twsd_319_95");
+			sleep 1000;
+			disablenpc();
+			disablenpc instance_npcname("ep20_1twsd_311_93");
+			disablenpc instance_npcname("ep20_1twsd_309_96");
+			end;
+		}
+		end;
+	}
+	end;
+
+OnTouch:
+	if ('step == 0) {
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("ep20_1twsd_307_95");
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("ep20_1twsd_308_94");
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("ep20_1twsd_306_93");
+		npctalk "Who's there!!";
+		end;
+	}
+	end;
+}
+
+1@twsd,307,95,5	script	Jormungand Guardian#ms00::ep20_1twsd_307_95	EP20_JORMUNGUARD1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("ep20_1twsd_307_95") + "::OnMobDead";
+	monster 'map_twsd$,317,98,"--ja--","EP20_MD_HEARTHUNTER1",1, .@event$;
+	monster 'map_twsd$,319,95,"--ja--","EP20_MD_HEARTHUNTER1",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount('map_twsd$, instance_npcname("ep20_1twsd_307_95") + "::OnMobDead") > 0)
+		end;
+	disablenpc instance_npcname("ep20_1twsd_307_95");
+	disablenpc instance_npcname("ep20_1twsd_308_94");
+	disablenpc instance_npcname("ep20_1twsd_306_93");
+	removespecialeffect EF_NPC_STOP, AREA, instance_npcname("ep20_1twsd_307_95");
+	removespecialeffect EF_NPC_STOP, AREA, instance_npcname("ep20_1twsd_308_94");
+	removespecialeffect EF_NPC_STOP, AREA, instance_npcname("ep20_1twsd_306_93");
+	donpcevent instance_npcname("twsd_mobs_1") + "::OnStart";
+	end;
+}
+1@twsd,308,94,5	duplicate(dummy_npc)	Jormungand Guardian#ms01::ep20_1twsd_308_94	EP20_JORMUNGUARD2
+1@twsd,306,93,5	duplicate(dummy_npc)	Jormungand Guardian#ms02::ep20_1twsd_306_93	EP20_JORMUNGUARD1
+
+1@twsd,1,1,5	script	twsd_mobs_1	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("twsd_mobs_1") + "::OnMobDead";
+	monster 'map_twsd$,307,95,"--ja--","MD_EP20_JOR_G_P",1, .@event$;
+	monster 'map_twsd$,308,94,"--ja--","MD_EP20_JOR_G_Y",1, .@event$;
+	monster 'map_twsd$,306,93,"--ja--","MD_EP20_JOR_G_P",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount('map_twsd$, instance_npcname("twsd_mobs_1") + "::OnMobDead") > 0)
+		end;
+	if ('step == 1)
+		'step = 2;
+	enablenpc instance_npcname("ep20_1twsd_319_100");
+	enablenpc instance_npcname("ep20_1twsd_312_100");
+	npctalk "A bit noisy...", instance_npcname("ep20_1twsd_319_100");
+	end;
+}
+
+
+// Step 2
+1@twsd,312,100,5	duplicate(dummy_disabled_npc)	Rgan Shaman#20msd01::ep20_1twsd_312_100	EP20_JORGAN_WARLOCK
+
+1@twsd,319,100,3	script(DISABLED)	Rgan Shaman#20msd00::ep20_1twsd_319_100	EP20_JORGAN_WARLOCK,{
+	if ('step == 2) {
+		setpcblock PCBLOCK_NPC, true;
+		npctalk "What's the fuss?";
+		sleep2 1500;
+		npctalk "The Bishop urgently called me. Where did all the humans here go?", instance_npcname("ep20_1twsd_312_100");
+		sleep2 1500;
+		npctalk "I heard a suspicious priest showed up! Is that you?";
+		sleep2 1500;
+		npctalk "Wait? That's weird? Could be a human. Should I check?", instance_npcname("ep20_1twsd_312_100");
+		sleep2 1500;
+		specialeffect2 EF_4WAYBODY;
+		specialeffect2 EF_ELECTRIC;
+		specialeffect2 EF_BLUECASTING;
+		sleep2 1500;
+		sc_end SC_MONSTER_TRANSFORM;
+		npctalk "Human!!! How did you get here?";
+		sleep2 1000;
+		npctalk "Once you capture it!", instance_npcname("ep20_1twsd_312_100");
+		setpcblock PCBLOCK_NPC, false;
+		if ('step == 2) {
+			'step = 3;
+			disablenpc();
+			disablenpc instance_npcname("ep20_1twsd_312_100");
+			donpcevent instance_npcname("twsd_mobs_2") + "::OnStart";
+			end;
+		}
+		end;
+	}
+	end;
+}
+
+1@twsd,1,1,5	script	twsd_mobs_2	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("twsd_mobs_2") + "::OnMobDead";
+	monster 'map_twsd$,319,100,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	monster 'map_twsd$,312,100,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount('map_twsd$, instance_npcname("twsd_mobs_2") + "::OnMobDead") > 0)
+		end;
+	if ('step == 3)
+		'step = 4;
+	mapannounce 'map_twsd$, "A little... horsepower... high...", bc_map, 0xFFCC;
+	enablenpc instance_npcname("#20msn01");
+	enablenpc instance_npcname("#20w00");
+	end;
+}
+
+
+// Step 3
+1@twsd,311,101,0	script(DISABLED)	#20msn01	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	navigateto("1@twsd",294,115);
+	end;
+}
+
+1@twsd,294,115,0	script(DISABLED)	#20w00	WARPNPC,2,2,{
+	end;
+OnTouch:
+	if ('step >= 4) {
+		unittalk getcharid(3), "" + strcharinfo(0) + " : I heard a sound from here?";
+		warp 'map_twsd$,261,119;
+		end;
+	}
+	end;
+}
+
+1@twsd,260,119,0	script	#20msd00	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if ('step == 4) {
+		'step = 5;
+		unittalk getcharid(3), "" + strcharinfo(0) + " : this way?";
+		navigateto("1@twsd",262,146);
+		donpcevent instance_npcname("twsd_mobs_3") + "::OnStart";
+		end;
+	}
+	end;
+}
+
+1@twsd,1,1,5	script	twsd_mobs_3	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("twsd_mobs_3") + "::OnMobDead";
+	monster 'map_twsd$,258,131,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	monster 'map_twsd$,251,117,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	monster 'map_twsd$,268,145,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	monster 'map_twsd$,257,149,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount('map_twsd$, instance_npcname("twsd_mobs_3") + "::OnMobDead") > 0)
+		end;
+	if ('step == 5)
+		'step = 6;
+	mapannounce 'map_twsd$, "Recoil... ?...", bc_map, 0xFFCC;
+	enablenpc instance_npcname("#20w10");
+	enablenpc instance_npcname("#20msn02");
+	enablenpc instance_npcname("#20msn03");
+	enablenpc instance_npcname("ep20_1twsd_161_198");
+	enablenpc instance_npcname("ep20_1twsd_164_197");
+	enablenpc instance_npcname("ep20_1twsd_160_196");
+	enablenpc instance_npcname("ep20_1twsd_166_193");
+	enablenpc instance_npcname("ep20_1twsd_168_197");
+	enablenpc instance_npcname("ep20_1twsd_166_200");
+	enablenpc instance_npcname("ep20_1twsd_163_190");
+	end;
+}
+
+1@twsd,262,146,0	script(DISABLED)	#20msn02	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	navigateto("1@twsd",220,154);
+	end;
+}
+
+1@twsd,220,154,0	warp2(DISABLED)	#20w10	2,2,1@twsd,196,208
+
+1@twsd,196,209,0	script(DISABLED)	#20msn03	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	navigateto("1@twsd",163,190);
+	end;
+}
+
+
+// Step 4
+1@twsd,161,198,5	duplicate(dummy_disabled_npc)	Rgan Shaman#20msd10::ep20_1twsd_161_198	EP20_JORGAN_WARLOCK
+1@twsd,160,196,3	duplicate(dummy_disabled_npc)	Jormungand Guardian#ms11::ep20_1twsd_160_196	EP20_JORMUNGUARD2
+1@twsd,166,193,3	duplicate(dummy_disabled_npc)	Rgan Bishop#20msd11::ep20_1twsd_166_193	4_EP19_RGAN_SR1
+1@twsd,168,197,3	duplicate(dummy_disabled_npc)	Rgan Bishop#20msd12::ep20_1twsd_168_197	4_EP19_RGAN_SR3
+1@twsd,166,200,5	duplicate(dummy_disabled_npc)	Rgan Shaman#20msd11::ep20_1twsd_166_200	EP20_JORGAN_WARLOCK
+	
+1@twsd,163,190,5	script(DISABLED)	Rgan Bishop#20msd10::ep20_1twsd_163_190	4_EP19_RGAN_SR2,5,5,{
+	if ('step == 6) {
+		mes "[Rgan Bishop]";
+		mes "What happened to the clear-eyed lunatic priest? Why is there no news about the shaman who went to find out?";
+		npctalk "What happened to the mad priest? Why is there no news about the shaman I went to find out?", instance_npcname("ep20_1twsd_161_198");
+		next;
+		mes "[Rgan Shaman]";
+		mes "I'll guide you to the sanctuary. I need help...";
+		npctalk "I'll guide you to the sanctuary. I need help...", instance_npcname("ep20_1twsd_161_198");
+		next;
+		mes "[Rgan Bishop]";
+		mes "Isn't that a human?";
+		npctalk "Isn't that human?", instance_npcname("ep20_1twsd_166_193");
+		next;
+		mes "[Rgan Bishop]";
+		mes "If it's a human who appeared in the current situation... So, was that mad priest a transformed human?";
+		npctalk "So, was the lunatic priest a transformed human?", instance_npcname("ep20_1twsd_161_198");
+		npctalk "Did all the people who went get hurt? It's crazy. I'm going crazy!", instance_npcname("ep20_1twsd_168_197");
+		next;
+		mes "[Rgan Bishop]";
+		mes "^0000cdLasgand is coming soon!!^000000 Let's do it quietly!!";
+		npctalk "Lasgand is coming soon!! Let's deal with it quietly!!", instance_npcname("ep20_1twsd_166_193");
+		next;
+		select( "Lasgand? Is he right here?" );
+		mes "[Rgan Bishop]";
+		mes "You came all the way here without knowing...?!";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Lasgand? Is he right here?";
+		npctalk "You came all this way without knowing...?!", instance_npcname("ep20_1twsd_168_197");
+		next;
+		mes "[Rgan Bishop]";
+		mes "Calm down. Apparently, I don't know the other side yet. Watch your mouth and let's do it quietly!";
+		npctalk "Looks like I don't know the other side yet. Watch your mouth and let's do it quietly!", instance_npcname("ep20_1twsd_161_198");
+		next;
+		mes "[Rgan Bishop]";
+		mes "^0000cdThat arrogant person^000000 went to ask for favors, but if we do this, we lose face!";
+		npctalk "That arrogant person went to ask for trust, but we lost face!", instance_npcname("ep20_1twsd_166_193");
+		npctalk "Come to think of it, that cheeky human was also a lunatic. Are all humans lunatics??", instance_npcname("ep20_1twsd_168_197");
+		next;
+		select( "Ah! Is there a bar here too?" );
+		emotion ET_FRET, getnpcid(0, instance_npcname("ep20_1twsd_161_198"));
+		mes "[Rgan Bishop]";
+		mes "... Everyone, don't open your mouth after this time. ^0000cdLord Lasgand's sacred ritual^000000 must not be disturbed. Quiet...";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Ah! Is there a bar here too?";
+		npctalk "Everyone, don't open your mouth. Don't disturb Lasgand's sacred ritual. Quiet...", instance_npcname("ep20_1twsd_161_198");
+		next;
+		select( "The two of you are doing something? Is that the back?" );
+		emotion ET_FRET, getnpcid(0, instance_npcname("ep20_1twsd_166_193"));
+		next;
+		mes "[Rgan Bishop]";
+		mes "It's crazy! We're blowing important information ourselves!!";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : You two doing something together? Is that the back?";
+		npctalk "It's crazy! We're blowing important information ourselves!!", instance_npcname("ep20_1twsd_166_193");
+		next;
+		mes "[Rgan Bishop]";
+		mes "Eight! It's a sure win!";
+		npctalk "Eight! It's a win!", instance_npcname("ep20_1twsd_168_197");
+		npctalk "Now that it's like this, I have no choice but to keep my mouth shut forever!!", instance_npcname("ep20_1twsd_161_198");
+		next;
+		mes "[Rgan Shaman]";
+		mes "Wait a minute. We'll step in this time. Keep a close eye on the Guardian and report the situation elsewhere.";
+		npctalk "We will step in this time. Hold on to the guardian and report the situation elsewhere.", instance_npcname("ep20_1twsd_166_200");
+		next;
+		mes "[Rgan Bishop]";
+		mes "That's right!";
+		npctalk "Yes, yes!", instance_npcname("ep20_1twsd_161_198");
+		close2;
+		if ('step == 6) {
+			'step = 7;
+			disablenpc instance_npcname("ep20_1twsd_161_198");
+			disablenpc instance_npcname("ep20_1twsd_166_200");
+			donpcevent instance_npcname("ep20_1twsd_164_197") + "::OnStart";
+			npctalk "Should we join?", instance_npcname("ep20_1twsd_161_198");
+			npctalk "I told you to wait, so let's unlock the guardian if that doesn't work!", instance_npcname("ep20_1twsd_166_193");
+			sleep 1000;
+			disablenpc instance_npcname("ep20_1twsd_168_197");
+			end;
+		}
+		end;
+	}
+	end;
+
+OnTouch:
+	if ('step == 6) {
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("ep20_1twsd_164_197");
+		specialeffect EF_NPC_STOP, AREA, instance_npcname("ep20_1twsd_160_196");
+		npctalk "Not good...", instance_npcname("ep20_1twsd_161_198");
+		end;
+	}
+	end;
+}
+
+1@twsd,164,197,3	script(DISABLED)	Jormungand Guardian#ms10::ep20_1twsd_164_197	EP20_JORMUNGUARD1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("ep20_1twsd_164_197") + "::OnMobDead";
+	monster 'map_twsd$,161,198,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	monster 'map_twsd$,166,200,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount('map_twsd$, instance_npcname("ep20_1twsd_164_197") + "::OnMobDead") > 0)
+		end;
+	npctalk "I can't do that! Let's get away for now!", instance_npcname("ep20_1twsd_161_198");
+	npctalk "Garat! Parasite!!!", instance_npcname("ep20_1twsd_166_193");
+	
+	disablenpc instance_npcname("ep20_1twsd_164_197");
+	disablenpc instance_npcname("ep20_1twsd_160_196");
+	disablenpc instance_npcname("ep20_1twsd_161_198");
+	disablenpc instance_npcname("ep20_1twsd_166_193");
+	disablenpc instance_npcname("ep20_1twsd_163_190");
+	removespecialeffect EF_NPC_STOP, AREA, instance_npcname("ep20_1twsd_164_197");
+	removespecialeffect EF_NPC_STOP, AREA, instance_npcname("ep20_1twsd_160_196");
+	donpcevent instance_npcname("twsd_mobs_4") + "::OnStart";
+	end;
+}
+
+1@twsd,1,1,5	script	twsd_mobs_4	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("twsd_mobs_4") + "::OnMobDead";
+	monster 'map_twsd$,164,197,"--ja--","MD_EP20_JOR_G_P",1, .@event$;
+	monster 'map_twsd$,160,196,"--ja--","MD_EP20_JOR_G_Y",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount('map_twsd$, instance_npcname("twsd_mobs_4") + "::OnMobDead") > 0)
+		end;
+	if ('step == 7)
+		'step = 8;
+	enablenpc instance_npcname("#20msn04");
+	mapannounce 'map_twsd$, "At once...", bc_map, 0xFFCC;
+	donpcevent instance_npcname("twsd_mobs_4") + "::OnStart2";
+	end;
+
+OnStart2:
+	.@event$ = instance_npcname("twsd_mobs_4") + "::OnMobDead2";
+	monster 'map_twsd$,149,214,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	monster 'map_twsd$,151,235,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	end;
+OnMobDead2:
+	if (mobcount('map_twsd$, instance_npcname("twsd_mobs_4") + "::OnMobDead2") > 0)
+		end;
+	if ('step == 8)
+		'step = 9;
+	enablenpc instance_npcname("ep20_1twsd_162_245");
+	specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_162_245");
+	mapannounce 'map_twsd$, "Adventurer! Adventurer~ Where are you...?", bc_map, 0xFFCC;
+	end;
+}
+
+
+// Step 5
+1@twsd,165,197,0	script(DISABLED)	#20msn04	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	navigateto("1@twsd",162,245);
+	end;
+}
+
+1@twsd,162,245,3	script	Lehar#20msd10::ep20_1twsd_162_245	4_EP19_LEHAR,5,5,{
+	if ('step == 9) {
+		cutin "ep19_lehar01.png",0;
+		mes "[Lehar]";
+		mes "Here you are! Phew- I just found it";
+		npctalk "Adventurersir!!! Phew - I finally found it.", instance_npcname("ep20_1twsd_162_245");
+		next;
+		select( "Lehar? How?" );
+		cutin "ep19_lehar02.png",0;
+		mes "[Lehar]";
+		mes "Lazy said it would be good to organize the information gathered so far and share opinions in the ice castle.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Mr. Lehar? How?";
+		npctalk "I heard it's good to have a discussion in the ice castle.", instance_npcname("ep20_1twsd_162_245");
+		next;
+		cutin "ep19_lehar03.png",0;
+		mes "[Lehar]";
+		mes "Lazy and Miriam went first, and I came to find an adventurer and go with them, but what way...";
+		npctalk "Lazy and Miriam went first, and I came to find adventurers and go with them.", instance_npcname("ep20_1twsd_162_245");
+		next;
+		cutin "ep19_lehar01.png",0;
+		mes "[Lehar]";
+		mes "He said it would be better to reorganize and come back.";
+		npctalk "He said it would be better to reorganize and come back.", instance_npcname("ep20_1twsd_162_245");
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "I haven't been able to find any information about it yet.";
+		mes "And I guess this is what Lasgand and Bagot talked about";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : I guess this is what Lasgand and Bagot talked about.";
+		next;
+		cutin "ep19_lehar01.png",0;
+		mes "[Lehar]";
+		mes "Did the adventurer disarm the device in front of you? What is it for, huh?";
+		npctalk "Did the adventurer disarm the device in front of you? What is it for, huh?", instance_npcname("ep20_1twsd_162_245");
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "So let's just take a quick look ahead. I felt a huge amount of magical power a moment ago.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : So let's just take a quick look and go. I felt a lot of magic a while ago.";
+		next;
+		cutin "ep19_lehar01.png",0;
+		mes "[Lehar]";
+		mes "In front? Okay! There are many forks, so it's better to split up and look for them.";
+		npctalk "From here? Okay! There are many forks, so it's better to split up and look for them.", instance_npcname("ep20_1twsd_162_245");
+		next;
+		mes "[Lehar]";
+		mes "If there is no clue after a while, let's meet again here and go back to the ice castle to reorganize and come together.";
+		npctalk "If there is no clue after a while, we will meet again here and return to the ice castle.", instance_npcname("ep20_1twsd_162_245");
+		close2;
+		cutin "",255;
+		if ('step == 9) {
+			'step = 10;
+			disablenpc();
+			navigateto("1@twsd",164,260);
+			enablenpc instance_npcname("#20w11");
+			enablenpc instance_npcname("#20msd10");
+			end;
+		}
+		end;
+	}
+	end;
+OnTouch:
+	npctalk "Adventurer!!!";
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("ep20_1twsd_162_245");
+	end;
+}
+
+1@twsd,164,260,0	warp2(DISABLED)	#20w11	2,2,1@twsd,154,299
+
+
+1@twsd,154,300,0	script(DISABLED)	#20msd10	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if ('step == 10) {
+		'step = 11;
+		donpcevent instance_npcname("twsd_mobs_5") + "::OnStart";
+	}
+	navigateto("1@twsd",48,326);
+	end;
+}
+
+1@twsd,1,1,5	script	twsd_mobs_5	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("twsd_mobs_5") + "::OnMobDead";
+	monster 'map_twsd$,148,310,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	monster 'map_twsd$,113,326,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	monster 'map_twsd$,85,336,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount('map_twsd$, instance_npcname("twsd_mobs_5") + "::OnMobDead") > 0)
+		end;
+	if ('step == 11)
+		'step = 12;
+	mapannounce 'map_twsd$, "Let's try again", bc_map, 0xFFCC;
+	enablenpc instance_npcname("ep20_1twsd_48_326");
+	enablenpc instance_npcname("ep20_1twsd_46_328");
+	enablenpc instance_npcname("ep20_1twsd_43_326");
+	enablenpc instance_npcname("ep20_1twsd_49_330");
+	enablenpc instance_npcname("ep20_1twsd_55_333");
+	enablenpc instance_npcname("ep20_1twsd_62_334");
+	enablenpc instance_npcname("ep20_1twsd_45_322");
+	enablenpc instance_npcname("ep20_1twsd_54_321");
+	enablenpc instance_npcname("ep20_1twsd_50_323");
+	enablenpc instance_npcname("ep20_1twsd_53_330");
+	enablenpc instance_npcname("ep20_1twsd_57_323");
+	end;
+}
+
+
+// Step 6
+1@twsd,50,323,1	duplicate(dummy_disabled_npc)	Rgan Bishop#20msd20::ep20_1twsd_50_323	4_EP19_RGAN_SR1
+1@twsd,53,330,3	duplicate(dummy_disabled_npc)	Rgan Bishop#20msd21::ep20_1twsd_53_330	4_EP19_RGAN_SR2
+1@twsd,57,323,1	duplicate(dummy_disabled_npc)	Rgan Bishop#20msd22::ep20_1twsd_57_323	4_EP19_RGAN_SR3
+1@twsd,49,330,5	duplicate(dummy_disabled_npc)	Heart hunter#20msd20::ep20_1twsd_49_330	EP20_MD_HEARTHUNTER1
+1@twsd,55,333,5	duplicate(dummy_disabled_npc)	Heart hunter#20msd21::ep20_1twsd_55_333	EP20_MD_HEARTHUNTER1
+1@twsd,62,334,5	duplicate(dummy_disabled_npc)	Heart hunter#20msd22::ep20_1twsd_62_334	EP20_MD_HEARTHUNTER1
+1@twsd,45,322,3	duplicate(dummy_disabled_npc)	Heart hunter#20msd23::ep20_1twsd_45_322	EP20_MD_HEARTHUNTER1,5,0
+1@twsd,54,321,5	duplicate(dummy_disabled_npc)	Heart hunter#20msd24::ep20_1twsd_54_321	EP20_MD_HEARTHUNTER1
+1@twsd,51,327,5	duplicate(dummy_disabled_npc)	Rgan Shaman#20msd20::ep20_1twsd_51_327	MD_EP20_JOR_WARLOCK
+1@twsd,56,332,3	duplicate(dummy_disabled_npc)	Rgan Shaman#20msd21::ep20_1twsd_56_332	EP20_JORGAN_WARLOCK
+1@twsd,61,324,1	duplicate(dummy_disabled_npc)	Rgan Shaman#20msd22::ep20_1twsd_61_324	EP20_JORGAN_WARLOCK
+
+1@twsd,53,327,3	script(DISABLED)	White cat#20ms20::ep20_1twsd_53_327	4_EP20_NYAR,{
+	npctalk "Why?";
+	end;
+OnMove:
+	npcspeed 200;
+	unitwalk getnpcid(0),57,317;
+	end;
+}
+
+1@twsd,43,326,5	script(DISABLED)	Lasgand#20msd20::ep20_1twsd_43_326	4_EP20_LASGAND,{
+	npctalk "......";
+	end;
+}
+
+1@twsd,48,326,5	script(DISABLED)	Salekgandh#20msd20::ep20_1twsd_48_326	4_EP19_RGAN_SR1,5,5,{
+	if ('step == 12) {
+		mes "[Salekgandh]";
+		mes "Human!!! Why is it still not working? Am I doing it right?";
+		npctalk "Human!!! Why is it still not working? Am I doing it right?";
+		next;
+		cutin "ep18_bagot_01.png",2;
+		mes "[Bagot]";
+		mes "Is that statement okay in front of Lasgand?";
+		npctalk "Is that statement okay in front of Lasgand?", instance_npcname("ep20_1twsd_46_328");
+		next;
+		cutin "",255;
+		mes "[Salekgandh]";
+		mes "Didn't you boast! You just need to break through that barrier!";
+		npctalk "Didn't you brag! You just need to break through that shield!";
+		next;
+		cutin "ep18_bagot_02.png",2;
+		mes "[Bagot]";
+		mes "So you're working hard with Mr. Lasgand? What's your complaint?";
+		npctalk "So you're working hard with Lasgand? What's your complaint?", instance_npcname("ep20_1twsd_46_328");
+		next;
+		cutin "",255;
+		select( "Everyone was here! So here it is..." );
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Everyone has been here! So here it is...";
+		mes "[Salekgandh]";
+		mes "Humans?! Why are humans here? Why didn't anyone stop them from coming here!";
+		npctalk "Humans?! Why are humans here? Why didn't anyone stop them from coming here!";
+		next;
+		cutin "ep18_bagot_02.png",2;
+		mes "[Bagot]";
+		mes "I have to tell you. Humans are strong. You must have processed everything, right? Even if you don't have a brain, you can understand that much with just a little thought.";
+		npctalk "Humans, you're strong. You've already processed everything, right? Even if you don't have a brain, you can figure it out with just a little thought.", instance_npcname("ep20_1twsd_46_328");
+		npctalk "Shut up!";
+		next;
+		cutin "ep18_bagot_01.png",2;
+		mes "[Bagot]";
+		mes "^0000cdSurely, Lasgand was right that if you leave the door open^000000 it will come back.";
+		npctalk "Indeed, Lasgand was right when he said that if you leave the door open, it will come back.", instance_npcname("ep20_1twsd_46_328");
+		next;
+		select( "Did you leave it open on purpose? Why?" );
+		cutin "ep18_bagot_03.png",2;
+		mes "[Bagot]";
+		mes "Because I need it. I didn't expect to see you here, did you?";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Did you leave it open on purpose? Why?";
+		npctalk "I need it. I didn't expect to see it here, right?", instance_npcname("ep20_1twsd_46_328");
+		next;
+		select( "Is that the 'that place' you said?" );
+		cutin "",255;
+		mes "[Salekgandh]";
+		mes "How do you know that?";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Is that... 'the place' you mentioned?";
+		npctalk "How do you know that?";
+		next;
+		cutin "ep18_bagot_02.png",2;
+		mes "[Bagot]";
+		mes "Did you know you gave the answer yourself? You must have overheard the conversation. Bagot doesn't like that.";
+		npctalk "I must have overheard the conversation. Bagot doesn't like that.", instance_npcname("ep20_1twsd_46_328");
+		next;
+		cutin "ep20_lasgand01.png",0;
+		mes "[Lasgand]";
+		mes "That's the adventurer.";
+		npctalk "That's the adventurer.", instance_npcname("ep20_1twsd_43_326");
+		next;
+		cutin "",255;
+		mes "[Salekgandh]";
+		mes "La, Mr. Lasgand. I, in my line, somehow...!";
+		npctalk "La, Mr. Lasgand. I, in my own way...!";
+		next;
+		cutin "ep20_lasgand01.png",0;
+		mes "[Lasgand]";
+		mes "But I can't feel the ^0000cd'power'^000000.";
+		npctalk "But I can't feel 'the power'.", instance_npcname("ep20_1twsd_43_326");
+		next;
+		cutin "ep18_bagot_03.png",2;
+		mes "[Bagot]";
+		mes "Did you say it was the strength of the other party? That person didn't have any special aura when tested. It was just normal and very strong.";
+		mes "The other unchecked side probably has that power.";
+		npctalk "The other unchecked side probably has that power.", instance_npcname("ep20_1twsd_46_328");
+		next;
+		select( "That power?" );
+		cutin "ep18_bagot_01.png",2;
+		mes "[Bagot]";
+		mes "Yes. ^0000cdThat power you used to escape^000000. So, where is that? That purple hair.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : that power?";
+		npctalk "That power you used to escape. So, where is it? That purple head.", instance_npcname("ep20_1twsd_46_328");
+		next;
+		cutin "ep18_bagot_03.png",2;
+		mes "[Bagot]";
+		mes "Well, no. That human is also a very good source of magic, so you better capture it. If you catch it, that human will come from the other side to save that person.";
+		mes "The more power the better. Hearthunter, move.";
+		npctalk "That human is also a very good source of magic, so I'd better capture him first. Hearthunter, move.", instance_npcname("ep20_1twsd_46_328");
+		close2;
+		cutin "",255;
+		if ('step == 12) {
+			'step = 13;
+			donpcevent instance_npcname("twsd_mobs_6") + "::OnStart";
+			disablenpc instance_npcname("ep20_1twsd_49_330");
+			disablenpc instance_npcname("ep20_1twsd_55_333");
+			disablenpc instance_npcname("ep20_1twsd_62_334");
+			disablenpc instance_npcname("ep20_1twsd_45_322");
+			disablenpc instance_npcname("ep20_1twsd_54_321");
+			end;
+		}
+		end;
+	}
+	if ('step == 13) {
+		mes "[Salekgandh]";
+		mes "Ku- you guys are not cool! As expectedHumans... I don't like them.";
+		close;
+	}
+	if ('step == 14) {
+		mes "[Salekgandh]";
+		mes "Kuu, stronger than I thought...! Ji, now I...!";
+		npctalk "Que, stronger than I thought...! Ji, now I...!", instance_npcname("ep20_1twsd_48_326");
+		next;
+		cutin "ep20_lasgand01.png",0;
+		mes "[Lasgand]";
+		mes "Stop. He's really strong. But he's not like that. I thought he hid his power.";
+		npctalk "Stop. He's really strong. But he's not. I thought he was hiding his power.", instance_npcname ("ep20_1twsd_43_326");
+		next;
+		cutin "ep18_bagot_01.png",2;
+		mes "[Bagot]";
+		mes "That's right. Bagot said. Now if you capture it. My comrades will come looking for it and we'll catch it again.";
+		npctalk "That's right. Bagot said. Now if you capture it. My companions will come looking for it and we'll catch it again.", instance_npcname("ep20_1twsd_46_328");
+		next;
+		enablenpc instance_npcname("ep20_1twsd_58_327");
+		sleep2 500;
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_58_327");
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "Adventurer!!";
+		mes "They're all gathered here? That's the scientist, right? Next to him is the self-proclaimed right-hand man.";
+		npctalk "You're all gathered here? That's the scientist, right? Next to him is the self-proclaimed right-hand man.", instance_npcname("ep20_1twsd_58_327");
+		npctalk "Self-proclaimed! How rude!!", instance_npcname("ep20_1twsd_48_326");
+		next;
+		cutin "ep19_lehar03.png",2;
+		mes "[Lehar]";
+		mes "And after that... is that person...?";
+		npctalk "And after that... is that person...?", instance_npcname("ep20_1twsd_58_327");
+		next;
+		select( "It's Lasgand" );
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "This is the first time I've seen a real person!! It's a real person! I even feel like the person in the story actually appeared!";
+		mes "You look better than you think?";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : This is Lasgand.";
+		npctalk "It's a real person! It even feels like the person in the story actually appeared!", instance_npcname("ep20_1twsd_58_327");
+		npctalk "Shut up!!!", instance_npcname("ep20_1twsd_48_326");
+		next;
+		cutin "ep18_bagot_01.png",1;
+		mes "[Bagot]";
+		mes "Uh, sure. I caught an adventurer and they came to rescue me. It's fast. But did you come alone?";
+		npctalk "As expected. I caught an adventurer and they came to rescue me. It's fast. But did you come alone?", instance_npcname("ep20_1twsd_46_328");
+		next;
+		cutin "ep20_lasgand01.png",0;
+		mes "[Lasgand]";
+		mes "Is that the one you said?";
+		mes "But neither is he ^0000cdstrong, but not that strong^000000.";
+		npctalk "Is the author the one you said? But he is strong, but he doesn't have that power.", instance_npcname ("ep20_1twsd_43_326");
+		next;
+		cutin "ep20_lasgand04.png",0;
+		mes "[Lasgand]";
+		mes "I thought I would be able to find out if I met you.";
+		mes "But ^0000cdI also feel the familiar strength^000000. Old... I see.";
+		npctalk "But he also feels a familiar power. Old... I see.", instance_npcname("ep20_1twsd_43_326");
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "That power? What is he talking about?";
+		npctalk "That power? What is he talking about?", instance_npcname("ep20_1twsd_58_327");
+		next;
+		cutin "ep18_bagot_03.png",1;
+		mes "[Bagot]";
+		mes "The power that allowed you fools to escape safely when they were caught.";
+		npctalk "The power that allowed you fools to escape safely when they were caught.", instance_npcname("ep20_1twsd_46_328");
+		next;
+		cutin "ep19_lehar03.png",2;
+		mes "[Lehar]";
+		mes "What do you call the one who missed us stupid?";
+		npctalk "So what do we call those who missed us stupid?", instance_npcname("ep20_1twsd_58_327");
+		next;
+		cutin "ep18_bagot_02.png",1;
+		mes "[Bagot]";
+		mes "You guys really don't know?? That's strange? That power trail definitely helped those idiots?";
+		mes "Um... Oh, maybe a device or something? The brain for that is over there... Ah! You helped? Jungkea.";
+		npctalk "That power surely helped those idiots? Oh, maybe a device or something? Ah! You helped? Jungkea.", instance_npcname("ep20_1twsd_46_328");
+		next;
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "What are you talking about? Mr. Jungkea was transported to the continent a long time ago? There's no reason to keep criminals with you.";
+		npctalk "Mr. Jungkea was transported to the continent long ago? There's no reason to keep a criminal with him.", instance_npcname("ep20_1twsd_58_327");
+		next;
+		cutin "ep18_bagot_01.png",1;
+		mes "[Bagot]";
+		mes "Then, do you have a helper? Please tell me. This Bagot will make good use of it.";
+		mes "Assistant, how do you call it?";
+		npctalk "So, there are helpers, too? Please tell me. How do you call them helpers?", instance_npcname("ep20_1twsd_46_328");
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "I really don't know what you mean. Do you understand, adventurer?";
+		npctalk "I really don't know what you mean. Adventurer, do you know?", instance_npcname("ep20_1twsd_58_327");
+		next;
+		select( "Okay" );
+		cutin "ep18_bagot_03.png",1;
+		mes "[Bagot]";
+		mes "Yes, it's okay. I didn't expect to open my mouth so easily. I'm easily caught.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : well";
+		npctalk "I didn't expect to open my mouth so easily. I'm easily caught.", instance_npcname("ep20_1twsd_46_328");
+		next;
+		cutin "",255;
+		mes "[Salekgandh]";
+		mes "Hey sorcerers!";
+		npctalk "Hey sorcerers!", instance_npcname("ep20_1twsd_48_326");
+		sleep2 500;
+		enablenpc instance_npcname("ep20_1twsd_51_327");
+		enablenpc instance_npcname("ep20_1twsd_56_332");
+		enablenpc instance_npcname("ep20_1twsd_61_324");
+		npctalk "Deal with that sneaky human!", instance_npcname("ep20_1twsd_48_326");
+		close2;
+		if ('step == 14) {
+			'step = 15;
+			donpcevent instance_npcname("twsd_mobs_6") + "::OnStart2";
+			disablenpc instance_npcname("ep20_1twsd_51_327");
+			disablenpc instance_npcname("ep20_1twsd_56_332");
+			disablenpc instance_npcname("ep20_1twsd_61_324");
+			end;
+		}
+		end;
+	}
+	if ('step == 16) {
+		mes "[Salekgandh]";
+		mes "As expected, I'm not talking about human beings. I should have said it more strongly!";
+		close;
+	}
+	end;
+
+OnTouch:
+	npctalk "I have a foreboding...";
+	end;
+}
+
+
+1@twsd,1,1,5	script	twsd_mobs_6	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("twsd_mobs_6") + "::OnMobDead";
+	monster 'map_twsd$,49,330,"--ja--","EP20_MD_HEARTHUNTER1",1, .@event$;
+	monster 'map_twsd$,55,333,"--ja--","EP20_MD_HEARTHUNTER1",1, .@event$;
+	monster 'map_twsd$,62,334,"--ja--","EP20_MD_HEARTHUNTER1",1, .@event$;
+	monster 'map_twsd$,45,322,"--ja--","EP20_MD_HEARTHUNTER1",1, .@event$;
+	monster 'map_twsd$,54,321,"--ja--","EP20_MD_HEARTHUNTER1",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount('map_twsd$, instance_npcname("twsd_mobs_6") + "::OnMobDead") > 0)
+		end;
+	if ('step == 13)
+		'step = 14;
+	npctalk "Oh my God!", instance_npcname("ep20_1twsd_48_326");
+	end;
+
+OnStart2:
+	.@event$ = instance_npcname("twsd_mobs_6") + "::OnMobDead2";
+	monster 'map_twsd$,51,327,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	monster 'map_twsd$,56,332,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	monster 'map_twsd$,61,324,"--ja--","MD_EP20_JOR_WARLOCK",1, .@event$;
+	end;
+OnMobDead2:
+	if (mobcount('map_twsd$, instance_npcname("twsd_mobs_6") + "::OnMobDead2") > 0)
+		end;
+	if ('step == 15)
+		'step = 16;
+	npctalk "Like...", instance_npcname("ep20_1twsd_46_328");
+	end;
+}
+
+
+// Step 7
+1@twsd,46,328,5	script(DISABLED)	Bagot#20msd20::ep20_1twsd_46_328	4_EP18_BAGOT,{
+	if ('step < 16) {
+		cutin "ep18_bagot_01.png",2;
+		mes "[Bagot]";
+		mes "How did you get here?";
+		close3;
+	}
+	if ('step == 16) {
+		cutin "ep18_bagot_03.png",1;
+		mes "[Bagot]";
+		mes "In the meantime, you've gotten stronger? This bar is getting more interesting.";
+		npctalk "In the meantime, you've gotten stronger? This bar is getting more interesting.";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "You realize that now?!";
+		mes "Our adventurer is really strong!!";
+		npctalk "Our adventurer is really strong!!", instance_npcname("ep20_1twsd_58_327");
+		next;
+		cutin "ep18_bagot_01.png",1;
+		mes "[Bagot]";
+		mes "I want more. Could it be that the initial test subject settings were wrong?";
+		npctalk "I want more. Could it be that I misconfigured the test subjects in the first place?";
+		next;
+		select( "What to do?" );
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "Now that we run into each other, shall we deal with it ourselves? Aren't we counting?";
+		mes "Ah, but I think it would be nice to come safely together... We've accomplished our goal anyway.";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : what about it?";
+		npctalk "We ran into each other, shall we deal with it? Aren't we counting?", instance_npcname("ep20_1twsd_58_327");
+		next;
+		mes "[Lehar]";
+		mes "This is there, right? I mean 'the place'. Wouldn't it be better to leave and investigate together?";
+		npctalk "Is it better to leave and investigate together?", instance_npcname("ep20_1twsd_58_327");
+		next;
+		cutin "ep18_bagot_01.png",1;
+		mes "[Bagot]";
+		mes "What kind of confidence is it to say that out loud right now?";
+		npctalk "What kind of confidence do you have to say that out loud right now?";
+		next;
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "Because we are strong!";
+		npctalk "Because we are strong!", instance_npcname("ep20_1twsd_58_327");
+		next;
+		cutin "ep18_bagot_02.png",1;
+		mes "[Bagot]";
+		mes "It's good to be strong because you'll capture it anyway. But it's a little difficult to come back to this place.";
+		npctalk "It's good to be strong because you'll be captivated. But it's a bit difficult to come back to this place.";
+		next;
+		cutin "ep18_bagot_03.png",2;
+		mes "[Bagot]";
+		mes "Lord Lasgand? Can you use your strength?";
+		npctalk "Sir Lasgand? Can you use your strength?";
+		next;
+		cutin "ep20_lasgand01.png",0;
+		mes "[Lasgand]";
+		mes "That's annoying";
+		npctalk "That's annoying.", instance_npcname("ep20_1twsd_43_326");
+		next;
+		cutin "",255;
+		mes "[Salekgandh]";
+		mes "Ah! Lord Lasgand, I, I will...!";
+		npctalk "Ah! Lord Lasgand, I, I will...!", instance_npcname("ep20_1twsd_48_326");
+		next;
+		specialeffect EF_TETRACASTING, AREA, instance_npcname("ep20_1twsd_43_326");
+		specialeffect2 EF_BOTTOM_ANI;
+		specialeffect EF_BOTTOM_ANI, AREA, instance_npcname("ep20_1twsd_58_327");
+		cutin "ep19_lehar03.png",2;
+		mes "[Lehar]";
+		mes "Uh, that energy is... a bit strong...? Us. It's okay, right?";
+		npctalk "Uh, that energy is... a bit strong...? Us. It's okay, right?", instance_npcname("ep20_1twsd_58_327");
+		next;
+		cutin "ep18_bagot_01.png",1;
+		mes "[Bagot]";
+		mes "It's all good, but it shouldn't go bad. It's great stuff.";
+		npctalk "It's all good, but it shouldn't go bad. It's great stuff.";
+		next;
+		specialeffect EF_PORTAL4, AREA, instance_npcname("ep20_1twsd_43_326");
+		sleep2 500;
+		specialeffect EF_ASURABODY, AREA, instance_npcname("ep20_1twsd_43_326");
+		specialeffect2 EF_SHOCKWAVE2;
+		specialeffect EF_SHOCKWAVE2, AREA, instance_npcname("ep20_1twsd_58_327");
+		cutin "ep19_lehar03.png",2;
+		mes "[Lehar]";
+		mes "Uh, adventurerhee is it okay? Are you okay?";
+		npctalk "Uh, Adventurer, are we okay...? Are we okay?", instance_npcname("ep20_1twsd_58_327");
+		next;
+		cutin "",255;
+		mes "[Salekgandh]";
+		mes "Oh, as expected Lasgand...! But too noble to be used by such filthy people...";
+		npctalk "Ohhh, as expected, Lasgand...! But he's too noble to be used by such filthy people...", instance_npcname("ep20_1twsd_48_326");
+		next;
+		enablenpc instance_npcname("ep20_1twsd_53_327");
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_53_327");
+		cutin "ep20_nyar02.png",1;
+		mes "[White cat]";
+		mes "Why-";
+		npctalk "Why-", instance_npcname("ep20_1twsd_53_327");
+		next;
+		mes "[Salekgandh]";
+		mes "^0000cdCat^000000?! What cat?";
+		npctalk "A cat?! What a cat?", instance_npcname("ep20_1twsd_48_326");
+		next;
+		cutin "ep18_bagot_01.png",0;
+		mes "[Bagot]";
+		mes "What is that cat?";
+		mes "It appeared out of nowhere.";
+		npctalk "What is that cat? It appears out of nowhere.";
+		npctalk "That cat...!", instance_npcname("ep20_1twsd_58_327");
+		emotion ET_SURPRISE, getnpcid(0, instance_npcname("ep20_1twsd_43_326"));
+		next;
+		cutin "ep18_bagot_01.png",0;
+		mes "[Bagot]";
+		mes "...?! That's... Come to think of it...";
+		npctalk "...?! That's... Come to think of it...";
+		next;
+		cutin "ep20_lasgand02.png",0;
+		mes "[Lasgand]";
+		mes "That's it. Hold that one.";
+		npctalk "That's it. Grab that.", instance_npcname("ep20_1twsd_43_326");
+		npctalk "NET!!!", instance_npcname("ep20_1twsd_48_326");
+		npctalk "old!!!", instance_npcname("ep20_1twsd_50_323");
+		npctalk "old!!!", instance_npcname("ep20_1twsd_53_330");
+		npctalk "old!!!", instance_npcname("ep20_1twsd_57_323");
+		next;
+		specialeffect EF_DOUBLEGUMGANG2, AREA, instance_npcname("ep20_1twsd_43_326");
+		sleep2 500;
+		specialeffect EF_DARKCASTING, AREA, instance_npcname("ep20_1twsd_43_326");
+		specialeffect EF_GI_EXPLOSION, AREA, instance_npcname("ep20_1twsd_43_326");
+		specialeffect2 EF_SPR_MASH;
+		specialeffect EF_SPR_MASH, AREA, instance_npcname("ep20_1twsd_58_327");
+		cutin "",255;
+		mes "[Salekgandh]";
+		mes "Everyone besieged!!! Help Lasgand-nim!!!";
+		npctalk "Everyone besiege!!! Help Lasgand!!!", instance_npcname("ep20_1twsd_48_326");
+		next;
+		specialeffect EF_ITEM_LIGHT, AREA, instance_npcname("ep20_1twsd_53_327");
+		sleep2 500;
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_53_327");
+		cutin "ep20_nyar03.png",1;
+		mes "[White cat]";
+		mes "Nyaaaaaa!!";
+		npctalk "Nyaaaaa!!", instance_npcname("ep20_1twsd_53_327");
+		next;
+		removespecialeffect EF_SHOCKWAVE2, AREA, instance_npcname("ep20_1twsd_58_327");
+		sleep2 500;
+		removespecialeffect EF_SPR_MASH, AREA, instance_npcname("ep20_1twsd_58_327");
+		cutin "ep18_bagot_01.png",0;
+		mes "[Bagot]";
+		mes "Uh...? What is this...";
+		npctalk "Uh...? What is this...";
+		emotion ET_SURPRISE, getnpcid(0, instance_npcname("ep20_1twsd_43_326"));
+		specialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_48_326");
+		specialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_46_328");
+		specialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_43_326");
+		specialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_50_323");
+		specialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_53_330");
+		specialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_57_323");
+		next;
+		mes "[Bagot]";
+		mes "No way!! We are...---!!";
+		npctalk "No way!! We are...---!!";
+		close2;
+		cutin "",255;
+		if ('step == 16)
+			'step = 17;
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_48_326");
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_46_328");
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_43_326");
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_50_323");
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_53_330");
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_57_323");
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_58_327");
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_48_326");
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_46_328");
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_43_326");
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_50_323");
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_53_330");
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_57_323");
+		disablenpc instance_npcname("ep20_1twsd_48_326");
+		disablenpc instance_npcname("ep20_1twsd_46_328");
+		disablenpc instance_npcname("ep20_1twsd_43_326");
+		disablenpc instance_npcname("ep20_1twsd_50_323");
+		disablenpc instance_npcname("ep20_1twsd_53_330");
+		disablenpc instance_npcname("ep20_1twsd_57_323");
+		end;
+	}
+	end;
+}
+
+
+// Step 8
+1@twsd,58,327,3	script(DISABLED)	Lehar#20msd20::ep20_1twsd_58_327	4_EP19_LEHAR,{
+	if ('step == 16) {
+		cutin "ep19_lehar01.png",1;
+		mes "[Lehar]";
+		mes "We can beat them all, can't we?";
+		close3;
+	}
+	if ('step == 17) {
+		mes "[Lehar]";
+		mes "Gone... gone?";
+		mes "Meow?";
+		npctalk "It's gone... lost? Meow, meow?";
+		next;
+		cutin "ep20_nyar04.png",1;
+		mes "[White cat]";
+		mes "......";
+		npctalk "......", instance_npcname("ep20_1twsd_53_327");
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "...Cat?";
+		npctalk "...Cat?";
+		next;
+		cutin "ep20_nyar02.png",1;
+		mes "[White cat]";
+		mes "Nyaaa-";
+		npctalk "Nyaaa-", instance_npcname("ep20_1twsd_53_327");
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "Cat, did you help us this time too?";
+		npctalk "Cat, did you help us again?";
+		next;
+		cutin "ep20_nyar02.png",1;
+		mes "[White cat]";
+		mes "Nyaa-";
+		npctalk "Nyaaaa-", instance_npcname("ep20_1twsd_53_327");
+		next;
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "Yeah, that's right! Thank you";
+		npctalk "Yeah, that's right! Thanks.";
+		next;
+		emotion ET_QUESTION, playerattached();
+		select( "Did you understand?" );
+		cutin "ep19_lehar06.png",2;
+		mes "[Lehar]";
+		mes "No, I just think so";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Did you understand??";
+		npctalk "No, I just think so.";
+		next;
+		emotion ET_SWEAT, playerattached();
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "Where are they sent?";
+		npctalk "Where did you send them?";
+		next;
+		cutin "ep20_nyar02.png",1;
+		mes "[White cat]";
+		mes "Why?";
+		npctalk "Why?", instance_npcname("ep20_1twsd_53_327");
+		next;
+		select( "What do you say?" );
+		cutin "ep19_lehar03.png",2;
+		mes "[Lehar]";
+		mes "I don't know what you mean either.";
+		mes "But if you take this cat, someone might know!";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : what does it say?";
+		npctalk "If you take this cat, someone might know!";
+		next;
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "Cat, would you like to come with us? I'd like to thank you.";
+		npctalk "Cat, would you like to come with us? I'd like to pay you back.";
+		next;
+		cutin "ep20_nyar03.png",1;
+		mes "[White cat]";
+		mes "Nya?!";
+		npctalk "Nya?!", instance_npcname("ep20_1twsd_53_327");
+		next;
+		specialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_58_327");
+		sleep2 500;
+		emotion ET_SURPRISE;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "Oh, I don't like it- uh, huh?";
+		mes "Where, where?? Like this, we too, like this??";
+		npctalk "Where, where?? Like this, we too, like this??";
+		next;
+		removespecialeffect EF_BIG_PORTAL2, AREA, instance_npcname("ep20_1twsd_58_327");
+		specialeffect EF_HIT1, AREA, instance_npcname("ep20_1twsd_58_327");
+		disablenpc instance_npcname("ep20_1twsd_58_327");
+		if ('step == 17)
+			'step = 18;
+		cutin "ep20_nyar05.png",1;
+		mes "[White cat]";
+		mes "Nyaaah--- -- --- - -";
+		npctalk "Nyaaah--- -- --- - -", instance_npcname("ep20_1twsd_53_327");
+		next;
+		select( "Lehar? Where is Lehar...?" );
+		cutin "ep20_nyar04.png",1;
+		mes "[White cat]";
+		mes "Oh right---";
+		npctalk "Oh right---", instance_npcname("ep20_1twsd_53_327");
+		next;
+		cutin "",255;
+		mes "- The White cat stared at me for a long time and then started walking slowly. -";
+		mes "- I think it means follow me. -";
+		unittalk getcharid(3), "" + strcharinfo(0) + " : The White cat started to lead as if to follow.";
+		specialeffect EF_HIT1, AREA, instance_npcname("#20w21");
+		enablenpc instance_npcname("#20w21");
+		close2;
+		donpcevent instance_npcname("ep20_1twsd_53_327") + "::OnMove";
+		end;
+	}
+	end;
+}
+
+
+1@twsd,56,315,0	script(DISABLED)	#20w21	WARPNPC,2,2,{
+	if ('step < 18)
+		end;
+	if (ep20_main == 33) {
+		ep20_main = 34;
+		erasequest 17707;
+		setquest 17708;
+	}
+	warp "jor_back1",363,222;
+	end;
+}

@@ -1,0 +1,1692 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Episode 20: Immortals
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- 2 sidequests from Episode 20
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+
+// Sidequest A - Step 1, 10
+// (unlocked after the final of the sidequest A, quest "Koppo's Secret Base". Starting the main quest is not required)
+// (Starting the episode 20 main quest is not required, the prerequisites are BaseLevel 215 and episode 19 completed)
+icecastle,106,241,5	duplicate(dummy_cloaked_npc)	Friederike#ep20_1::ep20_icecastle_106_241	4_EP19_FRIEDERIKE
+
+icecastle,109,241,3	script	Iwin Courier#ep20	4_EP19_IWIN,{
+	if (BaseLevel < 215) {
+		mes "[Iwin Courier]";
+		mes "Oops!";
+		mes "Sorry!";
+		mes "I'll pass!!!";
+		mes "^ff0000※ This quest is available for level 215 or higher.^000000!";
+		cutin "ep19_iwin11.png",2;
+		close3;
+	}
+	if (ep19_side_sea < 17) {	// Frozen Sea completed
+		mes "[Iwin Courier]";
+		mes "Oops!";
+		mes "Sorry!";
+		mes "I'll pass!!!";
+		cutin "ep19_iwin11.png",2;
+		close3;
+	}
+	if (ep20_sidequest_1 == 0) {
+		mes "[Iwin Courier]";
+		mes "Oops!";
+		mes "Sorry!";
+		mes "I'll pass!!!";
+		cutin "ep19_iwin11.png",2;
+		next;
+		mes "[Iwin Courier]";
+		mes "Ah!";
+		mes "Who is this!";
+		mes "" + strcharinfo(0) + ", it was you!";
+		mes "I can't see because I have so much luggage!";
+		mes "ho ho ho ho!";
+		next;
+		select( "I offer to help" );
+		mes "[Iwin Courier]";
+		mes "Aww";
+		mes "No!";
+		mes "Well, I'm trying to help with this!";
+		next;
+		mes "[Iwin Courier]";
+		mes "You must be very busy with other things.";
+		mes "Even at times like this, you should rest!";
+		next;
+		select( "It looks heavy" );
+		mes "[Iwin Courier]";
+		mes "I can move slowly.";
+		next;
+		mes "[Iwin Courier]";
+		mes "hmm…";
+		mes "If so, please move this small box.";
+		next;
+		mes "[Iwin Courier]";
+		mes "I'm going to Friederike's room.";
+		mes "You can just say that Voglinde sent it.";
+		next;
+		mes "[Iwin Courier]";
+		mes "Then take care of me~";
+		setquest 11928;
+		ep20_sidequest_1 = 1;
+		close2;
+		cutin "",255;
+		navigateto("icas_in",35,121);
+		end;
+	}
+	if (ep20_sidequest_1 == 1) {
+		mes "[Iwin Courier]";
+		mes "hmm…";
+		mes "If so, please move this small box.";
+		cutin "ep19_iwin11.png",2;
+		next;
+		mes "[Iwin Courier]";
+		mes "I'm going to Friederike's room.";
+		mes "You can just say that Voglinde sent it.";
+		next;
+		mes "[Iwin Courier]";
+		mes "Then take care of me~";
+		close2;
+		cutin "",255;
+		navigateto("icas_in",35,121);
+		end;
+	}
+	if (ep20_sidequest_1 == 9) {
+		mes "[Iwin Courier]";
+		mes "Hello";
+		mes "Friederike.";
+		mes "Did you get the item?";
+		cutin "ep19_iwin11.png",2;
+		cloakoffnpcself( "ep20_icecastle_106_241" );
+		next;
+		mes "[Friederike]";
+		mes "Thanks to you, I received it well.";
+		mes "Thank you as always.";
+		cutin "ep19_friederike03.png",2;
+		next;
+		mes "[Iwin Courier]";
+		mes "What?";
+		mes "It's my job.";
+		cutin "ep19_iwin11.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Oops!";
+		mes "Have you not seen Rorohu nearby?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Iwin Courier]";
+		mes "Rorohu?";
+		mes "Okay,";
+		mes "I don't think I saw it.";
+		cutin "ep19_iwin11.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Where have it been?";
+		mes "It must be hungry.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Hmm...";
+		mes "Then, shall we look elsewhere?";
+		mes "Let's start with the ice castle.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Iwin Courier]";
+		mes "" + strcharinfo(0) + " I'm glad you're here, but it can be dangerous out there, so don't go too far.";
+		cutin "ep19_iwin11.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Yes.";
+		cutin "ep19_friederike05.png",2;
+		ep20_sidequest_1 = 10;
+		erasequest 11936;
+		setquest 11937;
+		close2;
+		cloakonnpcself( "ep20_icecastle_106_241" );
+		cutin "",255;
+		navigateto("icas_in",113,38);
+		end;
+	}
+	if (ep20_sidequest_1 == 10) {
+		mes "[Iwin Courier]";
+		mes "Rorohu?";
+		mes "Okay,";
+		mes "I don't think I saw it.";
+		cutin "ep19_iwin11.png",2;
+		cloakoffnpcself( "ep20_icecastle_106_241" );
+		next;
+		mes "[Friederike]";
+		mes "Where have it been?";
+		mes "It must be hungry.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Hmm...";
+		mes "Then, shall we look elsewhere?";
+		mes "Let's start with the ice castle.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Iwin Courier]";
+		mes "" + strcharinfo(0) + " I'm glad you're here, but it can be dangerous out there, so don't go too far.";
+		cutin "ep19_iwin11.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Yes.";
+		cutin "ep19_friederike05.png",2;
+		close2;
+		cloakonnpcself( "ep20_icecastle_106_241" );
+		cutin "",255;
+		navigateto("icas_in",113,38);
+		end;
+	}
+	mes "[Iwin Courier]";
+	mes "Oops!";
+	mes "Sorry!";
+	mes "I'll pass!!!";
+	cutin "ep19_iwin11.png",2;
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep19_main == 100 && BaseLevel >= 215 && ep20_sidequest_1 == 0" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11936) == 1" );
+	end;
+}
+
+// Sidequest A - Step 2
+icas_in,35,121,0	script	#ep20print	HIDDEN_WARP_NPC,2,2,{
+	end;
+OnTouch:
+	if (ep20_sidequest_1 == 1) {
+		mes "- Noisy -";
+		next;
+		mes "!!!!!!!!!!!!";
+		next;
+		mes "[Friederike]";
+		mes "Oops";
+		mes "What's happening all of a sudden guys!";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Ah!";
+		mes "Hello " + strcharinfo(0) + "";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "You shy people " + strcharinfo(0) + " I see you and hide.";
+		mes "You really can't dry it.";
+		cutin "ep19_friederike05.png",2;
+		next;
+		select( "Deliver the box" );
+		mes "[Friederike]";
+		mes "Wow!";
+		mes "" + strcharinfo(0) + " thank you for bringing it yourself.";
+		mes "What did Voglinde give you?";
+		cutin "ep19_friederike03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Crunch";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Oops!";
+		mes "These are the wool socks you asked for!!";
+		mes "It's fluffy and so cute!!";
+		cutin "ep19_friederike03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "And with Hinare tea...";
+		mes "With a letter addressed to Tataring.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Foringle Chip!";
+		mes "It's a new flavor.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Little Iwin]";
+		mes "Is it a cookie?";
+		mes "It looks delicious!!!";
+		mes "Let's go eat!";
+		cutin "ep20_cocopo02.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Wait!";
+		mes "Not yet!";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Little Iwin]";
+		mes "To~~~";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Snacks will be eaten after dinner.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Little Iwin]";
+		mes "Can't we eat now?";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "No!";
+		mes "Voglinde will scold you if you eat snacks before eating!";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[Little Iwin]";
+		mes "But Friederike also ate snacks before eating.";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[Tataring]";
+		mes "So Mark and Voglinde really scolded you?";
+		cutin "ep19_tamarin04.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Ah...";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Little Iwin]";
+		mes "LFriederike, you're scolded by Voglinde.";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "That… what if I say that!";
+		mes "Tatarin got scolded as well!";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[Tataring]";
+		mes "I was scolded not because I ate cookies, but because Friederike didn't stop me from eating them.";
+		mes "And it's not a Tatarin, it's Tamarin...";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[Little Iwin]";
+		mes "You can't fight!";
+		mes "Mother said her friends should get along.";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[Little Iwin]";
+		mes "So, let's eat snacks.";
+		mes "Don't fight.";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Tataring]";
+		mes "You kid...";
+		cutin "ep19_tamarin03.png",2;
+		next;
+		mes "[Little Iwin]";
+		mes "But her mother tells her to get along with her friends and she says she shouldn't go near the Iwins in the canyon?";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		select( "Iwin in the canyon?" );
+		mes "[Little Iwin]";
+		mes "There are things that even adventurers don't know!";
+		mes "There are many Iwins living in the northern canyon.";
+		cutin "ep20_cocopo02.png",2;
+		next;
+		mes "[Little Iwin]";
+		mes "We lived together a long time ago, but we don't live together now.";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[Little Iwin]";
+		mes "It would be nice if we lived together.";
+		mes "If you live in an ice castle, you can have a warm house and eat delicious snacks.";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Rorohu is a good boy.";
+		cutin "ep19_friederike03.png",2;
+		next;
+		mes "[Rorohu]";
+		mes "That's not like that!";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Tataring]";
+		mes "I'm ashamed.";
+		cutin "ep19_tamarin04.png",2;
+		next;
+		mes "[Rorohu]";
+		mes "Indeed!!";
+		mes "Just kidding you both!!!";
+		mes "I'm going home to eat!";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Oops!";
+		mes "Looks like it's already that time?";
+		mes "Then you'd better send the other girls back before it's too late.";
+		cutin "ep19_friederike02.png",2;
+		erasequest 11928;
+		setquest 11929;
+		ep20_sidequest_1 = 2;
+		close2;
+		cloakoffnpcself( "ep20_icas_in_32_116" );
+		cloakoffnpcself( "ep20_icas_in_30_120" );
+		cloakoffnpcself( "ep20_icas_in_36_117" );
+		cloakoffnpcself( "ep20_icas_in_28_119" );
+		cutin "",255;
+		navigateto("icas_in",32,116);
+		end;
+	}
+	if (ep20_sidequest_1 == 2 || ep20_sidequest_1 == 3 || ep20_sidequest_1 == 4 || ep20_sidequest_1 == 5) {
+		mes "[Friederike]";
+		mes "Oops!";
+		mes "Looks like it's already that time?";
+		mes "Then you'd better send the other girls back before it's too late.";
+		cutin "ep19_friederike02.png",2;
+		close2;
+		if (ep20_sidequest_1 < 3)
+			cloakoffnpcself( "ep20_icas_in_32_116" );
+		if (ep20_sidequest_1 < 4)
+			cloakoffnpcself( "ep20_icas_in_30_120" );
+		if (ep20_sidequest_1 < 5)
+			cloakoffnpcself( "ep20_icas_in_36_117" );
+		cloakoffnpcself( "ep20_icas_in_28_119" );
+		cutin "",255;
+		if (ep20_sidequest_1 == 2)
+			navigateto("icas_in",32,116);
+		else if (ep20_sidequest_1 == 3)
+			navigateto("icas_in",30,120);
+		else if (ep20_sidequest_1 == 4)
+			navigateto("icas_in",36,117);
+		else if (ep20_sidequest_1 == 5)
+			navigateto("icas_in",28,119);
+		end;
+	}
+	if (ep20_sidequest_1 == 6) {
+		mes "[Friederike]";
+		mes "I can't help it";
+		mes "I know the house, so I'll take you there";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Tataring]";
+		mes "Oops!";
+		mes "Are you leaving?";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[Friederike]";
+		mes "It's not far, so I'll be back soon.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Tataring]";
+		mes "Um...";
+		mes "" + strcharinfo(0) + ", I'm afraid to send Friederike alone. Could you go with me?";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "I can walk alone in the village at least!";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[Tataring]";
+		mes "It's not that I don't believe it, it's because there are some bad rumors these days.";
+		mes "Please";
+		cutin "ep19_tamarin01.png",2;
+		close2;
+		cutin "",255;
+		navigateto("icecastle",65,213);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11928) == 1" );
+	end;
+}
+
+// Sidequest A - Step 3
+icas_in,32,116,3	script(CLOAKED)	Cocopo#ep20_1::ep20_icas_in_32_116	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 == 2) {
+		mes "[Copo]";
+		mes "Is it time to eat already?";
+		mes "Then I'll go home soon.";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[Copo]";
+		mes "Mom scolds me if I'm late.";
+		erasequest 11929;
+		setquest 11930;
+		ep20_sidequest_1 = 3;
+		close2;
+		cutin "",255;
+		cloakonnpcself();
+		navigateto("icas_in",30,120);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11929) == 1" );
+	end;
+}
+
+// Sidequest A - Step 4
+icas_in,30,120,3	script(CLOAKED)	Cocopo#ep20_2::ep20_icas_in_30_120	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 == 3) {
+		mes "[Copo]";
+		mes "Oops!";
+		mes "I don't want to go home";
+		mes "This is the warmest place.";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Tataring]";
+		mes "Then I will be scolded.";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[Copo]";
+		mes "Tooth…";
+		cutin "ep20_cocopo03.png",2;
+		ep20_sidequest_1 = 4;
+		erasequest 11930;
+		setquest 11931;
+		close2;
+		cutin "",255;
+		cloakonnpcself();
+		navigateto("icas_in",36,117);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11930) == 1" );
+	end;
+}
+
+// Sidequest A - Step 5
+icas_in,36,117,3	script(CLOAKED)	Cocopo#ep20_3::ep20_icas_in_36_117	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 == 4) {
+		mes "[Copo]";
+		mes "You know what?";
+		mes "Today's meal at my house is Rgan sweet and sour pork.";
+		cutin "ep20_cocopo02.png",2;
+		ep20_sidequest_1 = 5;
+		erasequest 11931;
+		setquest 11932;
+		close2;
+		cutin "",255;
+		cloakonnpcself();
+		navigateto("icas_in",28,119);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11931) == 1" );
+	end;
+}
+
+// Sidequest A - Step 6
+icas_in,28,119,3	script(CLOAKED)	Cocopo#ep20_4::ep20_icas_in_28_119	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 == 5) {
+		mes "[Copo]";
+		mes "…sneaky…";
+		cutin "ep20_cocopo_baby.png",2;
+		next;
+		mes "[Friederike]";
+		mes "It's Capopo.";
+		mes "I have to take care of Chacoco's sister.";
+		mes "Capopo?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Oh my gosh, are you gone already?";
+		mes "I can't help it";
+		mes "I know the house, so I'll take you there";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Tataring]";
+		mes "Oops!";
+		mes "Are you leaving?";
+		cutin "ep19_tamarin02.png",2;
+		next;
+		mes "[Friederike]";
+		mes "It's not far, so I'll be back soon.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Tataring]";
+		mes "Um...";
+		mes "" + strcharinfo(0) + ", I'm afraid to send Friederike alone. Could you go with me?";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "I can walk alone in the village at least!";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[Tataring]";
+		mes "It's not that I don't believe it, it's because there are some bad rumors these days.";
+		mes "Please.";
+		cutin "ep19_tamarin01.png",2;
+		ep20_sidequest_1 = 6;
+		erasequest 11932;
+		setquest 11933;
+		close2;
+		cutin "",255;
+		cloakonnpcself();
+		navigateto("icecastle",65,213);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11932) == 1" );
+	end;
+}
+
+// Sidequest A - Step 7, 9
+icecastle,70,216,3	duplicate(dummy_cloaked_npc)	Friederike#ep20_2::ep20_icecastle_70_216	4_EP19_FRIEDERIKE
+
+icecastle,65,213,0	script	#ep20	HIDDEN_WARP_NPC,2,2,{
+	end;
+OnTouch:
+	if (ep20_sidequest_1 == 6) {
+		mes "[Friederike]";
+		mes "Everyone is overprotective!";
+		cloakoffnpcself( "ep20_icecastle_70_216" );
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Chacoco's house is just a little way down from here.";
+		mes "If you come back late, Tataring will nag you, so let's go.";
+		cutin "ep19_friederike02.png",2;
+		ep20_sidequest_1 = 7;
+		erasequest 11933;
+		setquest 11934;
+		close2;
+		cloakonnpcself( "ep20_icecastle_70_216" );
+		cutin "",255;
+		navigateto("icecastle",65,159);
+		end;
+	}
+	if (ep20_sidequest_1 == 7) {
+		mes "[Friederike]";
+		mes "Everyone is overprotective!";
+		cutin "ep19_friederike04.png",2;
+		cloakoffnpcself( "ep20_icecastle_70_216" );
+		next;
+		mes "[Friederike]";
+		mes "Chacoco's house is just a little way down from here.";
+		mes "If you come back late, Tataring will nag you, so let's go.";
+		cutin "ep19_friederike02.png",2;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep20_icecastle_70_216" );
+		navigateto("icecastle",65,159);
+		end;
+	}
+	if (ep20_sidequest_1 == 8) {
+		mes "[Friederike]";
+		mes "Since you've come this far, would you like to rest in a warm room?";
+		mes "I can give you snacks and tea.";
+		cutin "ep19_friederike03.png",2;
+		cloakoffnpcself( "ep20_icecastle_70_216" );
+		next;
+		mes "[Laraha]";
+		mes "Friederike!";
+		mes "Friederike!";
+		cutin "ep19_iwin04.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Hello.";
+		mes "What's going on?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Laraha]";
+		mes "Is Rorohu in the room?";
+		cutin "ep19_iwin04.png",2;
+		next;
+		mes "[Friederike]";
+		mes "I just got home too...";
+		mes "Wait a minute.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Tataring!!";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Tataring]";
+		mes "Huh?";
+		mes "Are you here?";
+		mes "What's up?";
+		mes "It's cold, but I can't come in.";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Have you been to Rorohu?";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Tataring]";
+		mes "No?";
+		mes "I haven't seen her since I went back to eat.";
+		cutin "ep19_tamarin01.png",2;
+		next;
+		mes "[Laraha]";
+		mes "That's weird...";
+		mes "That's because... you never came home.";
+		mes "It's past time to eat.";
+		cutin "ep19_iwin04.png",2;
+		next;
+		mes "[Laraha]";
+		mes "Where did he go again?";
+		next;
+		mes "[Friederike]";
+		mes "If I meet you on a walk, I'll send you home.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		select( "Walking?" );
+		mes "[Friederike]";
+		mes "Will you hang out?";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Then, shall we take a walk east?";
+		mes "Whoops.";
+		cutin "ep19_friederike05.png",2;
+		ep20_sidequest_1 = 9;
+		erasequest 11935;
+		setquest 11936;
+		close2;
+		cloakonnpcself( "ep20_icecastle_70_216" );
+		cutin "",255;
+		navigateto("icecastle",109,241);
+		end;
+	}
+	if (ep20_sidequest_1 == 9) {
+		mes "[Friederike]";
+		mes "Will you hang out?";
+		cutin "ep19_friederike02.png",2;
+		cloakoffnpcself( "ep20_icecastle_70_216" );
+		next;
+		mes "[Friederike]";
+		mes "Then, shall we take a walk east?";
+		mes "Whoops.";
+		cutin "ep19_friederike05.png",2;
+		close2;
+		cloakonnpcself( "ep20_icecastle_70_216" );
+		cutin "",255;
+		navigateto("icecastle",109,241);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11933) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11935) == 1" );
+	end;
+}
+
+// Sidequest A - Step 8
+icecastle,62,160,5	duplicate(dummy_cloaked_npc)	Friederike#ep20_3::ep20_icecastle_62_160	4_EP19_FRIEDERIKE
+icecastle,63,158,3	duplicate(dummy_cloaked_npc)	Capopo#ep20_3::ep20_icecastle_63_158	EP20_NPC_COCOPO
+
+icecastle,65,159,3	script	Chacoco#ep20	4_EP19_IWIN,{
+	if (ep20_sidequest_1 == 7) {
+		mes "[Chacoco]";
+		mes "Hello Friederike, Hello " + strcharinfo(0) + ".";
+		mes "Are you going for a walk?";
+		cutin "ep19_iwin06.png",2;
+		cloakoffnpcself( "ep20_icecastle_62_160" );
+		next;
+		mes "[Friederike]";
+		mes "That's…";
+		mes "Here...";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Chacoco]";
+		mes "Why does " + strcharinfo(0) + " have Capopo?";
+		mes "Did you leave it at Friederike's house again?";
+		mes "Chacoco is really..!!";
+		cutin "ep19_iwin06.png",2;
+		next;
+		mes "[Chacoco]";
+		mes "Chacoco!!!";
+		cloakoffnpcself( "ep20_icecastle_63_158" );
+		next;
+		mes "[Chacoco]";
+		mes "Huh?";
+		mes "Why?";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Chacoco]";
+		mes "Why!";
+		mes "Did you bother Friederike again?";
+		mes "And I left Capopo behind!";
+		cutin "ep19_iwin06.png",2;
+		next;
+		mes "[Capopo]";
+		mes "Oops!";
+		cutin "ep20_cocopo01.png",2;
+		next;
+		mes "[Capopo]";
+		mes "I'm sorry!!!";
+		cutin "ep19_iwin06.png",2;
+		next;
+		mes "[Chacoco]";
+		mes "Friederike, " + strcharinfo(0) + " thank you so much for bringing me Capopo.";
+		next;
+		mes "[Chacoco]";
+		mes "I'll scold Capopo harshly so that this doesn't happen again.";
+		mes "Sorry.";
+		next;
+		mes "[Friederike]";
+		mes "I'm fine, don't scold her too much.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Okay, we'll go back now.";
+		next;
+		mes "[Capopo]";
+		mes "Don't go, Friederike!!";
+		mes "Mom will scold me so much!!!";
+		cutin "ep20_cocopo03.png",2;
+		next;
+		mes "[Chacoco]";
+		mes "Mrs. Friederike is busy, so you have to leave quickly.";
+		mes "Let's go home.";
+		mes "ho ho ho.";
+		cutin "ep19_iwin06.png",2;
+		next;
+		mes "[Capopo]";
+		mes "Gyaaah!!!!";
+		cutin "ep20_cocopo03.png",2;
+		ep20_sidequest_1 = 8;
+		erasequest 11934;
+		setquest 11935;
+		close2;
+		cloakonnpcself( "ep20_icecastle_62_160" );
+		sleep2 350;
+		cloakonnpcself( "ep20_icecastle_63_158" );
+		cutin "",255;
+		navigateto("icecastle",65,213);
+		end;
+	}
+	if (ep20_sidequest_1 == 8) {
+		mes "[Chacoco]";
+		mes "Mrs. Friederike is busy, so you have to leave quickly.";
+		mes "Let's go home.";
+		mes "ho ho ho.";
+		cutin "ep19_iwin06.png",2;
+		cloakoffnpcself( "ep20_icecastle_63_158" );
+		next;
+		mes "[Capopo]";
+		mes "Gyaaah!!!!";
+		cutin "ep20_cocopo03.png",2;
+		close2;
+		cloakonnpcself( "ep20_icecastle_63_158" );
+		sleep2 334;
+		cutin "",255;
+		navigateto("icecastle",65,213);
+		end;
+	}
+	// note: no text
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11934) == 1" );
+	end;
+}
+
+// Sidequest A - Step 9
+// icecastle,65,213,0	script	#ep20	HIDDEN_WARP_NPC,2,2,{
+
+// Sidequest A - Step 10
+// icecastle,109,241,3	script	Iwin Courier#ep20	4_EP19_IWIN,{
+
+// Sidequest A - Step 11
+icas_in,111,40,5	duplicate(dummy_cloaked_npc)	Friederike#ep20_4::ep20_icas_in_111_40	4_EP19_FRIEDERIKE
+
+icas_in,113,38,3	script	Iwin Guard#ep20_1	4_EP19_IWIN,{
+	if (ep20_sidequest_1 == 10) {
+		mes "[Iwin Guard]";
+		mes "Hello";
+		mes "Friederike.";
+		mes "Did you come to see Voglinde?";
+		cutin "ep19_iwin01.png",2;
+		cloakoffnpcself( "ep20_icas_in_111_40" );
+		next;
+		mes "[Friederike]";
+		mes "No, I'm looking for Rorohu.";
+		mes "Didn't you see it?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Iwin Guard]";
+		mes "I don't think I've seen it today, but since the time is right now, I'd better find it soon.";
+		mes "Shall we contact the guards as well?";
+		cutin "ep19_iwin01.png",2;
+		next;
+		mes "[Friederike]";
+		mes "It would be nice if it wasn't a big deal...";
+		mes "Please.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Friederike]";
+		mes "" + strcharinfo(0) + ", let's go to the village entrance.";
+		mes "Delivered to the guard at the entrance... It shouldn't be anything...";
+		ep20_sidequest_1 = 11;
+		erasequest 11937;
+		setquest 11938;
+		close2;
+		cloakonnpcself( "ep20_icas_in_111_40" );
+		sleep2 349;
+		cutin "",255;
+		navigateto("icecastle",24,130);
+		end;
+	}
+	if (ep20_sidequest_1 == 11) {
+		mes "[Iwin Guard]";
+		mes "I don't think I've seen it today, but since the time is right now, I'd better find it soon.";
+		mes "Shall we contact the guards as well?";
+		cutin "ep19_iwin01.png",2;
+		cloakoffnpcself( "ep20_icas_in_111_40" );
+		next;
+		mes "[Friederike]";
+		mes "It would be nice if it wasn't a big deal...";
+		mes "Please.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Friederike]";
+		mes "" + strcharinfo(0) + ", let's go to the village entrance.";
+		mes "Delivered to the guard at the entrance... It shouldn't be anything...";
+		close2;
+		cloakonnpcself( "ep20_icas_in_111_40" );
+		cutin "",255;
+		navigateto("icecastle",24,130);
+		end;
+	}
+	// note: no text
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11937) == 1" );
+	end;
+}
+
+// Sidequest A - Step 12
+icecastle,26,129,3	duplicate(dummy_cloaked_npc)	Friederike#ep20_5::ep20_icecastle_26_129	4_EP19_FRIEDERIKE
+
+icecastle,24,130,5	script	Iwin Guard#ep20_2	4_EP19_IWIN,{
+	if (ep20_sidequest_1 == 11) {
+		mes "[Iwin Guard]";
+		mes "Hello";
+		mes "Friederike.";
+		mes "Is it any big deal that you've come this far?";
+		cutin "ep19_iwin03.png",2;
+		cloakoffnpcself( "ep20_icecastle_26_129" );
+		next;
+		mes "[Friederike]";
+		mes "Oh than that.";
+		mes "Have you seen Rorohu?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Iwin Guard]";
+		mes "If it's Rorohu, it should be near the entrance.";
+		mes "They wanted to go outside, so I said no, and then they said they would just look outside at the entrance.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Iwin Guard]";
+		mes "Right before yo...";
+		next;
+		mes "[Friederike]";
+		mes "Are you here?";
+		mes "Whew… that's nice.";
+		cutin "ep19_friederike03.png",2;
+		ep20_sidequest_1 = 12;
+		erasequest 11938;
+		setquest 11939;
+		close2;
+		cloakonnpcself( "ep20_icecastle_26_129" );
+		sleep2 317;
+		cutin "",255;
+		navigateto("icecastle",20,128);
+		end;
+	}
+	if (ep20_sidequest_1 == 12) {
+		mes "[Iwin Guard]";
+		mes "If it's Rorohu, it should be near the entrance.";
+		mes "They wanted to go outside, so I said no, and then they said they would just look outside at the entrance.";
+		cutin "ep19_iwin03.png",2;
+		cloakoffnpcself( "ep20_icecastle_26_129" );
+		next;
+		mes "[Iwin Guard]";
+		mes "Right before yo...";
+		next;
+		mes "[Friederike]";
+		mes "Are you here?";
+		mes "Whew… that's nice.";
+		cutin "ep19_friederike03.png",2;
+		close2;
+		cloakonnpcself( "ep20_icecastle_26_129" );
+		cutin "",255;
+		navigateto("icecastle",20,128);
+		end;
+	}
+	// note: no text
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11938) == 1" );
+	end;
+}
+
+// Sidequest A - Step 13
+icecastle,22,128,3	duplicate(dummy_cloaked_npc)	Friederike#ep20_6::ep20_icecastle_22_128	4_EP19_FRIEDERIKE
+
+// Note: strange, but the NPC is not cloaked on official
+icecastle,20,128,3	script	Cocopo#ep20_Comm	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 == 12) {
+		mes "[Friederike]";
+		mes "Here you are! Rorohu.";
+		mes "Your mother is worried.";
+		mes "Come home...";
+		mes "Oops!!!";
+		cloakoffnpcself( "ep20_icecastle_22_128" );
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Friederike]";
+		mes "This is not Rorohu, so it's just a bunch of cotton.";
+		next;
+		mes "[Iwin Guard]";
+		mes "Aaaah!!!!";
+		mes "Couldn't it have left a wad of cotton and sneaked out!";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Iwin Guard]";
+		mes "It would be nice if nothing happened... but in case you don't know, you'd better go look for it.";
+		next;
+		mes "[Friederike]";
+		mes "I... I want to go too.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Iwin Guard]";
+		mes "It's dangerous outside. Leave it to the guards to find it.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "But...";
+		mes "If you're even hurt, I'll be of help.";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Iwin Guard]";
+		mes "Ummm...";
+		mes "Then you must never leave " + strcharinfo(0) + "'s side.";
+		mes "You see?";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Okay.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Iwin Guard]";
+		mes "Then take good care of Friederike.";
+		mes "I'll call in some more guards.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[Friederike]";
+		mes "Let's go out and find Rorohu first.";
+		mes "It shouldn't have happened...";
+		cutin "ep19_friederike02.png",2;
+		ep20_sidequest_1 = 13;
+		erasequest 11939;
+		setquest 11940;
+		close2;
+		cloakonnpcself( "ep20_icecastle_22_128" );
+		sleep2 350;
+		cutin "",255;
+		navigateto("jor_back1",310,245);
+		end;
+	}
+	if (ep20_sidequest_1 == 13) {
+		mes "[Iwin Guard]";
+		mes "Then take good care of Friederike.";
+		mes "I'll call in some more guards.";
+		cutin "ep19_iwin03.png",2;
+		cloakoffnpcself( "ep20_icecastle_26_129" );	// strange but official
+		next;
+		mes "[Friederike]";
+		mes "Let's go out and find Rorohu first.";
+		mes "It shouldn't have happened...";
+		cutin "ep19_friederike02.png",2;
+		close2;
+		cloakonnpcself( "ep20_icecastle_26_129" );
+		sleep2 333;
+		cutin "",255;
+		navigateto("jor_back1",310,245);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11939) == 1" );
+	end;
+}
+
+// Sidequest A - Step 14
+jor_back1,310,245,3	script	Fluff#ep20_1	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 == 13) {
+		mes "- Perhaps the fluff of Rorohu.";
+		mes "Considering where the hair fell, it seems that Rorohu moved north. -";
+		ep20_sidequest_1 = 14;
+		erasequest 11940;
+		setquest 11941;
+		close2;
+		navigateto("jor_back1",222,392);
+		end;
+	}
+	if (ep20_sidequest_1 == 14) {
+		mes "- Perhaps the fluff of Rorohu.";
+		mes "Considering where the hair fell, it seems that Rorohu moved north. -";
+		close2;
+		navigateto("jor_back1",222,392);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11940) == 1" );
+	end;
+}
+
+// Sidequest A - Step 15
+jor_back1,222,392,3	script	Fluff#ep20_2	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 == 14) {
+		mes "- Perhaps the fluff of Rorohu.";
+		mes "Considering where the hair fell, it seems that Rorohu moved north. -";
+		next;
+		mes "- Let's move further north -";
+		ep20_sidequest_1 = 15;
+		erasequest 11941;
+		setquest 11942;
+		close2;
+		navigateto("jor_back2",8,242);
+		end;
+	}
+	if (ep20_sidequest_1 == 15) {
+		mes "- Perhaps the fluff of Rorohu.";
+		mes "Considering where the hair fell, it seems that Rorohu moved north. -";
+		next;
+		mes "- Let's move further north -";
+		close2;
+		navigateto("jor_back2",8,242);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11941) == 1" );
+	end;
+}
+
+// Sidequest A - Step 16
+jor_back2,8,242,3	script	Fluff#ep20_3	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 == 15) {
+		mes "- Perhaps the fluff of Rorohu.";
+		mes "Considering where the hair fell, it seems that Rorohu moved north. -";
+		next;
+		mes "- Let's move further north -";
+		ep20_sidequest_1 = 16;
+		erasequest 11942;
+		setquest 11943;
+		close2;
+		navigateto("jor_back3",95,324);
+		end;
+	}
+	// note: no text
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11942) == 1" );
+	end;
+}
+
+// Sidequest A - Step 17
+jor_back3,95,324,3	script	Fluff#ep20_4	EP20_NPC_COCOPO,{
+	if (ep20_sidequest_1 == 16) {
+		mes "- Perhaps the fluff of Rorohu.";
+		mes "Considering where the hair fell, it seems that Rorohu moved north. -";
+		next;
+		mes "- Let's move further north -";
+		ep20_sidequest_1 = 17;
+		erasequest 11943;
+		setquest 11944;
+		close2;
+		navigateto("jor_back4",101,265);
+		end;
+	}
+	if (ep20_sidequest_1 == 17) {
+		mes "- Perhaps the fluff of Rorohu.";
+		mes "Considering where the hair fell, it seems that Rorohu moved north. -";
+		next;
+		mes "- Let's move further north -";
+		close2;
+		navigateto("jor_back4",101,265);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11943) == 1" );
+	end;
+}
+
+// Sidequest A - Step 18 (instance creation)
+// jor_back4,101,265,3	script	Cocopo#ep20_5	EP20_NPC_COCOPO,{
+
+// Sidequest A - Step 19
+icecastle,69,217,3	duplicate(dummy_cloaked_npc)	Rorohu#ep20_e::ep20_icecastle_69_217	EP20_NPC_COCOPO
+
+// (final NPC is part of the daily quests : 'Escargot!', 'Dangerous!', 'I hope they reconcile.(1)', '[230] I wish we could reconcile (2)')
+// icecastle,67,218,5	script	Lalaha#ep20	4_EP19_IWIN,{
+
+// (End of Sidequest A)
+//---------------------------------
+
+
+
+// Sidequest B - Step 1
+// (unlocked when ep20_main = 24, main quest "Holy and Holy")
+icecastle,46,164,5	script	Iwin Soldier#20ms60	EP19_NPC_IWIN_SY,{
+	if (BaseLevel < 215) {
+		mes "[Iwin soldier]";
+		mes "Adventurer!";
+		next;
+		mes "- ^0000cdThis is a quest available from level 215.^000000 -";
+		close;
+	}
+	if (ep20_main < 24) {
+		npctalk "Every day is bleeding, really...", "", bc_self;
+		end;
+	}
+	if (ep20_sidequest_2 == 0) {
+		mes "[Iwin soldier]";
+		mes "Adventurer! Just what I was looking for!!";
+		mes "I'd like you to come with me.";
+		next;
+		select( "What happened?" );
+		mes "[Iwin soldier]";
+		mes "Rgan, brought by Horror, is a bit troublesome. We can't handle it. This is the first time we've seen someone like this.";
+		emotion ET_OHNO;
+		next;
+		mes "[Iwin soldier]";
+		mes "He's an experienced adventurer who has dealt with a lot of people, so you'll know how to deal with him once you meet him.";
+		mes "I would like some help";
+		next;
+		if (select( "I will go now", "I will go later when I have time" ) == 2) {
+			mes "[Irwin soldier]";
+			mes "Ah, ah... Was it too sudden?";
+			mes "Then, when you have time, I'll be sure to ask for it. It's a little, a little too difficult.";
+			close;
+		}
+		mes "[Iwin soldier]";
+		mes "Ah, I live!!";
+		mes "I've been quarantined because I'm a prisoner of war, but I'll guide you right away.";
+		ep20_sidequest_2 = 1;
+		setquest 17712;
+		close2;
+		warp "icas_in2",33,114;
+		end;
+	}
+	mes "[Iwin soldier]";
+	mes "Are you going to see Rgan prisoner? I'll guide you right away.";
+	close2;
+	warp "icas_in2",33,114;
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "ep20_main >= 24 && ep20_sidequest_2 == 0" );
+	end;
+}
+
+
+icas_in2,33,114,0	script	#20ms60	HIDDEN_WARP_NPC,3,3,{
+	end;
+OnTouch:
+	if (ep20_sidequest_2 > 0 && ep20_sidequest_2 < 5) {
+		cloakoffnpcself( "ep20_icas_in2_31_116" );
+		cloakoffnpcself( "ep20_icas_in2_37_118" );
+		cloakoffnpcself( "ep20_icas_in2_29_114" );
+		cloakoffnpcself( "ep20_icas_in2_27_118" );
+		cloakoffnpcself( "ep20_icas_in2_37_115" );
+		end;
+	}
+	if (ep20_sidequest_2 == 5 || ep20_sidequest_2 == 6) {
+		cloakoffnpcself( "ep20_icas_in2_31_116" );
+		cloakoffnpcself( "ep20_icas_in2_37_118" );
+		cloakoffnpcself( "ep20_icas_in2_29_114" );
+		cloakoffnpcself( "ep20_icas_in2_27_118" );
+		cloakoffnpcself( "ep20_icas_in2_37_115" );
+		cloakoffnpcself( "ep20_icas_in2_32_120" );
+		end;
+	}
+	end;
+}
+
+icas_in2,37,118,3	script(CLOAKED)	Iwin Soldier#20ms61::ep20_icas_in2_37_118	4_EP19_IWIN,{
+	npctalk "What did I do so wrong that I deserve this?", "", bc_self;
+	end;
+}
+
+// note: not cloaked
+icas_in2,34,117,3	script	Iwin Soldier#20ms62::ep20_icas_in2_34_117	4_EP19_IWIN,{ 
+	npctalk "Hu- not easy... not easy...", "", bc_self;
+	end;
+}
+
+icas_in2,29,114,1	script(CLOAKED)	Iwin Soldier#20ms63::ep20_icas_in2_29_114	4_EP19_IWIN,{
+	npctalk "You know all the Rgans are crazy, right?", "ep20_icas_in2_29_114", bc_self;
+	end;
+}
+
+icas_in2,27,118,1	script(CLOAKED)	Iwin Soldier#20ms64::ep20_icas_in2_27_118	4_EP19_IWIN,{
+	npctalk "You really don't intend to live here forever...", "", bc_self;
+	end;
+}
+
+icas_in2,37,115,3	script(CLOAKED)	Iwin Soldier#20ms65::ep20_icas_in2_37_115	4_EP19_IWIN,{
+	npctalk "Having lived to this age, I really see everything. I see everything.", "", bc_self;
+	end;
+}
+
+
+// Sidequest B - Step 2, 5
+// (part of the daily quest 'Taste of hobby')
+// icas_in2,30,121,5	script	Nadyagand#20ms60::ep20_icas_in2_30_121	4_EP19_RGAN_SR2,{
+
+
+// Sidequest B - Step 3
+icas_in2,31,116,1	script(CLOAKED)	Horr#20ms60::ep20_icas_in2_31_116	4_EP19_IWIN,{
+	if (ep20_sidequest_2 == 2) {
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "Ah, it's difficult at this rate...";
+		mes "I tried to open my mouth and get something";
+		next;
+		cutin "",255;
+		mes "[Nadyagand]";
+		mes "Are you going to brush all my teeth out? No way!!";
+		next;
+		mes "[Iwin soldier]";
+		mes "At this rate, I'm really going to starve Rgan without getting any information.";
+		npctalk "Why... do we need to get information from such an uncooperative?", "ep20_icas_in2_37_118", bc_self;
+		npctalk "Is that so? Is it necessary?", "ep20_icas_in2_29_114", bc_self;
+		next;
+		mes "[Nadyagand]";
+		mes "What? To save my precious self.";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "You'd better give me a " + getitemname(1001154) + " if you like.";
+		next;
+		cutin "",255;
+		mes "[Iwin soldier]";
+		mes "Where did you get that? I don't even know what it is.";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "Regan is asking for it, so you can ask him.";
+		mes "Where do you get those " + getitemname(1001154) + "?";
+		next;
+		cutin "",255;
+		mes "[Nadyagand]";
+		mes "That, I don't know";
+		mes "I don't know?";
+		npctalk "What do you know?", "ep20_icas_in2_29_114", bc_self;
+		next;
+		mes "[Iwin soldier]";
+		mes "Can you bring us something we don't know?";
+		npctalk "Can't we pretend we haven't heard?", "ep20_icas_in2_27_118", bc_self;
+		next;
+		mes "[Nadyagand]";
+		mes "The priests took care of it. How do I know?";
+		next;
+		mes "[Iwin soldier]";
+		mes "What is this? Is this a young boy?";
+		npctalk "This is a thoroughly hierarchical society. It's obvious you haven't worked.", "ep20_icas_in2_37_118", bc_self;
+		npctalk "No, but if it goes into your mouth, you don't have to know where it comes from.", "ep20_icas_in2_37_115", bc_self;
+		npctalk "Do you really need to feed them?", "ep20_icas_in2_27_118", bc_self;
+		next;
+		mes "[Nadyagand]";
+		mes "I hear very disrespectful things about me, but they are not";
+		next;
+		mes "[Iwin soldier]";
+		mes "What is disrespect as if you are anything?";
+		npctalk "Anything can work, vase maker, poor conscience?", "ep20_icas_in2_34_117", bc_self;
+		next;
+		select( "What's wrong?" );
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "Ah, adventurer. You're welcome! You've saved yourself an hour.";
+		mes "Rgan, who I brought for information, is on hunger strike saying he won't open his mouth unless I give him what he wants.";
+		next;
+		cutin "",255;
+		mes "[Iwin soldier]";
+		mes "You said you brought a prisoner, but it feels strange to be serving your master, right?";
+		npctalk "Phew. It saved me an hour.", "ep20_icas_in2_29_114", bc_self;
+		next;
+		mes "[Iwin soldier]";
+		mes "It's a big deal, it's a big deal. It looks like I'll have Rgan as my master. Tsk tsk. What's the world like?";
+		npctalk "I need to do something quickly, I won't look like that.", "ep20_icas_in2_27_118", bc_self;
+		next;
+		mes "[Nadyagand]";
+		mes "Can anyone hear my last words?";
+		mes "Why do you treat people like this?";
+		next;
+		select( "What are you asking for specifically?" );
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "Iza is saying he won't eat anything other than wild " + getitemname(1001154) + ". But it's a problem because no one knows where to get wild " + getitemname(1001154) + ".";
+		next;
+		cutin "",255;
+		mes "[Iwin soldier]";
+		mes "Yeah. You won't even open your mouth until you bring out something called " + getitemname(1001154) + ", which you've never heard of before.";
+		npctalk "Wouldn't the adventurer be angry too?", "ep20_icas_in2_34_117", bc_self;
+		next;
+		select( "I know what's a " + getitemname(1001154) + "." );
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Rgans' favorite favorite.", bc_self;
+		mes "[Nadyagand]";
+		mes "Uh, that's right. I like it the most";
+		next;
+		mes "[Iwin soldier]";
+		mes "Ohh! After all, an adventurer who knows nothing!!";
+		npctalk "I believed you!!", "ep20_icas_in2_37_115", bc_self;
+		next;
+		select( "How many do you need?" );
+		mes "[Nadyagand]";
+		mes "10! ^0000cd10 " + getitemname(1001154) + "^000000 I want to eat!!!";
+		next;
+		mes "[Iwin soldier]";
+		mes "Ha- Do I have to go this far...";
+		npctalk "Watch me say you waited.", "ep20_icas_in2_37_118", bc_self;
+		npctalk "My lord, my lord.","ep20_icas_in2_34_117", bc_self;
+		npctalk "A prisoner is a prisoner.", "ep20_icas_in2_27_118", bc_self;
+		next;
+		mes "[Nadyagand]";
+		mes "These are the things that should be given to me as a bishop";
+		npctalk "It's just a mouthful.", "ep20_icas_in2_29_114", bc_self;
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "Take care.";
+		ep20_sidequest_2 = 3;
+		erasequest 17713;
+		setquest 17714;
+		close3;
+	}
+	cutin "ep19_iwin09.png",2;
+	mes "[Horr]";
+	mes "If I had known in advance that you were such a troublesome person, I would have used a different method.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(17713) == 1" );
+	end;
+}
+
+
+// Sidequest B - Step 4
+// (npcs are parts of the main quest - Step 23)
+
+// Sidequest B - Step 5
+// icas_in2,30,121,5	script	Nadyagand#20ms60::ep20_icas_in2_30_121	4_EP19_RGAN_SR2,{
+
+
+// Sidequest B - Step 6, 7 (final)
+icas_in2,32,120,3	script(CLOAKED)	Lazy#20ms60::ep20_icas_in2_32_120	4_EP19_LAZY,{
+	if (checkweight(1001217,10) == 0) {	// custom
+		mes "You cannot proceed with the quest because you have too many items.";
+		mes "Please clean up your items and try again.";
+		close;
+	}
+	if (ep20_sidequest_2 == 5) {
+		cutin "ep19_leizi02.png",0;
+		mes "[Lazy]";
+		mes "Oops! There was some Rgan, so someone said I was here?";
+		mes "Hello, me?";
+		next;
+		cutin "",255;
+		mes "[Nadyagand]";
+		mes "You are that person.";
+		next;
+		cutin "ep19_leizi02.png",0;
+		mes "[Lazy]";
+		mes "Thanks to you, I can live. Thank you so much. How can I repay this favor?";
+		mes "I don't know how, so just take my heart.";
+		next;
+		cutin "",255;
+		mes "[Nadyagand]";
+		mes "Well, thanks to you guys, I don't have to do hard work, so it's good. Let's count it as helping each other.";
+		next;
+		mes "[Nadyagand]";
+		mes "Okay, now massage my legs";
+		npctalk "Suddenly??", "ep20_icas_in2_29_114", bc_self;
+		npctalk "This is how it comes out?", "ep20_icas_in2_27_118", bc_self;
+		next;
+		mes "[Iwin soldier]";
+		mes "What are you saying? Go and do something.";
+		npctalk "Yes!! Good work!", "ep20_icas_in2_37_118", bc_self;
+		next;
+		mes "[Nadyagand]";
+		mes "You treat me this way? How dare you, a bishop?";
+		next;
+		mes "[Iwin soldier]";
+		mes "There's a bishop, here it's just a Rgan";
+		npctalk "Yes, just one Rgan.", "ep20_icas_in2_37_115", bc_self;
+		next;
+		mes "[Iwin soldier]";
+		mes "You, just go. We'll just deliver it there.";
+		npctalk "Just drop it nearby.", "ep20_icas_in2_34_117", bc_self;
+		next;
+		mes "[Nadyagand]";
+		mes "I'm not going!!";
+		next;
+		mes "[Iwin soldier]";
+		mes "Oh, that burn. It must be crazy.";
+		npctalk "Fantastic!!", "ep20_icas_in2_37_115", bc_self;
+		next;
+		cutin "ep19_leizi03.png",0;
+		mes "[Lazy]";
+		mes "Adventurer, has it been like this all along?";
+		next;
+		select( "Yes, it was like this" );
+		cutin "ep19_leizi02.png",0;
+		mes "[Lazy]";
+		mes "Feathers. Let's talk to me for a second.";
+		mes "Looks like I'm in trouble over there.";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "That said!";
+		npctalk "It's just a master, master.", "ep20_icas_in2_31_116", bc_self;
+		next;
+		cutin "ep19_leizi02.png",0;
+		mes "[Lazy]";
+		mes "Because Bishop Rgan, who hasn't had a drop of water on his hands and has grown up so far, I can't help him with that attitude.";
+		next;
+		cutin "ep19_leizi03.png",0;
+		mes "[Lazy]";
+		mes "A person like that is not someone who can be fixed just by fixing it from the side.";
+		mes "Why? Because I was raised that way.";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "Then how should I deal with that trouble pot? I'd rather just let it go.";
+		npctalk "Are you saying you have to put up with that?", "ep20_icas_in2_29_114", bc_self;
+		npctalk "Oops!", "ep20_icas_in2_34_117", bc_self;
+		next;
+		cutin "ep19_leizi03.png",0;
+		mes "[Lazy]";
+		mes "But it's difficult to send it over there. Our operation isn't over yet, and if we send it now, we might end up providing only information from this side.";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "So what?";
+		next;
+		cutin "ep19_leizi02.png",0;
+		mes "[Lazy]";
+		mes "Pamper it. Pamper it as much as you like.";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "How do you manage a servant who doesn't even lift a hand? Haven't you seen them using words?";
+		npctalk "The adventurer went all the way to the snake's lair, picked strawberries, and even offered them.", "ep20_icas_in2_37_115", bc_self;
+		next;
+		cutin "ep19_leizi03.png",0;
+		mes "[Lazy]";
+		mes "Um...yes, I see what the problem is. Attitude is the problem, right?";
+		mes "Then let me talk for a minute.";
+		next;
+		cutin "ep19_leizi02.png",0;
+		mes "[Lazy]";
+		mes "Hey, me. Would you like to talk to me for a minute?";
+		next;
+		cutin "",255;
+		mes "[Nadyagand]";
+		mes "There's nothing to do right now, so feel free";
+		next;
+		mes "[Lazy]";
+		mes "Work is...";
+		next;
+		mes "[Nadyagand]";
+		mes "...but...";
+		npctalk "What are you talking about?", "ep20_icas_in2_29_114", bc_self;
+		emotion ET_THINK, getnpcid(0,"ep20_icas_in2_30_121");
+		next;
+		mes "[Lazy]";
+		mes "Thought...";
+		next;
+		mes "[Nadyagand]";
+		mes "Ah...how is that?";
+		npctalk "I'm very curious. Will that convince you?", "ep20_icas_in2_37_118", bc_self;
+		next;
+		mes "[Lazy]";
+		mes "Yeah... yeah, that's right";
+		emotion ET_OK, getnpcid(0,"ep20_icas_in2_32_120");
+		next;
+		mes "[Nadyagand]";
+		mes "Really though...";
+		npctalk "Hasn't something changed the mood?", "ep20_icas_in2_37_115", bc_self;
+		next;
+		mes "[Lazy]";
+		mes "No way...";
+		next;
+		mes "[Nadyagand]";
+		mes "Thanks for the advice.";
+		emotion ET_BEST, getnpcid(0,"ep20_icas_in2_30_121");
+		next;
+		cutin "ep19_leizi02.png",0;
+		mes "[Lazy]";
+		mes "End!";
+		npctalk "What??!!", "ep20_icas_in2_34_117", bc_self;
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "What? What is the end?";
+		next;
+		cutin "ep19_leizi03.png",0;
+		mes "[Lazy]";
+		mes "It literally means everything is solved, what can I say~";
+		npctalk "Really the end? In such a short time?", "ep20_icas_in2_29_114", bc_self;
+		ep20_sidequest_2 = 6;
+		erasequest 17715;
+		setquest 17716;
+		close3;
+	}
+	if (ep20_sidequest_2 == 6) {
+		cutin "ep19_leizi02.png",0;
+		mes "[Lazy]";
+		mes "I've solved the problem, so I'm leaving";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "Wait!! Wait! What did you say that made Jeochi's face bloom like that?";
+		mes "You're not going to treat us with such an insolent attitude in the future, are you?";
+		npctalk "You promised that?", "ep20_icas_in2_37_118", bc_self;
+		next;
+		cutin "ep19_leizi01.png",0;
+		mes "[Lazy]";
+		mes "Impatient feather friends. Just watch. My new self.";
+		next;
+		emotion ET_DELIGHT, getnpcid(0,"ep20_icas_in2_30_121");
+		cutin "",255;
+		mes "[Nadyagand]";
+		mes "Hey! Give me the fishing rod! I'll teach you how to mend the net later.";
+		next;
+		mes "[Nadyagand]";
+		mes "I mean, I thought cooking was something only the lower classes did, but according to my words here, there is no science as delicate and profound as that. Is it true?";
+		mes "Cut to length and complete with precise measurements...";
+		next;
+		mes "[Nadyagand]";
+		mes "It wouldn't hurt to start a new life with a great hobby.";
+		mes "I'm really looking forward to it. Now, where should I go? I want to try fishing first.";
+		next;
+		mes "[Iwin soldier]";
+		mes "Uh, uh... I'll guide you. Let's go.";
+		npctalk "Oh my god??", "ep20_icas_in2_29_114", bc_self;
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "What the hell did you do?";
+		next;
+		cutin "ep19_leizi01.png",0;
+		mes "[Lazy]";
+		mes "That's how I make a living.";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "That tongue is so amazing. In such a short time, even if many people grow up, soothe, and threaten, it is not okay.";
+		npctalk "What did you really mean?", "ep20_icas_in2_34_117", bc_self;
+		npctalk "What are you doing?", "ep20_icas_in2_27_118", bc_self;
+		next;
+		cutin "ep19_leizi01.png",0;
+		mes "[Lazy]";
+		mes "Just, well. I wonder if you gave me a little advice to look at the action from a different perspective...";
+		npctalk "What's that?", "ep20_icas_in2_31_116", bc_self;
+		next;
+		cutin "ep19_leizi03.png",0;
+		mes "[Lazy]";
+		mes "Originally, labor and hobbies differ by a piece of paper, so it's up to you to wrap them up.";
+		mes "Cleaning the net is a noble way of cultivating the mind, fishing is a way to feel the taste of the hand, and cooking is a magic that is born at your fingertips.";
+		next;
+		cutin "",255;
+		mes "[Iwin soldier]";
+		mes "Hi-go... We'll have to be careful when we talk to this guy.";
+		mes "Even with my sane mind, I'd be scammed.";
+		npctalk "I'm a little scared.", "ep20_icas_in2_37_118", bc_self;
+		next;
+		cutin "ep19_leizi03.png",0;
+		mes "[Lazy]";
+		mes "Adventurer, pick me some " + getitemname(1001154) + " every day.";
+		mes "You can't pamper someone who works hard for free.";
+		next;
+		select( "I will." );
+		cutin "ep19_leizi01.png",0;
+		mes "[Lazy]";
+		mes "This is what I did today.";
+		mes "I did it again";
+		next;
+		cutin "ep19_leizi02.png",0;
+		mes "[Lazy]";
+		mes "Then I'm leaving";
+		next;
+		cutin "ep19_iwin09.png",2;
+		mes "[Horr]";
+		mes "Looks like things have been sorted out, so we can do our own thing now.";
+		mes "Adventurers will have to work hard starting tomorrow. Thank you.";
+		ep20_sidequest_2 = 7;
+		erasequest 17716;
+		setquest 17717;
+		getitem 1001217,10;	// Ep20_Cat_Whiskers
+		getexp2 68305979,0;
+		getexp 0,8566027;
+		// note: no reputation
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep20_icas_in2_32_120" );
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(17715) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(17716) == 1" );
+	end;
+}
+// (End of Sidequest B)
+//---------------------------------

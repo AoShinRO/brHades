@@ -4883,6 +4883,7 @@
 	export_constant(UMOB_ATKMAX);
 	export_constant(UMOB_MATKMIN);
 	export_constant(UMOB_MATKMAX);
+	export_constant(UMOB_MATK);
 	export_constant(UMOB_DEF);
 	export_constant(UMOB_MDEF);
 	export_constant(UMOB_HIT);
@@ -4903,6 +4904,7 @@
 	export_constant(UMOB_RES);
 	export_constant(UMOB_MRES);
 	export_constant(UMOB_DAMAGETAKEN);
+	export_constant(UMOB_BODYSIZE);
 
 	/* unit control - homunculus */
 	export_constant(UHOM_SIZE);
@@ -5117,6 +5119,7 @@
 	export_constant(UNPC_BODY2);
 	export_constant(UNPC_DEADSIT);
 	export_constant(UNPC_GROUP_ID);
+	export_constant(UNPC_BODYSIZE);
 
 	export_constant(NAV_NONE);
 	export_constant(NAV_AIRSHIP_ONLY);

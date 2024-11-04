@@ -86987,7 +86987,7 @@ Body:
     AegisName: Ep19_Rgan_Core_F
     Name: Low-quality Rgan Magic Core
     Type: Etc
-    Buy: 525
+    Buy: 2100
     Weight: 10
     Flags:
       BuyingStore: true
@@ -87418,6 +87418,7 @@ Body:
   - Id: 1000811
     AegisName: Snow_F_Ore
     Name: Snowflower Ore
+    Buy: 2500
     Weight: 1
     Flags:
       BuyingStore: true
@@ -87443,7 +87444,7 @@ Body:
     AegisName: EP19_Shell_Of_Rgan
     Name: Rgan Shell
     Type: Etc
-    Buy: 920
+    Buy: 2300
     Weight: 10
     Flags:
       BuyingStore: true
@@ -87451,7 +87452,7 @@ Body:
     AegisName: EP19_Unknown_Cell
     Name: Monstrous Cell
     Type: Etc
-    Buy: 960
+    Buy: 2400
     Weight: 10
     Flags:
       BuyingStore: true
@@ -87459,7 +87460,7 @@ Body:
     AegisName: EP19_Calapy
     Name: Calapy
     Type: Etc
-    Buy: 800
+    Buy: 2000
     Weight: 10
     Flags:
       BuyingStore: true
@@ -87467,7 +87468,7 @@ Body:
     AegisName: EP19_CaCalapy
     Name: Cacalapy
     Type: Etc
-    Buy: 1000
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
@@ -87475,7 +87476,7 @@ Body:
     AegisName: EP19_Prickle_Shell
     Name: Prickly Shell
     Type: Etc
-    Buy: 880
+    Buy: 2200
     Weight: 10
     Flags:
       BuyingStore: true
@@ -87499,7 +87500,7 @@ Body:
     AegisName: EP19_Bell_Flower
     Name: Bait Bellflower
     Type: Etc
-    Buy: 1080
+    Buy: 2700
     Weight: 10
     Flags:
       BuyingStore: true
@@ -87507,7 +87508,7 @@ Body:
     AegisName: EP19_Thin_Shell
     Name: Thin Tough Shell
     Type: Etc
-    Buy: 920
+    Buy: 2300
     Weight: 10
     Flags:
       BuyingStore: true
@@ -87515,7 +87516,7 @@ Body:
     AegisName: EP19_Shiny_Seaweed
     Name: Shiny Seaweed Stem
     Type: Etc
-    Buy: 880
+    Buy: 2200
     Weight: 10
     Flags:
       BuyingStore: true
@@ -87523,7 +87524,7 @@ Body:
     AegisName: EP19_Frozen_Shell
     Name: Frozen Insect Shell
     Type: Etc
-    Buy: 900
+    Buy: 2250
     Weight: 10
     Flags:
       BuyingStore: true
@@ -88553,7 +88554,7 @@ Body:
     AegisName: Slicky_Fluid
     Name: Slimy Fluid
     Type: Etc
-    Buy: 1560
+    Buy: 3900
     Weight: 10
   - Id: 1001082
     AegisName: Reptile_Stone
@@ -88577,7 +88578,7 @@ Body:
     AegisName: Cool_Liquid
     Name: Cool Liquid
     Type: Etc
-    Buy: 1460
+    Buy: 3900
     Weight: 10
   - Id: 1001086
     AegisName: Green_Crystal_Fragment
@@ -89324,7 +89325,7 @@ Body:
     AegisName: aegis_1001226
     Name: Legan's Advanced Magic Core    # !todo check english name
     Type: Etc
-    Buy: 1170
+    Buy: 2600
     Weight: 10
     Flags:
       BuyingStore: true
@@ -89332,7 +89333,7 @@ Body:
     AegisName: aegis_1001227
     Name: Coral bracelet    # !todo check english name
     Type: Etc
-    Buy: 1440
+    Buy: 3200
     Weight: 10
     Flags:
       BuyingStore: true
@@ -89340,7 +89341,7 @@ Body:
     AegisName: aegis_1001228
     Name: Seashell hairpin    # !todo check english name
     Type: Etc
-    Buy: 1440
+    Buy: 3200
     Weight: 10
     Flags:
       BuyingStore: true
@@ -89348,7 +89349,7 @@ Body:
     AegisName: aegis_1001229
     Name: Seaweed Belt    # !todo check english name
     Type: Etc
-    Buy: 1440
+    Buy: 3200
     Weight: 10
     Flags:
       BuyingStore: true
@@ -89356,7 +89357,7 @@ Body:
     AegisName: aegis_1001230
     Name: Scale Armor Fragment    # !todo check english name
     Type: Etc
-    Buy: 1440
+    Buy: 3200
     Weight: 10
     Flags:
       BuyingStore: true
@@ -89364,7 +89365,7 @@ Body:
     AegisName: aegis_1001231
     Name: Soft Fluorescent Cell (Sour)    # !todo check english name
     Type: Etc
-    Buy: 1800
+    Buy: 4000
     Weight: 10
     Flags:
       BuyingStore: true
@@ -89372,7 +89373,7 @@ Body:
     AegisName: aegis_1001232
     Name: Soft Fluorescent Cell (salty)    # !todo check english name
     Type: Etc
-    Buy: 1440
+    Buy: 3200
     Weight: 10
     Flags:
       BuyingStore: true
@@ -89380,7 +89381,7 @@ Body:
     AegisName: aegis_1001233
     Name: Fluorescent Fluorescent Cell (Daldal)    # !todo check english name
     Type: Etc
-    Buy: 1530
+    Buy: 3400
     Weight: 10
     Flags:
       BuyingStore: true
@@ -89388,7 +89389,7 @@ Body:
     AegisName: aegis_1001234
     Name: Bear Hide    # !todo check english name
     Type: Etc
-    Buy: 1710
+    Buy: 3800
     Weight: 10
     Flags:
       BuyingStore: true
@@ -89410,6 +89411,7 @@ Body:
     AegisName: aegis_1001237
     Name: Angel's Tail    # !todo check english name
     Type: Etc
+    Buy: 15000
     Weight: 10
     Flags:
       BuyingStore: true
@@ -89417,7 +89419,7 @@ Body:
     AegisName: aegis_1001238
     Name: Mystic Magic Mass    # !todo check english name
     Type: Etc
-    Buy: 1530
+    Buy: 3400
     Weight: 10
     Flags:
       BuyingStore: true
@@ -89425,7 +89427,7 @@ Body:
     AegisName: aegis_1001239
     Name: Broken Trident    # !todo check english name
     Type: Etc
-    Buy: 1170
+    Buy: 2600
     Weight: 10
     Flags:
       BuyingStore: true
@@ -89457,7 +89459,7 @@ Body:
     AegisName: aegis_1001243
     Name: Arwin Manic Hat    # !todo check english name
     Type: Etc
-    Buy: 1530
+    Buy: 3400
     Weight: 10
     Flags:
       BuyingStore: true
@@ -89465,7 +89467,7 @@ Body:
     AegisName: Ep20_Huge_Feather_G
     Name: Large Gray Feather    # !todo check english name
     Type: Etc
-    Buy: 1260
+    Buy: 2800
     Weight: 10
     Flags:
       BuyingStore: true
@@ -89473,7 +89475,7 @@ Body:
     AegisName: Ep20_Huge_Feather_W
     Name: Large White Feather    # !todo check english name
     Type: Etc
-    Buy: 1710
+    Buy: 3800
     Weight: 10
     Flags:
       BuyingStore: true
@@ -89489,7 +89491,7 @@ Body:
     AegisName: Ep20_Copo_Egg_Shell
     Name: Kkopo Eggshell Fragment    # !todo check english name
     Type: Etc
-    Buy: 945
+    Buy: 2100
     Weight: 10
     Flags:
       BuyingStore: true
@@ -89497,6 +89499,7 @@ Body:
     AegisName: EP20_D_P_Ore
     Name: Pure Magical Ore
     Type: Etc
+    Buy: 1000
     Weight: 30
     Flags:
       BuyingStore: true

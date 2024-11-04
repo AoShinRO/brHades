@@ -6418,6 +6418,66 @@ Body:
   - Id: 8738
     Title: Shared Memories - Standby
     TimeLimit: 4h
+  - Id: 8839
+    Title: Behind the scenes pretending to help
+  - Id: 8840
+    Title: Trust in Rgan
+  - Id: 8841
+    Title: But think about it
+  - Id: 8842
+    Title: You are very angry
+  - Id: 8843
+    Title: A Silent Answer
+  - Id: 8844
+    Title: Example of Silent Answer - Wait
+    TimeLimit: 4h
+  - Id: 8845
+    Title: Example of silent answer
+  - Id: 8846
+    Title: I've come this far
+  - Id: 8847
+    Title: Nalshioramigando's work
+  - Id: 8848
+    Title: Numkasai Gargand's Work
+  - Id: 8849
+    Title: Onnaecharamelgand's Work
+  - Id: 8850
+    Title: Work of Jakda Gumi Gand
+  - Id: 8851
+    Title: Kljaina Mogand's Work
+  - Id: 8852
+    Title: I've come this far - Wait
+    TimeLimit: 4h
+  - Id: 8853
+    Title: I've come this far
+  - Id: 8854
+    Title: I'm probably a lunch box
+  - Id: 8855
+    Title: Collecting soft delicacies
+    Targets:
+      - Mob: EP20_ANGEL_ICESLUG
+        Count: 20
+      - Mob: EP20_RABBIT_ICESLUG
+        Count: 20
+  - Id: 8856
+    Title: Collecting soft and fluffy delicacies - Wait
+    TimeLimit: 4h
+  - Id: 8857
+    Title: Salty and Sweet Tastes
+    Targets:
+      - Mob: EP20_ANGEL_ICESLUG
+        Count: 20
+      - Mob: EP20_RABBIT_ICESLUG
+        Count: 20
+  - Id: 8858
+    Title: Salty and Sweet and Sour
+    Targets:
+      - Mob: EP20_ANGEL_ICESLUG
+        Count: 20
+      - Mob: EP20_RABBIT_ICESLUG
+        Count: 20
+      - Mob: EP20_MELIBE_ICESLUG
+        Count: 20
   - Id: 9000
     Title: Job Change to Knight
   - Id: 9001
@@ -8297,6 +8357,83 @@ Body:
   - Id: 11739
     Title: "[Cooldown] Oz Labyrinth 2F"
     TimeLimit: 4h
+  - Id: 11928
+    Title: Copo's Secret Base
+  - Id: 11929
+    Title: Copo's Secret Base
+  - Id: 11930
+    Title: Copo's Secret Base
+  - Id: 11931
+    Title: Copo's Secret Base
+  - Id: 11932
+    Title: Copo's Secret Base
+  - Id: 11933
+    Title: Copo's Secret Base
+  - Id: 11934
+    Title: Copo's Secret Base
+  - Id: 11935
+    Title: Copo's Secret Base
+  - Id: 11936
+    Title: Copo's Secret Base
+  - Id: 11937
+    Title: Copo's Secret Base
+  - Id: 11938
+    Title: Copo's Secret Base
+  - Id: 11939
+    Title: Copo's Secret Base
+  - Id: 11940
+    Title: Copo's Secret Base
+  - Id: 11941
+    Title: Copo's Secret Base
+  - Id: 11942
+    Title: Copo's Secret Base
+  - Id: 11943
+    Title: Copo's Secret Base
+  - Id: 11944
+    Title: Copo's Secret Base
+  - Id: 11945
+    Title: Copo's Secret Base
+  - Id: 11946
+    Title: Copo's Secret Base
+    Targets:
+      - Mob: MD_EP20_FALLENANGEL
+        Count: 1
+  - Id: 11947
+    Title: Copo's Secret Base
+  - Id: 11948
+    Title: Escargo!
+  - Id: 11949
+    Title: Escargo!
+    Targets:
+      - Mob: MD_EP20_FALLENANGEL
+        Count: 1
+  - Id: 11950
+    Title: Escargot! - Wait
+    TimeLimit: 4h
+  - Id: 11951
+    Title: Dangerous!
+    Targets:
+      - Mob: EP20_NPC_COCOPO
+        Count: 10
+  - Id: 11952
+    Title: Dangerous! - Wait
+    TimeLimit: 4h
+  - Id: 11953
+    Title: I wish we could reconcile.(1)
+    Targets:
+      - Mob: EP20_ICEWIND1
+        Count: 10
+  - Id: 11954
+    Title: I wish we could reconcile.(1) - Wait
+    TimeLimit: 4h
+  - Id: 11955
+    Title: I wish we could reconcile.(2)
+    Targets:
+      - Mob: EP20_ICEWIND2
+        Count: 10
+  - Id: 11956
+    Title: I wish we could reconcile.(2) - Wait
+    TimeLimit: 4h
   - Id: 12000
     Title: An old friend
   - Id: 12001
@@ -9361,6 +9498,19 @@ Body:
     Title: Scattered Goods (East)
   - Id: 12539
     Title: Scattered Goods (South)
+  - Id: 12588
+    Title: Immortal - Standby
+    TimeLimit: 4h
+  - Id: 12589
+    Title: Immortal (Advanced) - Standby
+    TimeLimit: 4h
+  - Id: 12590
+    Title: The Story of the Immortal
+  - Id: 12591
+    Title: Neutralize the Immortal
+    Targets:
+      - Mob: MD_EP20_BOSS_LASGAND
+        Count: 1
   - Id: 13000
     Title: RWC2011Card Gathering
   - Id: 13001
@@ -11628,6 +11778,34 @@ Body:
     Title: Safe return after completing the mission(Umbala)
   - Id: 16600
     Title: Safe return after completing the mission(Einbroch)
+  - Id: 16691
+    Title: Expansion of Exploration Scope
+  - Id: 16692
+    Title: Indigenous Peoples of the Ancient Ice Gorge
+  - Id: 16693
+    Title: Ancient Ice Gorge Exploration
+  - Id: 16694
+    Title: Evidence and return
+  - Id: 16695
+    Title: Suspicious Sense
+  - Id: 16696
+    Title: Barracks Investigation
+  - Id: 16697
+    Title: Investigate the Inn
+  - Id: 16698
+    Title: Exploring Back Alleys
+  - Id: 16699
+    Title: Suspicious?
+  - Id: 16700
+    Title: The Identity of the Suspicious Device
+  - Id: 16701
+    Title: Canyon Exploration
+  - Id: 16702
+    Title: Return to the Ice Castle
+  - Id: 16703
+    Title: The story of the past
+  - Id: 16704
+    Title: The Cold War and the Age of Intelligence
   - Id: 17000
     Title: Meet with Father Bamph
   - Id: 17001
@@ -11950,6 +12128,87 @@ Body:
   - Id: 17566
     Title: (Standby) Code name! Is it a star button?
     TimeLimit: 4h
+  - Id: 17690
+    Title: New Explore
+  - Id: 17691
+    Title: Infiltrate the hideout of the Rgans
+  - Id: 17692
+    Title: Infiltrate the hideout of the Rgans
+  - Id: 17693
+    Title: Infiltrate the hideout of the Rgans
+    Targets:
+      - Mob: EP20_RGAN_WARLOCK
+        Count: 5
+      - Mob: EP20_JORGAN_WARLOCK
+        Count: 5
+  - Id: 17694
+    Title: Infiltrate the hideout of the Rgans
+  - Id: 17695
+    Title: Infiltrate the hideout of the Rgans
+  - Id: 17696
+    Title: Sacred and Sacred
+  - Id: 17697
+    Title: Sacred and Sacred
+  - Id: 17698
+    Title: Sacred and Sacred
+  - Id: 17699
+    Title: Sacred and Sacred
+  - Id: 17700
+    Title: Sacred and Sacred
+  - Id: 17701
+    Title: Gaining the Trust of Rgans
+  - Id: 17702
+    Title: Where the maze ends
+  - Id: 17703
+    Title: Where the maze ends
+    Targets:
+      - Mob: EP20_JORMUNGUARD1
+        Count: 2
+      - Mob: EP20_JORMUNGUARD2
+        Count: 1
+  - Id: 17704
+    Title: Where the maze ends
+  - Id: 17705
+    Title: Where the maze ends
+  - Id: 17706
+    Title: Where the maze ends
+  - Id: 17707
+    Title: An Unexpected Reunion
+  - Id: 17708
+    Title: An Unexpected Reunion
+  - Id: 17709
+    Title: Hideout Infiltration Report
+  - Id: 17710
+    Title: Clean the snake's maze
+    Targets:
+      - Mob: EP20_JORMUNGUARD1
+        Count: 10
+      - Mob: EP20_JORMUNGUARD2
+        Count: 10
+  - Id: 17711
+    Title: "Waiting: Clearing the Snake's Maze"
+    TimeLimit: 4h
+  - Id: 17712
+    Title: A new home
+  - Id: 17713
+    Title: A new home
+  - Id: 17714
+    Title: A new home
+  - Id: 17715
+    Title: A new home
+  - Id: 17716
+    Title: A new home
+  - Id: 17717
+    Title: "Atmosphere: A Taste of Hobbies"
+    TimeLimit: 4h
+  - Id: 17718
+    Title: Taste of Hobbies
+  - Id: 17719
+    Title: Sacred and Sacred
+  - Id: 17720
+    Title: Taste of Hobbies
+  - Id: 17721
+    Title: Taste of Hobbies
   - Id: 18000
     Title: Ready to enter
   - Id: 18001
@@ -12133,6 +12392,79 @@ Body:
     Title: Gusli
   - Id: 18121
     Title: Shafka
+  - Id: 18220
+    Title: To the Ice Castle
+  - Id: 18221
+    Title: Finding Lehar...!
+  - Id: 18222
+    Title: Investigation, Investigation, Investigation
+  - Id: 18223
+    Title: Mark of Lehar 1
+  - Id: 18224
+    Title: Mark of Lehar 2
+  - Id: 18225
+    Title: Mark of Lehar 3
+  - Id: 18226
+    Title: It's bullshit. What's the next place?
+  - Id: 18227
+    Title: Sacred Root Trend Investigation
+  - Id: 18228
+    Title: Call of Nyar
+  - Id: 18229
+    Title: Step on the cat's back and run!
+  - Id: 18230
+    Title: Is everyone here?
+  - Id: 18231
+    Title: So what happened?
+  - Id: 18232
+    Title: Separate Sanctuary
+  - Id: 18233
+    Title: The Immortal
+  - Id: 18234
+    Title: Irwin's concern about Irwin
+    Targets:
+      - Id: 1
+        Count: 100
+        Location: jor_root3
+        MapMobTargets:
+          EP20_ICEBEAR: true
+          EP20_MELIBE_ICESLUG: true
+          EP20_JORGAN_CLEANER: true
+  - Id: 18235
+    Title: Irwin's Irwin Worry - Wait
+    TimeLimit: 4h
+  - Id: 18236
+    Title: Voklind's Extermination Operation 1
+    Targets:
+      - Id: 1
+        Count: 100
+        Location: jor_root1
+        MapMobTargets:
+          EP20_JORMUNGUARD1: true
+          EP20_JORMUNGUARD2: true
+          EP20_RGAN_WARLOCK: true
+          EP20_RGAN_HEALER: true
+          EP20_JORGAN_GUARDIAN: true
+  - Id: 18237
+    Title: Voklind's Operation Annihilation 1 - Wait
+    TimeLimit: 4h
+  - Id: 18238
+    Title: Voklind's Extermination Operation 2
+    Targets:
+      - Id: 1
+        Count: 100
+        Location: jor_root2
+        MapMobTargets:
+          EP20_JORMUNGUARD1: true
+          EP20_JORMUNGUARD2: true
+          EP20_JORGAN_GUARDIAN: true
+          EP20_JORGAN_WARLOCK: true
+          EP20_RGAN_HEALER: true
+  - Id: 18239
+    Title: Voklind's Operation Annihilation 2 - Wait
+    TimeLimit: 4h
+  - Id: 18240
+    Title: To the Ice Castle
   - Id: 19001
     Title: The earth where the flowers have blossomed - Waiting
     TimeLimit: 4h
@@ -12290,6 +12622,49 @@ Body:
     Title: The Eye of Hellion
   - Id: 19129
     Title: The Eye of Hellion
+  - Id: 19158
+    Title: More expert than any Irwin
+  - Id: 19159
+    Title: Briefing
+  - Id: 19160
+    Title: Spy Countermeasures Meeting
+  - Id: 19161
+    Title: Mission Description
+  - Id: 19162
+    Title: Today's password
+    TimeLimit: 4h
+  - Id: 19163
+    Title: "[Standby] Spy Search"
+    TimeLimit: 4h
+  - Id: 19164
+    Title: Spy Search Success
+  - Id: 19165
+    Title: "[Standby] Retrieving intelligence information"
+    TimeLimit: 4h
+  - Id: 19166
+    Title: Completion of spy information collection
+  - Id: 19167
+    Title: Failure to Retrieve Intelligence Information
+  - Id: 19168
+    Title: A place for tangents
+  - Id: 19169
+    Title: A place for tangents
+  - Id: 19170
+    Title: A place for tangents
+  - Id: 19171
+    Title: A place for tangents
+  - Id: 19172
+    Title: A place for tangents
+  - Id: 19173
+    Title: A place for tangents
+  - Id: 19174
+    Title: A place for tangents
+  - Id: 19175
+    Title: A place for tangents
+  - Id: 19176
+    Title: A place for tangents
+  - Id: 19177
+    Title: A place for tangents
   - Id: 21001
     Title: Escape the Wreck
   - Id: 21002
@@ -12450,6 +12825,57 @@ Body:
   - Id: 21173
     Title: Trust of the Village
     TimeLimit: 4h
+  - Id: 23100
+    Title: Primordial Deep Sea
+  - Id: 23101
+    Title: No matter how deep you can find it 1
+    Targets:
+      - Mob: EP19_ICE_GANGU
+        Count: 5
+  - Id: 23102
+    Title: No matter how deep you can find it 2
+    Targets:
+      - Mob: EP19_SHINING_SEAWEED
+        Count: 5
+  - Id: 23103
+    Title: What is hidden between the ice
+  - Id: 23104
+    Title: What is hidden between the ice
+  - Id: 23105
+    Title: What is hidden between the ice
+  - Id: 23106
+    Title: Branch's Nest
+  - Id: 23107
+    Title: Branch's Nest
+  - Id: 23108
+    Title: Beyond the Iceberg, Beyond the Ice Sea
+  - Id: 23109
+    Title: Beyond the Iceberg, Beyond the Ice Sea
+    Targets:
+      - Mob: EP20_JORGAN_WARLOCK
+        Count: 5
+  - Id: 23110
+    Title: Uprooting Rgan - Wait
+    TimeLimit: 4h
+  - Id: 23111
+    Title: Uprooting Rgan
+    Targets:
+      - Mob: EP20_JORGAN_WARLOCK
+        Count: 15
+  - Id: 23112
+    Title: Deep Rooted Rgan
+  - Id: 23113
+    Title: Rumors Collection Between Rgan 1
+  - Id: 23114
+    Title: Rumors Collection Between Rgan 2
+  - Id: 23115
+    Title: Rumors Collection Between Rgan 3
+  - Id: 23116
+    Title: The cat at the end of the maze
+  - Id: 23117
+    Title: The cat at the end of the maze
+  - Id: 23118
+    Title: The cat at the end of the maze
   - Id: 50000
     Title: Pirate Dagger materials
   - Id: 50001

@@ -1,0 +1,269 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Episode 20: Immortals
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- Instance Separate Sanctuary from Episode 20 (main quest)
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Main quest - Step 61 (instance "Separate sanctuary")
+jor_twig,138,152,7	script(CLOAKED)	Aurelie#ep20_end02::ep20_jor_twig_138_152	4_EP19_AURELIE,{
+	if (ep20_main == 60) {
+		if (getcharid(1) < 1) {
+			cutin "ep19_aurelie01.png",0;
+			mes "[Aurelie]";
+			mes "Wouldn't it be dangerous to be alone?";
+			mes "If you have friends, let's make a party and go.";
+			next;
+			mes "This is an event going on with the ^4d4dffmemorial.";
+			mes "Please create a party and try again.^000000";
+			mes "You can create a ^4d4dffparty with /group name^000000.";
+			close3;
+		}
+		.@md_name$ = "Separated Sanctuary";
+
+		cutin "ep19_aurelie01.png",0;
+		mes "[Aurelie]";
+		mes "Are you ready?";
+		mes "If you say you're ready, I'll proceed with sending you to the Separate Sanctuary in Nyar's place.";
+		mes "Actual move is next.";
+		next;
+		if (is_party_leader() == true)
+			.@menu$ = "Yes! Connect with '" + .@md_name$ + "'!";
+
+		switch( select( .@menu$, "Please let me enter '" + .@md_name$ + "'!", "I need more preparation." ) ) {
+		case 1:
+			cutin "ep19_aurelie01.png",0;
+			mes "[Aurelie]";
+			mes "Shall we wait a bit until it connects? It should be soon.";
+			if (is_party_leader() == true)
+				instance_create(.@md_name$);
+			close3;
+		case 2:
+			switch( instance_enter(.@md_name$) ) {
+			case IE_OTHER:
+				mes "^ff0000An unknown error occurred.^000000";
+				close;
+			case IE_NOINSTANCE:
+			case IE_NOMEMBER:
+				cutin "ep19_aurelie01.png",0;
+				mes "[Aurelie]";
+				mes "I need to check if the connection to " + .@md_name$ + " is working properly...";
+				close3;
+			case IE_OK:
+				mapannounce "jor_twig", "" + strcharinfo(0) + " of the party " + getpartyname(getcharid(1)) + " enters " + .@md_name$ + ".", bc_map, 0xFF99;
+				// warp "1@twas",96,66;
+				end;
+			}
+			end;
+		case 3:
+			cutin "ep19_aurelie01.png",0;
+			mes "[Aurelie]";
+			mes "Yeah, don't be too impatient.";
+			mes "Lasgand won't be able to escape right away because Leon and I are helping.";
+			mes "Call me when you're ready";
+			next;
+			mes "[Aurelie]";
+			mes "If you can't see me, ask Nyar here to call you.";
+			mes "I'll be right there";
+			close3;
+		}
+		end;
+	}
+	if (ep20_main == 61) {
+		cutin "ep19_aurelie01.png",0;
+		mes "[Aurelie]";
+		mes "A fragment of Ymir's heart from the separated sanctuary.";
+		mes "Even though Lasgand only partially used that power...";
+		next;
+		mes "[Aurelie]";
+		mes "Should we go return that piece anyway?";
+		mes "I'll reinforce the barrier with Leon, so I'll let you go first.";
+		close2;
+		cutin "",255;
+		warp "icecastle",73,126;
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(18232) == 1" );
+	end;
+}
+
+
+// 1@twas,99,67,4	script	Aurelie#aurelie01::ep20_1twas_99_67	4_EP19_AURELIE,3,0,{	// effect?
+1@twas,99,67,4	script	Aurelie#aurelie01::ep20_1twas_99_67	4_EP19_AURELIE,{
+	if ('step == 0) {
+		if (is_party_leader() == false)
+			end;
+		cutin "ep19_aurelie01.png",2;
+		mes "[Aurelie]";
+		mes "I think this is the space where Nyar separated Lasgand.";
+		mes "I act as a stepping stone so that you don't become a lost child in the dimension, so this appearance is like an illusion.";
+		npctalk "I think this is the space where Nyar separated Lasgand. I am a stepping stone, so this is an illusion.";
+		next;
+		mes "[Aurelie]";
+		mes "So you're the only one I can count on here.";
+		mes "Let's drain Lasgand's magic before he fully fuses his powers.";
+		npctalk "Let's drain Lasgand's magic before he can fully fuse his powers. I'm sorry I left it all up to you.";
+		next;
+		mes "[Aurelie]";
+		mes "It would be nice to kill Lasgand, but it will probably be difficult.";
+		mes "Our target is Lasgand, but your safe return is more important.";
+		mes "Be careful.";
+		npctalk "Killing Lasgand would be nice, but it's probably going to be hard. Be careful.";
+		close2;
+		cutin "",255;
+		if ('step == 0)
+			'step = 1;
+		disablenpc();
+		end;
+	}
+	if ('step != 3)
+		end;
+	if (ep20_main == 60) {
+		select("Have I killed Lasgand?" );
+		cutin "ep19_aurelie01.png",2;
+		mes "[Aurelie]";
+		mes "Unfortunately I don't think so";
+		mes "Nyar's clones are suppressing Lasgand's power.";
+		next;
+		mes "[Nyar's alter ego]";
+		mes "Uruleuk.";
+		next;
+		cutin "ep19_aurelie01.png",2;
+		mes "[Aurelie]";
+		mes "Huh? What did you bring?";
+		mes "This is a piece of Ymir's heart!";
+		next;
+		mes "[Nyar's alter ego]";
+		mes "Meow.";
+		next;
+		cutin "ep19_aurelie01.png",2;
+		mes "[Aurelie]";
+		mes "The adventurer's attack worked before the power of Ymir's Heart Fragment was fully absorbed!";
+		mes "But Lasgand...";
+		next;
+		mes "[Nyar's alter ego]";
+		mes "Ehhhhhhhhhhh..";
+		next;
+		cutin "ep19_aurelie01.png",2;
+		mes "[Aurelie]";
+		mes "That's right. As long as Geoborg exists, his fate will be with him...";
+		mes "still making him immortal";
+		next;
+		mes "[Aurelie]";
+		mes "But I thought I could press it with force";
+		mes "Lasgand's power is too great for that.";
+		next;
+		mes "[Aurelie]";
+		mes "Adventurer, do you know the spoon tactic?";
+		mes "Even if all I have is a spoon, if I dig one by one, it's a tactic that one day I can move a big mountain.";
+		next;
+		mes "[Aurelie]";
+		mes "So let's make tomorrow and retreat.";
+		mes "We have to do some maintenance before Lasgand regains his strength.";
+		ep20_main = 61;
+		erasequest 18232;
+		setquest 18233;
+		getitem 1001254,1;	// Ep20_Ymir_Heart
+		close3;
+	}
+	cutin "ep19_aurelie01.png",2;
+	mes "[Aurelie]";
+	mes "Thank you for stopping Ymir's heart shards before they can be fully absorbed.";
+	mes "It's hard to keep the connection any longer, so should we retreat?";
+	next;
+	mes "[Aurelie]";
+	mes "The recovered piece of Ymir's heart must be returned to its original owner.";
+	mes "Let's go back to the ice castle for now.";
+	close2;
+	cutin "",255;
+	warp "jor_twig",136,150;
+	end;
+
+OnInstanceInit:
+	'step = 0;
+	'map_twas$ = instance_mapname("1@twas");
+	end;
+}
+
+1@twas,94,84,3	script	Lasgand#lasgand01::ep20_1twas_94_84	EP20_DEMIGOD_LASGAND,{
+	if ('step == 1) {
+		if (is_party_leader() == false)
+			end;
+		cutin "ep20_lasgand_god01.png",1;
+		mes "[Lasgand]";
+		mes "Looks like I've been caught?";
+		mes "I don't know what to do with God's love for this body alone.";
+		npctalk "Looks like I've been caught, right? God's love for this body is so fierce that I don't know what to do.";
+		next;
+		mes "[Lasgand]";
+		mes "You made a very different move.";
+		mes "Shouldn't you have watched it more leisurely if you had locked it up?";
+		npctalk "I made a very different move. If you locked it up, you should have watched it more leisurely.";
+		specialeffect EF_DQ9_CHARGE3;
+		specialeffect EF_MAGICCRASHER;
+		cutin "ep20_lasgand_god02.png",1;
+		next;
+		mes "[Lasgand]";
+		mes "You came to open the door without fear.";
+		npctalk "You came to open the door without fear.";
+		close2;
+		cutin "",255;
+		if ('step == 1) {
+			'step = 2;
+			specialeffect EF_DQ9_CHARGE4;
+			sleep 500;
+			npctalk "Open the way!!";
+			sleep 500;
+			specialeffect EF_MAGICCRASHER;
+			disablenpc();
+			donpcevent instance_npcname("twas_boss") + "::OnStart";
+		}
+		end;
+	}
+	if ('step == 3) {
+		cutin "ep20_lasgand02.png",1;
+		mes "[Lasgand]";
+		mes "Don't think this is the end, human kid.";
+		mes "As long as the lineage of the proud Geoborg you serve exists, I am immortal";
+		next;
+		cutin "ep20_lasgand03.png",1;
+		mes "[Lasgand]";
+		mes "It's a body that has endured hundreds of years in the barriers of Isgard.";
+		mes "Jormungandr's might run out first,";
+		mes "I wonder if this body absorbs all the mana and breaks this place first.";
+		mes "Let's try again.";
+		close3;
+	}
+	npctalk "There's a lot of random stuff here.";
+	end;
+}
+
+1@twas,1,1,3	script	twas_boss	-1,{
+	end;
+OnStart:
+	monster 'map_twas$,96,80,"--ja--","EP20_DEMIGOD_LASGAND",1, instance_npcname("twas_boss") + "::OnMobDead";	// Ultimate Lasgand
+	end;
+OnMobDead:
+	enablenpc instance_npcname("ep20_1twas_94_81");
+	enablenpc instance_npcname("ep20_1twas_91_83");
+	enablenpc instance_npcname("ep20_1twas_97_83");
+	enablenpc instance_npcname("ep20_1twas_94_84");
+	enablenpc instance_npcname("ep20_1twas_99_67");
+	instance_warpall 'map_twas$,96,66, instance_id();
+	if ('step == 2)
+		'step = 3;
+	end;
+}
+
+1@twas,94,81,0	script(DISABLED)	Nyar's alter ego#nyar01::ep20_1twas_94_81	4_EP20_NYAR,{
+	npctalk "Nyarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...";
+	end;
+}
+1@twas,91,83,6	duplicate(ep20_1twas_94_81)	Nyar's alter ego#nyar02::ep20_1twas_91_83	4_EP20_NYAR
+1@twas,97,83,1	duplicate(ep20_1twas_94_81)	Nyar's alter ego#nyar03::ep20_1twas_97_83	4_EP20_NYAR

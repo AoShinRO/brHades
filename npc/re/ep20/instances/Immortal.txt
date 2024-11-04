@@ -1,0 +1,859 @@
+// 인코딩을 EUC-KR로 유지하기 위한 한국어 문장.
+//===== rAthena Script =======================================
+//= Episode 20: Immortals
+//===== Description: ========================================= 
+//= [Walkthrough Conversion]
+//--- Instance Immortal from Episode 20 (daily quest)
+// Todo:
+// - The icon must indicate a boss type but not an mvp type on Vision unlike on Lasgand
+// - The skill NPC_SEEDTRAP need to be implemented
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+jor_twig,114,147,4	script	Branches of the World Tree#ls	CLEAR_NPC,{ 
+	if (BaseLevel < 215) {
+		mes "^0000ffInsufficient levels to interact with the Branches of the World Tree. Please reach at least level 215.^000000";
+		close;
+	}
+	if (ep20_main < 100) {
+		mes "^0000ffYou have not completed the preceding quest to interact with the Branches of the World Tree.^000000";
+		close;
+	}
+	if (isbegin_quest(12590) == 0) {
+		cutin "ep20_nyar02.png",1;
+		mes "[Nyar]";
+		mes "Aooooong~";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Twigs?? Why are the branches. No, can I just touch them?";
+		next;
+		cutin "ep20_nyar02.png",1;
+		mes "[Nyar]";
+		mes "Aooooong~";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Put your hand on a branch... yeah?";
+		next;
+		cutin "ep20_nyar03.png",1;
+		mes "[Nyar]";
+		mes "Nya?";
+		next;
+		cutin "",255;
+		mes "^0000ffYou seem to be very satisfied. From now on, I'll be able to communicate with the Branches of the World Tree.^000000";
+		close2;
+		cutin "",255;
+		setquest 12590;
+		end;
+	}
+	switch( checkquest(12588,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "^0000ffI don't have the energy to interact with the Branches of the World Tree.. Let's come back later.^000000";
+		close;
+	case 2:
+		erasequest 12588;
+		break;
+	}
+	switch( checkquest(12589,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "^0000ffI don't have the energy to interact with the Branches of the World Tree.. Let's come back later.^000000";
+		close;
+	case 2:
+		erasequest 12589;
+		break;
+	}
+	if (getcharid(1) < 1) {
+		mes "^0000ffPlease organize a party of at least one person.^000000";
+		close;
+	}
+	.@md_name_easy$ = "Immortal";
+	.@md_name_hard$ = "Immortal (Hard)";
+
+	.@current_instance_name$ = instance_live_info(ILI_NAME, instance_id(IM_PARTY));
+
+	if (.@current_instance_name$ == .@md_name_easy$)
+		.@md_name$ = .@md_name_easy$;
+	else if (.@current_instance_name$ == .@md_name_hard$)
+		.@md_name$ = .@md_name_hard$;
+	else if (is_party_leader() == true) {	// can create the instance (or at least try to create it)
+		switch( select( "Give me a moment", "Create " + .@md_name_easy$ + "", "^ff0000Create " + .@md_name_hard$ + "^000000" ) ) {
+		case 1:
+			end;
+		case 2:
+			instance_create(.@md_name_easy$);
+			end;
+		case 3:
+			instance_create(.@md_name_hard$);
+			end;
+		}
+		end;
+	}
+	if (.@md_name$ != "")
+		.@menu$ = "Enter " + .@md_name$ + "";
+	if (select( "Give me a minute", .@menu$ ) == 1)
+		end;
+	switch( instance_enter(.@md_name$) ) {
+	case IE_OTHER:
+		mes "^ff0000An unknown error occurred.^000000";
+		close;
+	case IE_NOINSTANCE:
+	case IE_NOMEMBER:
+		end;
+	case IE_OK:
+		if (isbegin_quest(12591) == 0)
+			setquest 12591;
+		setquest 12588;
+		mapannounce "jor_twig", "Adventurer " + strcharinfo(0) + " enters " + .@md_name$ + "", bc_map, 0xFFAA;
+		// warp "1@twbs",86,68;	// easy
+		// warp "1@twbs",101,68;	// hard
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(12591) > -1 && BaseLevel >= 215 && ep20_main >= 100" );	// never disappear?
+	end;
+}
+
+// easy mode
+// 1@twbs,86,68,0	script	#wp01	HIDDEN_WARP_NPC,3,3,{
+1@twbs,86,68,0	script	#wp01_twbs	HIDDEN_WARP_NPC,3,3,{
+	end;
+OnTouch:
+	if (is_party_leader() == false)
+		end;
+	disablenpc();
+	disablenpc instance_npcname("#wp02_twbs");
+	'game_mode = 1;
+	end;
+}
+
+// hard mode
+// 1@twbs,101,68,0	script	#wp02	HIDDEN_WARP_NPC,3,3,{
+1@twbs,101,68,0	script	#wp02_twbs	HIDDEN_WARP_NPC,3,3,{
+	end;
+OnTouch:
+	if (is_party_leader() == false)
+		end;
+	disablenpc();
+	disablenpc instance_npcname("#wp01_twbs");
+	'game_mode = 2;
+	end;
+}
+
+
+1@twbs,93,88,5	script(DISABLED)	#md_pt	4_EP20_NYAR,{
+	if ('step != 2)
+		end;
+	// note: this part is inaccurate
+	switch( checkquest(12591,HUNTING) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		break;
+	case 2:
+		mes "[Nyar]";
+		mes "Why is it so tight?";
+		cutin "ep20_nyar02.png",1;
+		close2;
+		cutin "",255;
+		getitem 1001249, rand(1,2);	// EP20_D_P_Crystal
+		getexp2 34152989,5567916;
+		erasequest 12591;
+		add_reputation_points( REPU_EP20, 20 );
+		end;
+	}
+	mes "[Nyar]";
+	mes "Ahhhh";
+	cutin "ep20_nyar02.png",1;
+	next;
+	mes "^0000ffNyar seems to be asking if you want to go outside.^000000";
+	cutin "",255;
+	next;
+	if (select( "Look around some more", "Go outside" ) == 1)
+		end;
+	warp "jor_twig",118,142;
+	end;
+}
+
+
+
+// 1@twbs,93,76,5	script	#boss_control	MD_EP20_BOSS_LASGAND,{
+1@twbs,93,76,5	script	#boss_control_twbs	MD_EP20_BOSS_LASGAND,{
+	if (is_party_leader() == false || 'game_mode == 0 || 'step != 0)
+		end;
+	// note: same text for easy and hard
+	mes "^0000ffLasgand's eyes, sealed with a strong barrier, stare at you. It seems you will have to weaken his power before it grows stronger. ^000000";
+	next;
+	if (select( "Cancel", "Remove the seal and attack." ) == 1)
+		end;
+	if (is_party_leader() && 'game_mode > 0 && 'step == 0) {
+		'step = 1;
+
+		// (script periodically checks if all members are alive)
+		'party_id = getcharid(1);
+		getpartymember 'party_id, 1;
+		'party_count = $@partymembercount;
+		donpcevent instance_npcname("#boss_control_twbs") + "::OnStart";
+	}
+	end;
+
+
+OnStart:
+	npctalk "You arrogant bastard, you're dreaming! I won't send you back alive today.";
+	sleep 3000;
+	npctalk "Come! My illusion. Unleash all my power!";
+	sleep 500;
+	specialeffect EF_BEGINSPELL3;
+	sleep 3000;
+	disablenpc();
+	donpcevent instance_npcname("md_immortal") + "::OnStart";
+	end;
+}
+
+1@twbs,1,1,0	script	md_immortal	-1,{
+function LasgandStats;
+function VisionStats;
+	end;
+OnInstanceInit:
+	'step = 0;
+	'game_mode = 0;
+	'previous_state_invincible = false;
+	'previous_relieve_lv = 1;
+
+	'map_twbs$ = instance_mapname("1@twbs");
+
+	// ----------------
+	// (custom: unknown stats changed and values)
+	// easy mode
+	LasgandStats( 1, UMOB_MATK, 4000 );
+	LasgandStats( 1, UMOB_DEF, 527 );
+	LasgandStats( 1, UMOB_MDEF, 286 );
+	LasgandStats( 1, UMOB_RES, 250 );
+	LasgandStats( 1, UMOB_MRES, 250 );
+	// (note: more UMOB_* can be added)
+
+	VisionStats( 1, UMOB_MATK, 30000 );
+
+	// hard mode
+	LasgandStats( 2, UMOB_MATK, 7000 );
+	LasgandStats( 2, UMOB_DEF, 700 );
+	LasgandStats( 2, UMOB_MDEF, 400 );
+	LasgandStats( 2, UMOB_RES, 400 );
+	LasgandStats( 2, UMOB_MRES, 400 );
+
+	VisionStats( 2, UMOB_MATK, 30000 );
+	// ----------------
+
+
+	// ----------------
+	// Rates of lasgand skills by mode (the chance of each skill will be = rate/(total rates))
+	// easy mode
+	'meteor_lasgand_rate[1] = 15;	// NPC_RAINOFMETEOR
+	'heaven_lasgand_rate[1] = 45;	// NPC_GROUNDDRIVE
+	'cloud_lasgand_rate[1] = 25;	// NPC_CLOUD_KILL
+	'empty_lasgand_rate[1] = 15;	// (empty, nothing happen)
+
+	// hard mode
+	'meteor_lasgand_rate[2] = 40;
+	'heaven_lasgand_rate[2] = 40;
+	'cloud_lasgand_rate[2] = 5;
+	'empty_lasgand_rate[2] = 15;
+
+	// ----------------
+	// (Lasgand) skill level of NPC_RAINOFMETEOR, NPC_GROUNDDRIVE, NPC_CLOUD_KILL
+	// easy mode
+	'meteor_lasgand_level[1] = 1;
+	'heaven_lasgand_level[1] = 5;
+	'cloud_lasgand_level[1] = 5;
+
+	// hard mode
+	'meteor_lasgand_level[2] = 1;
+	'heaven_lasgand_level[2] = 5;
+	'cloud_lasgand_level[2] = 10;
+
+
+	// ----------------
+	// Rates of vision skills by mode (the chance of each skill will be = rate/(total rates))
+	// easy mode
+	'heaven_vision_rate[1] = 55;	// NPC_GROUNDDRIVE
+	'storm_vision_rate[1] = 25;		// WZ_STORMGUST
+	'trap_vision_rate[1] = 20;		// (for now since NPC_SEEDTRAP not implemented nothing happen)
+	'empty_vision_rate[1] = 0;
+
+	// hard mode
+	'heaven_vision_rate[2] = 55;
+	'storm_vision_rate[2] = 25;
+	'trap_vision_rate[2] = 20;
+	'empty_vision_rate[2] = 0;
+
+	// ----------------
+	// (vision) skill level of NPC_RAINOFMETEOR, NPC_GROUNDDRIVE, NPC_CLOUD_KILL
+	// easy mode
+	'heaven_vision_level[1] = 5;
+	'storm_vision_level[1] = 1;
+	'trap_vision_level[1] = 3;
+
+	// hard mode
+	'heaven_vision_level[2] = 5;
+	'storm_vision_level[2] = 10;
+	'trap_vision_level[2] = 3;
+	end;
+
+OnStart:
+	// calcul the skill rate for later
+	//---------------------------
+	// lasgand
+	'total_skill_lasgand_rate = 'meteor_lasgand_rate['game_mode] + 'heaven_lasgand_rate['game_mode] + 'cloud_lasgand_rate['game_mode] + 'empty_lasgand_rate['game_mode];
+
+	// meteor
+	'heaven_lasgand_rate['game_mode] = 'meteor_lasgand_rate['game_mode] + 'heaven_lasgand_rate['game_mode];
+	'cloud_lasgand_rate['game_mode]  = 'heaven_lasgand_rate['game_mode] + 'cloud_lasgand_rate['game_mode];
+	'empty_lasgand_rate['game_mode]  = 'cloud_lasgand_rate['game_mode]  + 'empty_lasgand_rate['game_mode];
+
+	// vision
+	'total_skill_vision_rate = 'heaven_vision_rate['game_mode] + 'storm_vision_rate['game_mode] + 'trap_vision_rate['game_mode] + 'empty_vision_rate['game_mode];
+
+	// heaven
+	'storm_vision_rate['game_mode] = 'storm_vision_rate['game_mode] + 'heaven_vision_rate['game_mode];
+	'trap_vision_rate['game_mode]  = 'trap_vision_rate['game_mode] + 'storm_vision_rate['game_mode];
+	'empty_vision_rate['game_mode]  = 'trap_vision_rate['game_mode]  + 'empty_vision_rate['game_mode];
+	//---------------------------
+
+	// lasgand spawn and data
+	monster 'map_twbs$,93,76,"--ja--","MD_EP20_BOSS_LASGAND",1, instance_npcname("md_immortal") + "::OnBossDead";	// Ultimate Lasgand
+	'lasgand_gid = $@mobid[0];
+	unitskilluseid 'lasgand_gid, 771, 9;	// NPC_RELIEVE_ON
+
+	for ( .@i = 0; .@i < 'u_lasgand_size['game_mode]; ++.@i ) {
+		.@string_param$ = "'u_lasgand_" + 'game_mode + "_param[" + .@i + "]";
+		.@param = getd( .@string_param$ );
+		.@string_value$ = "'u_lasgand_" + 'game_mode + "_value[" + .@param + "]";
+		.@value = getd( .@string_value$ );
+
+		setunitdata 'lasgand_gid, .@param, .@value;
+	}
+
+
+	// vision spawn and mode
+	callsub( S_Vision );
+
+	initnpctimer;
+	donpcevent instance_npcname("md_immortal_lasgand") + "::OnStart";
+	donpcevent instance_npcname("md_immortal_vision_skill") + "::OnStart";
+	donpcevent instance_npcname("md_immortal_lasgand_relieve") + "::OnStart";
+	donpcevent instance_npcname("md_immortal_vision_size") + "::OnStart";
+	donpcevent instance_npcname("md_immortal_vision_effect") + "::OnStart";
+	end;
+
+OnTimer20000:
+	switch( rand(5) ) {
+	case 0:
+		mapannounce 'map_twbs$, "Lasgand shouts: Little ones...", bc_map, 0xFFAAAA;
+		break;
+	case 1:
+		mapannounce 'map_twbs$, "Lasgand shouts: What a nuisance they are.", bc_map, 0xFFAAAA;
+		break;
+	case 2:
+		mapannounce 'map_twbs$, "Lasgand shouts: Illusion, help me!", bc_map, 0xFFAAAA;
+		break;
+	default:
+		break;
+	}
+	initnpctimer;
+	end;
+
+S_Vision:
+	switch( rand(3) ) {
+	case 0:
+		monster 'map_twbs$,74,80,"Vision of Lasgand","MD_EP20_BOSS_LASGAND",1, instance_npcname("md_immortal") + "::OnDummyDead";
+		break;
+	case 1:
+		monster 'map_twbs$,114,80,"Vision of Lasgand","MD_EP20_BOSS_LASGAND",1, instance_npcname("md_immortal") + "::OnDummyDead";
+		break;
+	case 2:	// note: these coordinates (South) are approximate
+		monster 'map_twbs$,93,60,"Vision of Lasgand","MD_EP20_BOSS_LASGAND",1, instance_npcname("md_immortal") + "::OnDummyDead";
+		break;
+	}
+
+	'vision_gid = $@mobid[0];
+	// todo: the icon must indicate a boss type but not an mvp type unlike lasgand
+	.@mode = (MD_CANMOVE | MD_AGGRESSIVE | MD_CANATTACK | MD_IGNOREMELEE | MD_IGNOREMAGIC | MD_IGNORERANGED | MD_IGNOREMISC | MD_KNOCKBACKIMMUNE | MD_DETECTOR | MD_STATUSIMMUNE | MD_SKILLIMMUNE);
+	setunitdata 'vision_gid, UMOB_MODE, .@mode;
+
+	for ( .@i = 0; .@i < 'u_vision_size['game_mode]; ++.@i ) {
+		.@string_param$ = "'u_vision_" + 'game_mode + "_param[" + .@i + "]";
+		.@param = getd( .@string_param$ );
+		.@string_value$ = "'u_vision_" + 'game_mode + "_value[" + .@param + "]";
+		.@value = getd( .@string_value$ );
+
+		setunitdata 'vision_gid, .@param, .@value;
+	}
+	return;
+
+OnBossDead:
+	if ('step != 1)
+		end;
+	'step = 2;
+	killmonster 'map_twbs$, instance_npcname("md_immortal") + "::OnBossDead";
+	killmonster 'map_twbs$, instance_npcname("md_immortal") + "::OnDummyDead";
+	stopnpctimer;
+	donpcevent instance_npcname("md_immortal_lasgand") + "::OnStop";
+	donpcevent instance_npcname("md_immortal_vision_skill") + "::OnStop";
+	donpcevent instance_npcname("md_immortal_lasgand_relieve") + "::OnStop";
+	donpcevent instance_npcname("md_immortal_vision_size") + "::OnStop";
+	donpcevent instance_npcname("md_immortal_vision_effect") + "::OnStop";
+	enablenpc instance_npcname("#md_pt");
+
+	// Spawn "reward" monster
+	switch( 'game_mode ) {
+	case 1:
+		monster 'map_twbs$,93,76,"--ja--",22004,1;	// suspicious archive
+		break;
+	case 2:
+		monster 'map_twbs$,93,76,"--ja--",22005,1;
+		break;
+	default:
+		break;
+	}
+	end;
+
+OnDummyDead:
+	if ('step == 1) {	// respawn (shouldn't happen)
+		callsub( S_Vision );
+	}
+	end;
+
+function LasgandStats {
+	.@mode = getarg(0);
+	.@param = getarg(1);
+	.@value = getarg(2);
+
+	.@string_param$ = "'u_lasgand_" + .@mode + "_param[" + 'u_lasgand_size[.@mode] + "]";
+	.@string_value$ = "'u_lasgand_" + .@mode + "_value[" + .@param + "]";
+	'u_lasgand_size[.@mode]++;
+
+	setd( .@string_param$, .@param );
+	setd( .@string_value$, .@value );
+	return;
+}
+function VisionStats {
+	.@mode = getarg(0);
+	.@param = getarg(1);
+	.@value = getarg(2);
+
+	.@string_param$ = "'u_vision_" + .@mode + "_param[" + 'u_vision_size[.@mode] + "]";
+	.@string_value$ = "'u_vision_" + .@mode + "_value[" + .@param + "]";
+	'u_vision_size[.@mode]++;
+
+	setd( .@string_param$, .@param );
+	setd( .@string_value$, .@value );
+	return;
+}
+}
+
+
+1@twbs,1,1,0	script	md_immortal_lasgand	-1,{
+function get_sign_x;
+function get_sign_y;
+function get_pos;
+function get_dir;
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnStop:
+	stopnpctimer;
+	end;
+
+OnTimer4000:
+	callsub( S_Skills );	// additional scripted skills
+	initnpctimer;
+	end;
+
+S_Skills:
+	.@r = rand('total_skill_lasgand_rate);
+
+	if (.@r < 'meteor_lasgand_rate['game_mode]) {	// NPC_RAINOFMETEOR
+		getunitdata 'lasgand_gid, .@data_A;
+		getunitdata 'vision_gid, .@data_B;
+
+		callsub( S_SubSkill, "NPC_RAINOFMETEOR", 'meteor_lasgand_level['game_mode], .@data_A[UMOB_X], .@data_B[UMOB_X], .@data_A[UMOB_Y], .@data_B[UMOB_Y] );
+
+		for ( .@x = -4; .@x <= 4; .@x += 4 ) {
+			for ( .@y = -4; .@y <= 4; .@y += 4 ) {
+				unitskillusepos 'lasgand_gid,"NPC_RAINOFMETEOR", 'meteor_lasgand_level['game_mode], (.@data_A[UMOB_X] + .@x), (.@data_A[UMOB_Y] + .@y), -50, false, 0, true;
+			}
+		}
+	}
+	else if (.@r < 'heaven_lasgand_rate['game_mode]) {	// NPC_GROUNDDRIVE
+		getunitdata 'lasgand_gid, .@data_A;
+		getunitdata 'vision_gid, .@data_B;
+
+		callsub( S_SubSkill, "NPC_GROUNDDRIVE", 'heaven_lasgand_level['game_mode], .@data_A[UMOB_X], .@data_B[UMOB_X], .@data_A[UMOB_Y], .@data_B[UMOB_Y] );
+
+		for ( .@x = -4; .@x <= 4; .@x += 4 ) {
+			for ( .@y = -4; .@y <= 4; .@y += 4 ) {
+				unitskillusepos 'lasgand_gid,"NPC_GROUNDDRIVE", 'heaven_lasgand_level['game_mode], (.@data_A[UMOB_X] + .@x), (.@data_A[UMOB_Y] + .@y), -50, false, 0, true;
+			}
+		}
+	}
+	else if (.@r < 'cloud_lasgand_rate['game_mode]) {	// NPC_CLOUD_KILL
+		// Spread the skill between the 2 boss starting from vision. Only one instance is allowed so only the skill on lasgand remains at the end
+		getunitdata 'lasgand_gid, .@data_A;
+		getunitdata 'vision_gid, .@data_B;
+
+		.@xa = .@data_A[UMOB_X];
+		.@xb = .@data_B[UMOB_X];
+		.@ya = .@data_A[UMOB_Y];
+		.@yb = .@data_B[UMOB_Y];
+
+		.@d = distance(.@xa,.@ya,.@xb,.@yb);
+
+		if (.@d > 8) {
+			.@dir = get_dir( .@xa, .@xb, .@ya, .@yb );
+			.@sign_x = get_sign_x( .@dir );
+			.@sign_y = get_sign_y( .@dir );
+
+			if (.@d > 16) {
+				.@x = get_pos( 3, .@sign_x,.@xa );
+				.@y = get_pos( 3, .@sign_y,.@ya );
+
+				unitskillusepos 'lasgand_gid, "NPC_CLOUD_KILL", 'cloud_lasgand_level['game_mode], .@x, .@y, -50, false, 0, true;
+				sleep 150;
+				callsub( S_CheckBossAlive );
+			}
+			if (.@d > 12) {
+				.@x = get_pos( 2, .@sign_x,.@xa );
+				.@y = get_pos( 2, .@sign_y,.@ya );
+
+				unitskillusepos 'lasgand_gid, "NPC_CLOUD_KILL", 'cloud_lasgand_level['game_mode], .@x, .@y, -50, false, 0, true;
+				sleep 150;
+				callsub( S_CheckBossAlive );
+			}
+			.@x = get_pos( 1, .@sign_x,.@xa );
+			.@y = get_pos( 1, .@sign_y,.@ya );
+
+			unitskillusepos 'lasgand_gid, "NPC_CLOUD_KILL", 'cloud_lasgand_level['game_mode], .@x, .@y, -50, false, 0, true;
+			sleep 150;
+			callsub( S_CheckBossAlive );
+
+			.@x = get_pos( 0, .@sign_x,.@xa );
+			.@y = get_pos( 0, .@sign_y,.@ya );
+
+			unitskillusepos 'lasgand_gid, "NPC_CLOUD_KILL", 'cloud_lasgand_level['game_mode], .@x, .@y, -50, false, 0, true;
+		}
+
+	}
+	// else {	// empty
+	return;
+
+S_SubSkill:
+	.@skill_name$ = getarg(0);
+	.@skill_level = getarg(1);
+	.@xa = getarg(2);
+	.@xb = getarg(3);
+	.@ya = getarg(4);
+	.@yb = getarg(5);
+
+	// vision (B), lasgand (A)
+	.@d = distance(.@xa,.@ya,.@xb,.@yb);
+
+	// Additional skill between the 2 boss (is skipped if the distance is too low)
+	if (.@d <= 8)
+		return;
+
+	.@dir = get_dir( .@xa, .@xb, .@ya, .@yb );	// Return the direction based on lasgand -> vision
+	.@sign_x = get_sign_x( .@dir );	// Return +- according to the direction
+	.@sign_y = get_sign_y( .@dir );
+
+	if (.@d > 16) {
+		.@x = get_pos( 3, .@sign_x,.@xa );	// Get the new position starting from vision
+		.@y = get_pos( 3, .@sign_y,.@ya );
+
+		unitskillusepos 'lasgand_gid, .@skill_name$, .@skill_level, .@x, .@y, -50, false, 0, true;
+		sleep 150;
+		callsub( S_CheckBossAlive );
+	}
+	if (.@d > 12) {
+		.@x = get_pos( 2, .@sign_x,.@xa );
+		.@y = get_pos( 2, .@sign_y,.@ya );
+
+		unitskillusepos 'lasgand_gid, .@skill_name$, .@skill_level, .@x, .@y, -50, false, 0, true;
+		sleep 150;
+		callsub( S_CheckBossAlive );
+	}
+	.@x = get_pos( 1, .@sign_x,.@xa );
+	.@y = get_pos( 1, .@sign_y,.@ya );
+
+	unitskillusepos 'lasgand_gid, .@skill_name$, .@skill_level, .@x, .@y, -50, false, 0, true;
+	sleep 150;
+	callsub( S_CheckBossAlive );
+	return;
+
+S_CheckBossAlive:
+	if (!unitexists('lasgand_gid))	// end the script if the boss is dead, continue otherwise
+		end;
+	return;
+
+function get_sign_x {
+	.@dir = getarg(0);
+
+	switch( .@dir ) {
+	case DIR_SOUTH:
+	case DIR_NORTH:
+		.@sign = 0;
+		break;
+	case DIR_EAST:
+	case DIR_SOUTHEAST:
+	case DIR_NORTHEAST:
+		.@sign = 1;
+		break;
+	default:
+		.@sign = -1;
+		break;
+	}
+	return .@sign;
+}
+
+function get_sign_y {
+	.@dir = getarg(0);
+
+	switch( .@dir ) {
+	case DIR_NORTH:
+	case DIR_NORTHEAST:
+	case DIR_NORTHWEST:
+		.@sign = 1;
+		break;
+	case DIR_EAST:
+	case DIR_WEST:
+		.@sign = 0;
+		break;
+	default:
+		.@sign = -1;
+		break;
+	}
+	return .@sign;
+}
+
+function get_pos {
+	.@deepness = getarg(0);
+	.@sign = getarg(1);
+	.@pos = getarg(2);
+
+	.@d_pos = (2 + (.@deepness * 4));
+	.@val = .@pos + (.@sign * .@d_pos);
+
+	return .@val;
+}
+
+function get_dir {
+	.@xa = getarg(0);
+	.@xb = getarg(1);
+	.@ya = getarg(2);
+	.@yb = getarg(3);
+
+	.@range = 5;
+
+	if ((.@xa-.@range) < .@xb && (.@xa+.@range) > .@xb) {
+		if (.@ya > .@yb)
+			return DIR_SOUTH;
+		else
+			return DIR_NORTH;
+	}
+	else if ((.@ya-.@range) < .@yb && (.@ya+.@range) > .@yb) {
+		if (.@xa > .@xb)
+			return DIR_WEST;
+		else
+			return DIR_EAST;
+	}
+	else if (.@xa > .@xb) {
+		if (.@ya > .@yb)
+			return DIR_SOUTHWEST;
+		else
+			return DIR_NORTHWEST;
+	}
+	else {
+		if (.@ya > .@yb)
+			return DIR_SOUTHEAST;
+		else
+			return DIR_NORTHEAST;
+	}
+}
+}
+
+// Change relieve level on lasgand according to the distance between the 2 boss
+1@twbs,1,1,0	script	md_immortal_lasgand_relieve	-1,{
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnStop:
+	stopnpctimer;
+	end;
+OnTimer2501:
+	if (unitexists('lasgand_gid) && unitexists('vision_gid)) {
+		getunitdata 'lasgand_gid, .@data_A;
+		getunitdata 'vision_gid, .@data_B;
+		.@d = distance(.@data_A[UMOB_X],.@data_A[UMOB_Y],.@data_B[UMOB_X],.@data_B[UMOB_Y]);
+		.@lv = 10 - (.@d / 3);	// level lowered by distance (for now 3 cases = lvl - 1)
+		.@lv = min(9,.@lv);
+		.@lv = max(2,.@lv);
+		if (.@lv != 'previous_relieve_lv) {
+			unitskilluseid 'lasgand_gid, 772, 1;	// NPC_RELIEVE_OFF
+			unitskilluseid 'lasgand_gid, 771, .@lv;	// NPC_RELIEVE_ON
+			'previous_relieve_lv = .@lv;
+		}
+	}
+	initnpctimer;
+	end;
+}
+
+/// Change vision size according to the distance
+1@twbs,1,1,0	script	md_immortal_vision_size	-1,{
+	end;
+OnStart:
+	initnpctimer;
+	getunitdata 'lasgand_gid, .@data_A;
+	getunitdata 'vision_gid, .@data_B;
+
+	// The reference distance is the distance where vision is of normal size (position on spawn)
+	'distance_reference = distance(.@data_A[UMOB_X],.@data_A[UMOB_Y],.@data_B[UMOB_X],.@data_B[UMOB_Y]);
+	'previous_value = 100;	// normal size
+	end;
+OnStop:
+	stopnpctimer;
+	end;
+OnTimer2500:
+	if (unitexists('lasgand_gid) && unitexists('vision_gid)) {
+		getunitdata 'lasgand_gid, .@data_A;
+		getunitdata 'vision_gid, .@data_B;
+		.@d = distance(.@data_A[UMOB_X],.@data_A[UMOB_Y],.@data_B[UMOB_X],.@data_B[UMOB_Y]);
+
+		.@d -= 'distance_reference;
+
+		// 1 case = +-5 size
+		.@current_value = 100 - (.@d * 5);
+		.@current_value = max(20, .@current_value);
+		.@current_value = min(180, .@current_value);
+
+		if ('previous_value != .@current_value) {
+			if ('previous_value < .@current_value) {	// make vision bigger
+				.@step = (.@current_value - 'previous_value) / 5;
+
+				for ( .@i = 1; .@i <= .@step; ++.@i ) {
+					setunitdata 'vision_gid, UMOB_BODYSIZE, 'previous_value + (5 * .@i);
+					sleep 30;
+				}
+			}
+			else if ('previous_value > .@current_value) {	// make vision smaller
+				.@step = ('previous_value - .@current_value) / 5;
+
+				for ( .@i = 1; .@i <= .@step; ++.@i ) {
+					setunitdata 'vision_gid, UMOB_BODYSIZE, 'previous_value - (5 * .@i);
+					sleep 30;
+				}
+			}
+			'previous_value = .@current_value;
+		}
+	}
+	initnpctimer;
+	end;
+}
+
+1@twbs,1,1,0	script	md_immortal_vision_effect	-1,{
+	end;
+OnStart:
+	initnpctimer;
+	specialeffect3 EF_REDBODY, AREA, 'vision_gid;
+	end;
+OnStop:
+	stopnpctimer;
+	end;
+OnTimer1000:
+	if (unitexists('vision_gid)) {
+		// Workaround to display the berserk effect on vision
+		specialeffect3 EF_REDBODY, AREA, 'vision_gid;
+	}
+	initnpctimer;
+	end;
+}
+
+// Skills casted by vision
+1@twbs,1,1,0	script	md_immortal_vision_skill	-1,{
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnStop:
+	stopnpctimer;
+	end;
+
+OnTimer2000:
+	callsub( S_Check_Members_Alive );	// make lasgand invincible when one of the party member is dead
+	callsub( S_Skills );	// some additional skills casted by vision
+	initnpctimer;
+	end;
+
+S_Is_All_Members_Alive:
+	getpartymember 'party_id, 1, .@char_id;
+
+	if ($@partymembercount != 'party_count)
+		return false;
+
+	for ( .@i = 0; .@i < 'party_count; ++.@i ) {
+		.@account_id = convertpcinfo(.@char_id, CPC_ACCOUNT);
+		if (.@account_id == 0)
+			return false;
+		if (isdead(.@account_id))
+			return false;
+	}
+	return true;
+
+S_Check_Members_Alive:
+	// note: NPC_INVINCIBLEOFF and NPC_INVINCIBLE are spammed on official server regardless of previous state, but it seems not necessary
+	if (callsub( S_Is_All_Members_Alive ) == true) {
+		if ('previous_state_invincible == true) {
+			unitskilluseid 'lasgand_gid, 686, 1;	// NPC_INVINCIBLEOFF
+			'previous_state_invincible = false;
+		}
+	}
+	else {
+		mapannounce 'map_twbs$, "There is a death in the party. Lasgand is given unlimited power until the death is revived.", bc_map, 0xCCFF00;
+		if ('previous_state_invincible == false) {
+			unitskilluseid 'lasgand_gid, 685, 1;	// NPC_INVINCIBLE
+			'previous_state_invincible = true;
+		}
+	}
+	return;
+
+S_Skills:
+	.@r = rand('total_skill_vision_rate);
+
+	if (.@r < 'heaven_vision_rate['game_mode]) {	// NPC_GROUNDDRIVE
+		getunitdata 'vision_gid, .@data_A;
+
+		for ( .@x = -4; .@x <= 4; .@x += 4 ) {
+			for ( .@y = -4; .@y <= 4; .@y += 4 ) {
+				unitskillusepos 'vision_gid,"NPC_GROUNDDRIVE", 'heaven_vision_level['game_mode], (.@data_A[UMOB_X] + .@x), (.@data_A[UMOB_Y] + .@y), -50, false, 0, true;
+			}
+		}
+	}
+	else if (.@r < 'storm_vision_rate['game_mode]) {	// WZ_STORMGUST
+		getunitdata 'vision_gid, .@data_A;
+		unitskillusepos 'vision_gid,"WZ_STORMGUST", 'storm_vision_level['game_mode], (.@data_A[UMOB_X] + .@x), (.@data_A[UMOB_Y] + .@y), -50, false, 0, true;
+	}
+	// else if (.@r < 100) {	// should be NPC_SEEDTRAP (not implemented, unknown effect)
+		// unknown skill effect
+	// }
+	return;
+}
