@@ -18898,7 +18898,9 @@ BUILDIN_FUNC(getunitdata)
 			getunitdata_sub(UMOB_ATKMAX, md->status.rhw.atk2);
 			getunitdata_sub(UMOB_MATKMIN, md->status.matk_min);
 			getunitdata_sub(UMOB_MATKMAX, md->status.matk_max);
+#ifdef RENEWAL
 			getunitdata_sub(UMOB_MATK, md->status.rhw.matk);
+#endif
 			getunitdata_sub(UMOB_DEF, md->status.def);
 			getunitdata_sub(UMOB_MDEF, md->status.mdef);
 			getunitdata_sub(UMOB_HIT, md->status.hit);
@@ -19263,7 +19265,9 @@ BUILDIN_FUNC(setunitdata)
 			case UMOB_ATKMAX: md->base_status->rhw.atk2 = util::clamp<decltype(md->base_status->rhw.atk2)>(value); calc_status = true; break;
 			case UMOB_MATKMIN: md->base_status->matk_min = util::clamp<decltype(md->base_status->matk_min)>(value); calc_status = true; break;
 			case UMOB_MATKMAX: md->base_status->matk_max = util::clamp<decltype(md->base_status->matk_max)>(value); calc_status = true; break;
+#ifdef RENEWAL
 			case UMOB_MATK: md->base_status->rhw.matk = util::clamp<decltype(md->base_status->rhw.matk)>(value); calc_status = true; break;
+#endif
 			case UMOB_DEF: md->base_status->def = util::clamp<decltype(md->base_status->def)>(value); calc_status = true; break;
 			case UMOB_MDEF: md->base_status->mdef = util::clamp<decltype(md->base_status->mdef)>(value); calc_status = true; break;
 			case UMOB_HIT: md->base_status->hit = util::clamp<decltype(md->base_status->hit)>(value); calc_status = true; break;
@@ -19297,10 +19301,13 @@ BUILDIN_FUNC(setunitdata)
 			case UMOB_MRES: md->base_status->mres = util::clamp<decltype(md->base_status->mres)>(value); calc_status = true; break;
 			case UMOB_DAMAGETAKEN: md->damagetaken = util::clamp<decltype(md->damagetaken)>(value); break;
 			case UMOB_BODYSIZE: {
-				struct unit_data* ud = unit_bl2ud(bl);
-				ud->body_size = cap_value(value, 1, 255);	// 100 = normal size
+				unit_data* ud = unit_bl2ud(bl);
+				if(ud != nullptr)
+				{
+					ud->body_size = util::clamp<decltype(ud->body_size)>(value);	// 100 = normal size
 
-				clif_body_size(bl, ud->body_size);
+					clif_body_size(bl, ud->body_size);
+				}
 				break;
 			}
 			default:
@@ -19622,10 +19629,13 @@ BUILDIN_FUNC(setunitdata)
 			case UNPC_GROUP_ID: nd->ud.group_id = value; unit_refresh(bl); break;
 			case UNPC_LEVEL: nd->level = util::clamp<decltype(nd->level)>(value); break;
 			case UNPC_BODYSIZE: {
-				struct unit_data* ud = unit_bl2ud(bl);
-				ud->body_size = cap_value(value, 1, 255);
+				unit_data* ud = unit_bl2ud(bl);
+				if(ud != nullptr)
+				{
+					ud->body_size = util::clamp<decltype(ud->body_size)>(value);
 
-				clif_body_size(bl, ud->body_size);
+					clif_body_size(bl, ud->body_size);
+				}
 				break;
 			}
 			default:

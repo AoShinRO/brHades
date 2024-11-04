@@ -1803,7 +1803,7 @@ int clif_spawn( struct block_list *bl, bool walking ){
 		clif_spawn_unit( bl, AREA_WOS );
 	}
 	unit_data* ud = unit_bl2ud(bl);
-	if (ud->body_size)
+	if (ud != nullptr && ud->body_size)
 		clif_body_size(bl, ud->body_size);
 	if (vd->cloth_color)
 		clif_refreshlook(bl,bl->id,LOOK_CLOTHES_COLOR,vd->cloth_color,AREA_WOS);
