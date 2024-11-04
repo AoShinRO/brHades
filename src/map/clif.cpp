@@ -4205,8 +4205,10 @@ void clif_changelook(struct block_list *bl, int type, int val) {
 #if PACKETVER < 20150513
 				return;
 #else
+#if PACKETVER < 20231220
 				if (val && sd && sd->sc.option&OPTION_COSTUME)
  					val = 0;
+#endif
  				vd->body_style = val;
 #endif
 				break;
