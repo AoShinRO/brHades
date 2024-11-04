@@ -2088,4 +2088,8 @@
 	parseable_packet( HEADER_CZ_RESET_SKILL, sizeof( struct PACKET_CZ_RESET_SKILL ), clif_parse_reset_skill, 0 );
 #endif
 
+#if PACKETVER >= 20230920
+	parseable_packet(HEADER_CZ_MACRO_USER_REPORT_REQ, sizeof(PACKET_CZ_MACRO_USER_REPORT_REQ), clif_parse_macro_user_report, 0);
+#endif
+
 #endif /* CLIF_PACKETDB_HPP */

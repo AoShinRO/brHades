@@ -1602,6 +1602,29 @@ struct PACKET_CZ_REQUEST_MOVENPC{
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(CZ_REQUEST_MOVENPC, 0x232);
 
+#if PACKETVER >= 20230920
+struct PACKET_CZ_MACRO_USER_REPORT_REQ{
+	uint16 packetType;
+	uint32 reporterAID;
+	uint32 reportAID;
+	char reportName[NAME_LENGTH];
+	int16 reportType;
+	char reportMsg[REPORT_MSG_LENGHT];
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(CZ_MACRO_USER_REPORT_REQ, 0x0be2);
+#endif
+
+#if PACKETVER >= 20230920
+struct PACKET_ZC_MACRO_USER_REPORT_RES {
+	uint16 packetType;
+	uint32 reporterAID;
+	char reportName[NAME_LENGTH];
+	uint32 status;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_MACRO_USER_REPORT_RES, 0x0be3);
+#endif
+
+
 // NetBSD 5 and Solaris don't like pragma pack but accept the packed attribute
 #if !defined( sun ) && ( !defined( __NETBSD__ ) || __NetBSD_Version__ >= 600000000 )
 	#pragma pack( pop )
