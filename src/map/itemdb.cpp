@@ -9,6 +9,7 @@
 #include <fstream>
 #include <iostream>
 #include <map>
+#include <thread>
 #include <unordered_map>
 
 #include <common/nullpo.hpp>
@@ -4800,28 +4801,41 @@ void itemdb_gen_itemmoveinfo()
 * Reload Item DB
 */
 void itemdb_reload(void) {
-	struct s_mapiterator* iter;
-	map_session_data* sd;
-
+    // Tarefas principais de recarregamento
 	do_final_itemdb();
 
 	// read new data
-	itemdb_read();
-	cashshop_reloaddb();
+	
+	std::thread t0(itemdb_read);
+	t0.join();
+    std::thread t1(cashshop_reloaddb);
+    std::thread t2(mob_reload_itemmob_data);
 
-	mob_reload_itemmob_data();
+    // Função de atualização para cada jogador
+    auto update_player_data = [](map_session_data* sd) {
+        memset(sd->item_delay, 0, sizeof(sd->item_delay));
+        sd->combos.clear();
+        pc_setinventorydata(sd);
+        pc_check_available_item(sd, ITMCHK_ALL);
+        pc_load_combo(sd);
+        status_calc_pc(sd, SCO_FORCE);
+    };
 
-	// readjust itemdb pointer cache for each player
-	iter = mapit_geteachpc();
-	for( sd = (map_session_data*)mapit_first(iter); mapit_exists(iter); sd = (map_session_data*)mapit_next(iter) ) {
-		memset(sd->item_delay, 0, sizeof(sd->item_delay));  // reset item delays
-		sd->combos.clear(); // clear combo bonuses
-		pc_setinventorydata(sd);
-		pc_check_available_item(sd, ITMCHK_ALL); // Check for invalid(ated) items.
-		pc_load_combo(sd); // Check to see if new combos are available
-		status_calc_pc(sd, SCO_FORCE); // 
-	}
-	mapit_free(iter);
+    // Iniciar uma thread para realizar as atualizações de dados dos jogadores
+    std::thread update_thread([&]() {
+        struct s_mapiterator* iter = mapit_geteachpc();
+        for (map_session_data* sd = (map_session_data*)mapit_first(iter); 
+             mapit_exists(iter); 
+             sd = (map_session_data*)mapit_next(iter)) {
+            update_player_data(sd);
+        }
+        mapit_free(iter);
+    });
+
+    // Esperar a thread terminar
+	t1.join();
+	t2.join();
+    update_thread.join();
 }
 
 /**
