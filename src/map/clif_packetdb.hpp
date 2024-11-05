@@ -2088,4 +2088,8 @@
 	parseable_packet( HEADER_CZ_RESET_SKILL, sizeof( struct PACKET_CZ_RESET_SKILL ), clif_parse_reset_skill, 0 );
 #endif
 
+#if PACKETVER_MAIN_NUM >= 20231115
+	parseable_packet(HEADER_CZ_GUILD_ALLIANCECHAT, -1, clif_parse_GuildAllianceMessage, 2, 4);
+#endif
+
 #endif /* CLIF_PACKETDB_HPP */
