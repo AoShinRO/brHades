@@ -14724,6 +14724,73 @@ void clif_parse_GuildMessage(int fd, map_session_data* sd){
 		guild_send_message(sd, output, strlen(output) );
 }
 
+/// Guild alliance chat message
+/// 0bde <packet len>.W <message>.?B (ZC_GUILD_ALLIANCECHAT)
+static void clif_guild_alliance_message(const struct mmo_guild &g, const char *mes, int len)
+{
+	PACKET_ZC_GUILD_ALLIANCECHAT *p = reinterpret_cast<PACKET_ZC_GUILD_ALLIANCECHAT*>( packet_buffer );
+	// -1 for null terminator
+	static const size_t max_len = CHAT_SIZE_MAX - sizeof( *p ) - 1;
+
+	map_session_data* sd = guild_getavailablesd(g);
+
+	// Ignore this message, if no guildmember is available
+	if (sd == nullptr)
+		return;
+
+	if( len == 0 ){
+		return;
+	} else if( len > max_len ){
+		ShowWarning("clif_guild_alliance_message: Truncated message '%s' (len=%" PRIuPTR ", max=%" PRIuPTR ", guild_id=%u).\n", mes, len, max_len, g.guild_id);
+		len = max_len;
+	}
+
+	p->packetType = HEADER_ZC_GUILD_ALLIANCECHAT;
+	p->packetLength = sizeof(*p);
+
+	safestrncpy(p->message, mes, len+1);
+	p->packetLength += static_cast<decltype(p->packetLength)>( len + 1 );
+
+	map_session_data* allysd;
+	for (const guild_alliance& al : g.alliance)
+	{
+		if (al.guild_id == 0 || al.opposition == 1)
+			continue;
+
+		const auto& ag = guild_search(al.guild_id);
+
+		if (!ag)
+			continue;
+
+		allysd = guild_getavailablesd(ag->guild);
+
+		if(allysd == nullptr)
+			continue;
+
+		clif_send(p, p->packetLength, &allysd->bl, GUILD);
+	}
+
+	clif_send(p, p->packetLength, &sd->bl, GUILD);
+}
+
+/// Validates and processes guild messages (CZ_GUILD_ALLIANCECHAT).
+/// 0bdd <packet len>.W <text>.?B (<name> : <message>) 00
+static void clif_parse_GuildAllianceMessage(int fd, map_session_data* sd){
+	char name[NAME_LENGTH], message[CHAT_SIZE_MAX], output[CHAT_SIZE_MAX+NAME_LENGTH*2];
+
+	// validate packet and retrieve name and message
+	if( !clif_process_message( sd, false, name, message, output ) )
+		return;
+
+	if (sd->status.guild_id == 0)
+		return;
+
+	auto g = guild_search(sd->status.guild_id);
+	if (!g)
+		return;
+
+	clif_guild_alliance_message(g->guild, output, strlen(output));
+}
 
 /// Guild alliance request (CZ_REQ_ALLY_GUILD).
 /// 0170 <account id>.L <inviter account id>.L <inviter char id>.L
