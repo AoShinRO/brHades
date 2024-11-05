@@ -17878,6 +17878,10 @@ void clif_parse_configuration( int fd, map_session_data* sd ){
 
 			sd->hd->homunculus.autofeed = flag;
 			break;
+		case CONFIG_SHOW_COSTUMES:
+			sd->status.show_costumes = flag;
+			pc_set_costume_view(sd);
+			break;
 		default:
 			ShowWarning( "clif_parse_configuration: received unknown configuration type '%d'...\n", type );
 			return;
