@@ -1610,6 +1610,78 @@ struct PACKET_CZ_REQUEST_MOVENPC{
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(CZ_REQUEST_MOVENPC, 0x232);
 
+struct PACKET_CZ_REQ_EMOTION2 {
+	uint16 packetType;
+	uint16 packId;
+	uint16 emoteId;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(CZ_REQ_EMOTION2, 0x0be9);
+
+struct PACKET_ZC_EMOTION_SUCCESS {
+	uint16 packetType;
+	uint32 GID;
+	uint16 packId;
+	uint16 emoteId;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_EMOTION_SUCCESS, 0x0bea);
+
+struct PACKET_ZC_EMOTION_FAIL {
+	uint16 packetType;
+	uint16 packId;
+	uint16 emoteId;
+	uint8 status;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_EMOTION_FAIL, 0x0beb);
+
+struct PACKET_CZ_EMOTION_EXPANTION_REQ {
+	uint16 packetType;
+	uint16 packId;
+	uint16 itemId; // hardcoded to 6909 see CCashEmotionMgr()
+	uint8 amount;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(CZ_EMOTION_EXPANTION_REQ, 0x0bec);
+
+struct PACKET_ZC_EMOTION_EXPANSION_SUCCESS {
+	uint16 packetType;
+	uint16 packId;
+	uint8 isRented;
+	uint32 timestamp;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_EMOTION_EXPANSION_SUCCESS, 0x0bed);
+
+struct PACKET_ZC_EMOTION_EXPANSION_FAIL {
+	uint16 packetType;
+	uint16 packId;
+	uint8 status;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_EMOTION_EXPANSION_FAIL, 0x0bee);
+
+struct PACKET_ZC_EMOTION_EXPANTION_LIST_sub {
+	uint16 packId;
+	uint8 isRented;
+	uint32 timestamp;
+} __attribute__((packed));
+
+#if PACKETVER >= 20230920
+struct PACKET_ZC_EMOTION_EXPANTION_LIST {
+	uint16 packetType;
+	uint16 packetLength;
+	uint32 timestamp;
+	uint16 timezone;
+	PACKET_ZC_EMOTION_EXPANTION_LIST_sub list[];
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_EMOTION_EXPANTION_LIST, 0x0bf6);
+#else
+struct PACKET_ZC_EMOTION_EXPANTION_LIST {
+	uint16 packetType;
+	uint16 packetLength;
+	uint32 timestamp;
+	PACKET_ZC_EMOTION_EXPANTION_LIST_sub list[];
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_EMOTION_EXPANTION_LIST, 0x0bef);
+#endif
+
+
 // NetBSD 5 and Solaris don't like pragma pack but accept the packed attribute
 #if !defined( sun ) && ( !defined( __NETBSD__ ) || __NetBSD_Version__ >= 600000000 )
 	#pragma pack( pop )
