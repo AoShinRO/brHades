@@ -36,6 +36,7 @@
 #include "clan.hpp"
 #include "clif.hpp"
 #include "elemental.hpp"
+#include "emotes.hpp"
 #include "guild.hpp"
 #include "homunculus.hpp"
 #include "instance.hpp"
@@ -9618,6 +9619,13 @@ void clif_emotion(block_list& bl,e_emotion_type type){
 	if(type <= ET_BLANK || type >= ET_MAX)
 		return;
 
+#if PACKETVER >= 20230802
+	if(bl.type == BL_PC){
+		clif_emotion_success(&bl, 0, type);
+		return;
+	}
+#endif
+
 	PACKET_ZC_EMOTION p{};
 
 	p.packetType = HEADER_ZC_EMOTION;
@@ -11180,7 +11188,9 @@ void clif_parse_LoadEndAck(int fd,map_session_data *sd)
 			sd->state.night = 1;
 			clif_status_load(&sd->bl, EFST_SKE, 1);
 		}
-
+#if PACKETVER >= 20230802
+		emotes_get_player_packs(sd);
+#endif
 		// Notify everyone that this char logged in [Skotlex].
 		map_foreachpc(clif_friendslist_toggle_sub, sd->status.account_id, sd->status.char_id, 1);
 
@@ -11824,6 +11834,7 @@ void clif_parse_ChangeDir(int fd, map_session_data *sd)
 /// type:
 ///     @see enum emotion_type
 void clif_parse_Emotion(int fd, map_session_data *sd){
+#if PACKETVER < 20230802
 	if( sd == nullptr ){
 		return;
 	}
@@ -11868,6 +11879,7 @@ void clif_parse_Emotion(int fd, map_session_data *sd){
 		clif_emotion(sd->bl, emoticon);
 	} else
 		clif_skill_fail( *sd, 1, USESKILL_FAIL_LEVEL, 1 );
+#endif
 }
 
 
@@ -25608,6 +25620,101 @@ void clif_specialpopup(map_session_data& sd, int32 id ){
 	p.ppId = id;
 
 	clif_send( &p, sizeof( p ), &sd.bl, SELF);
+#endif
+}
+
+void clif_parse_emotion2(int fd, map_session_data *sd)
+{
+#if PACKETVER >= 20230802
+	nullpo_retv(sd);
+	const PACKET_CZ_REQ_EMOTION2* p = reinterpret_cast<PACKET_CZ_REQ_EMOTION2*>(RFIFOP(fd, 0));
+	emotes_use(sd, p->packId, p->emoteId);
+#endif
+}
+
+void clif_parse_emotion_expansion_request(int fd, map_session_data *sd)
+{
+#if PACKETVER >= 20230802
+	nullpo_retv(sd);
+	const PACKET_CZ_EMOTION_EXPANTION_REQ* p = reinterpret_cast<PACKET_CZ_EMOTION_EXPANTION_REQ*>(RFIFOP(fd, 0));
+	emotes_expantion_buy(sd, p->packId, p->itemId, p->amount);
+#endif
+}
+
+void clif_emotion_success(block_list *bl, int16 packId, int16 emoteId)
+{
+#if PACKETVER >= 20230802
+	nullpo_retv(bl);
+
+	PACKET_ZC_EMOTION_SUCCESS p{};
+	p.packetType = HEADER_ZC_EMOTION_SUCCESS;
+	p.GID = bl->id;
+	p.packId = packId;
+	p.emoteId = emoteId;
+	clif_send(&p, sizeof(p), bl, AREA);
+#endif
+}
+
+void clif_emotion_fail(map_session_data *sd, int16 packId, int16 emoteId, emote_msg status)
+{
+#if PACKETVER >= 20230802
+	nullpo_retv(sd);
+
+	PACKET_ZC_EMOTION_FAIL p{};
+	p.packetType = HEADER_ZC_EMOTION_FAIL;
+	p.packId = packId;
+	p.emoteId = emoteId;
+	p.status = status;
+	clif_send(&p, sizeof(p), &sd->bl, SELF);
+#endif
+}
+
+void clif_emotion_expansion_response_success(map_session_data *sd, int16 packId, int8 isRented, uint32 RentEndTime)
+{
+#if PACKETVER >= 20230802
+	nullpo_retv(sd);
+
+	PACKET_ZC_EMOTION_EXPANSION_SUCCESS p{};
+	p.packetType = HEADER_ZC_EMOTION_EXPANSION_SUCCESS;
+	p.packId = packId;
+	p.isRented = isRented;
+	p.timestamp = RentEndTime; // rental end time, 0 for permanent
+	clif_send(&p, sizeof(p), &sd->bl, SELF);
+#endif
+}
+
+void clif_emotion_expansion_response_fail(map_session_data *sd, int16 packId, emotion_expansion_msg status)
+{
+#if PACKETVER >= 20230802
+	nullpo_retv(sd);
+
+	PACKET_ZC_EMOTION_EXPANSION_FAIL p{};
+	p.packetType = HEADER_ZC_EMOTION_EXPANSION_FAIL;
+	p.packId = packId;
+	p.status = status;
+	clif_send(&p, sizeof(p), &sd->bl, SELF);
+#endif
+}
+
+void clif_emotion_expansion_list(map_session_data *sd, std::vector<PACKET_ZC_EMOTION_EXPANTION_LIST_sub> &list)
+{
+#if PACKETVER >= 20230802
+	nullpo_retv(sd);
+
+	//WFIFOHEAD(fd, sizeof(struct PACKET_ZC_EMOTION_EXPANTION_LIST) + sizeof(struct PACKET_ZC_EMOTION_EXPANTION_LIST_sub) * list.size());
+	PACKET_ZC_EMOTION_EXPANTION_LIST *p = reinterpret_cast<PACKET_ZC_EMOTION_EXPANTION_LIST*>( packet_buffer );
+	p->packetType = HEADER_ZC_EMOTION_EXPANTION_LIST;
+	p->timestamp = static_cast<decltype(p->timestamp)>(time(NULL));
+	p->packetLength = sizeof(*p);
+#if PACKETVER >= 20230920
+	p->timezone = 60 * 9; // kRO UTC+9 = 540
+#endif
+	for (auto i = 0; i < list.size(); ++i){
+		p->list[i] = list[i];
+		p->packetLength += static_cast<decltype(p->packetLength)>(sizeof(list[i]));
+	}
+
+	clif_send(p,p->packetLength,&sd->bl,SELF);
 #endif
 }
 

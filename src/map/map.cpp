@@ -37,6 +37,7 @@
 #include "clif.hpp"
 #include "duel.hpp"
 #include "elemental.hpp"
+#include "emotes.hpp"
 #include "guild.hpp"
 #include "homunculus.hpp"
 #include "instance.hpp"
@@ -5081,6 +5082,7 @@ void MapServer::finalize(){
 	do_final_vending();
 	do_final_buyingstore();
 	do_final_path();
+	do_final_emotes();
 
 	map_db->destroy(map_db, map_db_final);
 
@@ -5469,6 +5471,7 @@ bool MapServer::initialize( int argc, char *argv[] ){
 	do_init_duel();
 	do_init_vending();
 	do_init_buyingstore();
+	do_init_emotes();
 
 #ifndef MAP_GENERATOR
 #ifdef TRANSLATION_API
