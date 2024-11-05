@@ -25701,7 +25701,6 @@ void clif_emotion_expansion_list(map_session_data *sd, std::vector<PACKET_ZC_EMO
 #if PACKETVER >= 20230802
 	nullpo_retv(sd);
 
-	//WFIFOHEAD(fd, sizeof(struct PACKET_ZC_EMOTION_EXPANTION_LIST) + sizeof(struct PACKET_ZC_EMOTION_EXPANTION_LIST_sub) * list.size());
 	PACKET_ZC_EMOTION_EXPANTION_LIST *p = reinterpret_cast<PACKET_ZC_EMOTION_EXPANTION_LIST*>( packet_buffer );
 	p->packetType = HEADER_ZC_EMOTION_EXPANTION_LIST;
 	p->timestamp = static_cast<decltype(p->timestamp)>(time(NULL));

@@ -1666,7 +1666,7 @@ struct PACKET_ZC_EMOTION_EXPANTION_LIST_sub {
 struct PACKET_ZC_EMOTION_EXPANTION_LIST {
 	uint16 packetType;
 	uint16 packetLength;
-	uuint32 timestamp;
+	uint32 timestamp;
 	uint16 timezone;
 	PACKET_ZC_EMOTION_EXPANTION_LIST_sub list[];
 } __attribute__((packed));

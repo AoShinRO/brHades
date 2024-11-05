@@ -86,18 +86,24 @@ uint64 CashEmotesDatabase::parseBodyNode(const ryml::NodeRef& node)
 	ce->rental_period *= (60 * 60 * 24); // Convert from days to seconds
 
 	for (const ryml::NodeRef& emoteNode : node["EmotesList"]) {
+		if (!emoteNode.is_val()) {
+			this->invalidWarning(node["EmotesList"], "Unknown format.\n");
+			continue;
+		}
 		// Get the name of the node
-		std::string emotename;
-		c4::from_chars(emoteNode.val(), &emotename);
-
+		std::string emotename = emoteNode.val().data();
+		size_t newline_pos = emotename.find('\n');
+		if (newline_pos != std::string::npos) {
+			emotename = emotename.substr(0, newline_pos);
+		}		
 		// Get the value of the constant
 		int64 val;
 		script_get_constant(emotename.c_str(), &val);
 
 		// Verify it's a valid emotion
 		if (val < 0 || val >= ET_MAX) {
-			this->invalidWarning(node["EmotesList"], "Unknown emotion \"%s\".\n", emotename.c_str());
-			return 0;
+			this->invalidWarning(node["EmotesList"], "Unknown emotion /%s/.\n", emotename.c_str());
+			continue;
 		}
 
 		// Append to the pack
@@ -110,7 +116,7 @@ uint64 CashEmotesDatabase::parseBodyNode(const ryml::NodeRef& node)
 
 void emotes_use(map_session_data *sd, int16 packId, int16 emoteId)
 {
-	// ShowDebug("Processing a request to use emote %d from pack %d\n", emoteId, packId);
+
 	nullpo_retv(sd);
 
 	// Check if the player can use any emotes at all
