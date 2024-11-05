@@ -1386,7 +1386,8 @@ enum out_ui_type : int8 {
 	OUT_UI_QUEST,
 	OUT_UI_ATTENDANCE,
 	OUT_UI_ENCHANTGRADE,
-	OUT_UI_ENCHANT = 10,
+	OUT_UI_CHANGE_MATERIAL,
+	OUT_UI_ENCHANT,
 };
 
 void clif_ui_open( map_session_data& sd, enum out_ui_type ui_type, int32 data );
