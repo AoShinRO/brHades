@@ -33,6 +33,7 @@
 #include "script.hpp"
 
 #include <stdlib.h>
+#include <chrono>
 
 using namespace brhades;
 
@@ -40,12 +41,14 @@ CashEmotesDatabase cash_emotes_db;
 
 std::time_t convertToUnixTimestamp(uint64_t dateValue)
 {
-    std::tm tmStruct = {};
-    tmStruct.tm_year = static_cast<int>(dateValue / 10000) - 1900;
-    tmStruct.tm_mon = static_cast<int>((dateValue / 100) % 100) - 1; 
-    tmStruct.tm_mday = static_cast<int>(dateValue % 100); 
+    std::chrono::year_month_day ymd{
+        std::chrono::year{static_cast<int>(dateValue / 10000)},
+        std::chrono::month{static_cast<int>((dateValue % 10000) / 100)},
+        std::chrono::day{static_cast<int>(dateValue % 100)}
+    };
 
-    return std::mktime(&tmStruct);
+    auto tp = std::chrono::sys_days{ymd};
+    return std::chrono::system_clock::to_time_t(tp);
 }
 
 const std::string CashEmotesDatabase::getDefaultLocation() {
