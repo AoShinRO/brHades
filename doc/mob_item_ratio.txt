@@ -1,4 +1,49 @@
 //===== rAthena Documentation ================================
+//===== Documentação do rAthena ================================
+//= Estrutura de Banco de Dados de Proporção de Itens de Monstros
+//===== Por: ==================================================
+//= Equipe de Desenvolvimento do rAthena
+//===== Última Atualização: ===================================
+//= 20210624
+//===== Descrição: ============================================
+//= Explicação do arquivo mob_item_ratio.yml e sua estrutura.
+//============================================================
+
+As taxas de queda base dos itens definidas em mob_db.yml não serão multiplicadas pelos valores globais de item_rate* (taxas de queda) presentes em
+conf/battle/drops.conf e, em vez disso, a proporção (Ratio) será utilizada (100 = 1x).
+Se nenhum monstro for especificado, todos os monstros serão afetados, caso contrário, apenas os listados.
+
+Exemplos:
+Jellopies dos monstros irão cair com uma taxa de queda de 1x, independentemente da taxa de queda global.
+Corpo:
+ - Item: Jellopy
+   Ratio: 100
+
+Jellopies dos monstros irão cair com uma taxa de queda de 10x, independentemente da taxa de queda global.
+Corpo:
+ - Item: Jellopy
+   Ratio: 1000
+
+Remove as Jellopies dos drops dos monstros.
+Corpo:
+ - Item: Jellopy
+   Ratio: 0
+
+Jellopies dos Porings irão cair com uma taxa de queda de 1x. Outros monstros que também dropam Jellopies não serão afetados (utilize a taxa de queda global).
+Corpo:
+ - Item: Jellopy
+   Ratio: 100
+   List:
+     PORING: true
+
+Observações:
+- Não substitui as configurações item_drop_*_min/max.
+- Não afeta os drops concedidos por cartas/itens. Para ajustar esses drops, edite-os no item_db.
+- Afeta prêmios de MVP e Caixas do Tesouro.
+- É possível adicionar apenas UMA proporção (Ratio) por item. Se você precisar de proporções diferentes para diferentes monstros, substitua a taxa de queda pelo Ratio=100 e edite as taxas de queda base no mob_db.
+- Esse arquivo é recarregado pelo comando @reloadmobdb.
+
+
 //= Mob Item Ratio Database Structure
 //===== By: ==================================================
 //= rAthena Dev Team

@@ -1,3 +1,416 @@
+//===== Documentação do rAthena ===============================
+//= Estrutura do Banco de Dados de Itens
+//===== Por: ==================================================
+//= Equipe de Desenvolvimento do rAthena
+//===== Última Atualização: ==================================
+//= 20220402
+//===== Descrição: ==========================================
+//= Explicação do arquivo item_db.yml e sua estrutura.
+//============================================================
+
+---------------------------------------
+
+Id: ID do item.
+
+---------------------------------------
+
+AegisName: Nome do servidor usado para referenciar o item em scripts e pesquisas, não deve conter espaços.
+
+---------------------------------------
+
+Name: Nome em inglês para exibição em comandos de atalho e scripts.
+
+---------------------------------------
+
+Type: Tipo do item.
+
+Healing      - Item de cura.
+Usable       - Item utilizável.
+Etc          - Item variado.
+Armor        - Item de Armadura/Vestimenta/Sapatos/Chapéu/Acessório.
+Weapon       - Item de arma.
+Card         - Item de carta.
+PetEgg       - Item de ovo de mascote.
+PetArmor     - Item de equipamento de mascote.
+Ammo         - Item de munição (flechas, balas, etc.).
+DelayConsume - Item utilizável com consumo atrasado (destinado a 'itemskill').
+               Itens que usam o comando de script 'itemskill' são consumidos após selecionar um alvo. Qualquer outro comando NÃO consome o item.
+ShadowGear   - Item de Equipamento Sombrio.
+Cash         - Outro consumo atrasado que requer confirmação do usuário antes de usar o item.
+
+---------------------------------------
+
+SubType: Indica a classe da arma do item.
+
+Para armas, os tipos são:
+Fist        - Punho
+Dagger      - Adaga
+1hSword     - Espada de 1 mão
+2hSword     - Espada de 2 mãos
+1hSpear     - Lança de 1 mão
+2hSpear     - Lança de 2 mãos
+1hAxe       - Machado de 1 mão
+2hAxe       - Machado de 2 mãos
+Mace        - Maça
+Staff       - Cajado
+Bow         - Arco
+Knuckle     - Soqueira
+Musical     - Instrumento Musical
+Whip        - Chicote
+Book        - Livro
+Katar       - Katar
+Revolver    - Revólver
+Rifle       - Rifle
+Gatling     - Metralhadora Gatling
+Shotgun     - Espingarda
+Grenade     - Granada
+Huuma       - Huuma Shuriken
+2hStaff     - Cajado de 2 mãos
+
+Para munição, os tipos são:
+Arrow       - Flecha
+Dagger      - Adaga
+Bullet      - Bala
+Shell       - Cartucho
+Grenade     - Granada
+Shuriken    - Shuriken
+Kunai       - Kunai
+CannonBall  - Bala de Canhão
+ThrowWeapon - Arma de Arremesso
+
+Para cartas, os tipos são:
+Normal (padrão)
+Enchant (encantamento)
+
+---------------------------------------
+
+Buy: Preço de compra padrão. Quando não especificado, é o dobro do preço de venda.
+
+---------------------------------------
+
+Sell: Preço de venda padrão. Quando não especificado, é a metade do preço de compra.
+
+---------------------------------------
+
+Weight: Peso do item. Cada múltiplo de 10 é 1 peso.
+
+---------------------------------------
+
+Attack: Ataque da arma.
+
+---------------------------------------
+
+MagicAttack: Ataque mágico da arma. (Apenas Renovação)
+
+---------------------------------------
+
+Defense: Defesa da armadura.
+
+---------------------------------------
+
+Range: Alcance do ataque da arma.
+
+---------------------------------------
+
+Slots: Quantidade de slots que o item possui.
+
+---------------------------------------
+
+Jobs: Classes que podem equipar o item.
+
+All          - Aplica-se a todas as classes listadas abaixo.
+Acolyte      - Clérigo
+Alchemist    - Alquimista
+Archer       - Arqueiro
+Assassin     - Assassino
+BardDancer   - Menestrel/Maestro
+Blacksmith   - Ferreiro
+Crusader     - Paladino
+Gunslinger   - Justiceiro
+Hunter       - Caçador
+KagerouOboro - Kagerou/Oboro
+Knight       - Cavaleiro
+Mage         - Mago
+Merchant     - Mercador
+Monk         - Monge
+Ninja        - Ninja
+Novice       - Noviço
+Priest       - Sacerdote
+Rebellion    - Rebelde
+Rogue        - Arruaceiro
+Sage         - Sábio
+SoulLinker   - Conecta-Almas
+StarGladiator - Estrela Gladiadora
+Summoner     - Invocador
+SuperNovice  - Superaprendiz
+Swordman     - Espadachim
+Taekwon      - Taekwon
+Thief        - Ladrão
+Wizard       - Bruxo
+
+---------------------------------------
+
+Classes: Tipos de classe equipáveis.
+
+All         - Aplica-se a todas as classes.
+Normal      - Classes normais (sem classes Bebê/Transcendentais/Terceiras).
+Upper       - Classes Transcendentais (sem classes Transcendentais-Terceiras).
+Baby        - Classes Bebê (sem classes Terceiras-Bebê).
+Third       - Classes Terceiras (sem classes Transcendentais-Terceiras ou Terceiras-Bebê).
+Third_Upper - Classes Transcendentais-Terceiras.
+Third_Baby  - Classes Terceiras-Bebê.
+Fourth      - Classes Quartas.
+All_Upper   - Todas as classes Transcendentais.
+All_Baby    - Todas as classes Bebê.
+All_Third   - Aplica-se a todas as classes Terceiras.
+
+---------------------------------------
+
+Gender: Restrição de gênero.
+
+Female - Feminino
+Male   - Masculino
+Both   - Ambos
+
+---------------------------------------
+
+Locations: Localizações do equipamento.
+
+Head_Top               - Chapéu Superior
+Head_Mid               - Chapéu Médio
+Head_Low               - Chapéu Inferior
+Armor                  - Armadura
+Right_Hand             - Arma (Mão Direita)
+Left_Hand              - Escudo (Mão Esquerda)
+Garment                - Vestimenta/Manto
+Shoes                  - Sapatos
+Right_Accessory        - Acessório Direito
+Left_Accessory         - Acessório Esquerdo
+Costume_Head_Top       - Chapéu Superior de Fantasia
+Costume_Head_Mid       - Chapéu Médio de Fantasia
+Costume_Head_Low       - Chapéu Inferior de Fantasia
+Costume_Garment        - Vestimenta/Manto de Fantasia
+Ammo                   - Munição
+Shadow_Armor           - Armadura Sombria
+Shadow_Weapon          - Arma Sombria
+Shadow_Shield          - Escudo Sombrio
+Shadow_Shoes           - Sapatos Sombrios
+Shadow_Right_Accessory - Acessório Direito Sombrio (Brinco)
+Shadow_Left_Accessory  - Acessório Esquerdo Sombrio (Pingente)
+
+Both_Hand              - Mão Direita + Mão Esquerda
+Both_Accessory         - Acessório Direito + Acessório Esquerdo
+
+---------------------------------------
+
+WeaponLevel: Nível da arma. Usado para refinamento.
+
+---------------------------------------
+
+EquipLevelMin: Nível base necessário para poder equipar.
+
+---------------------------------------
+
+EquipLevelMax: Só é possível equipar se o nível base for menor que esse.
+
+---------------------------------------
+
+Refineable: Define se o item pode ser refinado.
+
+---------------------------------------
+
+Gradable: Define se o item pode ser aprimorado.
+
+---------------------------------------
+
+View: Para itens normais, define uma visualização substituta para o sprite do item.
+
+---------------------------------------
+
+AliasName: Usa o AegisName de outro item que será enviado ao cliente em vez deste item.
+           Isso faz com que os itens apareçam visualmente como outros sem precisar alterar os dados do cliente.
+
+---------------------------------------
+
+Flags: Diferentes tipos de flags para um item.
+
+BuyingStore  - Se o item está disponível para Compras em Lojas.
+DeadBranch   - Se o item é do tipo Dead Branch.
+Container    - Se o item faz parte de um Contêiner.
+UniqueId     - Se o item é um conjunto único.
+BindOnEquip  - Se o item está vinculado ao personagem ao ser equipado.
+DropAnnounce - Se o item possui um anúncio especial ao ser dropado pelo personagem.
+NoConsume    - Se o item é consumido ao ser usado.
+DropEffect   - Se o item possui um efeito especial no chão quando dropado por um monstro.
+
+---------------------------------------
+
+Delay: Atraso de uso do item.
+  Duration - Duração do atraso em segundos.
+  Status   - Mudança de status usada para controlar o atraso.
+
+---------------------------------------
+
+Stack: Quantidade de empilhamento do item.
+  Amount       - Quantidade máxima que pode ser empilhada.
+  Inventory    - Se o empilhamento se aplica ao inventário do jogador.
+  Cart         - Se o empilhamento se aplica ao carrinho do jogador.
+  Storage      - Se o empilhamento se aplica ao armazenamento do jogador.
+  GuildStorage - Se o empilhamento se aplica ao armazenamento da guilda do jogador.
+
+---------------------------------------
+
+NoUse: Condições em que o item não pode ser usado.
+  Override - Nível do grupo para substituir essas condições.
+  Sitting  - Se o item não pode ser usado enquanto o personagem está sentado.
+
+---------------------------------------
+
+Trade: Restrições de negociação.
+  Override       - Nível do grupo para substituir essas condições.
+  NoDrop         - Se o item não pode ser dropado.
+  NoTrade        - Se o item não pode ser negociado.
+  TradePartner   - Se o item não pode ser negociado com o parceiro do jogador.
+  NoSell         - Se o item não pode ser vendido.
+  NoCart         - Se o item não pode ser colocado em um carrinho.
+  NoStorage      - Se o item não pode ser colocado em um armazenamento.
+  NoGuildStorage - Se o item não pode ser colocado em um armazenamento de guilda.
+  NoMail         - Se o item não pode ser enviado por correio.
+  NoAuction      - Se o item não pode ser leiloado.
+
+---------------------------------------
+
+Stackable: Define se o item é empilhável.
+
+---------------------------------------
+
+Sprite: Nome do arquivo de sprite do item.
+
+---------------------------------------
+
+Script: Script de item personalizado.
+
+---------------------------------------
+
+OnEquip_Script: Script executado quando o item é equipado.
+
+---------------------------------------
+
+OnUnequip_Script: Script executado quando o item é desequipado.
+
+---------------------------------------
+
+OnConsume_Script: Script executado quando o item é consumido.
+
+---------------------------------------
+
+OnActivate_Script: Script executado quando o item é ativado.
+
+---------------------------------------
+
+OnTrigger_Script: Script executado quando o item é acionado (usado).
+
+---------------------------------------
+
+OnDestroy_Script: Script executado quando o item é destruído.
+
+---------------------------------------
+
+UnEquip_After_Script: Script executado após desequipar o item.
+
+---------------------------------------
+
+Bonuses: Bônus do item.
+  Stats       - Bônus de atributos (força, agilidade, etc.).
+  Skills      - Bônus de habilidades (aumento de dano, recuperação de SP, etc.).
+  Race        - Bônus de raça (humano, demônio, etc.).
+  Element     - Bônus de elemento (fogo, água, etc.).
+  Resistances - Bônus de resistências (imunidade a status negativos, etc.).
+  Damage      - Bônus de dano (aumento de dano físico/mágico, etc.).
+  Heal        - Bônus de cura (aumento de cura, recuperação de SP, etc.).
+  SP          - Bônus de SP (aumento de SP máximo, regeneração de SP, etc.).
+  HP          - Bônus de HP (aumento de HP máximo, regeneração de HP, etc.).
+  Misc        - Outros bônus (velocidade de ataque, velocidade de lançamento de habilidades, etc.).
+
+---------------------------------------
+
+Required_Equipment: Equipamentos necessários para poder equipar o item.
+
+---------------------------------------
+
+Scripts_Equipment: Scripts executados quando certos equipamentos são equipados.
+
+---------------------------------------
+
+Set_Bonus: Bônus de conjunto.
+
+---------------------------------------
+
+Trade_Slot: Número do slot de troca utilizado para negociação.
+
+---------------------------------------
+
+Trade_Cart_Slot: Número do slot de troca do carrinho utilizado para negociação.
+
+---------------------------------------
+
+Stack_Attribute: Atributo de empilhamento do item. (Apenas Renovação)
+
+---------------------------------------
+
+Attribute: Atributos do item. (Apenas Renovação)
+
+---------------------------------------
+
+Socket_Enchant: Encantamento de socket para o item. (Apenas Renovação)
+
+---------------------------------------
+
+Description: Descrição do item em inglês.
+
+---------------------------------------
+
+ItemSlots: Slots necessários para equipar o item. (Apenas Renovação)
+
+---------------------------------------
+
+Cannot_Disassemble: Define se o item não pode ser desmontado.
+
+---------------------------------------
+
+PetInfo: Informações sobre o mascote. (Apenas Renovação)
+
+---------------------------------------
+
+PetCapture: Define se o mascote pode ser capturado. (Apenas Renovação)
+
+---------------------------------------
+
+PetEgg_FormID: ID do formulário do ovo de mascote. (Apenas Renovação)
+
+---------------------------------------
+
+PetMaxLoyalty: Lealdade máxima do mascote. (Apenas Renovação)
+
+---------------------------------------
+
+PetEquipLevels: Níveis de equipamento do mascote. (Apenas Renovação)
+
+---------------------------------------
+
+PetEquipWeapons: Armas equipáveis pelo mascote. (Apenas Renovação)
+
+---------------------------------------
+
+PetEquipSkills: Habilidades equipáveis pelo mascote. (Apenas Renovação)
+
+---------------------------------------
+
+PetEquipEvolutions: Evoluções possíveis para o mascote. (Apenas Renovação)
+
+Essas são algumas das propriedades e informações que podem ser encontradas nos arquivos de dados de um item do jogo Ragnarok Online. Cada item pode ter propriedades específicas e nem todos os campos mencionados acima estarão presentes em todos os itens.
+
+
 //===== rAthena Documentation ================================
 //= Item Database Structure
 //===== By: ==================================================

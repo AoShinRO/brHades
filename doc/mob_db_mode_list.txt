@@ -1,3 +1,193 @@
+
+//===== Documentação do rAthena =======================================
+//= Referência dos Modos de Monstros do rAthena
+//===== Por: ==========================================================
+//= Equipe de Desenvolvimento do rAthena
+//===== Última atualização: ============================================
+//= 20160402
+//===== Descrição: =====================================================
+//= Uma descrição de referência do campo 'mode' da tabela mob_db do rAthena.
+//=======================================================================
+
+Bit Legend
+-------------------------------------------------------------------------------
+
+MD_CANMOVE            | 0x0000001 |         1
+MD_LOOTER             | 0x0000002 |         2
+MD_AGGRESSIVE         | 0x0000004 |         4
+MD_ASSIST             | 0x0000008 |         8
+MD_CASTSENSORIDLE     | 0x0000010 |        16
+MD_NORANDOMWALK       | 0x0000020 |        32
+MD_NOCAST             | 0x0000040 |        64
+MD_CANATTACK          | 0x0000080 |       128
+FREE                  | 0x0000100 |       256
+MD_CASTSENSORCHASE    | 0x0000200 |       512
+MD_CHANGECHASE        | 0x0000400 |      1024
+MD_ANGRY              | 0x0000800 |      2048
+MD_CHANGETARGETMELEE  | 0x0001000 |      4096
+MD_CHANGETARGETCHASE  | 0x0002000 |      8192
+MD_TARGETWEAK         | 0x0004000 |     16384
+MD_RANDOMTARGET       | 0x0008000 |     32768
+---------------------------------------------
+MD_IGNOREMELEE        | 0x0010000 |     65536
+MD_IGNOREMAGIC        | 0x0020000 |    131072
+MD_IGNORERANGED       | 0x0040000 |    262144
+MD_MVP                | 0x0080000 |    524288
+MD_IGNOREMISC         | 0x0100000 |   1048576
+MD_KNOCKBACKIMMUNE    | 0x0200000 |   2097152
+MD_TELEPORTBLOCK      | 0x0400000 |   4194304
+FREE                  | 0x0800000 |   8388608
+---------------------------------------------
+MD_FIXEDITEMDROP      | 0x1000000 |  16777216
+MD_DETECTOR           | 0x2000000 |  33554432
+MD_STATUSIMMUNE       | 0x4000000 |  67108864
+MD_SKILLIMMUNE        | 0x8000000 | 134217728
+
+Explicação
+Can Move: Permite que o monstro se mova/persegue personagens.
+
+Looter: O monstro recolherá itens próximos no chão quando estiver em estado de repouso.
+
+Aggressive: monstro agressivo normal, procurará um jogador próximo para atacar.
+
+Assist: Quando um monstro próximo da mesma classe ataca, os tipos de assistência se juntarão a eles.
+
+Cast Sensor Idle: Irá atrás de personagens que começarem a conjurar neles se estiverem parados
+ou caminhando (sem alvo).
+
+No Random Walk: O monstro não andará aleatoriamente enquanto estiver
+em estado de repouso.
+
+No Cast Skill: O monstro não poderá lançar habilidades.
+
+Can Attack: Permite que o monstro ataque/retalie quando estiver dentro do alcance de ataque.
+Observe que isso só permite o uso de ataques normais, as habilidades
+sempre são permitidas.
+
+Cast Sensor Chase: Irá atrás de personagens que começarem a conjurar neles se estiverem parados
+ou perseguindo outros jogadores (mudam de alvo de perseguição)
+
+Change Chase: Permite que os monstros perseguidores mudem de alvo se outro jogador
+estiver dentro do alcance de ataque (útil para atacantes à distância, por exemplo)
+
+Angry: Esses monstros são "hiperativos". Além de "perseguir"/"atacar", eles têm
+os estados "seguir"/"irritado". Uma vez atingidos, eles param de usar esses estados e usam
+os estados normais. Os novos estados são usados para determinar um conjunto de habilidades
+diferente para os estados "antes de serem atacados" e "depois de serem atacados". Além disso, quando
+"seguindo", eles mudam automaticamente para o personagem mais próximo.
+
+Change Target Melee: Permite que um monstro mude de alvo quando atingido por um ataque normal
+enquanto estiver atacando outra pessoa.
+
+Change Target Chase: Permite que um monstro mude de alvo quando atingido por qualquer ataque
+enquanto estiver perseguindo outro personagem.
+
+Target Weak: Permite que monstros agressivos sejam agressivos apenas contra
+personagens que estão cinco níveis abaixo de seu próprio nível.
+Por exemplo, um monstro de nível 104 não brigará com um nível 99.
+
+Random Target: Escolhe um novo alvo aleatório dentro do alcance a cada ataque/habilidade.
+
+Ignore Melee: O monstro receberá 1 ponto de dano de ataques físicos.
+
+Ignore Magic: O monstro receberá 1 ponto de dano de ataques mágicos.
+
+Ignore Range: O monstro receberá 1 ponto de dano de ataques à distância.
+
+MVP: Marcado como MVP, tornando os monstros resistentes à Coma. Também exibe o
+símbolo MVP e concede aos jogadores EXP de MVP ou itens de MVP.
+
+Ignore Misc: O monstro receberá 1 ponto de dano de ataques "nenhum".
+
+Knockback Immune: O monstro não poderá ser empurrado para trás.
+
+Teleport Block: Ainda não implementado.
+
+Fixed Item Drop: Os drops do monstro não são afetados por modificadores de drop de itens.
+
+Detector: Permite que o monstro detecte e ataque personagens que estão se escondendo/furtivos.
+
+Status Immune: Imune a ser afetado por estados.
+
+Skill Immune: Imune a ser afetado por habilidades.
+
+Tipos de Monstros Aegis
+O que a Aegis tem são tipos de monstros, onde cada tipo representa um comportamento de IA que
+é imitado por um grupo de bits de modo do rAthena. Esta é a tabela para converter de um
+para outro:
+
+Aegis/rA (descrição)
+01: 0x0081 (passivo)
+02: 0x0083 (passivo, saqueador)
+03: 0x1089 (passivo, assistente e muda-alvo corpo a corpo)
+04: 0x3885 (irritado, muda-alvo corpo a corpo/perseguir)
+05: 0x2085 (agressivo, muda-alvo perseguir)
+06: 0x0000 (passivo, imóvel, não pode atacar) [plantas]
+07: 0x108B (passivo, saqueador, assistente, muda-alvo corpo a corpo)
+08: 0x7085 (agressivo, muda-alvo corpo a corpo/perseguir, alvejar inimigos fracos)
+09: 0x3095 (agressivo, muda-alvo corpo a corpo/perseguir, sensor de lançamento ocioso) [Guardian]
+10: 0x0084 (agressivo, imóvel)
+11: 0x0084 (agressivo, imóvel) [Guardian]
+12: 0x2085 (agressivo, muda-alvo perseguir) [Guardian]
+13: 0x308D (agressivo, muda-alvo corpo a corpo/perseguir, assistente)
+17: 0x0091 (passivo, sensor de lançamento ocioso)
+19: 0x3095 (agressivo, muda-alvo corpo a corpo/perseguir, sensor de lançamento ocioso)
+20: 0x3295 (agressivo, muda-alvo corpo a corpo/perseguir, sensor de lançamento ocioso/perseguir)
+21: 0x3695 (agressivo, muda-alvo corpo a corpo/perseguir, sensor de lançamento ocioso/perseguir, muda-alvo de perseguição)
+24: 0x00A1 (passivo, não anda aleatoriamente) [Slave]
+25: 0x0001 (passivo, não pode atacar) [Pet]
+26: 0xB695 (agressivo, muda-alvo corpo a corpo/perseguir, sensor de lançamento ocioso/perseguir, muda-alvo de perseguição, alvo aleatório)
+27: 0x8084 (agressivo, imóvel, alvo aleatório)
+
+Tipos de Classe Aegis
+Aegis tem diferentes tipos de classe que não podem ser combinados, mas podem ser refletidos por
+uma combinação de bits de modo do rAthena.
+Adicione o modo listado aqui ao modo acima.
+
+Aegis/rA
+00: 0x0000000 (monstro normal)
+01: 0x6200000 (classe de chefe, imune a mudanças de status, imune a knockback, detector)
+02: 0x4000000 (classe de guardião, imune a mudanças de status)
+04: 0xC000000 (classe de campo de batalha, imune a mudanças de status, ignora completamente todas as habilidades)
+05: 0x1000000 (classe de evento, ignora todos os ajustes de taxa de drop)
+
+Observe que o bit de detector para monstros insetos/demônios precisa ser adicionado
+independentemente.
+Tipos de Atributos Aegis
+Os tipos de atributos Aegis são uma máscara de bits assim como os bits de modo.
+Adicione os atributos listados aqui à máscara de bits de atributo.
+
+Aegis/rA
+01: 0x0001 (vento)
+02: 0x0002 (terra)
+04: 0x0004 (fogo)
+08: 0x0008 (água)
+16: 0x0010 (sagrado)
+32: 0x0020 (sombrio)
+64: 0x0040 (veneno)
+128: 0x0080 (fantasma)
+256: 0x0100 (não morto)
+512: 0x0200 (inseto)
+1024: 0x0400 (peixe)
+2048: 0x0800 (anjo)
+4096: 0x1000 (demônio)
+8192: 0x2000 (planta)
+16384: 0x4000 (inseto)
+32768: 0x8000 (umbral)
+65536: 0x10000 (humanoide)
+131072: 0x20000 (dragão)
+262144: 0x40000 (animal)
+524288: 0x80000 (forma de morto-vivo)
+1048576: 0x100000 (anfíbio)
+2097152: 0x200000 (forma do anjo)
+4194304: 0x400000 (forma do demônio)
+8388608: 0x800000 (forma de planta)
+
+Os monstros podem ter vários atributos.
+
+Por exemplo, para monstros com atributos Vento e Água, adicione 0x0001 (vento) e
+0x0008 (água) à máscara de atributos.
+
 //===== rAthena Documentation ================================
 //= rAthena Monster Modes Reference
 //===== By: ==================================================

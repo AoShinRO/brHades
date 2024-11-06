@@ -1,3 +1,176 @@
+
+//===== Documentação do rAthena ================================
+//= Banco de Dados de Itens
+//===== Por: ==================================================
+//= Equipe de Desenvolvimento do rAthena
+//===== Última Atualização: ===================================
+//= 20210624
+//===== Descrição: ============================================
+//= Explicação do arquivo item_group.yml e sua estrutura.
+//==============================================================
+
+Os itens dentro de um grupo de itens podem ser obtidos através dos comandos de script 'groupranditem',
+'getrandgroupitem' e 'getgroupitem'.
+A tabela abaixo explica quais campos são acessados em cada um desses comandos.
+
++===============+=================+====================+================+
+| Campo         | 'groupranditem' | 'getrandgroupitem' | 'getgroupitem' |
++===============+=================+====================+================+
+| GroupID       |       SIM       |        SIM         |      SIM       |
++===============+=================+====================+================+
+| Item          |       SIM       |        SIM         |      SIM       |
++===============+=================+====================+================+
+| Rate          |       SIM       |        SIM         |      SIM       |
++===============+=================+====================+================+
+| Amount        |       não       |     OPCIONAL       |      SIM       |
++===============+=================+====================+================+
+| SubGroup      |     OPCIONAL    |     OPCIONAL       |      SIM       |
++===============+=================+====================+================+
+| Announced     |       não       |        não         |      SIM       |
++===============+=================+====================+================+
+| Duration      |       não       |        não         |      SIM       |
++===============+=================+====================+================+
+| UniqueId      |       não       |        não         |      SIM       |
++===============+=================+====================+================+
+| Bound         |       não       |        não         |      SIM       |
++===============+=================+====================+================+
+| Named         |       não       |        não         |      SIM       |
++===============+=================+====================+================+
+
+---------------------------------------
+
+GroupID: Consulte a seção "Item Group ID" em 'src/map/itemdb.hpp' e a seção "item groups" em 'src/map/script_constants.hpp'.
+         Suporta as constantes IG_*. 'IG_' é anexado ao nome ao ler o arquivo.
+
+---------------------------------------
+
+Item: Item disponível que será obtido deste grupo de itens.
+        Requer o AegisName do item.
+
+---------------------------------------
+
+Rate: Probabilidade de obter o item. Não é um valor percentual!
+
+Exemplos:
+  - Group: MeuGrupoDeItens
+    Contém:
+      - SubGroup: 1
+        Lista:
+          - Item: Faca
+            Rate: 5
+          - Item: Adaga
+            Rate: 1
+
+	- Faca tem chance de 5/6 (83,3%) de ser obtida
+	- Adaga tem chance de 1/6 (16,7%) de ser obtida
+
+---------------------------------------
+
+Amount: Quantidade do item que será obtida.
+
+---------------------------------------
+
+SubGroup: Definir isso como '0' torna o item sempre obtido ("item obrigatório").
+		   O valor de SubGroup irá alocar onde o item será armazenado no grupo aleatório.
+
+	Grupo de Itens:
+      - Group: MeuGrupoDeItens
+        Contém:
+          - SubGroup: 0
+            Lista:
+              - Item: Faca       # item(s) "obrigatórios"
+              - Item: Adaga      # item(s) "obrigatórios"
+          - SubGroup: 1
+            Lista:
+              - Item: Estilete   # aleatório no SubGroup 1
+                Rate: 5
+              - Item: Estilete_  # aleatório no SubGroup 1
+                Rate: 2
+          - SubGroup: 2
+            Lista:
+              - Item: Estilete   # aleatório no SubGroup 2
+                Rate: 5
+              - Item: Adaga_     # aleatório no SubGroup 2
+                Rate: 4
+
+	Usos:
+	getgroupitem(<group_id>)
+	------------
+	-> 'getgroupitem(IG_MeuGrupoDeItens);'
+		- Jogador sempre recebe 1x Faca e 1x Adaga
+		- Jogador tem chance de receber 1x Estilete com chance de 5/7 do SubGroup 1
+		- Jogador tem chance de receber 1x Estilete_ com chance de 2/7 do SubGroup 1
+		- Jogador tem chance de receber 1x Estilete com chance de 5/9 do SubGroup 2
+		- Jogador tem chance de receber 1x Adaga_ com chance de 4/9 do SubGroup 2
+
+	getrandgroupitem(<group_id>{,<quantity>{,<sub_group>}})
+	------------
+	-> 'getrandgroupitem(IG_MeuGrupoDeItens);'
+		- SubGroup aleatório: 1, Quantidade: [Baseado na lista]
+		- Equivale a: getrandgroupitem(IG_MeuGrupoDeItens,0) e getrandgroupitem(IG_MeuGrupoDeItens,0,1)
+		- Jogador tem chance de receber 1x Estilete com chance de 5/7 do SubGroup 1
+		- Jogador tem chance de receber 1x Estilete_ com chance de 2/7 do SubGroup 1
+		- 'obrigatórios' e 'SubGroup 2' são ignorados
+
+	-> 'getrandgroupitem(IG_MeuGrupoDeItens,1);'
+		- SubGroup aleatório: 1, Quantidade: 2, ignorar 'amount' na lista
+		- Equivale a: getrandgroupitem(IG_MeuGrupoDeItens,1,1)
+		- Jogador tem chance de receber 2x Estilete com chance de 5/7 do SubGroup 1
+		- Jogador tem chance de receber 2x Estilete_ com chance de 2/7 do SubGroup 1
+		- 'obrigatórios' e 'SubGroup 2' são ignorados
+
+	-> 'getrandgroupitem(IG_MeuGrupoDeItens,3, 0);'
+		- SubGroup aleatório: 'obrigatório', Quantidade: 2, ignorar 'amount' na lista
+		- Jogador tem chance de receber 3x Faca com chance de 1/2 do SubGroup 'obrigatório'
+		- Jogador tem chance de receber 3x Adaga com chance de 1/2 do SubGroup 'obrigatório'
+		- 'SubGroup 1' e 'SubGroup 2' são ignorados
+
+	groupranditem(<group id>{,<sub_group>})
+	------------
+	Este comando retorna apenas um ID de item do SubGroup aleatório. Combine com 'getitem'
+	para obter os itens.
+	-> 'groupranditem(IG_MeuGrupoDeItens);'
+		- SubGroup aleatório: 1
+		- Retorna o ID do item Estilete com chance de 5/7 do SubGroup 1
+		- Retorna o ID do item Estilete_ com chance de 2/7 do SubGroup 1
+		- 'obrigatórios' e 'SubGroup 2' são ignorados
+	-> 'groupranditem(IG_MeuGrupoDeItens,0);'
+		- SubGroup aleatório: 0
+		- Retorna o ID do item Faca com chance de 5/7 do SubGroup 'obrigatório'
+		- Retorna o ID do item Adaga com chance de 2/7 do SubGroup 'obrigatório'
+		- 'SubGroup 1' e 'SubGroup 2' são ignorados
+
+---------------------------------------
+
+Anunciado: Se o jogador obtiver este item, será transmitido para o servidor.
+           "[Jogador] ganhou [Item] de 'Caixa'"
+
+---------------------------------------
+
+Duração: Torna o item um item alugado, que expirará após a quantidade fornecida
+          de minutos. Não destinado a ser usado com itens empilháveis.
+
+---------------------------------------
+
+UniqueId: Torna o(s) item(s) únicos. O item será empilhado SOMENTE em cada grupo
+      quando obtido. Não pode ser empilhado com o mesmo item, mesmo se for um item empilhável.
+	  Por exemplo, há uma Caixa (chamada de Caixa_de_Maçã) que contém 3x Maçãs com
+	  UniqueId = 1. Quando as Maçãs aparecerem, elas serão empilhadas a cada 3, mesmo se outras 3x Maçãs
+	  aparecerem pela mesma caixa. Então, elas serão preenchidas no inventário da seguinte forma:
+	        3x Maçãs | 3x Maçãs | etc... | nx Maçãs (normal)
+
+---------------------------------------
+
+Bound: Vincula o item obtido.
+       Consulte 'getitembound' em 'doc/script_commands.txt' para obter os tipos de vinculação válidos.
+
+---------------------------------------
+
+Named: Grava o nome do obtentor no item.
+
+---------------------------------------
+
+
 //===== rAthena Documentation ================================
 //= Item Database
 //===== By: ==================================================
@@ -43,12 +216,8 @@ GroupID: See the "Item Group ID" section in 'src/map/itemdb.hpp' and the "item g
 
 ---------------------------------------
 
-Index: Unique number that can be used to add the same Item with different data in the list.
-
----------------------------------------
-
 Item: Available item that will be obtained from this item group.
-      Requires the AegisName of the item.
+        Requires the AegisName of the item.
 
 ---------------------------------------
 
@@ -56,14 +225,12 @@ Rate: Probability to get the item. Not a percentage value!
 
 Examples:
   - Group: MyItemGroup
-    SubGroups:
+    Contain:
       - SubGroup: 1
         List:
-          - Index: 0
-            Item: Knife
+          - Item: Knife
             Rate: 5
-          - Index: 1
-            Item: Dagger
+          - Item: Dagger
             Rate: 1
 
 	- Knife has chance 5/6 (83.3%) to be obtained
@@ -80,28 +247,22 @@ SubGroup: Setting this to '0' makes the item always obtainable ("must" item).
 
 	Item Group:
       - Group: MyItemGroup
-        SubGroups:
+        Contain:
           - SubGroup: 0
             List:
-              - Index: 0
-                Item: Knife       # "must" item(s)
-              - Index: 1
-                Item: Dagger      # "must" item(s)
+              - Item: Knife       # "must" item(s)
+              - Item: Dagger      # "must" item(s)
           - SubGroup: 1
             List:
-              - Index: 0
-                Item: Stiletto    # random at SubGroup 1
+              - Item: Stiletto    # random at SubGroup 1
                 Rate: 5
-              - Index: 1
-                Item: Stiletto_   # random at SubGroup 1
+              - Item: Stiletto_   # random at SubGroup 1
                 Rate: 2
           - SubGroup: 2
             List:
-              - Index: 0
-                Item: Stiletto    # random at SubGroup 2
+              - Item: Stiletto    # random at SubGroup 2
                 Rate: 5
-              - Index: 1
-                Item: Dagger_     # random at SubGroup 2
+              - Item: Dagger_     # random at SubGroup 2
                 Rate: 4
 
 	Usages:

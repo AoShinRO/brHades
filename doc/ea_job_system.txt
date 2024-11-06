@@ -1,3 +1,110 @@
+====================
+//= Documentação rAthena ================================
+//= Sistema de Classes eAthena
+//===== By: ==================================================
+//= Skotlex
+//===== Última Atualização: ========================================
+//= 20130209
+//===== Descrição: =========================================
+//= Uma descrição de referência do sistema de classes interno do eA (para uso
+//= em scripts através dos comandos de script eaclass e roclass).
+//============================================================
+
+Prefácio:
+-------------------------------------------------------------------------------
+
+	A maioria dos scripters está ciente dos valores de classe usados no RO e de suas constantes
+	especificadas em src/map/script_constants.hpp. Cada classe possui um número associado
+	a ela para referência, então quando alguém possui a classe 9, isso significa que eles são
+	um Mago. No entanto, essa lista de números de classe não possui uma ordem real por trás dela
+	e não há lógica por trás de sua atribuição.
+
+	Você pode adicionar 3999 a uma classe para obter seu ID de renascimento, mas se você tentar fazer o
+	mesmo para obter o ID da classe Baby, isso falhará na super classe Baby. Além disso,
+	não há como calcular, a partir de uma primeira classe fornecida, quais classes seriam
+	suas "evoluções". Ou seja, dado o ID do Arqueiro, você não pode simplesmente adicionar
+	um valor que retornará "Caçador" e ainda funcionará se aplicado às outras classes. Não ajudou muito quando eles adicionaram o Taekwon Boy, uma primeira
+	classe, com um ID de 4046, e muito tempo depois eles adicionaram o Ninja/Gunslinger com
+	os IDs 25/24. Como você identifica uma primeira classe nessa confusão toda sem
+	recorrer a verificações de intervalo muito feias?
+
+O Sistema de Classes do eA:
+-------------------------------------------------------------------------------
+
+	Uma vez que o código também exigia fazer esse tipo de verificação para várias habilidades
+	(os buffs do Spirit Linker, especificamente, vêm à mente), um sistema de ID de classe
+	alternativo foi desenvolvido, que tenta fazer mais sentido e tornar mais fácil verificar onde
+	uma determinada classe se encaixa em relação às demais.
+
+	O esquema consiste em que cada classe pode ser dividida em 3 critérios:
+
+- Classe Base: Isso determina a qual árvore de classes uma classe pertence. Todas as classes podem ser
+  rastreadas até sua raiz. A classe base de todas as classes deve ser uma das seguintes:
+
+	EAJ_NOVICE		0x0
+	EAJ_SWORDMAN	0x1
+	EAJ_MAGE		0x2
+	EAJ_ARCHER		0x3
+	EAJ_ACOLYTE		0x4
+	EAJ_MERCHANT	0x5
+	EAJ_THIEF		0x6
+	EAJ_TAEKWON		0x7
+	EAJ_GUNSLINGER	0x9
+	EAJ_NINJA		0x0A
+	EAJ_GANGSI		0x0D
+	EAJ_SUMMONER	0x10
+
+- Ramificação: Todas as classes podem ser classificadas como "Primeira Classe", "Classe 2-1" ou
+  "Classe 2-2":
+
+	EAJL_2_1	0x100
+	EAJL
+
+_2_2	0x200
+	EAJL_2		0x300
+
+- A terceira categoria é o tipo. As classes podem ser normais, renascimento/avançadas,
+  adotadas ou de terceira classe.
+
+	EAJL_UPPER	0x1000
+	EAJL_BABY	0x2000
+	EAJL_THIRD	0x4000
+
+Portanto, usando essas três categorias, qualquer classe de trabalho pode ser construída a partir das
+outras. Vamos pegar um Espadachim, por exemplo.
+
+O primeiro passo é o espadachim básico, sem mais nada:
+
+	EAJ_SWORDMAN
+
+Se um espadachim for adotado...
+
+	EAJ_SWORDMAN|EAJL_BABY -> EAJ_BABY_SWORDMAN
+
+O próximo passo é se tornar uma classe 2-1 ou uma classe 2-2:
+
+	EAJ_SWORDMAN|EAJL_2_1 -> EAJ_KNIGHT
+	EAJ_SWORDMAN|EAJL_2_2 -> EAJ_CRUSADER
+
+Obtendo as versões de renascimento de um espadachim:
+
+	EAJ_SWORDMAN|EAJL_UPPER 			-> EAJ_SWORDMAN_HIGH
+	EAJ_SWORDMAN|EAJL_2_1|EAJL_UPPER	-> EAJ_LORD_KNIGHT
+	EAJ_SWORDMAN|EAJL_2_2|EAJL_UPPER	-> EAJ_PALADIN
+
+Ou obtendo as versões de terceira classe:
+
+	EAJ_SWORDMAN|EAJL_2_1|EAJL_THIRD	-> EAJ_RUNE_KNIGHT
+	EAJ_SWORDMAN|EAJL_2_2|EAJL_THIRD	-> EAJ_ROYAL_GUARD
+
+Por que estamos usando o operador lógico OR bit a bit ('|') em vez de simplesmente adicionar? Porque
+o OR é à prova de erros:
+
+	EAJ_SWORDMAN_HIGH|EAJL_UPPER -> EAJ_SWORDMAN_HIGH
+
+Se tivéssemos usado a adição, teríamos obtido um resultado completamente diferente.
+
+
 //===== rAthena Documentation ================================
 //= eAthena Job System
 //===== By: ==================================================
@@ -63,12 +170,11 @@ The eA Job System:
 	EAJL_2		0x300
 
 - The third category is type. Classes can either be normal, rebirth/advanced,
-  adopted, third class or fourth class.
+  adopted, or third class.
 
 	EAJL_UPPER	0x1000
 	EAJL_BABY	0x2000
 	EAJL_THIRD	0x4000
-	EAJL_FOURTH	0x8000
 
 So using these three categories, any job class can be constructed from the
 others. Let's take a swordman, for example.
@@ -144,11 +250,6 @@ EAJL_THIRD:
 	if(@eac&EAJL_THIRD)
 		mes "Wow, you've really grown!";
 
-EAJL_FOURTH:
-	Checks if a class is a fourth job.
-	if(@eac&EAJL_FOURTH)
-		mes "Wow, you've really grown!";
-
 EAJ_UPPERMASK:
 	The upper mask can be used to "strip" the upper/baby characteristics of a
 	class, used when you want to know if someone is a certain class regardless
@@ -175,18 +276,12 @@ EAJ_BASEMASK:
 	check will  always fail for the same reasons previously explained.
 
 EAJ_THIRDMASK:
-	This mask strips 3rd class attributes. It will give the "normal" class of
+	This mask strips 3rd class attributes.  It will give the "normal" class of
 	a third job, regardless of rebirth/adopted status.  When used on non-third
 	class characters, it will return the second job, or, if that also doesn't
 	exist, the first.
 	if ((@eac&EAJ_THIRDMASK) == EAJ_WARLOCK_T)
 		mes "You've gone through rebirth, I see.";
-
-EAJ_FOURTHMASK:
-	This mask strips 4th class attributes. Although currently there are none,
-	it is suggested to use this for checking.
-	if ((@eac&EAJ_FOURTHMASK) == EAJ_DRAGON_KNIGHT)
-		mes "Oh you are a Dragon Knight, I see.";
 
 The script commands eaclass, roclass:
 -------------------------------------------------------------------------------

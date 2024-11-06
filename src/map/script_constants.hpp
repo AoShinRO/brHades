@@ -1922,6 +1922,51 @@
 	export_constant(SC_BATH_FOAM_B);
 	export_constant(SC_BATH_FOAM_C);
 
+	// Sky Emperor
+	export_constant(SC_RISING_SUN);
+	export_constant(SC_NOON_SUN);
+	export_constant(SC_SUNSET_SUN);
+	export_constant(SC_RISING_MOON);
+	export_constant(SC_MIDNIGHT_MOON);
+	export_constant(SC_DAWN_MOON);
+	export_constant(SC_STAR_BURST);
+	export_constant(SC_SKY_ENCHANT);
+
+	// Soul Ascetic
+	export_constant(SC_TALISMAN_OF_PROTECTION);
+	export_constant(SC_TALISMAN_OF_WARRIOR);
+	export_constant(SC_TALISMAN_OF_MAGICIAN);
+	export_constant(SC_TALISMAN_OF_FIVE_ELEMENTS);
+	export_constant(SC_TOTEM_OF_TUTELARY);
+	export_constant(SC_T_FIRST_GOD);
+	export_constant(SC_T_SECOND_GOD);
+	export_constant(SC_T_THIRD_GOD);
+	export_constant(SC_T_FOURTH_GOD);
+	export_constant(SC_T_FIFTH_GOD);
+	export_constant(SC_HEAVEN_AND_EARTH);
+
+	// Shinkiro/Shiranui
+	export_constant(SC_SHADOW_CLOCK);
+	export_constant(SC_SHINKIROU_CALL);
+	export_constant(SC_NIGHTMARE);
+	export_constant(SC_SBUNSHIN);
+
+	// Spirit Handler
+	export_constant(SC_HOGOGONG);
+	export_constant(SC_MARINE_FESTIVAL);
+	export_constant(SC_SANDY_FESTIVAL);
+	export_constant(SC_KI_SUL_RAMPAGE);
+	export_constant(SC_COLORS_OF_HYUN_ROK_1);
+	export_constant(SC_COLORS_OF_HYUN_ROK_2);
+	export_constant(SC_COLORS_OF_HYUN_ROK_3);
+	export_constant(SC_COLORS_OF_HYUN_ROK_4);
+	export_constant(SC_COLORS_OF_HYUN_ROK_5);
+	export_constant(SC_COLORS_OF_HYUN_ROK_6);
+	export_constant(SC_COLORS_OF_HYUN_ROK_BUFF);
+	export_constant(SC_TEMPORARY_COMMUNION);
+	export_constant(SC_BLESSING_OF_M_CREATURES);
+	export_constant(SC_BLESSING_OF_M_C_DEBUFF);
+
 	export_constant(SC_BUCHEDENOEL);
 	export_constant(SC_EP16_DEF);
 	export_constant(SC_STR_SCROLL);
@@ -11241,6 +11286,8 @@
 	export_constant(UNT_GD_SOULCOLD);
 	export_constant(UNT_GD_HAWKEYES);
 	export_constant(UNT_CANE_OF_EVIL_EYE);
+	export_constant(UNT_KUNAIKAITEN);
+	export_constant(UNT_STAR_BURST);
 
 	/* battleground info types */
 	export_constant(BG_INFO_ID);
