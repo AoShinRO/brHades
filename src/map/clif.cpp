@@ -21968,6 +21968,18 @@ void clif_ui_open( map_session_data& sd, enum out_ui_type ui_type, int32 data ){
 #else
 			return;
 #endif
+
+		case OUT_UI_CHANGE_MATERIAL:{
+#if PACKETVER_MAIN_NUM >= 20210203
+		{
+			PACKET_ZC_UI_OPEN3 p = {};
+			p.PacketType = HEADER_ZC_UI_OPEN3;
+			p.UIType = ui_type;
+			clif_send(&p, sizeof(p), &sd.bl, SELF);
+		}
+#endif
+			return;
+		}
 	}
 
 	PACKET_ZC_UI_OPEN p = {};

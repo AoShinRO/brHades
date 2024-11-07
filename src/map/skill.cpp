@@ -12070,6 +12070,15 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 		break;
 
 	case GN_CHANGEMATERIAL:
+#if PACKETVER_MAIN_NUM >= 20221019
+		if (sd != NULL) {
+			sd->menuskill_id = skill_id;
+			sd->menuskill_val = skill_lv;
+			clif_ui_open(*sd, OUT_UI_CHANGE_MATERIAL, 0);
+			clif_skill_nodamage(src, *bl, skill_id, skill_lv, 1);
+		}
+		break;
+#endif
 	case SO_EL_ANALYSIS:
 		if( sd ) {
 			clif_skill_nodamage(src,*bl,skill_id,skill_lv);

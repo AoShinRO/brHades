@@ -1020,6 +1020,14 @@ struct PACKET_ZC_ACK_ITEMREFINING {
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(ZC_ACK_ITEMREFINING, 0x188)
 
+#if PACKETVER_MAIN_NUM >= 20221019
+struct PACKET_ZC_UI_OPEN3 {
+	int16 PacketType;
+	int8 UIType;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_UI_OPEN3, 0x0a38);
+#endif
+
 struct PACKET_ZC_PAR_CHANGE_USER {
 	int16 packetType;
 	uint32 gid;
