@@ -940,8 +940,6 @@ void pc_delsoulball( map_session_data& sd, int32 count, bool no_client_effect ) 
 	if (count <= 0)
 		return;
 
-	status_change *sc = status_get_sc(&sd.bl);
-
 	if (sd.soulball <= 0)
 		sd.soulball = 0;
 	else {
