@@ -3272,9 +3272,6 @@ int skill_mirage_cast(block_list* src, block_list* bl, int skill_id, int skill_l
 		return 0;
 
 	for (const auto &itsu : ud->skillunits) {
-		skill_unit *su = itsu->unit;
-		std::shared_ptr<s_skill_unit_group> sg = itsu->unit->group;
-
 		if (itsu->skill_id == SS_SHINKIROU) {
 			switch (skill_id) {
 			case SS_KUNAIWAIKYOKU: {
