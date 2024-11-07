@@ -4380,17 +4380,22 @@ static int skill_check_unit_range2_sub (struct block_list *bl, va_list ap)
 	return 1;
 }
 
-int skill_shimiru_check_cell(block_list *target, va_list ap)
+int buildin_skill_shimiru_check_cell(block_list *target, va_list ap)
 {
+	uint16 dx = va_arg(ap, uint16);
+	uint16 dy = va_arg(ap, uint16);
 	if (target->type == BL_SKILL)
 	{
 		skill_unit* su = reinterpret_cast<skill_unit*>(target);
-		if (su != nullptr && su->group->skill_id == SS_SHINKIROU)
+		if (su != nullptr && su->group.get()->skill_id == SS_SHINKIROU){
+			dx = su->bl.x;
+			dy = su->bl.y;
 			return 1;
+		}
 		else
 			return 0;
 	}
-	return 1;
+	return 0;
 }
 
 /**
@@ -6162,23 +6167,20 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, uint
 		if (flag & 1) {
 			skill_attack(skill_get_type(skill_id), src, src, bl, skill_id, skill_lv, tick, flag);
 		} else {
-			struct unit_data *ud = unit_bl2ud(src);
-			if (ud) {
+			unit_data *ud = unit_bl2ud(src);
+			if (ud != nullptr) {
 				for (const auto &itsu : ud->skillunits) {
-					skill_unit *su = itsu->unit;
-					std::shared_ptr<s_skill_unit_group> sg = itsu->unit->group;
-
-					if (itsu->skill_id == SKE_TWINKLING_GALAXY && distance_xy(bl->x, bl->y, su->bl.x, su->bl.y) <= skill_get_unit_range(SKE_TWINKLING_GALAXY, itsu->skill_lv)) {
+					if (itsu->skill_id == SKE_TWINKLING_GALAXY && distance_xy(bl->x, bl->y, itsu->unit->bl.x, itsu->unit->bl.y) <= skill_get_unit_range(SKE_TWINKLING_GALAXY, itsu->skill_lv)) {
 						for(int i=0;i<MAX_SKILLTIMERSKILL;i++) {
 							if(ud->skilltimerskill[i]) {
 								if (ud->skilltimerskill[i]->skill_id == SKE_TWINKLING_GALAXY) {
 									delete_timer(ud->skilltimerskill[i]->timer, skill_timerskill);
 									ers_free(skill_timer_ers, ud->skilltimerskill[i]);
-									ud->skilltimerskill[i]=NULL;
+									ud->skilltimerskill[i] = nullptr;
 								}
 							}
 						}
-						skill_delunitgroup(sg);
+						skill_delunitgroup(itsu->unit->group);
 						sc_start2(src, bl, skill_get_sc(skill_id), 100, skill_lv, src->id, skill_get_time2(skill_id, skill_lv));
 						return skill_castend_pos2(src, bl->x, bl->y, skill_id, skill_lv, tick, 0);
 					}
@@ -6235,24 +6237,14 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, uint
 		if (ud == nullptr)
 			break;
 
-		for (const auto itsu : ud->skillunits) {
-			int count = 0;
-			skill_unit *su = itsu->unit;
-			std::shared_ptr<s_skill_unit_group> sg = itsu->unit->group;
-
-			int dx = src->x - itsu->unit->bl.x;
-			int dy = src->y - itsu->unit->bl.y;
-			while (1) {
-				if (map_foreachincell(skill_shimiru_check_cell, src->m, itsu->unit->bl.x + dx, itsu->unit->bl.y + dy, BL_CHAR|BL_SKILL) == 0)
-					break;	
-				if (count++ == 1000)
-					break;
-				dx += rnd() % 3 - 1;
-				dy += rnd() % 3 - 1;
-			}
-
-			if (itsu->skill_id == SS_SHINKIROU)
-				skill_unit_move_unit_group(sg, src->m, dx,dy);
+		for (const auto& itsu : ud->skillunits) {
+			uint16 dx, dy;
+			if (itsu->skill_id != SS_SHINKIROU)
+				continue;
+			if (map_foreachinrange(buildin_skill_shimiru_check_cell, src, 3000, BL_CHAR|BL_SKILL, &dx , &dy) == 0)
+				break;
+			
+				skill_unit_move_unit_group(itsu->unit->group, src->m, src->x - dx, src->y - dy);
 		}
 
 		skill_attack(skill_get_type(skill_id), src, src, bl, skill_id, skill_lv, tick, flag);
@@ -14586,10 +14578,7 @@ int skill_castend_pos2(struct block_list* src, int x, int y, uint16 skill_id, ui
 		unit_data *ud = unit_bl2ud(src);
 		if (ud != nullptr) {
 			for (const auto &itsu : ud->skillunits) {
-				skill_unit *su = itsu->unit;
-				std::shared_ptr<s_skill_unit_group> sg = itsu->unit->group;
-
-				if (itsu->skill_id == SKE_TWINKLING_GALAXY && distance_xy(x, y, su->bl.x, su->bl.y) <= skill_get_unit_range(SKE_TWINKLING_GALAXY, itsu->skill_lv)) {
+				if (itsu->skill_id == SKE_TWINKLING_GALAXY && distance_xy(x, y, itsu->unit->bl.x, itsu->unit->bl.y) <= skill_get_unit_range(SKE_TWINKLING_GALAXY, itsu->skill_lv)) {
 						for(int i=0;i<MAX_SKILLTIMERSKILL;i++) {
 							if(ud->skilltimerskill[i]) {
 								if (ud->skilltimerskill[i]->skill_id == SKE_TWINKLING_GALAXY) {
@@ -14599,7 +14588,7 @@ int skill_castend_pos2(struct block_list* src, int x, int y, uint16 skill_id, ui
 								}
 							}
 						}
-					skill_delunitgroup(sg);
+					skill_delunitgroup(itsu->unit->group);
 
 					for (i = 0; i < skill_get_time(skill_id, skill_lv) / skill_get_unit_interval(skill_id); i++)
 						skill_addtimerskill(src, tick + (t_tick)(i * skill_get_unit_interval(skill_id)), 0, x, y, skill_id, skill_lv, 0, flag);
