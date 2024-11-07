@@ -4379,8 +4379,8 @@ static int skill_check_unit_range2_sub (struct block_list *bl, va_list ap)
 
 int buildin_skill_shimiru_check_cell(block_list *target, va_list ap)
 {
-	uint16 dx = va_arg(ap, uint16);
-	uint16 dy = va_arg(ap, uint16);
+	int dx = va_arg(ap, int);
+	int dy = va_arg(ap, int);
 	if (target->type == BL_SKILL)
 	{
 		skill_unit* su = reinterpret_cast<skill_unit*>(target);
@@ -6237,7 +6237,7 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, uint
 			break;
 
 		for (const auto& itsu : ud->skillunits) {
-			uint16 dx, dy;
+			int dx, dy;
 			if (itsu->skill_id != SS_SHINKIROU)
 				continue;
 			if (map_foreachinrange(buildin_skill_shimiru_check_cell, src, 3000, BL_CHAR|BL_SKILL, &dx , &dy) == 0)
