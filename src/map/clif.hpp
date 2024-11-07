@@ -841,6 +841,17 @@ enum e_ack_additem_to_cart : uint8 {
 	ADDITEM_TO_CART_FAIL_COUNT = 1
 };
 
+enum e_macro_user_report_result : int32 {
+	MACRO_USER_REPORT_COUNTLIMIT = 0,
+	MACRO_USER_REPORT_SUCCESS = 1,
+	MACRO_USER_REPORT_COOLTIME = 2,
+	MACRO_USER_REPORT_EFST_ACTIVATED = 3,
+	MACRO_USER_REPORT_PENALTY_COUNTMAX = 4,
+	MACRO_USER_REPORT_REPORTED = 5,
+	MACRO_USER_REPORT_NOT_USE_AREA = 6,
+	MACRO_CHECK_REMOVE_INVALID_AID = 7,
+};
+
 int clif_setip(const char* ip);
 void clif_setbindip(const char* ip);
 void clif_setport(uint16 port);
@@ -1491,6 +1502,10 @@ void clif_specialpopup(map_session_data& sd, int32 id);
 
 void clif_hit_frame(block_list&,int);
 void clif_parse_restore_animation(map_session_data* sd, block_list& target, uint16 skill_id, uint16 skill_lv);
+
+// User Report
+void clif_parse_macro_user_report(int fd, map_session_data *sd);
+void clif_macro_user_report_response(map_session_data *sd, int status, char *reportName);
 
 // Body Size Controller
 void clif_body_size(block_list* bl, int val1);

@@ -116,7 +116,7 @@ uint64 CashEmotesDatabase::parseBodyNode(const ryml::NodeRef& node)
 
 void emotes_use(map_session_data *sd, int16 packId, int16 emoteId)
 {
-
+#if PACKETVER >= 20230802
 	nullpo_retv(sd);
 
 	// Check if the player can use any emotes at all
@@ -193,10 +193,12 @@ void emotes_use(map_session_data *sd, int16 packId, int16 emoteId)
 
 	// All good.. congrats!
 	clif_emotion_success(&sd->bl, packId, emoteId);
+#endif
 }
 
 void emotes_expantion_buy(map_session_data *sd, int16 packId, int16 itemId, int8 amount)
 {
+#if PACKETVER >= 20230802
 	nullpo_retv(sd);
 
 	// Verify the item id client-hardcoded to 6909 Nyangvine_Fruit
@@ -286,16 +288,17 @@ void emotes_expantion_buy(map_session_data *sd, int16 packId, int16 itemId, int8
 
 	// All good.. congrats! Unlimited pack
 	clif_emotion_expansion_response_success(sd, packId, false, 0);
+#endif
 }
 
 void emotes_get_player_packs(map_session_data *sd)
 {
+#if PACKETVER >= 20230802
 	nullpo_retv(sd);
 
 	std::vector<PACKET_ZC_EMOTION_EXPANTION_LIST_sub> packs;
 
 	// Iterate throught every pack in the database and get the player's owned packs from the variables
-	//std::pair<uint16,std::shared_ptr<s_cash_emotes_db>>;
 	for (std::pair<const uint16,std::shared_ptr<s_cash_emotes_db>> k : cash_emotes_db) {
 		std::string var_name = k.second->packType == 1 ? "#cashemote_" : "cashemote_";
 		var_name += std::to_string(k.second->packId);
@@ -317,6 +320,7 @@ void emotes_get_player_packs(map_session_data *sd)
 			packs.push_back({ k.first, (k.second->rental_period != 0), (uint32)expire_time });
 	}
 	clif_emotion_expansion_list(sd, packs);
+#endif
 }
 
 void do_init_emotes(void)

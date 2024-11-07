@@ -9620,10 +9620,8 @@ void clif_emotion(block_list& bl,e_emotion_type type){
 		return;
 
 #if PACKETVER >= 20230802
-	if(bl.type == BL_PC){
 		clif_emotion_success(&bl, 0, type);
 		return;
-	}
 #endif
 
 	PACKET_ZC_EMOTION p{};
@@ -25513,6 +25511,71 @@ void clif_parse_partybooking_reply( int fd, map_session_data* sd ){
 	clif_partybooking_reply( tsd, sd, p->accept );
 #endif
 }
+
+void clif_parse_macro_user_report(int fd, map_session_data *sd)
+{
+#if PACKETVER >= 20230920
+	nullpo_retv(sd);
+
+	PACKET_CZ_MACRO_USER_REPORT_REQ* p = reinterpret_cast<PACKET_CZ_MACRO_USER_REPORT_REQ*>(RFIFOP(fd, 0));
+
+	// Ignore forged packets
+	if (p->reporterAID != sd->status.account_id || p->reporterAID == p->reportAID || (p->reportType < 0 || p->reportType > 1))
+		return;
+
+	// Verify the target player is online
+	map_session_data *tsd = map_id2sd(p->reportAID);
+	if (tsd == nullptr) {
+		clif_macro_user_report_response(sd, MACRO_CHECK_REMOVE_INVALID_AID, nullptr);
+		return;
+	}
+
+	// Verify that the name of the target player matches the name in the packet
+	if (strcmpi(p->reportName, tsd->status.name) != 0) {
+		clif_macro_user_report_response(sd, MACRO_CHECK_REMOVE_INVALID_AID, nullptr);
+		return;
+	}
+
+	// Limit the maximum number of reports per player to avoid abuse
+	int reports_count = static_cast<int>(pc_readreg2(sd, "#MUR_TotalReports"));
+	if (reports_count >= 1000) {
+		clif_displaymessage(sd->fd, "You have reached the maximum number of reports.");
+		return;
+	}
+	pc_setreg2(sd, "#MUR_TotalReports", reports_count + 1);
+
+	// Limit the interval between reports to avoid abuse
+	int last_report_time = static_cast<int>(pc_readreg2(sd, "#MUR_LastReportTime"));
+	if (last_report_time > 0 && last_report_time + 10 > time(nullptr)) {
+		clif_displaymessage(sd->fd, "You have to wait 10 seconds between reports.");
+		return;
+	}
+	pc_setreg2(sd, "#MUR_LastReportTime", static_cast<int>(time(nullptr)));
+
+	// TODO: other behavior checks (e.g. if the target player is in a town, etc.)
+
+	chrif_MacroUserReport_Save(p->reporterAID, p->reportAID, p->reportType, p->reportMsg);
+	clif_macro_user_report_response(sd, MACRO_USER_REPORT_SUCCESS, p->reportName);
+#endif
+}
+
+void clif_macro_user_report_response(map_session_data *sd, int status, char *reportName)
+{
+#if PACKETVER >= 20230920
+	nullpo_retv(sd);
+
+	PACKET_ZC_MACRO_USER_REPORT_RES p;
+	p.packetType = HEADER_ZC_MACRO_USER_REPORT_RES;
+	p.reporterAID = sd->status.account_id;
+	if (reportName != nullptr)
+		memcpy(p.reportName, reportName, NAME_LENGTH);
+	else
+		memset(p.reportName, 0, NAME_LENGTH);
+	p.status = status;
+	clif_send(&p, sizeof(p), &sd->bl, SELF);
+#endif
+}
+
 
 void clif_parse_reset_skill( int fd, map_session_data* sd ){
 #if PACKETVER_MAIN_NUM >= 20220216 || PACKETVER_ZERO_NUM >= 20220203
