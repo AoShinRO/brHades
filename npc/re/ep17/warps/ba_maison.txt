@@ -87,6 +87,8 @@ ba_in01,23,372,0	warp	#ep172_restaurant_a_out	1,1,ba_maison,137,108
 ba_in01,80,364,0	warp	#ep172_restaurant_a_out_	1,1,ba_maison,137,96
 ba_in01,35,383,0	warp	#ep172_restaurant_atob	1,1,ba_in01,69,381
 ba_in01,66,381,0	warp	#ep172_restaurant_btoa	1,1,ba_in01,32,383
+ba_maison,100,65,0	warp	#ep172_restaurant_c_in	1,1,ba_in01,223,116
+ba_in01,226,116,0	warp	#ep172_restaurant_c_out	1,1,ba_maison,103,65
 
 //============================================================
 // Dungeon
