@@ -1610,7 +1610,6 @@ struct PACKET_CZ_REQUEST_MOVENPC{
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(CZ_REQUEST_MOVENPC, 0x232);
 
-
 struct PACKET_CZ_REQ_EMOTION2 {
 	uint16 packetType;
 	uint16 packId;

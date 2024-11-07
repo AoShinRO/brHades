@@ -2093,11 +2093,6 @@
 	parseable_packet(HEADER_CZ_EMOTION_EXPANTION_REQ, sizeof( PACKET_CZ_EMOTION_EXPANTION_REQ), clif_parse_emotion_expansion_request, 0);
 #endif
 
-#if PACKETVER >= 20230802
-	parseable_packet(HEADER_CZ_REQ_EMOTION2, sizeof( PACKET_CZ_REQ_EMOTION2), clif_parse_emotion2, 0);
-	parseable_packet(HEADER_CZ_EMOTION_EXPANTION_REQ, sizeof(PACKET_CZ_EMOTION_EXPANTION_REQ), clif_parse_emotion_expansion_request, 0);
-#endif
-
 #if PACKETVER >= 20230920
 	parseable_packet(HEADER_CZ_MACRO_USER_REPORT_REQ, sizeof(PACKET_CZ_MACRO_USER_REPORT_REQ), clif_parse_macro_user_report, 0);
 #endif
