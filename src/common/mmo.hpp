@@ -89,7 +89,7 @@ typedef uint32 t_itemid;
 #endif
 #define MAX_FAME 1000000000 ///Max fame points
 #define MAX_CART 100 ///Maximum item in cart
-#define MAX_SKILL 1623 ///Maximum skill can be hold by Player, Homunculus, & Mercenary (skill list) AND skill_db limit
+#define MAX_SKILL 1624 ///Maximum skill can be hold by Player, Homunculus, & Mercenary (skill list) AND skill_db limit
 #define DEFAULT_WALK_SPEED 150 ///Default walk speed (other than NPC)
 #define DEFAULT_NPC_WALK_SPEED 200 ///Default NPC walk speed
 #define MIN_WALK_SPEED 20 ///Min walk speed
@@ -225,6 +225,8 @@ const t_itemid WEDDING_RING_F = 2635;
 #define MAX_ACHIEVEMENT_OBJECTIVES 10 /// Maximum different objectives in achievement_db.yml
 #define MAX_ACHIEVEMENT_DEPENDENTS 20 /// Maximum different dependents in achievement_db.yml
 #define ACHIEVEMENT_NAME_LENGTH 50 /// Max Achievement Name length
+
+#define REPORT_MSG_LENGHT (100+1)
 
 enum item_types {
 	IT_HEALING = 0,

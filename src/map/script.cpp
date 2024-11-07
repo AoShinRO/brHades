@@ -15494,6 +15494,54 @@ BUILDIN_FUNC(specialeffect3)
 	return SCRIPT_CMD_SUCCESS;
 }
 
+BUILDIN_FUNC(setbodysize)
+{
+	block_list* bl;
+
+	if(!script_rid2bl(2,bl))
+	{
+		script_pushconststr(st, "Unknown");
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	mob_data* md;
+	npc_data* nd;
+	unit_data* ud;
+
+	switch (bl->type) {
+		case BL_MOB:{
+			md = map_id2md(bl->id);
+			if (md == nullptr) {
+				ShowWarning("buildin_setbodysize: Error in finding object BL_MOB!\n");
+				return SCRIPT_CMD_FAILURE;
+			}
+			ud = &md->ud;
+			break;
+		}
+		case BL_NPC:{
+			nd = map_id2nd(bl->id);
+			if (nd == nullptr) {
+				ShowWarning("buildin_setbodysize: Error in finding object BL_NPC!\n");
+				return SCRIPT_CMD_FAILURE;
+			}
+			ud = &nd->ud;
+			break;
+		}
+		default:
+			ShowWarning("buildin_setbodysize: Invalid object type!\n");
+			return SCRIPT_CMD_FAILURE;
+	}
+	
+	if(ud != nullptr)
+	{
+		ud->body_size = script_getnum(st, 3);
+		clif_body_size(bl, ud->body_size);
+		return SCRIPT_CMD_SUCCESS;
+	}
+
+	return SCRIPT_CMD_FAILURE;
+}
+
 BUILDIN_FUNC(removespecialeffect)
 {
 	const char* command = script_getfuncname(st);
@@ -24064,6 +24112,41 @@ BUILDIN_FUNC(clan_leave){
 	return SCRIPT_CMD_SUCCESS;
 }
 
+// guild_join(<guild_id>{,<char_id>});
+// NOTE: Guild data must be loaded. Meaning at least a member of the guild
+// 		 should be online so the script command can read it in the system.
+//		 weird but I don't know why as well. Same issue occurs in all script
+// 		 command related to guild.
+BUILDIN_FUNC(guild_join) {
+	map_session_data *sd;
+	int guild_id = script_getnum(st,2);
+
+	auto g = guild_search(guild_id);
+
+	if ( !script_charid2sd( 3, sd ) ) {
+		script_pushint(st, -1);
+		return SCRIPT_CMD_FAILURE;
+	}
+	if ( sd->status.guild_id ) {
+		script_pushint(st, -2);
+		return SCRIPT_CMD_FAILURE;
+	}
+	if ( !g ) {
+		script_pushint(st, -3);
+		return SCRIPT_CMD_FAILURE;
+	}
+	if ( g->guild.max_member >= MAX_GUILD ) {
+		script_pushint(st, -4);
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	sd->guild_invite = guild_id;
+
+	script_pushint( st, guild_reply_invite( *sd, guild_id, 1 ) );
+
+	return SCRIPT_CMD_SUCCESS;
+}
+
 /**
  * Get rid from running script.
  * getattachedrid();
@@ -27839,6 +27922,7 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(specialeffect,"i??"), // npc skill effect [Valaris]
 	BUILDIN_DEF(specialeffect2,"i??"), // skill effect on players[Valaris]
 	BUILDIN_DEF(specialeffect3,"iii"), // skill effect on unit
+	BUILDIN_DEF(setbodysize, "ii"),
 	BUILDIN_DEF(removespecialeffect,"i??"),
 	BUILDIN_DEF2(removespecialeffect,"removespecialeffect2","i??"),
 	BUILDIN_DEF(nude,"?"), // nude command [Valaris]
@@ -28121,6 +28205,8 @@ struct script_function buildin_func[] = {
 	// Clan system
 	BUILDIN_DEF(clan_join,"i?"),
 	BUILDIN_DEF(clan_leave,"?"),
+
+	BUILDIN_DEF(guild_join,"i?"),
 
 	BUILDIN_DEF2(montransform, "transform", "vi?????"), // Monster Transform [malufett/Hercules]
 	BUILDIN_DEF2(montransform, "active_transform", "vi?????"),

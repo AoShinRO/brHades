@@ -1020,6 +1020,14 @@ struct PACKET_ZC_ACK_ITEMREFINING {
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(ZC_ACK_ITEMREFINING, 0x188)
 
+#if PACKETVER_MAIN_NUM >= 20221019
+struct PACKET_ZC_UI_OPEN3 {
+	int16 PacketType;
+	int8 UIType;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_UI_OPEN3, 0x0a38);
+#endif
+
 struct PACKET_ZC_PAR_CHANGE_USER {
 	int16 packetType;
 	uint32 gid;
@@ -1681,6 +1689,27 @@ struct PACKET_ZC_EMOTION_EXPANTION_LIST {
 DEFINE_PACKET_HEADER(ZC_EMOTION_EXPANTION_LIST, 0x0bef);
 #endif
 
+#if PACKETVER >= 20230920
+struct PACKET_CZ_MACRO_USER_REPORT_REQ{
+	uint16 packetType;
+	uint32 reporterAID;
+	uint32 reportAID;
+	char reportName[NAME_LENGTH];
+	int16 reportType;
+	char reportMsg[REPORT_MSG_LENGHT];
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(CZ_MACRO_USER_REPORT_REQ, 0x0be2);
+#endif
+
+#if PACKETVER >= 20230920
+struct PACKET_ZC_MACRO_USER_REPORT_RES {
+	uint16 packetType;
+	uint32 reporterAID;
+	char reportName[NAME_LENGTH];
+	uint32 status;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_MACRO_USER_REPORT_RES, 0x0be3);
+#endif
 
 // NetBSD 5 and Solaris don't like pragma pack but accept the packed attribute
 #if !defined( sun ) && ( !defined( __NETBSD__ ) || __NetBSD_Version__ >= 600000000 )
@@ -1724,6 +1753,7 @@ DEFINE_PACKET_HEADER(CZ_REQ_STYLE_CHANGE, 0xa46)
 DEFINE_PACKET_HEADER(ZC_STYLE_CHANGE_RES, 0xa47)
 DEFINE_PACKET_HEADER(ZC_GROUP_ISALIVE, 0xab2)
 DEFINE_PACKET_HEADER(CZ_REQ_STYLE_CHANGE2, 0xafc)
+DEFINE_PACKET_HEADER(ZC_GUILD_POSITION, 0x0afd)
 DEFINE_PACKET_HEADER(ZC_REMOVE_EFFECT, 0x0b0d)
 DEFINE_PACKET_HEADER(ZC_FEED_MER, 0x22f)
 DEFINE_PACKET_HEADER(ZC_FEED_PET, 0x1a3)

@@ -4713,7 +4713,6 @@ void clif_dispchat(chat_data& cd, map_session_data* sd) {
 ///     2 = arena (npc waiting room)
 ///     3 = PK zone (non-clickable)
 void clif_changechatstatus(chat_data& cd) {
-
 	if(cd.usersd[0] == nullptr )
 		return;
 
@@ -5206,13 +5205,13 @@ void clif_getareachar_unit( map_session_data* sd,struct block_list *bl ){
 
 	ud = unit_bl2ud(bl);
 
-	if( ud && ud->walktimer != INVALID_TIMER ){
+	if( ud != nullptr && ud->walktimer != INVALID_TIMER ){
 		clif_set_unit_walking( *bl, sd, *ud, SELF );
 	}else{
 		clif_set_unit_idle( bl, false, SELF, &sd->bl );
 	}
 
-	if (ud->body_size)
+	if (ud != nullptr && ud->body_size)
 		clif_body_size(bl, ud->body_size);
 
 	if (vd->cloth_color)
@@ -6739,13 +6738,15 @@ static void clif_status_change_sub(block_list &bl, block_list &src, e_efst_type 
 }
 
 void clif_body_size(block_list *bl, int val1) {
-	map_session_data *sd = NULL;
+	map_session_data *sd;
 
 	nullpo_retv(bl);
 
 	sd = BL_CAST(BL_PC, bl);
-
-	clif_status_change_sub(*bl, *bl, (e_efst_type)1421, true, 9999, val1, 0, 0, ((sd ? (pc_isinvisible(sd) ? SELF : AREA) : AREA_WOS)));
+	if(val1)
+		clif_status_change_sub(*bl, *bl, EFST_CHANGE_SIZE_MONSTER, true, INFINITE_TICK, val1, 0, 0, ((sd ? (pc_isinvisible(sd) ? SELF : AREA) : AREA_WOS)));
+	else
+		clif_status_change_sub(*bl, *bl, EFST_CHANGE_SIZE_MONSTER, true, INFINITE_TICK, 100, 0, 0, ((sd ? (pc_isinvisible(sd) ? SELF : AREA) : AREA_WOS)));
 }
 
 /* Sends status effect to clients around the bl
@@ -9192,6 +9193,29 @@ static void clif_guild_positioninfolist(map_session_data& sd){
 	clif_send(p,p->PacketLength,&sd.bl,SELF);
 }
 
+void clif_guild_position_selected(map_session_data& sd)
+{
+#if PACKETVER_MAIN_NUM >= 20180605 || PACKETVER_RE_NUM >= 20180605 || PACKETVER_ZERO_NUM >= 20180605
+	PACKET_ZC_GUILD_POSITION* p = reinterpret_cast<PACKET_ZC_GUILD_POSITION*>(packet_buffer);
+
+	p->packetType = HEADER_ZC_GUILD_POSITION;
+	p->packetLength = sizeof( *p );
+	p->AID = sd.bl.id;
+
+	if( sd.guild != nullptr ){
+		const auto& g = sd.guild->guild;
+
+		if( int ps = guild_getposition( sd ); ps != -1 ){
+			safestrncpy( p->position, g.position[ps].name, NAME_LENGTH );
+			p->packetLength += static_cast<decltype(p->packetLength)>( NAME_LENGTH );
+		}
+	}
+
+	clif_send( p, p->packetLength, &sd.bl, AREA );
+#else
+	clif_name_area(&sd.bl);
+#endif
+}
 
 /// Notifies clients in a guild about updated position information.
 /// 0174 <packet len>.W { <position id>.L <mode>.L <ranking>.L <pay rate>.L <position name>.24B }* (ZC_ACK_CHANGE_GUILD_POSITIONINFO)
@@ -9294,7 +9318,7 @@ void clif_guild_emblem_area(struct block_list* bl)
 	p.emblem_id = status_get_emblem_id(bl);
 	p.AID = bl->id;
 
-	clif_send(&p, sizeof(p), bl, AREA_WOS);
+	clif_send(&p, sizeof(p), bl, AREA);
 }
 
 
@@ -9620,10 +9644,8 @@ void clif_emotion(block_list& bl,e_emotion_type type){
 		return;
 
 #if PACKETVER >= 20230802
-	if(bl.type == BL_PC){
 		clif_emotion_success(&bl, 0, type);
 		return;
-	}
 #endif
 
 	PACKET_ZC_EMOTION p{};
@@ -21968,6 +21990,18 @@ void clif_ui_open( map_session_data& sd, enum out_ui_type ui_type, int32 data ){
 #else
 			return;
 #endif
+
+		case OUT_UI_CHANGE_MATERIAL:{
+#if PACKETVER_MAIN_NUM >= 20210203
+		{
+			PACKET_ZC_UI_OPEN3 p = {};
+			p.PacketType = HEADER_ZC_UI_OPEN3;
+			p.UIType = ui_type;
+			clif_send(&p, sizeof(p), &sd.bl, SELF);
+		}
+#endif
+			return;
+		}
 	}
 
 	PACKET_ZC_UI_OPEN p = {};
@@ -25501,6 +25535,71 @@ void clif_parse_partybooking_reply( int fd, map_session_data* sd ){
 	clif_partybooking_reply( tsd, sd, p->accept );
 #endif
 }
+
+void clif_parse_macro_user_report(int fd, map_session_data *sd)
+{
+#if PACKETVER >= 20230920
+	nullpo_retv(sd);
+
+	PACKET_CZ_MACRO_USER_REPORT_REQ* p = reinterpret_cast<PACKET_CZ_MACRO_USER_REPORT_REQ*>(RFIFOP(fd, 0));
+
+	// Ignore forged packets
+	if (p->reporterAID != sd->status.account_id || p->reporterAID == p->reportAID || (p->reportType < 0 || p->reportType > 1))
+		return;
+
+	// Verify the target player is online
+	map_session_data *tsd = map_id2sd(p->reportAID);
+	if (tsd == nullptr) {
+		clif_macro_user_report_response(sd, MACRO_CHECK_REMOVE_INVALID_AID, nullptr);
+		return;
+	}
+
+	// Verify that the name of the target player matches the name in the packet
+	if (strcmpi(p->reportName, tsd->status.name) != 0) {
+		clif_macro_user_report_response(sd, MACRO_CHECK_REMOVE_INVALID_AID, nullptr);
+		return;
+	}
+
+	// Limit the maximum number of reports per player to avoid abuse
+	int reports_count = static_cast<int>(pc_readreg2(sd, "#MUR_TotalReports"));
+	if (reports_count >= 1000) {
+		clif_displaymessage(sd->fd, "You have reached the maximum number of reports.");
+		return;
+	}
+	pc_setreg2(sd, "#MUR_TotalReports", reports_count + 1);
+
+	// Limit the interval between reports to avoid abuse
+	int last_report_time = static_cast<int>(pc_readreg2(sd, "#MUR_LastReportTime"));
+	if (last_report_time > 0 && last_report_time + 10 > time(nullptr)) {
+		clif_displaymessage(sd->fd, "You have to wait 10 seconds between reports.");
+		return;
+	}
+	pc_setreg2(sd, "#MUR_LastReportTime", static_cast<int>(time(nullptr)));
+
+	// TODO: other behavior checks (e.g. if the target player is in a town, etc.)
+
+	chrif_MacroUserReport_Save(p->reporterAID, p->reportAID, p->reportType, p->reportMsg);
+	clif_macro_user_report_response(sd, MACRO_USER_REPORT_SUCCESS, p->reportName);
+#endif
+}
+
+void clif_macro_user_report_response(map_session_data *sd, int status, char *reportName)
+{
+#if PACKETVER >= 20230920
+	nullpo_retv(sd);
+
+	PACKET_ZC_MACRO_USER_REPORT_RES p;
+	p.packetType = HEADER_ZC_MACRO_USER_REPORT_RES;
+	p.reporterAID = sd->status.account_id;
+	if (reportName != nullptr)
+		memcpy(p.reportName, reportName, NAME_LENGTH);
+	else
+		memset(p.reportName, 0, NAME_LENGTH);
+	p.status = status;
+	clif_send(&p, sizeof(p), &sd->bl, SELF);
+#endif
+}
+
 
 void clif_parse_reset_skill( int fd, map_session_data* sd ){
 #if PACKETVER_MAIN_NUM >= 20220216 || PACKETVER_ZERO_NUM >= 20220203
