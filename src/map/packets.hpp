@@ -872,6 +872,14 @@ struct PACKET_ZC_GUILD_CHAT {
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(ZC_GUILD_CHAT, 0x17f)
 
+struct PACKET_ZC_GUILD_ALLIANCECHAT {
+	int16 packetType;
+	int16 packetLength;
+	char message[];
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_GUILD_ALLIANCECHAT, 0x0bde)
+DEFINE_PACKET_HEADER(CZ_GUILD_ALLIANCECHAT, 0x0bdd)
+
 struct PACKET_ZC_ACK_REQ_CHANGE_MEMBERS_sub {
 	uint32 accId;
 	uint32 charId;
@@ -1601,6 +1609,78 @@ struct PACKET_CZ_REQUEST_MOVENPC{
 	uint8 PosDir[3];
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(CZ_REQUEST_MOVENPC, 0x232);
+
+struct PACKET_CZ_REQ_EMOTION2 {
+	uint16 packetType;
+	uint16 packId;
+	uint16 emoteId;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(CZ_REQ_EMOTION2, 0x0be9);
+
+struct PACKET_ZC_EMOTION_SUCCESS {
+	uint16 packetType;
+	uint32 GID;
+	uint16 packId;
+	uint16 emoteId;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_EMOTION_SUCCESS, 0x0bea);
+
+struct PACKET_ZC_EMOTION_FAIL {
+	uint16 packetType;
+	uint16 packId;
+	uint16 emoteId;
+	uint8 status;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_EMOTION_FAIL, 0x0beb);
+
+struct PACKET_CZ_EMOTION_EXPANTION_REQ {
+	uint16 packetType;
+	uint16 packId;
+	uint16 itemId; // hardcoded to 6909 see CCashEmotionMgr()
+	uint8 amount;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(CZ_EMOTION_EXPANTION_REQ, 0x0bec);
+
+struct PACKET_ZC_EMOTION_EXPANSION_SUCCESS {
+	uint16 packetType;
+	uint16 packId;
+	uint8 isRented;
+	uint32 timestamp;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_EMOTION_EXPANSION_SUCCESS, 0x0bed);
+
+struct PACKET_ZC_EMOTION_EXPANSION_FAIL {
+	uint16 packetType;
+	uint16 packId;
+	uint8 status;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_EMOTION_EXPANSION_FAIL, 0x0bee);
+
+struct PACKET_ZC_EMOTION_EXPANTION_LIST_sub {
+	uint16 packId;
+	uint8 isRented;
+	uint32 timestamp;
+} __attribute__((packed));
+
+#if PACKETVER >= 20230920
+struct PACKET_ZC_EMOTION_EXPANTION_LIST {
+	uint16 packetType;
+	uint16 packetLength;
+	uint32 timestamp;
+	uint16 timezone;
+	PACKET_ZC_EMOTION_EXPANTION_LIST_sub list[];
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_EMOTION_EXPANTION_LIST, 0x0bf6);
+#else
+struct PACKET_ZC_EMOTION_EXPANTION_LIST {
+	uint16 packetType;
+	uint16 packetLength;
+	uint32 timestamp;
+	PACKET_ZC_EMOTION_EXPANTION_LIST_sub list[];
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_EMOTION_EXPANTION_LIST, 0x0bef);
+#endif
+
 
 // NetBSD 5 and Solaris don't like pragma pack but accept the packed attribute
 #if !defined( sun ) && ( !defined( __NETBSD__ ) || __NetBSD_Version__ >= 600000000 )
