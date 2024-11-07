@@ -4713,7 +4713,6 @@ void clif_dispchat(chat_data& cd, map_session_data* sd) {
 ///     2 = arena (npc waiting room)
 ///     3 = PK zone (non-clickable)
 void clif_changechatstatus(chat_data& cd) {
-
 	if(cd.usersd[0] == nullptr )
 		return;
 
@@ -9192,6 +9191,29 @@ static void clif_guild_positioninfolist(map_session_data& sd){
 	clif_send(p,p->PacketLength,&sd.bl,SELF);
 }
 
+void clif_guild_position_selected(map_session_data& sd)
+{
+#if PACKETVER_MAIN_NUM >= 20180605 || PACKETVER_RE_NUM >= 20180605 || PACKETVER_ZERO_NUM >= 20180605
+	PACKET_ZC_GUILD_POSITION* p = reinterpret_cast<PACKET_ZC_GUILD_POSITION*>(packet_buffer);
+
+	p->packetType = HEADER_ZC_GUILD_POSITION;
+	p->packetLength = sizeof( *p );
+	p->AID = sd.bl.id;
+
+	if( sd.guild != nullptr ){
+		const auto& g = sd.guild->guild;
+
+		if( int ps = guild_getposition( sd ); ps != -1 ){
+			safestrncpy( p->position, g.position[ps].name, NAME_LENGTH );
+			p->packetLength += static_cast<decltype(p->packetLength)>( NAME_LENGTH );
+		}
+	}
+
+	clif_send( p, p->packetLength, &sd.bl, AREA );
+#else
+	clif_name_area(&sd.bl);
+#endif
+}
 
 /// Notifies clients in a guild about updated position information.
 /// 0174 <packet len>.W { <position id>.L <mode>.L <ranking>.L <pay rate>.L <position name>.24B }* (ZC_ACK_CHANGE_GUILD_POSITIONINFO)
@@ -9294,7 +9316,7 @@ void clif_guild_emblem_area(struct block_list* bl)
 	p.emblem_id = status_get_emblem_id(bl);
 	p.AID = bl->id;
 
-	clif_send(&p, sizeof(p), bl, AREA_WOS);
+	clif_send(&p, sizeof(p), bl, AREA);
 }
 
 
