@@ -8976,7 +8976,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			if (sd) {
 				// Remove old souls if any exist.
 				sd->soulball_old = sd->soulball;
-				pc_delsoulball(sd, sd->soulball, 0);
+				pc_delsoulball(*sd, sd->soulball, 0);
 			}
 		}
 		if (skill_id == SOA_TALISMAN_OF_WHITE_TIGER ) {
@@ -11315,7 +11315,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 
 			clif_skill_nodamage(src,*bl,skill_id,skill_lv);
 			for (i = 0; i < limit; i++)
-				pc_addsoulball(sd,limit);
+				pc_addsoulball(*sd,limit);
 		}
 		break;
 	case SOA_TALISMAN_OF_PROTECTION:
