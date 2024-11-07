@@ -1325,18 +1325,6 @@ bool battle_status_block_damage(struct block_list *src, struct block_list *targe
 			}
 			break;
 	}
-	/*
-	if ((sce = sc->getSCE(SC_P_ALTER)) && damage > 0) {
-		clif_specialeffect(target, EF_GUARD, AREA);
-		sce->val3 -= static_cast<int>(cap_value(damage, INT_MIN, INT_MAX));
-		if (sce->val3 >= 0)
-			damage = 0;
-		else
-			damage = -sce->val3;
-		if (sce->val3 <= 0)
-			status_change_end(target, SC_P_ALTER);
-	}
-	*/
 	if ((sce = sc->getSCE(SC_TUNAPARTY)) && damage > 0) {
 		sce->val2 -= static_cast<int>(cap_value(damage, INT_MIN, INT_MAX));
 		if (sce->val2 >= 0)
