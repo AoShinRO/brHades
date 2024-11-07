@@ -1,21 +1,243 @@
+//===== Documentação do rAthena ================================
+//= Lista de Permissões
+//===== Por: ==================================================
+//= Equipe de Desenvolvimento do rAthena
+//===== Última Atualização: ===================================
+//= 20130613
+//===== Descrição: ============================================
+//= Lista de permissões disponíveis e suas funções.
+//============================================================
+
+Este arquivo descreve as funções das permissões de grupos de jogadores,
+configuradas em '/conf/groups.conf' sob o conjunto de chaves "permissions".
+
+Para pesquisar uma permissão, escreva "*" antes do nome dela.
+O formato deste arquivo é o seguinte:
+	1. Permissões Básicas
+	2. Permissões Estendidas
+	3. Relacionadas a Comandos
+
+==============================
+| 1. Permissões Básicas      |
+==============================
+---------------------------------------
+
+*can_trade
+
+Permite que o jogador distribua itens, como por meio de trocas, descartes,
+vendas, armazenamento, correio, etc.
+
+---------------------------------------
+
+*can_party
+
+Permite que o jogador crie e participe de grupos (parties).
+
+---------------------------------------
+
+*attendance
+
+Permite que o jogador utilize o sistema de presença diária.
+
+---------------------------------------
+
+===================================
+| 2. Permissões Estendidas       |
+===================================
+---------------------------------------
+
+*all_skill
+
+Concede ao jogador todas as habilidades disponíveis na árvore de habilidades.
+
+---------------------------------------
+
+*all_equipment
+
+Permite que o jogador equipe qualquer item, independentemente dos requisitos
+(classe, nível, etc.). Observe que isso pode causar erros no cliente se um sprite não existir.
+
+---------------------------------------
+
+*skill_unconditional
+
+Permite que o jogador use qualquer habilidade, independentemente das condições
+requeridas (SP, itens, etc.).
+
+---------------------------------------
+
+*join_chat
+
+Permite que o jogador entre em salas de chat protegidas por senha.
+
+---------------------------------------
+
+*kick_chat
+
+Impede que o jogador seja expulso de uma sala de chat.
+
+---------------------------------------
+
+*view_hpmeter
+
+Permite que o jogador veja a barra de HP de todos os jogadores.
+
+---------------------------------------
+
+*view_equipment
+
+Permite que o jogador veja o equipamento de todos os jogadores, independentemente
+da configuração do jogador.
+
+---------------------------------------
+
+*hack_info
+
+Permite que o jogador receba todas as informações sobre jogadores que tentam hackear,
+falsificar um nome, etc.
+
+---------------------------------------
+
+*disable_pvm
+
+Impede que o jogador ataque monstros.
+
+---------------------------------------
+
+*disable_pvp
+
+Impede que o jogador ataque outros jogadores.
+
+---------------------------------------
+
+*can_trade_bounded
+
+Permite que o jogador execute ações normais de itens com itens vinculados (descartar,
+vender, trocar, etc.).
+
+---------------------------------------
+
+*item_unconditional
+
+Permite que o jogador consuma qualquer item consumível, independentemente dos requisitos
+(bypass da mapflag noitemconsumption, classe do item, gênero, alterações de status,
+atraso do item, etc.).
+
+---------------------------------------
+
+==================================
+| 3. Relacionadas a Comandos     |
+==================================
+---------------------------------------
+
+*all_commands
+
+Permite o uso de todos os comandos de GM (atcommands) e comandos de personagem (charcommands).
+
+---------------------------------------
+
+*disable_commands_when_dead
+
+Desabilita o uso de atcommands quando o jogador está morto.
+
+---------------------------------------
+
+*hide_session
+
+Oculta a sessão do jogador para que não seja exibida em comandos como @who, @whomap, etc.
+
+---------------------------------------
+
+*who_display_aid
+
+Exibe todos os GMs e IDs de personagem/conta no comando @who.
+
+---------------------------------------
+
+*any_warp
+
+Permite que o jogador ignore as flags de mapa 'nowarp', 'nowarpto', 'noteleport' e 'nomemo'
+em comandos que modificam o mapa ou coordenadas do personagem (@memo, @mapmove, @go, @jump, etc.).
+
+---------------------------------------
+
+*receive_requests
+
+Permite que o jogador receba solicitações por meio do comando @requests.
+
+---------------------------------------
+
+*show_bossmobs
+
+Exibe os monstros chefes no comando @showmobs.
+
+---------------------------------------
+
+*channel_admin
+
+Permite que o jogador modifique as configurações do canal #channel, independentemente da propriedade,
+e participe de canais protegidos por senha sem uma senha.
+
+---------------------------------------
+
+*use_check
+
+Permite que o jogador use o comando do cliente /check (exibe o status do personagem).
+
+---------------------------------------
+
+*use_changemaptype
+
+Permite que o jogador use o comando do cliente /changemaptype.
+
+---------------------------------------
+
+*command_enable
+
+Permite o uso de atcommands enquanto se está conversando com um NPC.
+
+---------------------------------------
+
+*bypass_stat_onclone
+
+Ignora o limite máximo de parâmetros ao usar o comando @clonestat.
+
+---------------------------------------
+
+*bypass_max_stat
+
+Permite ignorar o limite máximo de parâmetros de estatística (em conf/player.conf) para
+um valor máximo de 32.767.
+
+---------------------------------------
+
+*macro_detect
+
+Permite que o jogador use o comando do cliente /macro_detector.
+
+---------------------------------------
+
+*macro_register
+
+Permite que o jogador use os comandos do cliente /macro_register (usado para adicionar novo CAPTCHA)
+e /macro_preview (usado para visualizar o CAPTCHA pelo ID).
+
+---------------------------------------
+
+
+
 //===== rAthena Documentation ================================
 //= Permissions List
 //===== By: ==================================================
 //= rAthena Dev Team
 //===== Last Updated: ========================================
-//= 20240414
+//= 20130613
 //===== Description: =========================================
 //= List of available permissions and their functions.
 //============================================================
 
 This file describes the functions of player group permissions,
 configured in '/conf/groups.conf' under the "permissions" bracket.
-
-The permission name used in '/conf/groups.conf' goes after the asterisk "*",
-while the constant name used in scripts and src goes between the parentheses "()"
-in the following format:
-
-*permission_name (PC_PERM_CONSTANT_NAME)
 
 To search for a permission, write "*" before its name.
 The format of this file is as follows:
@@ -28,20 +250,20 @@ The format of this file is as follows:
 ========================
 ---------------------------------------
 
-*can_trade (PC_PERM_TRADE)
+*can_trade
 
 Allows player to distribute items, such as through trades, dropping,
 vending, storage, mail, etc.
 
 ---------------------------------------
 
-*can_party (PC_PERM_PARTY)
+*can_party
 
 Allows player to create and join parties.
 
 ---------------------------------------
 
-*attendance (PC_PERM_ATTENDANCE)
+*attendance
 
 Allows player to use the daily attendance system.
 
@@ -52,78 +274,78 @@ Allows player to use the daily attendance system.
 ===========================
 ---------------------------------------
 
-*all_skill (PC_PERM_ALL_SKILL)
+*all_skill
 
 Grants player all available skills in the player's skill tree.
 
 ---------------------------------------
 
-*all_equipment (PC_PERM_USE_ALL_EQUIPMENT)
+*all_equipment
 
 Allows player to equip any item, regardless of requirements (class, level,
 etc.). Note that this can cause client errors if a sprite does not exist.
 
 ---------------------------------------
 
-*skill_unconditional (PC_PERM_SKILL_UNCONDITIONAL)
+*skill_unconditional
 
 Allows player to use any skill, regardless of required conditions (SP,
 items, etc.).
 
 ---------------------------------------
 
-*join_chat (PC_PERM_JOIN_ALL_CHAT)
+*join_chat
 
 Allows player to join password-protected chatrooms.
 
 ---------------------------------------
 
-*kick_chat (PC_PERM_NO_CHAT_KICK)
+*kick_chat
 
 Prevents player from being kicked from a chatroom.
 
 ---------------------------------------
 
-*view_hpmeter (PC_PERM_VIEW_HPMETER)
+*view_hpmeter
 
 Allows player to see the HP bar of every player.
 
 ---------------------------------------
 
-*view_equipment (PC_PERM_VIEW_EQUIPMENT)
+*view_equipment
 
 Allows player to view the equipment of every player, regardless of that
 player's setting.
 
 ---------------------------------------
 
-*hack_info (PC_PERM_RECEIVE_HACK_INFO)
+*hack_info
 
 Allows player to receive all information about players who try to hack,
 spoof a name, etc.
 
 ---------------------------------------
 
-*disable_pvm (PC_PERM_DISABLE_PVM)
+*disable_pvm
 
 Prevents player from attacking monsters.
 
 ---------------------------------------
 
-*disable_pvp (PC_PERM_DISABLE_PVP)
+*disable_pvp
 
 Prevents player from attacking other players.
 
 ---------------------------------------
 
-*can_trade_bounded (PC_PERM_TRADE_BOUNDED)
+*can_trade_bounded
 
 Allows player to do normal item actions with bounded items (drop, sell,
 trade, etc.).
 
 ---------------------------------------
  
-*item_unconditional (PC_PERM_ITEM_UNCONDITIONAL)
+*item_unconditional
 
 Allows player to consume any consumable item regardless the requirements
 (bypass noitemconsumption mapflag, item's class, gender, status changes,
@@ -131,43 +353,37 @@ item delay, etc).
 
 ---------------------------------------
 
-*trade_unconditional (PC_PERM_TRADE_UNCONDITIONAL)
-
-Allows player to ignore the trade conditions of items (drop, trade, sell, cart, storage/gstorage, mail and auction).
-
----------------------------------------
- 
 ======================
 | 3. Command-related |
 ======================
 ---------------------------------------
 
-*all_commands (PC_PERM_USE_ALL_COMMANDS)
+*all_commands
 
 Allows usage of all atcommands and charcommands.
 
 ---------------------------------------
 
-*disable_commands_when_dead (PC_PERM_DISABLE_CMD_DEAD)
+*disable_commands_when_dead
 
 Disables usage of atcommands when player is dead.
 
 ---------------------------------------
 
-*hide_session (PC_PERM_HIDE_SESSION)
+*hide_session
 
 Hides player session from being displayed by atcommands (@who, @whomap,
 etc.).
 
 ---------------------------------------
 
-*who_display_aid (PC_PERM_WHO_DISPLAY_AID)
+*who_display_aid
 
 Displays all GMs and character/account IDs in the @who command.
 
 ---------------------------------------
 
-*any_warp (PC_PERM_WARP_ANYWHERE)
+*any_warp
 
 Allows player to bypass 'nowarp', 'nowarpto', 'noteleport', and 'nomemo'
 mapflags in commands which modify a character's map or coordinates (@memo,
@@ -175,64 +391,64 @@ mapflags in commands which modify a character's map or coordinates (@memo,
 
 ---------------------------------------
 
-*receive_requests (PC_PERM_RECEIVE_REQUESTS)
+*receive_requests
 
 Allows player to receive requests through the @requests command.
 
 ---------------------------------------
 
-*show_bossmobs (PC_PERM_SHOW_BOSS)
+*show_bossmobs
 
 Displays boss mobs in the @showmobs command.
 
 ---------------------------------------
 
-*channel_admin (PC_PERM_CHANNEL_ADMIN)
+*channel_admin
 
 Allows player to modify #channel settings regardless of ownership and to
 join password-protected channels without a password.
 
 ---------------------------------------
 
-*use_check (PC_PERM_USE_CHECK)
+*use_check
 
 Allows player to use the client command /check (displays character status).
 
 ---------------------------------------
 
-*use_changemaptype (PC_PERM_USE_CHANGEMAPTYPE)
+*use_changemaptype
 
 Allows player to use the client command /changemaptype.
 
 ---------------------------------------
 
-*command_enable (PC_PERM_ENABLE_COMMAND)
+*command_enable
 
 Enable to use atcommand while talking with NPC.
 
 ---------------------------------------
 
-*bypass_stat_onclone (PC_PERM_BYPASS_STAT_ONCLONE)
+*bypass_stat_onclone
 
 Bypass max parameter limit while using @clonestat
 
 ---------------------------------------
 
-*bypass_max_stat (PC_PERM_BYPASS_MAX_STAT)
+*bypass_max_stat
 
 Allow to bypass the maximum stat parameter (at conf/player.conf) to
 maximum value 32,767.
 
 ---------------------------------------
 
-*macro_detect (PC_PERM_MACRO_DETECT)
+*macro_detect
 
 Allows player to use the client command /macro_detector.
 
 ---------------------------------------
 
-*macro_register (PC_PERM_MACRO_REGISTER)
+*macro_register
 
-Allows player to use the client commands /macro_register (used to add new captcha) and /macro_preview (used to preview captcha by ID).
+Allows player to use the client commands /maco_register (used to add new captcha) and /macro_preview (used to preview captcha by ID).
 
 ---------------------------------------

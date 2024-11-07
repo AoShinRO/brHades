@@ -1,12 +1,11 @@
-# List of client-side effects sorted by ID
 
-The following is a compiled list of visual and sound effects which the client
-can produce when receiving a packet with id `0x1f3 (01f3 <ID>.l <type>.l)`.
-Each list entry contains a number and a short description of the effect.
-You can produce these effects ingame by doing `"@effect <number>"`.
-It's also possible to attach effects to item/npc scripts by using `specialeffect` or `specialeffect2`.
+A seguir está uma lista compilada de efeitos visuais e sonoros que o cliente
+pode produzir ao receber um pacote com o ID 0x1f3 (01f3 <ID>.l <tipo>.l).
+Cada entrada da lista contém um número e uma breve descrição do efeito.
+Você pode produzir esses efeitos no jogo digitando "@effect <número>".
+Também é possível anexar efeitos a scripts de itens/NPCs usando `specialeffect` ou `specialeffect2`.
 
-|Number|Constant|Description|
+|Numero|Constante|Description|
 |---|---|---|
 |0|EF_HIT1|	Regular Hit|
 |1|EF_HIT2|	Bash|

@@ -1,3 +1,465 @@
+//===== Documentação rAthena ================================
+//= Lista de Mapflags
+//===== Por: ==================================================
+//= Equipe de Desenvolvimento do rAthena
+//===== Última atualização: ==================================
+//= 20130830
+//===== Descrição: ===========================================
+//= Lista de mapflags disponíveis e suas funções.
+//============================================================
+
+Este arquivo descreve as funções das mapflags, que determinam o comportamento de um mapa em várias situações. Para instruções sobre como definir uma mapflag, consulte a documentação em '/doc/script_commands.txt'.
+
+Para pesquisar uma mapflag, escreva "*" antes do seu nome.
+O formato deste arquivo é o seguinte:
+	1. Restrições
+	2. Relacionadas a Batalha
+	3. Efeitos do Mapa
+	4. Diversos
+
+===================
+| 1. Restrições |
+===================
+---------------------------------------
+
+*noreturn
+
+Desabilita o uso de itens de teletransporte em um mapa:
+ - Butterfly Wing (ID 602)
+ - Butterfly Wing Amarelo/Verde/Vermelho/Azul (IDs 14582-14585)
+ - Pergaminho de Teleporte para Cerco (ID 14591)
+ - Pergaminhos de Teleporte para Masmorra 1/2/3 (IDs 14527, 14581, 12352)
+
+Os comandos de script 'warpparty' e 'warpguild' também são bloqueados para destinos fora do mapa atual do jogador.
+
+---------------------------------------
+
+*noteleport
+
+Desabilita todos os meios de teletransporte dentro de um mapa:
+ - Os itens Fly Wing (ID 601) e Giant Fly Wing (ID 12212) são desabilitados.
+ - As habilidades AL_TELEPORT, TK_HIGHJUMP e SC_DIMENSIONDOOR são desabilitadas.
+ - As habilidades RG_INTIMIDATE, NPC_EXPULSION e CG_TAROTCARD não teleportarão seus alvos pretendidos.
+ - Comandos de script que usam "Random" como destino falharão.
+ - O comando de script 'warpwaitingpc' falhará com "SavePoint" como destino.
+ - O comando de script 'unitwarp' falhará para jogadores.
+ - O comando de atalho @jump está desabilitado.
+
+---------------------------------------
+
+*nowarp
+
+Desabilita o teletransporte a partir de um mapa:
+ - Os comandos de script 'warpparty' e 'warpguild' não teleportarão jogadores em mapas 'nowarp'.
+ - Os comandos de atalho @warp, @go, @load e @jump estão desabilitados.
+ - Os comandos de atalho @partyrecall, @guildrecall e @recallall não teleportarão jogadores em mapas 'nowarp'.
+ - A habilidade GD_EMERGENCYCALL não teleportará jogadores em mapas 'nowarp'.
+ - A unidade UNT_CALLFAMILY não teleportará jogadores em mapas 'nowarp'.
+
+---------------------------------------
+
+*nowarpto
+
+Desabilita o teletransporte para um mapa:
+ - Os comandos de atalho @warp, @go, @load e @jump estão desabilitados para o mapa 'nowarpto'.
+ - Os comandos de atalho @partyrecall, @guildrecall e @recallall estão desabilitados.
+ - O comando /memo está desabilitado.
+ - A habilidade GD_EMERGENCYCALL está desabilitada se a flag 16 de 'emergency_call' estiver ativada em
+   '/conf/battle/skill.conf'. Isso não funcionará para mapas 'gvg_castle'.
+
+---------------------------------------
+
+*nogo
+
+Desabilita o uso do comando @go em um mapa.
+
+---------------------------------------
+
+*nosave	<nome do mapa>
+
+Desabilita o salvamento automático em um mapa. Jogadores que fizerem logoff no mapa serão teleportados para <nome do mapa> quando
+fizerem login novamente. "SavePoint", sem aspas, também é válido para este campo.
+
+---------------------------------------
+
+*nomemo
+
+Desabilita o comando /memo para salvar um ponto de teletransporte em um mapa, e também desabilita o uso das habilidades de casamento
+WE_CALLPARTNER, WE_CALLPARENT e WE_CALLBABY.
+
+---------------------------------------
+
+*noitemconsumption
+
+Desabilita o uso de itens em um mapa.
+
+---------------------------------------
+
+*notrade
+
+Desabilita a negociação em um mapa.
+
+---------------------------------------
+
+*nodrop
+
+Desabilita a queda de itens em um mapa.
+
+Observe que os itens ainda podem ser descartados se o inventário do jogador estiver cheio e 'item_flooritem_check'
+estiver desabilitado em '/conf/battle/items.conf'.
+
+---------------------------------------
+
+*noloot
+*nomobloot
+*nomvploot
+
+Desabilita monstros normais e MVPs de soltarem itens em um mapa. Os itens saqueados sempre serão soltos.
+'noloot' é o mesmo que 'nomobloot' e 'nomvploot' combinados.
+		
+---------------------------------------
+
+*noexp
+*nobaseexp
+*nojobexp
+
+Desabilita o ganho de experiência base e de classe de monstros, incluindo bônus de MVP, em um mapa.
+'noexp' é o mesmo que 'nobaseexp' e 'nojobexp' combinados.
+
+---------------------------------------
+
+*nopenalty
+*noexppenalty
+*nozenypenalty
+
+Desabilita a perda de experiência e Zeny ao morrer em um mapa.
+'nopenalty' é o mesmo que 'noexppenalty' e 'nozenypenalty' combinados.
+
+Notas:
+'noexppenalty' também afeta pets, e as habilidades PR_REDEMPTIO e LG_INSPIRATION não deduzirão EXP.
+'nozenypenalty' só se aplica se 'zeny_penalty' estiver ativado em '/conf/battle/exp.conf'.
+
+---------------------------------------
+
+*nochat
+
+Desabilita a criação de salas de chat em um mapa.
+
+---------------------------------------
+
+*novending
+
+Desabilita a criação de lojas no mapa usando a habilidade MC_VENDING.
+
+---------------------------------------
+
+*nobuyingstore
+
+Desabilita a criação de lojas no mapa usando a habilidade ALL_BUYING_STORE.
+
+---------------------------------------
+
+*nousecart
+
+Desabilita o uso de carrinho em um mapa.
+
+---------------------------------------
+
+*noskill
+
+Desabilita o uso de habilidades em um mapa.
+
+---------------------------------------
+
+*restricted	<zona>
+
+Desabilita certos itens e habilidades em um mapa através de um número de zona especificado. Os bancos de dados de zona estão
+localizados em 'db/(pre-)re/item_noequip.txt' e 'db/(pre-)re/skill_nocast_db.txt', ambos os quais
+contêm explicações e exemplos de como essa mapflag é usada.
+
+Zonas Restritas:
+1 - Aldebaran Turbo Track
+2 - Prisão
+3 - Arena de Batalha de Izlude
+4 - Mapas WoE:SE
+5 - Santuário Selado
+6 - Instâncias: Torre Infinita, Memória de Orc, Instância de Nidhoggr
+7 - Cidades
+8 - Dungeons WoE:TE
+
+---------------------------------------
+
+*monster_noteleport
+
+Impede que monstros se teletransportem em um mapa, incluindo através da habilidade RG_INTIMIDATE.
+
+---------------------------------------
+
+*nobranch
+
+Desabilita o uso de itens que invocam monstros em um mapa:
+  - Dead Branch (ID 604)
+  - Bloody Branch (ID 12103)
+  - Poring Box (ID 12109)
+  - Red Pouch (ID 12024)
+
+Os itens listados acima podem ser modificados em db/(pre-)re/item_flag.txt
+
+Observe que quando 'mob_warp' está ativado em '/conf/battle/monster.conf' e a flag 4 está definida, isso também
+impedirá que os monstros sejam teletransportados para o mapa (exceto monstros escravos).
+
+---------------------------------------
+
+*noicewall
+
+Desabilita a habilidade WZ_ICEWALL em um mapa.
+
+---------------------------------------
+
+*nosunmoonstarmiracle
+
+Impede que a habilidade "Solar, Lunar e Stellar Miracle" do Star Gladiator ocorra em um mapa.
+
+---------------------------------------
+
+*forcemineffect
+
+Força efeitos de habilidades mais simples, assim como o comando /mineffect.
+
+---------------------------------------
+
+*nolockon
+
+Impede o ataque a outro jogador sem pressionar shift ou usar /ns em um mapa.
+
+---------------------------------------
+
+*nocommand	<nível do grupo>
+
+Impede que todos usem comandos em um mapa. Se o nível do grupo for especificado, apenas desabilita
+jogadores que possuem um nível de grupo abaixo dele.
+
+---------------------------------------
+
+
+*nomapchannelautojoin
+
+Impede que os jogadores entrem automaticamente no canal #map em um mapa.
+
+Isso só se aplica se os canais de mapa estiverem ativados e 'map_local_channel_autojoin' estiver como verdadeiro
+em '/conf/channels.conf'.
+
+---------------------------------------
+
+*notomb
+
+Impede que túmulos de MVP apareçam em um mapa.
+
+---------------------------------------
+
+*nocostume
+
+Desabilita sprites de trajes em um mapa.
+
+Isso apenas desabilita os sprites e não o efeito dos itens.
+Se um jogador fizer logoff em um mapa sem trajes, os sprites de traje também não serão mostrados no
+servidor de personagens.
+
+---------------------------------------
+
+*norenewaldroppenalty
+
+Desabilita a penalidade de taxa de queda de renovação devido à diferença de nível em um mapa.
+
+---------------------------------------
+
+*norenewalexppenalty
+
+Desabilita a penalidade de experiência de renovação devido à diferença de nível em um mapa.
+
+---------------------------------------
+
+*nopetcapture
+
+Desabilita a capacidade de capturar pets em um mapa.
+
+---------------------------------------
+
+=====================
+| 2. Relacionado à Batalha |
+=====================
+---------------------------------------
+
+*pvp
+*pvp_noparty
+*pvp_noguild
+*pvp_nocalcrank
+
+Ativa o modo Jogador vs. Jogador em um mapa e aplica os ajustes de dano correspondentes.
+'pvp_noparty' ignora alianças de grupo.
+'pvp_noguild' ignora alianças de guilda.
+'pvp_nocalcrank' desativa o cálculo das classificações de PvP.
+
+---------------------------------------
+
+*pvp_nightmaredrop	<id>,<tipo>,<taxa>
+
+Faz com que os jogadores deixem cair itens ao morrer. Isso não está agrupado com as outras mapflags de PvP
+porque não requer necessariamente que o modo PvP seja ativado.
+
+<id> determina o que será deixado cair. Pode ser um ID de item específico ou "random".
+<tipo> especifica de onde os itens são deixados cair. Pode ser "inventory" (inventário), "equip" (equipamento) ou "all" (todos).
+<taxa> é a chance de um item ser deixado cair (10000 = 100%).
+
+---------------------------------------
+
+*gvg
+*gvg_noparty
+*gvg_castle
+*gvg_dungeon
+*gvg_te
+*gvg_te_castle
+
+Ativa o modo Guilda vs. Guilda em um mapa e aplica os ajustes de dano correspondentes.
+'gvg_noparty' ignora alianças de grupo.
+'gvg_castle' marca um castelo de guilda. O modo GvG estará ativo apenas durante a Guerra do Emperium.
+'gvg_dungeon' marca um calabouço de guilda. Os jogadores serão teletransportados para fora após duas mortes.
+'gvg_te' e 'gvg_te_castle' marcam uma área de WOE:TE (Guerra do Emperium: Edição Teste) e aplicam restrições especiais.
+
+---------------------------------------
+
+*battleground	{<tipo>}
+
+Ativa os Campos de Batalha em um mapa e aplica os ajustes de dano correspondentes.
+Se <tipo> for 2, será mostrado um placar. O padrão é 1 (nada).
+
+---------------------------------------
+
+*partylock
+*guildlock
+
+Impede a alteração de grupos e guildas em um mapa. Isso inclui criar, sair,
+convidar, expulsar, quebrar e mudar líderes.
+
+Notas:
+'partylock' ainda permite que as opções de grupo sejam alteradas.
+'guildlock' também bloqueará as mudanças nas alianças de guilda.
+
+---------------------------------------
+
+*skill_damage	{<nome_habilidade>,<lançador>,<SKILLDMG_PC>,{<SKILLDMG_MOB>,{<SKILLDMG_BOSS>,{<SKILLDMG_OTHER>}}}}
+
+Ativa o ajuste de dano de habilidade em um mapa. Todos os ajustes em 'db/skill_damage_db.txt'
+para o tipo de mapa 16 (Map) serão aplicados.
+
+Essa mapflag também pode ser usada para ajustar o dano de uma habilidade em uma porcentagem:
+ - nome_habilidade:
+	Nome da habilidade em 'db/(pre-)re/skill_db.yml' (ex. SM_BASH).
+	Para ajustar todo o dano de habilidade, escreva "all" (sem aspas).
+ - lançador: os grupos nos quais o ajuste terá efeito. (bitmask)
+	BL_PC = Jogador
+	BL_MOB = Monstro
+	BL_PET = Pet
+	BL_HOM = Homunculus
+	BL_MER = Mercenário
+	BL_ELEM = Elemental
+ - dano: taxa de ajuste percentual (entre -100 e 100000).
+	SKILLDMG_PC = contra jogador
+	SKILLDMG_MOB = contra monstro normal
+	SKILLDMG_BOSS = contra monstro chefe
+	SKILLDMG_OTHER = contra outros (homunculus, mercenário, pet, elemental)
+
+---------------------------------------
+
+*skill_duration	nome_habilidade,porcentagem
+
+Define o limite de tempo (duração) de uma habilidade (tipo armadilha) como n% da duração original.
+
+// Exemplo:
+// Faz com que a habilidade HT_ANKLESNARE dure 4 vezes mais que em outros mapas.
+prtg_cas01	mapflag	skill_duration	HT_ANKLESNARE,400
+
+---------------------------------------
+
+==================
+| 3. Efeitos de Mapa |
+==================
+---------------------------------------
+
+*clouds
+*clouds2
+*fireworks
+*fog
+*leaves
+*sakura
+*snow
+
+Exibe um efeito de clima em um mapa.
+
+---------------------------------------
+
+*nightenabled
+
+Exibe efeitos de modo noturno em um mapa. Isso é usado na maioria dos mapas externos.
+
+---------------------------------------
+
+====================
+| 4. Diversos |
+====================
+---------------------------------------
+
+*town
+
+Marca um mapa como uma cidade. Isso permite que os jogadores acessem seu correio e desabilita o roubo de kills.
+
+---------------------------------------
+
+*reset
+
+Permite o uso do item Neuralizer (ID 12213).
+
+---------------------------------------
+
+*bexp	<taxa>
+*jexp	<taxa>
+
+Altera as taxas de experiência base e de classe em um mapa. Aceita valores negativos para reduzir as taxas de EXP também.
+<taxa> é fornecida como uma porcentagem (ou seja, 100 = 1x EXP). Isso leva em consideração os modificadores
+'base_exp_rate' e 'job_exp_rate' em '/conf/battle/exp.conf'.
+
+---------------------------------------
+
+*loadevent
+
+Aciona o rótulo "OnPCLoadMapEvent" quando os jogadores entram em um mapa (isso inclui também
+teletransporte dentro do mapa). Mais detalhes podem ser encontrados em '/doc/script_commands.txt'.
+
+---------------------------------------
+
+*allowks
+
+Permite roubo de kills em um mapa (tornando o comando @noks inútil).
+
+---------------------------------------
+
+*autotrade
+
+Permite o comando @autotrade em um mapa.
+
+Isso só se aplica se 'at_mapflag' estiver ativado em '/conf/battle/misc.conf'. Caso contrário, o
+comando @autotrade está habilitado em todos os mapas por padrão.
+
+---------------------------------------
+
+*hidemobhpbar
+
+Oculta a barra de HP dos monstros em um mapa.
+Ignora o valor de configuração de 'monster_hp_bars_info'.
+
+---------------------------------------
+
+
 //===== rAthena Documentation ================================
 //= Mapflag List
 //===== By: ==================================================
@@ -117,24 +579,9 @@ is disabled in '/conf/battle/items.conf'.
 *nomobloot
 *nomvploot
 
-'nomobloot' prevents monsters and MVPs from dropping items from the 'Drops' table.
-'nomvploot' prevents MVPs from giving MVP prize items from the 'MvpDrops' table.
 Disables normal monsters and MVPs from dropping items on a map. Looted items will always drop.
 'noloot' is the same as 'nomobloot' and 'nomvploot' combined.
 		
----------------------------------------
-
-*nolootnormalmob
-
-Disables normal monsters type (only) from dropping items on a map. Looted items will always drop.
-
----------------------------------------
-
-*no_npc_selfdestruction_on_all
-
-A quick mapflag to change the behaviour of the NPC_SELFDESTRUCTION skill.
-When defined, the skill always and only hits enemy type instead of all units.
-
 ---------------------------------------
 
 *noexp
@@ -300,18 +747,6 @@ Disable renewal experience penalty due to level difference on a map.
 *nopetcapture
 
 Disable the ability to capture pets on a map.
-
----------------------------------------
-
-*nobank
-
-Disable Bank on a map.
-
----------------------------------------
-
-*norodex
-
-Disable RODex on a map.
 
 ---------------------------------------
 
@@ -487,11 +922,5 @@ atcommand is enabled on all maps by default.
 
 Hides monster's HP bar on a map.
 Ignores config value of 'monster_hp_bars_info'.
-
----------------------------------------
-
-*specialpopup	<popup ID>
-
-Displays a special popup when a player enters the map. See script command "specialpopup" for details on different popup types.
 
 ---------------------------------------

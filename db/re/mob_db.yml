@@ -109068,7 +109068,7 @@ Body:
     Int: 0
     Dex: 0
     Luk: 0
-    AttackRange: 5
+    AttackRange: 2
     SkillRange: 8
     ChaseRange: 12
     Size: Large

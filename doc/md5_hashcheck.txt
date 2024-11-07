@@ -1,3 +1,48 @@
+//===== Documentação do rAthena ================================
+//= Verificação de Hash MD5
+//===== Por: ===================================================
+//= Equipe de Desenvolvimento do rAthena
+//===== Última Atualização: ====================================
+//= 08/02/2014
+//===== Descrição: =============================================
+//= Este arquivo descreve a verificação de hash MD5 do servidor de login.
+//==============================================================
+
+O servidor de login é capaz de realizar uma verificação do hash MD5 do cliente.
+Isso garantirá que um usuário não tenha adulterado o cliente e que o cliente seja específico para o seu servidor.
+
+O cliente só pode enviar o hash MD5 correto para o servidor em certos tipos de servidor, portanto, é necessário um diff do cliente para garantir que o hash seja enviado.
+Consulte o manual da ferramenta de diff do seu cliente para obter o patch apropriado, chamado de "Force Send Client Hash Packet" ou um nome semelhante. Um link contendo o plugin WeeDiffGen pode ser encontrado em:
+http://rathena.org/board/topic/70841-r16771-client-md5-hash-check/
+
+As configurações do lado do servidor para a verificação de hash estão localizadas em 'conf\login_athena.conf':
+
+// Verificação de hash MD5 do cliente
+// Se ativado, o servidor de login verificará se o hash do cliente corresponde
+// ao valor abaixo e não conectará clientes adulterados.
+// Observação: consulte 'doc/md5_hashcheck.txt' para obter mais detalhes.
+client_hash_check: off
+
+// Hashes MD5 do cliente
+// O cliente com o hash especificado pode ser usado para fazer login por jogadores com
+// um group_id igual ou maior que o valor fornecido.
+// Se você especificar 'disabled' como hash, jogadores com group_id maior ou igual ao
+// valor fornecido poderão fazer login independentemente do hash (e até mesmo
+// se seu cliente não enviar um hash).
+// Formato: group_id, hash
+// Observação: consulte 'doc/md5_hashcheck.txt' para obter mais detalhes.
+client_hash: 0, 113e195e6c051bb1cfb12a644bb084c5
+client_hash: 10, cb1ea78023d337c38e8ba5124e2338ae
+client_hash: 99, disabled
+
+Para ativar a verificação de hash MD5, defina 'client_hash_check' como 'on' e adicione uma entrada 'client_hash' para cada cliente que você deseja usar.
+O group_id pode ser qualquer um dos grupos em 'conf/groups.conf' e é útil caso você queira permitir que GMs usem um cliente diferente dos jogadores normais; por exemplo, um cliente GM pode ser hexado de forma diferente, talvez com a opção de usar dois clientes simultaneamente habilitada e com o flood de chat desabilitado.
+Você precisará substituir os exemplos de hashes MD5 pelos hashes reais do seu cliente. Você pode usar qualquer ferramenta de hash MD5 para gerá-los, como:
+
+md5sum (linha de comando) no Linux
+WinMD5 no Windows
+md5 (linha de comando) no Mac OS X
+
 //===== rAthena Documentation ================================
 //= MD5 Hash Check
 //===== By: ==================================================

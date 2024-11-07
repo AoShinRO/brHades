@@ -1,3 +1,41 @@
+====================
+//= Documentação rAthena ================================
+//= Estrutura do Banco de Dados de Captcha
+//===== By: ==================================================
+//= Equipe de Desenvolvimento do rAthena
+//===== Última Atualização: ========================================
+//= 20220920
+//===== Descrição: =========================================
+//= Explicação do arquivo captcha_db.yml e sua estrutura.
+//============================================================
+
+Id: ID único.
+
+Filename: Nome do arquivo de imagem BMP (com localização).
+O caminho do arquivo pode ser diferente para cada imagem de captcha, mas é recomendável mantê-las no mesmo diretório.
+
+Exemplo:
+Filename: db/import/captcha/rathena.bmp
+
+Answer: Resposta correta para o captcha (diferencia maiúsculas de minúsculas).
+
+Bonus: Script do NPC que é executado quando um captcha é respondido com sucesso. Aceita todas as formas de constantes de script, variáveis, bem como a
+variável única do jogador @captcha_retries. Essa variável pode ser usada dentro do script de bônus para obter as tentativas restantes que um jogador
+possui. Em conjunto com o comando de script 'getbattleflag()', isso poderia ser usado para atribuir diferentes bônus com base na taxa de sucesso.
+
+Exemplo:
+# Concede Bênção de nível 10 por 20 minutos sem falhas, caso contrário, concede por 30 segundos.
+Bonus: >
+if (@captcha_retries == getbattleflag("macro_detection_retry")) {
+# Jogador resolveu na primeira tentativa
+specialeffect2 EF_BLESSING;
+sc_start SC_BLESSING,1200000,10;
+} else {
+# Jogador precisou de mais de uma tentativa
+specialeffect2 EF_BLESSING;
+sc_start SC_BLESSING,30000,10;
+}
+
 //===== rAthena Documentation ================================
 //= Captcha Database Structure
 //===== By: ==================================================

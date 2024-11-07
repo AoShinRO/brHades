@@ -1,3 +1,362 @@
+====================
+//= Documentação rAthena ================================
+//= Lista de Bônus de Itens do rAthena
+//===== By: ==================================================
+//= Equipe de Desenvolvimento do rAthena
+//===== Última Atualização: ========================================
+//= 20151029
+//===== Descrição: =========================================
+//= Lista de instruções de script usadas nos bônus de itens.
+//============================================================
+
+Constantes
+---------
+Esta lista contém todas as constantes disponíveis referenciadas nos comandos 'bonus'.
+
+* Efeito de status (eff)
+	Eff_Bleeding, Eff_Blind, Eff_Burning, Eff_Confusion, Eff_Crystalize, Eff_Curse, Eff_DPoison,
+	Eff_Fear, Eff_Freeze, Eff_Poison, Eff_Silence, Eff_Sleep, Eff_Stone, Eff_Stun, Eff_Freezing,
+	Eff_Heat, Eff_Deepsleep
+
+* Elemento (e)
+	Ele_Dark, Ele_Earth, Ele_Fire, Ele_Ghost, Ele_Holy, Ele_Neutral, Ele_Poison,
+	Ele_Undead, Ele_Water, Ele_Wind, Ele_All
+
+* Raça (r)
+	RC_Angel, RC_Brute, RC_DemiHuman, RC_Demon, RC_Dragon, RC_Fish, RC_Formless,
+	RC_Insect, RC_Plant, RC_Player_Human (RC_Player depreciado), RC_Player_Doram, RC_Undead, RC_All
+
+* Raça do Monstro (mr)
+	RC2_Goblin, RC2_Kobold, RC2_Orc, RC2_Golem, RC2_Guardian, RC2_Ninja, RC2_GVG, RC2_Battlefield,
+	RC2_Treasure, RC2_BioLab, RC2_Manuk, RC2_Splendide, RC2_Scaraba, RC2_OGH_ATK_DEF, RC2_OGH_Hidden,
+	RC2_Bio5_Swordman_Thief, RC2_Bio5_Acolyte_Merchant, RC2_Bio5_Mage_Archer, RC2_Bio5_MVP,
+	RC2_Clocktower, RC2_Thanatos, RC2_Faceworm, RC2_Hearthunter, RC2_Rockridge, RC2_Werner_Lab,
+	RC2_Temple_Demon, RC2_Illusion_Vampire, RC2_Malangdo
+
+* Classe (c)
+	Class_Normal, Class_Boss, Class_Guardian, Class_All
+
+* Tamanho (s)
+	Size_Small, Size_Medium, Size_Large, Size_All
+
+* Critérios de gatilho (bf)
+	BF_SHORT	= Gatilho em ataques corpo a corpo
+	BF_LONG		= Gatilho em ataques à distância
+	(Padrão: BF_SHORT+BF_LONG)
+   
+	BF_WEAPON	= Gatilho em habilidades de arma 
+	BF_MAGIC	= Gatilho em habilidades mágicas 
+	BF_MISC		= Gatilho em habilidades diversas
+	(Padrão: BF_WEAPON)
+   
+	BF_NORMAL	= Gatilho em ataques normais
+	BF_SKILL	= Gatilho em habilidades
+	(Padrão: BF_SKILL se o tipo for BF_MISC ou BF_MAGIC, BF_NORMAL se o tipo for BF_WEAPON)
+
+* Critérios de gatilho (atf)
+	Alvo do efeito: (Padrão: Alvo atacado)
+	ATF_SELF	= At
+
+ivar efeito em si mesmo
+	ATF_TARGET	= Ativar efeito no alvo
+	
+	Critérios de alcance do ataque: (Padrão: Todos os ataques)
+	ATF_SHORT	= Gatilho em ataques corpo a corpo
+	ATF_LONG	= Gatilho em ataques à distância
+	
+	Critérios de tipo de habilidade/ataque: (Padrão: Físico/arma)
+	ATF_SKILL	= Gatilho em habilidades mágicas/diversas
+	ATF_WEAPON	= Gatilho em habilidades de arma / ataques físicos
+	ATF_MAGIC	= Gatilho em habilidades mágicas
+	ATF_MISC	= Gatilho em habilidades diversas
+
+* Outros valores:
+	Habilidade (sk): consulte 'db/(pre-)re/skill_db.yml' (OBSERVAÇÃO: IDs e nomes de habilidades, entre aspas, são suportados.)
+	ID do Monstro (mid): consulte 'db/(pre-)re/mob_db.yml'
+	ID do Item (iid): consulte 'db/item_db.yml'
+	Grupo de Itens (ig): consulte 'db/(pre-)re/item_group_db.yml' e as constantes em 'src/map/script_constants.hpp', prefixadas com IG_*
+	Tipo de Arma (w): consulte 'doc/item_db.txt' -> SubType
+
+
+Bônus
+-------
+O formato dos bônus listados neste arquivo é o seguinte:
+	1. Bônus Básicos
+	2. Bônus Estendidos
+	3. Bônus Específicos para Grupos
+	4. Bônus Relacionados a Status
+	5. Bônus de AutoMagia
+	6. Bônus Diversos
+
+====================
+| 1. Bônus Básicos |
+====================
+
+Atributos base
+----------
+bonus bStr,n;      			STR + n
+bonus bAgi,n;      			AGI + n
+bonus bVit,n;      			VIT + n
+bonus bInt,n;      			INT + n
+bonus bDex,n;      			DEX + n
+bonus bLuk,n;      			LUK + n
+bonus bAllStats,n; 			STR + n, AGI + n, VIT + n, INT + n, DEX + n, LUK + n
+bonus bAgiVit,n;   			AGI + n, VIT + n
+bonus bAgiDexStr,n;			STR + n, AGI + n, DEX + n
+
+Atributos de Característica
+-----------
+bonus bPow,n;      			POW + n
+bonus bSta,n;      			STA + n
+bonus bWis,n;      			WIS + n
+bonus bSpl,n;      			SPL + n
+bonus bCon,n;      			CON + n
+bonus bCrt,n;      			CRT + n
+bonus bAllTraitStats,n; 		POW + n, STA + n, WIS + n, SPL + n, CON + n, CRT + n
+
+HP/SP/AP
+-----
+bonus bMaxHP,n;    			MaxHP + n
+bonus bMaxHPrate,n;			MaxHP + n% 
+bonus bMaxSP,n;    			MaxSP + n
+bonus bMaxSPrate,n;			MaxSP + n%
+bonus bMaxAP,n;    			MaxAP + n
+bonus bMaxAPrate,n;			MaxAP + n%
+
+Atk/Def
+-------
+bonus bBaseAtk,n;  			Poder de ataque básico + n
+bonus bAtk,n;      			ATK + n (não oficial)
+bonus bAtk2,n;     			ATK2 + n
+bonus bAtkRate,n;  			ATK + n% que não interfere com o modificador de dano e SC_EDP (apenas modo de renovação)
+bonus bWeaponAtkRate,n; 	Weapon ATK + n%
+bonus bMatk,n;     			Poder de ataque mágico + n
+bonus bMatkRate,n; 			Poder de ataque mágico + n%
+bonus bWeaponMatkRate,n;	Weapon Magical ATK + n% (apenas modo de renovação)
+bonus bDef,n;      			Equipment DEF + n
+bonus bDefRate,n;  			Equipment DEF + n%
+bonus bDef2,n;     			VIT based DEF + n
+bonus bDef2Rate,n; 			VIT based DEF + n%
+bonus bMdef,n;     			Equipment MDEF + n
+bonus bMdefRate,n; 			Equipment MDEF + n%
+bonus bMdef2,n;    			INT based MDEF + n
+bonus bMdef2Rate,n;			INT based MDEF + n%
+
+Estatísticas adicionais
+----------------
+bonus bHit,n;         			Hit + n
+bonus bHitRate,n;     			Hit + n%
+bonus bCritical,n;    			Critical + n
+bonus bCriticalLong,n;			Critical + n para ataques normais de longa distância (não será exibido na janela de status)
+bonus2 bCriticalAddRace,r,n;	Critical + n contra inimigos da raça r
+bonus bCriticalRate,n;			Critical + n%
+bonus bFlee,n;        			Flee + n
+bonus bFleeRate,n;    			Flee + n%
+bonus bFlee2,n;       			Perfect Dodge + n
+bonus bFlee2Rate,n;   			Perfect Dodge + n%
+bonus bPerfectHitRate,n;		Probabilidade de acerto no alvo n% (apenas o maior entre todos é aplicado)
+bonus bPerfectHitAddRate,n;	Probabilidade de acerto no alvo + n%
+bonus bSpeedRate,n;   			Velocidade de movimento + n% (apenas o maior entre todos é aplicado, não se acumula com SC_SPEEDUP0, SC_SPEEDUP1)
+bonus bSpeedAddRate,n;			Velocidade de movimento + n%
+bonus bAspd,n;        			Velocidade de ataque + n
+bonus bAspdRate,n;    			Velocidade de ataque + n%
+bonus bAtkRange,n;    			Alcance de ataque + n
+bonus bAddMaxWeight,n;			MaxWeight + n (em unidades de 0.1)
+bonus bPAtk,n;         			PAtk + n
+bonus bPAtkRate,n;     			PAtk + n%
+bonus bSMatk,n;         		SMatk + n
+bonus bSMatkRate,n;     		SMatk + n%
+bonus bRes,n;         			Res + n
+bonus bResRate,n;     			Res + n%
+bonus bMRes,n;         			MRes + n
+bonus bMResRate,n;     			MRes + n%
+bonus bHPlus,n;         		HPlus + n
+bonus bHPlusRate,n;     		HPlus + n%
+bonus bCRate,n;         		CRate + n
+bonus bCRateRate,n;     		CRate + n%
+
+=======================
+| 2. Bônus Estendidos |
+=======================
+
+HP/SP
+-----
+bonus bHPrecovRate,n;   		Razão de recuperação de HP natural + n%
+bonus bSPrecovRate,n;   		Razão de recuperação de SP natural + n%
+bonus2 bHPRegenRate,n,t;		Ganha n HP a cada t milissegundos
+bonus2 bHPLossRate,n,t; 		Perde n HP a cada t milissegundos
+bonus2 bSPRegenRate,n,t;		Ganha n SP a cada t milissegundos
+bonus2 bSPLossRate,n,t; 		Perde n SP a cada t milissegundos
+bonus2 bRegenPercentHP,n,t;		Ganha n% do HP máximo a cada t milissegundos
+bonus2 bRegenPercentSP,n,t;		Ganha n% do SP máximo a cada t milissegundos
+bonus bNoRegen,x;       		Interrompe a regeneração de HP ou SP (x: 1=HP, 2=SP)
+
+bonus bUseSPrate,n;         		Consumo de SP + n%
+bonus2 bSkillUseSP,sk,n;    		Reduz o consumo de SP da habilidade sk em n
+bonus2 bSkillUseSPrate,sk,n;		Reduz o consumo de SP da habilidade sk em n%
+
+Atk/Def
+-------
+bonus2 bSkillAtk,sk,n;    		Aumenta o dano da habilidade sk em n%
+bonus bShortAtkRate,n;			Aumenta o dano dos ataques de curto alcance em n%
+bonus bLongAtkRate,n;     		Aumenta o dano dos ataques de longo alcance em n%
+bonus bCritAtkRate,n;     		Aumenta o dano crítico em +n%
+bonus bCritDefRate,n;			Diminui o dano crítico recebido em n%
+bonus bCriticalDef,n;     		Diminui a chance de receber acertos críticos em n%
+bonus2 bWeaponAtk,w,n;    		Adiciona n ATK quando a arma do tipo w está equipada
+bonus2 bWeaponDamageRate,w,n;	Adiciona n% de dano a ataques normais quando a arma do tipo w está equipada
+
+bonus bNearAtkDef,n; 			Reduz n% o dano recebido de ataques físicos corpo a corpo
+bonus bLongAtkDef,n; 			Reduz n% o dano recebido de ataques físicos à distância
+bonus bMagicAtkDef,n;			Reduz n% o dano recebido de ataques mágicos
+bonus bMiscAtkDef,n; 			Reduz n% o dano recebido de ataques diversos (armadilhas, falcão, ...)
+
+bonus bNoWeaponDamage,n;		Reduz n% o dano físico recebido
+bonus bNoMagicDamage,n; 		Reduz n% o dano mágico recebido (ataques, cura, magias de suporte são bloqueados)
+bonus bNoMiscDamage,n;  		Reduz n% o dano diverso recebido
+
+Healing
+-------
+bonus bHealPower,n;						Aumenta a quantidade de cura de todas as habilidades de cura em n%
+bonus bHealPower2,n;					Aumenta a quantidade de cura se você for curado por qualquer habilidade em n%
+bonus2 bSkillHeal,sk,n;					Aumenta a quantidade de cura da habilidade sk em n%
+bonus2 bSkillHeal2,sk,n;				Aumenta a quantidade de cura se você for curado pela habilidade sk em n%
+bonus bAddItemHealRate,n;				Aumenta a quantidade de HP recuperada em n% para itens de cura
+bonus2 bAddItemHealRate,iid,n;			Aumenta a quantidade de HP recuperada em n% para o item iid
+bonus2 bAddItemGroupHealRate,ig,n;		Aumenta a quantidade de HP recuperada em n% para itens do grupo de itens ig
+bonus bAddItemSPHealRate,n;				Aumenta a quantidade de SP recuperada em n% para itens de cura
+bonus2 bAddItemSPHealRate,iid,n;		Aumenta a quantidade de SP recuperada em n% para o item iid
+bonus2 bAddItemGroupSPHealRate,ig,n;		Aumenta a quantidade de SP recuperada em n% para itens do grupo de itens ig
+
+Cast time/delay
+---------------
+bonus bCastrate,n;             		Taxa de tempo de conjuração de habilidades + n% (Se RENEWAL_CAST estiver definido, esse bônus é igual a bVariableCastrate)
+bonus2 bCastrate,n,x;          		Taxa de tempo de conjuração de habilidades + n% (Se RENEWAL_CAST estiver definido, esse bônus é igual a bVariableCastrate) (x:1=Cure (bônus multiplicador) | x:2=Skills normais (bônus aditivo))
+bonus bDelayrate,n;            		Taxa de atraso global de habilidades + n% (Se RENEWAL_DELAY estiver definido, esse bônus é igual a bVariableDelayrate)
+bonus bFixedCastrate,n;       		Taxa de tempo de conjuração fixo de habilidades + n (Se RENEWAL_CAST estiver definido, esse bônus é igual a bFixedVariableCastrate)
+bonus bFixedDelayrate,n;      		Taxa de atraso global fixo de habilidades + n (Se RENEWAL_DELAY estiver definido, esse bônus é igual a bFixedVariableDelayrate)
+
+Misc
+----
+bonus2 bSkillVariableTime,sk,n,x;   	Modifica a duração da habilidade sk em n milissegundos (x:1=Duração fixa | x:2=Duração variável)
+bonus2 bSkillVariableTimeRate,sk,n;	Modifica a duração da habilidade sk em n% (apenas modo de renovação)
+bonus bUnbreakable,equipid;       	Protege o equipamento equipid da quebra
+bonus bUnstripable,equipid;       	Protege o equipamento equipid de ser desequipado
+bonus2 bAddEffWhenHit,effectid,chance,n;   	Chance de ativar o efeito effectid quando atacado + n%
+bonus2 bAddEffWhenHitRace,effectid,race,n;	Chance de ativar o efeito effectid quando atacado por inimigos da raça race + n%
+bonus2 bMagicAddRace,eff,r,n;     			Aumenta a efetividade do efeito eff lançado em inimigos da raça r em n%
+bonus2 bMagicAddEle,eff,e,n;      			Aumenta a efetividade do efeito eff lançado em inimigos do elemento e em n%
+bonus2 bSkillAddRace,eff,r,n;     			Aumenta a efetividade do efeito eff de habilidades lançadas em inimigos da raça r em n%
+bonus2 bSkillAddRace2,eff,r,n;    			Aumenta a efetividade do efeito eff de habilidades lançadas em inimigos da raça r em n%
+bonus2 bSkillAddEle,eff,e,n;      			Aumenta a efetividade do efeito eff de habilidades lançadas em inimigos do elemento e em n%
+bonus2 bSkillAddRace,sk,r,n;      			Aumenta a efetividade da habilidade sk lançada em inimigos da raça r em n%
+bonus2 bSkillAddRace2,sk,r,n;    			Aumenta a efetividade da habilidade sk lançada em inimigos da raça r em n%
+bonus2 bSkillAddEle,sk,e,n;      			Aumenta a efetividade da habilidade sk lançada em inimigos do elemento e em n%
+bonus2 bAutoSpell,sk,rate,n;     			Tem n% de chance de lançar a habilidade sk ao atacar
+bonus2 bAutoSpellWhenHit,sk,rate,n;    	Tem n% de chance de lançar a habilidade sk quando atacado
+bonus2 bSkillAutoSpell,sk,rate,n;    		Tem n% de chance de lançar a habilidade sk ao usar uma habilidade específica
+bonus2 bSkillAutoSpellWhenHit,sk,rate,n;	Tem n% de chance de lançar a habilidade sk quando atacado por uma habilidade específica
+bonus2 bSkillAtkRate,n;         			Aumenta o dano de habilidades em n%
+bonus2 bIgnoreMagicDefRace,r,n;  			Ignora a defesa mágica dos inimigos da raça r em n%
+bonus2 bIgnoreMagicDefRace2,r,n; 			Ignora a defesa mágica dos inimigos da raça r em n%
+bonus2 bIgnoreDefRace,r,n;      			Ignora a defesa física dos inimigos da raça r em n%
+bonus2 bIgnoreDefRace2,r,n;     			Ignora a defesa física dos inimigos da raça r em n%
+bonus2 bIgnoreDefEle,e,n;        			Ignora a defesa física dos inimigos do elemento e em n%
+bonus2 bIgnoreDefEle2,e,n;      			Ignora a defesa física dos inimigos do elemento e em n%
+
+=============================
+| 3. Bônus Específicos de Grupo |
+=============================
+
+Modificadores de Dano
+----------------
+bonus2 bAddEle,e,x;       	+x% de dano físico contra o elemento e
+bonus3 bAddEle,e,x,bf;    	+x% de dano físico contra o elemento e com critérios de ativação bf
+bonus2 bMagicAddEle,e,x;  	+x% de dano mágico contra o elemento e
+bonus2 bSubEle,e,x;       	+x% de redução de dano contra o elemento de ataque e
+bonus3 bSubEle,e,x,bf;    	+x% de redução de dano contra o elemento de ataque e com critérios de ativação bf
+bonus2 bSubDefEle,e,x;    	+x% de redução de dano físico do inimigo com elemento de defesa e
+bonus2 bMagicSubDefEle,e,x;	+x% de redução de dano mágico do inimigo com elemento de defesa e
+
+bonus2 bAddRace,r,x;      	+x% de dano físico contra a raça r
+bonus2 bMagicAddRace,r,x; 	+x% de dano mágico contra a raça r
+bonus2 bSubRace,r,x;      	+x% de redução de dano contra a raça r
+bonus3 bSubRace,r,x,bf;   	+x% de redução de dano contra a raça r com critérios de ativação bf
+
+bonus2 bAddClass,c,x;     	+x% de dano físico contra a classe c
+bonus2 bMagicAddClass,c,x;	+x% de dano mágico contra a classe c
+bonus2 bSubClass,c,x;     	+x% de redução de dano contra a classe c
+
+bonus2 bAddSize,s,x;      	+x% de dano físico contra o tamanho s
+bonus2 bMagicAddSize,s,x; 	+x% de dano mágico contra o tamanho s
+bonus2 bSubSize,s,x;      	+x% de redução de dano contra o tamanho s
+bonus2 bWeaponSubSize,s,x;	+x% de redução de dano físico contra o tamanho s
+bonus2 bMagicSubSize,s,x;	+x% de redução de dano mágico contra o tamanho s
+bonus bNoSizeFix;       		Ignore o modificador de tamanho ao calcular o dano
+
+bonus2 bAddDamageClass,mid,x;     	+x% de dano físico contra o monstro mid
+bonus2 bAddMagicDamageClass,mid,x;	+x% de dano mágico contra o monstro mid
+                                  	OBSERVAÇÃO: Contra jogadores, mid é o ID do trabalho do jogador.
+									LIMITE: Apenas 10 desses bônus podem ser definidos. Os que excedem 10 são ignorados.
+
+bonus2 bAddDefMonster,mid,x;     	+x% de redução de dano físico contra o monstro mid
+bonus2 bAddMDefMonster,mid,x;     +x% de redução de dano mágico contra o monstro mid
+                                  	OBSERVAÇÃO: Contra jogadores, mid é o ID do trabalho do jogador.
+
+bonus2 bSubRace2,mr,x;      	+x% de redução de dano contra a raça de monstros mr
+bonus3 bSubRace2,mr,x,bf;   	+x% de redução de dano contra a raça de monstros mr com critérios de ativação bf
+
+bonus2 bAddMonsterDropItem,itemId,rate;            	+x% de chance de dropar o item de ID itemId do monstro
+bonus2 bAddMonsterDropItemGroup,groupId,rate;      	+x% de chance de dropar um item de um grupo groupId do monstro
+bonus2 bAddMonsterDropItemById,itemId,rate,monsterId;	+x% de chance de dropar o item de ID itemId do monstro com ID monsterId
+bonus2 bAddMonsterDropItemById2,itemId,rate,monsterId;	+x% de chance de dropar o item de ID itemId do monstro com ID monsterId
+                                                    	(o mesmo que bAddMonsterDropItemById, mas não leva em consideração
+                                                     	o drop rate de itens adicionais do monstro)
+
+bonus2 bNoReflect;         	Ignora a habilidade de refletir dano
+
+bonus2 bNoMagicDamage;     	Ignora a habilidade de causar dano mágico
+
+bonus2 bSplashRange,x;     	+x células de alcance em habilidades de dano em área
+
+bonus2 bSplashArea,x;      	Aumenta o raio de habilidades de dano em área em x células
+
+bonus2 bHealPower,x;       	+x% de poder de cura em habilidades de cura
+
+bonus2 bIgnoreMdef;        	Ignora a defesa mágica do alvo
+
+bonus2 bIgnoreDefRace,r,x; 	Ignora x% da defesa física do alvo com a raça r
+
+bonus2 bIgnoreDefClass,c,x; 	Ignora x% da defesa física do alvo com a classe c
+
+bonus2 bIgnoreDefEle,e,x;   	Ignora x% da defesa física do alvo contra o elemento e
+
+bonus2 bIgnoreDefSize,s,x;  	Ignora x% da defesa física do alvo com o tamanho s
+
+bonus2 bIgnoreMagicDefRace,r,x; 	Ignora x% da defesa mágica do alvo com a raça r
+
+bonus2 bIgnoreMagicDefClass,c,x;	Ignora x% da defesa mágica do alvo com a classe c
+
+bonus2 bIgnoreMagicDefEle,e,x;  	Ignora x% da defesa mágica do alvo contra o elemento e
+
+bonus2 bIgnoreMagicDefSize,s,x; 	Ignora x% da defesa mágica do alvo com o tamanho s
+
+bonus2 bIgnoreDefMonster,mid,x;  	Ignora x% da defesa física do alvo contra o monstro mid
+                               	OBSERVAÇÃO: Contra jogadores, mid é o ID do trabalho do jogador.
+
+bonus2 bIgnoreMdefRace,r,x;   	Ignora x% da defesa mágica do alvo com a raça r
+
+bonus2 bIgnoreMdefClass,c,x;  	Ignora x% da defesa mágica do alvo com a classe c
+
+bonus2 bIgnoreMdefEle,e,x;    	Ignora x% da defesa mágica do alvo contra o elemento e
+
+bonus2 bIgnoreMdefSize,s,x;   	Ignora x% da defesa mágica do alvo com o tamanho s
+
+bonus2 bIgnoreMdefMonster,mid,x;  	Ignora x% da defesa mágica do alvo contra o monstro mid
+                               	OBSERVAÇÃO: Contra jogadores, mid é o ID do trabalho do jogador.
+
+
+
 //===== rAthena Documentation ================================
 //= rAthena Item Bonuses List
 //===== By: ==================================================
@@ -15,7 +374,7 @@ This list contains all available constants referenced in the 'bonus' commands.
 * Status effect (eff)
 	Eff_Bleeding, Eff_Blind, Eff_Burning, Eff_Confusion, Eff_Crystalize, Eff_Curse, Eff_DPoison,
 	Eff_Fear, Eff_Freeze, Eff_Poison, Eff_Silence, Eff_Sleep, Eff_Stone, Eff_Stun, Eff_Freezing,
-	Eff_Heat, Eff_Deepsleep, Eff_WhiteImprison, Eff_Hallucination
+	Eff_Heat, Eff_Deepsleep
 
 * Element (e)
 	Ele_Dark, Ele_Earth, Ele_Fire, Ele_Ghost, Ele_Holy, Ele_Neutral, Ele_Poison,
@@ -30,8 +389,7 @@ This list contains all available constants referenced in the 'bonus' commands.
 	RC2_Treasure, RC2_BioLab, RC2_Manuk, RC2_Splendide, RC2_Scaraba, RC2_OGH_ATK_DEF, RC2_OGH_Hidden,
 	RC2_Bio5_Swordman_Thief, RC2_Bio5_Acolyte_Merchant, RC2_Bio5_Mage_Archer, RC2_Bio5_MVP,
 	RC2_Clocktower, RC2_Thanatos, RC2_Faceworm, RC2_Hearthunter, RC2_Rockridge, RC2_Werner_Lab,
-	RC2_Temple_Demon, RC2_Illusion_Vampire, RC2_Malangdo, RC2_EP172ALPHA, RC2_EP172BETA, RC2_EP172BATH,
-	RC2_Illusion_Turtle, RC2_Rachel_Sanctuary, RC2_Illusion_Luanda, RC2_Illusion_Frozen, RC2_Illusion_Moonlight
+	RC2_Temple_Demon, RC2_Illusion_Vampire, RC2_Malangdo
 
 * Class (c)
 	Class_Normal, Class_Boss, Class_Guardian, Class_All

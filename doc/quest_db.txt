@@ -1,3 +1,65 @@
+//===== Documentação do rAthena ================================
+//= Estrutura do Banco de Dados de Quests
+//===== Por: ==================================================
+//= Equipe de Desenvolvimento do rAthena
+//===== Última Atualização: ===================================
+//= 20220629
+//===== Descrição: ============================================
+//= Explicação do arquivo quest_db.yml e sua estrutura.
+//============================================================
+
+---------------------------------------
+
+Id: ID da Quest.
+
+---------------------------------------
+
+Title: Título da Quest.
+
+---------------------------------------
+
+TimeLimit: Quantidade de tempo antes que a quest expire.
+
+Use um número seguido de "d" para dia(s), "h" para hora(s), "mn" para minuto(s) e "s" para segundo(s).
+Especificar com "+" marcará quanto tempo falta até a quest expirar.
+Especificar sem "+" marcará o horário exato em que a quest expira. Formato: "d" (opcional), [0-23]"h" (obrigatório), [0-59]"mn" (opcional), [0-59]"s" (opcional).
+
+Observe que o número antes de "d" apenas desloca o temporizador exato para o(s) dia(s) fornecido(s).
+
+---------------------------------------
+
+Targets: Alvo(s) objetivo(s) da Quest.
+
+O alvo pode ser uma combinação de Mob/Count ou de Id/Count e outros campos.
+Se Mob for fornecido, Count é obrigatório e os outros campos são ignorados.
+Se Id for fornecido, Count é obrigatório para cada nova entrada.
+
+  - Mob                Nome do monstro a ser morto (nome do monstro no Aegis).
+    Count              Quantidade de monstros a serem mortos. Defina como 0 para pular o alvo na importação.
+    Id                 Índice único do alvo para o ID da Quest. Requer um número positivo.
+    Race               Raça do monstro alvo. (Padrão: Todos). Raças válidas são Angel, Brute, DemiHuman, Demon, Dragon, Fish, Formless, Insect, Plant, Undead, All.
+    Size               Tamanho do monstro alvo. (Padrão: Todos). Tamanhos válidos são Small, Medium, Large, All.
+    Element            Elemento do monstro alvo. (Padrão: Todos). Elementos válidos são Dark, Earth, Fire, Ghost, Holy, Neutral, Poison, Undead, Water, Wind, All.
+    MinLevel           Nível mínimo do monstro alvo. Se não fornecido, mas MaxLevel definido, MinLevel é 1. Defina como 0 para ignorar MinLevel na importação.
+    MaxLevel           Nível máximo do monstro alvo. Defina como 0 para ignorar MaxLevel na importação.
+    Location           Nome do mapa onde as mortes são contadas.
+    MapName            Nome do mapa exibido na interface da Quest.
+    MapMobTargets      Lista de nomes de monstros. Somente os nomes da lista aumentarão o contador de mortes. Ativo somente quando Id é usado.
+      <name>: <bool>   Nome do monstro e se o monstro é adicionado ou removido da lista.
+
+---------------------------------------
+
+Drops: Alvo(s) de queda de item da Quest.
+
+  - Mob              Monstro a ser morto. 0 se aplica a todos os monstros.
+    Item             Item a ser dropado (nome do item no Aegis).
+    Count            Quantidade de itens que serão dropados. Itens não empilháveis têm como padrão 1.
+    Rate             Taxa de queda do item. (10000 = 100%)
+
+
+
+
+
 //===== rAthena Documentation ================================
 //= Quest Database Structure
 //===== By: ==================================================
@@ -20,30 +82,11 @@ Title: Quest title.
 
 TimeLimit: Amount of time before the quest expires.
 
-Specifying with "+" will mark how long until the quest expires.
 Use a number followed by "d" for day(s), "h" for hour(s), "mn" for minute(s), and "s" for second(s).
-Format: "d" (optional), [0-23]"h" (optional), [0-59]"mn" (optional), [0-59]"s" (optional).
+Specifying with "+" will mark how long until the quest expires.
+Specifying without "+" will mark the exact time the quest expires. Format: "d" (optional), [0-23]"h" (required), [0-59]"mn" (optional), [0-59]"s" (optional).
 
-Example:
-  - Id: 2069
-    Title: Tierra Gorge Battle
-    # The quest expires 5 minutes after being taken.
-    TimeLimit: +5mn
-
-Specifying without "+" will mark the exact time the quest expires.
-Use a number followed by "d" for day(s) to shift the exact timer to the given day(s) or use the days of the week to set the expiration day,
-and "h" for hour(s), "mn" for minute(s), and "s" for second(s).
-Format: [days of the week] or "d" (optionals), [0-23]"h" (optional), [0-59]"mn" (optional), [0-59]"s" (optional).
-
-Examples:
-  - Id: 9419
-    Title: Attack Sky Fortress Invading Prontera
-    # The quest expires 3 days after being taken at 4am.
-    TimeLimit: 3d 4h
-  - Id: 5965
-    Title: "[Standby] Devil's Special"
-    # The quest expires Monday at 4am.
-    TimeLimit: Monday 4h
+Please note the number before "d" only shifts the exact timer to the given day(s).
 
 ---------------------------------------
 
