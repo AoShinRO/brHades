@@ -1297,7 +1297,13 @@ void pc_makesavestatus(map_session_data *sd) {
 		sd->status.clothes_color = 0;
 
 	if(!battle_config.save_body_style)
+	{
+#if PACKETVER >= 20231220
+		sd->status.body = sd->status.class_;
+#else
 		sd->status.body = 0;
+#endif
+	}
 
 	//Only copy the Cart/Peco/Falcon options, the rest are handled via
 	//status change load/saving. [Skotlex]
@@ -10800,7 +10806,11 @@ bool pc_jobchange(map_session_data *sd,int job, char upper)
 
 	// Reset body style to 0 before changing job to avoid
 	// errors since not every job has a alternate outfit.
+#if PACKETVER >= 20231220
+	sd->status.body = job;
+#else
 	sd->status.body = 0;
+#endif
 	clif_changelook(&sd->bl,LOOK_BODY2,0);
 
 	sd->status.class_ = job;
@@ -15340,7 +15350,7 @@ void pc_set_costume_view(map_session_data *sd) {
 		sd->status.robe = id->look;
 
 	// Costumes check
-	if (!map_getmapflag(sd->bl.m, MF_NOCOSTUME)) {
+	if (!map_getmapflag(sd->bl.m, MF_NOCOSTUME) && !sd->status.show_costumes) {
 		if ((i = sd->equip_index[EQI_COSTUME_HEAD_LOW]) != -1 && (id = sd->inventory_data[i])) {
 			if (!(id->equip&(EQP_COSTUME_HEAD_MID|EQP_COSTUME_HEAD_TOP)))
 				sd->status.head_bottom = id->look;

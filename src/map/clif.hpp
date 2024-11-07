@@ -54,6 +54,8 @@ enum e_macro_report_status : uint8;
 enum e_hom_state2 : uint8;
 enum _sp;
 enum e_searchstore_failure : uint16;
+enum emote_msg : int8;
+enum emotion_expansion_msg : int8;
 
 enum e_PacketDBVersion { // packet DB
 	MIN_PACKET_DB  = 0x064,
@@ -348,6 +350,26 @@ enum e_emotion_type : int8 {
 	ET_YUT5,
 	ET_YUT6,
 	ET_YUT7,
+	ET_CLICK_ME,
+	ET_DAILY_QUEST,
+	ET_EVENT,
+	ET_JOB_QUEST,
+	ET_TRAFFIC_LINE_QUEST,
+	ET_CUSTOM_1,
+	ET_CUSTOM_2,
+	ET_CUSTOM_3,
+	ET_CUSTOM_4,
+	ET_CUSTOM_5,
+	ET_CUSTOM_6,
+	ET_CUSTOM_7,
+	ET_CUSTOM_8,
+	ET_CUSTOM_9,
+	ET_CUSTOM_10,
+	ET_CUSTOM_11,
+	ET_CUSTOM_12,
+	ET_CUSTOM_13,
+	ET_CUSTOM_14,
+	ET_CUSTOM_15,
 	//
 	ET_MAX
 };
@@ -694,7 +716,9 @@ enum e_config_type : uint32 {
 	CONFIG_OPEN_EQUIPMENT_WINDOW = 0,
 	CONFIG_CALL,
 	CONFIG_PET_AUTOFEED,
-	CONFIG_HOMUNCULUS_AUTOFEED
+	CONFIG_HOMUNCULUS_AUTOFEED,
+	//4 free
+	CONFIG_SHOW_COSTUMES = 5
 };
 
 enum e_memorial_dungeon_command : uint16 {
@@ -1484,5 +1508,14 @@ void clif_macro_user_report_response(map_session_data *sd, int status, char *rep
 
 // Body Size Controller
 void clif_body_size(block_list* bl, int val1);
+
+// New Emotions
+void clif_parse_emotion2(int fd, map_session_data *sd);
+void clif_parse_emotion_expansion_request(int fd, map_session_data *sd);
+void clif_emotion_success(block_list *bl, int16 packId, int16 emoteId);
+void clif_emotion_fail(map_session_data *sd, int16 packId, int16 emoteId, emote_msg status);
+void clif_emotion_expansion_response_success(map_session_data *sd, int16 packId, int8 isRented, uint32 RentEndTime);
+void clif_emotion_expansion_response_fail(map_session_data *sd, int16 packId, emotion_expansion_msg status);
+void clif_emotion_expansion_list(map_session_data *sd, std::vector<PACKET_ZC_EMOTION_EXPANTION_LIST_sub> &list);
 
 #endif /* CLIF_HPP */
