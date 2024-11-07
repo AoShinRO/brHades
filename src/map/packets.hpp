@@ -1610,6 +1610,7 @@ struct PACKET_CZ_REQUEST_MOVENPC{
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(CZ_REQUEST_MOVENPC, 0x232);
 
+
 struct PACKET_CZ_REQ_EMOTION2 {
 	uint16 packetType;
 	uint16 packId;
@@ -1701,6 +1702,7 @@ struct PACKET_ZC_MACRO_USER_REPORT_RES {
 	uint32 status;
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(ZC_MACRO_USER_REPORT_RES, 0x0be3);
+#endif
 
 // NetBSD 5 and Solaris don't like pragma pack but accept the packed attribute
 #if !defined( sun ) && ( !defined( __NETBSD__ ) || __NetBSD_Version__ >= 600000000 )

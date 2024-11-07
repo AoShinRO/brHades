@@ -9620,10 +9620,8 @@ void clif_emotion(block_list& bl,e_emotion_type type){
 		return;
 
 #if PACKETVER >= 20230802
-	if(bl.type == BL_PC){
 		clif_emotion_success(&bl, 0, type);
 		return;
-	}
 #endif
 
 	PACKET_ZC_EMOTION p{};
