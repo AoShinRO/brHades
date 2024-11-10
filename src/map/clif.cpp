@@ -21992,7 +21992,7 @@ void clif_ui_open( map_session_data& sd, enum out_ui_type ui_type, int32 data ){
 #endif
 
 		case OUT_UI_CHANGE_MATERIAL:{
-#if PACKETVER_MAIN_NUM >= 20210203
+#if PACKETVER_MAIN_NUM >= 20221019
 		{
 			PACKET_ZC_UI_OPEN3 p = {};
 			p.PacketType = HEADER_ZC_UI_OPEN3;
