@@ -112,9 +112,9 @@ Body:
       - ET_YUT7
   - PackId: 1
     PackType: 1
-    PackPrice: 0
+    PackPrice: 10
     SaleStart: 20230802
-    SaleEnd: 20230830
+    SaleEnd: 0
     RentalPeriod: 0
     EmotesList:
       - ET_KIK
