@@ -92,7 +92,7 @@ void do_final_path(){
  * Find the closest reachable cell, 'count' cells away from (x0,y0) in direction (dx,dy).
  * Income after the coordinates of the blow
  *------------------------------------------*/
-int path_blownpos(int16 m,int16 x0,int16 y0,int16 dx,int16 dy,int count)
+int32 path_blownpos(int16 m,int16 x0,int16 y0,int16 dx,int16 dy,int32 count)
 {
 	struct map_data *mapdata = map_getmapdata(m);
 
@@ -117,8 +117,8 @@ int path_blownpos(int16 m,int16 x0,int16 y0,int16 dx,int16 dy,int count)
 				break;
 			else
 			{// attempt partial movement
-				int fx = ( dx != 0 && map_getcellp(mapdata,x0+dx,y0,CELL_CHKPASS) );
-				int fy = ( dy != 0 && map_getcellp(mapdata,x0,y0+dy,CELL_CHKPASS) );
+				int32 fx = ( dx != 0 && map_getcellp(mapdata,x0+dx,y0,CELL_CHKPASS) );
+				int32 fy = ( dy != 0 && map_getcellp(mapdata,x0,y0+dy,CELL_CHKPASS) );
 				if( fx && fy )
 				{
 					if(rnd_chance(50, 100))
@@ -146,9 +146,9 @@ int path_blownpos(int16 m,int16 x0,int16 y0,int16 dx,int16 dy,int count)
  *------------------------------------------*/
 bool path_search_long(struct shootpath_data *spd,int16 m,int16 x0,int16 y0,int16 x1,int16 y1,cell_chk cell)
 {
-	int dx, dy;
-	int wx = 0, wy = 0;
-	int weight;
+	int32 dx, dy;
+	int32 wx = 0, wy = 0;
+	int32 weight;
 	struct map_data *mapdata = map_getmapdata(m);
 	struct shootpath_data s_spd;
 

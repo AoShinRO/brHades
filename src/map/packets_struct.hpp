@@ -4040,16 +4040,10 @@ struct PACKET_ZC_PARTY_CONFIG {
 DEFINE_PACKET_HEADER(ZC_PARTY_CONFIG, 0x02c9);
 #endif
 
-struct PACKET_ZC_ROLE_CHANGE_sub {
-	int16 packetType;
-	int32 flag;
-	char name[NAME_LENGTH];
-} __attribute__((packed));
 struct PACKET_ZC_ROLE_CHANGE {
 	int16 packetType;
 	int32 flag;
 	char name[NAME_LENGTH];
-	struct PACKET_ZC_ROLE_CHANGE_sub newOwner;
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(ZC_ROLE_CHANGE, 0x00e1);
 
@@ -4220,49 +4214,6 @@ struct PACKET_ZC_BROADCAST_ITEMREFINING_RESULT {
 	int8 status;
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(ZC_BROADCAST_ITEMREFINING_RESULT, 0x0ada);
-#endif
-
-struct PACKET_ZC_ACK_RANKING_name {
-	char name[NAME_LENGTH];
-} __attribute__((packed));
-
-struct PACKET_ZC_ACK_RANKING_points {
-	uint32 points;
-} __attribute__((packed));
-
-#if PACKETVER_MAIN_NUM >= 20190731 || PACKETVER_RE_NUM >= 20190703 || PACKETVER_ZERO_NUM >= 20190724
-struct PACKET_ZC_ACK_RANKING_sub {
-	char name[NAME_LENGTH];
-	uint32 points;
-} __attribute__((packed));
-
-struct PACKET_ZC_ACK_RANKING {
-	int16 packetType;
-	int16 rankType;
-	uint32 chars[10];
-	uint32 points[10];
-	uint32 myPoints;
-} __attribute__((packed));
-DEFINE_PACKET_HEADER(ZC_ACK_RANKING, 0x0af6);
-#elif PACKETVER_MAIN_NUM >= 20130605 || PACKETVER_RE_NUM >= 20130529 || defined(PACKETVER_ZERO)
-struct PACKET_ZC_ACK_RANKING_sub {
-	struct PACKET_ZC_ACK_RANKING_name names[10];
-	struct PACKET_ZC_ACK_RANKING_points points[10];
-} __attribute__((packed));
-
-struct PACKET_ZC_ACK_RANKING {
-	int16 packetType;
-	int16 rankType;
-	struct PACKET_ZC_ACK_RANKING_sub ranks;
-	uint32 myPoints;
-} __attribute__((packed));
-
-DEFINE_PACKET_HEADER(ZC_ACK_RANKING, 0x097d);
-#else
-struct PACKET_ZC_ACK_RANKING_sub {
-	struct PACKET_ZC_ACK_RANKING_name names[10];
-	struct PACKET_ZC_ACK_RANKING_points points[10];
-} __attribute__((packed));
 #endif
 
 struct PACKET_ZC_STATUS_CHANGE_ACK {

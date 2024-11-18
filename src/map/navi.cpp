@@ -40,11 +40,11 @@ static BinaryHeap navi_openset;	// use static heap for all path calculations
 
 // So we don't have to allocate every time, use static structures
 static struct path_node tp[MAX_WALKPATH_NAVI * MAX_WALKPATH_NAVI + 1];
-static int tpused[MAX_WALKPATH_NAVI * MAX_WALKPATH_NAVI + 1];
+static int32 tpused[MAX_WALKPATH_NAVI * MAX_WALKPATH_NAVI + 1];
 
 /// Path_node processing in A* pathfinding.
 /// Adds new node to heap and updates/re-adds old ones if necessary.
-static int add_path(uint16 x, uint16 y, unsigned short g_cost, path_node& parent, unsigned short h_cost)
+static unsigned short add_path(uint16 x, uint16 y, unsigned short g_cost, path_node& parent, unsigned short h_cost)
 {
 	int i = navi_openset.calc_index_naviwalkpath(x, y);
 
@@ -125,8 +125,6 @@ static bool navi_path_search(struct navi_walkpath_data *wpd, const struct navi_p
 	int16 ys = mapdata->ys - 1;
 	unsigned char len = 0;
 	short j; // need to be signed
-
-	unsigned short e = 0; // error flag
 		
 	// Saves allowed directions for the current cell. Diagonal directions
 	// are only allowed if both directions around it are allowed. This is
@@ -134,9 +132,10 @@ static bool navi_path_search(struct navi_walkpath_data *wpd, const struct navi_p
 	// For example, you can only go NW from the current cell, if you can
 	// go N *and* you can go W. Otherwise you need to walk around the
 	// (corner of the) non-walkable cell.
-	int allowed_dirs;
+	unsigned short allowed_dirs;
 
 	unsigned short g_cost;
+	unsigned short e = 0; // error flag
 
 	// A* (A-star) pathfinding
 	// We always use A* for finding walkpaths because it is what game client uses.
@@ -159,7 +158,9 @@ static bool navi_path_search(struct navi_walkpath_data *wpd, const struct navi_p
 	navi_openset.push_node(&tp[i]); // Put start node to 'open' set
 	
 	for (;;) {
-	
+
+		e = 0; // error flag
+
 		allowed_dirs = 0;
 
 		if (navi_openset.length() == 0) {
@@ -262,7 +263,7 @@ void write_footer(std::ostream &os) {
 // 5005 = 5003 + monsters??? i really have no clue
 //        maybe it's maps that you must leave to reach parts of it
 //        for example, ptr_fild04?
-int map_type(const struct map_data * m) {
+int32 map_type(const struct map_data * m) {
 
 	bool segmented = false;
 	bool has_mob = false;
@@ -350,7 +351,7 @@ void write_npc(std::ostream &os, const struct npc_data *nd) {
 	os << "},\n";
 }
 
-void write_spawn(std::ostream &os, const struct map_data * m, const std::shared_ptr<s_mob_db> mobinfo, int amount, int idx) {
+void write_spawn(std::ostream &os, const struct map_data * m, const std::shared_ptr<s_mob_db> mobinfo, int32 amount, int32 idx) {
 
 	os << "\t{";
 	os << "\"" << m->name << "\", ";
@@ -385,27 +386,27 @@ void write_object_lists() {
 		exit(1);
 	}
 
-	int warp_count = 0;
-	int npc_count = 0;
-	int spawn_count = 0;
+	int32 warp_count = 0;
+	int32 npc_count = 0;
+	int32 spawn_count = 0;
 
 	write_header(links_file, "Navi_Link");
 	write_header(npc_file, "Navi_Npc");
 	write_header(mob_file, "Navi_Mob");
 	write_header(map_file, "Navi_Map");
 
-	for (int mapid = 0; mapid < map_num; mapid++) {
+	for (int32 mapid = 0; mapid < map_num; mapid++) {
 		auto m = map_getmapdata(mapid);
 
 		// Warps/NPCs
-		for (int npcidx = 0; npcidx < m->npc_num; npcidx++) {
+		for (int32 npcidx = 0; npcidx < m->npc_num; npcidx++) {
 			struct npc_data *nd = m->npc[npcidx];
 
 			if (nd == nullptr)
 				continue;
 
 			if (nd->subtype == NPCTYPE_WARP) {
-				int target = nd->navi.warp_dest.m;
+				int32 target = nd->navi.warp_dest.m;
 				if (target < 0)
 					continue;
 
@@ -425,7 +426,7 @@ void write_object_lists() {
 				m->navi.npcs.push_back(nd);
 
 				for (auto &link : nd->links) {
-					int target = link.warp_dest.m;
+					int32 target = link.warp_dest.m;
 					if (target < 0)
 						continue;
 					
@@ -440,7 +441,7 @@ void write_object_lists() {
 		}
 
 		// Mobs
-		for (int mobidx = 0; mobidx < MAX_MOB_LIST_PER_MAP; mobidx++) {
+		for (int32 mobidx = 0; mobidx < MAX_MOB_LIST_PER_MAP; mobidx++) {
 			if (m->moblist[mobidx] == nullptr)
 				continue;
 
@@ -499,7 +500,7 @@ void write_npc_distances() {
 
 	write_header(dist_npc_file, "Navi_NpcDistance");
 
-	for (int mapid = 0; mapid < map_num; mapid++) {
+	for (int32 mapid = 0; mapid < map_num; mapid++) {
 		auto m = map_getmapdata(mapid);
 #ifdef DETAILED_LOADING_OUTPUT
 		ShowStatus("Loading [%i/%i]" CL_CLL "\r", mapid, map_num);
@@ -569,7 +570,7 @@ void write_map_distances() {
 	auto dist_map_file = std::ofstream(filePrefix + "./navi_linkdistance_krpri.lub");
 	write_header(dist_map_file, "Navi_Distance");
 
-	for (int mapid = 0; mapid < map_num; mapid++) {
+	for (int32 mapid = 0; mapid < map_num; mapid++) {
 		const struct map_data * m = map_getmapdata(mapid);
 		write_mapdist_header(dist_map_file, m);
 		for (auto nd : m->navi.warps_outof) {

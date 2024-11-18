@@ -109,7 +109,7 @@
 #endif
 
 /// Uncomment to forcibly disable the detailed loading output.
-/// This will noticeably decrease the boot time of the map server by not having to print so many status messages.
+/// This will noticeably decrease the boot time of the map server by not having to print32 so many status messages.
 //#undef DETAILED_LOADING_OUTPUT
 
 /// Descomente para habilitar o uso de APIs da google para traducao de npcs com o atcommand @langtype. PS: Isso pode ser lento...
