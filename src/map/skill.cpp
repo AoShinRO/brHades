@@ -15596,7 +15596,7 @@ int skill_castend_map (map_session_data *sd, uint16 skill_id, const char *mapnam
 			// check if the chosen map exists in the memo list
 			size_t ext_size = static_cast<size_t>(lv + pc_readreg2(sd, EXT_MEMO_VAR));
 			if(ext_size > MAX_MEMOPOINTS+1) ext_size = MAX_MEMOPOINTS+1; // crash prevention
-			ARR_FIND(0, util::clamp<int32>(ext_size), i, strncmp(p[i]->map, mapname, sizeof(p[i]->map)) == 0);
+			ARR_FIND(0, static_cast<int32>(ext_size), i, strncmp(p[i]->map, mapname, sizeof(p[i]->map)) == 0);
 			if( i < ext_size ) {
 				x=p[i]->x;
 				y=p[i]->y;
