@@ -5633,57 +5633,79 @@ static void clif_graffiti(block_list &bl, skill_unit &unit, enum send_target tar
 /// 08c7 <lenght>.W <id> L <creator id>.L <x>.W <y>.W <unit id>.B <range>.W <visible>.B (ZC_SKILL_ENTRY3)
 /// 099f <lenght>.W <id> L <creator id>.L <x>.W <y>.W <unit id>.L <range>.W <visible>.B (ZC_SKILL_ENTRY4)
 /// 09ca <lenght>.W <id> L <creator id>.L <x>.W <y>.W <unit id>.L <range>.B <visible>.B <skill level>.B (ZC_SKILL_ENTRY5)
-void clif_getareachar_skillunit(block_list &bl, skill_unit &unit, enum send_target target, bool visible) {
+void clif_getareachar_skillunit(struct block_list* bl, struct skill_unit* unit, enum send_target target, bool visible) {
+	int32 header = 0, unit_id = 0, pos = 0, fd = 0, len = -1;
+	unsigned char buf[128];
 
-	uint16 unit_id = 0;
-	int fd = 0;
+	nullpo_retv(bl);
+	nullpo_retv(unit);
 
-	if (bl.type != BL_PC)
+	if (bl->type == BL_PC)
+		fd = ((TBL_PC*)bl)->fd;
+
+	if (unit->group->state.guildaura)
 		return;
 
-	map_session_data* sd = reinterpret_cast<TBL_PC*>(&bl);
-
-	if (unit.group->state.guildaura)
-		return;
-
-	if (unit.group->state.song_dance&0x1 && unit.val2&(1 << UF_ENSEMBLE))
-		unit_id = unit.val2&(1 << UF_SONG) ? UNT_DISSONANCE : UNT_UGLYDANCE;
-	else if (skill_get_unit_flag(unit.group->skill_id, UF_RANGEDSINGLEUNIT) && !(unit.val2 & (1 << UF_RANGEDSINGLEUNIT)))
+	if (unit->group->state.song_dance & 0x1 && unit->val2 & (1 << UF_ENSEMBLE))
+		unit_id = unit->val2 & (1 << UF_SONG) ? UNT_DISSONANCE : UNT_UGLYDANCE;
+	else if (skill_get_unit_flag(unit->group->skill_id, UF_RANGEDSINGLEUNIT) && !(unit->val2 & (1 << UF_RANGEDSINGLEUNIT)))
 		unit_id = UNT_DUMMYSKILL; // Use invisible unit id for other case of rangedsingle unit
 	else
-		unit_id = unit.group->unit_id;
+		unit_id = unit->group->unit_id;
 
 	if (!visible)
 		unit_id = UNT_DUMMYSKILL; // Hack to makes hidden trap really hidden!
-
 #if PACKETVER >= 3
 	if (unit_id == UNT_GRAFFITI) { // Graffiti [Valaris]
-		clif_graffiti(bl, unit, target);
+		clif_graffiti(*bl, *unit, target);
 		return;
 	}
 #endif
 
-	PACKET_ZC_SKILL_ENTRY p = {};
-
-	p.packetType = HEADER_ZC_SKILL_ENTRY;
-	p.unitId = unit.bl.id;
-	p.srcId = unit.group->src_id;
-	p.x = unit.bl.x;
-	p.y = unit.bl.y;
-	p.viewId = util::clamp<decltype(p.viewId)>( unit_id );
-	p.isVisible = visible;
-#if PACKETVER > 20120702
-	p.packetLen = sizeof(p);
-	p.range = util::clamp<decltype(p.range)>( unit.range );
-#if PACKETVER >= 20130731
-	p.skillLv = util::clamp<decltype(p.skillLv)>( unit.group->skill_lv );
-#endif
+#if PACKETVER <= 20120702
+	header = 0x011f;
+#elif PACKETVER < 20130731
+	header = 0x099f;
+#else
+	header = 0x09ca;
 #endif
 
-	clif_send(&p,sizeof(p),&bl,target);
- 
-	if (unit.group->skill_id == WZ_ICEWALL)
-		clif_changemapcell(unit.bl.m, unit.bl.x, unit.bl.y, 5, SELF, &bl);
+	len = packet_len(header);
+	WBUFW(buf, pos) = header;
+	if (header != 0x011f) {
+		WBUFW(buf, pos + 2) = len;
+		pos += 2;
+	}
+	WBUFL(buf, pos + 2) = unit->bl.id;
+	WBUFL(buf, pos + 6) = unit->group->src_id;
+	WBUFW(buf, pos + 10) = unit->bl.x;
+	WBUFW(buf, pos + 12) = unit->bl.y;
+	switch (header) {
+	case 0x011f:
+		WBUFB(buf, pos + 14) = unit_id;
+		WBUFB(buf, pos + 15) = visible;
+		break;
+	case 0x08c7:
+		WBUFB(buf, pos + 14) = unit_id;
+		WBUFW(buf, pos + 15) = unit->range;
+		WBUFB(buf, pos + 17) = visible;
+		break;
+	case 0x099f:
+		WBUFL(buf, pos + 14) = unit_id;
+		WBUFW(buf, pos + 18) = unit->range;
+		WBUFB(buf, pos + 20) = visible;
+		break;
+	case 0x09ca:
+		WBUFL(buf, pos + 14) = unit_id;
+		WBUFB(buf, pos + 18) = util::clamp<unsigned char>(unit->range);
+		WBUFB(buf, pos + 19) = visible;
+		WBUFB(buf, pos + 20) = util::clamp<unsigned char>(unit->group->skill_lv);
+		break;
+	}
+	clif_send(buf, len, bl, target);
+
+	if (unit->group->skill_id == WZ_ICEWALL)
+		clif_changemapcell(unit->bl.m, unit->bl.x, unit->bl.y, 5, SELF);
 }
 
 /// 09ca <lenght>.W <id> L <creator id>.L <x>.W <y>.W <unit id>.L <range>.B <visible>.B <skill level>.B (ZC_SKILL_ENTRY5)

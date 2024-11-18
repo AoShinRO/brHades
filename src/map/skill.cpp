@@ -4224,9 +4224,9 @@ int64 skill_attack (int attack_type, struct block_list* src, struct block_list *
 	if ((flag&0x1000000) && rmdamage)
 		return 0; //Should return 0 when damage was reflected
 
-	if(damage > 0 && sd != nullptr){
-		clif_parse_restore_animation(sd,*bl,skill_id,skill_lv);
-	}
+	if(damage > 0 && sd != nullptr && dmg.dmg_lv == ATK_DEF)
+ 		clif_parse_restore_animation(sd,*bl,skill_id,skill_lv);
+	
 	return damage;
 }
 
@@ -21586,7 +21586,7 @@ int skill_getareachar_skillunit_visibilty_sub(struct block_list *bl, va_list ap)
 			visible = false;
 	}
 
-	clif_getareachar_skillunit(*bl, *su, SELF, visible);
+	clif_getareachar_skillunit(bl, su, SELF, visible);
 	return 1;
 }
 
@@ -21602,7 +21602,7 @@ void skill_getareachar_skillunit_visibilty(struct skill_unit *su, enum send_targ
 	nullpo_retv(su);
 
 	if (!su->hidden) // It's not hidden, just do this!
-		clif_getareachar_skillunit(su->bl, *su, target, true);
+		clif_getareachar_skillunit(&su->bl, su, target, true);
 	else {
 		struct block_list *src = battle_get_master(&su->bl);
 		map_foreachinallarea(skill_getareachar_skillunit_visibilty_sub, su->bl.m, su->bl.x-AREA_SIZE, su->bl.y-AREA_SIZE,
@@ -21631,7 +21631,7 @@ void skill_getareachar_skillunit_visibilty_single(struct skill_unit *su, struct 
 			visible = false;
 	}
 
-	clif_getareachar_skillunit(*bl, *su, SELF, visible);
+	clif_getareachar_skillunit(bl, su, SELF, visible);
 }
 
 /**

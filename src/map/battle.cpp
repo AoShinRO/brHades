@@ -7958,9 +7958,6 @@ static struct Damage battle_calc_weapon_attack(struct block_list *src, struct bl
 
 	battle_do_reflect(BF_WEAPON,&wd, src, target, skill_id, skill_lv); //WIP [lighta]
 
-	if(sd != nullptr && !sd->animation.empty() && wd.dmg_lv != ATK_DEF)
-		sd->animation.pop_back();
-
 	return wd;
 }
 

@@ -291,6 +291,18 @@
 	packet(0x020d,-1);
 	packet(0x8b3,-1);
 
+//unitpackets
+	packet(0x011f, 16);// ZC_SKILL_ENTRY
+#if PACKETVER >= 20121212
+	packet(0x08C7, 20); // ZC_SKILL_ENTRY3 (2 is for grafitti)
+#if PACKETVER >= 20130320
+	packet(0x099f, 22); // ZC_SKILL_ENTRY4
+#if PACKETVER >= 20130731
+	packet(0x09ca, 23); // ZC_SKILL_ENTRY5
+#endif
+#endif
+#endif
+
 // 2004-07-05aSakexe
 #if PACKETVER >= 20040705
 	parseable_packet(0x0072,22,clif_parse_WantToConnection,5,9,13,17,21);
