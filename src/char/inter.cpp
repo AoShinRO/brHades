@@ -487,7 +487,7 @@ void mapif_acc_info_ack(int32 fd, int32 u_fd, int32 acc_id, const char* acc_name
  * @param fd : map-serv link
  */
 void mapif_parse_accinfo(int32 fd) {
-	int32 u_fd = RFIFOL(fd,2), u_aid = RFIFOL(fd,6), u_group = RFIFOL(fd,10);
+	int32 u_fd = RFIFOL(fd,2), u_aid = RFIFOL(fd,6); 
 	char type= RFIFOB(fd,14);
 	char query[NAME_LENGTH], query_esq[NAME_LENGTH*2+1];
 	uint32 account_id = 0;

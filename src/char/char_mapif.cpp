@@ -242,7 +242,7 @@ void chmapif_send_maps( int32 fd, int32 map_id, size_t count, unsigned char* map
  * @return : 0 not enough data received, 1 success
  */
 int32 chmapif_parse_getmapname(int32 fd, int32 id){
-	int32 i = 0;
+
 	unsigned char *mapbuf;
 
 	if (RFIFOREST(fd) < 4 || RFIFOREST(fd) < RFIFOW(fd,2))
@@ -1185,7 +1185,6 @@ int32 chmapif_parse_reqcharban(int32 fd){
 	if (RFIFOREST(fd) < 10+NAME_LENGTH)
 		return 0;
 	else {
-		//int32 aid = RFIFOL(fd,2); aid of player who as requested the ban
 		int32 timediff = RFIFOL(fd,6);
 		const char* name = RFIFOCP(fd,10); // name of the target character
 		char esc_name[NAME_LENGTH*2+1];
