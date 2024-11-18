@@ -6,6 +6,7 @@
 
 #include <libconfig.h>
 #include <string_view>
+#include <common/cbasetypes.hpp>
 
 // for help with the console colors look here:
 // http://www.edoceo.com/liberum/?doc=printf-with-color
@@ -66,11 +67,11 @@
 #define CL_XXBL			"\033[0;44m"	// default on blue
 #define CL_PASS			"\033[0;32;42m"	// green on green
 
-#define CL_SPACE		"           "	// space aquivalent of the print messages
+#define CL_SPACE		"           "	// space aquivalent of the print32 messages
 
-extern int stdout_with_ansisequence; //If the color ansi sequences are to be used. [flaviojs]
-extern int msg_silent; //Specifies how silent the console is. [Skotlex]
-extern int console_msg_log; //Specifies what error messages to log. [Ind]
+extern int32 stdout_with_ansisequence; //If the color ansi sequences are to be used. [flaviojs]
+extern int32 msg_silent; //Specifies how silent the console is. [Skotlex]
+extern int32 console_msg_log; //Specifies what error messages to log. [Ind]
 extern char console_log_filepath[32]; ///< Filepath to save console_msg_log. [Cydh]
 extern char timestamp_format[20]; //For displaying Timestamps [Skotlex]
 
@@ -87,7 +88,7 @@ enum msg_type {
 };
 
 extern void ClearScreen(void);
-extern int _vShowMessage(enum msg_type flag, const std::string_view string, va_list ap);
+extern int32 _vShowMessage(enum msg_type flag, const std::string_view string, va_list ap);
 extern void ShowMessage(const std::string_view, ...);
 extern void ShowStatus(const std::string_view, ...);
 extern void ShowSQL(const std::string_view, ...);

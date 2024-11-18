@@ -53,9 +53,9 @@ struct walkpath_data {
 };
 
 struct shootpath_data {
-	int rx,ry,len;
-	int x[MAX_WALKPATH];
-	int y[MAX_WALKPATH];
+	int32 rx,ry,len;
+	int32 x[MAX_WALKPATH];
+	int32 y[MAX_WALKPATH];
 };
 
 #define check_distance_bl(bl1, bl2, distance) check_distance((bl1)->x - (bl2)->x, (bl1)->y - (bl2)->y, distance)

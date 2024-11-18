@@ -2,6 +2,7 @@
 // For more information, see LICENCE in the main folder
 
 #include "utilities.hpp"
+#include "cbasetypes.hpp"
 
 #include <chrono>
 #include <iostream>
@@ -38,12 +39,12 @@ cScopeTimer::cScopeTimer()
  * @author http://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#C.2B.2B
  * comparison test was done here http://cpp.sh/2o7w
  */
-int levenshtein(const std::string &s1, const std::string &s2)
+int32 levenshtein(const std::string &s1, const std::string &s2)
 {
 	// To change the type this function manipulates and returns, change
 	// the return type and the types of the two variables below.
-	int s1len = static_cast<int>(s1.size());
-	int s2len = static_cast<int>(s2.size());
+	int32 s1len = static_cast<int>(s1.size());
+	int32 s2len = static_cast<int>(s2.size());
 	
 	auto column_start = (decltype(s1len))1;
 	
@@ -156,3 +157,4 @@ bool brhades::util::ansi_or_utf_check(std::string_view text, uint32 npcid) {
 	}
 	return ansi;
 }
+
