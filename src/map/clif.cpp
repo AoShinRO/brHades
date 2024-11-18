@@ -14823,7 +14823,7 @@ static void clif_parse_GuildAllianceMessage(int fd, map_session_data* sd){
 	if (!g)
 		return;
 
-	clif_guild_alliance_message(g->guild, output, static_cast<int>(strlen(output)));
+	clif_guild_alliance_message(g->guild, output, util::clamp<int32>(strlen(output)));
 }
 
 /// Guild alliance request (CZ_REQ_ALLY_GUILD).
