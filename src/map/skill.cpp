@@ -3237,20 +3237,20 @@ void skill_combo_toggle_inf(struct block_list* bl, uint16 skill_id, int inf){
 		case CH_TIGERFIST:
 		case CH_CHAINCRUSH:
 			if (sd != nullptr)
-				clif_skillinfo(*sd,MO_EXTREMITYFIST);
+				clif_skillinfo(sd,MO_EXTREMITYFIST, inf);
 			break;
 		case TK_JUMPKICK:
 			if (sd != nullptr)
-				clif_skillinfo(*sd,TK_JUMPKICK);
+				clif_skillinfo(sd,TK_JUMPKICK, inf);
 			break;
 		case MO_TRIPLEATTACK:
 			if (sd != nullptr && pc_checkskill(sd, SR_DRAGONCOMBO) > 0)
-				clif_skillinfo(*sd,SR_DRAGONCOMBO);
+				clif_skillinfo(sd,SR_DRAGONCOMBO, inf);
 			break;
 		case SR_FALLENEMPIRE:
 			if (sd != nullptr){
-				clif_skillinfo(*sd,SR_GATEOFHELL);
-				clif_skillinfo(*sd,SR_TIGERCANNON);
+				clif_skillinfo(sd,SR_GATEOFHELL, inf);
+				clif_skillinfo(sd,SR_TIGERCANNON, inf);
 			}
 			break;
 	}
@@ -15596,7 +15596,7 @@ int skill_castend_map (map_session_data *sd, uint16 skill_id, const char *mapnam
 			// check if the chosen map exists in the memo list
 			size_t ext_size = static_cast<size_t>(lv + pc_readreg2(sd, EXT_MEMO_VAR));
 			if(ext_size > MAX_MEMOPOINTS+1) ext_size = MAX_MEMOPOINTS+1; // crash prevention
-			ARR_FIND( 0, ext_size, i, strncmp( p[i]->map, mapname, sizeof( p[i]->map ) ) == 0 );
+			ARR_FIND(0, static_cast<int>(ext_size), i, strncmp(p[i]->map, mapname, sizeof(p[i]->map)) == 0);
 			if( i < ext_size ) {
 				x=p[i]->x;
 				y=p[i]->y;
@@ -21586,7 +21586,7 @@ int skill_getareachar_skillunit_visibilty_sub(struct block_list *bl, va_list ap)
 			visible = false;
 	}
 
-	clif_getareachar_skillunit(*bl, *su, SELF, visible);
+	clif_getareachar_skillunit(bl, su, SELF, visible);
 	return 1;
 }
 
@@ -21602,7 +21602,7 @@ void skill_getareachar_skillunit_visibilty(struct skill_unit *su, enum send_targ
 	nullpo_retv(su);
 
 	if (!su->hidden) // It's not hidden, just do this!
-		clif_getareachar_skillunit(su->bl, *su, target, true);
+		clif_getareachar_skillunit(&su->bl, su, target, true);
 	else {
 		struct block_list *src = battle_get_master(&su->bl);
 		map_foreachinallarea(skill_getareachar_skillunit_visibilty_sub, su->bl.m, su->bl.x-AREA_SIZE, su->bl.y-AREA_SIZE,
@@ -21631,7 +21631,7 @@ void skill_getareachar_skillunit_visibilty_single(struct skill_unit *su, struct 
 			visible = false;
 	}
 
-	clif_getareachar_skillunit(*bl, *su, SELF, visible);
+	clif_getareachar_skillunit(bl, su, SELF, visible);
 }
 
 /**
@@ -21681,7 +21681,7 @@ struct skill_unit *skill_initunit(std::shared_ptr<s_skill_unit_group> group, int
 	switch (group->skill_id) {
 		case WZ_ICEWALL:
 			map_setgatcell(unit->bl.m,unit->bl.x,unit->bl.y,5);
-			clif_changemapcell(unit->bl.m,unit->bl.x,unit->bl.y,5,AREA);
+			clif_changemapcell(0, unit->bl.m,unit->bl.x,unit->bl.y,5,AREA);
 			skill_unitsetmapcell(unit,WZ_ICEWALL,group->skill_lv,CELL_ICEWALL,true);
 			break;
 		case SA_LANDPROTECTOR:
@@ -21743,7 +21743,7 @@ int skill_delunit(struct skill_unit* unit)
 			break;
 		case WZ_ICEWALL:
 			map_setgatcell(unit->bl.m,unit->bl.x,unit->bl.y,unit->val2);
-			clif_changemapcell(unit->bl.m,unit->bl.x,unit->bl.y,unit->val2,ALL_SAMEMAP); // hack to avoid clientside cell bug
+			clif_changemapcell(0, unit->bl.m,unit->bl.x,unit->bl.y,unit->val2,ALL_SAMEMAP); // hack to avoid clientside cell bug
 			skill_unitsetmapcell(unit,WZ_ICEWALL,group->skill_lv,CELL_ICEWALL,false);
 			break;
 		case SA_LANDPROTECTOR:
@@ -26236,7 +26236,7 @@ void skill_reload (void) {
 
 	for( map_session_data *sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); sd = (TBL_PC*)mapit_next(iter) ) {
 		pc_validate_skill(sd);
-		clif_skillinfoblock(*sd);
+		clif_skillinfoblock(sd);
 	}
 	mapit_free(iter);
 }
