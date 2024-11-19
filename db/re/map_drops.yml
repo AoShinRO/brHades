@@ -2205,6 +2205,65 @@ Body:
           - Index: 18
             Item: D_Glacier_Muffler # 480284
             Rate: 1000
+      - Monster: EP20_MD_BOX2
+        Drops:
+          - Index: 0
+            Item: EP19_S_F_1_Extract # 1001034
+            Rate: 10000
+          - Index: 1
+            Item: EP19_Gla_Extract # 1001037
+            Rate: 10000
+          - Index: 2
+            Item: EP20_D_P_Crystal # 1001249
+            Rate: 10000
+          - Index: 3
+            Item: EP19_N_P_Ore # 1001030
+            Rate: 50000
+          - Index: 4
+            Item: EP19_D_P_Crystal   # 1001031
+            Rate: 50000
+          - Index: 5
+            Item: EP19_N_P_Crystal   # 1001032
+            Rate: 10000
+          - Index: 6
+            Item: aegis_1001237   # 1001237
+            Rate: 10000
+          - Index: 7
+            Item: EP19_D_P_Ore   # 1001029
+            Rate: 10000
+          - Index: 8
+            Item: EP19_D_P_Ore   # 1001029
+            Rate: 10000
+          - Index: 9
+            Item: EP20_D_P_Extract # 1001250
+            Rate: 5000
+          - Index: 10
+            Item: EP20_D_P_Ore # 1001248
+            Rate: 90000
+          - Index: 11
+            Item: EP20_D_P_Ore # 1001248
+            Rate: 90000
+          - Index: 12
+            Item: aegis_480286   # (costume)
+            Rate: 10
+          - Index: 13
+            Item: D_Glacier_Armor # 450270
+            Rate: 1000
+          - Index: 14
+            Item: D_Glacier_Boots # 470197
+            Rate: 1000
+          - Index: 15
+            Item: D_Glacier_Manteau # 480283
+            Rate: 1000
+          - Index: 16
+            Item: D_Glacier_Robe # 450271
+            Rate: 1000
+          - Index: 17
+            Item: D_Glacier_Shoes # 470198
+            Rate: 1000
+          - Index: 18
+            Item: D_Glacier_Muffler # 480284
+            Rate: 1000
   - Map: for_dun01
     SpecificDrops:
       - Monster: SPIRIT_G_LAND_M
@@ -2427,63 +2486,6 @@ Body:
           - Index: 5
             Item: Etel_Topaz
             Rate: 30
-      - Monster: EP20_MD_BOX2
-        Drops:
-          - Index: 0
-            Item: EP19_S_F_1_Extract # 1001034
-            Rate: 10000
-          - Index: 1
-            Item: EP19_Gla_Extract # 1001037
-            Rate: 10000
-          - Index: 2
-            Item: EP20_D_P_Crystal # 1001249
-            Rate: 10000
-          - Index: 3
-            Item: EP19_N_P_Ore # 1001030
-            Rate: 50000
-          - Index: 4
-            Item: EP19_D_P_Crystal   # 1001031
-            Rate: 50000
-          - Index: 5
-            Item: EP19_N_P_Crystal   # 1001032
-            Rate: 10000
-          - Index: 6
-            Item: aegis_1001237   # 1001237
-            Rate: 10000
-          - Index: 7
-            Item: EP19_D_P_Ore   # 1001029
-            Rate: 10000
-          - Index: 8
-            Item: EP19_D_P_Ore   # 1001029
-            Rate: 10000
-          - Index: 9
-            Item: EP20_D_P_Extract # 1001250
-            Rate: 5000
-          - Index: 10
-            Item: EP20_D_P_Ore # 1001248
-            Rate: 90000
-          - Index: 11
-            Item: EP20_D_P_Ore # 1001248
-            Rate: 90000
-          - Index: 12
-            Item: aegis_480286   # (costume)
-            Rate: 10
-          - Index: 13
-            Item: D_Glacier_Armor # 450270
-            Rate: 1000
-          - Index: 14
-            Item: D_Glacier_Boots # 470197
-            Rate: 1000
-          - Index: 15
-            Item: D_Glacier_Manteau # 480283
-            Rate: 1000
-          - Index: 16
-            Item: D_Glacier_Robe # 450271
-            Rate: 1000
-          - Index: 17
-            Item: D_Glacier_Shoes # 470198
-            Rate: 1000
-          - Index: 18
-            Item: D_Glacier_Muffler # 480284
-            Rate: 1000
+
+
 
