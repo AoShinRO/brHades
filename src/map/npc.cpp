@@ -4954,8 +4954,8 @@ static void npc_market_fromsql(void) {
 		}
 
 		if (list.value * 0.75 < id->value_sell * 1.24) { // Exploit possible: you can buy and sell back with profit
-			ShowWarning("npc_market_fromsql: O preco de compra com desconto (%d->%d) do item %s [%u] e menor que o preco de venda cobrado a mais (%d->%d) na tabela '%s'. Atribuindo ao valor de venda atual.\n",
-						id->name.c_str(), list.nameid, list.value, (int)(list.value * 0.75), id->value_sell, (int)(id->value_sell * 1.24), market_table);
+//			ShowWarning("npc_market_fromsql: O preco de compra com desconto (%d->%d) do item %s [%u] e menor que o preco de venda cobrado a mais (%d->%d) na tabela '%s'. Atribuindo ao valor de venda atual.\n",
+//						id->name.c_str(), list.nameid, list.value, (int)(list.value * 0.75), id->value_sell, (int)(id->value_sell * 1.24), market_table);
 			list.value = id->value_sell;
 		}
 

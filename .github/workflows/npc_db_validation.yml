@@ -75,7 +75,7 @@ jobs:
           
       - name: Command - configure
         env:
-            CONFIGURE_FLAGS: 'CC=gcc-${{ matrix.gcc }} CXX=g++-${{ matrix.gcc }} --enable-prere=${{ env.PRERE }} --enable-buildbot=yes'
+            CONFIGURE_FLAGS: 'CC=gcc-${{ matrix.gcc }} CXX=g++-${{ matrix.gcc }}'
         run: ./configure $CONFIGURE_FLAGS
       
       # npc.sh enables all NPC scripts in the custom and test folders.

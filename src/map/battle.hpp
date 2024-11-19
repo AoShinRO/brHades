@@ -788,6 +788,8 @@ extern void battle_set_defaults(void);
 int32 battle_set_value(const char* w1, const char* w2);
 int32 battle_get_value(const char* w1);
 
+void battle_calc_defense_reduction(struct Damage* wd, struct block_list *src,struct block_list *target, uint16 skill_id, uint16 skill_lv);
+
 //
 struct block_list* battle_getenemyarea(struct block_list *src, int32 x, int32 y, int32 range, int32 type, int32 ignore_id);
 /**
