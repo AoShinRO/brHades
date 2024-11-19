@@ -2106,8 +2106,6 @@ Body:
           - Index: 12   # note: x2
             Item: EP20_D_P_Crystal # 1001249
             Rate: 10000
- 
-# Immortal daily instance
   - Map: 1@twbs
     SpecificDrops:
       - Monster: MD_EP20_BOSS_LASGAND
@@ -2148,8 +2146,6 @@ Body:
           - Index: 11
             Item: EP20_D_P_Ore # 1001248
             Rate: 90000
-
-# Immortal daily instance normal
       - Monster: EP20_MD_BOX1
         Drops:
           - Index: 0
@@ -2209,6 +2205,228 @@ Body:
           - Index: 18
             Item: D_Glacier_Muffler # 480284
             Rate: 1000
+  - Map: for_dun01
+    SpecificDrops:
+      - Monster: SPIRIT_G_LAND_M
+        Drops:
+          - Index: 0
+            Item: Etel_Stone
+            Rate: 25
+      - Monster: SPIRIT_G_LAND_L
+        Drops:
+          - Index: 0
+            Item: Etel_Skyblue_Jewel
+            Rate: 15
+          - Index: 1
+            Item: Etel_Stone
+            Rate: 35
+      - Monster: SPIRIT_G_LAND_SL
+        Drops:
+          - Index: 0
+            Item: Etel_Skyblue_Jewel
+            Rate: 20
+          - Index: 1
+            Item: Etel_Stone
+            Rate: 45
+          - Index: 2
+            Item: Etel_Topaz
+            Rate: 10
+      - Monster: SPIRIT_B_FLAME_M
+        Drops:
+          - Index: 0
+            Item: Etel_Stone
+            Rate: 25
+      - Monster: SPIRIT_B_FLAME_L
+        Drops:
+          - Index: 0
+            Item: Etel_Skyblue_Jewel
+            Rate: 15
+          - Index: 1
+            Item: Etel_Stone
+            Rate: 35
+      - Monster: SPIRIT_B_FLAME_SL
+        Drops:
+          - Index: 0
+            Item: Etel_Skyblue_Jewel
+            Rate: 20
+          - Index: 1
+            Item: Etel_Stone
+            Rate: 45
+          - Index: 2
+            Item: Etel_Topaz
+            Rate: 10
+      - Monster: SPIRIT_S_WIND_M
+        Drops:
+          - Index: 0
+            Item: Etel_Stone
+            Rate: 25
+      - Monster: SPIRIT_S_WIND_L
+        Drops:
+          - Index: 0
+            Item: Etel_Skyblue_Jewel
+            Rate: 15
+          - Index: 1
+            Item: Etel_Stone
+            Rate: 35
+      - Monster: SPIRIT_S_WIND_SL
+        Drops:
+          - Index: 0
+            Item: Etel_Skyblue_Jewel
+            Rate: 20
+          - Index: 1
+            Item: Etel_Stone
+            Rate: 45
+          - Index: 2
+            Item: Etel_Topaz
+            Rate: 10
+      - Monster: SPIRIT_I_WATER_M
+        Drops:
+          - Index: 0
+            Item: Etel_Stone
+            Rate: 25
+      - Monster: SPIRIT_I_WATER_L
+        Drops:
+          - Index: 0
+            Item: Etel_Skyblue_Jewel
+            Rate: 15
+          - Index: 1
+            Item: Etel_Stone
+            Rate: 35
+      - Monster: SPIRIT_I_WATER_SL
+        Drops:
+          - Index: 0
+            Item: Etel_Skyblue_Jewel
+            Rate: 20
+          - Index: 1
+            Item: Etel_Stone
+            Rate: 45
+          - Index: 2
+            Item: Etel_Topaz
+            Rate: 10
+      - Monster: SPIRIT_C_LAND_S
+        Drops:
+          - Index: 0
+            Item: MD_Hol_Fragment
+            Rate: 300
+          - Index: 1
+            Item: Etel_Skyblue_Jewel
+            Rate: 15
+          - Index: 2
+            Item: Etel_Stone
+            Rate: 30
+      - Monster: SPIRIT_C_LAND_M
+        Drops:
+          - Index: 0
+            Item: MD_Hol_Fragment
+            Rate: 350
+          - Index: 1
+            Item: Etel_Skyblue_Jewel
+            Rate: 25
+          - Index: 2
+            Item: Etel_Stone
+            Rate: 40
+          - Index: 3
+            Item: Etel_Topaz
+            Rate: 10
+      - Monster: SPIRIT_C_LAND_L
+        Drops:
+          - Index: 0
+            Item: MD_Hol_Fragment
+            Rate: 400
+          - Index: 1
+            Item: Etel_Violet_Jewel
+            Rate: 10
+          - Index: 2
+            Item: Etel_Skyblue_Jewel
+            Rate: 35
+          - Index: 3
+            Item: Etel_Stone
+            Rate: 50
+          - Index: 4
+            Item: Etel_Topaz
+            Rate: 20
+      - Monster: SPIRIT_C_LAND_SL
+        Drops:
+          - Index: 0
+            Item: MD_Hol_Fragment
+            Rate: 450
+          - Index: 1
+            Item: Etel_Amber
+            Rate: 7
+          - Index: 2
+            Item: Etel_Violet_Jewel
+            Rate: 15
+          - Index: 3
+            Item: Etel_Skyblue_Jewel
+            Rate: 45
+          - Index: 4
+            Item: Etel_Stone
+            Rate: 60
+          - Index: 5
+            Item: Etel_Topaz
+            Rate: 30
+      - Monster: SPIRIT_C_FLAME_S
+        Drops:
+          - Index: 0
+            Item: MD_Hol_Fragment
+            Rate: 300
+          - Index: 1
+            Item: Etel_Skyblue_Jewel
+            Rate: 15
+          - Index: 2
+            Item: Etel_Stone
+            Rate: 30
+      - Monster: SPIRIT_C_FLAME_M
+        Drops:
+          - Index: 0
+            Item: MD_Hol_Fragment
+            Rate: 350
+          - Index: 1
+            Item: Etel_Skyblue_Jewel
+            Rate: 25
+          - Index: 2
+            Item: Etel_Stone
+            Rate: 40
+          - Index: 3
+            Item: Etel_Topaz
+            Rate: 10
+      - Monster: SPIRIT_C_FLAME_L
+        Drops:
+          - Index: 0
+            Item: MD_Hol_Fragment
+            Rate: 400
+          - Index: 1
+            Item: Etel_Violet_Jewel
+            Rate: 10
+          - Index: 2
+            Item: Etel_Skyblue_Jewel
+            Rate: 35
+          - Index: 3
+            Item: Etel_Stone
+            Rate: 50
+          - Index: 4
+            Item: Etel_Topaz
+            Rate: 20
+      - Monster: SPIRIT_C_FLAME_SL
+        Drops:
+          - Index: 0
+            Item: MD_Hol_Fragment
+            Rate: 450
+          - Index: 1
+            Item: Etel_Amber
+            Rate: 7
+          - Index: 2
+            Item: Etel_Violet_Jewel
+            Rate: 15
+          - Index: 3
+            Item: Etel_Skyblue_Jewel
+            Rate: 45
+          - Index: 4
+            Item: Etel_Stone
+            Rate: 60
+          - Index: 5
+            Item: Etel_Topaz
+            Rate: 30
       - Monster: EP20_MD_BOX2
         Drops:
           - Index: 0
