@@ -915,7 +915,7 @@ int32 quest_check(map_session_data *sd, int32 quest_id, e_quest_check_type type)
 				int32 j;
 				std::shared_ptr<s_quest_db> qi = quest_search(sd->quest_log[i].quest_id);
 
-				ARR_FIND(0, qi->objectives.size(), j, sd->quest_log[i].count[j] < qi->objectives[j]->count);
+				ARR_FIND(0, static_cast<uint32>(qi->objectives.size()), j, sd->quest_log[i].count[j] < qi->objectives[j]->count);
 				if (j == qi->objectives.size())
 					return 2;
 				if (sd->quest_log[i].time < (uint32)time(nullptr))
