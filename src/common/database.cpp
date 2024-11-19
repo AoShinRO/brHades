@@ -12,14 +12,14 @@
 
 using namespace brhades;
 
-bool YamlDatabase::nodeExists( const ryml::NodeRef& node, const std::string_view& name ){
+bool YamlDatabase::nodeExists( const ryml::NodeRef& node, std::string_view name ){
 	return (node.num_children() > 0 && node.has_child(c4::to_csubstr(name.data())));
 }
 
 bool YamlDatabase::nodesExist( const ryml::NodeRef& node, std::initializer_list<const std::string> names ){
 	bool missing = false;
 
-	for( const std::string_view name : names ){
+	for( std::string_view name : names ){
 		if( !this->nodeExists( node, name ) ){
 			ShowError( "Missing mandatory node \"'%.*s'\".\n", (int)name.size(), name.data() );
 			missing = true;
@@ -89,7 +89,7 @@ bool YamlDatabase::reload(){
 	return this->load();
 }
 
-static std::pair<size_t, std::unique_ptr<char[]>> readDBFileAsync(const std::string_view& filepath, const std::string& type) {
+static std::pair<size_t, std::unique_ptr<char[]>> readDBFileAsync(std::string_view  filepath, const std::string& type) {
 
 	std::FILE* f = std::fopen(filepath.data(), "rb");
 	if (f == nullptr) 
@@ -110,7 +110,7 @@ static std::pair<size_t, std::unique_ptr<char[]>> readDBFileAsync(const std::str
 	return std::make_pair(len, std::move(buf));
 }
 
-bool YamlDatabase::load(const std::string_view& path) {
+bool YamlDatabase::load(std::string_view  path) {
 	ShowStatus("Carregando '" CL_WHITE "%.*s" CL_RESET "'..." CL_CLL "\r", (int)path.size(), path.data());
 
 	auto futureResult = std::async(std::launch::async, readDBFileAsync, path, this->type);
@@ -242,7 +242,7 @@ void YamlDatabase::parseImports( const ryml::Tree& rootNode ){
 	}
 }
 
-template <typename R> bool YamlDatabase::asType( const ryml::NodeRef& node, const std::string_view& name, R& out ){
+template <typename R> bool YamlDatabase::asType( const ryml::NodeRef& node, std::string_view  name, R& out ){
 	if( this->nodeExists( node, name ) ){
 		const ryml::NodeRef& dataNode = node[c4::to_csubstr(name.data())];
 
@@ -265,7 +265,7 @@ template <typename R> bool YamlDatabase::asType( const ryml::NodeRef& node, cons
 	}
 }
 
-bool YamlDatabase::asBool(const ryml::NodeRef& node, const std::string_view& name, bool &out) {
+bool YamlDatabase::asBool(const ryml::NodeRef& node, std::string_view  name, bool &out) {
 	const ryml::NodeRef& targetNode = node[c4::to_csubstr(name.data())];
 
 	if (targetNode.val_is_null()) {
@@ -291,43 +291,43 @@ bool YamlDatabase::asBool(const ryml::NodeRef& node, const std::string_view& nam
 	}
 }
 
-bool YamlDatabase::asInt16( const ryml::NodeRef& node, const std::string_view& name, int16& out ){
+bool YamlDatabase::asInt16( const ryml::NodeRef& node, std::string_view  name, int16& out ){
 	return asType<int16>( node, name, out);
 }
 
-bool YamlDatabase::asUInt16(const ryml::NodeRef& node, const std::string_view& name, uint16& out) {
+bool YamlDatabase::asUInt16(const ryml::NodeRef& node, std::string_view  name, uint16& out) {
 	return asType<uint16>(node, name, out);
 }
 
-bool YamlDatabase::asInt32(const ryml::NodeRef& node, const std::string_view& name, int32 &out) {
+bool YamlDatabase::asInt32(const ryml::NodeRef& node, std::string_view  name, int32 &out) {
 	return asType<int32>(node, name, out);
 }
 
-bool YamlDatabase::asUInt32(const ryml::NodeRef& node, const std::string_view& name, uint32 &out) {
+bool YamlDatabase::asUInt32(const ryml::NodeRef& node, std::string_view  name, uint32 &out) {
 	return asType<uint32>(node, name, out);
 }
 
-bool YamlDatabase::asInt64(const ryml::NodeRef& node, const std::string_view& name, int64 &out) {
+bool YamlDatabase::asInt64(const ryml::NodeRef& node, std::string_view  name, int64 &out) {
 	return asType<int64>(node, name, out);
 }
 
-bool YamlDatabase::asUInt64(const ryml::NodeRef& node, const std::string_view& name, uint64 &out) {
+bool YamlDatabase::asUInt64(const ryml::NodeRef& node, std::string_view  name, uint64 &out) {
 	return asType<uint64>(node, name, out);
 }
 
-bool YamlDatabase::asFloat(const ryml::NodeRef& node, const std::string_view& name, float &out) {
+bool YamlDatabase::asFloat(const ryml::NodeRef& node, std::string_view  name, float &out) {
 	return asType<float>(node, name, out);
 }
 
-bool YamlDatabase::asDouble(const ryml::NodeRef& node, const std::string_view& name, double &out) {
+bool YamlDatabase::asDouble(const ryml::NodeRef& node, std::string_view  name, double &out) {
 	return asType<double>(node, name, out);
 }
 
-bool YamlDatabase::asString(const ryml::NodeRef& node, const std::string_view& name, std::string &out) {
+bool YamlDatabase::asString(const ryml::NodeRef& node, std::string_view  name, std::string &out) {
 	return asType<std::string>(node, name, out);
 }
 
-bool YamlDatabase::asUInt16Rate( const ryml::NodeRef& node, const std::string_view& name, uint16& out, uint16 maximum ){
+bool YamlDatabase::asUInt16Rate( const ryml::NodeRef& node, std::string_view  name, uint16& out, uint16 maximum ){
 	if( this->asUInt16( node, name, out ) ){
 		if( out > maximum ){
 			this->invalidWarning( node[c4::to_csubstr(name.data())], "Node \"'%.*s'\" with value %" PRIu16 " exceeds maximum of %" PRIu16 ".\n", (int)name.size(), name.data(), out, maximum );
@@ -345,7 +345,7 @@ bool YamlDatabase::asUInt16Rate( const ryml::NodeRef& node, const std::string_vi
 	}
 }
 
-bool YamlDatabase::asUInt32Rate( const ryml::NodeRef& node, const std::string_view& name, uint32& out, uint32 maximum ){
+bool YamlDatabase::asUInt32Rate( const ryml::NodeRef& node, std::string_view  name, uint32& out, uint32 maximum ){
 	if( this->asUInt32( node, name, out ) ){
 		if( out > maximum ){
 			this->invalidWarning( node[c4::to_csubstr(name.data())], "Node \"'%.*s'\" with value %" PRIu32 " exceeds maximum of %" PRIu32 ".\n", (int)name.size(), name.data(), out, maximum );

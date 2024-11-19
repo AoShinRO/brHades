@@ -26,17 +26,17 @@ private:
 	bool shouldLoadGenerator{false};
 
 	bool verifyCompatibility( const ryml::Tree& rootNode );
-	bool load( const std::string_view& path );
+	bool load( std::string_view  path );
 	void parse( const ryml::Tree& rootNode );
 	void parseImports( const ryml::Tree& rootNode );
-	template <typename R> bool asType( const ryml::NodeRef& node, const std::string_view& name, R& out );
+	template <typename R> bool asType( const ryml::NodeRef& node, std::string_view  name, R& out );
 
 // These should be visible/usable by the implementation provider
 protected:
 	ryml::Parser parser;
 
 	// Helper functions
-	bool nodeExists( const ryml::NodeRef& node, const std::string_view& name );
+	bool nodeExists( const ryml::NodeRef& node, std::string_view  name );
 	bool nodesExist( const ryml::NodeRef& node, std::initializer_list<const std::string> names );
 	int32 getLineNumber(const ryml::NodeRef& node);
 	int32 getColumnNumber(const ryml::NodeRef& node);
@@ -44,18 +44,18 @@ protected:
 	std::string getCurrentFile();
 
 	// Conversion functions
-	bool asBool(const ryml::NodeRef& node, const std::string_view& name, bool &out);
-	bool asInt16(const ryml::NodeRef& node, const std::string_view& name, int16& out );
-	bool asUInt16(const ryml::NodeRef& node, const std::string_view& name, uint16& out);
-	bool asInt32(const ryml::NodeRef& node, const std::string_view& name, int32 &out);
-	bool asUInt32(const ryml::NodeRef& node, const std::string_view& name, uint32 &out);
-	bool asInt64(const ryml::NodeRef& node, const std::string_view& name, int64 &out);
-	bool asUInt64(const ryml::NodeRef& node, const std::string_view& name, uint64 &out);
-	bool asFloat(const ryml::NodeRef& node, const std::string_view& name, float &out);
-	bool asDouble(const ryml::NodeRef& node, const std::string_view& name, double &out);
-	bool asString(const ryml::NodeRef& node, const std::string_view& name, std::string &out);
-	bool asUInt16Rate(const ryml::NodeRef& node, const std::string_view& name, uint16& out, uint16 maximum=10000);
-	bool asUInt32Rate(const ryml::NodeRef& node, const std::string_view& name, uint32& out, uint32 maximum=10000);
+	bool asBool(const ryml::NodeRef& node, std::string_view  name, bool &out);
+	bool asInt16(const ryml::NodeRef& node, std::string_view  name, int16& out );
+	bool asUInt16(const ryml::NodeRef& node, std::string_view  name, uint16& out);
+	bool asInt32(const ryml::NodeRef& node, std::string_view  name, int32 &out);
+	bool asUInt32(const ryml::NodeRef& node, std::string_view  name, uint32 &out);
+	bool asInt64(const ryml::NodeRef& node, std::string_view  name, int64 &out);
+	bool asUInt64(const ryml::NodeRef& node, std::string_view  name, uint64 &out);
+	bool asFloat(const ryml::NodeRef& node, std::string_view  name, float &out);
+	bool asDouble(const ryml::NodeRef& node, std::string_view  name, double &out);
+	bool asString(const ryml::NodeRef& node, std::string_view  name, std::string &out);
+	bool asUInt16Rate(const ryml::NodeRef& node, std::string_view  name, uint16& out, uint16 maximum=10000);
+	bool asUInt32Rate(const ryml::NodeRef& node, std::string_view  name, uint32& out, uint32 maximum=10000);
 
 	void setGenerator(bool shouldLoad);
 
