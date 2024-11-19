@@ -2286,20 +2286,7 @@ bool pc_set_hate_mob(map_session_data *sd, int32 pos, struct block_list *bl)
 	clif_hate_info(sd, pos, class_, 1);
 	return true;
 }
-#ifdef TRANSLATION_API
-std::unordered_map<unsigned char, std::string> ISO639_map = {
-	{0, "en"},
-	{1, "ru"},
-	{2, "es"},
-	{3, "de"},
-	{4, "zh-CN"},
-	{5, "mg"},
-	{6, "id"},
-	{7, "fr"},
-	{8, "pt"},
-	{9, "th"},
-};
-#endif
+
 /*==========================================
  * Invoked once after the char/account/account2 registry variables are received. [Skotlex]
  * We didn't receive item information at this point so DO NOT attempt to do item operations here.
@@ -2320,6 +2307,18 @@ void pc_reg_received(map_session_data *sd)
 	if (msg_checklangtype(sd->langtype,true) < 0)
 		sd->langtype = 0; //invalid langtype reset to default
 #ifdef TRANSLATION_API
+	std::unordered_map<unsigned char, std::string> ISO639_map = {
+		{0, "en"},
+		{1, "ru"},
+		{2, "es"},
+		{3, "de"},
+		{4, "zh-CN"},
+		{5, "mg"},
+		{6, "id"},
+		{7, "fr"},
+		{8, "pt"},
+		{9, "th"},
+	};
 	sd->translation_api.translate_langtype = ISO639_map[sd->langtype];
 #endif
 	// Cash shop
