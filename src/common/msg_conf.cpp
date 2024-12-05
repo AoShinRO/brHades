@@ -91,7 +91,7 @@ int32 msg_langstr2langtype(std::string_view langtype) {
     
     for (size_t i = 0; i < std::size(languages); i++) {
         if (langtype.substr(0, 3) == languages[i]) {
-			return static_cast<int32>(i);
+		return static_cast<int32>(i);
         }
     }
     
