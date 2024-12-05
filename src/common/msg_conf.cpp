@@ -89,9 +89,9 @@ void _do_final_msg(int32 size, char ** msg_table){
 static constexpr std::string_view languages[] = {"eng", "rus", "spn", "grm", "chn", "mal", "idn", "frn", "por", "tha"};
 int32 msg_langstr2langtype(std::string_view langtype) {
     
-    for (int32 i = 0; i < std::size(languages); i++) {
+    for (size_t i = 0; i < std::size(languages); i++) {
         if (langtype.substr(0, 3) == languages[i]) {
-            return i;
+		return static_cast<int32>(i);
         }
     }
     
