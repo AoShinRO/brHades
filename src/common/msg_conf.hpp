@@ -8,6 +8,7 @@
 #include <string_view>
 
 enum lang_types {
+	LANG_ENG = 0x00,
 	LANG_RUS = 0x01,
 	LANG_SPN = 0x02,
 	LANG_GRM = 0x04,
@@ -24,7 +25,7 @@ enum lang_types {
 	// Multilanguage System.
 	// Define which languages to enable (bitmask).
 	// 0xFFF will enable all, while 0x000 will enable English only.
-	#define LANG_ENABLE (LANG_RUS | LANG_SPN | LANG_FRN | LANG_POR)
+	#define LANG_ENABLE (LANG_ENG | LANG_SPN | LANG_POR)
 #endif
 
 //read msg in table
