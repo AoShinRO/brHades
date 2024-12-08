@@ -25915,7 +25915,7 @@ std::string translate_api_call(map_session_data& sd, const std::string& text, co
 	clif_messagecolor_target(&sd.bl, color_table[COLOR_CYAN],tempbuf.c_str(), false, SELF, &sd);
 	clif_progressbar(&sd, strtol("#FFFFFF", (char**)nullptr, 0), second); 
 
-	char buffer[2048];
+	char buffer[4024];
 
 #ifdef TRANSLATION_API_PY
 	std::string cmd = "python3 tools/translator.py \"" + text + "\" \"en\" \"" + target_lang + "\"";
@@ -25968,30 +25968,16 @@ void clif_parse_apitranslate(map_session_data& sd, const std::string text, const
 		case HEADER_ZC_MENU_LIST:
 		{
 			std::string result = translate_api_call(std::ref(sd), text, sd.translation_api.translate_langtype);
-
-			PACKET_ZC_MENU_LIST* new_packet = reinterpret_cast<PACKET_ZC_MENU_LIST*>( packet_buffer );
-			int16 length = static_cast<int16>(result.size() + 1);
-			new_packet->packetType = header;
-			new_packet->packetLength = sizeof(*new_packet) + length;
-			new_packet->npcId = npcid;
-			safestrncpy(new_packet->menu, result.c_str(), length);
-
-			clif_send(new_packet, new_packet->packetLength, &sd.bl, SELF);
+			map_set_translate(text, sd.translation_api.translate_langtype, result);
+			clif_scriptmenu(std::ref(sd), npcid, text.c_str());
 			api_restore_npc_state(std::ref(sd), npcid);					
 			break;
 		}
 		case HEADER_ZC_SAY_DIALOG:
 		{
 			std::string result = translate_api_call(std::ref(sd), text, sd.translation_api.translate_langtype);
-
-			PACKET_ZC_SAY_DIALOG* new_packet = reinterpret_cast<PACKET_ZC_SAY_DIALOG*>( packet_buffer );
-			int16 length = static_cast<int16>(result.size() + 1);
-			new_packet->PacketType = header;
-			new_packet->PacketLength = sizeof(*new_packet) + length;
-			new_packet->NpcID = npcid;
-			safestrncpy(new_packet->message, result.c_str(), length);
-
-			clif_send(new_packet, new_packet->PacketLength, &sd.bl, SELF);
+			map_set_translate(text, sd.translation_api.translate_langtype, result);
+			clif_scriptmes(std::ref(sd), npcid, text.c_str());
 			api_restore_npc_state(std::ref(sd), npcid);		
 			break;
 		}
