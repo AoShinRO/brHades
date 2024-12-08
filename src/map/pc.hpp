@@ -969,6 +969,8 @@ public:
 #ifdef TRANSLATION_API
 	struct{
 		std::string translate_langtype = "en";
+		bool resend_state_packet;
+		std::mutex api_lock;
 	} translation_api;
 #endif
 };
