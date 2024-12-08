@@ -1308,6 +1308,10 @@ void pet_catch_process_end( map_session_data& sd, int32 target_id ){
 		case PET_CATCH_UNIVERSAL_ALL:
 			// No checks, catch anything.
 			break;
+		case PET_CATCH_MAX:
+			// No checks, catch anything.
+			return;
+			break;			
 	}
 
 	if( battle_config.pet_distance_check && distance_bl( &sd.bl, &md->bl ) > battle_config.pet_distance_check ){
