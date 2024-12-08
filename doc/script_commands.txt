@@ -10421,7 +10421,7 @@ para ser habilitado. <Tipo> pode ser um dos seguintes:
 ---------------------------------------
 
 *bpet;
-*animal de estimação de nascimento;
+*birthpet;
 
 Este comando abre uma janela de incubação de animais de estimação no cliente conectado ao
 invocando personagem. É usado no script de item para incubadoras de animais de estimação e irá
@@ -10431,19 +10431,20 @@ Isso ainda pode ser usado fora dos scripts de itens.
 
 ---------------------------------------
 
-*pet <id do animal de estimação>;
-*catchpet <id do animal de estimação>;
+*pet {<item_id>{,flag}};
+*catchpet {<item_id>{,flag}};
 
-Este comando é usado em todos os scripts de itens para domar itens. Executando isso
-comando fará com que o cursor de captura de animais de estimação apareça no cliente conectado ao
-personagem invocador, utilizável em monstros com o número de ID do animal de estimação especificado.
-ainda funcionará fora de um script de item.
-Se o <pet id> for PET_CATCH_UNIVERSAL o item tentará capturar o alvo
-monstro, desde que esteja no banco de dados do animal de estimação e não tenha o MD_STATUS_IMMUNE
-modo monstro.
-Se o <pet id> for PET_CATCH_UNIVERSAL_ITEM o item tentará capturar o alvo
-monstro, desde que esteja no banco de dados de animais de estimação e o monstro alvo exija a isca
-item usado.
+Este comando é usado em todos os scripts de itens para domesticar itens.
+Executar este comando fará com que o cursor de captura de animal de estimação apareça no cliente do personagem invocador
+e o jogador pode então tentar capturar um monstro.
+Se o ID do item não for especificado, o comando usará o ID do item do script do item invocado.
+Também funcionará fora de um script de item, se o ID do item for fornecido.
+As seguintes constantes podem ser usadas como parâmetro <flag>:
+	PET_CATCH_NORMAL: Tentará capturar o monstro alvo enquanto ele estiver no banco de dados de animais de estimação e
+o item de domesticação corresponde ao item de domesticação necessário no banco de dados de animais de estimação.Este é o padrão se <flag> não for especificado.
+	PET_CATCH_UNIVERSAL_NO_BOSS: Tentará capturar o monstro alvo enquanto ele estiver no banco de dados de animais de estimação e não possui o modo monstro MD_STATUS_IMMUNE.
+	PET_CATCH_UNIVERSAL_ALL: Tentará capturar o monstro alvo enquanto ele estiver no banco de dados de animais de estimação.
+
 Veja 'doc/mob_db_mode_list.txt' para mais informações sobre os modos monstro.
 
 Uma lista completa de IDs de animais de estimação pode ser encontrada em 'db/(pre-)re/pet_db.yml'.
