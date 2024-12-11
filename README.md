@@ -2,8 +2,8 @@
 
 #### Status - Compiladores:
 
-![clang](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_clang.yml?label=clang%20build&logo=llvm) | ![cmake](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_cmake.yml?label=cmake%20build&logo=cmake) | ![gcc](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_gcc.yml?label=gcc%20build&logo=gnu) | ![ms](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_msbuild.yml?label=ms%20build&logo=visualstudio) 
---------|--------|--------|--------
+![clang](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_clang.yml?label=clang%20build&logo=llvm) | ![cmake](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_cmake.yml?label=cmake%20build&logo=cmake) | ![gcc](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_gcc.yml?label=gcc%20build&logo=gnu) | ![ms](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_msbuild.yml?label=ms%20build&logo=visualstudio) | ![CodeQL](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/analysis_codeql.yml?label=CodeQL&logo=badge)
+--------|--------|--------|--------|--------
 
 #### Repo info:
 
