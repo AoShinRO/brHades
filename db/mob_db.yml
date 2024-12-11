@@ -86,4 +86,7 @@ Footer:
     Mode: Prerenewal
   - Path: db/re/mob_db.yml
     Mode: Renewal
+  - Path: db/translated/pt/re/mob_db_pt.yml
+    Mode: Renewal
   - Path: db/import/mob_db.yml
+

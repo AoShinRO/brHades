@@ -21151,6 +21151,7 @@ Body:
     AegisName: Gray_Shard
     Name: Gray Shard
     Type: Etc
+    Buy: 100000
     Sell: 1
     Weight: 1
     Flags:

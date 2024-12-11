@@ -1,0 +1,5273 @@
+Header:
+  Type: MOB_DB
+  Version: 4
+
+Body:
+  - Id: 1001
+    Name: Escorpião
+  - Id: 1002
+    Name: Poring
+  - Id: 1004
+    Name: Zangão
+  - Id: 1005
+    Name: Farmiliar
+  - Id: 1007
+    Name: Fabre
+  - Id: 1008
+    Name: Pupa
+  - Id: 1009
+    Name: Condor
+  - Id: 1010
+    Name: Salgueiro
+  - Id: 1011
+    Name: Chonchon
+  - Id: 1012
+    Name: Sapo de Rodda
+  - Id: 1013
+    Name: Lobo
+  - Id: 1014
+    Name: Esporo
+  - Id: 1015
+    Name: Zumbi
+  - Id: 1016
+    Name: Esqueleto Arqueiro
+  - Id: 1018
+    Name: Cremoso
+  - Id: 1019
+    Name: Pecopeco
+  - Id: 1020
+    Name: Mandrágora
+  - Id: 1023
+    Name: Guerreiro Orc
+  - Id: 1024
+    Name: Rabo de Verme
+  - Id: 1025
+    Name: Jiboia
+  - Id: 1026
+    Name: Amante
+  - Id: 1028
+    Name: Esqueleto Soldado
+  - Id: 1029
+    Name: Ísis
+  - Id: 1030
+    Name: Anaconda
+  - Id: 1031
+    Name: Poporing
+  - Id: 1032
+    Name: Ser
+  - Id: 1033
+    Name: Salgueiro Ancião
+  - Id: 1034
+    Name: Sapo de Thara
+  - Id: 1035
+    Name: Mosca Caçadora
+  - Id: 1036
+    Name: Carniçal
+  - Id: 1037
+    Name: Sorrateiro
+  - Id: 1038
+    Name: Osíris
+  - Id: 1039
+    Name: Bafome
+  - Id: 1040
+    Name: Golem
+  - Id: 1041
+    Name: Múmia
+  - Id: 1042
+    Name: Chonchon De Aço
+  - Id: 1044
+    Name: Obeaune
+  - Id: 1045
+    Name: Cavalo-Marinho
+  - Id: 1046
+    Name: Sósia
+  - Id: 1047
+    Name: Ovo de PecoPeco
+  - Id: 1048
+    Name: Ovo de Besouro-Ladrão
+  - Id: 1049
+    Name: Exigente
+  - Id: 1050
+    Name: Exigente
+  - Id: 1051
+    Name: Besouro-Ladrão
+  - Id: 1052
+    Name: Balancim
+  - Id: 1053
+    Name: Besouro-Ladrão Fêmea
+  - Id: 1054
+    Name: Besouro-Ladrão Macho
+  - Id: 1055
+    Name: Face
+  - Id: 1056
+    Name: Fumacento
+  - Id: 1057
+    Name: Ioiô
+  - Id: 1058
+    Name: Metais
+  - Id: 1059
+    Name: Abelha-Rainha
+  - Id: 1060
+    Name: Pé-Grande
+  - Id: 1061
+    Name: Pesadelo
+  - Id: 1062
+    Name: Poring Noel
+  - Id: 1063
+    Name: Lunático
+  - Id: 1064
+    Name: Megalodonte
+  - Id: 1065
+    Name: Strouf
+  - Id: 1066
+    Name: Selvagem
+  - Id: 1067
+    Name: Chifrudo
+  - Id: 1068
+    Name: Hidra
+  - Id: 1069
+    Name: Peixe-Espada
+  - Id: 1070
+    Name: Kukre
+  - Id: 1071
+    Name: Esqueleto Pirata
+  - Id: 1072
+    Name: Construção
+  - Id: 1073
+    Name: Caranguejo
+  - Id: 1074
+    Name: Molusco
+  - Id: 1076
+    Name: Esqueleto
+  - Id: 1077
+    Name: Esporo Venenoso
+  - Id: 1078
+    Name: Planta Vermelha
+  - Id: 1079
+    Name: Planta Azul
+  - Id: 1080
+    Name: Planta Verde
+  - Id: 1081
+    Name: Planta Amarela
+  - Id: 1082
+    Name: Planta Branca
+  - Id: 1083
+    Name: Planta Brilhante
+  - Id: 1084
+    Name: Cogumelo Negro
+  - Id: 1085
+    Name: Cogumelo Vermelho
+  - Id: 1086
+    Name: Besouro-Ladrão Dourado
+  - Id: 1087
+    Name: Orc Herói
+  - Id: 1088
+    Name: Vocal
+  - Id: 1089
+    Name: Sapo-Cururu
+  - Id: 1090
+    Name: Masterização
+  - Id: 1091
+    Name: Libélula
+  - Id: 1092
+    Name: Lobo Errante
+  - Id: 1093
+    Name: Eclipse
+  - Id: 1094
+    Name: Ambernite
+  - Id: 1095
+    Name: André
+  - Id: 1096
+    Name: Anjo
+  - Id: 1097
+    Name: Ovo de Andre
+  - Id: 1098
+    Name: Anúbis
+  - Id: 1099
+    Name: Argiope
+  - Id: 1100
+    Name: Argos
+  - Id: 1101
+    Name: Bafomé Jr.
+  - Id: 1102
+    Name: Batório
+  - Id: 1103
+    Name: Caramelo
+  - Id: 1104
+    Name: Tamanho
+  - Id: 1105
+    Name: Deniro
+  - Id: 1106
+    Name: Lobo do Deserto
+  - Id: 1107
+    Name: Filhote de Lobo
+  - Id: 1108
+    Name: Desvio
+  - Id: 1109
+    Name: Deviruchi
+  - Id: 1110
+    Name: Dokebi
+  - Id: 1111
+    Name: Dreno
+  - Id: 1112
+    Name: Drake
+  - Id: 1113
+    Name: Gotas
+  - Id: 1114
+    Name: Poeira
+  - Id: 1115
+    Name: Para Edd
+  - Id: 1116
+    Name: Eggyra
+  - Id: 1117
+    Name: Druida Maligno
+  - Id: 1118
+    Name: Flora
+  - Id: 1119
+    Name: Frilldora
+  - Id: 1120
+    Name: Anel Fantasma
+  - Id: 1121
+    Name: Gierath
+  - Id: 1122
+    Name: Duende
+  - Id: 1123
+    Name: Duende
+  - Id: 1124
+    Name: Duende
+  - Id: 1125
+    Name: Duende
+  - Id: 1126
+    Name: Duende
+  - Id: 1127
+    Name: Cabeça
+  - Id: 1128
+    Name: Besouro-Chifre
+  - Id: 1129
+    Name: Ouvir
+  - Id: 1130
+    Name: Jaqueta
+  - Id: 1131
+    Name: Coringa
+  - Id: 1132
+    Name: Khalitzburgo
+  - Id: 1133
+    Name: Kobold
+  - Id: 1134
+    Name: Kobold
+  - Id: 1135
+    Name: Kobold
+  - Id: 1136
+    Name: Kobold
+  - Id: 1137
+    Name: Kobold
+  - Id: 1138
+    Name: Magnólia
+  - Id: 1139
+    Name: Louvado Seja Deus
+  - Id: 1140
+    Name: Marduque
+  - Id: 1141
+    Name: Marina
+  - Id: 1142
+    Name: Esfera Marinha
+  - Id: 1143
+    Name: Marionetas
+  - Id: 1144
+    Name: Marte
+  - Id: 1145
+    Name: Martinho
+  - Id: 1146
+    Name: Matir
+  - Id: 1147
+    Name: Maia
+  - Id: 1148
+    Name: Medusa
+  - Id: 1149
+    Name: Menor
+  - Id: 1150
+    Name: Flor do Luar
+  - Id: 1151
+    Name: Névoa
+  - Id: 1152
+    Name: Orc Esqueleto
+  - Id: 1153
+    Name: Orc Zumbi
+  - Id: 1154
+    Name: Enterro
+  - Id: 1155
+    Name: Pequeno
+  - Id: 1156
+    Name: Petite Voador
+  - Id: 1157
+    Name: Faraó
+  - Id: 1158
+    Name: Fen
+  - Id: 1159
+    Name: Freeoni
+  - Id: 1160
+    Name: Mel
+  - Id: 1161
+    Name: Plâncton
+  - Id: 1162
+    Name: Raflésia
+  - Id: 1163
+    Name: Raydric
+  - Id: 1164
+    Name: Réquiem
+  - Id: 1165
+    Name: Sandy
+  - Id: 1166
+    Name: Selvagem
+  - Id: 1167
+    Name: Bebê Selvagem
+  - Id: 1169
+    Name: Esqueleto Operário
+  - Id: 1170
+    Name: Sohee
+  - Id: 1174
+    Name: Percevejo
+  - Id: 1175
+    Name: Tarou
+  - Id: 1176
+    Name: Vitata
+  - Id: 1177
+    Name: Zenorc
+  - Id: 1178
+    Name: Por Zero
+  - Id: 1179
+    Name: Sussurro
+  - Id: 1180
+    Name: Nove Caudas
+  - Id: 1182
+    Name: Cogumelo
+  - Id: 1183
+    Name: Chonchon
+  - Id: 1184
+    Name: Fabre
+  - Id: 1185
+    Name: Sussurro
+  - Id: 1186
+    Name: Cochicho
+  - Id: 1188
+    Name: Bongun
+  - Id: 1189
+    Name: Orc Arqueiro
+  - Id: 1190
+    Name: Senhor dos Orcs
+  - Id: 1191
+    Name: Mímico
+  - Id: 1192
+    Name: Alma Dolorosa
+  - Id: 1193
+    Name: Alarme
+  - Id: 1194
+    Name: Arclouse
+  - Id: 1195
+    Name: Palavra De Passeio
+  - Id: 1196
+    Name: Esqueleto Prisioneiro
+  - Id: 1197
+    Name: Zumbi Prisioneiro
+  - Id: 1198
+    Name: Sacerdote Amaldiçoado
+  - Id: 1199
+    Name: Punk
+  - Id: 1200
+    Name: Jirtas
+  - Id: 1201
+    Name: Rybio
+  - Id: 1202
+    Name: Fendark
+  - Id: 1203
+    Name: O Musteltain
+  - Id: 1204
+    Name: Tirfing
+  - Id: 1205
+    Name: Executor
+  - Id: 1206
+    Name: Anoliano
+  - Id: 1207
+    Name: Picada
+  - Id: 1208
+    Name: Andarilho
+  - Id: 1209
+    Name: Cãibra
+  - Id: 1211
+    Name: Escaravelho
+  - Id: 1212
+    Name: Mão de Ferro
+  - Id: 1213
+    Name: Grande Orc
+  - Id: 1214
+    Name: Chocolate
+  - Id: 1215
+    Name: Talo de Verme
+  - Id: 1216
+    Name: Penomena
+  - Id: 1219
+    Name: Cavaleiro do Abismo
+  - Id: 1220
+    Name: Lobo do Deserto
+  - Id: 1221
+    Name: Selvagem
+  - Id: 1229
+    Name: Fabre
+  - Id: 1230
+    Name: Pupa
+  - Id: 1231
+    Name: Cremoso
+  - Id: 1232
+    Name: Ovo de PecoPeco
+  - Id: 1234
+    Name: Ioiô
+  - Id: 1235
+    Name: Guerreiro Orc
+  - Id: 1236
+    Name: Ovo de Andre
+  - Id: 1237
+    Name: André
+  - Id: 1238
+    Name: Mel
+  - Id: 1239
+    Name: Deniro
+  - Id: 1240
+    Name: Exigente
+  - Id: 1241
+    Name: Exigente
+  - Id: 1242
+    Name: Marina
+  - Id: 1243
+    Name: Pé Grande
+  - Id: 1244
+    Name: Jaqueta
+  - Id: 1245
+    Name: Goblin Calma
+  - Id: 1246
+    Name: Biscoito
+  - Id: 1247
+    Name: Antônio
+  - Id: 1248
+    Name: Soldadinho de Chumbo
+  - Id: 1249
+    Name: Presente
+  - Id: 1250
+    Name: Cale-Se
+  - Id: 1251
+    Name: Cavaleiro da Tempestade
+  - Id: 1252
+    Name: Tome Cuidado
+  - Id: 1253
+    Name: Gárgula
+  - Id: 1254
+    Name: Trapaceiro
+  - Id: 1255
+    Name: Nereida
+  - Id: 1256
+    Name: Peixe
+  - Id: 1257
+    Name: Injustiçado
+  - Id: 1258
+    Name: Goblin Arqueiro
+  - Id: 1259
+    Name: Tocar
+  - Id: 1260
+    Name: Moldura Maldita
+  - Id: 1261
+    Name: Rosa Selvagem
+  - Id: 1262
+    Name: Dragão Mutante
+  - Id: 1263
+    Name: Xamã do Vento
+  - Id: 1264
+    Name: Tritão
+  - Id: 1265
+    Name: Biscoito
+  - Id: 1266
+    Name: Estrela do Mar
+  - Id: 1267
+    Name: Carat
+  - Id: 1268
+    Name: Cavaleiro Sanguinário
+  - Id: 1269
+    Name: Relógio
+  - Id: 1270
+    Name: Gerente
+  - Id: 1271
+    Name: Crocodilo
+  - Id: 1272
+    Name: Senhor das Trevas
+  - Id: 1273
+    Name: Senhora Orc
+  - Id: 1274
+    Name: Megálito
+  - Id: 1275
+    Name: Alice
+  - Id: 1276
+    Name: Raydric Arqueiro
+  - Id: 1277
+    Name: Guardião da Floresta
+  - Id: 1278
+    Name: Golem Estalactítico
+  - Id: 1279
+    Name: Trilobita
+  - Id: 1280
+    Name: Goblin Um Vapor
+  - Id: 1281
+    Name: Verme Sábio
+  - Id: 1282
+    Name: Kobold Arqueiro
+  - Id: 1283
+    Name: Quimera
+  - Id: 1285
+    Name: Arqueiro Guardião
+  - Id: 1286
+    Name: Cavaleiro Guardião
+  - Id: 1287
+    Name: Soldado Guardião
+  - Id: 1288
+    Name: Império
+  - Id: 1289
+    Name: Maia Masculino
+  - Id: 1290
+    Name: Esqueleto Geral
+  - Id: 1291
+    Name: Aparição
+  - Id: 1292
+    Name: Diabinho
+  - Id: 1293
+    Name: Creamy Ameaçador
+  - Id: 1294
+    Name: Mantis Assassino
+  - Id: 1295
+    Name: Barão Coruja
+  - Id: 1296
+    Name: Líder Kobold
+  - Id: 1297
+    Name: Múmia Anciã
+  - Id: 1298
+    Name: Zumbi Mestre
+  - Id: 1299
+    Name: Líder Goblin
+  - Id: 1300
+    Name: Lagarta
+  - Id: 1301
+    Name: Eu Tenho Mudo
+  - Id: 1302
+    Name: Ilusão das Trevas
+  - Id: 1303
+    Name: Zangão Gigante
+  - Id: 1304
+    Name: Aranha Gigante
+  - Id: 1305
+    Name: Verme Ancião
+  - Id: 1306
+    Name: Pão Olmai
+  - Id: 1307
+    Name: Gato de Nove Caudas
+  - Id: 1308
+    Name: Duende Panzer
+  - Id: 1309
+    Name: Gajomart
+  - Id: 1310
+    Name: Majores
+  - Id: 1311
+    Name: Pincel Dourado
+  - Id: 1312
+    Name: General Tartaruga
+  - Id: 1313
+    Name: Yakuza
+  - Id: 1314
+    Name: Batedor
+  - Id: 1315
+    Name: Agressor
+  - Id: 1316
+    Name: Solidificador
+  - Id: 1317
+    Name: Foca
+  - Id: 1318
+    Name: Aquecedor
+  - Id: 1319
+    Name: Freezer
+  - Id: 1320
+    Name: Duque Coruja
+  - Id: 1321
+    Name: Lavadeira
+  - Id: 1322
+    Name: Coelho
+  - Id: 1323
+    Name: Lontra
+  - Id: 1324
+    Name: Tesouro
+  - Id: 1325
+    Name: Tesouro
+  - Id: 1326
+    Name: Tesouro
+  - Id: 1327
+    Name: Tesouro
+  - Id: 1328
+    Name: Tesouro
+  - Id: 1329
+    Name: Tesouro
+  - Id: 1330
+    Name: Tesouro
+  - Id: 1331
+    Name: Tesouro
+  - Id: 1332
+    Name: Tesouro
+  - Id: 1333
+    Name: Tesouro
+  - Id: 1334
+    Name: Tesouro
+  - Id: 1335
+    Name: Tesouro
+  - Id: 1336
+    Name: Tesouro
+  - Id: 1337
+    Name: Tesouro
+  - Id: 1338
+    Name: Tesouro
+  - Id: 1339
+    Name: Tesouro
+  - Id: 1340
+    Name: Tesouro
+  - Id: 1341
+    Name: Tesouro
+  - Id: 1342
+    Name: Tesouro
+  - Id: 1343
+    Name: Tesouro
+  - Id: 1344
+    Name: Tesouro
+  - Id: 1345
+    Name: Tesouro
+  - Id: 1346
+    Name: Tesouro
+  - Id: 1347
+    Name: Tesouro
+  - Id: 1348
+    Name: Tesouro
+  - Id: 1349
+    Name: Tesouro
+  - Id: 1350
+    Name: Tesouro
+  - Id: 1351
+    Name: Tesouro
+  - Id: 1352
+    Name: Tesouro
+  - Id: 1353
+    Name: Tesouro
+  - Id: 1354
+    Name: Tesouro
+  - Id: 1355
+    Name: Tesouro
+  - Id: 1356
+    Name: Tesouro
+  - Id: 1357
+    Name: Tesouro
+  - Id: 1358
+    Name: Tesouro
+  - Id: 1359
+    Name: Tesouro
+  - Id: 1360
+    Name: Tesouro
+  - Id: 1361
+    Name: Tesouro
+  - Id: 1362
+    Name: Tesouro
+  - Id: 1363
+    Name: Tesouro
+  - Id: 1364
+    Name: Agressor
+  - Id: 1365
+    Name: Apocalipse
+  - Id: 1366
+    Name: Golem de Lava
+  - Id: 1367
+    Name: Labareda
+  - Id: 1368
+    Name: Planta Carnívora
+  - Id: 1369
+    Name: Grande Peco
+  - Id: 1370
+    Name: Súcubo
+  - Id: 1371
+    Name: Anjo Fajuto
+  - Id: 1372
+    Name: Bom Presságio
+  - Id: 1373
+    Name: Senhor dos Mortos
+  - Id: 1374
+    Name: Íncubo
+  - Id: 1375
+    Name: Papel
+  - Id: 1376
+    Name: Harpia
+  - Id: 1377
+    Name: Ancião
+  - Id: 1378
+    Name: Um Botão
+  - Id: 1379
+    Name: Pesadelo Sombrio
+  - Id: 1380
+    Name: Furador
+  - Id: 1381
+    Name: Pardo
+  - Id: 1382
+    Name: Diabólico
+  - Id: 1383
+    Name: Estrondo
+  - Id: 1384
+    Name: Exterminador
+  - Id: 1385
+    Name: Deletério
+  - Id: 1386
+    Name: Rochoso
+  - Id: 1387
+    Name: Ferrão
+  - Id: 1388
+    Name: Arcanjo
+  - Id: 1389
+    Name: Drácula
+  - Id: 1390
+    Name: Violinista
+  - Id: 1391
+    Name: Algemas
+  - Id: 1392
+    Name: Giro-Goblin
+  - Id: 1393
+    Name: Múmia
+  - Id: 1394
+    Name: Zumbi
+  - Id: 1395
+    Name: Cristal
+  - Id: 1396
+    Name: Cristal
+  - Id: 1397
+    Name: Cristal
+  - Id: 1398
+    Name: Cristal
+  - Id: 1399
+    Name: Bafome
+  - Id: 1400
+    Name: Karakasa
+  - Id: 1401
+    Name: Shinobi
+  - Id: 1402
+    Name: Sapo Venenoso
+  - Id: 1403
+    Name: Zumbi Atirador
+  - Id: 1404
+    Name: Miyabi Ningyo
+  - Id: 1405
+    Name: Tengu
+  - Id: 1406
+    Name: Kapha
+  - Id: 1408
+    Name: Borboleta Sanguinária
+  - Id: 1409
+    Name: Pirralho
+  - Id: 1410
+    Name: Pessegueira Encantada
+  - Id: 1412
+    Name: Ermitão Maligno
+  - Id: 1413
+    Name: Ginseng Selvagem
+  - Id: 1415
+    Name: Filhote de Leopardo
+  - Id: 1416
+    Name: Ninfa Perversa
+  - Id: 1417
+    Name: Zíper
+  - Id: 1418
+    Name: Serpente Suprema
+  - Id: 1419
+    Name: Farmiliar
+  - Id: 1420
+    Name: Esqueleto Arqueiro
+  - Id: 1421
+    Name: Ísis
+  - Id: 1422
+    Name: Mosca Caçadora
+  - Id: 1423
+    Name: Carniçal
+  - Id: 1424
+    Name: Sorrateiro
+  - Id: 1425
+    Name: Obeaune
+  - Id: 1426
+    Name: Cavalo-Marinho
+  - Id: 1427
+    Name: Pesadelo
+  - Id: 1428
+    Name: Esporo Venenoso
+  - Id: 1429
+    Name: Argiope
+  - Id: 1430
+    Name: Argos
+  - Id: 1431
+    Name: Bafomé Jr.
+  - Id: 1432
+    Name: Lobo do Deserto
+  - Id: 1433
+    Name: Deviruchi
+  - Id: 1434
+    Name: Dreno
+  - Id: 1435
+    Name: Druida Maligno
+  - Id: 1436
+    Name: Jaqueta
+  - Id: 1437
+    Name: Coringa
+  - Id: 1438
+    Name: Khalitzburgo
+  - Id: 1439
+    Name: Grande Orc
+  - Id: 1440
+    Name: Talo de Verme
+  - Id: 1441
+    Name: Fenómeno
+  - Id: 1442
+    Name: Pé Grande
+  - Id: 1443
+    Name: Soldadinho de Chumbo
+  - Id: 1444
+    Name: Cale-Se
+  - Id: 1445
+    Name: Trapaceiro
+  - Id: 1446
+    Name: Injustiçado
+  - Id: 1447
+    Name: Tocar
+  - Id: 1448
+    Name: Moldura Maldita
+  - Id: 1449
+    Name: Dragão Mutante
+  - Id: 1450
+    Name: Xamã do Vento
+  - Id: 1451
+    Name: Tritão
+  - Id: 1452
+    Name: Senhora Orc
+  - Id: 1453
+    Name: Raydric Arqueiro
+  - Id: 1454
+    Name: Trilobita
+  - Id: 1455
+    Name: Kobold Arqueiro
+  - Id: 1456
+    Name: Quimera
+  - Id: 1457
+    Name: Louva-A-Deus
+  - Id: 1458
+    Name: Marduque
+  - Id: 1459
+    Name: Marionetas
+  - Id: 1460
+    Name: Matir
+  - Id: 1461
+    Name: Menor
+  - Id: 1462
+    Name: Orc Esqueleto
+  - Id: 1463
+    Name: Orc Zumbi
+  - Id: 1464
+    Name: Enterro
+  - Id: 1465
+    Name: Pequeno
+  - Id: 1466
+    Name: Pequeno
+  - Id: 1467
+    Name: Raydric
+  - Id: 1468
+    Name: Réquiem
+  - Id: 1469
+    Name: Esqueleto Operário
+  - Id: 1470
+    Name: Por Zero
+  - Id: 1471
+    Name: Nove Caudas
+  - Id: 1472
+    Name: Bongun
+  - Id: 1473
+    Name: Orc Arqueiro
+  - Id: 1474
+    Name: Mímico
+  - Id: 1475
+    Name: Alma Dolorosa
+  - Id: 1476
+    Name: Alarme
+  - Id: 1477
+    Name: Arclouse
+  - Id: 1478
+    Name: Palavra De Passeio
+  - Id: 1479
+    Name: Esqueleto Prisioneiro
+  - Id: 1480
+    Name: Zumbi Prisioneiro
+  - Id: 1481
+    Name: Punk
+  - Id: 1482
+    Name: Jirtas
+  - Id: 1483
+    Name: Rybio
+  - Id: 1484
+    Name: Fendark
+  - Id: 1485
+    Name: O Musteltain
+  - Id: 1486
+    Name: Tirfing
+  - Id: 1487
+    Name: Executor
+  - Id: 1488
+    Name: Anoliano
+  - Id: 1489
+    Name: Picada
+  - Id: 1490
+    Name: Andarilho
+  - Id: 1491
+    Name: Dokebi
+  - Id: 1492
+    Name: Samurai Encarnado
+  - Id: 1493
+    Name: Dríade
+  - Id: 1494
+    Name: Encouraçado
+  - Id: 1495
+    Name: Atirador de Pedras
+  - Id: 1497
+    Name: Golem de Madeira
+  - Id: 1498
+    Name: Artilheiro Wootan
+  - Id: 1499
+    Name: Guerreiro Wootan
+  - Id: 1500
+    Name: Parasita
+  - Id: 1502
+    Name: Demolidor
+  - Id: 1503
+    Name: Árvore Maldita
+  - Id: 1504
+    Name: Dullahan
+  - Id: 1505
+    Name: Mudança De Ruri
+  - Id: 1506
+    Name: Mascarado
+  - Id: 1507
+    Name: Assassino Em Série
+  - Id: 1508
+    Name: Quve
+  - Id: 1509
+    Name: Louco
+  - Id: 1510
+    Name: Poltergeist
+  - Id: 1511
+    Name: Amon Rá
+  - Id: 1512
+    Name: Yao Junho
+  - Id: 1513
+    Name: Mao Guai
+  - Id: 1514
+    Name: Zhu Po Longo
+  - Id: 1515
+    Name: Filhote Hatii
+  - Id: 1516
+    Name: Mi Gao
+  - Id: 1517
+    Name: Jing Guai
+  - Id: 1518
+    Name: Dama Branca
+  - Id: 1519
+    Name: Donzela Verde
+  - Id: 1520
+    Name: Arroz Cozido
+  - Id: 1521
+    Name: Alice
+  - Id: 1522
+    Name: Múmia Anciã
+  - Id: 1523
+    Name: Zumbi Atirador
+  - Id: 1524
+    Name: Filhote de Leopardo
+  - Id: 1525
+    Name: Batório
+  - Id: 1526
+    Name: Borboleta Sanguinária
+  - Id: 1527
+    Name: Gerente
+  - Id: 1528
+    Name: Relógio
+  - Id: 1529
+    Name: Serpente Suprema
+  - Id: 1530
+    Name: Drácula
+  - Id: 1531
+    Name: Ermitão Maligno
+  - Id: 1532
+    Name: Estrondo
+  - Id: 1533
+    Name: Foca
+  - Id: 1534
+    Name: Duende
+  - Id: 1535
+    Name: Duende
+  - Id: 1536
+    Name: Duende
+  - Id: 1537
+    Name: Duende
+  - Id: 1538
+    Name: Duende
+  - Id: 1539
+    Name: Líder Goblin
+  - Id: 1540
+    Name: Golem
+  - Id: 1541
+    Name: Guardião da Floresta
+  - Id: 1542
+    Name: Samurai Encarnado
+  - Id: 1543
+    Name: Kapha
+  - Id: 1544
+    Name: Karakasa
+  - Id: 1545
+    Name: Kobold
+  - Id: 1546
+    Name: Kobold
+  - Id: 1547
+    Name: Kobold
+  - Id: 1548
+    Name: Líder Kobold
+  - Id: 1549
+    Name: Golem de Lava
+  - Id: 1550
+    Name: Pessegueira Encantada
+  - Id: 1551
+    Name: Marte
+  - Id: 1552
+    Name: Miyabi Ningyo
+  - Id: 1553
+    Name: Névoa
+  - Id: 1554
+    Name: Pesadelo Sombrio
+  - Id: 1555
+    Name: Parasita
+  - Id: 1556
+    Name: Sapo Venenoso
+  - Id: 1557
+    Name: Giro-Goblin
+  - Id: 1558
+    Name: Sandy
+  - Id: 1559
+    Name: Escorpião
+  - Id: 1560
+    Name: Shinobi
+  - Id: 1561
+    Name: Fumacento
+  - Id: 1562
+    Name: Esqueleto Soldado
+  - Id: 1563
+    Name: Tengu
+  - Id: 1564
+    Name: Ninfa Perversa
+  - Id: 1565
+    Name: Ginseng Selvagem
+  - Id: 1566
+    Name: Aparição
+  - Id: 1567
+    Name: Verme Ancião
+  - Id: 1568
+    Name: Anjo
+  - Id: 1569
+    Name: Cavaleiro Sanguinário
+  - Id: 1570
+    Name: Cãibra
+  - Id: 1571
+    Name: Desvio
+  - Id: 1572
+    Name: Gotas
+  - Id: 1573
+    Name: Ancião
+  - Id: 1574
+    Name: Salgueiro Ancião
+  - Id: 1575
+    Name: Flora
+  - Id: 1576
+    Name: Anel Fantasma
+  - Id: 1577
+    Name: Goblin Arqueiro
+  - Id: 1578
+    Name: Ouvir
+  - Id: 1579
+    Name: Hidra
+  - Id: 1580
+    Name: Íncubo
+  - Id: 1581
+    Name: Vocal
+  - Id: 1582
+    Name: Diabólico
+  - Id: 1583
+    Name: Tao Gunka
+  - Id: 1584
+    Name: Tamruan
+  - Id: 1585
+    Name: Macaco Mímico
+  - Id: 1586
+    Name: Gato de Folha
+  - Id: 1587
+    Name: Kraben
+  - Id: 1588
+    Name: Orc Natalino
+  - Id: 1589
+    Name: Mandrágora
+  - Id: 1590
+    Name: Planta Carnívora
+  - Id: 1591
+    Name: Lunático
+  - Id: 1592
+    Name: Yakuza
+  - Id: 1593
+    Name: Múmia Anciã
+  - Id: 1594
+    Name: Freezer
+  - Id: 1595
+    Name: Marina
+  - Id: 1596
+    Name: Tamruan
+  - Id: 1597
+    Name: Gárgula
+  - Id: 1598
+    Name: Labareda
+  - Id: 1599
+    Name: Cochicho
+  - Id: 1600
+    Name: Aquecedor
+  - Id: 1601
+    Name: Batedor
+  - Id: 1602
+    Name: Solidificador
+  - Id: 1603
+    Name: Pé-Grande
+  - Id: 1604
+    Name: Zangão Gigante
+  - Id: 1605
+    Name: Ilusão das Trevas
+  - Id: 1606
+    Name: Filhote de Hatii
+  - Id: 1607
+    Name: Goblin Calma
+  - Id: 1608
+    Name: Besouro-Ladrão Macho
+  - Id: 1609
+    Name: Zhu Po Longo
+  - Id: 1610
+    Name: Amante
+  - Id: 1611
+    Name: Bongun
+  - Id: 1612
+    Name: Yao Junho
+  - Id: 1613
+    Name: Metalização
+  - Id: 1614
+    Name: Mineral
+  - Id: 1615
+    Name: Obsidiana
+  - Id: 1616
+    Name: Mineiros
+  - Id: 1617
+    Name: Fornalha Velha
+  - Id: 1618
+    Name: Eles Pastam
+  - Id: 1619
+    Name: Porcelio
+  - Id: 1620
+    Name: Nuvem Tóxica
+  - Id: 1621
+    Name: Nuvem Venenosa
+  - Id: 1622
+    Name: Ursinho
+  - Id: 1623
+    Name: Rsx-0806
+  - Id: 1624
+    Name: Fornalha Velha
+  - Id: 1625
+    Name: Porcelio
+  - Id: 1626
+    Name: Espectro De Hellion
+  - Id: 1627
+    Name: Anófeles
+  - Id: 1628
+    Name: Holden
+  - Id: 1629
+    Name: Vento Da Colina
+  - Id: 1630
+    Name: Senhora Branca
+  - Id: 1631
+    Name: Donzela Verde
+  - Id: 1632
+    Name: Gremlin
+  - Id: 1633
+    Name: Espectador
+  - Id: 1634
+    Name: Seyren Windsor
+  - Id: 1635
+    Name: Eremes Guile
+  - Id: 1636
+    Name: Harword Alteisen
+  - Id: 1637
+    Name: Margaretha Sorin
+  - Id: 1638
+    Name: Cecil Damon
+  - Id: 1639
+    Name: Kathryne Keyron
+  - Id: 1640
+    Name: Lorde Seyren
+  - Id: 1641
+    Name: Algoz Eremes
+  - Id: 1642
+    Name: Mestre-ferreiro Howard
+  - Id: 1643
+    Name: Sacerdotisa Margaretha
+  - Id: 1644
+    Name: Atiradora Cecil
+  - Id: 1645
+    Name: Arquimaga Kathryne
+  - Id: 1646
+    Name: Lorde Seyren
+  - Id: 1647
+    Name: Algoz Eremes
+  - Id: 1648
+    Name: Mestre-ferreiro Harword
+  - Id: 1649
+    Name: Sumo Margaretha
+  - Id: 1650
+    Name: Atiradora Cecil
+  - Id: 1651
+    Name: Arquimaga Kathryne
+  - Id: 1652
+    Name: Egnigem Cenia
+  - Id: 1653
+    Name: Wickebine Três
+  - Id: 1654
+    Name: Armeyer Dinze
+  - Id: 1655
+    Name: Rende Ebecee
+  - Id: 1656
+    Name: Kavach Ícaro
+  - Id: 1657
+    Name: Laurel Weinder
+  - Id: 1658
+    Name: Espadachim Egnigem
+  - Id: 1659
+    Name: Wickebine Três
+  - Id: 1660
+    Name: Armeyer Dinze
+  - Id: 1661
+    Name: Rende Ebecee
+  - Id: 1662
+    Name: Kavach Ícaro
+  - Id: 1663
+    Name: Laurel Weinder
+  - Id: 1664
+    Name: Canhão de Fóton
+  - Id: 1665
+    Name: Canhão de Fóton
+  - Id: 1666
+    Name: Canhão de Fóton
+  - Id: 1667
+    Name: Canhão de Fóton
+  - Id: 1668
+    Name: Arquidam
+  - Id: 1669
+    Name: Dimik
+  - Id: 1670
+    Name: Dimik
+  - Id: 1671
+    Name: Dimik
+  - Id: 1672
+    Name: Dimik
+  - Id: 1673
+    Name: Dimik
+  - Id: 1674
+    Name: Aconselhamos
+  - Id: 1675
+    Name: Caça
+  - Id: 1676
+    Name: Caça
+  - Id: 1677
+    Name: Caça
+  - Id: 1678
+    Name: Caça
+  - Id: 1679
+    Name: Caça
+  - Id: 1680
+    Name: Vento Da Colina
+  - Id: 1681
+    Name: Gêmeos-S58
+  - Id: 1682
+    Name: Removedor
+  - Id: 1683
+    Name: Canhão de Fóton
+  - Id: 1684
+    Name: Arquidam
+  - Id: 1685
+    Name: Véspera
+  - Id: 1686
+    Name: Filhote de Orc
+  - Id: 1687
+    Name: Arvoredo
+  - Id: 1688
+    Name: Senhora Tanee
+  - Id: 1689
+    Name: Senhora Branca
+  - Id: 1690
+    Name: Coelho da Páscoa
+  - Id: 1691
+    Name: Kraben
+  - Id: 1692
+    Name: Brisa
+  - Id: 1693
+    Name: Plasma
+  - Id: 1694
+    Name: Plasma
+  - Id: 1695
+    Name: Plasma
+  - Id: 1696
+    Name: Plasma
+  - Id: 1697
+    Name: Plasma
+  - Id: 1698
+    Name: Palavra Morta
+  - Id: 1699
+    Name: Mímico Antigo
+  - Id: 1700
+    Name: Dama Da Guarda
+  - Id: 1701
+    Name: Senhora do Abrigo
+  - Id: 1702
+    Name: Baronesa da Retribuição
+  - Id: 1703
+    Name: Senhora do Conforto
+  - Id: 1704
+    Name: Odium de Thanatos
+  - Id: 1705
+    Name: Eu Me Desespero Com Th.
+  - Id: 1706
+    Name: Maero de Thanatos
+  - Id: 1707
+    Name: Arrependimento De Than.
+  - Id: 1708
+    Name: Memória de Thanatos
+  - Id: 1709
+    Name: Odium de Thanatos
+  - Id: 1710
+    Name: Eu Me Desespero Com Th.
+  - Id: 1711
+    Name: Maero de Thanatos
+  - Id: 1712
+    Name: Arrependimento De Than.
+  - Id: 1713
+    Name: Ácido
+  - Id: 1714
+    Name: Selvagem
+  - Id: 1715
+    Name: Novo
+  - Id: 1716
+    Name: Ácido
+  - Id: 1717
+    Name: Selvagem
+  - Id: 1718
+    Name: Novo
+  - Id: 1719
+    Name: Detardeuro
+  - Id: 1720
+    Name: Hidrolancer
+  - Id: 1721
+    Name: Ovo de Dragão
+  - Id: 1722
+    Name: Obrigado Pelo Halloween
+  - Id: 1723
+    Name: Cecil Damon
+  - Id: 1724
+    Name: Canhão de Fóton
+  - Id: 1725
+    Name: Poring
+  - Id: 1726
+    Name: Lunático
+  - Id: 1727
+    Name: Bebê Selvagem
+  - Id: 1728
+    Name: Filhote de Lobo
+  - Id: 1729
+    Name: Bafomé Jr.
+  - Id: 1730
+    Name: Deviruchi
+  - Id: 1731
+    Name: Sósia Cruel
+  - Id: 1732
+    Name: Baú do Ibeu
+  - Id: 1733
+    Name: Como
+  - Id: 1734
+    Name: Like-D-01
+  - Id: 1735
+    Name: Alicel
+  - Id: 1736
+    Name: Aliot
+  - Id: 1737
+    Name: Alisa
+  - Id: 1738
+    Name: Constant
+  - Id: 1739
+    Name: Alicel
+  - Id: 1740
+    Name: Aliot
+  - Id: 1741
+    Name: Biscoito
+  - Id: 1742
+    Name: Carat
+  - Id: 1743
+    Name: Presente
+  - Id: 1744
+    Name: Rosa Selvagem
+  - Id: 1745
+    Name: Constant
+  - Id: 1746
+    Name: Alisa
+  - Id: 1747
+    Name: Jiboia
+  - Id: 1748
+    Name: Anaconda
+  - Id: 1749
+    Name: Medusa
+  - Id: 1750
+    Name: Planta Vermelha
+  - Id: 1751
+    Name: Valquíria Randgris
+  - Id: 1752
+    Name: Skogul
+  - Id: 1753
+    Name: Frus
+  - Id: 1754
+    Name: Barba Dourada
+  - Id: 1755
+    Name: Barba Dourada
+  - Id: 1756
+    Name: Hidrolancer
+  - Id: 1757
+    Name: Ácido
+  - Id: 1758
+    Name: Selvagem
+  - Id: 1759
+    Name: Ácido
+  - Id: 1760
+    Name: Selvagem
+  - Id: 1761
+    Name: Skogul
+  - Id: 1762
+    Name: Frus
+  - Id: 1763
+    Name: Barba Dourada
+  - Id: 1764
+    Name: Barba Dourada
+  - Id: 1765
+    Name: Valquíria
+  - Id: 1766
+    Name: Anjo
+  - Id: 1767
+    Name: Diabólico
+  - Id: 1768
+    Name: Pesar Noturno
+  - Id: 1769
+    Name: Agave
+  - Id: 1770
+    Name: Echio
+  - Id: 1771
+    Name: Vanberk
+  - Id: 1772
+    Name: Com Pais
+  - Id: 1773
+    Name: Hodremlin
+  - Id: 1774
+    Name: Rastreador
+  - Id: 1775
+    Name: Yeti
+  - Id: 1776
+    Name: Siroma
+  - Id: 1777
+    Name: Titã de Gelo
+  - Id: 1778
+    Name: Jornal
+  - Id: 1779
+    Name: Cthullanuch
+  - Id: 1780
+    Name: Muscular
+  - Id: 1781
+    Name: Drosera
+  - Id: 1782
+    Name: Roween
+  - Id: 1783
+    Name: Galeão
+  - Id: 1784
+    Name: Parar
+  - Id: 1785
+    Name: Atroce
+  - Id: 1786
+    Name: Agave
+  - Id: 1787
+    Name: Echio
+  - Id: 1788
+    Name: Titã de Gelo
+  - Id: 1789
+    Name: Estalactite
+  - Id: 1790
+    Name: Raflésia
+  - Id: 1791
+    Name: Galeão
+  - Id: 1792
+    Name: Bola de Futebol
+  - Id: 1793
+    Name: Megálito
+  - Id: 1794
+    Name: Roween
+  - Id: 1795
+    Name: Cavaleiro Sanguinário
+  - Id: 1796
+    Name: Aunoe
+  - Id: 1797
+    Name: Um Fã
+  - Id: 1798
+    Name: Baú do Tesouro
+  - Id: 1799
+    Name: Seyren
+  - Id: 1800
+    Name: Eremes
+  - Id: 1801
+    Name: Harword
+  - Id: 1802
+    Name: Margarida
+  - Id: 1803
+    Name: Cecílio
+  - Id: 1804
+    Name: Catarina
+  - Id: 1805
+    Name: Seyren
+  - Id: 1806
+    Name: Eremes
+  - Id: 1807
+    Name: Harword
+  - Id: 1808
+    Name: Margarida
+  - Id: 1809
+    Name: Cecílio
+  - Id: 1810
+    Name: O Gato
+  - Id: 1811
+    Name: Bandido
+  - Id: 1812
+    Name: Mensageiro do Paraíso
+  - Id: 1813
+    Name: Hidrolancer
+  - Id: 1814
+    Name: Flor do Luar
+  - Id: 1815
+    Name: Irmão Buzzy
+  - Id: 1816
+    Name: Cabaça
+  - Id: 1817
+    Name: Detardeuro
+  - Id: 1818
+    Name: Alarme
+  - Id: 1819
+    Name: Batório
+  - Id: 1820
+    Name: Pé-Grande
+  - Id: 1821
+    Name: Lobo do Deserto
+  - Id: 1822
+    Name: Deviruchi
+  - Id: 1823
+    Name: Freezer
+  - Id: 1824
+    Name: Filhote de Hatii
+  - Id: 1825
+    Name: Goblin Calma
+  - Id: 1826
+    Name: Névoa
+  - Id: 1827
+    Name: Pé Grande
+  - Id: 1828
+    Name: Pincel Dourado
+  - Id: 1829
+    Name: Espadachim Guardião
+  - Id: 1830
+    Name: Arqueiro Guardião
+  - Id: 1831
+    Name: Salamandra
+  - Id: 1832
+    Name: Ifrit
+  - Id: 1833
+    Name: Falhar
+  - Id: 1834
+    Name: Salamandra
+  - Id: 1835
+    Name: Falhar
+  - Id: 1836
+    Name: Tome Cuidado
+  - Id: 1837
+    Name: Diabrete
+  - Id: 1838
+    Name: Golpeador
+  - Id: 1839
+    Name: Byorgue
+  - Id: 1840
+    Name: Selvagem Dourado
+  - Id: 1841
+    Name: Servo Do Senhor Das Co.
+  - Id: 1842
+    Name: Servo Do Senhor Das Co.
+  - Id: 1843
+    Name: Servo Do Senhor Das Co.
+  - Id: 1844
+    Name: Servo Do Senhor Das Co.
+  - Id: 1845
+    Name: Baú Do Tesouro
+  - Id: 1846
+    Name: Império
+  - Id: 1847
+    Name: Poring
+  - Id: 1848
+    Name: Bafomé
+  - Id: 1849
+    Name: Osíris
+  - Id: 1850
+    Name: Herói Orc
+  - Id: 1851
+    Name: Yakuza
+  - Id: 1852
+    Name: Anjo
+  - Id: 1853
+    Name: Diabólico
+  - Id: 1854
+    Name: Face
+  - Id: 1855
+    Name: Esporo Venenoso
+  - Id: 1856
+    Name: Magnólia
+  - Id: 1857
+    Name: Marina
+  - Id: 1858
+    Name: Plâncton
+  - Id: 1859
+    Name: Mandrágora
+  - Id: 1860
+    Name: Coco
+  - Id: 1861
+    Name: Chocolate
+  - Id: 1862
+    Name: Martinho
+  - Id: 1863
+    Name: Coelho Primavera
+  - Id: 1864
+    Name: Massacre
+  - Id: 1865
+    Name: Zumbi Dilacerado
+  - Id: 1866
+    Name: Cão Infernal
+  - Id: 1867
+    Name: Banshee
+  - Id: 1868
+    Name: Banshee
+  - Id: 1869
+    Name: Crânio Flamejante
+  - Id: 1870
+    Name: Necromante
+  - Id: 1871
+    Name: Bispo Decadente
+  - Id: 1872
+    Name: Mosca Infernal
+  - Id: 1873
+    Name: Belzebu
+  - Id: 1874
+    Name: Belzebu
+  - Id: 1875
+    Name: Tristão Iii
+  - Id: 1876
+    Name: Senhor Dos Mortos
+  - Id: 1877
+    Name: Cristal
+  - Id: 1878
+    Name: Planta Mística
+  - Id: 1879
+    Name: Coelho
+  - Id: 1880
+    Name: Leshij
+  - Id: 1881
+    Name: O
+  - Id: 1882
+    Name: Baba Yaga
+  - Id: 1883
+    Name: Kikimora
+  - Id: 1884
+    Name: Mavka
+  - Id: 1885
+    Name: Gorynych
+  - Id: 1886
+    Name: Mavka
+  - Id: 1887
+    Name: Freezer
+  - Id: 1888
+    Name: Espere, Querido
+  - Id: 1889
+    Name: Guarda De Marozka
+  - Id: 1890
+    Name: Koshei, O Imortal
+  - Id: 1891
+    Name: Valquíria
+  - Id: 1892
+    Name: Mudança De Ruri
+  - Id: 1893
+    Name: Cavaleiro Do Abismo
+  - Id: 1894
+    Name: Derramando
+  - Id: 1895
+    Name: Evento Seyren
+  - Id: 1896
+    Name: Evento Katrinn
+  - Id: 1897
+    Name: Evento Baphomet
+  - Id: 1898
+    Name: Evento Zumbi
+  - Id: 1899
+    Name: Cavaleiro Guardião
+  - Id: 1900
+    Name: Arqueiro Guardião
+  - Id: 1901
+    Name: Condor
+  - Id: 1902
+    Name: Tesouro
+  - Id: 1903
+    Name: Tesouro
+  - Id: 1904
+    Name: Bombardeio
+  - Id: 1905
+    Name: Barricada
+  - Id: 1906
+    Name: Barricada
+  - Id: 1907
+    Name: Runa Guardiã
+  - Id: 1908
+    Name: Runa Guardiã
+  - Id: 1909
+    Name: Suprimentos
+  - Id: 1910
+    Name: Suprimentos
+  - Id: 1911
+    Name: Bandeira Neutra
+  - Id: 1912
+    Name: Bandeira de Leão
+  - Id: 1913
+    Name: Bandeira de Águia
+  - Id: 1914
+    Name: Cristal Azul
+  - Id: 1915
+    Name: Cristal Vermelho
+  - Id: 1916
+    Name: Imperador Morroc
+  - Id: 1917
+    Name: Morroc Ferido
+  - Id: 1918
+    Name: Sombra da Inveja
+  - Id: 1919
+    Name: Sombra da Gula
+  - Id: 1920
+    Name: Sombra da Vaidade
+  - Id: 1921
+    Name: Sombra da Ira
+  - Id: 1922
+    Name: Sombra da Inveja
+  - Id: 1923
+    Name: Sombra da Gula
+  - Id: 1924
+    Name: Sombra da Vaidade
+  - Id: 1925
+    Name: Sombra da Ira
+  - Id: 1926
+    Name: Casaco Fugitivo
+  - Id: 1927
+    Name: Eu Sussurro Sobre O Ha.
+  - Id: 1928
+    Name: Deviruchi Do Halloween
+  - Id: 1929
+    Name: Bafome
+  - Id: 1930
+    Name: Piamette
+  - Id: 1931
+    Name: Dama dos Desejos
+  - Id: 1932
+    Name: Guardião
+  - Id: 1933
+    Name: Vigia
+  - Id: 1934
+    Name: Flor Azul
+  - Id: 1935
+    Name: Flor Vermelha
+  - Id: 1936
+    Name: Flor Amarela
+  - Id: 1937
+    Name: Constant
+  - Id: 1938
+    Name: Caixa De Tesouro
+  - Id: 1939
+    Name: Caixa De Tesouro
+  - Id: 1940
+    Name: Caixa De Tesouro
+  - Id: 1941
+    Name: Caixa De Tesouro
+  - Id: 1942
+    Name: Caixa De Tesouro
+  - Id: 1943
+    Name: Caixa De Tesouro
+  - Id: 1944
+    Name: Caixa De Tesouro
+  - Id: 1945
+    Name: Caixa De Tesouro
+  - Id: 1946
+    Name: Caixa De Tesouro
+  - Id: 1947
+    Name: Piamette
+  - Id: 1948
+    Name: G Ygnizem
+  - Id: 1949
+    Name: Guardião Guerreiro
+  - Id: 1950
+    Name: Guardião Arqueiro
+  - Id: 1951
+    Name: Cristal
+  - Id: 1952
+    Name: Cristal
+  - Id: 1953
+    Name: Cristal
+  - Id: 1954
+    Name: Cristal
+  - Id: 1955
+    Name: Baú De Tesouro
+  - Id: 1956
+    Name: Nada Vencedor
+  - Id: 1957
+    Name: Profanar Crothen
+  - Id: 1958
+    Name: Esqueleto Espinhoso
+  - Id: 1959
+    Name: Esqueleto Espinhoso
+  - Id: 1960
+    Name: Esqueleto Espinhoso
+  - Id: 1961
+    Name: Esqueleto Espinhoso
+  - Id: 1962
+    Name: Ladrão de Biscoitos
+  - Id: 1963
+    Name: Boneca De Ano Novo
+  - Id: 1964
+    Name: Pesadelo T
+  - Id: 1965
+    Name: Rosa Selvagem
+  - Id: 1966
+    Name: Sósia
+  - Id: 1967
+    Name: Egnigem Cenia
+  - Id: 1968
+    Name: Strouf
+  - Id: 1969
+    Name: Marcos
+  - Id: 1970
+    Name: Obeaune
+  - Id: 1971
+    Name: Selvagem
+  - Id: 1972
+    Name: Marina
+  - Id: 1973
+    Name: Buzzy Bol
+  - Id: 1974
+    Name: Senhora das Banshees
+  - Id: 1975
+    Name: Contêiner Mestre
+  - Id: 1976
+    Name: Cobalto
+  - Id: 1977
+    Name: Metalização Pesada
+  - Id: 1978
+    Name: Apocalipse Infernal
+  - Id: 1979
+    Name: Desculpe
+  - Id: 1980
+    Name: Esconder
+  - Id: 1981
+    Name: Grande Orc
+  - Id: 1982
+    Name: Orc Arqueiro
+  - Id: 1983
+    Name: Orc Esqueleto
+  - Id: 1984
+    Name: Senhora Orc
+  - Id: 1985
+    Name: Dente De Leão
+  - Id: 1986
+    Name: Tatacho
+  - Id: 1987
+    Name: Centopéia
+  - Id: 1988
+    Name: Nepenthes
+  - Id: 1989
+    Name: Leão da Montanha
+  - Id: 1990
+    Name: Mamute Rochoso
+  - Id: 1991
+    Name: Leão de Vinhas
+  - Id: 1992
+    Name: Buzina
+  - Id: 1993
+    Name: Naga
+  - Id: 1994
+    Name: Vespa Vagalume
+  - Id: 1995
+    Name: Pinguicula
+  - Id: 1997
+    Name: Tatacho
+  - Id: 1998
+    Name: Leão da Montanha
+  - Id: 1999
+    Name: Larva de Centopéia
+  - Id: 2000
+    Name: Mestre De Jogo Masculi.
+  - Id: 2001
+    Name: Female Gamemaster
+  - Id: 2002
+    Name: Coelho Chinês
+  - Id: 2003
+    Name: Ninfa Chinesa
+  - Id: 2004
+    Name: Lady Chinesa
+  - Id: 2005
+    Name: Plasma
+  - Id: 2006
+    Name: Plasma
+  - Id: 2007
+    Name: Plasma
+  - Id: 2008
+    Name: Woomawang
+  - Id: 2009
+    Name: Woomawang
+  - Id: 2010
+    Name: Ox
+  - Id: 2011
+    Name: Carniçal
+  - Id: 2012
+    Name: Zumbi
+  - Id: 2013
+    Name: Draco
+  - Id: 2014
+    Name: Ovo de Draco
+  - Id: 2015
+    Name: Pinguicula Sombria
+  - Id: 2016
+    Name: Elemental da Água
+  - Id: 2017
+    Name: Ratatouille
+  - Id: 2018
+    Name: Duneyrr
+  - Id: 2019
+    Name: Árvore Anciã
+  - Id: 2020
+    Name: Rincho
+  - Id: 2021
+    Name: Fila
+  - Id: 2022
+    Name: Sombra de Nidhogg
+  - Id: 2023
+    Name: Sombra Negra
+  - Id: 2024
+    Name: Golem de Bradium
+  - Id: 2025
+    Name: Presentinho
+  - Id: 2026
+    Name: Dandelion Fugitivo
+  - Id: 2027
+    Name: Sombra Negra
+  - Id: 2030
+    Name: Padre Escondido
+  - Id: 2031
+    Name: Dandelion Executivo
+  - Id: 2032
+    Name: Guardião Da Floresta
+  - Id: 2033
+    Name: Tulipa Dourada
+  - Id: 2034
+    Name: Filhote de Lobo
+  - Id: 2035
+    Name: Pedra da Futilidade
+  - Id: 2036
+    Name: Pesadelo da Valquíria
+  - Id: 2037
+    Name: Valquíria
+  - Id: 2038
+    Name: Valquíria
+  - Id: 2039
+    Name: Executor
+  - Id: 2040
+    Name: Augerto
+  - Id: 2041
+    Name: O Musteltain
+  - Id: 2042
+    Name: Artilheiro Prateado
+  - Id: 2043
+    Name: Distração Mágica
+  - Id: 2044
+    Name: Distração Mágica
+  - Id: 2045
+    Name: Distração Mágica
+  - Id: 2046
+    Name: Distração Mágica
+  - Id: 2047
+    Name: Naga
+  - Id: 2048
+    Name: Pinguicula
+  - Id: 2049
+    Name: Golem
+  - Id: 2050
+    Name: Elementar
+  - Id: 2052
+    Name: Senhor Invocado
+  - Id: 2057
+    Name: Rato
+  - Id: 2058
+    Name: Mímico
+  - Id: 2059
+    Name: Mascarado
+  - Id: 2060
+    Name: Alice
+  - Id: 2066
+    Name: Mestre Dos Pernilongos
+  - Id: 2067
+    Name: Pernilongo
+  - Id: 2068
+    Name: Boitatá
+  - Id: 2069
+    Name: De Novo
+  - Id: 2070
+    Name: Espírito da Água
+  - Id: 2071
+    Name: Mula Sem Cabeça
+  - Id: 2072
+    Name: Espírito da Terra
+  - Id: 2073
+    Name: Espírito do Vento
+  - Id: 2074
+    Name: Curupira
+  - Id: 2075
+    Name: Selvagem X
+  - Id: 2076
+    Name: Sombra da Decepção
+  - Id: 2077
+    Name: Sombra da Ilusão
+  - Id: 2078
+    Name: Sombra do Prazer
+  - Id: 2079
+    Name: Cristal Mãe
+  - Id: 2080
+    Name: Cristal Enorme
+  - Id: 2081
+    Name: Anêmona
+  - Id: 2082
+    Name: Espírito da Água
+  - Id: 2083
+    Name: Scaraba Chifre
+  - Id: 2084
+    Name: Scaraba Chifres Duplos
+  - Id: 2085
+    Name: Escaravelho Galhado
+  - Id: 2086
+    Name: Scaraba Ancinho
+  - Id: 2087
+    Name: Rainha Scaraba
+  - Id: 2088
+    Name: Ovo De Scaraba Chifre
+  - Id: 2089
+    Name: Ovo De Chifres Duplos
+  - Id: 2090
+    Name: Ovo de Scaraba Galhado
+  - Id: 2091
+    Name: Ovo de Scaraba Ancinho
+  - Id: 2092
+    Name: Dolomedes
+  - Id: 2093
+    Name: Botaring
+  - Id: 2094
+    Name: Orc Herói Corrompido
+  - Id: 2095
+    Name: Para Edd
+  - Id: 2096
+    Name: Osíris
+  - Id: 2097
+    Name: Drácula
+  - Id: 2098
+    Name: Sósia
+  - Id: 2099
+    Name: Amante
+  - Id: 2100
+    Name: Bafomé
+  - Id: 2101
+    Name: Senhor Da Morte
+  - Id: 2102
+    Name: Senhor Das Trevas
+  - Id: 2103
+    Name: Cthullanuch
+  - Id: 2104
+    Name: Senhor Serpente Maligno
+  - Id: 2105
+    Name: General Tartaruga
+  - Id: 2106
+    Name: Véspera
+  - Id: 2107
+    Name: Bispo Caído
+  - Id: 2108
+    Name: Trevas Sob A Noite
+  - Id: 2109
+    Name: Valquíria Randgris
+  - Id: 2110
+    Name: Ifrit
+  - Id: 2111
+    Name: Mestre Ferreiro Howard
+  - Id: 2112
+    Name: Senhor Cavaleiro Seyren
+  - Id: 2113
+    Name: Assassino Cruz Eremes
+  - Id: 2126
+    Name: Anófeles
+  - Id: 2127
+    Name: Vespa
+  - Id: 2128
+    Name: Vespa
+  - Id: 2129
+    Name: Luciola Vespa
+  - Id: 2130
+    Name: Luciola Vespa
+  - Id: 2131
+    Name: Dragão Púrpura
+  - Id: 2132
+    Name: Aranha Pom
+  - Id: 2133
+    Name: Louva-A-Deus Angra
+  - Id: 2134
+    Name: Chapim
+  - Id: 2135
+    Name: Trepadeira
+  - Id: 2136
+    Name: Pequeno Fatum
+  - Id: 2137
+    Name: Plagiador
+  - Id: 2138
+    Name: Lembrança da Guardiã
+  - Id: 2139
+    Name: Lembrança da Guardiã
+  - Id: 2140
+    Name: Lembrança da Guardiã
+  - Id: 2141
+    Name: Lembrança da Guardiã
+  - Id: 2142
+    Name: Lembrança da Guardiã
+  - Id: 2143
+    Name: Lembrança da Guardiã
+  - Id: 2144
+    Name: Escaravelho Galhado
+  - Id: 2145
+    Name: Scaraba Ancinho
+  - Id: 2146
+    Name: Sombra do Dragão
+  - Id: 2147
+    Name: Planta Branca
+  - Id: 2148
+    Name: Planta Azul
+  - Id: 2149
+    Name: Selvagem Bebê
+  - Id: 2150
+    Name: Melancia
+  - Id: 2151
+    Name: Raflésia Alnoldi
+  - Id: 2152
+    Name: Comodo
+  - Id: 2153
+    Name: Cendrawasih
+  - Id: 2154
+    Name: Banaspaty
+  - Id: 2155
+    Name: Butoijo
+  - Id: 2156
+    Name: Vazar
+  - Id: 2157
+    Name: Banaspaty
+  - Id: 2158
+    Name: Vespa
+  - Id: 2159
+    Name: Vespa Gigante
+  - Id: 2160
+    Name: Luciola Vespa
+  - Id: 2161
+    Name: Scaraba Chifre
+  - Id: 2162
+    Name: Scaraba Chifres Duplos
+  - Id: 2163
+    Name: Escaravelho Galhado
+  - Id: 2164
+    Name: Scaraba Ancinho
+  - Id: 2165
+    Name: Rainha Scaraba
+  - Id: 2166
+    Name: Ovo De Scaraba Chifre
+  - Id: 2167
+    Name: Ovo De Chifres Duplos
+  - Id: 2168
+    Name: Ovo de Scaraba Galhado
+  - Id: 2169
+    Name: Ovo de Scaraba Ancinho
+  - Id: 2170
+    Name: Escaravelho Galhado
+  - Id: 2171
+    Name: Scaraba Ancinho
+  - Id: 2172
+    Name: Scaraba Chifre
+  - Id: 2173
+    Name: Scaraba Chifres Duplos
+  - Id: 2174
+    Name: Ancestral Selvagem
+  - Id: 2175
+    Name: Marte das Profundezas
+  - Id: 2176
+    Name: Caranguejo Das Profund.
+  - Id: 2177
+    Name: Cornutus das Profundez.
+  - Id: 2178
+    Name: Ostra das Profundezas
+  - Id: 2179
+    Name: Kukre Ancestral
+  - Id: 2180
+    Name: Strouf Ancestral
+  - Id: 2181
+    Name: Peixe-Espada Ancestral
+  - Id: 2182
+    Name: Cavalo-marinho das Pro.
+  - Id: 2183
+    Name: Mutante Anoliano
+  - Id: 2184
+    Name: Obeaune Ancestral
+  - Id: 2185
+    Name: Kapha Metamorfo
+  - Id: 2186
+    Name: Celacanto
+  - Id: 2187
+    Name: Celacanto Sombrio
+  - Id: 2188
+    Name: Celacanto Cruel
+  - Id: 2189
+    Name: Celacanto Mutante
+  - Id: 2190
+    Name: Celacanto Violento
+  - Id: 2191
+    Name: Alga
+  - Id: 2192
+    Name: Polvo Pequeno
+  - Id: 2193
+    Name: Tentáculo de Polvo
+  - Id: 2194
+    Name: Polvo Gigante
+  - Id: 2195
+    Name: Kukre Ancestral
+  - Id: 2196
+    Name: Strouf Ancestral
+  - Id: 2197
+    Name: Eruma Vermelho
+  - Id: 2198
+    Name: Dramoh Rei
+  - Id: 2199
+    Name: Siorava
+  - Id: 2200
+    Name: Tain
+  - Id: 2201
+    Name: Srofo
+  - Id: 2202
+    Name: Kraken
+  - Id: 2203
+    Name: Dofle
+  - Id: 2204
+    Name: Sedora
+  - Id: 2206
+    Name: Perna De Kraken
+  - Id: 2208
+    Name: Montaria Selvagem
+  - Id: 2209
+    Name: Sombra Escura Rápida
+  - Id: 2210
+    Name: Lebre Da Neve
+  - Id: 2211
+    Name: Ursinho de Natal
+  - Id: 2212
+    Name: Cavaleiro Invocado
+  - Id: 2213
+    Name: Andarilho
+  - Id: 2214
+    Name: Ninfa Malvada
+  - Id: 2215
+    Name: Falhar
+  - Id: 2216
+    Name: Salamandra
+  - Id: 2217
+    Name: Ursinho De Pelúcia
+  - Id: 2218
+    Name: Tentáculo de Polvo
+  - Id: 2219
+    Name: Polvo Rei
+  - Id: 2220
+    Name: Mensageiro do Inferno
+  - Id: 2221
+    Name: Randel Lawrence
+  - Id: 2222
+    Name: Emul Flamer
+  - Id: 2223
+    Name: Célia Alde
+  - Id: 2224
+    Name: Chen Liu
+  - Id: 2225
+    Name: Gertie Nós
+  - Id: 2226
+    Name: Alfoccio Manjericão
+  - Id: 2227
+    Name: Trentino
+  - Id: 2228
+    Name: Paladino Randall
+  - Id: 2229
+    Name: Criador Flamel
+  - Id: 2230
+    Name: Professora Celia
+  - Id: 2231
+    Name: Mestre Chen
+  - Id: 2232
+    Name: Desordeira Gertie
+  - Id: 2233
+    Name: Menestrel Alfóquio
+  - Id: 2234
+    Name: Cigana Trentini
+  - Id: 2235
+    Name: Paladino Randall
+  - Id: 2236
+    Name: Criador Flamer
+  - Id: 2237
+    Name: Professora Celia
+  - Id: 2238
+    Name: Mestre Chen
+  - Id: 2239
+    Name: Desordeira Gertie
+  - Id: 2240
+    Name: Menestrel Alfócio
+  - Id: 2241
+    Name: Cigana Trentini
+  - Id: 2242
+    Name: Cobaia Faminta
+  - Id: 2243
+    Name: Cobaia Faminta
+  - Id: 2244
+    Name: Mestre
+  - Id: 2245
+    Name: Soldado
+  - Id: 2246
+    Name: Guerreiro Wootan
+  - Id: 2247
+    Name: Mi Gao
+  - Id: 2248
+    Name: Poring Dourado
+  - Id: 2249
+    Name: Pyuriel Furiosa
+  - Id: 2250
+    Name: Guerreira Laura
+  - Id: 2251
+    Name: Gioia
+  - Id: 2252
+    Name: Elvira
+  - Id: 2253
+    Name: General Daehyun
+  - Id: 2254
+    Name: Samurai Soheon
+  - Id: 2255
+    Name: Guardião Morto Kades
+  - Id: 2256
+    Name: Amor
+  - Id: 2257
+    Name: Piamette
+  - Id: 2258
+    Name: Piamette
+  - Id: 2259
+    Name: Jardineiro
+  - Id: 2260
+    Name: Jardineiro
+  - Id: 2261
+    Name: Vigia do Jardim
+  - Id: 2262
+    Name: Vigia do Jardim
+  - Id: 2263
+    Name: Donzela Dos Desejos
+  - Id: 2264
+    Name: Armeyer Dinze
+  - Id: 2265
+    Name: Armeyer Dinze
+  - Id: 2266
+    Name: Rende Ebecee
+  - Id: 2267
+    Name: Rende Ebecee
+  - Id: 2268
+    Name: Kavach Ícaro
+  - Id: 2269
+    Name: Kavach Ícaro
+  - Id: 2270
+    Name: Laurel Weinder
+  - Id: 2271
+    Name: Laurel Weinder
+  - Id: 2272
+    Name: Wickebine Três
+  - Id: 2273
+    Name: Wickebine Três
+  - Id: 2274
+    Name: Egnigem Cenia
+  - Id: 2275
+    Name: Egnigem Cenia
+  - Id: 2276
+    Name: Sósia
+  - Id: 2277
+    Name: Guerreira Laura
+  - Id: 2278
+    Name: Elvira
+  - Id: 2279
+    Name: Samurai Soheon
+  - Id: 2280
+    Name: Amor
+  - Id: 2281
+    Name: Sombra Abissal
+  - Id: 2282
+    Name: Moldura Abissal
+  - Id: 2283
+    Name: Sacerdote Abissal
+  - Id: 2284
+    Name: Kobold Abissal
+  - Id: 2285
+    Name: Kobold Abissal
+  - Id: 2286
+    Name: Kobold Abissal
+  - Id: 2287
+    Name: Arqueiro Abissal
+  - Id: 2288
+    Name: Velha Arca do Tesouro
+  - Id: 2289
+    Name: Favorecer
+  - Id: 2290
+    Name: Itifbuk
+  - Id: 2291
+    Name: Na Vespa
+  - Id: 2292
+    Name: Buzina Ligada
+  - Id: 2293
+    Name: Ekind Fora De Betelet
+  - Id: 2294
+    Name: Em Argiope
+  - Id: 2295
+    Name: Speeder Gigante
+  - Id: 2296
+    Name: Em Assassino Louva-A-D.
+  - Id: 2297
+    Name: E Vespa Gigante
+  - Id: 2298
+    Name: Telhas De Dragão Ed
+  - Id: 2299
+    Name: Steiner
+  - Id: 2300
+    Name: Casamento Misto
+  - Id: 2301
+    Name: Estel Casamento Misto
+  - Id: 2302
+    Name: Ehunter Fleur
+  - Id: 2303
+    Name: Em Mawia
+  - Id: 2304
+    Name: Na Barra De Colarinho .  
+  - Id: 2305
+    Name: Em Ungoliant
+  - Id: 2306
+    Name: Besouro Invocado
+  - Id: 2307
+    Name: Esta Amante
+  - Id: 2308
+    Name: Ko_Kage
+  - Id: 2309
+    Name: Sorrindo
+  - Id: 2310
+    Name: Fada
+  - Id: 2311
+    Name: Remover
+  - Id: 2312
+    Name: Bruxa
+  - Id: 2313
+    Name: Tikbalang
+  - Id: 2314
+    Name: Claro
+  - Id: 2315
+    Name: Barra
+  - Id: 2316
+    Name: Jejeling
+  - Id: 2317
+    Name: Pesadelo
+  - Id: 2318
+    Name: Pesadelo
+  - Id: 2319
+    Name: Crocodilo
+  - Id: 2320
+    Name: Bakonawa
+  - Id: 2321
+    Name: Bakonawa
+  - Id: 2322
+    Name: Bakonawa
+  - Id: 2323
+    Name: Bomba Epend
+  - Id: 2324
+    Name: Epend Lange
+  - Id: 2325
+    Name: Bafomé Jr.
+  - Id: 2326
+    Name: Galápago
+  - Id: 2327
+    Name: Pesadelo
+  - Id: 2328
+    Name: Gongo
+  - Id: 2329
+    Name: Ovo Buwaya
+  - Id: 2330
+    Name: Buwaya Escravo
+  - Id: 2331
+    Name: Alga Malaia
+  - Id: 2332
+    Name: Crocodilo
+  - Id: 2333
+    Name: Ponto Fraco
+  - Id: 2334
+    Name: Barra
+  - Id: 2335
+    Name: Tesouro De Bakonawa
+  - Id: 2336
+    Name: Domovoi
+  - Id: 2337
+    Name: Monstro
+  - Id: 2338
+    Name: Remover
+  - Id: 2339
+    Name: Bruxa
+  - Id: 2340
+    Name: Claro
+  - Id: 2341
+    Name: Abalado
+  - Id: 2342
+    Name: Diabólico
+  - Id: 2343
+    Name: Monstro
+  - Id: 2344
+    Name: Dama dos Desejos
+  - Id: 2345
+    Name: Jirtas
+  - Id: 2346
+    Name: Cthullanuch
+  - Id: 2347
+    Name: Para Edd
+  - Id: 2348
+    Name: Funcionário Público
+  - Id: 2349
+    Name: Mudança De Ruri
+  - Id: 2350
+    Name: Sedora
+  - Id: 2351
+    Name: Cale-Se
+  - Id: 2352
+    Name: Rsx-0805
+  - Id: 2353
+    Name: Minorous Pesadelo
+  - Id: 2354
+    Name: Múmia Pesadelo
+  - Id: 2355
+    Name: Verit Pesadelo
+  - Id: 2356
+    Name: Mímico Pesadelo
+  - Id: 2357
+    Name: Mímico Pesadelo
+  - Id: 2358
+    Name: Arclouse Pesadelo
+  - Id: 2359
+    Name: Arclouse Pesadelo
+  - Id: 2360
+    Name: Múmia Anciã Pesadelo
+  - Id: 2361
+    Name: Múmia Anciã Pesadelo
+  - Id: 2362
+    Name: Amon Ra Pesadelo
+  - Id: 2363
+    Name: Folha De Cardápio
+  - Id: 2364
+    Name: Pétala
+  - Id: 2365
+    Name: Cinzas
+  - Id: 2366
+    Name: Antigo Livro Danificado
+  - Id: 2367
+    Name: Luzes Laguz
+  - Id: 2368
+    Name: Luzes Anzus
+  - Id: 2369
+    Name: Luzes Kenaz
+  - Id: 2370
+    Name: Luzes Inguz
+  - Id: 2371
+    Name: Gerente De Bifrost
+  - Id: 2372
+    Name: Monte De Terra
+  - Id: 2373
+    Name: Pedra
+  - Id: 2374
+    Name: Monte De Mato
+  - Id: 2375
+    Name: Suspeito
+  - Id: 2376
+    Name: Devoto De Morroc
+  - Id: 2377
+    Name: Filhote Foragido
+  - Id: 2378
+    Name: Escaravelho De Chifre
+  - Id: 2379
+    Name: Fumacento em Meias
+  - Id: 2380
+    Name: Fumacento Natalino
+  - Id: 2398
+    Name: Bebê Poring
+  - Id: 2401
+    Name: Alvo de Prática
+  - Id: 2402
+    Name: Poporing Anti-Magia
+  - Id: 2403
+    Name: Poporing Anti-Ataques
+  - Id: 2404
+    Name: Plâncton Morto
+  - Id: 2405
+    Name: Esqueleto Frágil
+  - Id: 2406
+    Name: Soldado Frágil
+  - Id: 2407
+    Name: Esqueleto Marinheiro
+  - Id: 2408
+    Name: Ovo Nível 10
+  - Id: 2409
+    Name: Ovo Nível 50
+  - Id: 2410
+    Name: Ovo Nível 100
+  - Id: 2411
+    Name: Ovo Nível 150
+  - Id: 2413
+    Name: Ovo Nível 10 (Fogo)
+  - Id: 2415
+    Name: Cavaleiro
+  - Id: 2416
+    Name: Mercenário
+  - Id: 2417
+    Name: Ferreiro
+  - Id: 2418
+    Name: Caçadora
+  - Id: 2419
+    Name: Bruxa
+  - Id: 2420
+    Name: Sacerdotisa
+  - Id: 2421
+    Name: Templária
+  - Id: 2422
+    Name: Arruaceira
+  - Id: 2423
+    Name: Alquimista
+  - Id: 2424
+    Name: Bardo
+  - Id: 2425
+    Name: Odalisca
+  - Id: 2426
+    Name: Sábio
+  - Id: 2427
+    Name: Monge
+  - Id: 2428
+    Name: Cavaleiro Seyren
+  - Id: 2429
+    Name: Mercenário Eremes
+  - Id: 2430
+    Name: Ferreiro Howard
+  - Id: 2431
+    Name: Caçadora Cecil
+  - Id: 2432
+    Name: Bruxa Kathryne
+  - Id: 2433
+    Name: Sacerdotisa Margaretha
+  - Id: 2434
+    Name: Templária Egnigem
+  - Id: 2435
+    Name: Arruaceira Wikebine
+  - Id: 2436
+    Name: Alquimista Armeyer
+  - Id: 2437
+    Name: Bardo Kavach
+  - Id: 2438
+    Name: Odalisca Trentinni
+  - Id: 2439
+    Name: Sábio Laurell
+  - Id: 2440
+    Name: Monge Rende
+  - Id: 2441
+    Name: Aprendiz
+  - Id: 2442
+    Name: Superaprendiz
+  - Id: 2443
+    Name: Aira
+  - Id: 2444
+    Name: Ao Seu Servo
+  - Id: 2445
+    Name: Como Modelo
+  - Id: 2446
+    Name: Com Sono
+  - Id: 2447
+    Name: Lua
+  - Id: 2448
+    Name: Morin
+  - Id: 2449
+    Name: Nazarino
+  - Id: 2450
+    Name: Poring Suspeito
+  - Id: 2451
+    Name: Bebê Suspeito
+  - Id: 2452
+    Name: Baú do Tesouro
+  - Id: 2453
+    Name: Baú do Tesouro
+  - Id: 2454
+    Name: Baú do Tesouro
+  - Id: 2455
+    Name: Baú do Tesouro
+  - Id: 2456
+    Name: Baú do Tesouro
+  - Id: 2457
+    Name: Baú do Tesouro
+  - Id: 2458
+    Name: Baú do Tesouro
+  - Id: 2459
+    Name: Baú do Tesouro
+  - Id: 2460
+    Name: Baú do Tesouro
+  - Id: 2461
+    Name: Baú do Tesouro
+  - Id: 2462
+    Name: Baú do Tesouro
+  - Id: 2464
+    Name: Zumbi Amaldiçoado
+  - Id: 2465
+    Name: Alma Amaldiçoada
+  - Id: 2466
+    Name: Carniçal Amaldiçoado
+  - Id: 2467
+    Name: Arclouse Amaldiçoado
+  - Id: 2468
+    Name: Raydric Amaldiçoado
+  - Id: 2469
+    Name: Arqueiro Amaldiçoado
+  - Id: 2470
+    Name: Amaldiçoado do Abismo
+  - Id: 2471
+    Name: Khalitzburg Amaldiçoado
+  - Id: 2472
+    Name: Sanguinário Amaldiçoado
+  - Id: 2473
+    Name: Cavaleiro Desmorto
+  - Id: 2474
+    Name: Cavaleira Desmorta
+  - Id: 2475
+    Name: Origem da Maldição
+  - Id: 2476
+    Name: Amdarais
+  - Id: 2477
+    Name: Andarilho Amaldiçoado
+  - Id: 2478
+    Name: Rideword Distorcido
+  - Id: 2479
+    Name: Mímico Distorcido
+  - Id: 2480
+    Name: Druida Amaldiçoado
+  - Id: 2481
+    Name: Aparição Amaldiçoada
+  - Id: 2483
+    Name: Bafomé Amaldiçoado
+  - Id: 2484
+    Name: Bafomé Jr. Amaldiçoado
+  - Id: 2485
+    Name: Quimera Amaldiçoada
+  - Id: 2528
+    Name: Verme com Rosto
+  - Id: 2529
+    Name: Rainha Verme
+  - Id: 2530
+    Name: Verme Sombrio com Rosto
+  - Id: 2531
+    Name: Inseto Venenoso
+  - Id: 2532
+    Name: Rainha Verme
+  - Id: 2533
+    Name: Rainha Verme
+  - Id: 2534
+    Name: Rainha Verme
+  - Id: 2535
+    Name: Rainha Verme
+  - Id: 2536
+    Name: Monstro 3
+  - Id: 2537
+    Name: Monstro 4
+  - Id: 2539
+    Name: Monstro 5
+  - Id: 2540
+    Name: Ovo de Verme com Rosto
+  - Id: 2541
+    Name: Verme Larva
+  - Id: 2542
+    Name: Lorde Irine
+  - Id: 2543
+    Name: Guardião De Payon
+  - Id: 2544
+    Name: Soldado Payon
+  - Id: 2545
+    Name: Lobo da Guarda
+  - Id: 2546
+    Name: Lobo da Guarda Feroz
+  - Id: 2549
+    Name: Alphard
+  - Id: 2550
+    Name: Sírius
+  - Id: 2551
+    Name: Gatuna De Geffen
+  - Id: 2552
+    Name: Valentão de Geffen
+  - Id: 2553
+    Name: Bandido Geffen
+  - Id: 2554
+    Name: Mirzam
+  - Id: 2555
+    Name: Mulifen
+  - Id: 2556
+    Name: Ser
+  - Id: 2557
+    Name: Wei
+  - Id: 2558
+    Name: Guarda
+  - Id: 2559
+    Name: Shaula
+  - Id: 2560
+    Name: Ahdara
+  - Id: 2561
+    Name: Procyon
+  - Id: 2562
+    Name: Atria
+  - Id: 2563
+    Name: Fay Kanavion
+  - Id: 2564
+    Name: Fenris Fenrir
+  - Id: 2565
+    Name: Afonso
+  - Id: 2566
+    Name: Afonso Jr.
+  - Id: 2567
+    Name: Valentão de Geffen
+  - Id: 2568
+    Name: Bandido de Geffen
+  - Id: 2569
+    Name: Anófeles
+  - Id: 2570
+    Name: Brisa
+  - Id: 2571
+    Name: Butoijo
+  - Id: 2572
+    Name: Caramel
+  - Id: 2573
+    Name: Chonchón
+  - Id: 2574
+    Name: Mao Guai
+  - Id: 2575
+    Name: Coco
+  - Id: 2576
+    Name: Cremoso
+  - Id: 2577
+    Name: Fabre
+  - Id: 2578
+    Name: Buzina
+  - Id: 2579
+    Name: Hilozoísta
+  - Id: 2580
+    Name: Construção
+  - Id: 2581
+    Name: Louco
+  - Id: 2582
+    Name: Lunático
+  - Id: 2583
+    Name: Martinho
+  - Id: 2584
+    Name: Mineral
+  - Id: 2585
+    Name: Holden
+  - Id: 2586
+    Name: Nereida
+  - Id: 2587
+    Name: Obsidian
+  - Id: 2588
+    Name: Pitman
+  - Id: 2589
+    Name: Poporing
+  - Id: 2590
+    Name: Balancim
+  - Id: 2591
+    Name: Selvagem
+  - Id: 2592
+    Name: Siorava
+  - Id: 2593
+    Name: Siroma
+  - Id: 2594
+    Name: Mais Nevado
+  - Id: 2595
+    Name: Colorador
+  - Id: 2596
+    Name: Parar
+  - Id: 2597
+    Name: Chonchão De Aço
+  - Id: 2598
+    Name: Eles Pastam
+  - Id: 2599
+    Name: Invasor!
+  - Id: 2600
+    Name: Lobo
+  - Id: 2601
+    Name: Ioiô
+  - Id: 2602
+    Name: Urso Zíper
+  - Id: 2603
+    Name: Massacre Ágil
+  - Id: 2604
+    Name: Prisioneiro Brutal
+  - Id: 2605
+    Name: Zumbi Mestre Alfa
+  - Id: 2606
+    Name: Zumbi Feroz
+  - Id: 2607
+    Name: Zakudam Fugaz
+  - Id: 2608
+    Name: Ágil Yoiô
+  - Id: 2609
+    Name: Ioiô Brutal
+  - Id: 2610
+    Name: Rabo de Verme Alfa
+  - Id: 2611
+    Name: Guerreiro Wootan Feroz
+  - Id: 2612
+    Name: Leshij Fugaz
+  - Id: 2613
+    Name: Lobo Ágil
+  - Id: 2614
+    Name: Xamã do Vento Brutal
+  - Id: 2615
+    Name: Salgueiro Alfa
+  - Id: 2616
+    Name: Rosa Selvagem Feroz
+  - Id: 2617
+    Name: Ninfa Perversa Fugaz
+  - Id: 2618
+    Name: Sussurro Brutal
+  - Id: 2619
+    Name: Esqueleto Frágil Alfa
+  - Id: 2620
+    Name: Andarilho Feroz
+  - Id: 2621
+    Name: Violinista Fugaz
+  - Id: 2622
+    Name: Violinista Ágil
+  - Id: 2623
+    Name: Violinista Brutal
+  - Id: 2624
+    Name: Nuvem Venenosa Alfa
+  - Id: 2625
+    Name: Vêneto Feroz
+  - Id: 2626
+    Name: Baba-Yaga Fugaz
+  - Id: 2627
+    Name: Vanberk Ágil
+  - Id: 2628
+    Name: Extremamente Brutal
+  - Id: 2629
+    Name: Alfa Ungoliant
+  - Id: 2630
+    Name: Espírito do Vento Feroz
+  - Id: 2631
+    Name: Tiyanak Fugaz
+  - Id: 2632
+    Name: Besouro-Ladrão Brutal
+  - Id: 2633
+    Name: Besouro-Ladrão Alfa
+  - Id: 2634
+    Name: Besouro-Ladrão Feroz
+  - Id: 2635
+    Name: Sapo De Thara Fugaz
+  - Id: 2636
+    Name: Ursinho Ágil
+  - Id: 2637
+    Name: Tatacho Brutal
+  - Id: 2638
+    Name: Tarou Alfa
+  - Id: 2639
+    Name: Tamruan Feroz
+  - Id: 2640
+    Name: Sting Fugaz
+  - Id: 2641
+    Name: Talo de Verme Ágil
+  - Id: 2642
+    Name: Chonchon de Aço Brutal
+  - Id: 2643
+    Name: Stapo Alfa
+  - Id: 2644
+    Name: Estalactítica Feroz
+  - Id: 2645
+    Name: Percevejo Fugaz
+  - Id: 2646
+    Name: Esporo Ágil
+  - Id: 2647
+    Name: Solidificador Brutal
+  - Id: 2648
+    Name: Esqueleto Soldado Alfa
+  - Id: 2649
+    Name: Esqueleto Soldado Feroz
+  - Id: 2650
+    Name: Senhora Fugaz
+  - Id: 2651
+    Name: Sohee Ágil
+  - Id: 2652
+    Name: Yeti Brutal
+  - Id: 2653
+    Name: Jiboia Alfa
+  - Id: 2654
+    Name: Fumacento Feroz
+  - Id: 2655
+    Name: Rochoso Fugaz
+  - Id: 2656
+    Name: Rochoso Ágil
+  - Id: 2657
+    Name: Skogul Brutal
+  - Id: 2658
+    Name: Esqueleto General Alfa
+  - Id: 2659
+    Name: Esqueleto General Feroz
+  - Id: 2660
+    Name: Operário Fugaz
+  - Id: 2661
+    Name: Siroma Ágil
+  - Id: 2662
+    Name: Sorrateiro Brutal
+  - Id: 2663
+    Name: Sorrateiro Alfa
+  - Id: 2664
+    Name: Shinobi Feroz
+  - Id: 2665
+    Name: Senhora do Abrigo Fugaz
+  - Id: 2666
+    Name: Molusco Ágil
+  - Id: 2667
+    Name: Cecil Damon Brutal
+  - Id: 2668
+    Name: Lontra Alfa
+  - Id: 2669
+    Name: Silkdora Feroz
+  - Id: 2670
+    Name: Escorpião Fugaz
+  - Id: 2671
+    Name: Bebê Selvagem Ágil
+  - Id: 2672
+    Name: Selvagem Brutal
+  - Id: 2673
+    Name: Selvagem Alfa
+  - Id: 2674
+    Name: Areia Feroz
+  - Id: 2675
+    Name: Salamandra Fugaz
+  - Id: 2676
+    Name: Marinheiro Ágil
+  - Id: 2677
+    Name: Roween Brutal
+  - Id: 2678
+    Name: Sapo de Rodda Alfa
+  - Id: 2679
+    Name: Sapo de Rodda Feroz
+  - Id: 2680
+    Name: Rocker Fugaz
+  - Id: 2681
+    Name: Rideword Ágil
+  - Id: 2682
+    Name: Palavra De Passeio Bru.
+  - Id: 2683
+    Name: Pirralho Alfa
+  - Id: 2684
+    Name: Baronesa Feroz
+  - Id: 2685
+    Name: Baronesa Fugaz
+  - Id: 2686
+    Name: Baronesa Ágil
+  - Id: 2687
+    Name: Réquiem Brutal
+  - Id: 2688
+    Name: Removedor Alfa
+  - Id: 2689
+    Name: Eruma Vermelho Fugaz
+  - Id: 2690
+    Name: Raydric Ágil
+  - Id: 2691
+    Name: Raydric Brutal
+  - Id: 2692
+    Name: Laurell Weinder Alfa
+  - Id: 2693
+    Name: Scaraba Ancinho Feroz
+  - Id: 2694
+    Name: Raggler Fugaz
+  - Id: 2695
+    Name: Raflésia Ágil
+  - Id: 2696
+    Name: Poring Alfa
+  - Id: 2697
+    Name: Poring Feroz
+  - Id: 2698
+    Name: Poring Fugaz
+  - Id: 2699
+    Name: Poring Ágil
+  - Id: 2700
+    Name: Porcélio Brutal
+  - Id: 2701
+    Name: Poporing Alfa
+  - Id: 2702
+    Name: Poporing Feroz
+  - Id: 2703
+    Name: Poporing Fugaz
+  - Id: 2704
+    Name: Sapo Venenoso Ágil
+  - Id: 2705
+    Name: Esporo Venenoso Brutal
+  - Id: 2706
+    Name: Plasma Alfa
+  - Id: 2707
+    Name: Plâncton Feroz
+  - Id: 2708
+    Name: Mineiros Fugaz
+  - Id: 2709
+    Name: Espírito da Água Ágil
+  - Id: 2710
+    Name: Pinguicula Brutal
+  - Id: 2711
+    Name: Pinguicula Alfa
+  - Id: 2712
+    Name: Feroz Exigente
+  - Id: 2713
+    Name: Fen Fugaz
+  - Id: 2714
+    Name: Petite Ágil
+  - Id: 2715
+    Name: Pequeno Brutal
+  - Id: 2716
+    Name: Fenômeno Alfa
+  - Id: 2717
+    Name: Penomena Feroz
+  - Id: 2718
+    Name: Pecopeco Fugaz
+  - Id: 2719
+    Name: Marketing Ágil
+  - Id: 2720
+    Name: Parasita Brutal
+  - Id: 2721
+    Name: Duque Coruja Alfa
+  - Id: 2722
+    Name: Guerreiro Orc Feroz
+  - Id: 2723
+    Name: Orc Zumbi Fugaz
+  - Id: 2724
+    Name: Orc Esqueleto Ágil
+  - Id: 2725
+    Name: Senhora Orc Brutal
+  - Id: 2726
+    Name: Dama Da Guarda Alfa
+  - Id: 2727
+    Name: Nuvem Tóxica Feroz
+  - Id: 2728
+    Name: Novus Fugaz
+  - Id: 2729
+    Name: Novus Ágil
+  - Id: 2730
+    Name: Novus Brutal
+  - Id: 2731
+    Name: Novo Alfa
+  - Id: 2732
+    Name: Pesadelo Sombrio Feroz
+  - Id: 2733
+    Name: Aparição Fugaz
+  - Id: 2734
+    Name: Andarilho Ágil
+  - Id: 2735
+    Name: Nepenthes Brutal
+  - Id: 2736
+    Name: Necromante Alfa
+  - Id: 2737
+    Name: Presente Feroz
+  - Id: 2738
+    Name: Muscipular Fugaz
+  - Id: 2739
+    Name: Múmia Ágil
+  - Id: 2740
+    Name: Múmia Brutal
+  - Id: 2741
+    Name: Cara Alfa
+  - Id: 2742
+    Name: Sombra da Inveja Feroz
+  - Id: 2743
+    Name: Sombra da Inveja Fugaz
+  - Id: 2744
+    Name: Sombra da Inveja Ágil
+  - Id: 2745
+    Name: Holden Brutal
+  - Id: 2746
+    Name: Miyabi Ningyo Alfa
+  - Id: 2747
+    Name: Feroz Menor
+  - Id: 2748
+    Name: Minorous Fugaz
+  - Id: 2749
+    Name: Ágil Menor
+  - Id: 2750
+    Name: Minerais Brutais
+  - Id: 2751
+    Name: Plagiador Alfa
+  - Id: 2752
+    Name: Mímico Feroz
+  - Id: 2753
+    Name: Mímica Fugaz
+  - Id: 2754
+    Name: Metais Ágil
+  - Id: 2755
+    Name: Metalização Brutal
+  - Id: 2756
+    Name: Alfa Metalização
+  - Id: 2757
+    Name: Tritão Feroz
+  - Id: 2758
+    Name: Menblatt Fugaz
+  - Id: 2759
+    Name: Medusa Ágil
+  - Id: 2760
+    Name: Martin Brutal
+  - Id: 2761
+    Name: Marionetes Alfa
+  - Id: 2762
+    Name: Marina Feroz
+  - Id: 2763
+    Name: Marduk Fugaz
+  - Id: 2764
+    Name: Louva-A-Deus Ágil
+  - Id: 2765
+    Name: Mandrágora Brutal
+  - Id: 2766
+    Name: Apanhador Alfa
+  - Id: 2767
+    Name: Majoruros Feroz
+  - Id: 2768
+    Name: Magnólia Fugaz
+  - Id: 2769
+    Name: Seja Diligente
+  - Id: 2770
+    Name: Lunático Brutal
+  - Id: 2771
+    Name: Alfa Lunático
+  - Id: 2772
+    Name: Lude Feroz
+  - Id: 2773
+    Name: Vespa Vagalume Fugaz
+  - Id: 2774
+    Name: Loli Ruri Ágil
+  - Id: 2775
+    Name: Pessegueira Brutal
+  - Id: 2776
+    Name: Bebê Poring Alfa
+  - Id: 2777
+    Name: Pequeno Fatum Feroz
+  - Id: 2778
+    Name: Jing Guai Fugaz
+  - Id: 2779
+    Name: O Ágil
+  - Id: 2780
+    Name: Leib Olmai Brutal
+  - Id: 2781
+    Name: Gato de Folha Alfa
+  - Id: 2782
+    Name: Arruaceira Feroz
+  - Id: 2783
+    Name: Mercenário Fugaz
+  - Id: 2784
+    Name: Kobold Arqueiro Ágil
+  - Id: 2785
+    Name: Kobold Brutal
+  - Id: 2786
+    Name: Alfa Pickguard
+  - Id: 2787
+    Name: Encouraçado Feroz
+  - Id: 2788
+    Name: Não Fugaz
+  - Id: 2789
+    Name: Karakasa Ágil
+  - Id: 2790
+    Name: Ísis Brutal
+  - Id: 2791
+    Name: Ilha Alfa
+  - Id: 2792
+    Name: Injustiçado Feroz
+  - Id: 2793
+    Name: Meu Fugaz Gao
+  - Id: 2794
+    Name: Titã de Gelo Ágil
+  - Id: 2795
+    Name: Iara Brutal
+  - Id: 2796
+    Name: Yao Jun Alfa
+  - Id: 2797
+    Name: Mosca Caçadora Feroz
+  - Id: 2798
+    Name: Zangão Fugaz
+  - Id: 2799
+    Name: Scaraba Chifre Ágil
+  - Id: 2800
+    Name: Besouro-Chifre Brutal
+  - Id: 2801
+    Name: Hodremlin Alfa
+  - Id: 2802
+    Name: Feroz Arremessa
+  - Id: 2803
+    Name: Vento Da Colina Fugaz
+  - Id: 2804
+    Name: Vento Da Colina Ágil
+  - Id: 2805
+    Name: Grande Orc Brutal
+  - Id: 2806
+    Name: Harpia Alfa
+  - Id: 2807
+    Name: Harpia Feroz
+  - Id: 2808
+    Name: Bosque Fugaz
+  - Id: 2809
+    Name: Guardião Ágil
+  - Id: 2810
+    Name: Grande Peco Brutal
+  - Id: 2811
+    Name: Grand Peco Alfa
+  - Id: 2812
+    Name: Golem Feroz
+  - Id: 2813
+    Name: Fuga Dos Duendes
+  - Id: 2814
+    Name: Duende Ágil
+  - Id: 2815
+    Name: Bode Brutal
+  - Id: 2816
+    Name: Bode Alfa
+  - Id: 2817
+    Name: Kobold Abissal Feroz
+  - Id: 2818
+    Name: Kobold Abissal Fugaz
+  - Id: 2819
+    Name: Sombra Abissal Ágil
+  - Id: 2820
+    Name: Sombra Abissal Brutal
+  - Id: 2821
+    Name: Zangão Gigante Alfa
+  - Id: 2822
+    Name: Carniçal Feroz
+  - Id: 2823
+    Name: Carniçal Fugaz
+  - Id: 2824
+    Name: Planta Carnívora Ágil
+  - Id: 2825
+    Name: Planta Carnívora Brutal
+  - Id: 2826
+    Name: Gárgula Alfa
+  - Id: 2827
+    Name: Gárgula Feroz
+  - Id: 2828
+    Name: Galião Fugaz
+  - Id: 2829
+    Name: Foca Ágil
+  - Id: 2830
+    Name: Congelador Brutal
+  - Id: 2831
+    Name: Congelador Alfa
+  - Id: 2832
+    Name: Feroz Feroz
+  - Id: 2833
+    Name: Farmiliar Fugaz
+  - Id: 2834
+    Name: Anjo Fajuto Ágil
+  - Id: 2835
+    Name: Fabre Brutal
+  - Id: 2836
+    Name: Fabre Alfa
+  - Id: 2837
+    Name: Estrondo Feroz
+  - Id: 2838
+    Name: Druida Maligno Fugaz
+  - Id: 2839
+    Name: Salgueiro Ancião Ágil
+  - Id: 2840
+    Name: Salgueiro Ancião Brutal
+  - Id: 2841
+    Name: Eco Alfa
+  - Id: 2842
+    Name: Poeira Feroz
+  - Id: 2843
+    Name: Dríade Ágil
+  - Id: 2844
+    Name: Drosera Brutal
+  - Id: 2845
+    Name: Gotas Alfa
+  - Id: 2846
+    Name: Furador Feroz
+  - Id: 2847
+    Name: Dreno Fugaz
+  - Id: 2848
+    Name: Lavadeira Ágil
+  - Id: 2849
+    Name: Draco Brutal
+  - Id: 2850
+    Name: Dolomedes Alfa
+  - Id: 2851
+    Name: Dokebi Feroz
+  - Id: 2852
+    Name: Mascarado Fugaz
+  - Id: 2853
+    Name: Dimik Ágil
+  - Id: 2854
+    Name: Deviruchi Brutal
+  - Id: 2855
+    Name: Filhote de Lobo Alfa
+  - Id: 2856
+    Name: Filhote de Lobo Feroz
+  - Id: 2857
+    Name: Deniro Fugaz
+  - Id: 2858
+    Name: Palavra Morta Ágil
+  - Id: 2859
+    Name: Palavra Morta Brutal
+  - Id: 2860
+    Name: Palavra Morta Alfa
+  - Id: 2861
+    Name: Feroz Sacerdote Amaldi.
+  - Id: 2862
+    Name: Zhu Po Long Fugaz
+  - Id: 2863
+    Name: Ágil Cremoso
+  - Id: 2864
+    Name: Brutal Com Chifres
+  - Id: 2865
+    Name: Biscoito Alfa
+  - Id: 2866
+    Name: Feroz Constante
+  - Id: 2867
+    Name: Comodo Fugaz
+  - Id: 2868
+    Name: Koko Ágil
+  - Id: 2869
+    Name: Todo O Brutal
+  - Id: 2870
+    Name: Relógio Alfa
+  - Id: 2871
+    Name: Relógio Feroz
+  - Id: 2872
+    Name: Chonchon Fugaz
+  - Id: 2873
+    Name: Centopéia Ágil
+  - Id: 2874
+    Name: Cinza Brutal
+  - Id: 2875
+    Name: Celia Alde Alfa
+  - Id: 2876
+    Name: Lagarta Feroz
+  - Id: 2877
+    Name: Carat Fugaz
+  - Id: 2878
+    Name: Caramelo Ágil
+  - Id: 2879
+    Name: Zombaria Brutal
+  - Id: 2880
+    Name: Brisa Alfa
+  - Id: 2881
+    Name: Brisa Feroz
+  - Id: 2882
+    Name: Golem de Bradium Fugaz
+  - Id: 2883
+    Name: Borboleta Ágil
+  - Id: 2884
+    Name: Pé-Grande Alfa
+  - Id: 2885
+    Name: Bathory Feroz
+  - Id: 2886
+    Name: Sra das Banshees Fugaz
+  - Id: 2887
+    Name: Banshee Ágil
+  - Id: 2888
+    Name: Banaspatia Brutal
+  - Id: 2889
+    Name: Agressor Alfa
+  - Id: 2890
+    Name: Argos Feroz
+  - Id: 2891
+    Name: Argiope Fugaz
+  - Id: 2892
+    Name: Argiope Ágil
+  - Id: 2893
+    Name: Arclouse Brutal
+  - Id: 2894
+    Name: Arclouse Alfa
+  - Id: 2895
+    Name: Apocalipse Feroz
+  - Id: 2896
+    Name: Scaraba Galhado Fugaz
+  - Id: 2897
+    Name: Antigo Livro Ágil
+  - Id: 2898
+    Name: Antigo Livro Brutal
+  - Id: 2899
+    Name: Anolian Feroz
+  - Id: 2900
+    Name: Angra Fugaz
+  - Id: 2901
+    Name: Angra Ágil
+  - Id: 2902
+    Name: Outros Brutais
+  - Id: 2903
+    Name: Mímico Antigo Alfa
+  - Id: 2904
+    Name: Anaconda Feroz
+  - Id: 2905
+    Name: Ambernite Fugaz
+  - Id: 2906
+    Name: Raflésia Alnoldi Ágil
+  - Id: 2907
+    Name: Crocodilo Brutal
+  - Id: 2908
+    Name: Aliza Alfa
+  - Id: 2909
+    Name: Alicel Feroz
+  - Id: 2910
+    Name: Alarme Fugaz
+  - Id: 2911
+    Name: Agave Ágil
+  - Id: 2912
+    Name: Ácido Brutal
+  - Id: 2913
+    Name: Ácido Alfa
+  - Id: 2914
+    Name: Gatuna De Geffen
+  - Id: 2916
+    Name: Marca-Tempo
+  - Id: 2917
+    Name: Despertador
+  - Id: 2918
+    Name: Diretor
+  - Id: 2919
+    Name: Neo Punk
+  - Id: 2920
+    Name: Ancião Ancestral
+  - Id: 2921
+    Name: Visconde Coruja
+  - Id: 2922
+    Name: Visconde Coruja
+  - Id: 2923
+    Name: Marquês Coruja
+  - Id: 2924
+    Name: Ancião Salgueiro
+  - Id: 2925
+    Name: Salgueiro
+  - Id: 2926
+    Name: Harpia
+  - Id: 2927
+    Name: Mineral
+  - Id: 2928
+    Name: Forca
+  - Id: 2929
+    Name: Plasma
+  - Id: 2930
+    Name: Consolo
+  - Id: 2931
+    Name: Metalização
+  - Id: 2932
+    Name: Poporing
+  - Id: 2933
+    Name: Diabólico
+  - Id: 2934
+    Name: Arco Angeling
+  - Id: 2935
+    Name: Eremita Taoísta
+  - Id: 2936
+    Name: Fantasmas De Halloween
+  - Id: 2937
+    Name: Loki
+  - Id: 2938
+    Name: Selo Místico
+  - Id: 2939
+    Name: Habitante das Sombras
+  - Id: 2940
+    Name: Convidado do Inferno
+  - Id: 2941
+    Name: Espírito das Trevas
+  - Id: 2942
+    Name: Fanático das Trevas
+  - Id: 2943
+    Name: Mina de Gelo
+  - Id: 2948
+    Name: Soldado Amaldiçoado
+  - Id: 2949
+    Name: Sentinela Amaldiçoado
+  - Id: 2950
+    Name: Alma Estilhaçada
+  - Id: 2951
+    Name: Lamento Errante
+  - Id: 2952
+    Name: Suplício Perdido
+  - Id: 2953
+    Name: Memória Ressentida
+  - Id: 2954
+    Name: Juramento Desolado
+  - Id: 2955
+    Name: Rancor Antigo
+  - Id: 2956
+    Name: Massacre Prazeroso
+  - Id: 2957
+    Name: Legado Esquecido
+  - Id: 2958
+    Name: Passado Irreversível
+  - Id: 2959
+    Name: Angústia Torturante
+  - Id: 2960
+    Name: Cruz de Chamas
+  - Id: 2961
+    Name: Amargura Perpétua
+  - Id: 2987
+    Name: Árvore Maldita Decorada
+  - Id: 2988
+    Name: Antonio Sombrio
+  - Id: 2989
+    Name: Cookie Aterrorizante
+  - Id: 2990
+    Name: Soldadinho Corrompido
+  - Id: 2991
+    Name: Presente das Trevas
+  - Id: 2992
+    Name: Lude Grotesco
+  - Id: 2993
+    Name: Poltergeist Sangrento
+  - Id: 2994
+    Name: Marionete Demoníaca
+  - Id: 2995
+    Name: Ursinho Abominável
+  - Id: 2996
+    Name: Celine Kimi
+  - Id: 2997
+    Name: Espectro Da Celine
+  - Id: 2998
+    Name: Imperador Morroc
+  - Id: 2999
+    Name: Necromante de Morroc
+  - Id: 3000
+    Name: Necromante de Morroc
+  - Id: 3001
+    Name: Carniçal Profano
+  - Id: 3002
+    Name: Múmia Profana
+  - Id: 3003
+    Name: Esqueleto Profano
+  - Id: 3004
+    Name: Aparição Profana
+  - Id: 3005
+    Name: Ele Teme O Profano
+  - Id: 3006
+    Name: Lude Profano
+  - Id: 3007
+    Name: Morroc Falso
+  - Id: 3008
+    Name: Imperador Morroc
+  - Id: 3010
+    Name: Bebê Orc Caído
+  - Id: 3011
+    Name: Filhote de Lobo Caído
+  - Id: 3012
+    Name: Farmiliar Caído
+  - Id: 3013
+    Name: Orc Caído
+  - Id: 3014
+    Name: Lobo Caído
+  - Id: 3015
+    Name: Fen Caído
+  - Id: 3016
+    Name: Orc Zumbi Caído
+  - Id: 3017
+    Name: Verdade Caída
+  - Id: 3018
+    Name: Megalodonte Caído
+  - Id: 3020
+    Name: Condor de Fogo
+  - Id: 3021
+    Name: Arenoso de Fogo
+  - Id: 3022
+    Name: Frilldora de Fogo
+  - Id: 3023
+    Name: Golem de Fogo
+  - Id: 3026
+    Name: Fosso de Fogo
+  - Id: 3027
+    Name: Besouro Rola Brasa
+  - Id: 3028
+    Name: Sônia
+  - Id: 3029
+    Name: Ceifador Ankou
+  - Id: 3038
+    Name: Monstro 7
+  - Id: 3039
+    Name: Lamento da Inveja
+  - Id: 3040
+    Name: Lamento De Gula
+  - Id: 3041
+    Name: Lamento Da Ira
+  - Id: 3061
+    Name: Mímico Irritado
+  - Id: 3069
+    Name: Alegro
+  - Id: 3070
+    Name: Sonata
+  - Id: 3071
+    Name: Adágio
+  - Id: 3072
+    Name: Minueto
+  - Id: 3073
+    Name: Réquiem De Marfim
+  - Id: 3074
+    Name: Vigia do Tempo
+  - Id: 3075
+    Name: Caixa Tesouro Onda
+  - Id: 3076
+    Name: Monstro Das Ondas
+  - Id: 3077
+    Name: Monstro Das Ondas
+  - Id: 3078
+    Name: Monstro Das Ondas
+  - Id: 3079
+    Name: Monstro Das Ondas
+  - Id: 3080
+    Name: Monstro Das Ondas
+  - Id: 3081
+    Name: Monstro Das Ondas
+  - Id: 3082
+    Name: Monstro Das Ondas
+  - Id: 3083
+    Name: Monstro Das Ondas
+  - Id: 3084
+    Name: Monstro Das Ondas
+  - Id: 3085
+    Name: Monstro Das Ondas
+  - Id: 3086
+    Name: Mercenário Da Onda
+  - Id: 3087
+    Name: Lamento De Nidhogg
+  - Id: 3088
+    Name: Brinaranha Jovem
+  - Id: 3089
+    Name: Kasa Enfurecido
+  - Id: 3090
+    Name: Salamandra Enfurecida
+  - Id: 3091
+    Name: Brinaranha
+  - Id: 3092
+    Name: Scoll
+  - Id: 3096
+    Name: Reencarnação de Morroc
+  - Id: 3097
+    Name: Deus Morroc
+  - Id: 3098
+    Name: Morroc Exórdio
+  - Id: 3099
+    Name: Morroc Caído
+  - Id: 3101
+    Name: Mana da Aurora
+  - Id: 3102
+    Name: Mana da Vitalidade
+  - Id: 3103
+    Name: Mana da Terra
+  - Id: 3105
+    Name: Lamento da Inveja
+  - Id: 3106
+    Name: Lamento Da Ira
+  - Id: 3108
+    Name: Sustenido
+  - Id: 3109
+    Name: Bemol
+  - Id: 3122
+    Name: Charleston 01
+  - Id: 3123
+    Name: Charleston 02
+  - Id: 3124
+    Name: Charleston 03
+  - Id: 3125
+    Name: Roubar
+  - Id: 3126
+    Name: Mech V2.0
+  - Id: 3127
+    Name: Transistor
+  - Id: 3128
+    Name: Pavio V1.6
+  - Id: 3153
+    Name: Robô Escavador
+  - Id: 3154
+    Name: Robô de Reconhecimento
+  - Id: 3155
+    Name: Robô Reparador
+  - Id: 3156
+    Name: Robô Explorador
+  - Id: 3157
+    Name: Adorador do Infortúnio
+  - Id: 3158
+    Name: Adorador do Infortúnio
+  - Id: 3159
+    Name: Propaganda Ilegal
+  - Id: 3161
+    Name: Bomba
+  - Id: 3169
+    Name: Alvo
+  - Id: 3170
+    Name: Não-alvo
+  - Id: 3175
+    Name: Invasor Giro-Goblin
+  - Id: 3176
+    Name: Invasor Gremlin
+  - Id: 3177
+    Name: Invasor De Contêiner
+  - Id: 3178
+    Name: Wyvern Azul
+  - Id: 3179
+    Name: Wyvern Dourado
+  - Id: 3180
+    Name: Wyvern Gigante
+  - Id: 3181
+    Name: Capitão Ferlock
+  - Id: 3190
+    Name: Sara Irene
+  - Id: 3191
+    Name: Gigante
+  - Id: 3192
+    Name: Gigante
+  - Id: 3193
+    Name: Gigante
+  - Id: 3194
+    Name: Gigante Antimagia
+  - Id: 3195
+    Name: Gigante Imaterial
+  - Id: 3196
+    Name: Gigante Ancestral
+  - Id: 3197
+    Name: Gárgula Ancestral
+  - Id: 3198
+    Name: Galião Ancestral
+  - Id: 3199
+    Name: Dragão Ancestral
+  - Id: 3200
+    Name: Quimera Ancestral
+  - Id: 3202
+    Name: Abóbora Orgânica
+  - Id: 3203
+    Name: Abóbora Inorgânica
+  - Id: 3208
+    Name: Eremes Guile
+  - Id: 3209
+    Name: Margaretha Sorin
+  - Id: 3210
+    Name: Kathryne Keyron
+  - Id: 3211
+    Name: Cecil Damon
+  - Id: 3212
+    Name: Harword Alteisen
+  - Id: 3213
+    Name: Seyren Windsor
+  - Id: 3214
+    Name: Cobaia Eremes
+  - Id: 3215
+    Name: Cobaia Margaretha
+  - Id: 3216
+    Name: Cobaia Kathryne
+  - Id: 3217
+    Name: Cobaia Cecil
+  - Id: 3218
+    Name: Cobaia Harword
+  - Id: 3219
+    Name: Cobaia Seyren
+  - Id: 3220
+    Name: Sicário Eremes
+  - Id: 3221
+    Name: Arcebispa Margaretha
+  - Id: 3222
+    Name: Sentinela Cecil
+  - Id: 3223
+    Name: Mecânico Harword
+  - Id: 3224
+    Name: Arcana Kathryne
+  - Id: 3225
+    Name: Cavaleiro Rúnico Seyren
+  - Id: 3226
+    Name: Randel Lawrence
+  - Id: 3227
+    Name: Emula Flamel
+  - Id: 3228
+    Name: Célia Alde
+  - Id: 3229
+    Name: Chen Liu
+  - Id: 3230
+    Name: Gertie Nós
+  - Id: 3231
+    Name: Alfoccio Manjericão
+  - Id: 3232
+    Name: Trentino
+  - Id: 3233
+    Name: Cobaia Randel
+  - Id: 3234
+    Name: Cobaia Flamel
+  - Id: 3235
+    Name: Cobaia Celia
+  - Id: 3236
+    Name: Cobaia Chen
+  - Id: 3237
+    Name: Cobaia Gertie
+  - Id: 3238
+    Name: Cobaia Alphoccio
+  - Id: 3239
+    Name: Cobaia Trentini
+  - Id: 3240
+    Name: Guardião Real Randel
+  - Id: 3241
+    Name: Bioquímico Flamel
+  - Id: 3242
+    Name: Feiticeira Celia
+  - Id: 3243
+    Name: Shura Chen
+  - Id: 3244
+    Name: Renegada Gertie
+  - Id: 3245
+    Name: Trovador Alphoccio
+  - Id: 3246
+    Name: Musa Trentini
+  - Id: 3247
+    Name: Fumaça Verde
+  - Id: 3248
+    Name: Robô Reparador Turbo
+  - Id: 3249
+    Name: Robô Explorador Turbo
+  - Id: 3250
+    Name: Robô De Sucata
+  - Id: 3251
+    Name: Gc109
+  - Id: 3252
+    Name: Dr815
+  - Id: 3253
+    Name: Falha Do Sistema
+  - Id: 3254
+    Name: Dois
+  - Id: 3255
+    Name: Carniçal Fedorento
+  - Id: 3256
+    Name: Zumbi Fedorento
+  - Id: 3384
+    Name: Poring Espacial
+  - Id: 3385
+    Name: Lunático Espacial
+  - Id: 3386
+    Name: Espaço Fabre
+  - Id: 3387
+    Name: Espacial Exigente
+  - Id: 3388
+    Name: Espaço Condor
+  - Id: 3389
+    Name: Salgueiro Espacial
+  - Id: 3390
+    Name: Esporo Espacial
+  - Id: 3391
+    Name: Espaço Poporing
+  - Id: 3392
+    Name: Fumaça Espacial
+  - Id: 3393
+    Name: Dokebi Espacial
+  - Id: 3394
+    Name: Espaço Pe-Grande
+  - Id: 3395
+    Name: Espaço Veja-Me Cauda
+  - Id: 3396
+    Name: Lobo Espacial
+  - Id: 3397
+    Name: Jiboia Espacial
+  - Id: 3398
+    Name: Anaconda Espacial
+  - Id: 3399
+    Name: Marinha Espacial
+  - Id: 3400
+    Name: Espaço Muka
+  - Id: 3401
+    Name: Espaço Pecopeco
+  - Id: 3402
+    Name: Deniro Espacial
+  - Id: 3403
+    Name: Espaço Pierre
+  - Id: 3404
+    Name: Espaço André
+  - Id: 3405
+    Name: Golem Espacial
+  - Id: 3406
+    Name: Escorpiao Espacial
+  - Id: 3407
+    Name: Espaço Chon Chon
+  - Id: 3408
+    Name: Metalúrgico Espacial
+  - Id: 3409
+    Name: Arenoso Espacial
+  - Id: 3410
+    Name: Raggler Espacial
+  - Id: 3411
+    Name: Lavadeira Espacial
+  - Id: 3412
+    Name: Bosque Espacial
+  - Id: 3413
+    Name: Lontra Espacial
+  - Id: 3414
+    Name: Pingu Espacial
+  - Id: 3415
+    Name: Foca Espacial
+  - Id: 3416
+    Name: Crocodilo Espacial
+  - Id: 3417
+    Name: Megalodonte Espacial
+  - Id: 3418
+    Name: Trilobita Espacial
+  - Id: 3419
+    Name: Megálito Espacial
+  - Id: 3420
+    Name: Driade Espacial
+  - Id: 3421
+    Name: Sapo Espacial
+  - Id: 3422
+    Name: Andarilho Do Espaço
+  - Id: 3423
+    Name: Vocal Espacial
+  - Id: 3424
+    Name: Eclipse Espacial
+  - Id: 3425
+    Name: Quimera Espacial
+  - Id: 3426
+    Name: Espaço Edga
+  - Id: 3427
+    Name: Osiris Espacial
+  - Id: 3428
+    Name: Freeoni Espacial
+  - Id: 3429
+    Name: Herói Espacial Orc
+  - Id: 3430
+    Name: Tao Gunka Espacial
+  - Id: 3431
+    Name: Sapo Escravo
+  - Id: 3432
+    Name: Lobo Escravo
+  - Id: 3433
+    Name: Rocker Escravo
+  - Id: 3434
+    Name: Escravo Lunático
+  - Id: 3435
+    Name: Gargula Escrava
+  - Id: 3436
+    Name: Pe-Grande Escravo
+  - Id: 3437
+    Name: Mumia Escrava
+  - Id: 3438
+    Name: Arenoso Escravo
+  - Id: 3439
+    Name: Orc Escravo
+  - Id: 3440
+    Name: Megalith Escravo
+  - Id: 3442
+    Name: Lobo De Gelo
+  - Id: 3443
+    Name: Tappy
+  - Id: 3444
+    Name: Observador
+  - Id: 3445
+    Name: Arqueiro Imortal
+  - Id: 3446
+    Name: Esqueleto Imortal
+  - Id: 3447
+    Name: Soldado Imortal
+  - Id: 3448
+    Name: Amdarais Imortal
+  - Id: 3449
+    Name: Amdarais Mortal
+  - Id: 3450
+    Name: Bijuteria
+  - Id: 3451
+    Name: Legionário Imortal
+  - Id: 3452
+    Name: Zumbi Da Guarda
+  - Id: 3454
+    Name: Intruso
+  - Id: 3455
+    Name: Prato Luxuoso
+  - Id: 3473
+    Name: Jack Lobo
+  - Id: 3474
+    Name: Cavaleiro Imortal
+  - Id: 3475
+    Name: Xamã Imortal
+  - Id: 3476
+    Name: Zumbi Imortal
+  - Id: 3477
+    Name: Legionário Imortal
+  - Id: 3478
+    Name: Guardião da Chave
+  - Id: 3479
+    Name: Carniçal Imortal
+  - Id: 3480
+    Name: Dilacerado Imortal
+  - Id: 3481
+    Name: Habitante Imortal
+  - Id: 3482
+    Name: Convidado Imortal
+  - Id: 3483
+    Name: Espírito Imortal
+  - Id: 3484
+    Name: Jack Lobo
+  - Id: 3485
+    Name: Dilacerado Mortal
+  - Id: 3487
+    Name: Legionário Imortal
+  - Id: 3488
+    Name: Legionário Imortal
+  - Id: 3489
+    Name: Legionário Imortal
+  - Id: 3490
+    Name: Geral Imortal
+  - Id: 3494
+    Name: Poring de Ouro
+  - Id: 3495
+    Name: Omelete
+  - Id: 3496
+    Name: Lunático Folhado
+  - Id: 3497
+    Name: Fabre Gramíneo
+  - Id: 3498
+    Name: Zangão Selvagem
+  - Id: 3499
+    Name: Sapo de Rodda Doce
+  - Id: 3500
+    Name: Filhote de Lobo Caçador
+  - Id: 3501
+    Name: Esporo de Água Doce
+  - Id: 3502
+    Name: Basilisco Guarda
+  - Id: 3503
+    Name: Basilisco Guerreiro
+  - Id: 3504
+    Name: Basilisco Geral
+  - Id: 3505
+    Name: Gemaring
+  - Id: 3506
+    Name: Mandrágora da Selva
+  - Id: 3507
+    Name: Aranha Pomar
+  - Id: 3508
+    Name: Omelete
+  - Id: 3510
+    Name: Guarda De Freya
+  - Id: 3511
+    Name: Crente Agressiva
+  - Id: 3512
+    Name: Crente Agressivo
+  - Id: 3513
+    Name: Cachorro
+  - Id: 3514
+    Name: Padre Violento
+  - Id: 3515
+    Name: Coração Congelado
+  - Id: 3516
+    Name: Loomin
+  - Id: 3517
+    Name: Espectro De Gelo
+  - Id: 3518
+    Name: Guarda De Freya
+  - Id: 3519
+    Name: Crente Agressiva
+  - Id: 3520
+    Name: Crente Agressivo
+  - Id: 3521
+    Name: Cachorro
+  - Id: 3522
+    Name: Padre Violento
+  - Id: 3523
+    Name: Coração Congelado
+  - Id: 3524
+    Name: Loomin
+  - Id: 3525
+    Name: Espectro De Gelo
+  - Id: 3526
+    Name: Espectro Ktullanux
+  - Id: 3527
+    Name: Papisa
+  - Id: 3528
+    Name: Papisa Casual
+  - Id: 3569
+    Name: Papisa
+  - Id: 3570
+    Name: Papisa Casual
+  - Id: 3621
+    Name: Fofinho
+  - Id: 3622
+    Name: Caça-Coração Guarda
+  - Id: 3623
+    Name: Chama Etérea
+  - Id: 3624
+    Name: Chama Etérea
+  - Id: 3625
+    Name: Chama Etérea
+  - Id: 3626
+    Name: Caça-Coração Gigante
+  - Id: 3627
+    Name: Caça-Coração
+  - Id: 3628
+    Name: Malícia
+  - Id: 3629
+    Name: Rancor de Arma
+  - Id: 3630
+    Name: Elena Bolkova
+  - Id: 3631
+    Name: Quimera Humana
+  - Id: 3632
+    Name: Quimera Disforme
+  - Id: 3633
+    Name: Quimera Venenosa
+  - Id: 3636
+    Name: Bebê Isis
+  - Id: 3637
+    Name: Esqueleto 60
+  - Id: 3638
+    Name: Esqueleto 80
+  - Id: 3639
+    Name: Esqueleto 100
+  - Id: 3640
+    Name: Esqueleto 120
+  - Id: 3641
+    Name: Esqueleto 140
+  - Id: 3642
+    Name: Esqueleto 160
+  - Id: 3643
+    Name: Familiar 60
+  - Id: 3644
+    Name: Familiar 80
+  - Id: 3645
+    Name: Familiar 100
+  - Id: 3646
+    Name: Familiar 140
+  - Id: 3647
+    Name: Familiar 140
+  - Id: 3648
+    Name: Familiar 160
+  - Id: 3649
+    Name: Zumbi 60
+  - Id: 3650
+    Name: Zumbi 80
+  - Id: 3651
+    Name: Zumbi 100
+  - Id: 3652
+    Name: Zumbi 120
+  - Id: 3653
+    Name: Zumbi 140
+  - Id: 3654
+    Name: Zumbi 160
+  - Id: 3658
+    Name: Lich Monarca
+  - Id: 3659
+    Name: Lich Monarca
+  - Id: 3660
+    Name: Pesadelo 100
+  - Id: 3661
+    Name: Pesadelo 160
+  - Id: 3662
+    Name: Jaqueta 100
+  - Id: 3663
+    Name: Jaqueta 160
+  - Id: 3664
+    Name: Carniçal 100
+  - Id: 3665
+    Name: Carniçal 160
+  - Id: 3666
+    Name: Drenador 100
+  - Id: 3667
+    Name: Drenador 160
+  - Id: 3669
+    Name: Diabólico
+  - Id: 3670
+    Name: Deletério
+  - Id: 3736
+    Name: Búfalo Bandido
+  - Id: 3737
+    Name: Búfalo Atirador
+  - Id: 3738
+    Name: Búfalo Ladrão
+  - Id: 3739
+    Name: Coiote
+  - Id: 3740
+    Name: Gaster
+  - Id: 3741
+    Name: Aranha Mecânica
+  - Id: 3742
+    Name: Minério Roxo
+  - Id: 3743
+    Name: Anêmona Do Mar
+  - Id: 3744
+    Name: Búfalo Bandido
+  - Id: 3745
+    Name: Bandido Búfalo
+  - Id: 3746
+    Name: Bandido Búfalo
+  - Id: 3747
+    Name: Bandido De Elite
+  - Id: 3748
+    Name: Atirador De Elite
+  - Id: 3749
+    Name: Ladrão de Elite
+  - Id: 3750
+    Name: Matiliar
+  - Id: 3751
+    Name: Morto-Vivo
+  - Id: 3752
+    Name: Zumbi Ilusional
+  - Id: 3753
+    Name: Açougueiro Ilusório
+  - Id: 3754
+    Name: Doce Pesadelo
+  - Id: 3755
+    Name: Cogumelo Brilhante
+  - Id: 3756
+    Name: Bomi
+  - Id: 3757
+    Name: Conde Drácula
+  - Id: 3758
+    Name: Ilusão do Luar
+  - Id: 3759
+    Name: Raposa Raivosa
+  - Id: 3760
+    Name: Eu Quero Ressentida
+  - Id: 3761
+    Name: Bongun Ressentido
+  - Id: 3762
+    Name: Sohee Maldita
+  - Id: 3763
+    Name: Arqueiro Cruel
+  - Id: 3764
+    Name: Veritas
+  - Id: 3765
+    Name: Aventureiro
+  - Id: 3787
+    Name: Taburu
+  - Id: 3788
+    Name: Gabiru
+  - Id: 3790
+    Name: Quinding
+  - Id: 3792
+    Name: Gazeta De Cristal
+  - Id: 3793
+    Name: Yeti De Cristal
+  - Id: 3794
+    Name: Titã de Cristal
+  - Id: 3795
+    Name: Cristal De Gelo
+  - Id: 3796
+    Name: Ktullanux De Cristal
+  - Id: 3797
+    Name: Torção
+  - Id: 3798
+    Name: Zeit
+  - Id: 3799
+    Name: Agressor Ominoso
+  - Id: 3800
+    Name: Batedor Ominoso
+  - Id: 3801
+    Name: Congelador Ominoso
+  - Id: 3802
+    Name: Solidificador Ominoso
+  - Id: 3803
+    Name: Aquecedor Ominoso
+  - Id: 3804
+    Name: Marechal Tartaruga
+  - Id: 3810
+    Name: Rei Poring
+  - Id: 3811
+    Name: Dourading Gigante
+  - Id: 3812
+    Name: Amer Gigante
+  - Id: 3813
+    Name: Drops Encorpado
+  - Id: 3814
+    Name: Poporing Encorpado
+  - Id: 3815
+    Name: Poring Encorpado
+  - Id: 3816
+    Name: Marin Encorpado
+  - Id: 3896
+    Name: Agressor Ominoso
+  - Id: 20255
+    Name: Ursinho Vermelho
+  - Id: 20256
+    Name: Ursinho Amarelo
+  - Id: 20257
+    Name: Ursinho Verde
+  - Id: 20258
+    Name: Ursinho Branco
+  - Id: 20259
+    Name: Urzinho Azul
+  - Id: 20260
+    Name: Ursinho Brilhante
+  - Id: 20261
+    Name: Mineradores
+  - Id: 20262
+    Name: Fragmento de Alma
+  - Id: 20263
+    Name: Obsidiana Sinistra
+  - Id: 20264
+    Name: Ursinho Vermelho
+  - Id: 20265
+    Name: Ursinho Amarelo
+  - Id: 20266
+    Name: Ursinho Verde
+  - Id: 20267
+    Name: Ursinho Branco
+  - Id: 20268
+    Name: Urzinho Azul
+  - Id: 20269
+    Name: Bandeira
+  - Id: 20270
+    Name: Trilobita Ancestral
+  - Id: 20271
+    Name: Golem Ancestral
+  - Id: 20272
+    Name: Megálito Ancestral
+  - Id: 20273
+    Name: Tao Gunka Ancestral
+  - Id: 20274
+    Name: Disparador De Pedras
+  - Id: 20275
+    Name: Arqueiro Wootan
+  - Id: 20276
+    Name: Lutador Wootan
+  - Id: 20277
+    Name: Defensor Wootan
+  - Id: 20278
+    Name: Megálito Ancestral
+  - Id: 20279
+    Name: Arqueiro Wootan
+  - Id: 20280
+    Name: Lutador Wootan
+  - Id: 20340
+    Name: El-A17T
+  - Id: 20341
+    Name: E-Ea1L
+  - Id: 20342
+    Name: E-EA2S
+  - Id: 20343
+    Name: E-13En0
+  - Id: 20344
+    Name: Veneno Químico
+  - Id: 20345
+    Name: Biobateria
+  - Id: 20346
+    Name: Miguel
+  - Id: 20347
+    Name: Miguel
+  - Id: 20348
+    Name: A013-Caput
+  - Id: 20349
+    Name: A013-Dor
+  - Id: 20350
+    Name: A013-Para Lutar
+  - Id: 20351
+    Name: Buraco
+  - Id: 20352
+    Name: Gás Venenoso
+  - Id: 20353
+    Name: Vítima
+  - Id: 20355
+    Name: Para Lutar
+  - Id: 20356
+    Name: Mutante De Guerra
+  - Id: 20357
+    Name: Curar
+  - Id: 20358
+    Name: Curar Mutante
+  - Id: 20359
+    Name: Praga
+  - Id: 20360
+    Name: A Praga Mutante
+  - Id: 20361
+    Name: Dor
+  - Id: 20362
+    Name: Dor Mutante
+  - Id: 20363
+    Name: Veneno
+  - Id: 20364
+    Name: Veneno Mutante
+  - Id: 20365
+    Name: Capítulo
+  - Id: 20366
+    Name: Caput Mutante
+  - Id: 20367
+    Name: Raydric Poluto
+  - Id: 20368
+    Name: Raydric Atirador
+  - Id: 20369
+    Name: Gárgula Congelada
+  - Id: 20370
+    Name: Picada Poluto
+  - Id: 20371
+    Name: Foragido
+  - Id: 20372
+    Name: Brasa
+  - Id: 20373
+    Name: Pesadelo Sinistro
+  - Id: 20374
+    Name: Deleter Voador
+  - Id: 20375
+    Name: Excluidor
+  - Id: 20376
+    Name: Explosão
+  - Id: 20377
+    Name: Kaho Torrente
+  - Id: 20378
+    Name: Golem de Magma
+  - Id: 20379
+    Name: Xamã do Gelo
+  - Id: 20380
+    Name: Xamã do Fogo
+  - Id: 20381
+    Name: R48-85-A Besta
+  - Id: 20382
+    Name: Capítulo
+  - Id: 20419
+    Name: Escola Muspell
+  - Id: 20420
+    Name: Andarilho Poluto
+  - Id: 20421
+    Name: Aranha Rainha
+  - Id: 20422
+    Name: Lorde das Trevas
+  - Id: 20543
+    Name: Cientista Da Regenschr.
+  - Id: 20560
+    Name: Minério De Jade
+  - Id: 20592
+    Name: Nuvem Nociva
+  - Id: 20593
+    Name: Nuvem Perigosa
+  - Id: 20594
+    Name: Mineral de Jade
+  - Id: 20595
+    Name: Minério De Jaspe
+  - Id: 20596
+    Name: Mineral Selenita
+  - Id: 20597
+    Name: Minério De Ametista
+  - Id: 20598
+    Name: Geodolante
+  - Id: 20599
+    Name: Geodolante
+  - Id: 20600
+    Name: Geodo
+  - Id: 20601
+    Name: Joialiant
+  - Id: 20602
+    Name: Porcélio Albino
+  - Id: 20603
+    Name: Garimpeiros
+  - Id: 20620
+    Name: Pimentão Vermelho
+  - Id: 20621
+    Name: Pimenta Vermelha Sênior
+  - Id: 20622
+    Name: Observador De Flores
+  - Id: 20623
+    Name: Bot Assistente De Pesq. 
+  - Id: 20624
+    Name: Observador De Flores
+  - Id: 20625
+    Name: Raflésia Seca Sênior
+  - Id: 20626
+    Name: Observador De Flores
+  - Id: 20627
+    Name: Alnoldi Especial Sênior
+  - Id: 20628
+    Name: Gerente Da Mansão Alfa
+  - Id: 20629
+    Name: Gerenciador De Mansões 
+  - Id: 20630
+    Name: Beta Quebrado
+  - Id: 20631
+    Name: Jardineiro Quebrado Be.
+  - Id: 20632
+    Name: Jardineiro Quebrado Sê. 
+  - Id: 20633
+    Name: Limpador Quebrado
+  - Id: 20634
+    Name: Limpador Quebrado
+  - Id: 20635
+    Name: Robô De Limpeza
+  - Id: 20636
+    Name: Administrador De Banho
+  - Id: 20637
+    Name: Gerente De Armazém Que.
+  - Id: 20638
+    Name: Guarda Beta
+  - Id: 20639
+    Name: Guarda Quebrada Beta
+  - Id: 20640
+    Name: Robô De Limpeza
+  - Id: 20641
+    Name: Robô De Limpeza Quebra
+  - Id: 20642
+    Name: Docinho
+  - Id: 20643
+    Name: Água Fervente Phen
+  - Id: 20644
+    Name: Água Fervente Marc
+  - Id: 20645
+    Name: Espadarte De Água Ferv.
+  - Id: 20646
+    Name: Piranha De Água Ferven.
+  - Id: 20647
+    Name: Lápis-Lazúli
+  - Id: 20648
+    Name: Chefe Miau
+  - Id: 20649
+    Name: Pitaya
+  - Id: 20650
+    Name: Pitaya
+  - Id: 20651
+    Name: Pitaya
+  - Id: 20652
+    Name: Pitaya
+  - Id: 20653
+    Name: Pitaya
+  - Id: 20654
+    Name: Pitaya
+  - Id: 20655
+    Name: Pitaya
+  - Id: 20656
+    Name: Pitaya
+  - Id: 20657
+    Name: Pitaya
+  - Id: 20658
+    Name: Pitaya
+  - Id: 20659
+    Name: Chefe Pitaya
+  - Id: 20660
+    Name: Pitaya
+  - Id: 20661
+    Name: Pitaya
+  - Id: 20662
+    Name: Pitaya
+  - Id: 20663
+    Name: Pitaya
+  - Id: 20664
+    Name: Pitaya
+  - Id: 20665
+    Name: Porta De Visualização
+  - Id: 20666
+    Name: Verporte
+  - Id: 20667
+    Name: Silva Papila
+  - Id: 20668
+    Name: Papília Grande
+  - Id: 20669
+    Name: Papila
+  - Id: 20670
+    Name: Papila Sênior
+  - Id: 20671
+    Name: Papila
+  - Id: 20672
+    Name: Papila Ruba Sênior
+  - Id: 20673
+    Name: Papila Ruba
+  - Id: 20674
+    Name: Papila
+  - Id: 20675
+    Name: Papila Sênior Cae
+  - Id: 20676
+    Name: Papila
+  - Id: 20677
+    Name: Áries
+  - Id: 20678
+    Name: Áries Sênior
+  - Id: 20679
+    Name: Peças Do Guardião
+  - Id: 20680
+    Name: Escaramuçador Caçador . 
+  - Id: 20681
+    Name: Escaramuçador Caçador . 
+  - Id: 20682
+    Name: Escaramuçador Caçador . 
+  - Id: 20683
+    Name: Leitor Ávido
+  - Id: 20684
+    Name: Livro De Feitiços De R.
+  - Id: 20685
+    Name: Veneno De Esgoto
+  - Id: 20686
+    Name: Braçadeira De Esgoto
+  - Id: 20687
+    Name: Cachoeira De Esgoto
+  - Id: 20688
+    Name: Guerreiro De Elite
+  - Id: 20689
+    Name: Dolor Viciada Em Feiti.
+  - Id: 20690
+    Name: Feitiço Liberado
+  - Id: 20691
+    Name: Plaga Viciada Em Feiti.
+  - Id: 20692
+    Name: Sanare Viciado Em Feit.
+  - Id: 20693
+    Name: Feitiço Poderoso
+  - Id: 20694
+    Name: Feitiço Afiado
+  - Id: 20696
+    Name: Administrador Infantil 
+  - Id: 20697
+    Name: Administrador Filho Al.
+  - Id: 20698
+    Name: Robô Assistente De Pes.
+  - Id: 20699
+    Name: Comandante Caçador De .
+  - Id: 20700
+    Name: Jardineiro Quebrado Be.
+  - Id: 20801
+    Name: Sropho Abismal
+  - Id: 20802
+    Name: Obeaune Abismal
+  - Id: 20803
+    Name: Desvio Abismal
+  - Id: 20804
+    Name: Marte Abismal
+  - Id: 20805
+    Name: Tritão Abismal
+  - Id: 20806
+    Name: Sedora Abismal
+  - Id: 20807
+    Name: Peixe Abismal
+  - Id: 20808
+    Name: Strouf Abismal
+  - Id: 20809
+    Name: Fen Abismal
+  - Id: 20810
+    Name: Dramoh Abismal
+  - Id: 20811
+    Name: Kraken Abismal
+  - Id: 20834
+    Name: Guerreiro De Batalha A.
+  - Id: 20835
+    Name: Canhão Duplo Abr
+  - Id: 20836
+    Name: Rede Mãe Abr
+  - Id: 20837
+    Name: Abr Infiniti
+  - Id: 20843
+    Name: Bruxa Do Mar
+  - Id: 20846
+    Name: Rachadura Torcida
+  - Id: 20847
+    Name: Rachadura Torcida
+  - Id: 20848
+    Name: Guerreiro De Madeira
+  - Id: 20849
+    Name: Fada De Madeira
+  - Id: 20850
+    Name: Trepadeira
+  - Id: 20851
+    Name: Árvore Do Inferno
+  - Id: 20920
+    Name: Lavatera
+  - Id: 20921
+    Name: Fulgor
+  - Id: 20922
+    Name: Napeo
+  - Id: 20923
+    Name: Galensis
+  - Id: 20924
+    Name: Amiter
+  - Id: 20925
+    Name: Lituano
+  - Id: 20926
+    Name: Filha
+  - Id: 20927
+    Name: Vanilaqus
+  - Id: 20928
+    Name: O Único
+  - Id: 20929
+    Name: Cabeça De Gigante
+  - Id: 20930
+    Name: Doloriano
+  - Id: 20931
+    Name: Plagarion
+  - Id: 20932
+    Name: Deadre
+  - Id: 20933
+    Name: Veneza
+  - Id: 20934
+    Name: R001-Besta
+  - Id: 20935
+    Name: Sem Cabeça
+  - Id: 20936
+    Name: Disfarce
+  - Id: 20937
+    Name: Assassino Brutal
+  - Id: 20938
+    Name: Cubo Fantasma
+  - Id: 20939
+    Name: Lude Gal
+  - Id: 20940
+    Name: Lua Azul Loli Ruri
+  - Id: 20941
+    Name: Grande
+  - Id: 20942
+    Name: Pierrozoísta
+  - Id: 20943
+    Name: Bruxa Da Morte
+  - Id: 21064
+    Name: Dummy - Pequeno
+  - Id: 21065
+    Name: Dummy - Médio
+  - Id: 21066
+    Name: Manequim - Grande
+  - Id: 21067
+    Name: Boneco - Amorfo
+  - Id: 21068
+    Name: Dummy - Dragão
+  - Id: 21069
+    Name: Boneco - Bruto
+  - Id: 21070
+    Name: Dummy - Humanoide
+  - Id: 21071
+    Name: Dummy - Inseto
+  - Id: 21072
+    Name: Dummy - Peixe
+  - Id: 21073
+    Name: Dummy - Demônio
+  - Id: 21074
+    Name: Manequim - Planta
+  - Id: 21075
+    Name: Manequim - O
+  - Id: 21076
+    Name: Manequim - Morto-Vivo
+  - Id: 21077
+    Name: Manequim - Neutro
+  - Id: 21078
+    Name: Dummy - Água
+  - Id: 21079
+    Name: Manequim - Terra
+  - Id: 21080
+    Name: Manequim - Fogo
+  - Id: 21081
+    Name: Boneco - Vento
+  - Id: 21082
+    Name: Manequim - Veneno
+  - Id: 21083
+    Name: Boneco - Sagrado
+  - Id: 21084
+    Name: Dummy - Sombrio
+  - Id: 21085
+    Name: Boneco - Fantasma
+  - Id: 21086
+    Name: Boneco - Amaldiçoado
+  - Id: 21292
+    Name: Aldeões Armados
+  - Id: 21293
+    Name: Aldeões Armados
+  - Id: 21294
+    Name: Aldeões Armados
+  - Id: 21295
+    Name: Sapo Cinza
+  - Id: 21296
+    Name: Mão De Ancinho
+  - Id: 21297
+    Name: Fagulha
+  - Id: 21298
+    Name: Molar Quente
+  - Id: 21299
+    Name: Despejo
+  - Id: 21300
+    Name: Sapo De Lava
+  - Id: 21301
+    Name: Presa Ardente
+  - Id: 21302
+    Name: Ashhopper
+  - Id: 21303
+    Name: Triturar
+  - Id: 21304
+    Name: Lobo Cinzento
+  - Id: 21305
+    Name: Tumbler
+  - Id: 21306
+    Name: Pipa Vento De Fogo
+  - Id: 21307
+    Name: Lobo Fantasma
+  - Id: 21308
+    Name: Caçador De Corações
+  - Id: 21309
+    Name: Soldado Base
+  - Id: 21310
+    Name: Guarda Do Templo
+  - Id: 21311
+    Name: Guarda Do Templo Instá.
+  - Id: 21312
+    Name: Caçador De Coração De .
+  - Id: 21313
+    Name: Caçador De Corações Pr.
+  - Id: 21314
+    Name: Schlang Renegado
+  - Id: 21315
+    Name: Falso Deus
+  - Id: 21316
+    Name: Conversa Fiada
+  - Id: 21317
+    Name: Deus Distorcido
+  - Id: 21318
+    Name: Guardião Da Deusa
+  - Id: 21319
+    Name: Zelador Da Vila
+  - Id: 21320
+    Name: Maram
+  - Id: 21321
+    Name: Míriam
+  - Id: 21322
+    Name: Suave
+  - Id: 21323
+    Name: Cabra Cinzenta
+  - Id: 21324
+    Name: Bebê Lobo Cinzento
+  - Id: 21360
+    Name: Conversa Fiada
+  - Id: 21361
+    Name: Deus Distorcido
+  - Id: 21377
+    Name: Guardiã Da Deusa Maior
+  - Id: 21378
+    Name: Guardião Sênior Da Vila
+  - Id: 21386
+    Name: Outro Diligente
+  - Id: 21387
+    Name: Guerreiro Andre
+  - Id: 21388
+    Name: Larva De Formiga
+  - Id: 21389
+    Name: Diligente Deniro
+  - Id: 21390
+    Name: Morra Diligentemente
+  - Id: 21391
+    Name: Ovo de Formiga
+  - Id: 21392
+    Name: Destemido Giearth
+  - Id: 21393
+    Name: Fazendeiro Destemido
+  - Id: 21394
+    Name: Videira Diligente
+  - Id: 21395
+    Name: Silenciosa Maia
+  - Id: 21513
+    Name: Fantasma
+  - Id: 21514
+    Name: Iwin Sn
+  - Id: 21515
+    Name: Iwin Sy
+  - Id: 21516
+    Name: Ganhar Sb
+  - Id: 21517
+    Name: Iwin Sg
+  - Id: 21518
+    Name: Iwin Sr.
+  - Id: 21519
+    Name: Lehar
+  - Id: 21520
+    Name: Limacina
+  - Id: 21521
+    Name: Flor Descongelada
+  - Id: 21522
+    Name: Calmante
+  - Id: 21523
+    Name: Palha De Gelo
+  - Id: 21524
+    Name: Algas Brilhantes
+  - Id: 21525
+    Name: Gangue De Gelo
+  - Id: 21526
+    Name: Rgan Primitivo
+  - Id: 21527
+    Name: Rgan Mais Baixo
+  - Id: 21528
+    Name: Órgão Júnior
+  - Id: 21529
+    Name: Rgan Intermediário
+  - Id: 21530
+    Name: Rgan
+  - Id: 21531
+    Name: Áquila
+  - Id: 21532
+    Name: Monstro Yunkea#Chefe
+  - Id: 21533
+    Name: Simulação Juncea
+  - Id: 21534
+    Name: Ragan Está Com Medo
+  - Id: 21535
+    Name: Regan Dividido
+  - Id: 21536
+    Name: Caçador De Corações Mo.
+  - Id: 21537
+    Name: Ultra Limacina
+  - Id: 21538
+    Name: Rgan Primitivo Descart.
+  - Id: 21539
+    Name: Rgan Intermediário Des.
+  - Id: 21540
+    Name: Caverna Calmante
+  - Id: 21541
+    Name: Flor Da Caverna
+  - Id: 21542
+    Name: Alucigenia
+  - Id: 21543
+    Name: Alucigênia Bebê
+  - Id: 21544
+    Name: Um Olho Dollocaris
+  - Id: 21545
+    Name: Dollocaris De Dois Olh.
+  - Id: 21588
+    Name: Áquila
+  - Id: 21589
+    Name: Remacina
+  - Id: 21590
+    Name: Berserk Regan
+  - Id: 21599
+    Name: Caçador De Corações At
+  - Id: 21600
+    Name: Rgan Superior Renovado
+  - Id: 21601
+    Name: Rgan Intermediário Ema.
+  - Id: 21866
+    Name: Joia Da Primavera#Prim.
+  - Id: 21867
+    Name: Joia De Verão#Verão
+  - Id: 21868
+    Name: Joia De Outono#Outono
+  - Id: 21869
+    Name: Jóia De Inverno#Inverno
+  - Id: 21887
+    Name: Jóia
+  - Id: 21965
+    Name: Copo
+  - Id: 21966
+    Name: Vento Gelado Cinzento
+  - Id: 21967
+    Name: Vento Gelado
+  - Id: 21968
+    Name: Ovo Do Vento Gelado
+  - Id: 21969
+    Name: Lesma Coelho Da Neve
+  - Id: 21970
+    Name: Lesma Melibe
+  - Id: 21971
+    Name: Inseto Urso
+  - Id: 21972
+    Name: Jormungandr Guardião-P
+  - Id: 21973
+    Name: Jormungandr Guardião-Y
+  - Id: 21974
+    Name: Estagiário Suspeito Ar.
+  - Id: 21975
+    Name: Suspeito Soldado Arwin
+  - Id: 21976
+    Name: Suspeito Soldado Arwin
+  - Id: 21977
+    Name: Cabo Suspeito Arwin
+  - Id: 21978
+    Name: Suspeito Maníaco Arwin
+  - Id: 21979
+    Name: Rasgand Supremo
+  - Id: 21980
+    Name: Líder De Limpeza Do Lo. 
+  - Id: 21981
+    Name: Lasgand
+  - Id: 21982
+    Name: Lesma Anjo Caída
+  - Id: 21983
+    Name: Anjo Iceslug
+  - Id: 21984
+    Name: Ovo Do Vento Gelado
+  - Id: 21985
+    Name: Bruxo Rgan Superior
+  - Id: 21986
+    Name: Curador Superior De Ór.
+  - Id: 21987
+    Name: Bruxo Da Igreja Jormun.
+  - Id: 21988
+    Name: Bispo Da Igreja Jormun.
+  - Id: 21989
+    Name: Guardião Do Santuário .
+  - Id: 21990
+    Name: Limpador Do Santuário .
+  - Id: 21991
+    Name: Guardião De Jormungand
+  - Id: 21992
+    Name: Guardião De Jormungand
+  - Id: 21993
+    Name: Rugan Xamã
+  - Id: 21994
+    Name: Caçador De Coração
+  - Id: 21995
+    Name: Kkokkopo
+  - Id: 21996
+    Name: Anjo Da Tempestade De .
+  - Id: 21997
+    Name: Jormungandr Guardião-P
+  - Id: 21998
+    Name: Jormungandr Guardião-Y
+  - Id: 22000
+    Name: Caracóis Deliciosos
+  - Id: 22004
+    Name: Pedra De Armazenamento 
+  - Id: 22005
+    Name: Armazenamento Suspeito
+  - Id: 22006
+    Name: Nyar
+  - Id: 22007
+    Name: Lasgand
+  - Id: 22177
+    Name: Pégaso Floral
+  - Id: 22178
+    Name: Coral Marinho
+  - Id: 22179
+    Name: Árvore De Bordo
+  - Id: 22180
+    Name: Pinguim Monarca
+  - Id: 22192
+    Name: Pequeno Espírito Da Te. 
+  - Id: 22193
+    Name: Espírito Da Terra Azul
+  - Id: 22194
+    Name: Espírito Gigante Da Te. 
+  - Id: 22195
+    Name: Espírito Mutante Da Te. 
+  - Id: 22196
+    Name: Pequeno Espírito Da Ch. 
+  - Id: 22197
+    Name: Espírito Da Chama Azul
+  - Id: 22198
+    Name: Espírito Gigante Da Ch. 
+  - Id: 22199
+    Name: Espírito Mutante Da Ch. 
+  - Id: 22200
+    Name: Pequeno Espírito De Ve. 
+  - Id: 22201
+    Name: Espírito Do Vento Forte
+  - Id: 22202
+    Name: Espírito Gigante De Ve. 
+  - Id: 22203
+    Name: Espírito Mutante Do Ve. 
+  - Id: 22204
+    Name: Pequeno Espírito De Ág. 
+  - Id: 22205
+    Name: Espírito De Água Fria
+  - Id: 22206
+    Name: Espírito Gigante De Ág. 
+  - Id: 22207
+    Name: Espírito Polimorfo Da . 
+  - Id: 22208
+    Name: Pequeno Espírito Da Te. 
+  - Id: 22209
+    Name: Espírito Da Terra Polu.
+  - Id: 22210
+    Name: Espírito Gigante Da Te. 
+  - Id: 22211
+    Name: Espírito Mutante Da Te. 
+  - Id: 22212
+    Name: Pequeno Espírito De Ch. 
+  - Id: 22213
+    Name: Espírito De Chama Cont.
+  - Id: 22214
+    Name: Grande Espírito De Cha. 
+  - Id: 22215
+    Name: Espírito Mutante Da Ch. 
+  - Id: 22216
+    Name: Pequeno Espírito De Ág. 
+  - Id: 22217
+    Name: Espírito De Água Quente
+  - Id: 22218
+    Name: Espírito Gigante De Ág. 
+  - Id: 22219
+    Name: Espírito Mutante De Ág. 
+  - Id: 22220
+    Name: Pequeno Espírito Do Ve. 
+  - Id: 22221
+    Name: Espírito Do Vento Seco
+  - Id: 22222
+    Name: Espírito Gigante Do Ve. 
+  - Id: 22223
+    Name: Espírito Mutante Do Ve. 
+  - Id: 22224
+    Name: Pequeno Espírito De Ch. 
+  - Id: 22225
+    Name: Espírito De Chama Verm.
+  - Id: 22226
+    Name: Espírito Gigante Da Ch. 
+  - Id: 22227
+    Name: Espírito Mutante Da Ch. 
+  - Id: 22228
+    Name: Pequeno Espírito De Te. 
+  - Id: 22229
+    Name: Espírito Da Terra Robu.
+  - Id: 22230
+    Name: Espírito Gigante De Te. 
+  - Id: 22231
+    Name: Espírito Mutante Da Te. 
+  - Id: 22232
+    Name: Pequeno Espírito De Ág. 
+  - Id: 22233
+    Name: Espírito Da Água Poluí.
+  - Id: 22234
+    Name: Espírito Gigante De Ág. 
+  - Id: 22235
+    Name: Espírito Mutante Da Ág. 
+  - Id: 22236
+    Name: Pequeno Espírito De Ve. 
+  - Id: 22237
+    Name: Espírito Do Vento Macu.
+  - Id: 22238
+    Name: Espírito Gigante Do Ve. 
+  - Id: 22239
+    Name: Espírito Mutante Do Ve. 
+  - Id: 23060
+    Name: Kkobo Confiável
