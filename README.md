@@ -1,5 +1,8 @@
 # brHades
-<img src="https://github.com/AoShinRO/brHades/blob/main/.github/brHades-Logo.png?raw=true" align="right" height="400" />
+
+<div style="width: 2%;">
+    <img src="https://github.com/AoShinRO/brHades/blob/main/.github/brHades-Logo.png?raw=true" align="right" width="300" />
+</div>
 
 #### Status - Compiladores:
 
