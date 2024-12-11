@@ -36,10 +36,10 @@ RAM | 1 GB | 2 GB
 Disk Space | 300 MB | 500 MB
 
 ### Sistema Operacional e Compilador
-Sistema Operacional | Compilador
-------|------
-Linux  | [gcc-10+](https://www.gnu.org/software/gcc/) / [Make](https://www.gnu.org/software/make/)
-Windows | [MS Visual Studio 2020+](https://www.visualstudio.com/downloads/)
+Sistema Operacional | Compilador | Python para Addons
+------|------|------
+Linux  | [gcc-10+](https://www.gnu.org/software/gcc/) / [Make](https://www.gnu.org/software/make/) | [Python Linux](https://python.org.br/instalacao-linux/)
+Windows | [MS Visual Studio 2020+](https://www.visualstudio.com/downloads/) | [Microsoft Store Python 3.12](https://apps.microsoft.com/detail/9ncvdn91xzqp?hl=pt-br&gl=BR)
 
 ### Aplicativos Necessários
 Aplicativo | Nome
