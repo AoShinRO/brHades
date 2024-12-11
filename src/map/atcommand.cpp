@@ -7819,9 +7819,54 @@ ACMD_FUNC(mail)
  *------------------------------------------*/
 ACMD_FUNC(mobinfo)
 {
+#ifdef TRANSLATION_API
+	unsigned char msize[SZ_ALL][7];
+	unsigned char mrace[RC_ALL][11];
+	unsigned char melement[ELE_ALL][8];
+	if(sd->translation_api.translate_langtype == "pt"){
+        const char* translated_msize[SZ_ALL] = { "Pequeno", "Médio", "Grande" };
+        const char* translated_mrace[RC_ALL] = { 
+            "Sem forma", "Morto-vivo", "Besta", "Planta", "Inseto", 
+            "Peixe", "Demônio", "Semi-Humano", "Anjo", "Dragão", "Jogador" 
+        };
+        const char* translated_melement[ELE_ALL] = { 
+            "Neutro", "Água", "Terra", "Fogo", "Vento", 
+            "Veneno", "Sagrado", "Sombrio", "Fantasma", "Morto-vivo" 
+        };
+        // Copiando para as variáveis
+        for (int i = 0; i < SZ_ALL; ++i)
+            strcpy((char*)msize[i], translated_msize[i]);
+        for (int i = 0; i < RC_ALL; ++i)
+            strcpy((char*)mrace[i], translated_mrace[i]);
+        for (int i = 0; i < ELE_ALL; ++i)
+            strcpy((char*)melement[i], translated_melement[i]);
+	}
+	else
+	{
+        const char* default_msize[SZ_ALL] = { "Small", "Medium", "Large" };
+        const char* default_mrace[RC_ALL] = { 
+            "Formless", "Undead", "Beast", "Plant", "Insect", 
+            "Fish", "Demon", "Demi-Human", "Angel", "Dragon", "Player" 
+        };
+        const char* default_melement[ELE_ALL] = { 
+            "Neutral", "Water", "Earth", "Fire", "Wind", 
+            "Poison", "Holy", "Dark", "Ghost", "Undead" 
+        };
+
+        // Copiando para as variáveis
+        for (int i = 0; i < SZ_ALL; ++i)
+            strcpy((char*)msize[i], default_msize[i]);
+        for (int i = 0; i < RC_ALL; ++i)
+            strcpy((char*)mrace[i], default_mrace[i]);
+        for (int i = 0; i < ELE_ALL; ++i)
+            strcpy((char*)melement[i], default_melement[i]);
+	}
+#else
 	unsigned char msize[SZ_ALL][7] = { "Small", "Medium", "Large" };
 	unsigned char mrace[RC_ALL][11] = { "Formless", "Undead", "Beast", "Plant", "Insect", "Fish", "Demon", "Demi-Human", "Angel", "Dragon", "Player" };
 	unsigned char melement[ELE_ALL][8] = { "Neutral", "Water", "Earth", "Fire", "Wind", "Poison", "Holy", "Dark", "Ghost", "Undead" };
+#endif // TRANSLATION_API
+
 	char atcmd_output2[CHAT_SIZE_MAX];
 	uint16 mob_ids[MAX_SEARCH], count;
 	uint16 i;

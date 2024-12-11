@@ -45727,6 +45727,7 @@ Body:
     AegisName: C_Giant_Fly_Wing_Box
     Name: Giant Flywing 500 Box
     Type: Cash
+    Buy: 100000
     Sell: 10
     Weight: 10
     Flags:

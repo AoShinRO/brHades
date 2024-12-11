@@ -113831,38 +113831,164 @@ Body:
 #    AegisName: SEASON_MOB_110
   - Id: 21513
     AegisName: EP19_NPC_IWIN
-    Name: EP19_NPC_IWIN
+    Name: Iwin
     Level: 200
+    Hp: 10
+    BaseExp: 0
+    JobExp: 0
+    Attack: 1880
+    Attack2: 2680
+    Defense: 0
+    MagicDefense: 0
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    Size: Medium
+    Race: Brute
+    Element: Neutral
+    ElementLevel: 1
     WalkSpeed: 150
   - Id: 21514
     AegisName: EP19_NPC_IWIN_SN
-    Name: EP19_NPC_IWIN_SN
+    Name: Iwin SN
     Level: 200
+    Hp: 10
+    BaseExp: 0
+    JobExp: 0
+    Attack: 1880
+    Attack2: 2680
+    Defense: 0
+    MagicDefense: 0
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    Size: Medium
+    Race: Brute
+    Element: Neutral
+    ElementLevel: 1
     WalkSpeed: 150
   - Id: 21515
     AegisName: EP19_NPC_IWIN_SY
-    Name: EP19_NPC_IWIN_SY
+    Name: Iwin SY
     Level: 200
+    Hp: 10
+    BaseExp: 0
+    JobExp: 0
+    Attack: 1880
+    Attack2: 2680
+    Defense: 0
+    MagicDefense: 0
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    Size: Medium
+    Race: Brute
+    Element: Neutral
+    ElementLevel: 1
     WalkSpeed: 150
   - Id: 21516
     AegisName: EP19_NPC_IWIN_SB
-    Name: EP19_NPC_IWIN_SB
+    Name: Iwin SB
     Level: 200
+    Hp: 10
+    BaseExp: 0
+    JobExp: 0
+    Attack: 1880
+    Attack2: 2680
+    Defense: 0
+    MagicDefense: 0
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    Size: Medium
+    Race: Brute
+    Element: Neutral
+    ElementLevel: 1
     WalkSpeed: 150
   - Id: 21517
     AegisName: EP19_NPC_IWIN_SG
-    Name: EP19_NPC_IWIN_SG
+    Name: Iwin SG
     Level: 200
+    Hp: 10
+    BaseExp: 0
+    JobExp: 0
+    Attack: 1880
+    Attack2: 2680
+    Defense: 0
+    MagicDefense: 0
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    Size: Medium
+    Race: Brute
+    Element: Neutral
+    ElementLevel: 1
     WalkSpeed: 150
   - Id: 21518
     AegisName: EP19_NPC_IWIN_SR
-    Name: EP19_NPC_IWIN_SR
+    Name: Iwin SR
     Level: 200
+    Hp: 10
+    BaseExp: 0
+    JobExp: 0
+    Attack: 1880
+    Attack2: 2680
+    Defense: 0
+    MagicDefense: 0
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    Size: Medium
+    Race: Brute
+    Element: Neutral
+    ElementLevel: 1
     WalkSpeed: 150
   - Id: 21519
     AegisName: EP19_NPC_LEHAR
-    Name: EP19_NPC_LEHAR
+    Name: Lehar
     Level: 200
+    Hp: 10
+    BaseExp: 0
+    JobExp: 0
+    Attack: 1880
+    Attack2: 2680
+    Defense: 0
+    MagicDefense: 0
+    Str: 80
+    Agi: 80
+    Vit: 80
+    Int: 80
+    Dex: 80
+    Luk: 80
+    AttackRange: 1
+    Size: Medium
+    Race: Brute
+    Element: Neutral
+    ElementLevel: 1
     WalkSpeed: 150
   - Id: 21520
     AegisName: EP19_LIMACINA
@@ -117145,10 +117271,15 @@ Body:
     Ai: 04
   - Id: 22004
     AegisName: EP20_MD_BOX1
-    # Name: Suspicious storage vessel
     Name: Suspicious storage
-    Level: 1
+    Level: 220
     Hp: 10
+    Attack: 220
+    Attack2: 220
+    Size: Small
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 1
     Class: Boss
     Modes:
       IgnoreMagic: true
@@ -117159,8 +117290,14 @@ Body:
     AegisName: EP20_MD_BOX2
     # Name: Suspicious storage vessel
     Name: Suspicious storage
-    Level: 1
+    Level: 220
     Hp: 10
+    Attack: 220
+    Attack2: 220
+    Size: Small
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 1
     Class: Boss
     Modes:
       IgnoreMagic: true
@@ -117169,10 +117306,49 @@ Body:
       IgnoreRanged: true
   - Id: 22006
     AegisName: EP20_NPC_NYAR
-    Name: EP20_NPC_NYAR
+    Name: Nyar
+    Level: 220
+    Hp: 10
+    BaseExp: 0
+    JobExp: 0
+    Attack: 1902
+    Attack2: 2702
+    Defense: 0
+    MagicDefense: 0
+    Str: 82
+    Agi: 82
+    Vit: 82
+    Int: 82
+    Dex: 82
+    Luk: 82
+    AttackRange: 1
+    Size: Medium
+    Race: Brute
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 150
   - Id: 22007
     AegisName: EP20_NPC_LASGAND
-    Name: EP20_NPC_LASGAND
+    Name: Lasgand
+    Level: 220
+    Hp: 10
+    BaseExp: 0
+    JobExp: 0
+    Attack: 1902
+    Attack2: 2702
+    Defense: 0
+    MagicDefense: 0
+    Str: 82
+    Agi: 82
+    Vit: 82
+    Int: 82
+    Dex: 82
+    Luk: 82
+    AttackRange: 1
+    Size: Medium
+    Race: Brute
+    Element: Neutral
+    ElementLevel: 1
 #  - Id: 22008
 #    AegisName: AB_YEMOB_001
 #  - Id: 22009
