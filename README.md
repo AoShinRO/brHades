@@ -1,9 +1,5 @@
 # brHades
 
-<div style="width: 2%;">
-    <img src="https://github.com/AoShinRO/brHades/blob/main/.github/brHades-Logo.png?raw=true" align="right" width="300" />
-</div>
-
 #### Status - Compiladores:
 
 ![clang](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_clang.yml?label=clang%20build&logo=llvm) | ![cmake](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_cmake.yml?label=cmake%20build&logo=cmake) | ![gcc](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_gcc.yml?label=gcc%20build&logo=gnu) | ![ms](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_msbuild.yml?label=ms%20build&logo=visualstudio) 
@@ -13,6 +9,12 @@
 
 ![GitHub](https://img.shields.io/github/license/AoShinRo/brHades.svg) | ![commit activity](https://img.shields.io/github/commit-activity/w/AoShinRo/brHades) | ![GitHub repo size](https://img.shields.io/github/repo-size/AoShinRo/brHades.svg)
 --------|--------|--------
+
+# 
+
+<div style="width: 2%;">
+    <img src="https://github.com/AoShinRO/brHades/blob/main/.github/brHades-Logo.png?raw=true" align="right" width="200" />
+</div>
 
 ### Introdução
 > brHades é um projeto de desenvolvimento colaborativo com objetivo de oferecer um emulador de Ragnarok para a comunidade Brasileira.
