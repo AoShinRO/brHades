@@ -15330,7 +15330,7 @@ void pc_set_costume_view(map_session_data *sd) {
 
 	// Costumes check
 	if (!map_getmapflag(sd->bl.m, MF_NOCOSTUME)
-#if PACKETVER_MAIN_NUM >= 20230921 || PACKETVER_RE_NUM >= 20230906
+#if PACKETVER_MAIN_NUM >= 20230906 || PACKETVER_RE_NUM >= 20230906
 		&& !sd->status.show_costumes
 #endif
 		) {
