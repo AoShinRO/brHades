@@ -921,7 +921,11 @@ int32 char_mmo_chars_fromsql(struct char_session_data* sd, uint8* buf, uint8* co
 		"`robe`,`moves`,`unban_time`,`font`,`uniqueitem_counter`,`sex`,`hotkey_rowshift`,`title_id`,`show_equip`,"
 		"`hotkey_rowshift2`,"
 		"`max_ap`,`ap`,`trait_point`,`pow`,`sta`,`wis`,`spl`,`con`,`crt`,"
+#if PACKETVER_MAIN_NUM >= 20230906 || PACKETVER_RE_NUM >= 20230906
 		"`inventory_slots`,`body_direction`,`disable_call`,`show_costumes`"
+#else
+		"`inventory_slots`,`body_direction`,`disable_call`"
+#endif
 		" FROM `%s` WHERE `account_id`='%d' AND `char_num` < '%d'", schema_config.char_db, sd->account_id, MAX_CHARS)
 	||	SQL_ERROR == stmt.Execute()
 	||	SQL_ERROR == stmt.BindColumn( 0,  SQLDT_INT,    &p.char_id, 0, nullptr, nullptr)
@@ -982,7 +986,9 @@ int32 char_mmo_chars_fromsql(struct char_session_data* sd, uint8* buf, uint8* co
 	||	SQL_ERROR == stmt.BindColumn( 55, SQLDT_UINT16, &p.inventory_slots, 0, nullptr, nullptr)
 	||	SQL_ERROR == stmt.BindColumn( 56, SQLDT_UINT8,  &p.body_direction, 0, nullptr, nullptr)
 	||	SQL_ERROR == stmt.BindColumn( 57, SQLDT_UINT16, &p.disable_call, 0, nullptr, nullptr)
+#if PACKETVER_MAIN_NUM >= 20230906 || PACKETVER_RE_NUM >= 20230906
 	||	SQL_ERROR == stmt.BindColumn( 58, SQLDT_UINT8, &p.show_costumes, 0, nullptr, nullptr)
+#endif
 	)
 	{
 		SqlStmt_ShowDebug(stmt);
@@ -1038,7 +1044,11 @@ int32 char_mmo_char_fromsql(uint32 char_id, struct mmo_charstatus* p, bool load_
 		"`save_map`,`save_x`,`save_y`,`partner_id`,`father`,`mother`,`child`,`fame`,`rename`,`delete_date`,`robe`, `moves`,"
 		"`unban_time`,`font`,`uniqueitem_counter`,`sex`,`hotkey_rowshift`,`clan_id`,`title_id`,`show_equip`,`hotkey_rowshift2`,"
 		"`max_ap`,`ap`,`trait_point`,`pow`,`sta`,`wis`,`spl`,`con`,`crt`,"
+#if PACKETVER_MAIN_NUM >= 20230906 || PACKETVER_RE_NUM >= 20230906
 		"`inventory_slots`,`body_direction`,`disable_call`,`last_instanceid`,`show_costumes`"
+#else
+		"`inventory_slots`,`body_direction`,`disable_call`,`last_instanceid`"
+#endif
      	" FROM `%s` WHERE `char_id`=? LIMIT 1", schema_config.char_db)
 	||	SQL_ERROR == stmt.BindParam(0, SQLDT_INT, &char_id, 0)
 	||	SQL_ERROR == stmt.Execute()
@@ -1118,7 +1128,9 @@ int32 char_mmo_char_fromsql(uint32 char_id, struct mmo_charstatus* p, bool load_
 	||	SQL_ERROR == stmt.BindColumn(73, SQLDT_UINT8,  &p->body_direction, 0, nullptr, nullptr)
 	||	SQL_ERROR == stmt.BindColumn(74, SQLDT_UINT8,	&p->disable_call, 0, nullptr, nullptr)
 	||	SQL_ERROR == stmt.BindColumn(75, SQLDT_INT,    &p->last_point_instanceid, 0, nullptr, nullptr)
+#if PACKETVER_MAIN_NUM >= 20230906 || PACKETVER_RE_NUM >= 20230906
 	||	SQL_ERROR == stmt.BindColumn(76, SQLDT_UINT8, &p->show_costumes, 0, nullptr, nullptr)
+#endif
 	)
 	{
 		SqlStmt_ShowDebug(stmt);
