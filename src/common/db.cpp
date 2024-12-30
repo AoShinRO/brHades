@@ -434,7 +434,7 @@ static void db_rebalance(DBNode *node, DBNode **root)
 	DB_COUNTSTAT(db_rebalance);
 	// Restore the RED-BLACK properties
 	node->color = RED;
-	while (node != *root && node->parent->color == RED) {
+	while (node != *root && node->parent != nullptr && node->parent->color == RED) {
 		if (node->parent == node->parent->parent->left) {
 			// If node's parent is a left, y is node's right 'uncle'
 			y = node->parent->parent->right;
@@ -551,9 +551,9 @@ static void db_rebalance_erase(DBNode *node, DBNode **root)
 		// link x and node's parent
 		if (*root == node) {
 			*root = x; // node was the root
-		} else if (node->parent->left == node) {
+		} else if (node->parent != nullptr && node->parent->left == node) {
 			node->parent->left = x; // node was at the left
-		} else {
+		} else if (node->parent != nullptr) {
 			node->parent->right = x;  // node was at the right
 		}
 	}
@@ -564,55 +564,63 @@ static void db_rebalance_erase(DBNode *node, DBNode **root)
 			DBNode *w;
 			if (x == x_parent->left) {
 				w = x_parent->right;
-				if (w->color == RED) {
-					w->color = BLACK;
-					x_parent->color = RED;
-					db_rotate_left(x_parent, root);
-					w = x_parent->right;
-				}
-				if ((w->left == nullptr || w->left->color == BLACK) &&
-					(w->right == nullptr || w->right->color == BLACK)) {
-					w->color = RED;
-					x = x_parent;
-					x_parent = x_parent->parent;
-				} else {
-					if (w->right == nullptr || w->right->color == BLACK) {
-						if (w->left) w->left->color = BLACK;
-						w->color = RED;
-						db_rotate_right(w, root);
+				if(w != nullptr)
+				{
+					if (w->color == RED) {
+						w->color = BLACK;
+						x_parent->color = RED;
+						db_rotate_left(x_parent, root);
 						w = x_parent->right;
 					}
-					w->color = x_parent->color;
-					x_parent->color = BLACK;
-					if (w->right) w->right->color = BLACK;
-					db_rotate_left(x_parent, root);
-					break;
+					if ((w->left == nullptr || w->left->color == BLACK) &&
+						(w->right == nullptr || w->right->color == BLACK)) {
+						w->color = RED;
+						x = x_parent;
+						x_parent = x_parent->parent;
+					}
+					else {
+						if (w->right == nullptr || w->right->color == BLACK) {
+							if (w->left) w->left->color = BLACK;
+							w->color = RED;
+							db_rotate_right(w, root);
+							w = x_parent->right;
+						}
+						w->color = x_parent->color;
+						x_parent->color = BLACK;
+						if (w->right) w->right->color = BLACK;
+						db_rotate_left(x_parent, root);
+						break;
+					}
 				}
 			} else {
 				w = x_parent->left;
-				if (w->color == RED) {
-					w->color = BLACK;
-					x_parent->color = RED;
-					db_rotate_right(x_parent, root);
-					w = x_parent->left;
-				}
-				if ((w->right == nullptr || w->right->color == BLACK) &&
-					(w->left == nullptr || w->left->color == BLACK)) {
-					w->color = RED;
-					x = x_parent;
-					x_parent = x_parent->parent;
-				} else {
-					if (w->left == nullptr || w->left->color == BLACK) {
-						if (w->right) w->right->color = BLACK;
-						w->color = RED;
-						db_rotate_left(w, root);
+				if(w != nullptr)
+				{
+					if (w->color == RED) {
+						w->color = BLACK;
+						x_parent->color = RED;
+						db_rotate_right(x_parent, root);
 						w = x_parent->left;
 					}
-					w->color = x_parent->color;
-					x_parent->color = BLACK;
-					if (w->left) w->left->color = BLACK;
-					db_rotate_right(x_parent, root);
-					break;
+					if ((w->right == nullptr || w->right->color == BLACK) &&
+						(w->left == nullptr || w->left->color == BLACK)) {
+						w->color = RED;
+						x = x_parent;
+						x_parent = x_parent->parent;
+					}
+					else {
+						if (w->left == nullptr || w->left->color == BLACK) {
+							if (w->right) w->right->color = BLACK;
+							w->color = RED;
+							db_rotate_left(w, root);
+							w = x_parent->left;
+						}
+						w->color = x_parent->color;
+						x_parent->color = BLACK;
+						if (w->left) w->left->color = BLACK;
+						db_rotate_right(x_parent, root);
+						break;
+					}
 				}
 			}
 		}
@@ -817,11 +825,7 @@ static void db_free_unlock(DBMap_impl* db)
 	uint32 i;
 
 	DB_COUNTSTAT(db_free_unlock);
-	if (db->free_lock == 0) {
-		ShowWarning("db_free_unlock: free_lock was already 0\n"
-				"Database allocated at %s:%d\n",
-				db->alloc_file, db->alloc_line);
-	} else {
+	if(db->free_lock > 0) {
 		db->free_lock--;
 	}
 	if (db->free_lock)
