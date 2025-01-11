@@ -2308,7 +2308,7 @@ void clif_selllist( map_session_data& sd){
 		if( battle_config.rental_item_novalue && sd.inventory.u.items_inventory[i].expire_time ){
 			price = 0;
 		}else{
-			price = sd.inventory_data[i]->value_sell;
+			price = static_cast<int32>(sd.inventory_data[i]->value_sell > 0 ? sd.inventory_data[i]->value_sell : sd.inventory_data[i]->value_buy > 0 ? sd.inventory_data[i]->value_buy * 0.5 : 0);
 
 			if( price < 0 ){
 				continue;
