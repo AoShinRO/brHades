@@ -3044,7 +3044,7 @@ uint8 npc_selllist(map_session_data* sd, int32 list_length, const PACKET_CZ_PC_S
 		if (battle_config.rental_item_novalue && sd->inventory.u.items_inventory[idx].expire_time)
 			value = 0;
 		else
-			value = pc_modifysellvalue(sd, sd->inventory_data[idx]->value_sell);
+			value = pc_modifysellvalue(sd, static_cast<int32>(sd->inventory_data[idx]->value_sell > 0 ? sd->inventory_data[idx]->value_sell : sd->inventory_data[idx]->value_buy > 0 ? sd->inventory_data[idx]->value_buy * 0.5 : 0));
 
 		z+= (double)value*amount;
 	}
