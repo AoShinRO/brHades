@@ -26677,38 +26677,6 @@ BUILDIN_FUNC(getenchantgrade){
 	return SCRIPT_CMD_SUCCESS;
 }
 
-BUILDIN_FUNC(naviregisterwarp) {
-#ifdef MAP_GENERATOR
-	TBL_NPC* nd;
-	int32 x, y, m;
-	const char *warpname, *mapname=nullptr;
-
-	struct navi_link link;
-
-	nd = map_id2nd(st->oid);
-	if (!nd) {
-		return SCRIPT_CMD_SUCCESS;
-	}
-
-	warpname = script_getstr(st, 2);
-	mapname = script_getstr(st, 3);
-	x = script_getnum(st,4);
-	y = script_getnum(st,5);
-	m = map_mapname2mapid(mapname);
-
-	link.npc = nd;
-	link.id = 0;
-	link.pos = nd->navi.pos;
-	link.warp_dest = {m, x, y};
-	link.name = warpname;
-	link.hidden = nd->navi.hidden;
-
-	nd->links.push_back(link);
-
-#endif
-	return SCRIPT_CMD_SUCCESS;
-}
-
 /*==========================================
  * mob_setidleevent( <monster game ID>, "<event label>" )
  *------------------------------------------*/
@@ -26756,23 +26724,6 @@ BUILDIN_FUNC( openstylist ){
 	ShowError( "buildin_openstylist: This command requires packet version 2015-11-04 or newer.\n" );
 	return SCRIPT_CMD_FAILURE;
 #endif
-}
-
-BUILDIN_FUNC(navihide) {
-#ifdef MAP_GENERATOR
-	TBL_NPC *nd;
-
-	nd = map_id2nd(st->oid);
-	if (!nd) {
-		return SCRIPT_CMD_SUCCESS;
-	}
-
-	nd->navi.hidden = true;
-	for (auto &link : nd->links) {
-		link.hidden = true;
-	}
-#endif
-	return SCRIPT_CMD_SUCCESS;
 }
 
 BUILDIN_FUNC(getitempos) {
@@ -28370,10 +28321,6 @@ struct script_function buildin_func[] = {
 
 	BUILDIN_DEF(setinstancevar,"rvi"),
 	BUILDIN_DEF(openstylist, "?"),
-
-	// Navigation Generation System
-	BUILDIN_DEF(naviregisterwarp, "ssii"),
-	BUILDIN_DEF(navihide, ""),
 
 	BUILDIN_DEF(getitempos,""),
 	BUILDIN_DEF(laphine_synthesis, "?"),

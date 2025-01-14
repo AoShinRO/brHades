@@ -15,7 +15,6 @@
 #include "map.hpp" // struct block_list
 #include "status.hpp" // struct status_change
 #include "unit.hpp" // struct unit_data
-#include "navi.hpp" // navi stuff
 
 struct block_list;
 struct npc_data;
@@ -232,10 +231,6 @@ struct npc_data {
 		int32 removal_tid;
 	} dynamicnpc;
 
-#ifdef MAP_GENERATOR
-	struct navi_link navi; // for warps and the src of npcs
-	std::vector<navi_link> links; // for extra links, like warper npc
-#endif
 	bool is_invisible;
 };
 
