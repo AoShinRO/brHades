@@ -12238,9 +12238,6 @@ void battle_adjust_conf()
 		ShowWarning("Battle setting 'custom_cell_stack_limit' takes no effect as this server was compiled without Cell Stack Limit support.\n");
 #endif
 
-#ifdef MAP_GENERATOR
-	battle_config.dynamic_mobs = 1;
-#endif
 }
 
 /*=====================================

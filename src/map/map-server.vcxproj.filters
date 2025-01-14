@@ -95,9 +95,6 @@
     <ClInclude Include="mob.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="navi.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="npc.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -230,9 +227,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="mob.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="navi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="npc.cpp">

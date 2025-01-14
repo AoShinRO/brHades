@@ -46,7 +46,6 @@
 #include "mapreg.hpp"
 #include "mercenary.hpp"
 #include "mob.hpp"
-#include "navi.hpp"
 #include "npc.hpp"
 #include "party.hpp"
 #include "path.hpp"
@@ -188,14 +187,6 @@ char wisp_server_name[NAME_LENGTH] = "Server"; // can be modified in char-server
 int32 console = 0;
 int32 enable_spy = 0; //To enable/disable @spy commands, which consume too much cpu time when sending packets. [Skotlex]
 int32 enable_grf = 0;	//To enable/disable reading maps from GRF files, bypassing mapcache [blackhole89]
-
-#ifdef MAP_GENERATOR
-struct s_generator_options {
-	bool navi;
-	bool itemmoveinfo;
-	bool reputation;
-} gen_options;
-#endif
 
 /**
  * Get the map data
@@ -4931,7 +4922,7 @@ static int32 cleanup_db_sub(DBKey key, DBData *data, va_list va)
 	return cleanup_sub((struct block_list *)db_data2ptr(data), va);
 }
 int trad_count = 0;
-#ifndef MAP_GENERATOR
+
 #ifdef TRANSLATION_API
 #define TRANSLATED_DB_NAME "db/translated/database_"
 
@@ -5043,7 +5034,7 @@ void map_save_translation_db() {
 }
 
 #endif
-#endif
+
 
 /*==========================================
  * map destructor
@@ -5085,9 +5076,7 @@ void MapServer::finalize(){
 	do_final_battle();
 	do_final_chrif();
 	do_final_clan();
-#ifndef MAP_GENERATOR
 	do_final_clif();
-#endif
 	do_final_npc();
 	do_final_quest();
 	do_final_achievement();
@@ -5163,11 +5152,11 @@ static int32 map_abort_sub(map_session_data* sd, va_list ap)
 // has received a crash signal.
 //------------------------------
 void MapServer::handle_crash(){
-#ifndef MAP_GENERATOR
+
 #ifdef TRANSLATION_API
 	map_save_translation_db();
 #endif
-#endif
+
 	static int32 run = 0;
 	//Save all characters and then flush the inter-connection.
 	if (run) {
@@ -5289,46 +5278,6 @@ const char* map_msg_txt(map_session_data *sd, int32 msg_number){
 	return "??";
 }
 
-/**
- * Read the option specified in command line
- *  and assign the confs used by the different server.
- * @param argc: Argument count
- * @param argv: Argument values
- * @return true or Exit on failure.
- */
-int32 mapgenerator_get_options(int32 argc, char** argv) {
-#ifdef MAP_GENERATOR
-	bool optionSet = false;
-	for (int32 i = 1; i < argc; i++) {
-		const char *arg = argv[i];
-		if (arg[0] != '-' && (arg[0] != '/' || arg[1] == '-')) {// -, -- and /
-		} else if (arg[0] == '/' || (++arg)[0] == '-') {// long option
-			arg++;
-
-			if (strcmp(arg, "generate-navi") == 0) {
-				gen_options.navi = true;
-			} else if (strcmp(arg, "generate-itemmoveinfo") == 0) {
-				gen_options.itemmoveinfo = true;
-			} else if (strcmp(arg, "generate-reputation") == 0) {
-				gen_options.reputation = true;
-			} else {
-				// pass through to default get_options
-				continue;
-			}
-
-			// clear option
-			argv[i] = nullptr;
-			optionSet = true;
-		}
-	}
-	if (!optionSet) {
-		ShowError("No options passed to the map generator, you must set at least one.\n");
-		exit(1);
-	}
-#endif
-	return 1;
-}
-
 int32 map_data::getMapFlag(int32 flag) const {
 #ifdef DEBUG
 	if (flag < 0 || flag > flags.size()) {
@@ -5363,10 +5312,8 @@ void map_data::copyFlags(const map_data& other) {
 /// Called when a terminate signal is received.
 void MapServer::handle_shutdown(){
 	ShowStatus("Desligando...\n");
-#ifndef MAP_GENERATOR
 #ifdef TRANSLATION_API
 	map_save_translation_db();
-#endif
 #endif
 	map_session_data* sd;
 	struct s_mapiterator* iter = mapit_getallusers();
@@ -5401,9 +5348,6 @@ bool MapServer::initialize( int32 argc, char *argv[] ){
 	inter_config.emblem_woe_change = true;
 	inter_config.emblem_transparency_limit = 80;
 
-#ifdef MAP_GENERATOR
-	mapgenerator_get_options(argc, argv);
-#endif
 	cli_get_options(argc,argv);
 
 	map_config_read(MAP_CONF_NAME);
@@ -5477,9 +5421,7 @@ bool MapServer::initialize( int32 argc, char *argv[] ){
 	do_init_instance();
 	do_init_chrif();
 	do_init_clan();
-#ifndef MAP_GENERATOR
 	do_init_clif();
-#endif
 	do_init_script();
 	do_init_itemdb();
 	do_init_channel();
@@ -5505,11 +5447,10 @@ bool MapServer::initialize( int32 argc, char *argv[] ){
 	do_init_buyingstore();
 	do_init_emotes();
 
-#ifndef MAP_GENERATOR
 #ifdef TRANSLATION_API
 	map_load_translation_db();
 #endif
-#endif
+
 	// Fim do benchmark
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double, std::milli> duration = end - start; // Tempo em milissegundos
@@ -5526,18 +5467,7 @@ bool MapServer::initialize( int32 argc, char *argv[] ){
 	if (battle_config.pk_mode)
 		ShowNotice("O servidor esta sendo executado em '" CL_WHITE "Modo PK" CL_RESET "'.\n");
 
-#ifndef MAP_GENERATOR
 	ShowStatus("O servidor esta '" CL_GREEN "pronto" CL_RESET "' e escutando na porta '" CL_WHITE "%d" CL_RESET "'.\n\n", map_port);
-#else
-	// depending on gen_options, generate the correct things
-	if (gen_options.navi)
-		navi_create_lists();
-	if (gen_options.itemmoveinfo)
-		itemdb_gen_itemmoveinfo();
-	if (gen_options.reputation)
-		pc_reputation_generate();
-	this->signal_shutdown();
-#endif
 
 	if( console ){ //start listening
 		add_timer_func_list(parse_console_timer, "parse_console_timer");

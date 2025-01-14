@@ -1327,17 +1327,11 @@ struct s_reputation{
 	std::string variable;
 	int64 minimum;
 	int64 maximum;
-#ifdef MAP_GENERATOR
-	enum e_visibility {ALWAYS, NEVER, EXIST} visibility;
-#endif
 };
 
 class ReputationDatabase : public TypesafeYamlDatabase<int64, s_reputation>{
 public:
 	ReputationDatabase() : TypesafeYamlDatabase( "REPUTATION_DB", 1 ){
-#ifdef MAP_GENERATOR
-	setGenerator(true);
-#endif
 	}
 
 	const std::string getDefaultLocation() override;
@@ -1356,9 +1350,6 @@ struct s_reputationgroup {
 class ReputationGroupDatabase : public TypesafeYamlDatabase<int64, s_reputationgroup> {
 public:
 	ReputationGroupDatabase() : TypesafeYamlDatabase("REPUTATION_GROUP_DB", 1) {
-#ifdef MAP_GENERATOR
-	setGenerator(true);
-#endif
 	}
 
 	const std::string getDefaultLocation() override;
@@ -1791,10 +1782,6 @@ void pc_macro_detector_disconnect(map_session_data &sd);
 // Macro Reporter
 void pc_macro_reporter_area_select(map_session_data &sd, const int16 x, const int16 y, const int8 radius);
 void pc_macro_reporter_process(map_session_data &sd, int32 reporter_account_id = -1);
-
-#ifdef MAP_GENERATOR
-void pc_reputation_generate();
-#endif
 
 #if PACKETVER_MAIN_NUM >= 20170502 || PACKETVER_RE_NUM >= 20170419 || defined(PACKETVER_ZERO)
 #define PC_MAXMEMOPOINTS(sd) ((NORMAL_MEMOPOINTS + pc_readreg2(sd,EXT_MEMO_VAR) >= MAX_MEMOPOINTS)? MAX_MEMOPOINTS : NORMAL_MEMOPOINTS + pc_readreg2(sd,EXT_MEMO_VAR) )

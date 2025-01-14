@@ -31,7 +31,6 @@
 #include "log.hpp"
 #include "map.hpp"
 #include "mob.hpp"
-#include "navi.hpp"
 #include "pc.hpp"
 #include "pet.hpp"
 #include "script.hpp" // script_config
@@ -3804,12 +3803,6 @@ struct npc_data *npc_create_npc(int16 m, int16 x, int16 y){
 	nd->dynamicnpc.last_interaction = 0;
 	nd->dynamicnpc.removal_tid = INVALID_TIMER;
 
-#ifdef MAP_GENERATOR
-	nd->navi.pos = {m, x, y};
-	nd->navi.id = 0;
-	nd->navi.npc = nd;
-#endif
-
 	return nd;
 }
 
@@ -3926,10 +3919,6 @@ static inline const char* npc_parse_warp(char* w1, char* w2, char* w3, char* w4,
 	nd->u.warp.y = to_y;
 	nd->u.warp.xs = xs;
 	nd->u.warp.ys = ys;
-
-#ifdef MAP_GENERATOR
-	nd->navi.warp_dest = {map_mapindex2mapid(i), to_x, to_y};
-#endif
 
 	npc_warp++;
 	nd->bl.type = BL_NPC;

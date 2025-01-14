@@ -2483,7 +2483,6 @@ void clif_scriptmes( map_session_data& sd, uint32 npcid, const char *mes ){
 	if(util::ansi_or_utf_check(mes,npcid))
 		ShowDebug("[brHades] Atencao: o npc: '%s' contem caracteres fora do padrao ANSI. Considere salvar o arquivo como ANSI. \n", map_id2nd(npcid)->name );
 
-#ifndef MAP_GENERATOR
 #ifdef TRANSLATION_API
 	if(sd.translation_api.translate_langtype != "en"){
 		if(mes[0] != '[')
@@ -2498,7 +2497,6 @@ void clif_scriptmes( map_session_data& sd, uint32 npcid, const char *mes ){
 			}
 		}
 	}
-#endif
 #endif
 
 	int16 length = (int16)( strlen( mes ) + 1 );
@@ -2666,7 +2664,6 @@ void clif_scriptmenu( map_session_data& sd, uint32 npcid, const char* mes ){
 	   bl->y<sd.bl.y-AREA_SIZE-1 || bl->y>sd.bl.y+AREA_SIZE+1))))
 	   clif_sendfakenpc( sd, npcid );
 
-#ifndef MAP_GENERATOR
 #ifdef TRANSLATION_API
 	if(sd.translation_api.translate_langtype != "en"){
 			std::string result = map_get_translate(mes, sd.translation_api.translate_langtype);
@@ -2679,7 +2676,6 @@ void clif_scriptmenu( map_session_data& sd, uint32 npcid, const char* mes ){
 			else
 				mes = std::move(result.c_str());
 	}
-#endif
 #endif
 
 	// String length + 1 byte for zero termination
@@ -6940,14 +6936,12 @@ void clif_broadcast2(struct block_list* bl, const char* mes, size_t len, unsigne
 	if (len < 2)
 		return;
 
-#ifndef MAP_GENERATOR
 #ifdef TRANSLATION_API
 	if(bl->type == BL_PC && reinterpret_cast<TBL_PC*>(bl)->translation_api.translate_langtype != "en"){
 			std::string result = map_get_translate(mes, reinterpret_cast<TBL_PC*>(bl)->translation_api.translate_langtype);
 			if(!result.empty())
 				mes = std::move(result.c_str());
 	}
-#endif
 #endif
 
 	PACKET_ZC_BROADCAST2* p = reinterpret_cast<PACKET_ZC_BROADCAST2*>( packet_buffer );
@@ -25920,7 +25914,7 @@ void clif_emotion_expansion_list(map_session_data *sd, std::vector<PACKET_ZC_EMO
 #endif
 }
 
-#ifndef MAP_GENERATOR
+
 #ifdef TRANSLATION_API
 std::string translate_api_call(map_session_data& sd, const std::string& text, const std::string& target_lang){
 
@@ -26005,7 +25999,6 @@ void clif_parse_apitranslate(map_session_data& sd, const std::string text, const
 		default: ShowFatalError("Packet desconhecido foi chamado no tradutor \n"); break;
 	}
 }
-#endif
 #endif
 
 

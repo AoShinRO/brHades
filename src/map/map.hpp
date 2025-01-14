@@ -24,7 +24,6 @@
 #include <common/timer.hpp>
 #include <config/core.hpp>
 
-#include "navi.hpp"
 #include "script.hpp"
 #include "path.hpp"
 
@@ -845,13 +844,6 @@ struct map_data {
 
 	/* speeds up clif_updatestatus processing by causing hpmeter to run only when someone with the permission can view it */
 	unsigned short hpmeter_visible;
-#ifdef MAP_GENERATOR
-	struct {
-		std::vector<const struct npc_data*> npcs;
-		std::vector<const struct navi_link*> warps_into;
-		std::vector<const struct navi_link*> warps_outof;
-	} navi;
-#endif
 
 	int32 getMapFlag(int32 flag) const;
 	void setMapFlag(int32 flag, int32 value);
@@ -1305,12 +1297,11 @@ extern char partybookings_table[32];
 extern char roulette_table[32];
 extern char guild_storage_log_table[32];
 
-#ifndef MAP_GENERATOR
 #ifdef TRANSLATION_API
 std::string map_get_translate(const std::string& origin, const std::string& lang_type);
 void map_set_translate(const std::string& origin, const std::string& lang_type, const std::string& result);
 #endif
-#endif
+
 
 void do_shutdown(void);
 
