@@ -233,7 +233,8 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		item->value_sell = sell;
 	} else {
 		if (!exists) {
-			item->value_sell = 0;
+
+			item->value_sell = static_cast<uint32>(item->value_buy > 0 ? item->value_buy * 0.5 : 0);
 		}
 	}
 
