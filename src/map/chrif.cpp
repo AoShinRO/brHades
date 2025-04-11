@@ -1421,7 +1421,7 @@ int32 chrif_skillcooldown_load(int fd) {
 		return -1;
 	}
 
-
+	//uint32 cid = RFIFOL(fd, 8);
 	int32 count = RFIFOW(fd, 12); //sc_count
 
 	for (int32 i = 0; i < count; i++) {
