@@ -432,9 +432,9 @@ static int32 clif_send_sub(struct block_list *bl, va_list ap)
 	}
 
 	buf = va_arg(ap,unsigned char*);
-	len = va_arg(ap,int);
+	len = va_arg(ap,int32);
 	nullpo_ret(src_bl = va_arg(ap,struct block_list*));
-	type = va_arg(ap,int);
+	type = va_arg(ap,int32);
 
 	switch(type) {
 	case AREA_WOS:
@@ -1024,7 +1024,7 @@ void clif_clearunit_delayed(struct block_list* bl, clr_type type, t_tick tick)
 	tbl->x = bl->x;
 	tbl->y = bl->y;
 	tbl->type = BL_NUL;
-	add_timer(tick, clif_clearunit_delayed_sub, (int)type, (intptr_t)tbl);
+	add_timer(tick, clif_clearunit_delayed_sub, (int32)type, (intptr_t)tbl);
 }
 
 void clif_get_weapon_view(map_session_data* sd, t_itemid *rhand, t_itemid *lhand)
@@ -3073,7 +3073,7 @@ static void clif_inventoryStart( map_session_data*sd, e_inventory_type type, con
 	p->invType = type;
 #endif
 #if PACKETVER_RE_NUM >= 20180919 || PACKETVER_ZERO_NUM >= 20180919 || PACKETVER_MAIN_NUM >= 20181002
-	int32 strLen = (int)safestrnlen(name, 24) + 1;
+	int32 strLen = (int32)safestrnlen(name, 24) + 1;
 	if (strLen > 24)
 		strLen = 24;
 	const int32 len = sizeof(PACKET_ZC_INVENTORY_START) + strLen;
@@ -4547,71 +4547,64 @@ void clif_createchat( map_session_data& sd, e_create_chatroom flag ){
 	clif_send( &packet, sizeof( packet ), &sd.bl, SELF );
 }
 
-
-enum e_chat_flags :uint8 {
-	FLAG_CHAT_PRIVATE = 0,
-	FLAG_CHAT_PUBLIC,
-	FLAG_CHAT_ARENA,
-	FLAG_CHAT_PK
-};
-
-/// Display a chat above the owner (ZC_ROOM_NEWENTRY).
-/// 00d7 <packet len>.W <owner id>.L <char id>.L <limit>.W <users>.W <type>.B <title>.?B
+/// Calculates the chat status
 /// type:
 ///     0 = private (password protected)
 ///     1 = public
 ///     2 = arena (npc waiting room)
 ///     3 = PK zone (non-clickable)
-void clif_dispchat(chat_data& cd, map_session_data* sd) {
+static e_status_chatroom clif_chat_status( const chat_data &cd ){
+	if (cd.owner->type == BL_PC)
+		return (cd.pub) ? STATUSROOM_PUBLIC : STATUSROOM_PRIVATE;
+	else if (cd.owner->type == BL_NPC)
+		return (cd.limit) ? STATUSROOM_ARENA : STATUSROOM_PK_ZONE;
+	else
+		return STATUSROOM_PUBLIC;
+}
 
-	if (cd.usersd[0] == nullptr || cd.owner == nullptr)
+/// Calculates the chat user count
+static uint16 clif_chat_usercount( const chat_data& cd ){
+	if( cd.owner->type == BL_NPC ){
+		return cd.users + 1;
+	}else{
+		return cd.users;
+	}
+}
+
+/// Display a chat above the owner.
+/// 00d7 <packet len>.W <owner id>.L <char id>.L <limit>.W <users>.W <type>.B <title>.?B (ZC_ROOM_NEWENTRY)
+void clif_dispchat( const chat_data& cd ){
+	if( cd.owner == nullptr ){
 		return;
+	}
 
 	PACKET_ZC_ROOM_NEWENTRY* p = reinterpret_cast<PACKET_ZC_ROOM_NEWENTRY*>(packet_buffer);
 
 	p->packetType = HEADER_ZC_ROOM_NEWENTRY;
-	p->packetSize = static_cast<decltype(p->packetSize)>(sizeof(*p) + strlen(cd.title));
-	p->ownerId = cd.owner->id;
-	p->chatId = cd.bl.id;
+	p->packetSize = sizeof( *p );
+	p->owner = cd.owner->id;
+	p->id = cd.bl.id;
 	p->limit = cd.limit;
-	p->users = cd.users;
-
+	p->users = clif_chat_usercount( cd );
+	p->type = clif_chat_status( cd );
 	// not zero-terminated
-	memcpy(p->title, cd.title, strlen(cd.title));
+	size_t max = safestrnlen( cd.title, CHATROOM_TITLE_SIZE );
+	strncpy( p->title, cd.title, max );
+	p->packetSize += static_cast<decltype(p->packetSize)>( max );
 
-	if (cd.owner->type == BL_NPC) {
-		// NPC itself counts as additional chat user
-		p->users++;
-
-		if (cd.limit)
-			p->flag = FLAG_CHAT_ARENA;
-		else
-			p->flag = FLAG_CHAT_PK;
-	}
-	else if (cd.owner->type == BL_PC && cd.pub == false) {
-		p->flag = FLAG_CHAT_PRIVATE;
-	}
-	else {
-		p->flag = FLAG_CHAT_PUBLIC;
-	}
-
-	if (sd != nullptr) 
-		clif_send(p, p->packetSize, &sd->bl, SELF);
-	else 
-		clif_send(p, p->packetSize, cd.owner, AREA_WOSC);
-
+	clif_send( p, p->packetSize, cd.owner, AREA_WOSC );
 }
 
 
-/// Chatroom properties adjustment (ZC_CHANGE_CHATROOM).
-/// 00df <packet len>.W <owner id>.L <chat id>.L <limit>.W <users>.W <type>.B <title>.?B
+/// Chatroom properties adjustment.
+/// 00df <packet len>.W <owner id>.L <chat id>.L <limit>.W <users>.W <type>.B <title>.?B (ZC_CHANGE_CHATROOM)
 /// type:
 ///     0 = private (password protected)
 ///     1 = public
 ///     2 = arena (npc waiting room)
 ///     3 = PK zone (non-clickable)
 void clif_changechatstatus(chat_data& cd) {
-	if(cd.usersd[0] == nullptr )
+	if(cd.owner == nullptr )
 		return;
 
 	PACKET_ZC_CHANGE_CHATROOM* p = reinterpret_cast<PACKET_ZC_CHANGE_CHATROOM*>( packet_buffer );
@@ -4621,24 +4614,8 @@ void clif_changechatstatus(chat_data& cd) {
 	p->ownerId = cd.owner->id;
 	p->chatId = cd.bl.id;
 	p->limit = cd.limit;
-	p->users = cd.users;
-
-	// not zero-terminated
-	memcpy(p->title, cd.title, strlen(cd.title));
-
-	if(cd.owner->type == BL_NPC){
-		// NPC itself counts as additional chat user
-		p->users++;
-
-		if(cd.limit)
-			p->flag = FLAG_CHAT_ARENA;
-		else
-			p->flag = FLAG_CHAT_PK;
-	}else if(cd.owner->type == BL_PC && cd.pub == false){
-		p->flag = FLAG_CHAT_PRIVATE;
-	}else{
-		p->flag = FLAG_CHAT_PUBLIC;
-	}
+	p->users = clif_chat_usercount( cd );
+	p->flag = clif_chat_status( cd );
 
 	clif_send(p,p->packetSize,cd.owner,CHAT);
 }
@@ -4684,8 +4661,6 @@ void clif_joinchatfail( map_session_data& sd, e_refuse_enter_room result ){
 ///     0 = owner (menu)
 ///     1 = normal
 void clif_joinchatok(map_session_data& sd, chat_data& cd){
-
-
 	PACKET_ZC_ENTER_ROOM* p = reinterpret_cast<PACKET_ZC_ENTER_ROOM*>( packet_buffer );
 
 	p->packetType = HEADER_ZC_ENTER_ROOM;
@@ -4718,7 +4693,6 @@ void clif_joinchatok(map_session_data& sd, chat_data& cd){
 	}
 
 	clif_send(p,p->packetSize,&sd.bl,SELF);
-
 }
 
 
@@ -5044,9 +5018,11 @@ static void clif_getareachar_pc(map_session_data* sd,map_session_data* dstsd)
 	int32 i;
 
 	if( dstsd->chatID ) {
-		struct chat_data *cd = nullptr;
-		if( (cd = map_id2cd(dstsd->chatID)) && cd->usersd[0]==dstsd)
-			clif_dispchat(*cd,sd);
+		chat_data* cd = map_id2cd( dstsd->chatID );
+
+		if( cd != nullptr && cd->usersd[0] == dstsd ){
+			clif_dispchat(*cd);
+		}
 	} else if( dstsd->state.vending )
 		clif_showvendingboard( *dstsd, SELF, &sd->bl );
 	else if( dstsd->state.buyingstore )
@@ -5142,8 +5118,15 @@ void clif_getareachar_unit( map_session_data* sd,struct block_list *bl ){
 	case BL_NPC:
 		{
 			TBL_NPC* nd = (TBL_NPC*)bl;
-			if( nd->chat_id )
-				clif_dispchat(*map_id2cd(nd->chat_id),sd);
+
+			if( nd->chat_id ){
+				chat_data* cd = map_id2cd( nd->chat_id );
+
+				if( cd != nullptr ){
+					clif_dispchat( *cd );
+				}
+			}
+
 			if( nd->size == SZ_BIG )
 				clif_specialeffect_single(bl,EF_GIANTBODY2,sd->fd);
 			else if( nd->size == SZ_MEDIUM )
@@ -5246,8 +5229,8 @@ static int32 clif_hallucination_damage()
 ///     12 = (touch skill?)
 ///     13 = multi-hit critical
 int32 clif_damage(block_list& src, block_list& dst, t_tick tick, int32 sdelay, int32 ddelay, int64 sdamage, int32 div, enum e_damage_type type, int64 sdamage2, bool spdamage){
-	int32 damage = (int)cap_value(sdamage,INT_MIN,INT_MAX);
-	int32 damage2 = (int)cap_value(sdamage2,INT_MIN,INT_MAX);
+	int32 damage = (int32)cap_value(sdamage,INT_MIN,INT_MAX);
+	int32 damage2 = (int32)cap_value(sdamage2,INT_MIN,INT_MAX);
 
 	if (type != DMG_MULTI_HIT_CRITICAL)
 		type = clif_calc_delay(type,div,damage+damage2,ddelay);
@@ -5716,9 +5699,9 @@ int32 clif_outsight(struct block_list *bl,va_list ap)
 			if(sd->vd.class_ != JT_INVISIBLE)
 				clif_clearunit_single( bl->id, CLR_OUTSIGHT, *tsd );
 			if(sd->chatID){
-				struct chat_data *cd;
+				chat_data *cd;
 				if ((cd = map_id2cd(sd->chatID)) != nullptr && cd->usersd[0] == sd)
-					clif_dispchat(*cd,tsd);
+					clif_dispchat(*cd);
 			}
 			if(sd->state.vending)
 				clif_closevendingboard(bl,tsd->fd);
@@ -6142,7 +6125,7 @@ void clif_skill_cooldown( map_session_data &sd, uint16 skill_id, t_tick tick ){
 int32 clif_skill_damage(struct block_list *src,struct block_list *dst,t_tick tick,int32 sdelay,int32 ddelay,int64 sdamage,int32 div,uint32 skill_id,uint16 skill_lv,enum e_damage_type type)
 {
 	unsigned char buf[64];
-	int32 damage = (int)cap_value(sdamage,INT_MIN,INT_MAX);
+	int32 damage = (int32)cap_value(sdamage,INT_MIN,INT_MAX);
 
 	nullpo_ret(src);
 	nullpo_ret(dst);
@@ -10767,7 +10750,7 @@ inline void clif_pk_mode_message(map_session_data * sd)
 {
 	if (battle_config.pk_mode && battle_config.pk_mode_mes &&
 		sd && map_getmapflag(sd->bl.m, MF_PVP)) {
-		if( (int)sd->status.base_level < battle_config.pk_min_level ) {
+		if( (int32)sd->status.base_level < battle_config.pk_min_level ) {
 			char output[CHAT_SIZE_MAX];
 			// 1504: You've entered a PK Zone (safe until level %d).
 			safesnprintf(output, CHAT_SIZE_MAX, msg_txt(sd,1504), 
@@ -10810,13 +10793,13 @@ static int32 clif_parse_WantToConnection_sub(int32 fd)
 	// case.
 	if( packet_len != packet_db[cmd].len )
 		return 1; /* wrong length */
-	else if( (value=(int)RFIFOL(fd, packet_db[cmd].pos[0])) < START_ACCOUNT_NUM || value > END_ACCOUNT_NUM )
+	else if( (value=(int32)RFIFOL(fd, packet_db[cmd].pos[0])) < START_ACCOUNT_NUM || value > END_ACCOUNT_NUM )
 		return 2; /* invalid account_id */
-	else if( (value=(int)RFIFOL(fd, packet_db[cmd].pos[1])) <= 0 )
+	else if( (value=(int32)RFIFOL(fd, packet_db[cmd].pos[1])) <= 0 )
 		return 3; /* invalid char_id */
 	/*                   RFIFOL(fd, packet_db[cmd].pos[2]) - don't care about login_id1 */
 	/*                   RFIFOL(fd, packet_db[cmd].pos[3]) - don't care about client_tick */
-	else if( (value=(int)RFIFOB(fd, packet_db[cmd].pos[4])) != 0 && value != 1 )
+	else if( (value=(int32)RFIFOB(fd, packet_db[cmd].pos[4])) != 0 && value != 1 )
 		return 6; /* invalid sex */
 	else
 		return 0;
@@ -12808,7 +12791,7 @@ void clif_parse_SelectCart(int32 fd,map_session_data *sd) {
 	if( !sd || pc_checkskill(sd,MC_CARTDECORATE) < 1 || RFIFOL(fd,2) != sd->status.account_id )
 	return;
 
-	type = (int)RFIFOB(fd,6);
+	type = (int32)RFIFOB(fd,6);
 
 	// Check type
 	if( type < 10 || type > 12 ) 
@@ -12835,7 +12818,7 @@ void clif_parse_ChangeCart(int32 fd,map_session_data *sd)
 	}
 #endif
 
-	type = (int)RFIFOW(fd,packet_db[RFIFOW(fd,0)].pos[0]);
+	type = (int32)RFIFOW(fd,packet_db[RFIFOW(fd,0)].pos[0]);
 
 	if( 
 #ifdef NEW_CARTS
@@ -13505,7 +13488,7 @@ void clif_parse_NpcNextClicked(int32 fd,map_session_data *sd)
 void clif_parse_NpcAmountInput(int32 fd,map_session_data *sd){
 	struct s_packet_db* info = &packet_db[RFIFOW(fd,0)];
 	int32 npcid = RFIFOL(fd,info->pos[0]);
-	int32 amount = (int)RFIFOL(fd,info->pos[1]);
+	int32 amount = (int32)RFIFOL(fd,info->pos[1]);
 
 	sd->npc_amount = amount;
 
@@ -15430,7 +15413,7 @@ void clif_parse_NoviceExplosionSpirits(int32 fd, map_session_data *sd)
 		t_exp next = pc_nextbaseexp(sd);
 
 		if( next ) {
-			int32 percent = (int)( ( (double)sd->status.base_exp/(double)next )*1000. );
+			int32 percent = (int32)( ( (double)sd->status.base_exp/(double)next )*1000. );
 
 			if( percent && ( percent%100 ) == 0 ) {// 10.0%, 20.0%, ..., 90.0%
 				sc_start(&sd->bl,&sd->bl, SC_EXPLOSIONSPIRITS, 100, 17, skill_get_time(MO_EXPLOSIONSPIRITS, 5)); //Lv17-> +50 critical (noted by Poki) [Skotlex]
@@ -15477,9 +15460,9 @@ void clif_friendslist_toggle(map_session_data *sd,uint32 account_id, uint32 char
 int32 clif_friendslist_toggle_sub(map_session_data *sd,va_list ap)
 {
 	uint32 account_id, char_id, online;
-	account_id = va_arg(ap, int);
-	char_id = va_arg(ap, int);
-	online = va_arg(ap, int);
+	account_id = va_arg(ap, int32);
+	char_id = va_arg(ap, int32);
+	online = va_arg(ap, int32);
 	clif_friendslist_toggle(sd, account_id, char_id, online);
 	return 0;
 }
@@ -16573,7 +16556,7 @@ void clif_parse_Mail_read(int32 fd, map_session_data *sd){
 	int32 mail_id = RFIFOL(fd,packet_db[RFIFOW(fd,0)].pos[0]);
 #else
 	//uint8 openType = RFIFOB(fd, 2);
-	int32 mail_id = (int)RFIFOQ(fd, 3);
+	int32 mail_id = (int32)RFIFOQ(fd, 3);
 #endif
 
 	if( mail_id <= 0 )
@@ -16674,7 +16657,7 @@ void clif_parse_Mail_getattach( int32 fd, map_session_data *sd ){
 	int32 attachment = MAIL_ATT_ALL;
 #else
 	uint16 packet_id = RFIFOW(fd, 0);
-	int32 mail_id = (int)RFIFOQ(fd, 2);
+	int32 mail_id = (int32)RFIFOQ(fd, 2);
 	//int32 openType = RFIFOB(fd, 10);
 	int32 attachment = packet_id == 0x9f1 ? MAIL_ATT_ZENY : packet_id == 0x9f3 ? MAIL_ATT_ITEM : MAIL_ATT_NONE;
 #endif
@@ -16777,7 +16760,7 @@ void clif_parse_Mail_delete(int32 fd, map_session_data *sd){
 	int32 mail_id = RFIFOL(fd,packet_db[RFIFOW(fd,0)].pos[0]);
 #else
 	//int32 openType = RFIFOB(fd, 2);
-	int32 mail_id = (int)RFIFOQ(fd, 3);
+	int32 mail_id = (int32)RFIFOQ(fd, 3);
 #endif
 	int32 i, j;
 
@@ -19495,7 +19478,7 @@ void clif_buyingstore_update_item( map_session_data* sd, t_itemid nameid, unsign
 #if PACKETVER >= 20141016
 	p.zeny = zeny;
 	p.charId = char_id;  // GID
-	p.updateTime = (int)time(nullptr);
+	p.updateTime = (int32)time(nullptr);
 #endif
 
 	clif_send( &p, sizeof( p ), &sd->bl, SELF );
@@ -21525,20 +21508,16 @@ void clif_broadcast_obtain_special_item( const char *char_name, t_itemid nameid,
 	}
 }
 
-/// Show body view windows (ZC_DRESSROOM_OPEN).
-/// 0A02 <view>.W
-/// Value <flag> has the following effects:
-/// 1: Open a Dress Room window.
-void clif_dressing_room(map_session_data *sd, int32 flag) {
-#if PACKETVER >= 20150513
-	int32 fd = sd->fd;
+/// Open the dress room window.
+/// 0A02 <view>.W (ZC_DRESSROOM_OPEN)
+void clif_dressing_room( map_session_data& sd ){
+#if PACKETVER >= 20140212
+	PACKET_ZC_DRESSROOM_OPEN p = {};
 
-	nullpo_retv(sd);
+	p.packetType = HEADER_ZC_DRESSROOM_OPEN;
+	p.view = 0; // Ignored
 
-	WFIFOHEAD(fd, packet_len(0xa02));
-	WFIFOW(fd,0) = 0xa02;
-	WFIFOW(fd,2) = flag;
-	WFIFOSET(fd, packet_len(0xa02));
+	clif_send( &p, sizeof( p ), &sd.bl, SELF );
 #endif
 }
 
@@ -26111,7 +26090,7 @@ static int32 clif_parse(int32 fd)
 			return 0;
 		}
 	}
-	if ((int)RFIFOREST(fd) < packet_len){
+	if ((int32)RFIFOREST(fd) < packet_len){
 		ShowWarning( "clif_parse: Received packet 0x%04x with expected packet length %d, but only %d bytes remaining, disconnecting session #%d.\n", cmd, packet_len, RFIFOREST( fd ), fd );
 #ifdef DUMP_INVALID_PACKET
 		ShowDump( RFIFOP( fd, 0 ), RFIFOREST( fd ) );
@@ -26146,7 +26125,7 @@ static int32 clif_parse(int32 fd)
 	return 0;
 }
 
-void packetdb_addpacket( uint16 cmd, uint16 length, void (*func)(int, map_session_data *), ... ){
+void packetdb_addpacket( uint16 cmd, uint16 length, void (*func)(int32, map_session_data *), ... ){
 	va_list argp;
 	int32 i;
 
@@ -26159,7 +26138,7 @@ void packetdb_addpacket( uint16 cmd, uint16 length, void (*func)(int, map_sessio
 	va_start(argp, func);
 
 	for( i = 0; i < MAX_PACKET_POS; i++ ){
-		int32 offset = va_arg(argp, int);
+		int32 offset = va_arg(argp, int32);
 
 		if( offset == 0 ){
 			break;

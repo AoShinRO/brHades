@@ -1063,18 +1063,6 @@ struct PACKET_ZC_MEMBER_NEWENTRY {
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(ZC_MEMBER_NEWENTRY, 0xdc);
 
-struct PACKET_ZC_ROOM_NEWENTRY{
-	uint16 packetType;
-	uint16 packetSize;
-	uint32 ownerId;
-	uint32 chatId;
-	uint16 limit;
-	uint16 users;
-	uint8 flag;
-	char title[];
-} __attribute__((packed));
-DEFINE_PACKET_HEADER(ZC_ROOM_NEWENTRY, 0xd7);
-
 struct PACKET_ZC_EQUIP_ARROW {
 	int16 packetType;
 	uint16 index;
@@ -1918,6 +1906,24 @@ struct PACKET_CZ_AUCTION_ADD{
 	uint16 hours;
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(CZ_AUCTION_ADD, 0x24d);
+
+struct PACKET_ZC_DRESSROOM_OPEN{
+	int16 packetType;
+	uint16 view;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_DRESSROOM_OPEN, 0xa02);
+
+struct PACKET_ZC_ROOM_NEWENTRY {
+	int16 packetType;
+	uint16 packetSize;
+	int32 owner;
+	int32 id;
+	uint16 limit;
+	uint16 users;
+	uint8 type;
+	char title[];
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_ROOM_NEWENTRY, 0xd7);
 
 // NetBSD 5 and Solaris don't like pragma pack but accept the packed attribute
 #if !defined( sun ) && ( !defined( __NETBSD__ ) || __NetBSD_Version__ >= 600000000 )

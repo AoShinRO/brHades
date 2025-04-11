@@ -2432,7 +2432,7 @@ int32 unit_set_target(struct unit_data* ud, int32 target_id)
 int32 unit_stopattack(struct block_list *bl, va_list ap)
 {
 	struct unit_data *ud = unit_bl2ud(bl);
-	int32 id = va_arg(ap, int);
+	int32 id = va_arg(ap, int32);
 
 	if (ud && ud->attacktimer != INVALID_TIMER && (!id || id == ud->target)) {
 		unit_stop_attack(bl);
@@ -3540,7 +3540,7 @@ int32 unit_free(struct block_list *bl, clr_type clrtype)
 				duel_reject(sd->duel_invite, sd);
 
 			channel_pcquit(sd,0xF); // Leave all chan
-			skill_blockpc_clear(sd); // Clear all skill cooldown related
+			skill_blockpc_clear(*sd); // Clear all skill cooldown related
 
 			// Notify friends that this char logged out. [Skotlex]
 			map_foreachpc(clif_friendslist_toggle_sub, sd->status.account_id, sd->status.char_id, 0);
@@ -3724,9 +3724,12 @@ int32 unit_free(struct block_list *bl, clr_type clrtype)
 #endif
 			}
 
+			skill_blockhomun_clear(*hd); // Clear all skill cooldown related
+
 			if( sd )
 				sd->hd = nullptr;
 			hd->master = nullptr;
+			hd->~homun_data();
 
 			skill_clear_unitgroup(bl);
 			status_change_clear(bl,1);
@@ -3748,8 +3751,10 @@ int32 unit_free(struct block_list *bl, clr_type clrtype)
 			if( sd )
 				sd->md = nullptr;
 
+			skill_blockmerc_clear(*md); // Clear all skill cooldown related
 			mercenary_contract_stop(md);
 			md->master = nullptr;
+			md->~s_mercenary_data();
 
 			skill_clear_unitgroup(bl);
 			status_change_clear(bl,1);
