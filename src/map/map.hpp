@@ -1097,7 +1097,7 @@ enum save_settings_type {
 };
 
 // users
-void map_setusers(int);
+void map_setusers(int32);
 int32 map_getusers(void);
 int32 map_usercount(void);
 
@@ -1112,9 +1112,9 @@ int32 map_moveblock(struct block_list *, int32, int32, t_tick);
 int32 map_foreachinrange(int32 (*func)(struct block_list*,va_list), struct block_list* center, int16 range, int32 type, ...);
 int32 map_foreachinallrange(int32 (*func)(struct block_list*,va_list), struct block_list* center, int16 range, int32 type, ...);
 int32 map_foreachinshootrange(int32 (*func)(struct block_list*,va_list), struct block_list* center, int16 range, int32 type, ...);
-int32 map_foreachinarea(int(*func)(struct block_list*, va_list), int16 m, int16 x0, int16 y0, int16 x1, int16 y1, int32 type, ...);
-int32 map_foreachinallarea(int(*func)(struct block_list*, va_list), int16 m, int16 x0, int16 y0, int16 x1, int16 y1, int32 type, ...);
-int32 map_foreachinshootarea(int(*func)(struct block_list*, va_list), int16 m, int16 x0, int16 y0, int16 x1, int16 y1, int32 type, ...);
+int32 map_foreachinarea(int32 (*func)(struct block_list*, va_list), int16 m, int16 x0, int16 y0, int16 x1, int16 y1, int32 type, ...);
+int32 map_foreachinallarea(int32 (*func)(struct block_list*, va_list), int16 m, int16 x0, int16 y0, int16 x1, int16 y1, int32 type, ...);
+int32 map_foreachinshootarea(int32 (*func)(struct block_list*, va_list), int16 m, int16 x0, int16 y0, int16 x1, int16 y1, int32 type, ...);
 int32 map_forcountinrange(int32 (*func)(struct block_list*,va_list), struct block_list* center, int16 range, int32 count, int32 type, ...);
 int32 map_forcountinarea(int32 (*func)(struct block_list*,va_list), int16 m, int16 x0, int16 y0, int16 x1, int16 y1, int32 count, int32 type, ...);
 int32 map_foreachinmovearea(int32 (*func)(struct block_list*,va_list), struct block_list* center, int16 range, int16 dx, int16 dy, int32 type, ...);
