@@ -45,7 +45,7 @@ jobs:
       - name: Configure project with CMake (C++20)
         run: |
           cd cbuild
-          cmake -G "Unix Makefiles" -DCMAKE_CXX_STANDARD=20 ..
+          cmake -G "Unix Makefiles" -DCMAKE_CXX_STANDARD=20 -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ..
 
       - name: Create Unix Makefiles
         run: |
