@@ -8,57 +8,88 @@
 //= 1.2 Translation of the replay version [Lemongrass]
 //= 1.3 Cleanup of NPC logic [Lemongrass]
 //= 1.4 Added replay version of buff NPC [eppc0330]
+//= 1.5 Revised shop system to match reference [Cursor]
 //============================================================
 
 -	script	Goldpoint Manager	-1,{
 OnGOLDPCCAFE:
-	// ID:AMOUNT:PRICE
-	setarray .items$[1],
-		"25464:1:2", // World_Tour_Ticket 1
-		"23919:1:10",  // K_Secret_Key 1
-		"23919:11:100",// K_Secret_Key 11
-		"23919:33:300";// K_Secret_Key 33
-
-	mes "[Goldpoint Manager]";
-	mes "You currently have ^0000ff"+Goldpc_Points+"^000000 points.";
-	mes "What reward do you want?";
+	// Item arrays for shop
+	setarray @item_id[0],    25464, 23919, 23919, 23919;
+	setarray @amount[0],         1,     1,    11,    33;
+	setarray @price[0],          2,    10,   100,   300;
+	setarray @name$[0], "World_Tour_Ticket", "K_Secret_Key", "K_Secret_Key", "K_Secret_Key";
+	
+	// Initialize shop display
+	mes "[Pontos de Presença]";
+	mes "Você possui atualmente ^0000ff"+Goldpc_Points+"^000000 pontos.";
+	mes "Qual recompensa você deseja?";
 	next;
-
-	.@menu$ = "View current points";
-
-	for(.@i = 1; .@i < getarraysize(.items$); .@i++) {
-		explode(.@array$, .items$[.@i], ":");
-		.@cost = atoi(.@array$[2]);
-		.@menu$ += ":" + .@cost + " points gift";
-		if( Goldpc_Points < .@cost ){
-			.@menu$ += " ^ff0000(not enough points)^000000";
+	
+	// Generate menu options
+	set @menu$, "Ver pontos atuais";
+	for(set @i, 0; @i < getarraysize(@item_id); set @i, @i + 1) {
+		set @menu$, @menu$ + ":" + @amount[@i] + " " + getitemname(@item_id[@i]) + " - " + @price[@i] + " pontos";
+		if(Goldpc_Points < @price[@i]) {
+			set @menu$, @menu$ + " ^ff0000(pontos insuficientes)^000000";
 		}
 	}
-
-	.@s = select(.@menu$)-1;
-
-	if(.@s == 0) {
-		mes "[Goldpoint Manager]";
-		mes "You currently have ^0000ff"+Goldpc_Points+"^000000 points.";
+	
+	set @selected, select(@menu$) - 1;
+	
+	// Show current points
+	if(@selected == 0) {
+		mes "[Pontos de Presença]";
+		mes "Você possui atualmente ^0000ff<b>" + Goldpc_Points + "</b>^000000 pontos.";
 		close;
 	}
-
-	explode(.@array$, .items$[.@s], ":");
-	.@itemid = atoi(.@array$[0]);
-	.@amount = atoi(.@array$[1]);
-	.@cost = atoi(.@array$[2]);
-
-	if(Goldpc_Points < .@cost) {
-		mes "[Goldpoint Manager]";
-		mes "You have ^0000ff"+Goldpc_Points+"^000000 points remaining.";
-		mes "You cannot get the prize with this amount of points.";
+	
+	// Process item purchase
+	set @index, @selected - 1;
+	set @bought_nameid, @item_id[@index];
+	set @bought_amount, @amount[@index];
+	set @currentprice, @price[@index];
+	
+	// Check if enough points available
+	if(Goldpc_Points < @currentprice) {
+		mes "[Pontos de Presença]";
+		mes "Você não tem pontos suficientes para comprar.";
 		close;
 	}
-
-	mes "[Goldpoint Manager]";
-	mes "You chose the "+.@cost+" points gift. We will reward you immediately.";
-	Goldpc_Points -= .@cost;
-	getitem .@itemid,.@amount;
-	mes "You have ^0000ff"+Goldpc_Points+"^000000 points remaining.";
+	
+	// Confirm purchase
+	mes "[Pontos de Presença]";
+	mes "Você escolheu " + @bought_amount + " " + getitemname(@bought_nameid) + " por "+@currentprice+" pontos.";
+	mes "Deseja confirmar a compra?";
+	if(select("Sim:Não") == 2) {
+		close;
+	}
+	
+	// Process transaction
+	set Goldpc_Points, Goldpc_Points - @currentprice;
+	getitem @bought_nameid, @bought_amount;
+	
+	// Check equipment type for cosmetic items
+	switch(getiteminfo(@bought_nameid, 5)) {
+		case EQP_COSTUME_HEAD_TOP:
+		case EQP_COSTUME_HEAD_MID:
+		case EQP_COSTUME_HEAD_LOW:
+			mes "Você adquiriu um item cosmético!";
+			break;
+		default:
+			mes "Você adquiriu seu item com sucesso!";
+			break;
+	}
+	
+	mes "Você trocou " + @currentprice + " pontos por " + @bought_amount + "x " + getitemname(@bought_nameid) + ".";
+	mes "Pontos restantes: ^0000ff" + Goldpc_Points + "^000000";
+	
+	// Ask if user wants to continue shopping
+	next;
+	mes "[Pontos de Presença]";
+	mes "Deseja fazer outra troca?";
+	if(select("Sim:Não") == 1) {
+		next;
+		goto OnGOLDPCCAFE;
+	}
 	close;
 }
