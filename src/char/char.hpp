@@ -16,10 +16,10 @@
 
 #include "packets.hpp"
 
-using brhades::server_core::Core;
-using brhades::server_core::e_core_type;
+using pathofasgard::server_core::Core;
+using pathofasgard::server_core::e_core_type;
 
-namespace brhades{
+namespace pathofasgard{
 	namespace server_character{
 		class CharacterServer : public Core{
 			protected:

@@ -30,7 +30,7 @@
 #include "script.hpp"
 #include "status.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 void AchievementDatabase::clear(){
 	TypesafeYamlDatabase::clear();
@@ -111,7 +111,7 @@ uint64 AchievementDatabase::parseBodyNode(const ryml::NodeRef& node){
 				continue;
 			}
 
-			std::shared_ptr<achievement_target> target = brhades::util::map_find( achievement->targets, targetId );
+			std::shared_ptr<achievement_target> target = pathofasgard::util::map_find( achievement->targets, targetId );
 			bool targetExists = target != nullptr;
 
 			if( !targetExists ){

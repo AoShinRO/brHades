@@ -70,7 +70,7 @@ int32 levenshtein(const std::string &s1, const std::string &s2)
 	return result;
 }
 
-bool brhades::util::safe_substraction( int64 a, int64 b, int64& result ){
+bool pathofasgard::util::safe_substraction( int64 a, int64 b, int64& result ){
 #if __has_builtin( __builtin_sub_overflow ) || ( defined( __GNUC__ ) && !defined( __clang__ ) && defined( GCC_VERSION  ) && GCC_VERSION >= 50100 )
 	return __builtin_sub_overflow( a, b, &result );
 #else
@@ -92,7 +92,7 @@ bool brhades::util::safe_substraction( int64 a, int64 b, int64& result ){
 #endif
 }
 
-bool brhades::util::safe_multiplication( int64 a, int64 b, int64& result ){
+bool pathofasgard::util::safe_multiplication( int64 a, int64 b, int64& result ){
 #if __has_builtin( __builtin_mul_overflow ) || ( defined( __GNUC__ ) && !defined( __clang__ ) && defined( GCC_VERSION  ) && GCC_VERSION >= 50100 )
 	return __builtin_mul_overflow( a, b, &result );
 #else
@@ -116,12 +116,12 @@ bool brhades::util::safe_multiplication( int64 a, int64 b, int64& result ){
 #endif
 }
 
-void brhades::util::string_left_pad_inplace(std::string& str, char padding, size_t num)
+void pathofasgard::util::string_left_pad_inplace(std::string& str, char padding, size_t num)
 {
 	str.insert( 0, std::min( static_cast<size_t>( 0 ), num - str.length() ), padding );
 }
 
-std::string brhades::util::string_left_pad(const std::string& original, char padding, size_t num)
+std::string pathofasgard::util::string_left_pad(const std::string& original, char padding, size_t num)
 {
 	return std::string( num - std::min( num, original.length() ), padding ) + original;
 }
@@ -137,7 +137,7 @@ constexpr char base62_dictionary[] = {
 	'U', 'V', 'W', 'X', 'Y', 'Z'
 };
 
-std::string brhades::util::base62_encode( uint32 val ){
+std::string pathofasgard::util::base62_encode( uint32 val ){
 	std::string result = "";
 	while (val != 0) {
 		result = base62_dictionary[(val % 62)] + result;
@@ -147,7 +147,7 @@ std::string brhades::util::base62_encode( uint32 val ){
 }
 
 
-bool brhades::util::ansi_or_utf_check(std::string_view text, uint32 npcid) {
+bool pathofasgard::util::ansi_or_utf_check(std::string_view text, uint32 npcid) {
 	bool ansi = false;
 	for (size_t i = 0; i < text.size(); ++i) {
 		if (text[i] > 0x7F) {

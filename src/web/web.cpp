@@ -34,9 +34,9 @@
 #include "userconfig_controller.hpp"
 
 
-using namespace brhades;
-using namespace brhades::server_core;
-using namespace brhades::server_web;
+using namespace pathofasgard;
+using namespace pathofasgard::server_core;
+using namespace pathofasgard::server_web;
 
 #define WEB_MAX_MSG 30				/// Max number predefined in msg_conf
 static char* msg_table[WEB_MAX_MSG];	/// Web Server messages_conf

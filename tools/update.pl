@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-# brhades Updater
+# pathofasgard Updater
 # Performs git update, applies SQL database changes, and recompiles binaries.
 
 use strict;
@@ -14,8 +14,8 @@ use rA_Common;
 
 #prgm option
 my $sHelp	= 0;
-my $srABaseGitHttp	= 'https://github.com/brhades/brhades.git';
-my $srABaseGitSSH	= 'git@github.com:brhades/brhades.git';
+my $srABaseGitHttp	= 'https://github.com/pathofasgard/pathofasgard.git';
+my $srABaseGitSSH	= 'git@github.com:pathofasgard/pathofasgard.git';
 use constant {
 	STATE_FILE => "SQL_Status.yml",
 	ST_OLD => "old",

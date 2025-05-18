@@ -18,7 +18,7 @@
 #include "char_mapif.hpp"
 #include "inter.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 bool mail_loadmessage(int32 mail_id, struct mail_message* msg);
 void mapif_Mail_return( int32 fd, uint32 char_id, int32 mail_id, uint32 account_id_receiver = 0, uint32 account_id_sender = 0 );

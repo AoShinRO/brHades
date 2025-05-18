@@ -39,7 +39,7 @@
 	#endif
 #endif
 
-using namespace brhades::server_core;
+using namespace pathofasgard::server_core;
 
 Core* global_core = nullptr;
 

@@ -60,7 +60,7 @@
 #include "unit.hpp"
 #include "vending.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 static inline uint32 client_tick( t_tick tick ){
 	return (uint32)tick;
@@ -2481,7 +2481,7 @@ void clif_scriptmes( map_session_data& sd, uint32 npcid, const char *mes ){
 	PACKET_ZC_SAY_DIALOG* p = reinterpret_cast<PACKET_ZC_SAY_DIALOG*>( packet_buffer );
 
 	if(util::ansi_or_utf_check(mes,npcid))
-		ShowDebug("[brHades] Atencao: o npc: '%s' contem caracteres fora do padrao ANSI. Considere salvar o arquivo como ANSI. \n", map_id2nd(npcid)->name );
+		ShowDebug("[pathofAsgard] Atencao: o npc: '%s' contem caracteres fora do padrao ANSI. Considere salvar o arquivo como ANSI. \n", map_id2nd(npcid)->name );
 
 #ifdef TRANSLATION_API
 	if(sd.translation_api.translate_langtype != "en"){

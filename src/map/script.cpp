@@ -64,7 +64,7 @@
 #include "quest.hpp"
 #include "storage.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 const int64 SCRIPT_INT_MIN = INT64_MIN;
 const int64 SCRIPT_INT_MAX = INT64_MAX;

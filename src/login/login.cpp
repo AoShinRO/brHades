@@ -31,8 +31,8 @@
 #include "logincnslif.hpp"
 #include "loginlog.hpp"
 
-using namespace brhades;
-using namespace brhades::server_login;
+using namespace pathofasgard;
+using namespace pathofasgard::server_login;
 
 #define LOGIN_MAX_MSG 30				/// Max number predefined in msg_conf
 static char* msg_table[LOGIN_MAX_MSG];	/// Login Server messages_conf

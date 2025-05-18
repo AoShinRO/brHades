@@ -55,7 +55,7 @@
 #include "trade.hpp"
 #include "vending.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 #define ATCOMMAND_LENGTH 50
 #define ACMD_FUNC(x) static int32 atcommand_ ## x (const int32 fd, map_session_data* sd, const char* command, const char* message)
@@ -7819,7 +7819,7 @@ ACMD_FUNC(mobinfo)
             "Peixe", "Demônio", "Semi-Humano", "Anjo", "Dragão", "Jogador" 
         };
         const char* translated_melement[ELE_ALL] = { 
-            "Neutro", "Água", "Terra", "Fogo", "Vento", 
+            "Neutro", "Ýgua", "Terra", "Fogo", "Vento", 
             "Veneno", "Sagrado", "Sombrio", "Fantasma", "Morto-vivo" 
         };
         // Copiando para as variáveis

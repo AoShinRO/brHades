@@ -26,7 +26,7 @@
 #include "pc.hpp"
 #include "pet.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 BattlegroundDatabase battleground_db;
 std::unordered_map<int32, std::shared_ptr<s_battleground_data>> bg_team_db;

@@ -28,7 +28,7 @@
 #include "pc.hpp"
 #include "status.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 
 ComboDatabase itemdb_combo;

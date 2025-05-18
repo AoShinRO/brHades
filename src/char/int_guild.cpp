@@ -20,7 +20,7 @@
 #include "char_mapif.hpp"
 #include "inter.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 #define GS_MEMBER_UNMODIFIED 0x00
 #define GS_MEMBER_MODIFIED 0x01

@@ -41,7 +41,7 @@
 #include "pet.hpp"
 #include "quest.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 #define ACTIVE_AI_RANGE 2	//Distance added on top of 'AREA_SIZE' at which mobs enter active AI mode.
 

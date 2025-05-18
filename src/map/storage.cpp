@@ -24,7 +24,7 @@
 #include "pc.hpp"
 #include "pc_groups.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 std::unordered_map<uint16, std::shared_ptr<struct s_storage_table>> storage_db;
 

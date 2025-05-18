@@ -21,7 +21,7 @@
 #include "inter.hpp"
 #include "int_guild.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 //early declaration
 void chlogif_on_ready(void);

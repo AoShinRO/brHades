@@ -17,9 +17,9 @@
 #include <common/showmsg.hpp>
 #include <common/utils.hpp>
 
-using namespace brhades::server_core;
+using namespace pathofasgard::server_core;
 
-namespace brhades{
+namespace pathofasgard{
 	namespace tool_mapcache{
 		class MapcacheTool : public Core{
 			protected:
@@ -33,7 +33,7 @@ namespace brhades{
 	}
 }
 
-using namespace brhades::tool_mapcache;
+using namespace pathofasgard::tool_mapcache;
 
 std::string grf_list_file = "conf/grf-files.txt";
 std::string map_list_file = "map_index.txt";

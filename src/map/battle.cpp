@@ -34,7 +34,7 @@
 #include "pc_groups.hpp"
 #include "pet.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 struct Battle_Config battle_config;
 static struct eri *delay_damage_ers; //For battle delay damage structures.

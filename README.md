@@ -1,31 +1,31 @@
-# brHades
+# pathofAsgard
 
 #### Status - Compiladores:
 
-![clang](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_clang.yml?label=clang%20build&logo=llvm) | ![cmake](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_cmake.yml?label=cmake%20build&logo=cmake) | ![gcc](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_gcc.yml?label=gcc%20build&logo=gnu) | ![ms](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_msbuild.yml?label=ms%20build&logo=visualstudio) | ![CodeQL](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/analysis_codeql.yml?label=CodeQL&logo=badge)
+![clang](https://img.shields.io/github/actions/workflow/status/AoShinRo/pathofAsgard/build_servers_clang.yml?label=clang%20build&logo=llvm) | ![cmake](https://img.shields.io/github/actions/workflow/status/AoShinRo/pathofAsgard/build_servers_cmake.yml?label=cmake%20build&logo=cmake) | ![gcc](https://img.shields.io/github/actions/workflow/status/AoShinRo/pathofAsgard/build_servers_gcc.yml?label=gcc%20build&logo=gnu) | ![ms](https://img.shields.io/github/actions/workflow/status/AoShinRo/pathofAsgard/build_servers_msbuild.yml?label=ms%20build&logo=visualstudio) | ![CodeQL](https://img.shields.io/github/actions/workflow/status/AoShinRo/pathofAsgard/analysis_codeql.yml?label=CodeQL&logo=badge)
 --------|--------|--------|--------|--------
 
 #### Repo info:
 
-![GitHub](https://img.shields.io/github/license/AoShinRo/brHades.svg) | ![commit activity](https://img.shields.io/github/commit-activity/w/AoShinRo/brHades) | ![GitHub repo size](https://img.shields.io/github/repo-size/AoShinRo/brHades.svg)
+![GitHub](https://img.shields.io/github/license/AoShinRo/pathofAsgard.svg) | ![commit activity](https://img.shields.io/github/commit-activity/w/AoShinRo/pathofAsgard) | ![GitHub repo size](https://img.shields.io/github/repo-size/AoShinRo/pathofAsgard.svg)
 --------|--------|--------
 
 # 
 
 <div style="width: 2%;">
-    <img src="https://github.com/AoShinRO/brHades/blob/main/.github/brHades-Logo.png?raw=true" align="right" width="200" />
+    <img src="https://github.com/AoShinRO/pathofAsgard/blob/main/.github/pathofAsgard-Logo.png?raw=true" align="right" width="200" />
 </div>
 
 ### Introdução
-> brHades é um projeto de desenvolvimento colaborativo com objetivo de oferecer um emulador de Ragnarok para a comunidade Brasileira.
-> Nossos agradecimentos especiais a equipe do eAthena e rAthena por desenvolver a base deste emulador e a todos que contribuem e/ou um dia contribuiram ao brHades. 
-> brHades é uma continuação do rAthena.
+> pathofAsgard é um projeto de desenvolvimento colaborativo com objetivo de oferecer um emulador de Ragnarok para a comunidade Brasileira.
+> Nossos agradecimentos especiais a equipe do eAthena e rAthena por desenvolver a base deste emulador e a todos que contribuem e/ou um dia contribuiram ao pathofAsgard. 
+> pathofAsgard é uma continuação do rAthena.
 
-Qualquer bug encontrado deve ser postado em: [Reportar Bug](https://github.com/AoShinRO/brHades/issues)
+Qualquer bug encontrado deve ser postado em: [Reportar Bug](https://github.com/AoShinRO/pathofAsgard/issues)
 
 # 
 
-[Discord](https://discord.com/invite/DAPWeV677z)|[AzzyAI-RE](https://github.com/AoShinRO/AzzyAI-RE)|[ServerMonitor](https://github.com/AoShinRO/rAthena-ServMonitor-ByAoShinHo)|[Doações](https://github.com/AoShinRO/brHades/wiki/Doaçoes)|[Fork and Pull Request Q&A](https://brHades.org/board/topic/86913-pull-request-qa/)
+[Discord](https://discord.com/invite/DAPWeV677z)|[AzzyAI-RE](https://github.com/AoShinRO/AzzyAI-RE)|[ServerMonitor](https://github.com/AoShinRO/rAthena-ServMonitor-ByAoShinHo)|[Doações](https://github.com/AoShinRO/pathofAsgard/wiki/Doaçoes)|[Fork and Pull Request Q&A](https://pathofAsgard.org/board/topic/86913-pull-request-qa/)
 --------|--------|--------|--------|--------
 
 ### Leia-me
@@ -37,7 +37,7 @@ Qualquer bug encontrado deve ser postado em: [Reportar Bug](https://github.com/A
 6. [Licença](#6-licença)
 
 ## 1. Requisitos
-Antes de instalar o brHades, você precisará de certas ferramentas e aplicativos que
+Antes de instalar o pathofAsgard, você precisará de certas ferramentas e aplicativos que
 diferem entre os vários sistemas operacionais disponíveis.
 
 ### Requisitos de Hardware
@@ -67,10 +67,10 @@ Database | [MySQL Workbench 5 or newer](http://www.mysql.com/downloads/workbench
 ## 2. Instalação
 
 ### Instruçoes de Instalação
-  * [Windows](https://github.com/AoShinRO/brHades/wiki/Instalando-no-Windows)
-  * [Ubuntu](https://github.com/AoShinRO/brHades/wiki/Instalar-no-Ubuntu)
-  * [Debian](https://github.com/AoShinRO/brHades/wiki/Instalando-no-Debian)
-  * [FreeBSD](https://github.com/AoShinRO/brHades/wiki/Instalando-no-FreeBSD)
+  * [Windows](https://github.com/AoShinRO/pathofAsgard/wiki/Instalando-no-Windows)
+  * [Ubuntu](https://github.com/AoShinRO/pathofAsgard/wiki/Instalar-no-Ubuntu)
+  * [Debian](https://github.com/AoShinRO/pathofAsgard/wiki/Instalando-no-Debian)
+  * [FreeBSD](https://github.com/AoShinRO/pathofAsgard/wiki/Instalando-no-FreeBSD)
 
 ## 3. Problemas e Erros
 
@@ -80,14 +80,14 @@ pode ser resolvido simplesmente observando as mensagens de erro fornecidas. Conf
 se precisar de mais suporte para solução de problemas.
 
 ## 4. Mais documentação
-brHades tem uma grande coleção de arquivos de ajuda e scripts de NPC de amostra localizados no diretório /doc/
+pathofAsgard tem uma grande coleção de arquivos de ajuda e scripts de NPC de amostra localizados no diretório /doc/
 . Eles incluem explicações detalhadas de comandos de script de NPC, atcommands (@),
 permissões de grupo, bônus de itens e estruturas de pacotes, entre muitos outros tópicos.
 Recomendamos que todos os usuários reservem um tempo para dar uma olhada neste diretório antes de pedir
 assistência em outro lugar.
 
 ## 5. Como Contribuir
-Detalhes sobre como contribuir para brHades podem ser encontrados em [COMO CONTRIBUIR](https://github.com/AoShinRo/brHades/blob/master/.github/CONTRIBUTING.md)!
+Detalhes sobre como contribuir para pathofAsgard podem ser encontrados em [COMO CONTRIBUIR](https://github.com/AoShinRo/pathofAsgard/blob/master/.github/CONTRIBUTING.md)!
 
 ## 6. Licença
-Copyright (c) brHades Development Team - Licenciado sob [GNU General Public License v3.0](https://github.com/AoShinRo/brHades/blob/master/LICENSE)
+Copyright (c) pathofAsgard Development Team - Licenciado sob [GNU General Public License v3.0](https://github.com/AoShinRo/pathofAsgard/blob/master/LICENSE)

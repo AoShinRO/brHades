@@ -25,7 +25,7 @@
 #include "party.hpp"
 #include "pc.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 /// Instance Idle Queue data
 struct s_instance_wait {

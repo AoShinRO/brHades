@@ -34,7 +34,7 @@ class cScopeTimer {
 
 int32 levenshtein( const std::string &s1, const std::string &s2 );
 
-namespace brhades {
+namespace pathofasgard {
 	namespace util {
 		/**
 		 * Determine if a key-value pair exists in the map
@@ -297,7 +297,7 @@ namespace brhades {
 		template <typename T> T safe_addition_cap( T a, T b, T cap ){
 			T result;
 
-			if( brhades::util::safe_addition( a, b, result ) ){
+			if( pathofasgard::util::safe_addition( a, b, result ) ){
 				return cap;
 			}
 			return std::min(result, cap);

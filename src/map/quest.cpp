@@ -26,7 +26,7 @@
 #include "party.hpp"
 #include "pc.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 static int32 split_exact_quest_time(char* modif_p, int* week, int* day, int* hour, int* minute, int32 *second);
 

@@ -20,7 +20,7 @@
 #include "battle.hpp"
 #include "map.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 using namespace util;
 
 /// Binary heap of path nodes

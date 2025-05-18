@@ -41,8 +41,8 @@
 #include "int_storage.hpp"
 #include "packets.hpp"
 
-using namespace brhades;
-using namespace brhades::server_character;
+using namespace pathofasgard;
+using namespace pathofasgard::server_character;
 
 //definition of exported var declared in header
 int32 login_fd=-1; //login file descriptor

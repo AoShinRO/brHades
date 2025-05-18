@@ -32,7 +32,7 @@ extern int32 parse_console(const char* buf);
 const char *get_svn_revision(void);
 const char *get_git_hash(void);
 
-namespace brhades{
+namespace pathofasgard{
 	namespace server_core{
 		enum class e_core_status{
 			NOT_STARTED,
@@ -92,7 +92,7 @@ namespace brhades{
 	}
 }
 
-extern brhades::server_core::Core* global_core;
+extern pathofasgard::server_core::Core* global_core;
 
 template <typename T> int32 main_core( int32 argc, char *argv[] ){
 	T server = {};

@@ -4,7 +4,7 @@
 #
 
 set(RA_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR} CACHE PATH
-	"brhades include directory"
+	"pathofasgard include directory"
 )
 mark_as_advanced( RA_INCLUDE_DIRS )
 

@@ -19,7 +19,7 @@
 #include "pc.hpp"
 #include "pet.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 void mail_clear(map_session_data *sd)
 {

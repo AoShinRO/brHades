@@ -26,7 +26,7 @@
 # Update to 3.1 for CMAKE_CXX_STANDARD cross support definition
 set( CMAKE_LEGACY_CYGWIN_WIN32 0 )
 cmake_minimum_required( VERSION 3.1 )
-project( brHades )
+project( pathofAsgard )
 if( CYGWIN )
 	unset( WIN32 )
 endif()
@@ -426,7 +426,7 @@ endif()
 #####################################################################
 # package stuff
 #
-set( CPACK_PACKAGE_NAME "brHades" )
+set( CPACK_PACKAGE_NAME "pathofAsgard" )
 set( CPACK_PACKAGE_DESCRIPTION_SUMMARY "MMORPG server package" )
 set( CPACK_PACKAGE_VERSION ${SVNVERSION} )
 set( CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE )
@@ -492,7 +492,7 @@ set( DEVELOPMENT_FILES
 	"${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.txt"
 	"${CMAKE_CURRENT_SOURCE_DIR}/configure"
 	"${CMAKE_CURRENT_SOURCE_DIR}/configure.in"
-	"${CMAKE_CURRENT_SOURCE_DIR}/brHades.sln"
+	"${CMAKE_CURRENT_SOURCE_DIR}/pathofAsgard.sln"
 	)
 set( DEVELOPMENT_DIRECTORIES
 	"3rdparty"

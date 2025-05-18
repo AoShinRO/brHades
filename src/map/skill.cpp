@@ -46,7 +46,7 @@
 #include "status.hpp"
 #include "unit.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 #define SKILLUNITTIMER_INTERVAL	100
 #define TIMERSKILL_INTERVAL	150

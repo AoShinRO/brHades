@@ -27,7 +27,7 @@
 #include "inter.hpp"
 #include "packets.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 std::vector<struct s_point_str> accessible_maps{
 	s_point_str{ MAP_PRONTERA, 273, 354 },

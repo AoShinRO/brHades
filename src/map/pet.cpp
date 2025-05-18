@@ -28,7 +28,7 @@
 #include "npc.hpp"
 #include "pc.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 struct s_pet_catch_process{
 	uint32 char_id;

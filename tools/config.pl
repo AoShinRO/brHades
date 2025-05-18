@@ -88,7 +88,7 @@ sub GetArgs {
 sub Main {
 	my($filename, $dir, $suffix) = fileparse($0);
 	chdir $dir; #put ourself like was called in tools
-	print "Running brHades's configuration tool...\n";
+	print "Running pathofAsgard's configuration tool...\n";
 	#default conf
 	my $pubip = GetPublicIP();
 	my %hDefConf = (    SERV_UID => "s1",

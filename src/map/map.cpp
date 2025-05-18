@@ -55,8 +55,8 @@
 #include "storage.hpp"
 #include "trade.hpp"
 
-using namespace brhades;
-using namespace brhades::server_map;
+using namespace pathofasgard;
+using namespace pathofasgard::server_map;
 
 std::string default_codepage = "";
 

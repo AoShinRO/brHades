@@ -37,7 +37,7 @@
 #include "int_quest.hpp"
 #include "int_storage.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 std::string cfgFile = "inter_athena.yml"; ///< Inter-Config file
 InterServerDatabase interServerDb;

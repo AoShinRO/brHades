@@ -18,7 +18,7 @@
 #include "showmsg.hpp"
 #include "timer.hpp"
 
-using namespace brhades::server_core;
+using namespace pathofasgard::server_core;
 
 //map confs
 const char* MAP_CONF_NAME = "conf/map_athena.conf";
@@ -65,11 +65,11 @@ void display_versionscreen(bool do_exit)
 {
 	const char* svn = get_svn_revision();
 	if( svn[0] != UNKNOWN_VERSION )
-		ShowInfo("brHades SVN Revision: '" CL_WHITE "%s" CL_RESET "'\n", svn);
+		ShowInfo("pathofAsgard SVN Revision: '" CL_WHITE "%s" CL_RESET "'\n", svn);
 	else {
 		const char* git = get_git_hash();
 		if( git[0] != UNKNOWN_VERSION )
-			ShowInfo("brHades Git Hash: '" CL_WHITE "%s" CL_RESET "'\n", git);
+			ShowInfo("pathofAsgard Git Hash: '" CL_WHITE "%s" CL_RESET "'\n", git);
 	}
 	ShowInfo("Open " CL_WHITE "README.md" CL_RESET " for more information.\n");
 	if (do_exit)

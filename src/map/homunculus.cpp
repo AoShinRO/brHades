@@ -25,7 +25,7 @@
 #include "pc.hpp"
 #include "trade.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 static TIMER_FUNC(hom_hungry);
 

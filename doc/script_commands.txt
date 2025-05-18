@@ -1,16 +1,16 @@
-//===== Documentação brHades=================================
-//= Comandos de script brHades
+//===== Documentação pathofAsgard=================================
+//= Comandos de script pathofAsgard
 //===== Por:====================================================
-//= Equipe de desenvolvimento brHades
+//= Equipe de desenvolvimento pathofAsgard
 //===== Última atualização:==========================================
 //= 20220308
 //===== Descrição:=========================================
-//= Um manual de referência para a linguagem de script brHades.
+//= Um manual de referência para a linguagem de script pathofAsgard.
 //= Os comandos são classificados de acordo com sua funcionalidade.
 //============================================== ===========
 
 Este documento é um manual de referência para todos os comandos e funções de script
-disponível em brHades. Não é um tutorial simples. Quando as pessoas dizem para você
+disponível em pathofAsgard. Não é um tutorial simples. Quando as pessoas dizem para você
 "Leia a porra do manual", é o que eles querem dizer.
 
 Este não é um lugar para lhe ensinar programação básica. Este documento não vai lhe ensinar
@@ -94,7 +94,7 @@ coloque-o.
 // Esta linha será ignorada ao processar o script.
 
 Comentários em bloco também podem ser usados, onde você pode colocar /* e */ entre qualquer texto que você
-desejo que brHades ignore.
+desejo que pathofAsgard ignore.
 
 Exemplo:
 /* Este texto,
@@ -162,7 +162,7 @@ O nome do monstro é o nome que os monstros terão na tela e não tem relação
 qualquer que seja o nome deles em qualquer outro lugar. É o ID da máfia que conta, que
 identifica o registro do monstro no banco de dados de monstros 'mob_db.yml'. Se o nome do mob
 é dado como "--ja--", o campo 'nome japonês' do banco de dados do monstro é
-usado, (que, em brHades, na verdade contém um nome em inglês) se for "--en--",
+usado, (que, em pathofAsgard, na verdade contém um nome em inglês) se for "--en--",
 é o 'nome em inglês' do banco de dados de monstros (que contém uma letra maiúscula
 nome usado para invocar o monstro com um comando do Mestre).
 
@@ -493,7 +493,7 @@ Variáveis
 A essência de toda linguagem de programação são as variáveis ​​- lugares onde você armazena
 dados.
 
-Na linguagem de script brHades, nomes de variáveis ​​não diferenciam maiúsculas de minúsculas.
+Na linguagem de script pathofAsgard, nomes de variáveis ​​não diferenciam maiúsculas de minúsculas.
 
 As variáveis ​​são divididas e identificadas exclusivamente pela combinação de:
 prefixo - determina o escopo e a extensão (ou tempo de vida) da variável
@@ -683,7 +683,7 @@ Para incluir o símbolo '"' em uma string você deve usar o prefixo '\"'
 Matrizes
 ------
 
-Arrays (pelo menos no brHades) são essencialmente um conjunto de variáveis ​​que vão sob o
+Arrays (pelo menos no pathofAsgard) são essencialmente um conjunto de variáveis ​​que vão sob o
 mesmo nome. Você pode diferenciar as variáveis ​​específicas de uma matriz com um
 'índice de array', um número de uma variável naquele array:
 
@@ -745,7 +745,7 @@ operações matemáticas comuns ou operadores condicionais
 Existem também operadores condicionais. Isso tem a ver com o condicional
 comando 'if' e eles devem retornar 1 se a condição for satisfeita
 e 0 se não for. (É o que eles chamam de variáveis ​​'booleanas'. 0 significa 'Falso'.
-Qualquer coisa exceto o zero é 'Verdadeiro' Ímpar como é, -1 e -5 e qualquer coisa abaixo
+Qualquer coisa exceto o zero é 'Verdadeiro' Ýmpar como é, -1 e -5 e qualquer coisa abaixo
 zero também será Verdadeiro.)
 
 Você pode comparar números entre si e comparar strings entre si, mas
@@ -798,7 +798,7 @@ Operadores lógicos bit a bit funcionam apenas com números e são os seguintes:
 | - Ou.
 	O operador bit a bit AND (&) é usado para testar dois valores um contra o outro,
 	e resulta na configuração de bits que são ativos em ambos os argumentos. Isso pode
-	pode ser usado para algumas coisas, mas em brHades esse operador é geralmente usado para
+	pode ser usado para algumas coisas, mas em pathofAsgard esse operador é geralmente usado para
 	criar máscaras de bits em scripts.
 
 	O operador bit a bit OU (|) define como 1 uma posição binária se a posição binária
@@ -1609,10 +1609,10 @@ Se você der ao comando de entrada uma variável de string para colocar a entrad
 permite que o jogador insira texto. Caso contrário, somente números serão permitidos.
 
 	mes "[Mulher]";
-	mes "Por favor diga OLÁ";
+	mes "Por favor diga OLÝ";
 	next;
 	input .@var$;
-	if (.@var$ == "OLÁ") {
+	if (.@var$ == "OLÝ") {
 		mes "[Mulher]";
 		mes "Muito bem, você digitou corretamente.";
 		close;
@@ -1681,7 +1681,7 @@ geralmente mais limpo:
 		return 1;// é estranho
 	}
 
-Alternativamente, a partir da revisão 15979 e 15981 do brHades, funções definidas pelo usuário
+Alternativamente, a partir da revisão 15979 e 15981 do pathofAsgard, funções definidas pelo usuário
 pode ser chamado diretamente sem o uso do comando de script 'callfunc'.
 
 	function<tab>script<tab>DigaOla<tab>{
@@ -2256,7 +2256,7 @@ Exemplo:
 	para ( .@i = 0; .@i < .@bigloop; .@i++ ) {
 		faça isso;
 		// colocará o script em espera por 1 ms quando detectar um loop infinito
-		// deixe o brHades fazer o que precisa fazer (socket, timer, processo, etc.)
+		// deixe o pathofAsgard fazer o que precisa fazer (socket, timer, processo, etc.)
 	}
 
 	freeloop(0); // desabilitar freeloop
@@ -3319,7 +3319,7 @@ http://www.delorie.com/gnu/docs/glibc/libc_437.html
 Todos os caracteres de formato fornecidos ali devem funcionar corretamente.
 Comprimento máximo é o comprimento máximo de uma sequência de tempo a ser gerada.
 
-O exemplo dado nos scripts de amostra do brHades funciona assim:
+O exemplo dado nos scripts de amostra do pathofAsgard funciona assim:
 
   mes gettimestr("%Y-%m/%d %H:%M:%S",21);
 
@@ -3652,7 +3652,7 @@ Com <flag> você pode aplicar certas restrições sobre quais monstros do grupo 
 Retorna 0 se um dos parâmetros for inválido ou nenhum monstro puder ser encontrado com os parâmetros fornecidos.
 
 <tipo> válidos são:
-	MOBG_RAMO_DE_ÁRVORE_MORTA
+	MOBG_RAMO_DE_ÝRVORE_MORTA
 	CAIXA_DE_PORAGEM_MOBG
 	MOBG_GALHO_MORTO_SANGRENTO
 	MOBG_BOLSA_VERMELHA_DE_SURPRESA
@@ -4275,7 +4275,7 @@ por padrão verde
 Faz com que o jogador ou GID anexado diga uma mensagem como se estivesse gritando o nome de uma habilidade, a mensagem
 será visto por todos ao redor, mas não na janela de bate-papo.
 flag: Especificar alvo
-   ÁREA - A mensagem é enviada aos jogadores nas proximidades da fonte (padrão).
+   ÝREA - A mensagem é enviada aos jogadores nas proximidades da fonte (padrão).
    SELF - A mensagem é enviada somente para o jogador anexado.
 
 ---------------------------------------
@@ -4746,7 +4746,7 @@ sprites, o que é essencial para fazer chapéus personalizados.
 
 Como muitas pessoas têm paletas diferentes para cabelos e roupas, é
 impossível dizer a você quais são todos os números de cores. Se você quer um sério
-por exemplo, há um script Stylist dentro da instalação padrão do brHades que
+por exemplo, há um script Stylist dentro da instalação padrão do pathofAsgard que
 você pode olhar em: 'npc/custom/stylist.txt'
 
 ---------------------------------------
@@ -4798,7 +4798,7 @@ Este comando retornará o número de revisão do SVN que o servidor está atualm
 continuando.
 
 	if (obter_revisão() >= 15000)
-		mes "Bem-vindo a brHades!";
+		mes "Bem-vindo a pathofAsgard!";
 
 ---------------------------------------
 
@@ -4806,7 +4806,7 @@ continuando.
 
 Este comando retornará o Git Hash no qual o servidor está sendo executado no momento.
 
-	mes "Bem-vindo ao brHades! Hash do Git: " + get_githash();
+	mes "Bem-vindo ao pathofAsgard! Hash do Git: " + get_githash();
 
 ---------------------------------------
 \\
@@ -5510,7 +5510,7 @@ Os níveis de itens válidos são:
 2 - Armas de nível 2
 3 - Armas de nível 3
 21 - Pedras e Metais de Ferreiro
-22 - Poções do Alquimista, Água Benta, Veneno Mortal da Cruz Assassina
+22 - Poções do Alquimista, Ýgua Benta, Veneno Mortal da Cruz Assassina
 23 - Conversores Elementares
 
 ---------------------------------------
@@ -6174,7 +6174,7 @@ lançado depois de abril de 2005.)
 
 O parâmetro <nome do NPC> exibirá <número do efeito> em outro NPC. Se o NPC
 especificado não existe, o comando não fará nada. Ao especificar um NPC,
-<send_target> deve ser especificado ao especificar um <Nome NPC>, especificando ÁREA
+<send_target> deve ser especificado ao especificar um <Nome NPC>, especificando ÝREA
 manterá o comportamento padrão do comando.
 
 	// isso fará com que o NPC "John Doe#1"
@@ -6359,7 +6359,7 @@ Tipos:
 	1: Lustre
 	2: Debuff
 
-Status_icon: Veja a seção "Ícone de status" em 'src/map/script_constants.hpp'. O padrão é SI_BLANK (-1).
+Status_icon: Veja a seção "Ýcone de status" em 'src/map/script_constants.hpp'. O padrão é SI_BLANK (-1).
 
 Exemplo:
   - Identidade: 512
@@ -6435,7 +6435,7 @@ são ignorados quando qualquer ação é tomada para ajustar a árvore de habili
 Constantes de sinalizadores:
 	0 - HABILIDADE_PERM
 	1 - HABILIDADE_TEMP
-	2 - NÍVEL_DE_TEMPLO_DE_HABILIDADE
+	2 - NÝVEL_DE_TEMPLO_DE_HABILIDADE
 	3 - CONCESSÃO_DE_HABILIDADE_PERM
 
 // Isso dará permanentemente ao personagem Stone Throw (TF_THROWSTONE,152), em
@@ -7697,7 +7697,7 @@ personagens estão presentes na sala para bagunçar o roteiro.
 
 Os comandos 'enablearena'/'disablearena' são apenas aliases sem parâmetro.
 Eles supostamente são deixados aqui para compatibilidade com scripts oficiais do servidor,
-mas nenhum script brHades usa isso no momento.
+mas nenhum script pathofAsgard usa isso no momento.
 
 ---------------------------------------
 
@@ -8727,7 +8727,7 @@ Nota: Ao ajustar o status de uma unidade (STR, AGI, etc.), os respectivos status
 
 Os parâmetros (índices) para monstros são:
 	TAMANHO_UMOB
-	NÍVEL_UMOB
+	NÝVEL_UMOB
 	UMOB_HP
 	UMOB_MAXHP
 	UMOB_MASTERAID
@@ -8771,7 +8771,7 @@ Os parâmetros (índices) para monstros são:
 	UMOB_CRIT
 	CORRIDA_UMOB
 	UMOB_ELETIPO
-	UMOB_ELEVÁVEL
+	UMOB_ELEVÝVEL
 	UMOB_AMOÇÃO
 	ATRASO_UMOB
 	UMOB_DMOÇÃO
@@ -8788,7 +8788,7 @@ Os parâmetros (índices) para monstros são:
 
 Os parâmetros (índices) para homúnculos são:
 	TAMANHO_UHOM
-	NÍVEL_UHOM
+	NÝVEL_UHOM
 	UHOM_HP
 	UHOM_MAXHP
 	UHOM_SP
@@ -8822,7 +8822,7 @@ Os parâmetros (índices) para homúnculos são:
 	UHOM_CRIT
 	UHOM_RAÇA
 	UHOM_ELETIPO
-	UHOM_ELEVÁVEL
+	UHOM_ELEVÝVEL
 	UHOM_AMOÇÃO
 	UHOM_ATRASO
 	UHOM_DMOÇÃO
@@ -8833,7 +8833,7 @@ Os parâmetros (índices) para homúnculos são:
 
 Os parâmetros (índices) para animais de estimação são:
 	TAMANHO_UPET
-	NÍVEL_UPET
+	NÝVEL_UPET
 	UPET_HP
 	UPET_MAXHP
 	UPET_MASTERAID
@@ -8865,7 +8865,7 @@ Os parâmetros (índices) para animais de estimação são:
 	CRITÉRIO_UPET
 	CORRIDA_UPET
 	UPET_ELETIPO
-	UPET_ELEVÁVEL
+	UPET_ELEVÝVEL
 	UPET_AMOÇÃO
 	ATRASO_UPET
 	UPET_MOÇÃO
@@ -8960,7 +8960,7 @@ Os parâmetros (índices) para elementais são:
 -----
 
 Os parâmetros (índices) para NPCs são:
-	NÍVEL_UNPC
+	NÝVEL_UNPC
 	UNPC_HP
 	UNPC_MAXHP
 	UNPC_MAPID
@@ -8988,7 +8988,7 @@ Os parâmetros (índices) para NPCs são:
 	CRIT_UNPC
 	CORRIDA_UNPC
 	UNPC_ELETYPE
-	UNPC_ELEVÁVEL
+	UNPC_ELEVÝVEL
 	UNPC_AMOÇÃO
 	ATRASO_UNPC
 	UNPC_DMOTION
@@ -9454,7 +9454,7 @@ Retorna 1 se o caractere no índice especificado da string especificada for
 maiúsculas/minúsculas. Caso contrário, 0. Caracteres que não sejam do alfabeto retornarão 0.
 
 Exemplo:
-	charisupper("brHades", 1); //retorna 1
+	charisupper("pathofAsgard", 1); //retorna 1
 
 ---------------------------------------
 
@@ -10032,7 +10032,7 @@ Exemplos:
 =========================
 ---------------------------------------
 
-*questinfo <Ícone>{,<Cor da marca do mapa>{,"<condição>"}};
+*questinfo <Ýcone>{,<Cor da marca do mapa>{,"<condição>"}};
 
 Este comando deve ser usado somente em rótulos OnInit/OnInstanceInit.
 Mostre uma emoção em cima de um NPC e, opcionalmente, uma marca colorida no minimapa, como "viewpoint" ou "viewpointmap".
@@ -10040,20 +10040,20 @@ Quando um usuário realiza alguma ação, cada NPC é verificado em busca de inf
 Se questinfo estiver presente, ele verificará se o jogador atende à condição.
 Se ele/ela fizer isso ou nenhuma condição tiver sido definida, a bolha aparecerá.
 
-Disponível <Ícone>:
+Disponível <Ýcone>:
 
 Nenhum ícone: QTYPE_NONE
-! Ícone da missão: QTYPE_QUEST
-? Ícone da missão: QTYPE_QUEST2
-! Ícone de trabalho: QTYPE_JOB
-? Ícone de trabalho: QTYPE_JOB2
-! Ícone do evento: QTYPE_EVENT
-? Ícone do evento: QTYPE_EVENT2
+! Ýcone da missão: QTYPE_QUEST
+? Ýcone da missão: QTYPE_QUEST2
+! Ýcone de trabalho: QTYPE_JOB
+? Ýcone de trabalho: QTYPE_JOB2
+! Ýcone do evento: QTYPE_EVENT
+? Ýcone do evento: QTYPE_EVENT2
 Warg: QTYPE_WARG (somente para packetver < 20170315)
 Warg Face: QTYPE_WARG2 (Somente para packetver >= 20120410 e < 20170315)
 Clique em mim: QTYPE_CLICKME (somente para packetver >= 20170315)
 Missão diária: QTYPE_DAILYQUEST (somente para packetver >= 20170315)
-! Ícone do evento: QTYPE_EVENT3 (somente para packetver >= 20170315)
+! Ýcone do evento: QTYPE_EVENT3 (somente para packetver >= 20170315)
 Job Quest: QTYPE_JOBQUEST (Somente para packetver >= 20170315)
 Jumping Poring: QTYPE_JUMPING_PORING (Somente para packetver >= 20170315)
 
@@ -10165,15 +10165,15 @@ uma marca colorida no minimapa como "viewpoint" ou "viewpointmap".
 Isso é usado para indicar que um NPC tem uma missão ou um evento para
 um certo jogador.
 
-Ícones disponíveis:
+Ýcones disponíveis:
 
-Remover Ícone: QTYPE_NONE
-! Ícone da missão: QTYPE_QUEST
-? Ícone da missão: QTYPE_QUEST2
-! Ícone de trabalho: QTYPE_JOB
-? Ícone de trabalho: QTYPE_JOB2
-! Ícone do evento: QTYPE_EVENT
-? Ícone do evento: QTYPE_EVENT2
+Remover Ýcone: QTYPE_NONE
+! Ýcone da missão: QTYPE_QUEST
+? Ýcone da missão: QTYPE_QUEST2
+! Ýcone de trabalho: QTYPE_JOB
+? Ýcone de trabalho: QTYPE_JOB2
+! Ýcone do evento: QTYPE_EVENT
+? Ýcone do evento: QTYPE_EVENT2
 Warg: QTYPE_WARG
 Warg Face: QTYPE_WARG2 (Somente para packetver >= 20120410)
 
@@ -10485,15 +10485,15 @@ PETINFO_FOODID - ID do item de comida para animais de estimação
 
 PETINFO_INTIMATE pode ser usado com as seguintes constantes para verificar valores:
 ANIMAL_INTIMO_NENHUM = 0
-PET_ÍNTIMO_ESTRANHO = 1 ~ 99
-TÍMIDO_INTIMADO_DE_ANIMAL_DE_ESTIMAÇÃO = 100 ~ 249
-PET_ÍNTIMO_NEUTRO = 250 ~ 749
-CORDIAL_ÍNTIMO_DE_ANIMAL_DE_ESTIMAÇÃO = 750 ~ 909
-PET_ÍNTIMO_LEAL = 910 ~ 1000
+PET_ÝNTIMO_ESTRANHO = 1 ~ 99
+TÝMIDO_INTIMADO_DE_ANIMAL_DE_ESTIMAÇÃO = 100 ~ 249
+PET_ÝNTIMO_NEUTRO = 250 ~ 749
+CORDIAL_ÝNTIMO_DE_ANIMAL_DE_ESTIMAÇÃO = 750 ~ 909
+PET_ÝNTIMO_LEAL = 910 ~ 1000
 
 PETINFO_HUNGRY pode ser usado com as seguintes constantes para verificar valores:
 PET_FOME_NENHUM = 0
-PET_FAMÍLIA_MUITA_FAMÍLIA = 1 ~ 10
+PET_FAMÝLIA_MUITA_FAMÝLIA = 1 ~ 10
 PET_FOME_FOME = 11 ~ 25
 PET_FOME_NEUTRO = 26 ~ 75
 PET_FAMILIAR_SATISFEITO = 76 ~ 90
@@ -11235,11 +11235,11 @@ Retorna 1 em caso de sucesso.
 
 	/**
 	 * Este exemplo mostrará a mensagem neste canal como
-	 * [brHades] Admin: Olá, mundo!
+	 * [pathofAsgard] Admin: Olá, mundo!
 	 * em vez de
-	 * #brHades Admin: Olá, mundo!
+	 * #pathofAsgard Admin: Olá, mundo!
 	 **/
-	channel_create("#brHades","[brHades]");
+	channel_create("#pathofAsgard","[pathofAsgard]");
 	channel_create("#vip","[VIP]","somente membros vip");
 
 ---------------------------------------
@@ -11337,10 +11337,10 @@ Envia mensagem para o canal.
 Retorna 1 em caso de sucesso.
 
 	// Exemplo se o canal não tiver alias
-	channel_chat(#brHades,"Olá, mundo!"); // #brHades Olá, mundo!
+	channel_chat(#pathofAsgard,"Olá, mundo!"); // #pathofAsgard Olá, mundo!
 
 	// Exemplo se o canal tiver alias
-	channel_chat(#brHades,"Olá Mundo!"); // [brHades] Olá Mundo!
+	channel_chat(#pathofAsgard,"Olá Mundo!"); // [pathofAsgard] Olá Mundo!
 
 ---------------------------------------
 
@@ -11511,14 +11511,14 @@ Exemplo:
 Defina o alinhamento vertical ou horizontal no diálogo do NPC.
 Alinhamentos válidos:
 - alinhamento horizontal:
-  DIÁLOGO_ALINHAMENTO_ESQUERDA
-  CENTRO_DE_ALINHAMENTO_DE_DIÁLOGO
-  DIÁLOGO_ALINHAMENTO_DIREITO
+  DIÝLOGO_ALINHAMENTO_ESQUERDA
+  CENTRO_DE_ALINHAMENTO_DE_DIÝLOGO
+  DIÝLOGO_ALINHAMENTO_DIREITO
 
 - alinhamento vertical:
-  DIÁLOGO_ALINHAR_TOPO
-  DIÁLOGO_ALINHAMENTO_MEIO
-  DIÁLOGO_ALINHAMENTO_INFERIOR
+  DIÝLOGO_ALINHAR_TOPO
+  DIÝLOGO_ALINHAMENTO_MEIO
+  DIÝLOGO_ALINHAMENTO_INFERIOR
 
 ---------------------------------------
 

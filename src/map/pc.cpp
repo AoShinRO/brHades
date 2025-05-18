@@ -58,7 +58,7 @@
 #include "unit.hpp" // unit_stop_attack(), unit_stop_walking()
 #include "vending.hpp" // struct s_vending
 
-using namespace brhades;
+using namespace pathofasgard;
 
 JobDatabase job_db;
 

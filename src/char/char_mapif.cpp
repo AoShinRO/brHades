@@ -19,7 +19,7 @@
 #include "char_logif.hpp"
 #include "inter.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 /**
  * Packet send to all map-servers, attach to ourself

@@ -35,7 +35,7 @@
 #include "pet.hpp"
 #include "script.hpp" // script_config
 
-using namespace brhades;
+using namespace pathofasgard;
 
 struct npc_data* fake_nd;
 

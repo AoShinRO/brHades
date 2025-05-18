@@ -34,7 +34,7 @@
 
 #include <stdlib.h>
 
-using namespace brhades;
+using namespace pathofasgard;
 
 CashEmotesDatabase cash_emotes_db;
 

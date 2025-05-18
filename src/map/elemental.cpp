@@ -27,7 +27,7 @@
 #include "pc.hpp"
 #include "trade.hpp"
 
-using namespace brhades;
+using namespace pathofasgard;
 
 ElementalDatabase elemental_db;
 
