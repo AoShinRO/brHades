@@ -1,2 +1,2 @@
 // Internal default is limited to 128 lines.  If you need more, you will need to modify the MOTD_LINE_SIZE definition in pc.cpp
-Bem vindo ao brHades, reporte qualquer bug que encontrar.
+Bem vindo ao Path of Asgard, reporte qualquer bug que encontrar.
