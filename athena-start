@@ -9,11 +9,11 @@ LOG_DIR="./log"
 
 print_start() {
 	#    more << EOF
-	echo "brhades is starting..."
-	echo "            (c) 2024 brhades Project"
+	echo "Path of Asgard is starting..."
+	echo "            (c) 2025 Path of Asgard Project"
 	echo ""
 	echo ""
-	echo "checking..."
+	echo "CHECANDO..."
 	#EOF
 }
 
