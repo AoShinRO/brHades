@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        clang: ['10', '11']
+        clang: ['11']
 
     steps:
       - uses: actions/checkout@v4
