@@ -23,8 +23,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-20.04]
-        clang: ['10', '11']
+          # The ubuntu-latest label currently points to ubuntu-24.04.
+          # Available: ubuntu-24.04, ubuntu-22.04
+          os: [ubuntu-22.04]
+          # Version list can be found on https://github.com/marketplace/actions/install-clang
+          clang: ['13','14','15','16','17','18','19','20']
 
     steps:
       - uses: actions/checkout@v4
@@ -40,8 +43,8 @@ jobs:
           version: ${{ matrix.clang }}
           platform: x64
 
-      - name: Verify Clang installation
-        run: clang++ --version
+#      - name: Verify Clang installation
+#       run: clang++ --version
 
       - name: Ensure configure has execution permissions
         run: chmod +x ./configure 
