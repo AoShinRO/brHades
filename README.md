@@ -76,7 +76,7 @@ Database | [MySQL Workbench 5 or newer](http://www.mysql.com/downloads/workbench
 
 Se você estiver tendo problemas para iniciar seu servidor, a primeira coisa que você deve
 fazer é verificar o que está acontecendo em seus consoles. Na maioria das vezes, todos os problemas de suporte
-pode ser resolvido simplesmente observando as mensagens de erro fornecidas. Confira o [discord](https://discord.com/invite/DAPWeV677z)
+pode ser resolvido simplesmente observando as mensagens de erro fornecidas. Confira o [discord](https://discord.gg/xBtmGS3QQD)
 se precisar de mais suporte para solução de problemas.
 
 ## 4. Mais documentação
