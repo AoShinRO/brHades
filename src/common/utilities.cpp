@@ -126,7 +126,7 @@ std::string brhades::util::string_left_pad(const std::string& original, char pad
 	return std::string( num - std::min( num, original.length() ), padding ) + original;
 }
 
-int32 rathena::util::strtoint32def(const char* str, int32 def) {
+int32 brhades::util::strtoint32def(const char* str, int32 def) {
 	char* str_end{};
 	int32 result = std::strtol(str, &str_end, 10);
 
