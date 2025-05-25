@@ -508,9 +508,9 @@ static void script_reportsrc(struct script_state *st)
 			} break;
 		default:
 			if( bl->m >= 0 )
-				ShowDebug("Source (Non-NPC type %d): name %s at %s (%d,%d)\n", bl->type, status_get_name(bl), map_mapid2mapname(bl->m), bl->x, bl->y);
+				ShowDebug("Source (Non-NPC type %d): name %s at %s (%d,%d)\n", bl->type, status_get_name(*bl), map_mapid2mapname(bl->m), bl->x, bl->y);
 			else
-				ShowDebug("Source (Non-NPC type %d): name %s (invisible/not on a map)\n", bl->type, status_get_name(bl));
+				ShowDebug("Source (Non-NPC type %d): name %s (invisible/not on a map)\n", bl->type, status_get_name(*bl));
 			break;
 	}
 }
@@ -12130,7 +12130,7 @@ BUILDIN_FUNC(getunits)
 		{
 			if( data ){
 				if( is_string_variable( name ) ){
-					set_reg_str( st, sd, reference_uid( id, idx + size ), name, status_get_name( bl ), reference_getref( data ) );
+					set_reg_str( st, sd, reference_uid( id, idx + size ), name, status_get_name( *bl ), reference_getref( data ) );
 				}else{
 					set_reg_num( st, sd, reference_uid( id, idx + size ), name, bl->id, reference_getref( data ) );
 				}
@@ -19760,7 +19760,7 @@ BUILDIN_FUNC(getunitname)
 		return SCRIPT_CMD_FAILURE;
 	}
 
-	script_pushstrcopy(st, status_get_name(bl));
+	script_pushstrcopy(st, status_get_name(*bl));
 
 	return SCRIPT_CMD_SUCCESS;
 }
