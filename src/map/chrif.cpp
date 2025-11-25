@@ -1906,15 +1906,14 @@ int32 chrif_removefriend(uint32 char_id, int32 friend_id) {
 /*==========================================
 * Ask the char server to save the macro user report
  *------------------------------------------*/
-int chrif_MacroUserReport_Save(int reporterAID, int reportAID, int reportType, char *reportMsg)
-{
-	WFIFOHEAD(char_fd, 267);
+int32 chrif_macro_user_report(const uint32 inreporterAID, const uint32 inreportedAID, const uint16 inreportType, const char* inreportMessage){
+	WFIFOHEAD(char_fd, 268);
 	WFIFOW(char_fd, 0) = 0x2b2c;
-	WFIFOL(char_fd, 2) = reporterAID;
-	WFIFOL(char_fd, 6) = reportAID;
-	WFIFOB(char_fd, 10) = reportType;
-	safestrncpy(WFIFOCP(char_fd, 11), reportMsg, 255);
-	WFIFOSET(char_fd, 267);
+	WFIFOL(char_fd, 2) = inreporterAID;
+	WFIFOL(char_fd, 6) = inreportedAID;
+	WFIFOW(char_fd, 10) = inreportType;
+	safestrncpy(WFIFOCP(char_fd, 12), inreportMessage, 101);
+	WFIFOSET(char_fd, 268);
 
 	return 0;
 }

@@ -88,7 +88,7 @@ int32 chrif_req_charunban(int32 aid, const char* character_name);
 int32 chrif_bsdata_request(uint32 char_id);
 int32 chrif_bsdata_save(map_session_data *sd, bool quit);
 
-int chrif_MacroUserReport_Save(int reporterAID, int reportAID, int reportType, char *reportMsg);
+int32 chrif_macro_user_report(const uint32 inreporterAID, const uint32 inreportedAID, const uint16 inreportType, const char* inreportMessage);
 
 void do_final_chrif(void);
 void do_init_chrif(void);
