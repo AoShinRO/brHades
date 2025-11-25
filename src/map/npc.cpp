@@ -367,7 +367,7 @@ uint64 StylistDatabase::parseBodyNode( const ryml::NodeRef& node ){
 					this->invalidWarning(optionNode["RequiredJob"], "Job %s does not exist.\n", jobName.c_str());
 					return 0;
 				}
-				entry->required_job.push_back(job_id);
+				entry->required_job.push_back(util::clamp<uint16>(job_id));
 			}
 		}
 
