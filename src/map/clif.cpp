@@ -25616,6 +25616,25 @@ void clif_parse_partybooking_reply( int32 fd, map_session_data* sd ){
 /*==========================================
  * macro user report client packet processing function
  *------------------------------------------*/
+void clif_macro_user_report_ack(map_session_data* sd, int32 status, const char* report_name) {
+
+	PACKET_ZC_MACRO_USER_REPORT_ACK packet = {};
+	packet.packetType = HEADER_ZC_MACRO_USER_REPORT_ACK;
+	packet.reporterAID = sd->status.account_id;
+
+	if (report_name != nullptr)
+	{
+		safestrncpy(packet.reportName, report_name, sizeof(packet.reportName));
+	}
+	else
+	{
+		safestrncpy(packet.reportName, "", sizeof(packet.reportName));
+	}
+
+	packet.status = status;
+	clif_send(&packet, sizeof(packet), &sd->bl, SELF);
+}
+
 void clif_parse_macro_user_report(int32 fd, map_session_data* sd){
 
 	if (sd == nullptr) {
@@ -25686,26 +25705,6 @@ void clif_parse_macro_user_report(int32 fd, map_session_data* sd){
 	chrif_macro_user_report(packet->reporterAID, packet->reportedAID, packet->reportType, packet->reportMessage);
 	clif_macro_user_report_ack(sd, MACRO_USER_REPORT_SUCCESS, packet->reportName);
 }
-
-void clif_macro_user_report_ack(map_session_data* sd, int32 status, const char* report_name){
-
-	PACKET_ZC_MACRO_USER_REPORT_ACK packet = {};
-	packet.packetType = HEADER_ZC_MACRO_USER_REPORT_ACK;
-	packet.reporterAID = sd->status.account_id;
-
-	if (report_name != nullptr)
-	{
-		safestrncpy(packet.reportName, report_name, sizeof(packet.reportName));
-	}
-	else
-	{
-		safestrncpy(packet.reportName, "", sizeof(packet.reportName));
-	}
-
-	packet.status = status;
-	clif_send(&packet, sizeof(packet), &sd->bl, SELF);
-}
-
 
 void clif_parse_reset_skill( int32 fd, map_session_data* sd ){
 #if PACKETVER_MAIN_NUM >= 20220216 || PACKETVER_ZERO_NUM >= 20220203
