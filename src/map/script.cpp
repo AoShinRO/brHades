@@ -15685,7 +15685,7 @@ int32 atcommand_sub(struct script_state* st,int32 type) {
 		if( st->oid != 0 ){
 			block_list* bl = map_id2bl( st->oid );
 
-			safestrncpy( dummy_sd->status.name, status_get_name( bl ), sizeof( dummy_sd->status.name ) );
+			safestrncpy( dummy_sd->status.name, status_get_name( *bl ), sizeof( dummy_sd->status.name ) );
 			dummy_sd->bl.m = bl->m;
 			dummy_sd->bl.x = bl->x;
 			dummy_sd->bl.y = bl->y;
