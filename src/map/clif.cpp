@@ -25613,70 +25613,98 @@ void clif_parse_partybooking_reply( int32 fd, map_session_data* sd ){
 #endif
 }
 
-void clif_parse_macro_user_report(int fd, map_session_data *sd)
-{
-#if PACKETVER >= 20230920
-	nullpo_retv(sd);
+/*==========================================
+ * macro user report client packet processing function
+ *------------------------------------------*/
+void clif_macro_user_report_ack(map_session_data* sd, int32 status, const char* report_name) {
 
-	PACKET_CZ_MACRO_USER_REPORT_REQ* p = reinterpret_cast<PACKET_CZ_MACRO_USER_REPORT_REQ*>(RFIFOP(fd, 0));
+	PACKET_ZC_MACRO_USER_REPORT_ACK packet = {};
+	packet.packetType = HEADER_ZC_MACRO_USER_REPORT_ACK;
+	packet.reporterAID = sd->status.account_id;
 
-	// Ignore forged packets
-	if (p->reporterAID != sd->status.account_id || p->reporterAID == p->reportAID || (p->reportType < 0 || p->reportType > 1))
-		return;
-
-	// Verify the target player is online
-	map_session_data *tsd = map_id2sd(p->reportAID);
-	if (tsd == nullptr) {
-		clif_macro_user_report_response(sd, MACRO_CHECK_REMOVE_INVALID_AID, nullptr);
-		return;
+	if (report_name != nullptr)
+	{
+		safestrncpy(packet.reportName, report_name, sizeof(packet.reportName));
 	}
-
-	// Verify that the name of the target player matches the name in the packet
-	if (strcmpi(p->reportName, tsd->status.name) != 0) {
-		clif_macro_user_report_response(sd, MACRO_CHECK_REMOVE_INVALID_AID, nullptr);
-		return;
-	}
-
-	// Limit the maximum number of reports per player to avoid abuse
-	int reports_count = static_cast<int>(pc_readreg2(sd, "#MUR_TotalReports"));
-	if (reports_count >= 1000) {
-		clif_displaymessage(sd->fd, "You have reached the maximum number of reports.");
-		return;
-	}
-	pc_setreg2(sd, "#MUR_TotalReports", reports_count + 1);
-
-	// Limit the interval between reports to avoid abuse
-	int last_report_time = static_cast<int>(pc_readreg2(sd, "#MUR_LastReportTime"));
-	if (last_report_time > 0 && last_report_time + 10 > time(nullptr)) {
-		clif_displaymessage(sd->fd, "You have to wait 10 seconds between reports.");
-		return;
-	}
-	pc_setreg2(sd, "#MUR_LastReportTime", static_cast<int>(time(nullptr)));
-
-	// TODO: other behavior checks (e.g. if the target player is in a town, etc.)
-
-	chrif_MacroUserReport_Save(p->reporterAID, p->reportAID, p->reportType, p->reportMsg);
-	clif_macro_user_report_response(sd, MACRO_USER_REPORT_SUCCESS, p->reportName);
-#endif
-}
-
-void clif_macro_user_report_response(map_session_data *sd, int status, char *reportName)
-{
-#if PACKETVER >= 20230920
-	nullpo_retv(sd);
-
-	PACKET_ZC_MACRO_USER_REPORT_RES p;
-	p.packetType = HEADER_ZC_MACRO_USER_REPORT_RES;
-	p.reporterAID = sd->status.account_id;
-	if (reportName != nullptr)
-		memcpy(p.reportName, reportName, NAME_LENGTH);
 	else
-		memset(p.reportName, 0, NAME_LENGTH);
-	p.status = status;
-	clif_send(&p, sizeof(p), &sd->bl, SELF);
-#endif
+	{
+		safestrncpy(packet.reportName, "", sizeof(packet.reportName));
+	}
+
+	packet.status = status;
+	clif_send(&packet, sizeof(packet), &sd->bl, SELF);
 }
 
+void clif_parse_macro_user_report(int32 fd, map_session_data* sd){
+
+	if (sd == nullptr) {
+		return;
+	}
+
+	const PACKET_CZ_MACRO_USER_REPORT_REQ* packet = reinterpret_cast<PACKET_CZ_MACRO_USER_REPORT_REQ*>(RFIFOP(fd, 0));
+
+	//
+	// Packets that may be forged needs to be integrity checked before processing them.
+	//
+
+	if (packet->reportType > 1)
+	{
+		return;
+	}
+
+	if (packet->reporterAID == packet->reportedAID)
+	{
+		return;
+	}
+
+	if (packet->reporterAID != sd->status.account_id)
+	{
+		return;
+	}
+
+	map_session_data* tsd = map_id2sd(packet->reportedAID);
+	if (tsd == nullptr)
+	{
+		return;
+	}
+
+	//
+	// Checks whether the reported user character name matches.
+	//
+
+	if (strcmpi(packet->reportName, tsd->status.name) != 0)
+	{
+		return;
+	}
+
+	//
+	// Limits the maximum report count per reporter user.
+	//
+
+	const uint32 reportCount = static_cast<uint32>(pc_readreg2(sd, "#MUR_ReportCount"));
+	if (reportCount > 999)
+	{
+		return;
+	}
+
+	pc_setreg2(sd, "#MUR_ReportCount", reportCount + 1);
+
+	//
+	// Limits the interval between reports per reporter user.
+	//
+
+	const uint32 lastReportTime = static_cast<uint32>(pc_readreg2(sd, "#MUR_LastReportTime"));
+	if (lastReportTime > 0 && lastReportTime + 60 > time(nullptr))
+	{
+		clif_macro_user_report_ack(sd, MACRO_USER_REPORT_COOLTIME, nullptr);
+		return;
+	}
+
+	pc_setreg2(sd, "#MUR_LastReportTime", static_cast<uint32>(time(nullptr)));
+
+	chrif_macro_user_report(packet->reporterAID, packet->reportedAID, packet->reportType, packet->reportMessage);
+	clif_macro_user_report_ack(sd, MACRO_USER_REPORT_SUCCESS, packet->reportName);
+}
 
 void clif_parse_reset_skill( int32 fd, map_session_data* sd ){
 #if PACKETVER_MAIN_NUM >= 20220216 || PACKETVER_ZERO_NUM >= 20220203

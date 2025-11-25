@@ -1840,27 +1840,23 @@ struct PACKET_ZC_EMOTION_EXPANTION_LIST {
 DEFINE_PACKET_HEADER(ZC_EMOTION_EXPANTION_LIST, 0x0bef);
 #endif
 
-#if PACKETVER >= 20230920
 struct PACKET_CZ_MACRO_USER_REPORT_REQ{
-	uint16 packetType;
+	int16 packetType;
 	uint32 reporterAID;
-	uint32 reportAID;
+	uint32 reportedAID;
 	char reportName[NAME_LENGTH];
-	int16 reportType;
-	char reportMsg[REPORT_MSG_LENGHT];
+	uint16 reportType;
+	char reportMessage[REPORT_MSG_LENGHT];
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(CZ_MACRO_USER_REPORT_REQ, 0x0be2);
-#endif
 
-#if PACKETVER >= 20230920
-struct PACKET_ZC_MACRO_USER_REPORT_RES {
-	uint16 packetType;
+struct PACKET_ZC_MACRO_USER_REPORT_ACK{
+	int16 packetType;
 	uint32 reporterAID;
 	char reportName[NAME_LENGTH];
 	uint32 status;
 } __attribute__((packed));
-DEFINE_PACKET_HEADER(ZC_MACRO_USER_REPORT_RES, 0x0be3);
-#endif
+DEFINE_PACKET_HEADER(ZC_MACRO_USER_REPORT_ACK, 0x0be3);
 
 struct PACKET_CZ_LESSEFFECT{
 	int16 packetType;

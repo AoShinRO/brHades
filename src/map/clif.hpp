@@ -875,15 +875,16 @@ enum e_ack_additem_to_cart : uint8 {
 	ADDITEM_TO_CART_FAIL_COUNT = 1
 };
 
-enum e_macro_user_report_result : int32 {
-	MACRO_USER_REPORT_COUNTLIMIT = 0,
-	MACRO_USER_REPORT_SUCCESS = 1,
-	MACRO_USER_REPORT_COOLTIME = 2,
-	MACRO_USER_REPORT_EFST_ACTIVATED = 3,
-	MACRO_USER_REPORT_PENALTY_COUNTMAX = 4,
-	MACRO_USER_REPORT_REPORTED = 5,
-	MACRO_USER_REPORT_NOT_USE_AREA = 6,
-	MACRO_CHECK_REMOVE_INVALID_AID = 7,
+enum e_macro_user_report_status : uint32{
+	MACRO_USER_REPORT_COUNTLIMIT,			// If you have exceeded the number of daily reports, you will no longer be able to report.
+	MACRO_USER_REPORT_SUCCESS,				// %s was reported.
+	MACRO_USER_REPORT_COOLTIME,				// The target is being reported by another player.
+	MACRO_USER_REPORT_EFST_ACTIVATED,		// The target is under report protection.
+	MACRO_USER_REPORT_PENALTY_COUNTMAX,		// You can no longer report beyond the cumulative number of daily reports.
+	MACRO_USER_REPORT_REPORTED,				// You have been reported by another player.
+	MACRO_USER_REPORT_NOT_USE_AREA,			// This is an area where reporting is not possible.
+
+	MACRO_USER_REPORT_INVALID,				// CUSTOM: It will cause unexpected behavior (UB) to the client.
 };
 
 int32 clif_setip(const char* ip);

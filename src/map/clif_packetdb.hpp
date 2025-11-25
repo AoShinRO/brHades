@@ -2091,8 +2091,8 @@
 	parseable_packet(HEADER_CZ_EMOTION_EXPANTION_REQ, sizeof( PACKET_CZ_EMOTION_EXPANTION_REQ), clif_parse_emotion_expansion_request, 0);
 #endif
 
-#if PACKETVER >= 20230920
-	parseable_packet(HEADER_CZ_MACRO_USER_REPORT_REQ, sizeof(PACKET_CZ_MACRO_USER_REPORT_REQ), clif_parse_macro_user_report, 0);
+#if PACKETVER_MAIN_NUM >= 20230915
+	parseable_packet(HEADER_CZ_MACRO_USER_REPORT_REQ, sizeof(struct PACKET_CZ_MACRO_USER_REPORT_REQ), clif_parse_macro_user_report, 0);
 #endif
 
 #if PACKETVER >= 20231115
