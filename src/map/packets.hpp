@@ -1925,6 +1925,32 @@ struct PACKET_ZC_ROOM_NEWENTRY {
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(ZC_ROOM_NEWENTRY, 0xd7);
 
+DEFINE_PACKET_HEADER(CZ_QUEST_STATUS_REQ, 0xbf3);
+
+#if (PACKETVER_MAIN_NUM >= 20240516)
+struct PACKET_CZ_QUEST_STATUS_REQ_SUB{
+	uint32 QuestID;
+} __attribute__((packed));
+
+struct PACKET_CZ_QUEST_STATUS_REQ{
+	int16 PacketType;
+	uint16 PacketLength;
+	PACKET_CZ_QUEST_STATUS_REQ_SUB List[];
+} __attribute__((packed));
+
+struct PACKET_ZC_QUEST_STATUS_ACK_SUB{
+	uint32 QuestID;
+	uint8 QuestStatus;
+} __attribute__((packed));
+
+struct PACKET_ZC_QUEST_STATUS_ACK{
+	int16 PacketType;
+	uint16 PacketLength;
+	PACKET_ZC_QUEST_STATUS_ACK_SUB List[];
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_QUEST_STATUS_ACK, 0x0bf4);
+#endif
+
 // NetBSD 5 and Solaris don't like pragma pack but accept the packed attribute
 #if !defined( sun ) && ( !defined( __NETBSD__ ) || __NetBSD_Version__ >= 600000000 )
 	#pragma pack( pop )

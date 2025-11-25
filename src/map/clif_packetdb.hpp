@@ -2099,4 +2099,10 @@
 	parseable_packet(HEADER_CZ_GUILD_ALLIANCECHAT, -1, clif_parse_GuildAllianceMessage, 2, 4);
 #endif
 
+#if PACKETVER_MAIN_NUM >= 20240516
+	parseable_packet(HEADER_CZ_QUEST_STATUS_REQ, -1, clif_parse_quest_status, 0);
+#else
+	parseable_packet(HEADER_CZ_QUEST_STATUS_REQ, -1, clif_parse_dull, 0);
+#endif
+
 #endif /* CLIF_PACKETDB_HPP */
