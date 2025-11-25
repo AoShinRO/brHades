@@ -1999,6 +1999,18 @@ DEFINE_PACKET_HEADER(ZC_WARPLIST, 0xabe)
 DEFINE_PACKET_HEADER(ZC_WARPLIST, 0x11c)
 #endif
 
+struct CZ_REQ_STYLE_CHANGE3_SUB {
+	int32 action;
+	int32 value;
+} __attribute__((packed));
+
+struct PACKET_CZ_REQ_STYLE_CHANGE3 {
+	int16 PacketType;
+	int16 PacketLength;
+	int16 count;
+	struct CZ_REQ_STYLE_CHANGE3_SUB data[];
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(CZ_REQ_STYLE_CHANGE3, 0x0bf7);
 
 const int16 MAX_INVENTORY_ITEM_PACKET_NORMAL = ( ( INT16_MAX - ( sizeof( struct packet_itemlist_normal ) - ( sizeof( struct NORMALITEM_INFO ) * MAX_ITEMLIST) ) ) / sizeof( struct NORMALITEM_INFO ) );
 const int16 MAX_INVENTORY_ITEM_PACKET_EQUIP = ( ( INT16_MAX - ( sizeof( struct packet_itemlist_equip ) - ( sizeof( struct EQUIPITEM_INFO ) * MAX_ITEMLIST ) ) ) / sizeof( struct EQUIPITEM_INFO ) );
