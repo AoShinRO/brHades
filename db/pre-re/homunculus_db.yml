@@ -57,9 +57,10 @@ Header:
   Version: 1
 
 Body:
-  - Class: Lif
+  - Id: 6001
+    Class: Lif
     Name: Lif
-    EvolutionClass: Lif_H
+    EvolutionClass: 6009
     Status:
       - Type: Hp
         Base: 150
@@ -126,9 +127,10 @@ Body:
         MaxLevel: 3
         RequiredIntimacy: 910
         RequireEvolution: true
-  - Class: Amistr
+  - Id: 6002
+    Class: Amistr
     Name: Amistr
-    EvolutionClass: Amistr_H
+    EvolutionClass: 6010
     Food: Zargon
     Race: Brute
     Status:
@@ -197,9 +199,10 @@ Body:
         MaxLevel: 3
         RequiredIntimacy: 910
         RequireEvolution: true
-  - Class: Filir
+  - Id: 6003
+    Class: Filir
     Name: Filir
-    EvolutionClass: Filir_H
+    EvolutionClass: 6011
     Food: Garlet
     Race: Brute
     Status:
@@ -268,9 +271,10 @@ Body:
         MaxLevel: 3
         RequiredIntimacy: 910
         RequireEvolution: true
-  - Class: Vanilmirth
+  - Id: 6004
+    Class: Vanilmirth
     Name: Vanilmirth
-    EvolutionClass: Vanilmirth_H
+    EvolutionClass: 6012
     Food: Scell
     Race: Formless
     Status:
@@ -339,9 +343,10 @@ Body:
         MaxLevel: 3
         RequiredIntimacy: 910
         RequireEvolution: true
-  - Class: Lif2
+  - Id: 6005
+    Class: Lif2
     Name: Lif
-    EvolutionClass: Lif_H2
+    EvolutionClass: 6013
     Status:
       - Type: Hp
         Base: 150
@@ -408,9 +413,10 @@ Body:
         MaxLevel: 3
         RequiredIntimacy: 910
         RequireEvolution: true
-  - Class: Amistr2
+  - Id: 6006
+    Class: Amistr2
     Name: Amistr
-    EvolutionClass: Amistr_H2
+    EvolutionClass: 6014
     Food: Zargon
     Race: Brute
     Status:
@@ -479,9 +485,10 @@ Body:
         MaxLevel: 3
         RequiredIntimacy: 910
         RequireEvolution: true
-  - Class: Filir2
+  - Id: 6007
+    Class: Filir2
     Name: Filir
-    EvolutionClass: Filir_H2
+    EvolutionClass: 6015
     Food: Garlet
     Race: Brute
     Status:
@@ -550,9 +557,10 @@ Body:
         MaxLevel: 3
         RequiredIntimacy: 910
         RequireEvolution: true
-  - Class: Vanilmirth2
+  - Id: 6008
+    Class: Vanilmirth2
     Name: Vanilmirth
-    EvolutionClass: Vanilmirth_H2
+    EvolutionClass: 6016
     Food: Scell
     Race: Formless
     Status:
