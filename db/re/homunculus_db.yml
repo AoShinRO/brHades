@@ -57,9 +57,10 @@ Header:
   Version: 1
 
 Body:
-  - Class: Lif
+  - Id: 6001
+    Class: Lif
     Name: Lif
-    EvolutionClass: Lif_H
+    EvolutionClass: 6009
     Status:
       - Type: Hp
         Base: 150
@@ -126,9 +127,10 @@ Body:
         MaxLevel: 3
         RequiredIntimacy: 910
         RequireEvolution: true
-  - Class: Amistr
+  - Id: 6002
+    Class: Amistr
     Name: Amistr
-    EvolutionClass: Amistr_H
+    EvolutionClass: 6010
     Food: Zargon
     Race: Brute
     Status:
@@ -197,9 +199,10 @@ Body:
         MaxLevel: 3
         RequiredIntimacy: 910
         RequireEvolution: true
-  - Class: Filir
+  - Id: 6003
+    Class: Filir
     Name: Filir
-    EvolutionClass: Filir_H
+    EvolutionClass: 6011
     Food: Garlet
     Race: Brute
     Status:
@@ -268,9 +271,10 @@ Body:
         MaxLevel: 3
         RequiredIntimacy: 910
         RequireEvolution: true
-  - Class: Vanilmirth
+  - Id: 6004
+    Class: Vanilmirth
     Name: Vanilmirth
-    EvolutionClass: Vanilmirth_H
+    EvolutionClass: 6012
     Food: Scell
     Race: Formless
     Status:
@@ -339,9 +343,10 @@ Body:
         MaxLevel: 3
         RequiredIntimacy: 910
         RequireEvolution: true
-  - Class: Lif2
+  - Id: 6005
+    Class: Lif2
     Name: Lif
-    EvolutionClass: Lif_H2
+    EvolutionClass: 6013
     Status:
       - Type: Hp
         Base: 150
@@ -408,9 +413,10 @@ Body:
         MaxLevel: 3
         RequiredIntimacy: 910
         RequireEvolution: true
-  - Class: Amistr2
+  - Id: 6006
+    Class: Amistr2
     Name: Amistr
-    EvolutionClass: Amistr_H2
+    EvolutionClass: 6014
     Food: Zargon
     Race: Brute
     Status:
@@ -479,9 +485,10 @@ Body:
         MaxLevel: 3
         RequiredIntimacy: 910
         RequireEvolution: true
-  - Class: Filir2
+  - Id: 6007
+    Class: Filir2
     Name: Filir
-    EvolutionClass: Filir_H2
+    EvolutionClass: 6015
     Food: Garlet
     Race: Brute
     Status:
@@ -550,9 +557,10 @@ Body:
         MaxLevel: 3
         RequiredIntimacy: 910
         RequireEvolution: true
-  - Class: Vanilmirth2
+  - Id: 6008
+    Class: Vanilmirth2
     Name: Vanilmirth
-    EvolutionClass: Vanilmirth_H2
+    EvolutionClass: 6016
     Food: Scell
     Race: Formless
     Status:
@@ -621,7 +629,8 @@ Body:
         MaxLevel: 3
         RequiredIntimacy: 910
         RequireEvolution: true
-  - Class: Eira
+  - Id: 6048
+    Class: Eira
     Name: Eira
     Food: Small_Snow_Flower
     Race: Angel
@@ -685,7 +694,8 @@ Body:
       - Skill: MH_ABSOLUTE_ZEPHYR
         MaxLevel: 10
         RequiredLevel: 230
-  - Class: Bayeri
+  - Id: 6049
+    Class: Bayeri
     Name: Bayeri
     Food: Fresh_Plant
     Race: Brute
@@ -752,7 +762,8 @@ Body:
       - Skill: MH_GOLDENE_TONE
         MaxLevel: 10
         RequiredLevel: 230
-  - Class: Sera
+  - Id: 6050
+    Class: Sera
     Name: Sera
     Food: Apple_Pudding
     Race: Insect
@@ -813,7 +824,8 @@ Body:
       - Skill: MH_NEEDLE_STINGER
         MaxLevel: 10
         RequiredLevel: 230
-  - Class: Dieter
+  - Id: 6051
+    Class: Dieter
     Name: Dieter
     Food: Big_Cell
     Race: Formless
@@ -877,7 +889,8 @@ Body:
       - Skill: MH_BLAZING_LAVA
         MaxLevel: 10
         RequiredLevel: 210
-  - Class: Eleanor
+  - Id: 6052
+    Class: Eleanor
     Name: Eleanor
     Food: Bun_
     Element: Poison
@@ -946,3 +959,64 @@ Body:
       - Skill: MH_THE_ONE_FIGHTER_RISES
         MaxLevel: 10
         RequiredLevel: 230
+  - Id: 1150
+    Class: MOONLIGHT
+    Name: "Moonlight"
+    Food: Scell
+    HungryDelay: 60000
+    Race: Formless
+    Element: NEUTRAL
+    AttackDelay: 700
+    Status:
+      - Type: Hp
+        Base: 200
+        GrowthMinimum: 220
+        GrowthMaximum: 220
+        EvolutionMinimum: 5000
+        EvolutionMaximum: 5000
+      - Type: Sp
+        Base: 40
+        GrowthMinimum: 24
+        GrowthMaximum: 24
+        EvolutionMinimum: 720
+        EvolutionMaximum: 720
+      - Type: Str
+        Base: 20
+        GrowthMinimum: 25
+        GrowthMaximum: 25
+        EvolutionMinimum: 50
+        EvolutionMaximum: 50
+      - Type: Agi
+        Base: 18
+        GrowthMinimum: 20
+        GrowthMaximum: 20
+        EvolutionMinimum: 40
+        EvolutionMaximum: 40
+      - Type: Vit
+        Base: 18
+        GrowthMinimum: 20
+        GrowthMaximum: 20
+        EvolutionMinimum: 40
+        EvolutionMaximum: 40
+      - Type: Int
+        Base: 22
+        GrowthMinimum: 24
+        GrowthMaximum: 24
+        EvolutionMinimum: 60
+        EvolutionMaximum: 60
+      - Type: Dex
+        Base: 28
+        GrowthMinimum: 30
+        GrowthMaximum: 30
+        EvolutionMinimum: 60
+        EvolutionMaximum: 60
+      - Type: Luk
+        Base: 20
+        GrowthMinimum: 16
+        GrowthMaximum: 16
+        EvolutionMinimum: 40
+        EvolutionMaximum: 40
+    SkillTree:
+      - Skill: MG_FIREBOLT
+        MaxLevel: 5
+
