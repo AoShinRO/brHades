@@ -1136,6 +1136,7 @@ ACMD_FUNC(hide)
 	} else {
 		sd->sc.option |= OPTION_INVISIBLE;
 		sd->vd.class_ = JT_INVISIBLE;
+
 		clif_displaymessage(fd, msg_txt(sd,11)); // Invisible: On
 
 		// decrement the number of pvp players on the map
@@ -1920,28 +1921,42 @@ ACMD_FUNC(model)
  *------------------------------------------*/
 ACMD_FUNC(bodystyle)
 {
-	int32 body_style = 0;
+	unsigned short body_style = 0;
 	nullpo_retr(-1, sd);
 
 	memset(atcmd_output, '\0', sizeof(atcmd_output));
-#if PACKETVER < 20231220
-	if ( (sd->class_ & JOBL_FOURTH) || !(sd->class_ & JOBL_THIRD) || (sd->class_ & MAPID_THIRDMASK) == MAPID_SUPER_NOVICE_E || (sd->class_ & MAPID_THIRDMASK) == MAPID_STAR_EMPEROR || (sd->class_ & MAPID_THIRDMASK) == MAPID_SOUL_REAPER) {
+
+	if (job_alternate_outfit.find((e_job)sd->class_) == job_alternate_outfit.end()){
 		clif_displaymessage(fd, msg_txt(sd,740));	// This job has no alternate body styles.
 		return -1;
 	}
-#endif
-	if (!message || !*message || sscanf(message, "%d", &body_style) < 1) {
-		sprintf(atcmd_output, msg_txt(sd,739), MIN_BODY_STYLE, MAX_BODY_STYLE);		// Please enter a body style (usage: @bodystyle <body ID: %d-%d>).
-		clif_displaymessage(fd, atcmd_output);
+
+	if (message == nullptr || !*message || sscanf(message, "%hu", &body_style) < 1) {
+		clif_displaymessage(fd, msg_txt(sd, 739)); // Please enter a body style (usage: @bodystyle <job ID>).
 		return -1;
 	}
 
-	if (body_style >= MIN_BODY_STYLE && body_style <= MAX_BODY_STYLE) {
-		pc_changelook(sd, LOOK_BODY2, body_style);
-		clif_displaymessage(fd, msg_txt(sd,36)); // Appearence changed.
-	} else {
-		clif_displaymessage(fd, msg_txt(sd,37)); // An invalid number was specified.
+	// Handle the 'off' alias to revert to the default bodystyle
+	if (!strcasecmp(message, "off")) {
+		if (sd->vd.class_ != sd->status.class_) {
+			pc_changelook(sd, LOOK_BODY2, sd->status.class_);
+			clif_displaymessage(fd, msg_txt(sd, 1539)); // Appearance changed to default.
+		}
+		else {
+			clif_displaymessage(fd, msg_txt(sd, 1540)); // Appearance is already set to default.
+		}
+
+		return 0;
+	}
+
+	if (body_style != sd->status.class_ && job_alternate_outfit.find((e_job)body_style) == job_alternate_outfit.end()) {
+		clif_displaymessage(fd, msg_txt(sd, 37)); // An invalid number was specified.
 		return -1;
+	}
+
+	if (body_style != sd->vd.class_) {
+		pc_changelook(sd, LOOK_BODY2, body_style);
+		clif_displaymessage(fd, msg_txt(sd, 36)); // Appearence changed.
 	}
 
 	return 0;

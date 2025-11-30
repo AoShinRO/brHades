@@ -1032,6 +1032,11 @@ Body:
   - Command: setcard 
     Help: |
       Adds a card or enchant to the specific slot of the equipment.
+  - Command: bodystyle
+    Help: |
+      Params: <job ID>
+      Params: off. Restores default job bodystyle.
+      Changes the character's bodystyle to <job ID>.
   - Command: resetcooltime
     Aliases:
       - resetcooldown

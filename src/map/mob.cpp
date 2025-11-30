@@ -5477,7 +5477,7 @@ uint64 MobAvailDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			constant = sprite_mob->id;
 		}
 
-		mob->vd.class_ = (unsigned short)constant;
+		 mob->vd.class_ = mob->vd.body_style = static_cast<int32>(constant);
 	} else {
 		this->invalidWarning(node["Sprite"], "Sprite is missing.\n");
 		return 0;
