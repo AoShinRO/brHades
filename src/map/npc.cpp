@@ -335,9 +335,18 @@ uint64 StylistDatabase::parseBodyNode( const ryml::NodeRef& node ){
 					}
 					break;
 				case LOOK_BODY2:
-					if( !this->asUInt32( optionNode, "Value", value ) ){
+					std::string bodyStyle;
+					int64 job_id;
+					if (!this->asString(optionNode, "Value", bodyStyle)) {
 						return 0;
 					}
+
+					if (!script_get_constant(bodyStyle.c_str(), &job_id)) {
+						this->invalidWarning(optionNode["Value"], "Job %s does not exist.\n", bodyStyle.c_str());
+						return 0;
+					}
+
+					value = (uint32)job_id;
 #if PACKETVER < 20231220
 					value = cap_value(value, MIN_BODY_STYLE, MAX_BODY_STYLE);
 #endif
@@ -355,21 +364,21 @@ uint64 StylistDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if (this->nodeExists(node, "RequiredJob")) {
-			const ryml::NodeRef& jobNode = optionNode["RequiredJob"];
-
-			for (const auto& jobit : jobNode) {
-				std::string jobName;
-				c4::from_chars(jobit.key(), &jobName);
-				std::string job_name_constant = "JOB_" + jobName;
-				int64 job_id;
-
-				if (!script_get_constant(job_name_constant.c_str(), &job_id)) {
-					this->invalidWarning(optionNode["RequiredJob"], "Job %s does not exist.\n", jobName.c_str());
-					return 0;
-				}
-				entry->required_job.push_back(util::clamp<uint16>(job_id));
+			std::string jobName;
+			if (!this->asString(node, "RequiredJob", jobName)) {
+				return 0;
 			}
+
+			int64 job_id;
+			if (!script_get_constant(jobName.c_str(), &job_id)) {
+				this->invalidWarning(optionNode["Value"], "Job %s does not exist.\n", jobName.c_str());
+				return 0;
+			}
+
+			entry->required_job = (e_job)job_id;
 		}
+		else
+			entry->required_job = (e_job)0;
 
 		if( this->nodeExists( optionNode, "CostsHuman" ) ) {
 			if( !this->parseCostNode( entry, false, optionNode["CostsHuman"] ) ){
