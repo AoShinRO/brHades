@@ -22988,11 +22988,6 @@ bool clif_parse_stylist_buy_sub( map_session_data* sd, _look look, int16 index )
 
 	std::shared_ptr<s_stylist_entry> entry = util::umap_find( list->entries, index );
 
-#if PACKETVER >= 20231220
-	if (entry == nullptr && look == LOOK_BODY2 && !list->entries.empty())
-		entry = list->entries.begin()->second;
-#endif
-
 	if( entry == nullptr ){
 		return false;
 	}
@@ -23051,13 +23046,8 @@ bool clif_parse_stylist_buy_sub( map_session_data* sd, _look look, int16 index )
 	switch( look ){
 		case LOOK_BODY2:
 #if PACKETVER >= 20231220
-			if (!entry->required_job.empty()) {
-				if (std::find(entry->required_job.begin(), entry->required_job.end(), sd->status.class_) == entry->required_job.end()) {
-					return false;
-				}
-			}
-			pc_changelook(sd, look, index);
-			break;
+			if (entry->required_job > 0 && sd->status.class_ != entry->required_job) 
+				return false;
 #endif
 		case LOOK_HAIR:
 		case LOOK_HAIR_COLOR:
@@ -23117,61 +23107,6 @@ void clif_parse_stylist_buy( int32 fd, map_session_data* sd ){
 		{ STYLIST_HEAD_BOTTOM, LOOK_HEAD_BOTTOM },
 		{ STYLIST_BODY2, LOOK_BODY2 }
 	};
-	std::map<int16, e_job> stylist_map
-	{
-		{ 2, JOB_RUNE_KNIGHT_T},
-		{ 3, JOB_RUNE_KNIGHT_2ND},
-		{ 5, JOB_MECHANIC_T},
-		{ 6, JOB_MECHANIC_2ND},
-		{ 8, JOB_GUILLOTINE_CROSS_T},
-		{ 9, JOB_GUILLOTINE_CROSS_2ND},
-		{ 11, JOB_WARLOCK_T},
-		{ 12, JOB_WARLOCK_2ND},
-		{ 14, JOB_ARCH_BISHOP_T},
-		{ 15, JOB_ARCH_BISHOP_2ND},
-		{ 17, JOB_RANGER_T},
-		{ 18, JOB_RANGER_2ND},
-		{ 20, JOB_ROYAL_GUARD_T},
-		{ 21, JOB_ROYAL_GUARD_2ND},
-		{ 23, JOB_GENETIC_T},
-		{ 24, JOB_GENETIC_2ND},
-		{ 26, JOB_SHADOW_CHASER_T},
-		{ 27, JOB_SHADOW_CHASER_2ND},
-		{ 29, JOB_SORCERER_T},
-		{ 30, JOB_SORCERER_2ND},
-		{ 32, JOB_SURA_T},
-		{ 33, JOB_SURA_2ND},
-		{ 35, JOB_MINSTREL_T},
-		{ 36, JOB_MINSTREL_2ND},
-		{ 38, JOB_WANDERER_T},
-		{ 39, JOB_WANDERER_2ND},
-		{ 41, JOB_RUNE_KNIGHT_2ND},
-	 	{ 43, JOB_RUNE_KNIGHT_2ND},
-		{ 47, JOB_MECHANIC_2ND},
-		{ 49, JOB_MECHANIC_2ND},
-		{ 53, JOB_GUILLOTINE_CROSS_2ND},
-		{ 55, JOB_GUILLOTINE_CROSS_2ND},
-		{ 59, JOB_WARLOCK_2ND},
-		{ 61, JOB_WARLOCK_2ND},
-		{ 65, JOB_ARCH_BISHOP_2ND},
-		{ 67, JOB_ARCH_BISHOP_2ND},
-		{ 71, JOB_RANGER_2ND},
-		{ 73, JOB_RANGER_2ND},
-		{ 77, JOB_ROYAL_GUARD_2ND},
-		{ 79, JOB_ROYAL_GUARD_2ND},
-		{ 83, JOB_GENETIC_2ND},
-		{ 85, JOB_GENETIC_2ND},
-		{ 89, JOB_SHADOW_CHASER_2ND},
-		{ 91, JOB_SHADOW_CHASER_2ND},
-		{ 95, JOB_SORCERER_2ND},
-		{ 97, JOB_SORCERER_2ND},
-		{ 101, JOB_SURA_2ND},
-		{ 103, JOB_SURA_2ND},
-		{ 107, JOB_MINSTREL_2ND},
-		{ 109, JOB_MINSTREL_2ND},
-		{ 113, JOB_WANDERER_2ND},
-		{ 115, JOB_WANDERER_2ND}
-	};
 
 	for (int i = 0; i < p->count; i++) {
 
@@ -23187,18 +23122,8 @@ void clif_parse_stylist_buy( int32 fd, map_session_data* sd ){
 			clif_stylist_response(sd, true);
 			return;
 		}
-
-		int16 val = data.value;
-		if (look->first == STYLIST_BODY2)
-		{
-			auto tmp = stylist_map.find(val);
-			if (tmp == stylist_map.end())
-				val = static_cast<int16>(sd->status.class_);
-			else
-				val = tmp->second;
-		}
 		
-		if (!clif_parse_stylist_buy_sub(sd, look->second, val)) {
+		if (!clif_parse_stylist_buy_sub(sd, look->second, data.value)) {
 			clif_stylist_response(sd, true);
 			return;
 		}
