@@ -3973,8 +3973,7 @@ void clif_changemanner( map_session_data& sd ) {
 /// 01d7 <id>.L <type>.B <value1>.W <value2>.W (ZC_SPRITE_CHANGE2)
 void clif_sprite_change( struct block_list *bl, int32 id, int32 type, int32 val, int32 val2, enum send_target target ){
 
-	switch (type) {
-	case LOOK_BODY2:
+	if (type == LOOK_BODY2) {
 #if PACKETVER < 20231220
 		if (val > JOB_SECOND_JOB_START && val < JOB_SECOND_JOB_END) {
 			val = 1;
@@ -3985,7 +3984,6 @@ void clif_sprite_change( struct block_list *bl, int32 id, int32 type, int32 val,
 #elif PACKETVER < 20141022
 		return;
 #endif
-		break;
 	}
 
 	PACKET_ZC_SPRITE_CHANGE p = {};
