@@ -23099,7 +23099,7 @@ void clif_parse_stylist_buy( int32 fd, map_session_data* sd ){
 #if PACKETVER >= 20231220
 	const PACKET_CZ_REQ_STYLE_CHANGE3* p = reinterpret_cast<PACKET_CZ_REQ_STYLE_CHANGE3*>(RFIFOP(fd, 0));
 
-	const enum e_stylist : int16
+	enum e_stylist : int16
 	{
 		STYLIST_HAIR_COLLOR,
 		STYLIST_HAIR,
@@ -23110,7 +23110,7 @@ void clif_parse_stylist_buy( int32 fd, map_session_data* sd ){
 		STYLIST_BODY2 = 9
 	};
 
-	const std::map<int16, _look> stylist_response {
+	std::map<int16, _look> stylist_response {
 		{ STYLIST_HAIR_COLLOR, LOOK_HAIR_COLOR },
 		{ STYLIST_HAIR, LOOK_HAIR },
 		{ STYLIST_CLOTHS_COLLOR, LOOK_CLOTHES_COLOR },
@@ -23119,7 +23119,7 @@ void clif_parse_stylist_buy( int32 fd, map_session_data* sd ){
 		{ STYLIST_HEAD_BOTTOM, LOOK_HEAD_BOTTOM },
 		{ STYLIST_BODY2, LOOK_BODY2 }
 	};
-	const std::map<int16, e_job> stylist_map
+	std::map<int16, e_job> stylist_map
 	{
 		{ 2, JOB_RUNE_KNIGHT_T},
 		{ 3, JOB_RUNE_KNIGHT_2ND},
