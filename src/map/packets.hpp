@@ -2000,8 +2000,10 @@ DEFINE_PACKET_HEADER(ZC_WARPLIST, 0x11c)
 #endif
 
 struct CZ_REQ_STYLE_CHANGE3_SUB {
-	int32 action;
-	int32 value;
+	int16 action;   // 2 bytes - action comes first  
+	int16 unknown;  // 2 bytes - unused
+	int16 value;    // 2 bytes - style value 
+	int16 unknown2; // 2 bytes - unused  
 } __attribute__((packed));
 
 struct PACKET_CZ_REQ_STYLE_CHANGE3 {

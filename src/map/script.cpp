@@ -6893,7 +6893,15 @@ BUILDIN_FUNC(changelook)
 		val = cap_value(val, MIN_CLOTH_COLOR, MAX_CLOTH_COLOR);
 		break;
 	case LOOK_BODY2:
-		val = cap_value(val, MIN_BODY_STYLE, MAX_BODY_STYLE);
+		if (val < JOB_NOVICE) {
+			ShowError("buildin_changelook: Invalid body style. Minimum: %d\n", JOB_NOVICE);
+			return SCRIPT_CMD_FAILURE;
+		}
+
+		if (val >= JOB_MAX) {
+			ShowError("buildin_changelook: Invalid body style. Maximum: %d\n", (JOB_MAX - 1));
+			return SCRIPT_CMD_FAILURE;
+		}
 		break;
 	default:
 		break;

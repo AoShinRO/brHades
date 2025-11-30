@@ -249,7 +249,7 @@ CREATE TABLE IF NOT EXISTS `char` (
   `hair` tinyint(4) unsigned NOT NULL default '0',
   `hair_color` smallint(5) unsigned NOT NULL default '0',
   `clothes_color` smallint(5) unsigned NOT NULL default '0',
-  `body` smallint(5) unsigned NOT NULL default '0',
+  `body` smallint(6) unsigned NOT NULL default '0',
   `weapon` smallint(6) unsigned NOT NULL default '0',
   `shield` smallint(6) unsigned NOT NULL default '0',
   `head_top` smallint(6) unsigned NOT NULL default '0',
