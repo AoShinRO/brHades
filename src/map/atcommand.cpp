@@ -1917,7 +1917,7 @@ ACMD_FUNC(model)
 }
 
 /*==========================================
- * @bodystyle [Rytech]
+ * @bodystyle
  *------------------------------------------*/
 ACMD_FUNC(bodystyle)
 {
@@ -1926,18 +1926,18 @@ ACMD_FUNC(bodystyle)
 
 	memset(atcmd_output, '\0', sizeof(atcmd_output));
 
-	if (job_alternate_outfit.find((e_job)sd->class_) == job_alternate_outfit.end()){
+	if (job_alternate_outfit.find((e_job)sd->status.class_) == job_alternate_outfit.end()){
 		clif_displaymessage(fd, msg_txt(sd,740));	// This job has no alternate body styles.
 		return -1;
 	}
 
-	if (message == nullptr || !*message || sscanf(message, "%hu", &body_style) < 1) {
+	if (message == nullptr || !*message || sscanf(message, "%hu", &body_style) < 0) {
 		clif_displaymessage(fd, msg_txt(sd, 739)); // Please enter a body style (usage: @bodystyle <job ID>).
 		return -1;
 	}
 
 	// Handle the 'off' alias to revert to the default bodystyle
-	if (!strcasecmp(message, "off")) {
+	if (!strcasecmp(message, "off") || body_style == 0) {
 		if (sd->vd.class_ != sd->status.class_) {
 			pc_changelook(sd, LOOK_BODY2, sd->status.class_);
 			clif_displaymessage(fd, msg_txt(sd, 1539)); // Appearance changed to default.
@@ -1949,15 +1949,13 @@ ACMD_FUNC(bodystyle)
 		return 0;
 	}
 
-	if (body_style != sd->status.class_ && job_alternate_outfit.find((e_job)body_style) == job_alternate_outfit.end()) {
-		clif_displaymessage(fd, msg_txt(sd, 37)); // An invalid number was specified.
-		return -1;
-	}
+	auto tmp = job_alternate_outfit.find((e_job)sd->status.class_);
 
-	if (body_style != sd->vd.class_) {
-		pc_changelook(sd, LOOK_BODY2, body_style);
+	if (tmp != job_alternate_outfit.end() && tmp->second != sd->vd.class_) {
+		pc_changelook(sd, LOOK_BODY2, tmp->second);
 		clif_displaymessage(fd, msg_txt(sd, 36)); // Appearence changed.
 	}
+	
 
 	return 0;
 }
