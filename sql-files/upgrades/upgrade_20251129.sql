@@ -1,0 +1,3 @@
+ALTER TABLE `char`
+    MODIFY COLUMN `body` SMALLINT(6) NOT NULL
+;
