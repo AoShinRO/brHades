@@ -359,23 +359,23 @@ uint64 StylistDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if (this->nodeExists(node, "RequiredJob")) {
-			std::string jobName;
-			if (!this->asString(node, "RequiredJob", jobName)) {
+			std::string RequiredJob;
+			if (!this->asString(node, "RequiredJob", RequiredJobName)) {
 				return 0;
 			}
 
-			int64 job_id;
-			if (!script_get_constant(jobName.c_str(), &job_id)) {
-				this->invalidWarning(optionNode["Value"], "stylist_parseBodyNode: Job %s is invalid.\n", jobName.c_str());
+			int64 RequiredJob;
+			if (!script_get_constant(RequiredJobName.c_str(), &RequiredJob)) {
+				this->invalidWarning(node["RequiredJob"], "stylist_parseBodyNode: Job %s is invalid.\n", RequiredJobName.c_str());
 				return 0;
 			}
 
-			if (!job_db.exists(job_id)) {
-				this->invalidWarning(optionNode["Value"], "stylist_parseBodyNode: Job %s does not exist.\n", job_id);
+			if (!job_db.exists(RequiredJob)) {
+				this->invalidWarning(node["RequiredJob"], "stylist_parseBodyNode: Job %s does not exist.\n", RequiredJob);
 				return 0;
 			}
 
-			entry->required_job = static_cast<e_job>(job_id);
+			entry->required_job = static_cast<e_job>(RequiredJob);
 		}
 
 		if( this->nodeExists( optionNode, "CostsHuman" ) ) {
