@@ -347,7 +347,7 @@ uint64 StylistDatabase::parseBodyNode( const ryml::NodeRef& node ){
 					}
 
 					if (!job_db.exists(job_id) && (job_id <= JOB_SECOND_JOB_START || job_id >= JOB_SECOND_JOB_END)) {
-						this->invalidWarning(optionNode["Value"], "stylist_parseBodyNode: Job Body %s does not exist.\n", job_id);
+						this->invalidWarning(optionNode["Value"], "stylist_parseBodyNode: Job Body \"%u\" does not exist.\n", job_id);
 						return 0;
 					}
 
@@ -371,7 +371,7 @@ uint64 StylistDatabase::parseBodyNode( const ryml::NodeRef& node ){
 			}
 
 			if (!job_db.exists(RequiredJob)) {
-				this->invalidWarning(node["RequiredJob"], "stylist_parseBodyNode: Job %s does not exist.\n", RequiredJob);
+				this->invalidWarning(node["RequiredJob"], "stylist_parseBodyNode: Job \"%u\" does not exist.\n", RequiredJob);
 				return 0;
 			}
 
