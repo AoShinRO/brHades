@@ -1006,10 +1006,8 @@ int32 chrif_changedsex(int32 fd) {
 				sd->status.class_ -= 1;
 			else// Changed from male version of job.
 				sd->status.class_ += 1;
-#if PACKETVER >= 20231220
-			sd->status.body = sd->status.class_;
-#endif
 			//sd->class_ Does not need to be updated as both versions of the job are the same.
+			sd->status.body = sd->status.class_;
 		}
 		// save character
 		sd->login_id1++; // change identify, because if player come back in char within the 5 seconds, he can change its characters

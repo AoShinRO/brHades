@@ -342,21 +342,16 @@ uint64 StylistDatabase::parseBodyNode( const ryml::NodeRef& node ){
 					}
 
 					if (!script_get_constant(bodyStyle.c_str(), &job_id)) {
-						this->invalidWarning(optionNode["Value"], "Job %s does not exist.\n", bodyStyle.c_str());
+						this->invalidWarning(optionNode["Value"], "stylist_parseBodyNode: Job Body %s is invalid.\n", bodyStyle.c_str());
 						return 0;
 					}
 
-					value = (uint32)job_id;
-#if PACKETVER < 20231220
-					value = cap_value(value, MIN_BODY_STYLE, MAX_BODY_STYLE);
-#endif
-					if( value < MIN_BODY_STYLE ){
-						this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: body style \"%u\" is too low...\n", value );
-						return 0;
-					}else if( value > MAX_BODY_STYLE ){
-						this->invalidWarning( optionNode["Value"], "stylist_parseBodyNode: body style \"%u\" is too high...\n", value );
+					if (!job_db.exists(value) && (value <= JOB_SECOND_JOB_START || value >= JOB_SECOND_JOB_END)) {
+						this->invalidWarning(optionNode["Value"], "stylist_parseBodyNode: Job Body %s does not exist.\n", value);
 						return 0;
 					}
+
+					value = static_cast<uint32>(job_id);
 					break;
 			}
 
@@ -371,14 +366,17 @@ uint64 StylistDatabase::parseBodyNode( const ryml::NodeRef& node ){
 
 			int64 job_id;
 			if (!script_get_constant(jobName.c_str(), &job_id)) {
-				this->invalidWarning(optionNode["Value"], "Job %s does not exist.\n", jobName.c_str());
+				this->invalidWarning(optionNode["Value"], "stylist_parseBodyNode: Job %s is invalid.\n", jobName.c_str());
 				return 0;
 			}
 
-			entry->required_job = (e_job)job_id;
+			if (!job_db.exists(job_id)) {
+				this->invalidWarning(optionNode["Value"], "stylist_parseBodyNode: Job %s does not exist.\n", job_id);
+				return 0;
+			}
+
+			entry->required_job = static_cast<e_job>(job_id);
 		}
-		else
-			entry->required_job = (e_job)0;
 
 		if( this->nodeExists( optionNode, "CostsHuman" ) ) {
 			if( !this->parseCostNode( entry, false, optionNode["CostsHuman"] ) ){
