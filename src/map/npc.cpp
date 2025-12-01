@@ -346,8 +346,8 @@ uint64 StylistDatabase::parseBodyNode( const ryml::NodeRef& node ){
 						return 0;
 					}
 
-					if (!job_db.exists(value) && (value <= JOB_SECOND_JOB_START || value >= JOB_SECOND_JOB_END)) {
-						this->invalidWarning(optionNode["Value"], "stylist_parseBodyNode: Job Body %s does not exist.\n", value);
+					if (!job_db.exists(job_id) && (job_id <= JOB_SECOND_JOB_START || job_id >= JOB_SECOND_JOB_END)) {
+						this->invalidWarning(optionNode["Value"], "stylist_parseBodyNode: Job Body %s does not exist.\n", job_id);
 						return 0;
 					}
 
@@ -359,7 +359,7 @@ uint64 StylistDatabase::parseBodyNode( const ryml::NodeRef& node ){
 		}
 
 		if (this->nodeExists(node, "RequiredJob")) {
-			std::string RequiredJob;
+			std::string RequiredJobName;
 			if (!this->asString(node, "RequiredJob", RequiredJobName)) {
 				return 0;
 			}
