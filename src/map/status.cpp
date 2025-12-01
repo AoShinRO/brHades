@@ -9148,7 +9148,7 @@ void status_set_viewdata(struct block_list *bl, int32 class_)
 						sd->vd.cloth_color = 0;
 				}
 				if ( sd->vd.body_style && sd->sc.option&OPTION_COSTUME)
- 					sd->vd.body_style = util::clamp<uint16>(sd->class_);
+ 					sd->vd.body_style = util::clamp<uint16>(sd->status.class_);
 			} else if (vd)
 				memcpy(&sd->vd, vd, sizeof(struct view_data));
 			else

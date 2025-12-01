@@ -1233,8 +1233,15 @@ static void clif_set_unit_idle( struct block_list* bl, bool walking, send_target
 		p.isBoss = BOSSTYPE_NONE;
 	}
 #endif
-#if PACKETVER >= 20150513
+#if PACKETVER_MAIN_NUM >= 20231220
 	p.body = vd->body_style;
+#elif PACKETVER >= 20150513
+	if (vd->body_style > JOB_SECOND_JOB_START && vd->body_style < JOB_SECOND_JOB_END) {
+		p.body = 1;
+	}
+	else {
+		p.body = 0;
+	}
 #endif
 /* Might be earlier, this is when the named item bug began */
 #if PACKETVER >= 20131223
@@ -1476,8 +1483,15 @@ static void clif_set_unit_walking( struct block_list& bl, map_session_data* tsd,
 		p.isBoss = BOSSTYPE_NONE;
 	}
 #endif
-#if PACKETVER >= 20150513
+#if PACKETVER_MAIN_NUM >= 20231220
 	p.body = vd->body_style;
+#elif PACKETVER >= 20150513
+	if (vd->body_style > JOB_SECOND_JOB_START && vd->body_style < JOB_SECOND_JOB_END) {
+		p.body = 1;
+	}
+	else {
+		p.body = 0;
+	}
 #endif
 /* Might be earlier, this is when the named item bug began */
 #if PACKETVER >= 20131223
@@ -3974,7 +3988,7 @@ void clif_changemanner( map_session_data& sd ) {
 void clif_sprite_change( struct block_list *bl, int32 id, int32 type, int32 val, int32 val2, enum send_target target ){
 
 	if (type == LOOK_BODY2) {
-#if PACKETVER < 20231220
+#if defined(PACKETVER_ZERO) || PACKETVER_MAIN_NUM < 20231220 
 		if (val > JOB_SECOND_JOB_START && val < JOB_SECOND_JOB_END) {
 			val = 1;
 		}
@@ -4121,8 +4135,7 @@ void clif_changelook(struct block_list *bl, int32 type, int32 val) {
 				if (sc != nullptr && sc->option & OPTION_COSTUME) {
 					val = sd->status.class_;
 				}
-
-				vd->class_ = val;
+				vd->body_style = val;
 				break;
 #endif
 	}
@@ -23087,7 +23100,7 @@ void clif_parse_stylist_buy( int32 fd, map_session_data* sd ){
 
 	nullpo_retv(sd);
 
-#if PACKETVER >= 20231220
+#if PACKETVER_MAIN_NUM >= 20231220
 
 	enum e_stylist_actions : int16
 	{
