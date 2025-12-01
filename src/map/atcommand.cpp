@@ -1956,7 +1956,6 @@ ACMD_FUNC(bodystyle)
 		clif_displaymessage(fd, msg_txt(sd, 36)); // Appearence changed.
 	}
 	
-
 	return 0;
 }
 
