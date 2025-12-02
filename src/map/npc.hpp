@@ -57,7 +57,7 @@ struct s_stylist_entry{
 	uint32 value;
 	std::shared_ptr<s_stylist_costs> human;
 	std::shared_ptr<s_stylist_costs> doram;
-	std::vector<uint16> required_job;
+	e_job required_job;
 };
 
 struct s_stylist_list{
@@ -1610,7 +1610,7 @@ int32 npc_get_new_npc_id(void);
 
 int32 npc_addsrcfile(const char* name, bool loadscript);
 void npc_delsrcfile(const char* name);
-static inline int32 npc_parsesrcfile(std::string_view filepath);
+static inline int32 npc_parsesrcfile(const char* filepath);
 void do_clear_npc(void);
 void do_final_npc(void);
 void do_init_npc(void);

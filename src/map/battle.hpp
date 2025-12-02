@@ -155,12 +155,6 @@ bool is_infinite_defense(struct block_list *target, int32 flag);
 #define MAX_HAIR_COLOR battle_config.max_hair_color
 #define MIN_CLOTH_COLOR battle_config.min_cloth_color
 #define MAX_CLOTH_COLOR battle_config.max_cloth_color
-#define MIN_BODY_STYLE 0
-#if PACKETVER >= 20231220
-#define MAX_BODY_STYLE (JOB_MAX-1)
-#else
-#define MAX_BODY_STYLE 1
-#endif
 
 struct Battle_Config
 {

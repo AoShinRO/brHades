@@ -3,7 +3,7 @@ name: "Compilação em Clang"
 
 concurrency:
   group: ${{ github.repository }}-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 on:
   workflow_dispatch:
@@ -27,7 +27,7 @@ jobs:
           # Available: ubuntu-24.04, ubuntu-22.04
           os: [ubuntu-22.04]
           # Version list can be found on https://github.com/marketplace/actions/install-clang
-          clang: ['13','14','15','16','17','18','19','20']
+          clang: ['18','19','20']
 
     steps:
       - uses: actions/checkout@v4

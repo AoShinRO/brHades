@@ -1032,6 +1032,11 @@ Body:
   - Command: setcard 
     Help: |
       Adds a card or enchant to the specific slot of the equipment.
+  - Command: bodystyle
+    Help: |
+      Params: <1/0>
+      Params: off. Restores default job bodystyle.
+      Changes the character's bodystyle to alternate kro sprite.
   - Command: resetcooltime
     Aliases:
       - resetcooldown

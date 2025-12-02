@@ -362,7 +362,7 @@ enum e_clif_bl_types : unsigned char{
 };
 static inline unsigned char clif_bl_type(struct block_list *bl, bool walking) {
 	switch (bl->type) {
-	case BL_PC:    return (disguised(bl) && !pcdb_checkid(status_get_viewdata(bl)->class_))? C_NPC_TYPE : C_PC_TYPE;
+	case BL_PC:    return disguised(bl) && !pcdb_checkid(status_get_viewdata(bl)->class_)? C_NPC_TYPE : C_PC_TYPE;
 	case BL_ITEM:  return C_ITEM_TYPE;
 	case BL_SKILL: return C_SKILL_TYPE;
 	case BL_CHAT:  return C_CHAT_TYPE;
@@ -1233,8 +1233,15 @@ static void clif_set_unit_idle( struct block_list* bl, bool walking, send_target
 		p.isBoss = BOSSTYPE_NONE;
 	}
 #endif
-#if PACKETVER >= 20150513
+#if PACKETVER_MAIN_NUM >= 20231220
 	p.body = vd->body_style;
+#elif PACKETVER >= 20150513
+	if (vd->body_style > JOB_SECOND_JOB_START && vd->body_style < JOB_SECOND_JOB_END) {
+		p.body = 1;
+	}
+	else {
+		p.body = 0;
+	}
 #endif
 /* Might be earlier, this is when the named item bug began */
 #if PACKETVER >= 20131223
@@ -1476,8 +1483,15 @@ static void clif_set_unit_walking( struct block_list& bl, map_session_data* tsd,
 		p.isBoss = BOSSTYPE_NONE;
 	}
 #endif
-#if PACKETVER >= 20150513
+#if PACKETVER_MAIN_NUM >= 20231220
 	p.body = vd->body_style;
+#elif PACKETVER >= 20150513
+	if (vd->body_style > JOB_SECOND_JOB_START && vd->body_style < JOB_SECOND_JOB_END) {
+		p.body = 1;
+	}
+	else {
+		p.body = 0;
+	}
 #endif
 /* Might be earlier, this is when the named item bug began */
 #if PACKETVER >= 20131223
@@ -3972,6 +3986,20 @@ void clif_changemanner( map_session_data& sd ) {
 /// 00c3 <id>.L <type>.B <value>.B (ZC_SPRITE_CHANGE)
 /// 01d7 <id>.L <type>.B <value1>.W <value2>.W (ZC_SPRITE_CHANGE2)
 void clif_sprite_change( struct block_list *bl, int32 id, int32 type, int32 val, int32 val2, enum send_target target ){
+
+	if (type == LOOK_BODY2) {
+#if defined(PACKETVER_ZERO) || PACKETVER_MAIN_NUM < 20231220 
+		if (val > JOB_SECOND_JOB_START && val < JOB_SECOND_JOB_END) {
+			val = 1;
+		}
+		else {
+			val = 0;
+		}
+#elif PACKETVER < 20141022
+		return;
+#endif
+	}
+
 	PACKET_ZC_SPRITE_CHANGE p = {};
 
 	p.packetType = sendLookType;
@@ -4104,13 +4132,12 @@ void clif_changelook(struct block_list *bl, int32 type, int32 val) {
 #if PACKETVER < 20150513
 				return;
 #else
-#if PACKETVER < 20231220
-				if (val && sd && sd->sc.option&OPTION_COSTUME)
- 					val = 0;
-#endif
- 				vd->body_style = val;
-#endif
+				if (sc != nullptr && sc->option & OPTION_COSTUME) {
+					val = sd->status.class_;
+				}
+				vd->body_style = val;
 				break;
+#endif
 	}
 
 	// prevent leaking the presence of GM-hidden objects
@@ -22994,6 +23021,10 @@ bool clif_parse_stylist_buy_sub( map_session_data* sd, _look look, int16 index )
 		return false;
 	}
 
+	if (entry->required_job > 0 && entry->required_job != sd->status.class_) {
+		return false;
+	}
+
 	int16 inventoryIndex = -1;
 
 	if( costs->requiredItem != 0 ){
@@ -23030,17 +23061,10 @@ bool clif_parse_stylist_buy_sub( map_session_data* sd, _look look, int16 index )
 	}
 
 	switch( look ){
-		case LOOK_BODY2:
-#if PACKETVER >= 20231220
-		if (!entry->required_job.empty()) {
-			if (std::find(entry->required_job.begin(), entry->required_job.end(), sd->status.class_) == entry->required_job.end()) {
-				return false;
-			}
-		}
-#endif
 		case LOOK_HAIR:
 		case LOOK_HAIR_COLOR:
 		case LOOK_CLOTHES_COLOR:
+		case LOOK_BODY2:
 			pc_changelook( sd, look, entry->value );
 			break;
 		case LOOK_HEAD_BOTTOM:
@@ -23070,54 +23094,53 @@ bool clif_parse_stylist_buy_sub( map_session_data* sd, _look look, int16 index )
 }
 
 void clif_parse_stylist_buy( int32 fd, map_session_data* sd ){
-	if (sd == nullptr) {
-		return;
-	}
-#if PACKETVER >= 20231220
+#if	PACKETVER < 20151104
+	return; // unsuported
+#endif
+
+	nullpo_retv(sd);
+
+#if PACKETVER_MAIN_NUM >= 20231220
+
+	enum e_stylist_actions : int16
+	{
+		STYLIST_HAIR_COLLOR,
+		STYLIST_HAIR,
+		STYLIST_CLOTHES_COLLOR,
+		STYLIST_HEAD_TOP,
+		STYLIST_HEAD_MID,
+		STYLIST_HEAD_BOTTOM,
+		STYLIST_BODY2 = 9
+	};
+
+	std::map<int16, _look> stylist_actions{
+		{ STYLIST_HAIR_COLLOR, LOOK_HAIR_COLOR },
+		{ STYLIST_HAIR, LOOK_HAIR },
+		{ STYLIST_CLOTHES_COLLOR, LOOK_CLOTHES_COLOR },
+		{ STYLIST_HEAD_TOP, LOOK_HEAD_TOP },
+		{ STYLIST_HEAD_MID, LOOK_HEAD_MID },
+		{ STYLIST_HEAD_BOTTOM, LOOK_HEAD_BOTTOM },
+		{ STYLIST_BODY2, LOOK_BODY2 }
+	};
+
 	const PACKET_CZ_REQ_STYLE_CHANGE3* p = reinterpret_cast<PACKET_CZ_REQ_STYLE_CHANGE3*>(RFIFOP(fd, 0));
 
-	for (int i = 0; i < p->count; i++) {
-		if (p->data[i].value == 0)
-			continue;
+	for (int32 i = 0; i < p->count; i++) {
+		const CZ_REQ_STYLE_CHANGE3_SUB& data = p->data[i];
 
-		switch (p->data[i].action) {
-		case 0:
-			if (!clif_parse_stylist_buy_sub(sd, LOOK_HAIR_COLOR, p->data[i].value))
-				clif_stylist_response(sd, true);
-			break;
-		case 1:
-			if (!clif_parse_stylist_buy_sub(sd, LOOK_HAIR, p->data[i].value))
-				clif_stylist_response(sd, true);
-			break;
-		case 2:
-			if (!clif_parse_stylist_buy_sub(sd, LOOK_CLOTHES_COLOR, p->data[i].value))
-				clif_stylist_response(sd, true);
-			break;
-		case 3:
-			if (!clif_parse_stylist_buy_sub(sd, LOOK_HEAD_TOP, p->data[i].value))
-				clif_stylist_response(sd, true);
-			break;
-		case 4:
-			if (!clif_parse_stylist_buy_sub(sd, LOOK_HEAD_MID, p->data[i].value))
-				clif_stylist_response(sd, true);
-			break;
-		case 5:
-			if (!clif_parse_stylist_buy_sub(sd, LOOK_HEAD_BOTTOM, p->data[i].value))
-				clif_stylist_response(sd, true);
-			break;
-		case 9:
-			if (!clif_parse_stylist_buy_sub(sd, LOOK_BODY2, p->data[i].value))
-				clif_stylist_response(sd, true);
-			break;
-		default:
-			ShowError("clif_parse_stylist_buy: Unknown action type %d\n", p->data[i].action);
-			break;
+		auto action = stylist_actions.find(data.action);
+		if (action == stylist_actions.end()) {
+			ShowError("clif_parse_stylist_buy: Unknown action type %d\n", data.action);
+			clif_stylist_response(sd, true);
+			return;
+		}
+
+		if (!clif_parse_stylist_buy_sub(sd, action->second, data.value)) {
+			clif_stylist_response(sd, true);
+			return;
 		}
 	}
-
-	clif_stylist_response(sd, false);
 #else
-#if PACKETVER >= 20151104
 #if PACKETVER >= 20180516
 	const PACKET_CZ_REQ_STYLE_CHANGE2* p = reinterpret_cast<PACKET_CZ_REQ_STYLE_CHANGE2*>( RFIFOP( fd, 0 ) );
 #else
@@ -23159,10 +23182,9 @@ void clif_parse_stylist_buy( int32 fd, map_session_data* sd ){
 		return;
 	}
 #endif
+#endif
 
-	clif_stylist_response( sd, false );
-#endif
-#endif
+	clif_stylist_response(sd, false);
 }
 
 void clif_parse_stylist_close( int32 fd, map_session_data* sd ){

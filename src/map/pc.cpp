@@ -1188,14 +1188,8 @@ void pc_makesavestatus(map_session_data *sd) {
 		sd->status.clothes_color = 0;
 
 	if(!battle_config.save_body_style)
-	{
-#if PACKETVER >= 20231220
 		sd->status.body = sd->status.class_;
-#else
-		sd->status.body = 0;
-#endif
-	}
-
+	
 	//Only copy the Cart/Peco/Falcon options, the rest are handled via
 	//status change load/saving. [Skotlex]
 #ifdef NEW_CARTS
@@ -1947,8 +1941,10 @@ bool pc_authok(map_session_data *sd, uint32 login_id2, time_t expiration_time, i
 	sd->status.hair = cap_value(sd->status.hair,MIN_HAIR_STYLE,MAX_HAIR_STYLE);
 	sd->status.hair_color = cap_value(sd->status.hair_color,MIN_HAIR_COLOR,MAX_HAIR_COLOR);
 	sd->status.clothes_color = cap_value(sd->status.clothes_color,MIN_CLOTH_COLOR,MAX_CLOTH_COLOR);
-	sd->status.body = cap_value(sd->status.body,MIN_BODY_STYLE,MAX_BODY_STYLE);
 
+	if (!job_db.exists(sd->status.body) && (sd->status.body <= JOB_SECOND_JOB_START || sd->status.body >= JOB_SECOND_JOB_END)) 
+		sd->status.body = sd->status.class_;
+	
 	//Initializations to null/0 unneeded since map_session_data was filled with 0 upon allocation.
 	sd->state.connect_new = 1;
 
@@ -10686,14 +10682,13 @@ bool pc_jobchange(map_session_data *sd,int32 job, char upper)
 		pc_resethate(sd);
 	}
 
-	// Reset body style to 0 before changing job to avoid
-	// errors since not every job has a alternate outfit.
 #if PACKETVER >= 20231220
-	sd->status.body = job;
+	// Reset body style before changing job to avoid errors since not every job has a alternate outfit.
+	sd->vd.body_style = sd->status.body = job;
 #else
 	sd->status.body = 0;
 #endif
-	clif_changelook(&sd->bl,LOOK_BODY2,sd->status.body);
+
 	sd->status.class_ = job;
 	fame_flag = pc_famerank(sd->status.char_id,sd->class_&MAPID_UPPERMASK);
 	uint64 previous_class = sd->class_;
@@ -10773,12 +10768,9 @@ bool pc_jobchange(map_session_data *sd,int32 job, char upper)
 #if PACKETVER >= 20151001
 	clif_changelook(&sd->bl, LOOK_HAIR, sd->vd.hair_style); // Update player's head (only matters when switching to or from Doram)
 #endif
-	if(sd->vd.cloth_color)
-		clif_changelook(&sd->bl,LOOK_CLOTHES_COLOR,sd->vd.cloth_color);
-	/*
-	if(sd->vd.body_style)
-		clif_changelook(&sd->bl,LOOK_BODY2,sd->vd.body_style);
-	*/
+	clif_changelook(&sd->bl,LOOK_CLOTHES_COLOR,sd->vd.cloth_color);
+	clif_changelook(&sd->bl,LOOK_BODY2,sd->vd.body_style);
+	
 	//Update skill tree.
 	pc_calc_skilltree(sd);
 	clif_skillinfoblock(*sd);
@@ -10939,8 +10931,8 @@ void pc_changelook(map_session_data *sd,int32 type,int32 val) {
 		sd->setlook_robe = val;
 		break;
 	case LOOK_BODY2:
-		val = cap_value(val, MIN_BODY_STYLE, MAX_BODY_STYLE);
-
+		if (!job_db.exists(val) && (val <= JOB_SECOND_JOB_START || val >= JOB_SECOND_JOB_END))
+			return;
 		sd->status.body = val;
 		break;
 	}

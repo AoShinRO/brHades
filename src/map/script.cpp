@@ -6893,7 +6893,10 @@ BUILDIN_FUNC(changelook)
 		val = cap_value(val, MIN_CLOTH_COLOR, MAX_CLOTH_COLOR);
 		break;
 	case LOOK_BODY2:
-		val = cap_value(val, MIN_BODY_STYLE, MAX_BODY_STYLE);
+		if (!job_db.exists(val) && (val <= JOB_SECOND_JOB_START || val >= JOB_SECOND_JOB_END)){
+			ShowError("buildin_changelook: Invalid body style: %d.\n", val);
+			return SCRIPT_CMD_FAILURE;
+		}
 		break;
 	default:
 		break;
