@@ -249,7 +249,7 @@ template <typename R> bool YamlDatabase::asType( const ryml::NodeRef& node, cons
 
 		return true;
 	}else{
-		this->invalidWarning( node, "Missing node \"*s\".\n", name.c_str() );
+		this->invalidWarning( node, "Missing node \"%s\".\n", name.c_str() );
 		return false;
 	}
 }
