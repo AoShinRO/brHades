@@ -12,10 +12,10 @@ on:
   workflow_dispatch:
   push:
     branches:
-    - master
+    - main
   pull_request:
     branches:
-    - master
+    - main
 
 env:
   PROJ_PFX_TARGET: c4core-
@@ -54,7 +54,7 @@ jobs:
   #----------------------------------------------------------------------------
   coverage:
     name: coverage/c++${{matrix.std}}
-    # if: github.ref == 'refs/heads/master'
+    # if: github.ref == 'refs/heads/main'
     continue-on-error: true
     if: always()  # https://stackoverflow.com/questions/62045967/github-actions-is-there-a-way-to-continue-on-error-while-still-getting-correct
     runs-on: ${{matrix.os}}
@@ -119,7 +119,7 @@ jobs:
   #----------------------------------------------------------------------------
   coverage_nofastfloat:
     name: coverage/c++${{matrix.std}}/nofastfloat
-    # if: github.ref == 'refs/heads/master'
+    # if: github.ref == 'refs/heads/main'
     continue-on-error: true
     if: always()  # https://stackoverflow.com/questions/62045967/github-actions-is-there-a-way-to-continue-on-error-while-still-getting-correct
     runs-on: ${{matrix.os}}
