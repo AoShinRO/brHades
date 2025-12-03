@@ -2,10 +2,8 @@ import codecs
 import re
 import sys
 
-from googletrans import Translator
+from deep_translator import GoogleTranslator   
 from loguru import logger
-
-SERVICE_URLS = ['translate.google.com']
 
 CODEPAGE_BY_LANGUAGE = {
     "en": "utf-8",  # Inglês - Universalmente UTF-8
@@ -20,11 +18,6 @@ CODEPAGE_BY_LANGUAGE = {
     "th": "tis-620",  # Tailandês
 }
 
-TRANSLATORS = {
-    "GoogleTranslator": Translator(service_urls=SERVICE_URLS)
-}
-
-
 def configure_logger(level="INFO"):
     """
     Configures the Loguru logger to output UTF-8 encoded logs to console.
@@ -36,7 +29,7 @@ def configure_logger(level="INFO"):
     logger.add(utf8_stdout, format="{time: YYYY-MM-DD - HH:mm:ss} {level} - <level>{message}</level>", level=level)
 
 
-def translate_text(text, source='en', target='pt'):
+def translate_text(Translator, text, source='en', target='pt'):
     """
         Attempts to translate text from source to target language using available translators.
 
@@ -45,17 +38,15 @@ def translate_text(text, source='en', target='pt'):
         :param target: Code for the target language (default: 'pt')
         :return: Translated text or original text if translation fails
         """
-    for translator in TRANSLATORS.keys():
-        try:
-            return TRANSLATORS[translator].translate(text, src=source, dest=target).text
-        except Exception:
-            logger.exception(f"{translator}: Erro ao tentar traduzir de {source} para {target}")
-            continue
+    try:
+        return Translator.translate(text)
+    except Exception:
+        logger.info(f"Erro ao tentar traduzir de {text} para {target}")
 
     return text  # Retorna o texto original se todas as tentativas falharem
 
 
-def translate_with_patterns(text, source='en', target='pt'):
+def translate_with_patterns(Translator, text, source='en', target='pt'):
     """
     Translates text while preserving specific patterns like HTML tags and color codes.
 
@@ -86,7 +77,7 @@ def translate_with_patterns(text, source='en', target='pt'):
         )
         placeholder_offset += len(marker) - len(ignored_text)
 
-    translated_text = translate_text(placeholder_text, source=source, target=target)
+    translated_text = translate_text(Translator, placeholder_text, source=source, target=target)
 
     for i, original_text in enumerate(ignored_parts):
         translated_text = translated_text.replace(f"_{i}", original_text)
@@ -104,7 +95,9 @@ if __name__ == "__main__":
     source_lang = sys.argv[2]
     target_lang = sys.argv[3]
 
-    translation = translate_with_patterns(text_to_translate, source=source_lang, target=target_lang)
+    Translator = GoogleTranslator(source=source_lang, target=target_lang) 
+
+    translation = translate_with_patterns(Translator, text_to_translate, source=source_lang, target=target_lang)
 
     # Output the translation with the specified encoding
     with codecs.getwriter(CODEPAGE_BY_LANGUAGE.get(target_lang))(sys.stdout.buffer) as encoded_stdout:
