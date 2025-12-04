@@ -26091,7 +26091,7 @@ struct e_adventure_guide
 	uint32 quest_id;
 	uint8 completed;
 };
-void clif_quest_status_ack(map_session_data* sd, std::vector<e_adventure_guide> quest_ack){
+void clif_quest_status_ack(map_session_data& sd, std::vector<e_adventure_guide> quest_ack){
 
 	if (quest_ack.empty())
 		return;
@@ -26107,10 +26107,12 @@ void clif_quest_status_ack(map_session_data* sd, std::vector<e_adventure_guide> 
 		p->PacketLength += sizeof(PACKET_ZC_QUEST_STATUS_ACK_SUB);
 	}
 
-	clif_send(p, p->PacketLength, &sd->bl, SELF);
+	clif_send(p, p->PacketLength, &sd.bl, SELF);
 }
 
 void clif_parse_quest_status(int32 fd, map_session_data* sd){
+
+	nullpo_retv(sd);
 
 	const PACKET_CZ_QUEST_STATUS_REQ* p = reinterpret_cast<PACKET_CZ_QUEST_STATUS_REQ*>(RFIFOP(fd, 0));
 
@@ -26128,8 +26130,8 @@ void clif_parse_quest_status(int32 fd, map_session_data* sd){
 		e_adventure_guide ack;
 		ack.quest_id = req->QuestID;
 		for (int32 i = 0; i < sd->num_quests; i++){
-			if (req->QuestID == sd->quest_log[i].quest_id){
-				ack.completed = (sd->quest_log[i].state == Q_COMPLETE);
+			if (req->QuestID == sd->quest_log[i].quest_id && sd->quest_log[i].state == Q_COMPLETE){
+				ack.completed = 1;
 				break;
 			}
 		}
@@ -26138,7 +26140,7 @@ void clif_parse_quest_status(int32 fd, map_session_data* sd){
 		len += sizeof(req);
 	}
 
-	clif_quest_status_ack(sd, quest_list);
+	clif_quest_status_ack(*sd, quest_list);
 }
 #endif
 
