@@ -26086,55 +26086,61 @@ void clif_parse_apitranslate(map_session_data& sd, const std::string text, const
 #endif
 
 #if (PACKETVER_MAIN_NUM >= 20240516)
-void clif_quest_status_ack(map_session_data* const sd, const PACKET_CZ_QUEST_STATUS_REQ_SUB* const QuestList, const uint16 QuestCount)
+struct e_adventure_guide
 {
-	uint8 Buffer[2048];
+	uint32 quest_id;
+	uint8 completed;
+};
+void clif_quest_status_ack(map_session_data& sd, std::vector<e_adventure_guide> quest_ack){
 
-	const uint16 PacketLength = sizeof(PACKET_ZC_QUEST_STATUS_ACK) + QuestCount * sizeof(PACKET_ZC_QUEST_STATUS_ACK_SUB);
-	if (PacketLength > sizeof(Buffer))
+	if (quest_ack.empty())
+		return;
+
+	PACKET_ZC_QUEST_STATUS_ACK* p = reinterpret_cast<PACKET_ZC_QUEST_STATUS_ACK*>( packet_buffer );
+	
+	p->PacketType = HEADER_ZC_QUEST_STATUS_ACK;
+	p->PacketLength = sizeof(p);
+
+	for(int32 i = 0; i < quest_ack.size(); i++){
+		p->List[i].QuestID = quest_ack[i].quest_id;
+		p->List[i].QuestStatus = quest_ack[i].completed;
+		p->PacketLength += sizeof(PACKET_ZC_QUEST_STATUS_ACK_SUB);
+	}
+
+	clif_send(p, p->PacketLength, &sd.bl, SELF);
+}
+
+void clif_parse_quest_status(int32 fd, map_session_data* sd){
+
+	nullpo_retv(sd);
+
+	const PACKET_CZ_QUEST_STATUS_REQ* p = reinterpret_cast<PACKET_CZ_QUEST_STATUS_REQ*>(RFIFOP(fd, 0));
+
+	if (p->PacketLength <= (sizeof(PACKET_CZ_QUEST_STATUS_REQ) + sizeof(PACKET_CZ_QUEST_STATUS_REQ_SUB)))
 	{
-		// Buffer Overflow
 		return;
 	}
 
-	PACKET_ZC_QUEST_STATUS_ACK* const Packet = reinterpret_cast<PACKET_ZC_QUEST_STATUS_ACK*>(Buffer);
-	Packet->PacketType = HEADER_ZC_QUEST_STATUS_ACK;
-	Packet->PacketLength = PacketLength;
+	std::vector<e_adventure_guide> quest_list;
+	uint32 len = sizeof(PACKET_CZ_QUEST_STATUS_REQ);
+	while (len < p->PacketLength){
 
-	PACKET_ZC_QUEST_STATUS_ACK_SUB* const List = reinterpret_cast<PACKET_ZC_QUEST_STATUS_ACK_SUB*>(Buffer + sizeof(PACKET_ZC_QUEST_STATUS_ACK));
-	for (size_t Num = 0; Num < QuestCount; ++Num)
-	{
-		const uint32 QuestID = QuestList[Num].QuestID;
-		uint8 QuestStatus = Q_INACTIVE;
+		const PACKET_CZ_QUEST_STATUS_REQ_SUB* req = reinterpret_cast<PACKET_CZ_QUEST_STATUS_REQ_SUB*>(RFIFOP(fd, len));
 
-		for (size_t QuestNum = 0; QuestNum < sd->num_quests; ++QuestNum)
-		{
-			if (QuestID == sd->quest_log[QuestNum].quest_id)
-			{
-				QuestStatus = (sd->quest_log[QuestNum].state == Q_COMPLETE);
+		e_adventure_guide ack;
+		ack.quest_id = req->QuestID;
+		for (int32 i = 0; i < sd->num_quests; i++){
+			if (req->QuestID == sd->quest_log[i].quest_id && sd->quest_log[i].state == Q_COMPLETE){
+				ack.completed = 1;
 				break;
 			}
 		}
 
-		List[Num].QuestID = QuestID;
-		List[Num].QuestStatus = QuestStatus;
-
+		quest_list.push_back(ack);		
+		len += sizeof(req);
 	}
 
-	clif_send(Packet, Packet->PacketLength, &sd->bl, SELF);
-}
-
-void clif_parse_quest_status(const int32 fd, map_session_data* const sd)
-{
-	const PACKET_CZ_QUEST_STATUS_REQ* const Packet = reinterpret_cast<PACKET_CZ_QUEST_STATUS_REQ*>(RFIFOP(fd, 0));
-	if (Packet->PacketLength <= (sizeof(PACKET_CZ_QUEST_STATUS_REQ) + sizeof(PACKET_CZ_QUEST_STATUS_REQ_SUB)))
-	{
-		return;
-	}
-
-	const PACKET_CZ_QUEST_STATUS_REQ_SUB* const QuestList = reinterpret_cast<PACKET_CZ_QUEST_STATUS_REQ_SUB*>(RFIFOP(fd, sizeof(PACKET_CZ_QUEST_STATUS_REQ)));
-	const uint16 QuestCount = uint16(int16(Packet->PacketLength - sizeof(PACKET_CZ_QUEST_STATUS_REQ)) / sizeof(PACKET_CZ_QUEST_STATUS_REQ_SUB));
-	clif_quest_status_ack(sd, QuestList, QuestCount);
+	clif_quest_status_ack(*sd, quest_list);
 }
 #endif
 
