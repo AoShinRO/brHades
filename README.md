@@ -2,13 +2,13 @@
 
 #### Status - Compiladores:
 
-![clang](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_clang.yml?label=clang%20build&logo=llvm) | ![cmake](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_cmake.yml?label=cmake%20build&logo=cmake) | ![gcc](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_gcc.yml?label=gcc%20build&logo=gnu) | ![ms](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_msbuild.yml?label=ms%20build&logo=visualstudio) | ![CodeQL](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/analysis_codeql.yml?label=CodeQL&logo=badge) | [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/AoShinRO/brHades)
---------|--------|--------|--------|--------|--------
+![clang](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_clang.yml?label=clang%20build&logo=llvm) | ![cmake](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_cmake.yml?label=cmake%20build&logo=cmake) | ![gcc](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_gcc.yml?label=gcc%20build&logo=gnu) | ![ms](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/build_servers_msbuild.yml?label=ms%20build&logo=visualstudio) | ![CodeQL](https://img.shields.io/github/actions/workflow/status/AoShinRo/brHades/analysis_codeql.yml?label=CodeQL&logo=badge) 
+--------|--------|--------|--------|--------|
 
 #### Repo info:
 
-![GitHub](https://img.shields.io/github/license/AoShinRo/brHades.svg) | ![commit activity](https://img.shields.io/github/commit-activity/w/AoShinRo/brHades) | ![GitHub repo size](https://img.shields.io/github/repo-size/AoShinRo/brHades.svg)
---------|--------|--------
+![GitHub](https://img.shields.io/github/license/AoShinRo/brHades.svg) | ![commit activity](https://img.shields.io/github/commit-activity/w/AoShinRo/brHades) | ![GitHub repo size](https://img.shields.io/github/repo-size/AoShinRo/brHades.svg) | [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/AoShinRO/brHades)
+--------|--------|--------|--------
 
 # 
 
@@ -25,8 +25,8 @@ Qualquer bug encontrado deve ser postado em: [Reportar Bug](https://github.com/A
 
 # 
 
-[Discord](https://discord.gg/xBtmGS3QQD)|[AzzyAI-RE](https://github.com/AoShinRO/AzzyAI-RE)|[ServerMonitor](https://github.com/AoShinRO/rAthena-ServMonitor-ByAoShinHo)|[Doações](https://github.com/AoShinRO/brHades/wiki/Doaçoes)|[Fork and Pull Request Q&A](https://brHades.org/board/topic/86913-pull-request-qa/)|[Wiki](https://deepwiki.com/AoShinRO/brHades)
---------|--------|--------|--------|--------|--------
+[Discord](https://discord.gg/xBtmGS3QQD)|[AzzyAI-RE](https://github.com/AoShinRO/AzzyAI-RE)|[ServerMonitor](https://github.com/AoShinRO/rAthena-ServMonitor-ByAoShinHo)|[Doações](https://github.com/AoShinRO/brHades/wiki/Doaçoes)|[Wiki](https://deepwiki.com/AoShinRO/brHades)
+--------|--------|--------|--------|--------|
 
 ### Leia-me
 1. [Requisitos](#1-requisitos)
