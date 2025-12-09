@@ -78618,7 +78618,7 @@ Body:
     Script: |
       percentheal 100,100;
   - Id: 102947
-    AegisName: aegis_102947
+    AegisName: Captain_Antiquity
     Name: Antiquity of Ghost Ship (Ghost Ship Captain)
     Type: Usable
     Weight: 200
@@ -78628,7 +78628,7 @@ Body:
     Script: |
       getgroupitem(IG_AEGIS_102947);
   - Id: 102948
-    AegisName: aegis_102948
+    AegisName: Tan_Antiquity
     Name: Antiquity of Giant Snake (Devouring Tan)
     Type: Usable
     Weight: 200

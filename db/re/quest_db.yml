@@ -9759,7 +9759,19 @@ Body:
   - Id: 12642
     Title: Serpens's Request 6
   - Id: 12643
-    Title: Serpens's Request 7       
+    Title: Serpens's Request 7
+  - Id: 12650
+    Title: Final Battle (Easy)
+  - Id: 12651
+    Title: Final Battle (Normal)
+  - Id: 12646
+    Title: Final Battle - Cooldown
+    TimeLimit: 4h
+  - Id: 16826
+    Title: Ghost Ship Captain
+  - Id: 16823
+    Title: Ghost Ship Captain - Cooldown
+    TimeLimit: 4h
   - Id: 13000
     Title: RWC2011Card Gathering
   - Id: 13001

@@ -53818,7 +53818,7 @@ Body:
     Script: |
       bonus bCritical,100;
   - Id: 300505
-    AegisName: aegis_300505
+    AegisName: Seawind_Card
     Name: Seawind Card
     Type: Card
     Weight: 10
@@ -53837,7 +53837,7 @@ Body:
          }
       }
   - Id: 300506
-    AegisName: aegis_300506
+    AegisName: Scalleg_Card
     Name: Scalleg Card
     Type: Card
     Weight: 10
@@ -53852,7 +53852,7 @@ Body:
          bonus2 bAddSize,Size_Small,10;
       }
   - Id: 300507
-    AegisName: aegis_300507
+    AegisName: Velelling_Card
     Name: Velelling Card
     Type: Card
     Weight: 10
@@ -53867,7 +53867,7 @@ Body:
          bonus2 bMagicAddSize,Size_Small,10;
       }
   - Id: 300508
-    AegisName: aegis_300508
+    AegisName: Skipskipper_Card
     Name: Skipskipper Card
     Type: Card
     Weight: 10
@@ -53886,7 +53886,7 @@ Body:
          }
       }
   - Id: 300509
-    AegisName: aegis_300509
+    AegisName: Letterster_Card
     Name: Letterster Card
     Type: Card
     Weight: 10
@@ -53905,7 +53905,7 @@ Body:
          }
       }
   - Id: 300510
-    AegisName: aegis_300510
+    AegisName: Cliolima_Card
     Name: Cliolima Card
     Type: Card
     Weight: 10
@@ -53924,7 +53924,7 @@ Body:
          }
       }
   - Id: 300511
-    AegisName: aegis_300511
+    AegisName: Rockstriker_Card
     Name: Rockstriker Card
     Type: Card
     Weight: 10
@@ -53943,7 +53943,7 @@ Body:
          }
       }
   - Id: 300512
-    AegisName: aegis_300512
+    AegisName: Ice_Seahorse_Card
     Name: Ice Seahorse Card
     Type: Card
     Weight: 10
@@ -53962,7 +53962,7 @@ Body:
          }
       }
   - Id: 300513
-    AegisName: aegis_300513
+    AegisName: Icehorn_Card
     Name: Icehorn Card
     Type: Card
     Weight: 10
@@ -53975,7 +53975,7 @@ Body:
       bonus bUseSPrate,10;
       bonus2 bMagicAtkEle,Ele_Water,3*getrefine();
   - Id: 300514
-    AegisName: aegis_300514
+    AegisName: Yoster_Cleaner_Card
     Name: Yoster Cleaner Card
     Type: Card
     Weight: 10
@@ -53994,7 +53994,7 @@ Body:
          }
       }
   - Id: 300515
-    AegisName: aegis_300515
+    AegisName: Yoster_Fixer_Card
     Name: Yoster Fixer Card
     Type: Card
     Weight: 10
@@ -54008,7 +54008,7 @@ Body:
       bonus bFlee,30;
       bonus bShortAtkRate,10+7*(getrefine()/3);
   - Id: 300516
-    AegisName: aegis_300516
+    AegisName: Yoster_Collector_Card
     Name: Yoster Collector Card
     Type: Card
     Weight: 10
@@ -54027,7 +54027,7 @@ Body:
          }
       }
   - Id: 300517
-    AegisName: aegis_300517
+    AegisName: Yoster_Negotiator_Card
     Name: Yoster Negotiator Card
     Type: Card
     Weight: 10
@@ -54041,7 +54041,7 @@ Body:
       bonus bFlee,30;
       bonus bLongAtkRate,10+7*(getrefine()/3);
   - Id: 300518
-    AegisName: aegis_300518
+    AegisName: Yoster_Cooker_Card
     Name: Yoster Cooker Card
     Type: Card
     Weight: 10
@@ -54060,7 +54060,7 @@ Body:
          }
       }
   - Id: 300519
-    AegisName: aegis_300519
+    AegisName: Yormi_Card
     Name: Yormi Card
     Type: Card
     Weight: 10
@@ -54077,7 +54077,7 @@ Body:
          bonus2 bAddSize,Size_Large,10;
       }
   - Id: 300520
-    AegisName: aegis_300520
+    AegisName: Yormi_Missionary_Card
     Name: Yormi Missionary Card
     Type: Card
     Weight: 10
@@ -54094,7 +54094,7 @@ Body:
          bonus2 bMagicAddSize,Size_Large,10;
       }
   - Id: 300521
-    AegisName: aegis_300521
+    AegisName: Yordos_Investigator_Card
     Name: Yordos Investigator Card
     Type: Card
     Weight: 10
@@ -54113,7 +54113,7 @@ Body:
       bonus2 bMagicAtkEle,Ele_Holy,10+7*(.@r/3);
       bonus2 bMagicAtkEle,Ele_Dark,10+7*(.@r/3);
   - Id: 300522
-    AegisName: aegis_300522
+    AegisName: Yordos_Judge_Card
     Name: Yordos Judge Card
     Type: Card
     Weight: 10
@@ -54132,7 +54132,7 @@ Body:
       bonus2 bMagicAtkEle,Ele_Wind,10+7*(.@r/3);
       bonus2 bMagicAtkEle,Ele_Poison,10+7*(.@r/3);
   - Id: 300523
-    AegisName: aegis_300523
+    AegisName: Yordos_Executor_Card
     Name: Yordos Executor Card
     Type: Card
     Weight: 10
@@ -54152,7 +54152,7 @@ Body:
          }
       }
   - Id: 300524
-    AegisName: aegis_300524
+    AegisName: Yoscopus_Guardian_Card
     Name: Yoscopus Guardian Card
     Type: Card
     Weight: 10
@@ -54168,7 +54168,7 @@ Body:
       bonus bAtkRate,2*(readparam(bStr)/10);
       bonus bCritical,-3*(readparam(bLuk)/10);
   - Id: 300525
-    AegisName: aegis_300525
+    AegisName: Yoscopus_Warlock_Card
     Name: Yoscopus Warlock Card
     Type: Card
     Weight: 10
@@ -54184,7 +54184,7 @@ Body:
       bonus bAtkRate,2*(readparam(bDex)/10);
       bonus bCritical,-3*(readparam(bLuk)/10);
   - Id: 300526
-    AegisName: aegis_300526
+    AegisName: Yorker_Worker_Card
     Name: Yorker Worker Card
     Type: Card
     Weight: 10
@@ -54197,7 +54197,7 @@ Body:
       bonus bVariableCastrate,-7;
       bonus bCritical,5;
   - Id: 300527
-    AegisName: aegis_300527
+    AegisName: Yorker_Trader_Card
     Name: Yorker Trader Card
     Type: Card
     Weight: 10
@@ -54210,7 +54210,7 @@ Body:
       bonus bVariableCastrate,-7;
       bonus bCritical,5;
   - Id: 300528
-    AegisName: aegis_300528
+    AegisName: Yortus_Bishop_Card
     Name: Yortus Bishop Card
     Type: Card
     Weight: 10
@@ -54231,7 +54231,7 @@ Body:
          }
       }
   - Id: 300529
-    AegisName: aegis_300529
+    AegisName: Yortus_Warlock_Card
     Name: Yortus Warlock Card
     Type: Card
     Weight: 10
@@ -54247,7 +54247,7 @@ Body:
       bonus bMatkRate,2*(readparam(bInt)/10);
       bonus bUseSPrate,3*(readparam(bDex)/10);
   - Id: 300530
-    AegisName: aegis_300530
+    AegisName: Yortus_Arbiter_Card
     Name: Yortus Arbiter Card
     Type: Card
     Weight: 10
@@ -54268,7 +54268,7 @@ Body:
          bonus bCRate,5;
       }
   - Id: 300531
-    AegisName: aegis_300531
+    AegisName: Yortus_Bailiff_Card
     Name: Yortus Bailiff Card
     Type: Card
     Weight: 10
@@ -54281,7 +54281,7 @@ Body:
       bonus bUseSPrate,10;
       bonus2 bMagicAtkEle,Ele_Ghost,3*getrefine();
   - Id: 300532
-    AegisName: aegis_300532
+    AegisName: Ghost_Ship_Captain_Card
     Name: Ghost Ship Captain Card
     Type: Card
     Weight: 10
@@ -54296,7 +54296,7 @@ Body:
          bonus2 bAddClass,Class_Boss,10;
       }
   - Id: 300533
-    AegisName: aegis_300533
+    AegisName: Devouring_Tan_Card
     Name: Devouring Tan Card
     Type: Card
     Weight: 10
@@ -92318,156 +92318,177 @@ Body:
       NoMail: true
       NoAuction: true
   - Id: 1001628
-    AegisName: aegis_1001628
+    AegisName: Ep21_Jor_Rosary
     Name: Snake Shape Rosary
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001629
-    AegisName: aegis_1001629
+    AegisName: Ep21_Jor_Bible
     Name: Jormungandr Catechism
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001630
-    AegisName: aegis_1001630
+    AegisName: Ep21_Old_Bandana
     Name: Old Bandana
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001631
-    AegisName: aegis_1001631
+    AegisName: Ep21_Old_Apron
     Name: Old Apron
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001632
-    AegisName: aegis_1001632
+    AegisName: Ep21_Old_Homi
     Name: Old Hoe
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001633
-    AegisName: aegis_1001633
+    AegisName: Ep21_Fanatic_Mask
     Name: Fanatic Mask
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001634
-    AegisName: aegis_1001634
+    AegisName: Ep21_Fanatic_Cap
     Name: Fanatic Cap
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001635
-    AegisName: aegis_1001635
+    AegisName: Ep21_Jor_Stick
     Name: Snake Shape Stick
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001636
-    AegisName: aegis_1001636
+    AegisName: Ep21_Jor_Wand_Acc
     Name: Snake Shape Ornament
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001637
-    AegisName: aegis_1001637
+    AegisName: Ep21_Jor_Dagger_Pcs
     Name: Snake Shape Dagger Piece
     Type: Etc
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001638
-    AegisName: aegis_1001638
+    AegisName: Ep21_Jor_G_Rosary
     Name: Glittering Snake Shape Rosary
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001639
-    AegisName: aegis_1001639
+    AegisName: Ep21_Jor_Accessary
     Name: Flashy Accessory
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001640
-    AegisName: aegis_1001640
+    AegisName: Ep21_Daribitsal
     Name: Scalleg Flesh
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001641
-    AegisName: aegis_1001641
+    AegisName: Ep21_Bright_Eye
     Name: Bright Eye
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001642
-    AegisName: aegis_1001642
+    AegisName: Ep21_Guano
     Name: Guano
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001643
-    AegisName: aegis_1001643
+    AegisName: Ep21_Vellelopy
     Name: Vellelopy
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001644
-    AegisName: aegis_1001644
+    AegisName: Ep21_Skipskip_Fin
     Name: Skipskipper Fin
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001645
-    AegisName: aegis_1001645
+    AegisName: Ep21_Stiff_Limb
     Name: Stiff Limb
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001646
-    AegisName: aegis_1001646
+    AegisName: Ep21_Fluffy_Core
     Name: Fluffy Core
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001647
-    AegisName: aegis_1001647
+    AegisName: Ep21_Thick_Flesh
     Name: Thick Flesh
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001648
-    AegisName: aegis_1001648
+    AegisName: Ep21_Star_Candy
     Name: Ice Star Candy
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 1001649
-    AegisName: aegis_1001649
+    AegisName: Ep21_G_Ice_Coral
     Name: Shining Ice Coral
     Type: Etc
+    Buy: 2500
     Weight: 10
     Flags:
       BuyingStore: true

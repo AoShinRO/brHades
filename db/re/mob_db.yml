@@ -120036,8 +120036,29 @@ Body:
 #    AegisName: 2401_EV_IMOOGI
 #  - Id: 22299
 #    AegisName: VR_CHAO
-#  - Id: 22300
-#    AegisName: EP21_NPC_SERPENT
+  - Id: 22300
+    AegisName: JT_EP21_NPC_SERPENT
+    Name: JT_EP21_NPC_SERPENT
+    Level: 250
+    Hp: 7000000
+    Attack: 100
+    Attack2: 100
+    Defense: 150
+    MagicDefense: 80
+    Resistance: 400
+    MagicResistance : 400
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Brute
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 180
+    AttackDelay: 2228
+    AttackMotion: 576
+    DamageMotion: 528
+    Ai: 21
 #  - Id: 22301
 #    AegisName: EP21_NPC_TRIS
 #  - Id: 22302
@@ -120062,36 +120083,586 @@ Body:
 #    AegisName: EP21_NPC_IVAN
 #  - Id: 22312
 #    AegisName: EP21_NPC_GALAXIA
-#  - Id: 22313
-#    AegisName: EP21_SEAWIND
-#  - Id: 22314
-#    AegisName: EP21_SCALLEG
-#  - Id: 22315
-#    AegisName: EP21_VELELLING
-#  - Id: 22316
-#    AegisName: EP21_LETTERSTER
-#  - Id: 22317
-#    AegisName: EP21_ROCKSTRIKER
-#  - Id: 22318
-#    AegisName: EP21_ICESEAHORSE
-#  - Id: 22319
-#    AegisName: EP21_SKIPSKIPPER
-#  - Id: 22320
-#    AegisName: EP21_CLIOLIMA
-#  - Id: 22321
-#    AegisName: EP21_YORKER_A
-#  - Id: 22322
-#    AegisName: EP21_YORKER_B
-#  - Id: 22323
-#    AegisName: EP21_YOSTER_A
-#  - Id: 22324
-#    AegisName: EP21_YOSTER_B
-#  - Id: 22325
-#    AegisName: EP21_YOSTER_C
-#  - Id: 22326
-#    AegisName: EP21_YOSTER_D
-#  - Id: 22327
-#    AegisName: EP21_YOSTER_E
+  - Id: 22313
+    AegisName: EP21_SEAWIND
+    Name: EP21_SEAWIND
+    Level: 236
+    Hp: 28803605
+    BaseExp: 567512
+    JobExp: 457259
+    Attack: 5000
+    Attack2: 7000
+    Defense: 387
+    MagicDefense: 149
+    Resistance: 350
+    MagicResistance : 350
+    Str: 200
+    Agi: 220
+    Vit: 50
+    Int: 150
+    Dex: 200
+    Luk: 75
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Brute
+    Element: Wind
+    ElementLevel: 2
+    WalkSpeed: 130
+    AttackDelay: 476
+    AttackMotion: 500
+    DamageMotion: 480
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Guano
+        Rate: 500
+      - Item: Seawind_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22314
+    AegisName: EP21_SCALLEG
+    Name: EP21_SCALLEG
+    Level: 237
+    Hp: 34273200
+    BaseExp: 567512
+    JobExp: 457259
+    Attack: 5000
+    Attack2: 7000
+    Defense: 348
+    MagicDefense: 191
+    Str: 200
+    Agi: 220
+    Vit: 150
+    Int: 150
+    Dex: 230
+    Luk: 120
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Fish
+    Element: Water
+    ElementLevel: 1
+    WalkSpeed: 200
+    AttackDelay: 864
+    AttackMotion: 864
+    DamageMotion: 384
+    DamageTaken: 10
+    Ai: 17
+    Drops:
+      - Item: Ep21_Luna_Oyster
+        Rate: 500
+      - Item: Scalleg_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22315
+    AegisName: EP21_VELELLING
+    Name: EP21_VELELLING
+    Level: 235
+    Hp: 25262330
+    BaseExp: 567512
+    JobExp: 457259
+    Attack: 5000
+    Attack2: 7000
+    Defense: 357
+    MagicDefense: 197
+    Str: 200
+    Agi: 220
+    Vit: 150
+    Int: 150
+    Dex: 230
+    Luk: 120
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Plant
+    Element: Poison
+    ElementLevel: 2
+    WalkSpeed: 200
+    AttackDelay: 384
+    AttackMotion: 672
+    DamageMotion: 480
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Vellelopy
+        Rate: 500
+      - Item: Velelling_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22316
+    AegisName: EP21_LETTERSTER
+    Name: EP21_LETTERSTER
+    Level: 236
+    Hp: 30620560
+    BaseExp: 567512
+    JobExp: 457259
+    Attack: 5000
+    Attack2: 7000
+    Defense: 373
+    MagicDefense: 143
+    Str: 200
+    Agi: 220
+    Vit: 150
+    Int: 150
+    Dex: 230
+    Luk: 120
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Brute
+    Element: Water
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 768
+    AttackMotion: 768
+    DamageMotion: 576
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Stiff_Limb
+        Rate: 500
+      - Item: Ep21_Bright_Eye
+        Rate: 500
+      - Item: Letterster_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22317
+    AegisName: EP21_ROCKSTRIKER
+    Name: EP21_ROCKSTRIKER
+    Level: 237
+    Hp: 28974600
+    BaseExp: 567512
+    JobExp: 457259
+    Attack: 5000
+    Attack2: 7000
+    Defense: 252
+    MagicDefense: 133
+    Str: 200
+    Agi: 220
+    Vit: 70
+    Int: 150
+    Dex: 230
+    Luk: 120
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Insect
+    Element: Earth
+    ElementLevel: 3
+    WalkSpeed: 200
+    AttackDelay: 1480
+    AttackMotion: 480
+    DamageMotion: 720
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Fluffy_Core
+        Rate: 500
+      - Item: Rockstriker_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22318
+    AegisName: EP21_ICESEAHORSE
+    Name: EP21_ICESEAHORSE
+    Level: 238
+    Hp: 34156500
+    BaseExp: 567512
+    JobExp: 457259
+    Attack: 5000
+    Attack2: 7000
+    Defense: 242
+    MagicDefense: 245
+    Str: 200
+    Agi: 180
+    Vit: 80
+    Int: 150
+    Dex: 200
+    Luk: 90
+    AttackRange: 1
+    SkillRange: 50
+    ChaseRange: 12
+    Size: Medium
+    Race: Brute
+    Element: Water
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 1872
+    AttackMotion: 672
+    DamageMotion: 480
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Star_Candy
+        Rate: 500
+      - Item: Ep21_Fatty_Shrimp
+        Rate: 20
+      - Item: Ice_Seahorse_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22319
+    AegisName: EP21_SKIPSKIPPER
+    Name: EP21_SKIPSKIPPER
+    Level: 238
+    Hp: 31425500
+    BaseExp: 567512
+    JobExp: 457259
+    Attack: 5000
+    Attack2: 7000
+    Defense: 345
+    MagicDefense: 189
+    Str: 200
+    Agi: 180
+    Vit: 80
+    Int: 150
+    Dex: 200
+    Luk: 90
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Fish
+    Element: Poison
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 504
+    AttackMotion: 960
+    DamageMotion: 576
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Luna_Fish
+        Rate: 500
+      - Item: Skipskipper_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22320
+    AegisName: EP21_CLIOLIMA
+    Name: EP21_CLIOLIMA
+    Level: 238
+    Hp: 32321990
+    Attack: 4000
+    Attack2: 6000
+    Defense: 304
+    MagicDefense: 163
+    Resistance: 400
+    MagicResistance : 400
+    Str: 180
+    Agi: 150
+    Vit: 50
+    Int: 150
+    Dex: 170
+    Luk: 75
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Fish
+    Element: Water
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 476
+    AttackMotion: 500
+    DamageMotion: 480
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Skipskip_Fin
+        Rate: 500
+      - Item: Cliolima_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22321
+    AegisName: EP21_YORKER_A
+    Name: EP21_YORKER_A
+    Level: 236
+    Hp: 29897800
+    BaseExp: 467512
+    JobExp: 357259
+    Attack: 4000
+    Attack2: 7500
+    Defense: 345
+    MagicDefense: 189
+    Resistance: 400
+    MagicResistance : 400
+    Str: 190
+    Agi: 180
+    Vit: 70
+    Int: 150
+    Dex: 180
+    Luk: 80
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: DemiHuman
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 120
+    AttackDelay: 576
+    AttackMotion: 384
+    DamageMotion: 288
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Old_Homi
+        Rate: 500
+      - Item: Yorker_Worker_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22322
+    AegisName: EP21_YORKER_B
+    Name: EP21_YORKER_B
+    Level: 235
+    Hp: 28230800
+    BaseExp: 667512
+    JobExp: 557259
+    Attack: 5000
+    Attack2: 7000
+    Defense: 342
+    MagicDefense: 148
+    Resistance: 350
+    MagicResistance : 350
+    Str: 190
+    Agi: 140
+    Vit: 70
+    Int: 180
+    Dex: 200
+    Luk: 90
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: DemiHuman
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 130
+    AttackDelay: 476
+    AttackMotion: 500
+    DamageMotion: 480
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Old_Bandana
+        Rate: 500
+      - Item: Yorker_Trader_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22323
+    AegisName: EP21_YOSTER_A
+    Name: EP21_YOSTER_A
+    Level: 241
+    Hp: 32900300
+    BaseExp: 467512
+    JobExp: 357259
+    Attack: 4000
+    Attack2: 8000
+    Defense: 391
+    MagicDefense: 150
+    Resistance: 400
+    MagicResistance : 400
+    Str: 190
+    Agi: 230
+    Vit: 70
+    Int: 130
+    Dex: 230
+    Luk: 90
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: DemiHuman
+    Element: Fire
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 1152
+    AttackMotion: 384
+    DamageMotion: 288
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Fanatic_Mask
+        Rate: 500
+      - Item: Ep21_Fanatic_Cap
+        Rate: 500
+      - Item: Ep21_Jor_Bible
+        Rate: 500
+      - Item: Yorker_Trader_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22324
+    AegisName: EP21_YOSTER_B
+    Name: EP21_YOSTER_B
+    Level: 242
+    Hp: 32135640
+    BaseExp: 467512
+    JobExp: 357259
+    Attack: 4000
+    Attack2: 7000
+    Defense: 404
+    MagicDefense: 155
+    Resistance: 400
+    MagicResistance : 400
+    Str: 180
+    Agi: 230
+    Vit: 70
+    Int: 130
+    Dex: 220
+    Luk: 90
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: DemiHuman
+    Element: Wind
+    ElementLevel: 2
+    WalkSpeed: 120
+    AttackDelay: 576
+    AttackMotion: 384
+    DamageMotion: 288
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Fanatic_Mask
+        Rate: 500
+      - Item: Ep21_Fanatic_Cap
+        Rate: 500
+      - Item: Ep21_Jor_Bible
+        Rate: 500
+      - Item: Yoster_Fixer_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22325
+    AegisName: EP21_YOSTER_C
+    Name: EP21_YOSTER_C
+    Level: 242
+    Hp: 33905550
+    BaseExp: 667512
+    JobExp: 557259
+    Attack: 4000
+    Attack2: 8000
+    Defense: 320
+    MagicDefense: 180
+    Resistance: 350
+    MagicResistance : 350
+    Str: 190
+    Agi: 220
+    Vit: 50
+    Int: 120
+    Dex: 200
+    Luk: 90
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: DemiHuman
+    Element: Earth
+    ElementLevel: 2
+    WalkSpeed: 130
+    AttackDelay: 476
+    AttackMotion: 500
+    DamageMotion: 480
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Fanatic_Mask
+        Rate: 500
+      - Item: Ep21_Fanatic_Cap
+        Rate: 500
+      - Item: Ep21_Jor_Bible
+        Rate: 500
+      - Item: Yoster_Fixer_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22326
+    AegisName: EP21_YOSTER_D
+    Name: EP21_YOSTER_D
+    Level: 241
+    Hp: 28803605
+    BaseExp: 567512
+    JobExp: 457259
+    Attack: 4000
+    Attack2: 6000
+    Defense: 229
+    MagicDefense: 230
+    Resistance: 350
+    MagicResistance : 350
+    Str: 190
+    Agi: 210
+    Vit: 50
+    Int: 150
+    Dex: 200
+    Luk: 96
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Water
+    ElementLevel: 2
+    WalkSpeed: 130
+    AttackDelay: 476
+    AttackMotion: 500
+    DamageMotion: 480
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Fanatic_Mask
+        Rate: 500
+      - Item: Ep21_Fanatic_Cap
+        Rate: 500
+      - Item: Ep21_Jor_Bible
+        Rate: 500
+      - Item: Yoster_Negotiator_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22327
+    AegisName: EP21_YOSTER_E
+    Name: EP21_YOSTER_E
+    Level: 241
+    Hp: 30105830
+    BaseExp: 667512
+    JobExp: 557259
+    Attack: 4000
+    Attack2: 7000
+    Defense: 362
+    MagicDefense: 142
+    Resistance: 350
+    MagicResistance : 350
+    Str: 190
+    Agi: 210
+    Vit: 50
+    Int: 150
+    Dex: 200
+    Luk: 96
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 130
+    AttackDelay: 476
+    AttackMotion: 500
+    DamageMotion: 480
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Fanatic_Mask
+        Rate: 500
+      - Item: Ep21_Fanatic_Cap
+        Rate: 500
+      - Item: Ep21_Jor_Bible
+        Rate: 500
+      - Item: Yoster_Cooker_Card
+        Rate: 1
+        StealProtected: true
 #  - Id: 22328
 #    AegisName: DESERT_WOLF_RAC
 #  - Id: 22329
@@ -120142,50 +120713,918 @@ Body:
 #    AegisName: MQ_KIND_OF_BEETLE3
 #  - Id: 22352
 #    AegisName: MQ_KIND_OF_BEETLE4
-#  - Id: 22353
-#    AegisName: EP21_YORMI_A
-#  - Id: 22354
-#    AegisName: EP21_YORMI_B
-#  - Id: 22355
-#    AegisName: EP21_YORDOS_A
-#  - Id: 22356
-#    AegisName: EP21_YORDOS_B
-#  - Id: 22357
-#    AegisName: EP21_YORDOS_C
-#  - Id: 22358
-#    AegisName: EP21_YOSCOPUS_A
-#  - Id: 22359
-#    AegisName: EP21_YOSCOPUS_B
-#  - Id: 22360
-#    AegisName: EP21_YORTUS_A
-#  - Id: 22361
-#    AegisName: EP21_YORTUS_B
-#  - Id: 22362
-#    AegisName: EP21_ICEHORN
-#  - Id: 22363
-#    AegisName: EP21_B_YORTUS_A
-#  - Id: 22364
-#    AegisName: EP21_B_YORTUS_B
-#  - Id: 22365
-#    AegisName: G_EP21_ICESEAHORSE
-#  - Id: 22366
-#    AegisName: G_EP21_YORDOS_A
-#  - Id: 22367
-#    AegisName: G_EP21_YORDOS_B
-#  - Id: 22368
-#    AegisName: G_EP21_YORDOS_C
-#  - Id: 22369
-#    AegisName: EP21_MD_SAILOR
-#  - Id: 22370
-#    AegisName: EP21_MD_CAPTAIN
-#  - Id: 22371
-#    AegisName: EP21_YOR_TAN
-#  - Id: 22372
-#    AegisName: EP21_MD_CAPTAIN_B
-#  - Id: 22373
-#    AegisName: EP21_YOR_TAN_B
-#  - Id: 22374
-#    AegisName: EP21_MD_BOX1
+  - Id: 22353
+    AegisName: EP21_YORMI_A
+    Name: EP21_YORMI_A
+    Level: 241
+    Hp: 31128830
+    BaseExp: 667512
+    JobExp: 557259
+    Attack: 4000
+    Attack2: 8000
+    Defense: 385
+    MagicDefense: 208
+    Resistance: 350
+    MagicResistance : 350
+    Str: 210
+    Agi: 235
+    Vit: 70
+    Int: 145
+    Dex: 200
+    Luk: 90
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: DemiHuman
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 130
+    AttackDelay: 476
+    AttackMotion: 500
+    DamageMotion: 480
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Fanatic_Mask
+        Rate: 500
+      - Item: Ep21_Fanatic_Cap
+        Rate: 500
+      - Item: Ep21_Jor_Rosary
+        Rate: 500
+      - Item: Yormi_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22354
+    AegisName: EP21_YORMI_B
+    Name: EP21_YORMI_B
+    Level: 242
+    Hp: 31885750
+    BaseExp: 667512
+    JobExp: 557259
+    Attack: 4000
+    Attack2: 8000
+    Defense: 237
+    MagicDefense: 124
+    Resistance: 350
+    MagicResistance : 350
+    Str: 210
+    Agi: 235
+    Vit: 70
+    Int: 145
+    Dex: 200
+    Luk: 90
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: DemiHuman
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 130
+    AttackDelay: 476
+    AttackMotion: 500
+    DamageMotion: 480
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Fanatic_Mask
+        Rate: 500
+      - Item: Ep21_Fanatic_Cap
+        Rate: 500
+      - Item: Ep21_Jor_Rosary
+        Rate: 500
+      - Item: Yormi_Missionary_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22355
+    AegisName: EP21_YORDOS_A
+    Name: EP21_YORDOS_A
+    Level: 243
+    Hp: 31485880
+    BaseExp: 667512
+    JobExp: 557259
+    Attack: 4500
+    Attack2: 8000
+    Defense: 371
+    MagicDefense: 146
+    Resistance: 400
+    MagicResistance : 400
+    Str: 100
+    Agi: 200
+    Vit: 70
+    Int: 250
+    Dex: 220
+    Luk: 90
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 1152
+    AttackMotion: 384
+    DamageMotion: 288
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Fanatic_Mask
+        Rate: 500
+      - Item: Ep21_Fanatic_Cap
+        Rate: 500
+      - Item: Ep21_Jor_Rosary
+        Rate: 500
+      - Item: Yordos_Investigator_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22356
+    AegisName: EP21_YORDOS_B
+    Name: EP21_YORDOS_B
+    Level: 243
+    Hp: 33485880
+    BaseExp: 667512
+    JobExp: 557259
+    Attack: 4500
+    Attack2: 8000
+    Defense: 477
+    MagicDefense: 208
+    Resistance: 400
+    MagicResistance : 400
+    Str: 100
+    Agi: 200
+    Vit: 70
+    Int: 250
+    Dex: 220
+    Luk: 90
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 1152
+    AttackMotion: 384
+    DamageMotion: 288
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Fanatic_Mask
+        Rate: 500
+      - Item: Ep21_Fanatic_Cap
+        Rate: 500
+      - Item: Ep21_Jor_Rosary
+        Rate: 500
+      - Item: Yordos_Judge_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22357
+    AegisName: EP21_YORDOS_C
+    Name: EP21_YORDOS_C
+    Level: 243
+    Hp: 32458910
+    BaseExp: 667512
+    JobExp: 557259
+    Attack: 4000
+    Attack2: 8500
+    Defense: 253
+    MagicDefense: 133
+    Resistance: 400
+    MagicResistance : 400
+    Str: 220
+    Agi: 230
+    Vit: 115
+    Int: 150
+    Dex: 230
+    Luk: 95
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Earth
+    ElementLevel: 2
+    WalkSpeed: 120
+    AttackDelay: 576
+    AttackMotion: 384
+    DamageMotion: 288
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Fanatic_Mask
+        Rate: 500
+      - Item: Ep21_Fanatic_Cap
+        Rate: 500
+      - Item: Ep21_Jor_Rosary
+        Rate: 500
+      - Item: Yordos_Executor_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22358
+    AegisName: EP21_YOSCOPUS_A
+    Name: EP21_YOSCOPUS_A
+    Level: 244
+    Hp: 34628630
+    BaseExp: 667512
+    JobExp: 557259
+    Attack: 4500
+    Attack2: 8000
+    Defense: 410
+    MagicDefense: 158
+    Resistance: 400
+    MagicResistance : 400
+    Str: 100
+    Agi: 200
+    Vit: 70
+    Int: 250
+    Dex: 220
+    Luk: 90
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: DemiHuman
+    Element: Wind
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 1152
+    AttackMotion: 384
+    DamageMotion: 288
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Fanatic_Mask
+        Rate: 500
+      - Item: Ep21_Fanatic_Cap
+        Rate: 500
+      - Item: Ep21_Jor_Rosary
+        Rate: 500
+      - Item: Yoscopus_Guardian_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22359
+    AegisName: EP21_YOSCOPUS_B
+    Name: EP21_YOSCOPUS_B
+    Level: 244
+    Hp: 32897250
+    BaseExp: 667512
+    JobExp: 557259
+    Attack: 4500
+    Attack2: 8000
+    Defense: 246
+    MagicDefense: 130
+    Resistance: 400
+    MagicResistance : 400
+    Str: 100
+    Agi: 200
+    Vit: 70
+    Int: 250
+    Dex: 220
+    Luk: 90
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: DemiHuman
+    Element: Ghost
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 1152
+    AttackMotion: 384
+    DamageMotion: 288
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Fanatic_Mask
+        Rate: 500
+      - Item: Ep21_Fanatic_Cap
+        Rate: 500
+      - Item: Ep21_Jor_Rosary
+        Rate: 500
+      - Item: Yoscopus_Warlock_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22360
+    AegisName: EP21_YORTUS_A
+    Name: EP21_YORTUS_A
+    Level: 245
+    Hp: 32982850
+    BaseExp: 667512
+    JobExp: 557259
+    Attack: 4500
+    Attack2: 8000
+    Defense: 402
+    MagicDefense: 155
+    Resistance: 400
+    MagicResistance : 400
+    Str: 100
+    Agi: 200
+    Vit: 70
+    Int: 250
+    Dex: 220
+    Luk: 90
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 1152
+    AttackMotion: 384
+    DamageMotion: 288
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Jor_Stick
+        Rate: 500
+      - Item: Ep21_Jor_Wand_Acc
+        Rate: 500
+      - Item: Ep21_Jor_Dagger_Pcs
+        Rate: 500
+      - Item: Yortus_Bishop_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22361
+    AegisName: EP21_YORTUS_B
+    Name: EP21_YORTUS_B
+    Level: 245
+    Hp: 30990980
+    BaseExp: 667512
+    JobExp: 557259
+    Attack: 4500
+    Attack2: 8000
+    Defense: 246
+    MagicDefense: 257
+    Resistance: 400
+    MagicResistance : 400
+    Str: 100
+    Agi: 200
+    Vit: 70
+    Int: 260
+    Dex: 240
+    Luk: 90
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Ghost
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 1152
+    AttackMotion: 384
+    DamageMotion: 288
+    DamageTaken: 10
+    Ai: 21
+    Drops:
+      - Item: Ep21_Jor_Stick
+        Rate: 500
+      - Item: Ep21_Jor_Wand_Acc
+        Rate: 500
+      - Item: Ep21_Jor_Dagger_Pcs
+        Rate: 500
+      - Item: Yortus_Warlock_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22362
+    AegisName: EP21_ICEHORN
+    Name: EP21_ICEHORN
+    Level: 265
+    Hp: 843555800
+    BaseExp: 4675120
+    JobExp: 3572590
+    MvpExp: 1000000
+    Attack: 8000
+    Attack2: 22000
+    Defense: 527
+    MagicDefense: 204
+    Resistance: 400
+    MagicResistance : 400
+    Str: 300
+    Agi: 280
+    Vit: 120
+    Int: 250
+    Dex: 350
+    Luk: 200
+    AttackRange: 1
+    SkillRange: 50
+    ChaseRange: 12
+    Size: Medium
+    Race: Brute
+    Element: Water
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 1872
+    AttackMotion: 672
+    DamageMotion: 480
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: Ep21_G_Ice_Coral
+        Rate: 2500
+      - Item: Icehorn_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22363
+    AegisName: EP21_B_YORTUS_A
+    Name: EP21_B_YORTUS_A
+    Level: 265
+    Hp: 672022600
+    BaseExp: 4675120
+    JobExp: 3572590
+    MvpExp: 1000000
+    Attack: 9500
+    Attack2: 23000
+    Defense: 540
+    MagicDefense: 209
+    Resistance: 550
+    MagicResistance : 550
+    Str: 220
+    Agi: 230
+    Vit: 120
+    Int: 420
+    Dex: 420
+    Luk: 100
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 1152
+    AttackMotion: 384
+    DamageMotion: 288
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: Ep21_Jor_G_Rosary
+        Rate: 2500
+      - Item: Ep21_Jor_Accessary
+        Rate: 2500
+      - Item: Yortus_Arbiter_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22364
+    AegisName: EP21_B_YORTUS_B
+    Name: EP21_B_YORTUS_B
+    Level: 265
+    Hp: 670855900
+    BaseExp: 4675120
+    JobExp: 3572590
+    MvpExp: 1000000
+    Attack: 9500
+    Attack2: 23000
+    Defense: 518
+    MagicDefense: 206
+    Resistance: 550
+    MagicResistance : 550
+    Str: 220
+    Agi: 230
+    Vit: 120
+    Int: 420
+    Dex: 420
+    Luk: 100
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Ghost
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 1152
+    AttackMotion: 384
+    DamageMotion: 288
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: Ep21_Jor_G_Rosary
+        Rate: 2500
+      - Item: Ep21_Jor_Accessary
+        Rate: 2500
+      - Item: Yortus_Bailiff_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22365
+    AegisName: G_EP21_ICESEAHORSE
+    Name: G_EP21_ICESEAHORSE
+    Level: 240
+    Hp: 50000000
+    Attack: 5000
+    Attack2: 7000
+    Defense: 242
+    MagicDefense: 245
+    Str: 200
+    Agi: 180
+    Vit: 80
+    Int: 150
+    Dex: 200
+    Luk: 90
+    AttackRange: 1
+    SkillRange: 50
+    ChaseRange: 12
+    Size: Medium
+    Race: Brute
+    Element: Water
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 1872
+    AttackMotion: 672
+    DamageMotion: 480
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+  - Id: 22366
+    AegisName: G_EP21_YORDOS_A
+    Name: G_EP21_YORDOS_A
+    Level: 243
+    Hp: 50000000
+    Attack: 4500
+    Attack2: 8000
+    Defense: 341
+    MagicDefense: 187
+    Resistance: 400
+    MagicResistance : 400
+    Str: 100
+    Agi: 200
+    Vit: 70
+    Int: 250
+    Dex: 220
+    Luk: 90
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 1152
+    AttackMotion: 384
+    DamageMotion: 288
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+  - Id: 22367
+    AegisName: G_EP21_YORDOS_B
+    Name: G_EP21_YORDOS_B
+    Level: 243
+    Hp: 50000000
+    Attack: 4500
+    Attack2: 8000
+    Defense: 341
+    MagicDefense: 187
+    Resistance: 400
+    MagicResistance : 400
+    Str: 100
+    Agi: 200
+    Vit: 70
+    Int: 250
+    Dex: 220
+    Luk: 90
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 1152
+    AttackMotion: 384
+    DamageMotion: 288
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+  - Id: 22368
+    AegisName: G_EP21_YORDOS_C
+    Name: G_EP21_YORDOS_C
+    Level: 243
+    Hp: 50000000
+    Attack: 4000
+    Attack2: 8500
+    Defense: 380
+    MagicDefense: 150
+    Resistance: 400
+    MagicResistance : 400
+    Str: 220
+    Agi: 230
+    Vit: 115
+    Int: 150
+    Dex: 230
+    Luk: 95
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Earth
+    ElementLevel: 2
+    WalkSpeed: 120
+    AttackDelay: 576
+    AttackMotion: 384
+    DamageMotion: 288
+    DamageTaken: 10
+    Ai: 21
+  - Id: 22369
+    AegisName: EP21_MD_SAILOR
+    Name: EP21_MD_SAILOR
+    Level: 235
+    Hp: 25000000
+    Attack: 3000
+    Attack2: 7500
+    Defense: 280
+    MagicDefense: 150
+    Resistance: 400
+    MagicResistance : 400
+    Str: 220
+    Agi: 230
+    Vit: 115
+    Int: 150
+    Dex: 230
+    Luk: 95
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Undead
+    Element: Undead
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 2228
+    AttackMotion: 576
+    DamageMotion: 528
+    Ai: 21
+  - Id: 22370
+    AegisName: EP21_MD_CAPTAIN
+    Name: EP21_MD_CAPTAIN
+    Level: 240
+    Hp: 83156500
+    BaseExp: 4675120
+    JobExp: 3572590
+    MvpExp: 1000000
+    Attack: 15000
+    Attack2: 32000
+    Defense: 389
+    MagicDefense: 149
+    Resistance: 800
+    MagicResistance : 800
+    Str: 400
+    Agi: 350
+    Vit: 125
+    Int: 450
+    Dex: 350
+    Luk: 220
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Undead
+    Element: Undead
+    ElementLevel: 2
+    WalkSpeed: 180
+    AttackDelay: 476
+    AttackMotion: 500
+    DamageMotion: 480
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+  - Id: 22371
+    AegisName: EP21_YOR_TAN
+    Name: EP21_YOR_TAN
+    Level: 240
+    Hp: 95302440
+    BaseExp: 4675120
+    JobExp: 3572590
+    MvpExp: 1000000
+    Attack: 15000
+    Attack2: 32000
+    Defense: 383
+    MagicDefense: 147
+    Resistance: 800
+    MagicResistance : 800
+    Str: 400
+    Agi: 350
+    Vit: 125
+    Int: 450
+    Dex: 350
+    Luk: 220
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: DemiHuman
+    Element: Poison
+    ElementLevel: 2
+    WalkSpeed: 220
+    AttackDelay: 476
+    AttackMotion: 500
+    DamageMotion: 480
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: Devouring_Tan_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22372
+    AegisName: EP21_MD_CAPTAIN_B
+    Name: EP21_MD_CAPTAIN_B
+    Level: 240
+    Hp: 923588760
+    BaseExp: 4675120
+    JobExp: 3572590
+    MvpExp: 1000000
+    Attack: 15000
+    Attack2: 32000
+    Defense: 389
+    MagicDefense: 149
+    Resistance: 800
+    MagicResistance : 800
+    Str: 400
+    Agi: 350
+    Vit: 125
+    Int: 450
+    Dex: 350
+    Luk: 220
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Undead
+    Element: Undead
+    ElementLevel: 2
+    WalkSpeed: 180
+    AttackDelay: 476
+    AttackMotion: 500
+    DamageMotion: 480
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    MvpDrops:
+      - Item: Old_Card_Album
+        Rate: 5000
+      - Item: Old_Violet_Box
+        Rate: 5000
+      - Item: Magic_Card_Album
+        Rate: 300
+    Drops:
+      - Item: Ep21_Acc_E_Stone2
+        Rate: 2500
+      - Item: Ep21_Armor_E_Stone2
+        Rate: 2500
+      - Item: Ep21_Robe_E_Stone2
+        Rate: 2500
+      - Item: Ep21_Shoes_E_Stone2
+        Rate: 2500
+      - Item: EP20_D_P_Extract
+        Rate: 5000
+      - Item: EP19_S_F_1_Extract
+        Rate: 5000
+      - Item: Captain_Antiquity
+        Rate: 1000
+      - Item: Ghost_Ship_Captain_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22373
+    AegisName: EP21_YOR_TAN_B
+    Name: EP21_YOR_TAN_B
+    Level: 240
+    Hp: 570000000
+    BaseExp: 4675120
+    JobExp: 3572590
+    MvpExp: 1000000
+    Attack: 15000
+    Attack2: 32000
+    Defense: 383
+    MagicDefense: 147
+    Resistance: 800
+    MagicResistance : 800
+    Str: 400
+    Agi: 350
+    Vit: 125
+    Int: 450
+    Dex: 350
+    Luk: 220
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: DemiHuman
+    Element: Poison
+    ElementLevel: 2
+    WalkSpeed: 220
+    AttackDelay: 476
+    AttackMotion: 500
+    DamageMotion: 480
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: Ep21_Acc_E_Stone2
+        Rate: 2500
+      - Item: Ep21_Armor_E_Stone2
+        Rate: 2500
+      - Item: Ep21_Robe_E_Stone2
+        Rate: 2500
+      - Item: Ep21_Shoes_E_Stone2
+        Rate: 2500
+      - Item: EP20_D_P_Extract
+        Rate: 5000
+      - Item: EP19_S_F_1_Extract
+        Rate: 5000
+      - Item: Tan_Antiquity
+        Rate: 1000
+      - Item: Devouring_Tan_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22374
+    AegisName: EP21_MD_BOX1
+    Name: EP21_MD_BOX1
+    Level: 99
+    Dex: 10
+    Size: Small
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 100
+    AttackDelay: 100
+    AttackMotion: 100
+    DamageMotion: 100
+    Class: Boss
+    Modes:
+      NoRandomWalk: true
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
+    Drops:
+      - Item: Ep21_Acc_E_Stone1
+        Rate: 2500
+      - Item: Ep21_Armor_E_Stone1
+        Rate: 2500
+      - Item: Ep21_Robe_E_Stone1
+        Rate: 2500
+      - Item: Ep21_Shoes_E_Stone1
+        Rate: 2500
+      - Item: EP20_D_P_Extract
+        Rate: 2500
+      - Item: EP19_S_F_1_Extract
+        Rate: 2500
+      - Item: Ep21_Acc_E_Stone2
+        Rate: 800
+      - Item: Ep21_Armor_E_Stone2
+        Rate: 800
+      - Item: Ep21_Robe_E_Stone2
+        Rate: 800
+      - Item: Ep21_Shoes_E_Stone2
+        Rate: 800
+  - Id: 22375
+    AegisName: JT_EP21_NPC_SERPENT_
+    Name: JT_EP21_NPC_SERPENT_
+    Level: 250
+    Hp: 7000000
+    Attack: 100
+    Attack2: 100
+    Defense: 383
+    MagicDefense: 147
+    Resistance: 800
+    MagicResistance : 800
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Brute
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 1000
+    AttackDelay: 1
+    AttackMotion: 1
+    DamageMotion: 1
 #  - Id: 22378
 #    AegisName: MD_Airboat_Boss5
 #  - Id: 22379
