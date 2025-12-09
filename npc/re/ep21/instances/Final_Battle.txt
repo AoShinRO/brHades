@@ -1,0 +1,288 @@
+//===============================================================\\
+//      ___.         .__                .___                     ||
+//      \_ |_________|  |__ _____     __| _/____   ______        ||
+//       | __ \_  __ \  |  \\__  \   / __ |/ __ \ /  ___/        ||
+//       | \_\ \  | \/   Y  \/ __ \_/ /_/ \  ___/ \___ \         ||
+//       |___  /__|  |___|  (____  /\____ |\___  >____  >        ||
+//           \/           \/     \/      \/    \/     \/         ||
+//                                   Scripts                     ||
+//===============================================================||
+//= 1.0 First version. [Capuche]                                 ||
+//= 1.1 Revision&translation. [AoShinHo]                         ||
+//===============================================================||
+//= Final Battle Instance
+
+1@ep21b	mapflag	partylock
+1@ep21b	mapflag	noteleport
+1@ep21b	mapflag	nosave	SavePoint
+1@ep21b	mapflag	nomemo
+1@ep21b	mapflag	nobranch
+1@ep21b	mapflag	noicewall
+1@ep21b	mapflag	restricted	6
+
+luna_sf2,260,44,4	script	Ilze#Con1	10586,{
+
+	.@playtime = checkquest(12646,PLAYTIME);
+	if(.@playtime == 2) erasequest 12646;
+	if(.@playtime == 0 || .@playtime == 1){
+		mes "["+strnpcinfo(0)+"]";
+		mes "The cooling time of this copy is still there, please come to me when the cooling time is over.";
+		close;
+	}
+
+	set .@party_id,getcharid(1);
+	set .@p_name$,getpartyname(.@party_id);
+
+	if (!.@party_id) {
+		mes "["+strnpcinfo(0)+"]";
+		mes "What about your team members?";
+		close;
+	}
+	
+	.@md_name$ = "Final Battle";
+	
+	if (getcharid(0) == getpartyleader(.@party_id,2))
+		set @menu$, "Create "+.@md_name$+":Enter "+.@md_name$;
+	else
+		set @menu$, ":Enter"+.@md_name$;
+
+	cutin "ep21_ilse_heine01",1;
+	mes "["+strnpcinfo(0)+"]";
+	mes "Hehe, I have a long time to practice the magic, it's time to show it.";
+	next;
+	mes "["+strnpcinfo(0)+"]";
+	mes "Copy reward:";
+	mes "^i[102947] ^i[1001618] ^i[1001250] ^i[1001034] ^i[1001663] ^i[1001660] ^i[1001657] ^i[1001654]";
+	mes "What do you want to do?";
+	next;
+	cutin "ep21_ilse_heine01",255;
+	.@i = select(@menu$)-1;
+	switch(.@i) {
+	case 0:
+		if(BaseLevel < 220) {
+			mes "["+strnpcinfo(0)+"]";
+			mes "It is very dangerous in it ... Let's wait until LV.220 again ...";
+			close;
+		}
+		
+		if (instance_create(.@md_name$) < 0) {
+			mes "["+strnpcinfo(0)+"]";
+			mes "Team Name: Team Captain: ^0000ff";
+			close;
+		}
+
+		mapannounce strnpcinfo(4),"Team: " + getpartyname(.@party_id) + " is ready to challenge the ["+.@md_name$+"] dungeon!",bc_map,0x33ea91;	
+		mes "["+strnpcinfo(0)+"]";
+		mes ""+.@md_name$+"has been created~";
+		mes "Please select ^0066CC to enter";
+		
+		.@iid = instance_id(IM_PARTY);
+		set getinstancevar('party_id, .@iid), getcharid(1);
+		set Instance_Annal,gettimetick(2);
+		close;
+	case 1:
+		if(BaseLevel < 220) {
+			mes "["+strnpcinfo(0)+"]";
+			mes "It is very dangerous in it ... Let's wait until LV.220 again ...";
+			close;
+		}
+	if ( getinstancevar('Win,instance_id(IM_PARTY)) ) {
+			mes "The copy has begun and cannot enter again.";
+	close;
+	}
+		switch(instance_enter(.@md_name$)) {
+		case IE_OTHER:
+			mes "Unknown errors.";
+			close;
+		case IE_NOINSTANCE:
+			mes .@md_name$+" not exist";
+			mes "Captain has not yet applied for a memory maze.";
+			close;
+		case IE_NOMEMBER:
+			mes "Only apply";
+			close;
+		case IE_OK:
+			mapannounce strnpcinfo(4),"Team: " + getpartyname(.@party_id) + " led by " + strcharinfo(0) + " started ["+.@md_name$+"] dungeon!",bc_map,0x00ff99;			
+			close;
+		}
+	}
+	close;
+
+
+OnInit:
+	waitingroom "["+strnpcinfo(0)+"]",0;
+	end;
+}
+
+1@ep21b,0,0,0	script	#finalbattle	-1,{   
+	end;
+	
+OnInstanceInit:
+	'map$ = instance_mapname("1@ep21b");
+	end;
+}
+
+
+1@ep21b,74,74,4	script	Meowle#01	10537,{
+
+	if (getpartyleader(getcharid(1),2)!=getcharid(0)) end;
+	mes "["+strnpcinfo(0)+"]";
+	mes "Ah ..... Repeat the same time? Uh ... do you mean this? Difficulty? Ordinary? Multi-changing? What are you talking about?";
+	next;
+	mes "["+strnpcinfo(0)+"]";
+	mes "The past is not harmonious .... I am not the same as before ... the adjustment of the difficulty of the trial, I generally understand.";
+	next;
+	switch (select("Cancel: Easy difficulty: Normal difficulty")) {
+	
+	case 1:
+	close;
+
+	case 2:
+	close2;
+		'bossLv = 1;
+		if(checkquest(12650) == -1) { setquest 12650; }
+		mapannounce 'map$,"[Final Battle] Start conquering the Final Battle in easy mode, damage reduction mode is 50%",bc_map,"0x00ff99";
+		hideonnpc instance_npcname(strnpcinfo(0));
+		monster 'map$,168,30,"Tan",22371,1,instance_npcname(strnpcinfo(0))+"::OnBOSSdie"; 
+		'TAN_boss = $@mobid[0];
+		setunitdata 'TAN_boss,UMOB_DAMAGETAKEN,1;
+		areamobuseskill 'map$,168,30,60,22371,771,1,0,360000,ET_KEK,0;
+		initnpctimer instance_npcname("#monster01_EP21");
+		mapwarp instance_mapname("1@ep21b"),instance_mapname("1@ep21b"),168,15;
+		end;
+
+	case 3:
+	close2;
+		'bossLv = 2;
+		if(checkquest(12651) == -1) { setquest 12651; }
+		mapannounce 'map$,"[Final Battle] Start to conquer the final battle in normal mode, damage reduction mode is 90%",bc_map,"0x00ff99";
+		hideonnpc instance_npcname(strnpcinfo(0));
+		monster 'map$,168,30,"Devouring Tan",22373,1,instance_npcname(strnpcinfo(0))+"::OnBOSSdie"; 
+		'TAN_boss = $@mobid[0];
+		setunitdata 'TAN_boss,UMOB_DAMAGETAKEN,1;
+		areamobuseskill 'map$,168,30,60,22373,771,5,0,360000,ET_KEK,0;
+		initnpctimer instance_npcname("#monster01_EP21");
+		mapwarp instance_mapname("1@ep21b"),instance_mapname("1@ep21b"),168,15;
+		end;
+		
+	}
+
+
+OnBOSSdie:
+	'win = 1;
+	stopnpctimer instance_npcname("#monster01_EP21");
+	stopnpctimer instance_npcname("#monster02_EP21");
+	enablenpc instance_npcname("Tan#01");
+	initnpctimer instance_npcname("Tan#01");
+	set 'Instance_Miao,gettimetick(2)-'Instance_Annal;
+	announce "[Final Battle]: The team ["+strcharinfo(1)+"], led by the captain ["+getpartyleader(getcharid(1),0)+"] taking "+('Instance_Miao/60)+"Min's and "+('Instance_Miao%60)+"Sec's to challenge successful",bc_all,0xD7BA98;
+	end;
+}
+
+
+1@ep21b,0,0,0	script	#monster01_EP21	-1,{ end;
+
+OnTimer3000:
+	'TAN_mob = 30;
+	areamonster 'map$,162,35,178,22,"The Phantom of Jormungandr",22300,6,instance_npcname(strnpcinfo(0))+"::OnBOSSdie01";
+	end;
+OnTimer6000:
+	areamonster 'map$,162,35,178,22,"The Phantom of Jormungandr",22300,6,instance_npcname(strnpcinfo(0))+"::OnBOSSdie01";
+	end;
+OnTimer9000:
+	areamonster 'map$,162,35,178,22,"The Phantom of Jormungandr",22300,6,instance_npcname(strnpcinfo(0))+"::OnBOSSdie01";
+	end;
+OnTimer12000:
+	areamonster 'map$,162,35,178,22,"The Phantom of Jormungandr",22300,6,instance_npcname(strnpcinfo(0))+"::OnBOSSdie01";
+	end;
+OnTimer15000:
+	areamonster 'map$,162,35,178,22,"The Phantom of Jormungandr",22300,6,instance_npcname(strnpcinfo(0))+"::OnBOSSdie01";
+	stopnpctimer;
+	end;
+
+OnBOSSdie01:
+	set 'TAN_mob,'TAN_mob-1;
+	if ('TAN_mob>0) end;
+
+	if('bossLv == 1){
+	killmonster 'map$,instance_npcname(strnpcinfo(0))+"::OnBOSSdie01";
+	stopnpctimer;
+	unittalk 'TAN_boss, "Tan's consciousness is running low, the truth of the past ten years has been revealed, attack quickly!";	
+	setunitdata 'TAN_boss, UMOB_CLASS, 22375;
+	setunitdata 'TAN_boss,UMOB_AURA,2005;
+	setunitdata 'TAN_boss, UMOB_MODE, MD_NORANDOMWALK;
+	setunitdata 'TAN_boss,UMOB_DAMAGETAKEN,90;
+	initnpctimer instance_npcname("#monster02_EP21");
+	end;
+	}
+	
+	if('bossLv == 2){
+	killmonster 'map$,instance_npcname(strnpcinfo(0))+"::OnBOSSdie01";
+	stopnpctimer;
+	unittalk 'TAN_boss, "Tan's consciousness is running low, the truth of the past ten years has been revealed, attack quickly!";	
+	setunitdata 'TAN_boss,UMOB_CLASS, 22375;
+	setunitdata 'TAN_boss,UMOB_AURA,2005;
+	setunitdata 'TAN_boss,UMOB_MODE, MD_NORANDOMWALK;
+	setunitdata 'TAN_boss,UMOB_DAMAGETAKEN,10;
+	initnpctimer instance_npcname("#monster02_EP21");
+	end;
+	}
+	
+	end;
+}
+
+
+1@ep21b,0,0,0	script	#monster02_EP21	-1,{ end;
+
+OnTimer8000:
+	unittalk 'TAN_boss, "You useless bastard, your body is already mine!";	
+	setunitdata 'TAN_boss, UMOB_CLASS, 22371;
+	setunitdata 'TAN_boss,UMOB_AURA,0;
+	setunitdata 'TAN_boss, UMOB_MODE, MD_CANMOVE|MD_AGGRESSIVE|MD_CASTSENSORIDLE|MD_CANATTACK|MD_KNOCKBACKIMMUNE|MD_DETECTOR|MD_CASTSENSORIDLE;
+	setunitdata 'TAN_boss,UMOB_DAMAGETAKEN,1;
+	initnpctimer instance_npcname("#monster01_EP21");
+	end;
+}
+
+
+1@ep21b,166,29,4	script	Tan#01	10594,{ 
+end;
+
+OnTimer1000:
+	npctalk "That's it....it's done....";
+	end;
+OnTimer6000:
+	specialeffect 16;
+	disablenpc instance_npcname(strnpcinfo(0));
+	enablenpc instance_npcname("Meowle#02");
+	monster 'map$,166,29,"Box",22374,1; 
+	stopnpctimer;
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname(strnpcinfo(0));
+	end;
+}
+
+
+1@ep21b,169,29,4	script	Meowle#02	10537,{
+
+	mes "["+strnpcinfo(0)+"]";
+	mes "Reward";
+	close2;
+		if('bossLv == 1){
+		getitem 1001618,10;
+		}
+		if('bossLv == 2){
+		getitem 1001618,20;
+		}
+
+	if(checkquest(12650) >= 0) { erasequest 12650; setquest 12646; }
+	if(checkquest(12651) >= 0) { erasequest 12651; setquest 12646; }
+	warp $Instance_MA$,$Instance_MAP_X,$Instance_MAP_Y;
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname(strnpcinfo(0));
+	end;
+}

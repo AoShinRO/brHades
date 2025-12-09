@@ -66,4 +66,4 @@ Footer:
   - Path: npc/re/merchants/barters/ep19_new_content.yml
   - Path: npc/re/merchants/barters/quests_20_misc.yml
   - Path: npc/re/merchants/barters/garden_of_time.yml
-
+  - Path: npc/re/ep21/merchants/barter/quest_21_misc.yml

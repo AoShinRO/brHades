@@ -49544,36 +49544,36 @@ Body:
       bonus2 bSkillCooldown,"NW_THE_VIGILANTE_AT_NIGHT",-300;
   - Combos:
       - Combo:
-          - aegis_300515   # 300515
-          - aegis_300524   # 300524
+          - Yoster_Fixer_Card   # 300515
+          - Yoscopus_Guardian_Card   # 300524
     Script: |
       bonus2 bAddEle,Ele_All,15;
       bonus bShortAtkRate,15;
   - Combos:
       - Combo:
-          - aegis_300515   # 300515
-          - aegis_300525   # 300525
+          - Yoster_Fixer_Card   # 300515
+          - Yoscopus_Warlock_Card   # 300525
     Script: |
       bonus2 bAddEle,Ele_All,15;
       bonus bShortAtkRate,15;
   - Combos:
       - Combo:
-          - aegis_300517   # 300517
-          - aegis_300524   # 300524
+          - Yoster_Negotiator_Card   # 300517
+          - Yoscopus_Guardian_Card   # 300524
     Script: |
       bonus2 bAddEle,Ele_All,15;
       bonus bLongAtkRate,15;
   - Combos:
       - Combo:
-          - aegis_300517   # 300517
-          - aegis_300525   # 300525
+          - Yoster_Negotiator_Card   # 300517
+          - Yoscopus_Guardian_Card   # 300524
     Script: |
       bonus2 bAddEle,Ele_All,15;
       bonus bLongAtkRate,15;
   - Combos:
       - Combo:
-          - aegis_300519   # 300519
-          - aegis_300506   # 300506
+          - Yoster_Negotiator_Card   # 300517
+          - Yoscopus_Guardian_Card   # 300524
     Script: |
       bonus2 bAddSize,Size_All,15;
       if (getiteminfo(getequipid(EQI_HAND_R), ITEMINFO_WEAPONLEVEL)==5) {
@@ -49585,8 +49585,8 @@ Body:
       }
   - Combos:
       - Combo:
-          - aegis_300520   # 300520
-          - aegis_300507   # 300507
+          - Yormi_Missionary_Card   # 300520
+          - Velelling_Card   # 300507
     Script: |
       bonus2 bMagicAddSize,Size_All,15;
       if (getiteminfo(getequipid(EQI_HAND_R), ITEMINFO_WEAPONLEVEL)==5) {
@@ -49598,8 +49598,8 @@ Body:
       }
   - Combos:
       - Combo:
-          - aegis_300521   # 300521
-          - aegis_300529   # 300529
+          - Yordos_Investigator_Card   # 300521
+          - Yortus_Warlock_Card   # 300529
     Script: |
       bonus2 bMagicAddEle,Ele_All,15;
       bonus2 bMagicAtkEle,Ele_Ghost,15;
@@ -49609,8 +49609,8 @@ Body:
       bonus2 bMagicAtkEle,Ele_Dark,15;
   - Combos:
       - Combo:
-          - aegis_300522   # 300522
-          - aegis_300529   # 300529
+          - Yordos_Judge_Card   # 300522
+          - Yortus_Warlock_Card   # 300529
     Script: |
       bonus2 bMagicAddEle,Ele_All,15;
       bonus2 bMagicAtkEle,Ele_Undead,15;
@@ -49620,8 +49620,8 @@ Body:
       bonus2 bMagicAtkEle,Ele_Poison,15;
   - Combos:
       - Combo:
-          - aegis_300527   # 300527
-          - aegis_300526   # 300526
+          - Yorker_Trader_Card   # 300527
+          - Yorker_Worker_Card   # 300526
     Script: |
       bonus bCritAtkRate,12;
       bonus bCRate,2;

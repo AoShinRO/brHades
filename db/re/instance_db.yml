@@ -576,6 +576,22 @@ Body:
       Map: 1@jorlab
       X: 57
       Y: 45
+  - Id: 100
+    Name: Ghost Ship Captain
+    TimeLimit: 3600
+    IdleTimeOut: 600
+    Enter:
+      Map: 1@wtgs
+      X: 86
+      Y: 305
+  - Id: 101
+    Name: Final Battle
+    TimeLimit: 3600
+    IdleTimeOut: 600
+    Enter:
+      Map: 1@ep21b
+      X: 73
+      Y: 70
   - Id: 300
     Name: "Sticky Sea"
     TimeLimit: 1800
