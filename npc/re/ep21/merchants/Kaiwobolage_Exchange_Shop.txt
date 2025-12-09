@@ -1,0 +1,77 @@
+//===============================================================\\
+//      ___.         .__                .___                     ||
+//      \_ |_________|  |__ _____     __| _/____   ______        ||
+//       | __ \_  __ \  |  \\__  \   / __ |/ __ \ /  ___/        ||
+//       | \_\ \  | \/   Y  \/ __ \_/ /_/ \  ___/ \___ \         ||
+//       |___  /__|  |___|  (____  /\____ |\___  >____  >        ||
+//           \/           \/     \/      \/    \/     \/         ||
+//                                   Scripts                     ||
+//===============================================================||
+//= 1.0 First version. [Capuche]                                 ||
+//= 1.1 Revision&translation. [AoShinHo]                         ||
+//===============================================================||
+
+mbase_in,228,131,6	script	Kaiwobolage Exchange Shop#01	123,{
+
+	mes "["+strnpcinfo(0)+"]";
+	mes "Please select the service you want";
+	next;
+	switch(select("Magic Stone Exchange: General Items:Special Items:Enchant:Go to related maps")){
+
+	case 1:
+	close2;
+	callshop "Kaiwobolage_Exchange_Shop#Magic_Stone_Exchange";
+	end;
+
+	case 2:
+	close2;
+	callshop "Kaiwobolage_Exchange_Shop#General_Items";
+	end;
+
+	case 3:
+	close2;
+	callshop "Kaiwobolage_Exchange_Shop#Special_Items";
+	end;
+
+	case 4:
+		mes "["+strnpcinfo(0)+"]";
+		mes "Please select the equipment you want to attach magic";
+		next;
+		switch(select("Gaebolg Armor:Gaebolg Manteau:Gaebolg Boots:Gaebolg Ring")){
+
+		case 1:
+		close2;
+		item_enchant 143;
+		end;
+
+		case 2:
+		close2;
+		item_enchant 144;
+		end;
+
+		case 3:
+		close2;
+		item_enchant 145;
+		end;
+
+		case 4:
+		close2;
+		item_enchant 146;
+		end;
+
+		}
+
+	case 5:
+		switch(select("Jormungand's Cult Village[jor_base]","Rising Land South[jor_raise2]","Rising Land North[jor_raise1]","Jormungand's Cult Temple 1st floor[jor_tmple1]","Jormungand's Cult Temple 2st floor[jor_tmple2]")) {
+		case 1: set WarpMap$,"jor_base"; set WarpMapX,0; set WarpMapY,0; warp "jor_base",0,0;	close;
+		case 2: set WarpMap$,"jor_raise2"; set WarpMapX,0; set WarpMapY,0; warp "jor_raise2",0,0;	close;
+		case 3: set WarpMap$,"jor_raise1"; set WarpMapX,0; set WarpMapY,0; warp "jor_raise1",0,0;	close;
+		case 4: set WarpMap$,"jor_tmple1"; set WarpMapX,0; set WarpMapY,0; warp "jor_tmple1",0,0;	close;
+		case 5: set WarpMap$,"jor_tmple2"; set WarpMapX,0; set WarpMapY,0; warp "jor_tmple2",0,0;	close;
+		}
+	}
+
+OnInit:
+	waitingroom "["+strnpcinfo(0)+"]",0;
+	end;
+}

@@ -1,0 +1,334 @@
+#===============================================================\\
+#      ___.         .__                .___                     ||
+#      \_ |_________|  |__ _____     __| _/____   ______        ||
+#       | __ \_  __ \  |  \\__  \   / __ |/ __ \ /  ___/        ||
+#       | \_\ \  | \/   Y  \/ __ \_/ /_/ \  ___/ \___ \         ||
+#       |___  /__|  |___|  (____  /\____ |\___  >____  >        ||
+#           \/           \/     \/      \/    \/     \/         ||
+#                                   Scripts                     ||
+#===============================================================||
+
+Header:
+  Type: BARTER_DB
+  Version: 1
+
+Body:
+   - Name: Kaiwobolage_Exchange_Shop#Magic_Stone_Exchange
+     Map: mbase_in
+     X: 1
+     Y: 1
+     Direction: SouthWest
+     Sprite: 2_F_MAGICMASTER
+     Items:
+       - Index: 1
+         Item: Ep21_Armor_E_Stone1
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 5
+       - Index: 2
+         Item: Ep21_Armor_E_Stone2
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Armor_E_Stone1
+             Amount: 5
+           - Index: 2
+             Item: Ep18_Amethyst_Fragment
+             Amount: 30
+           - Index: 3
+             Item: Ep20_Cat_Whiskers
+             Amount: 15
+       - Index: 3
+         Item: Ep21_Armor_E_Stone3
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Armor_E_Stone2
+             Amount: 5
+           - Index: 2
+             Item: Ep18_Amethyst_Fragment
+             Amount: 30
+           - Index: 3
+             Item: Ep20_Cat_Whiskers
+             Amount: 15
+       - Index: 4
+         Item: Ep21_Robe_E_Stone1
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 5
+       - Index: 5
+         Item: Ep21_Robe_E_Stone2
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Robe_E_Stone1
+             Amount: 5
+           - Index: 2
+             Item: Ep18_Amethyst_Fragment
+             Amount: 30
+           - Index: 3
+             Item: Ep20_Cat_Whiskers
+             Amount: 15
+       - Index: 6
+         Item: Ep21_Robe_E_Stone3
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Robe_E_Stone2
+             Amount: 5
+           - Index: 2
+             Item: Ep18_Amethyst_Fragment
+             Amount: 30
+           - Index: 3
+             Item: Ep20_Cat_Whiskers
+             Amount: 15
+       - Index: 7
+         Item: Ep21_Shoes_E_Stone1
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 5
+       - Index: 8
+         Item: Ep21_Shoes_E_Stone2
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Shoes_E_Stone1
+             Amount: 5
+           - Index: 2
+             Item: Ep18_Amethyst_Fragment
+             Amount: 30
+           - Index: 3
+             Item: Ep20_Cat_Whiskers
+             Amount: 15
+       - Index: 9
+         Item: Ep21_Shoes_E_Stone3
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Shoes_E_Stone2
+             Amount: 5
+           - Index: 2
+             Item: Ep18_Amethyst_Fragment
+             Amount: 30
+           - Index: 3
+             Item: Ep20_Cat_Whiskers
+             Amount: 15
+       - Index: 10
+         Item: Ep21_Acc_E_Stone1
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 5
+       - Index: 11
+         Item: Ep21_Acc_E_Stone2
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Acc_E_Stone1
+             Amount: 5
+           - Index: 2
+             Item: Ep18_Amethyst_Fragment
+             Amount: 30
+           - Index: 3
+             Item: Ep20_Cat_Whiskers
+             Amount: 15
+       - Index: 12
+         Item: Ep21_Acc_E_Stone3
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Acc_E_Stone2
+             Amount: 5
+           - Index: 2
+             Item: Ep18_Amethyst_Fragment
+             Amount: 30
+           - Index: 3
+             Item: Ep20_Cat_Whiskers
+             Amount: 15
+   - Name: Kaiwobolage_Exchange_Shop#General_Items
+     Map: mbase_in
+     X: 1
+     Y: 1
+     Direction: SouthWest
+     Sprite: 2_F_MAGICMASTER
+     Items:
+       - Index: 1
+         Item: Teleport_Ep21
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 1
+       - Index: 2
+         Item: Gaebolg_A_Hammer_1
+         Stock: 0
+         Zeny: 2500000
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 50
+       - Index: 3
+         Item: Gaebolg_Armor
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 100
+       - Index: 4
+         Item: Gaebolg_Robe
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 100
+       - Index: 5
+         Item: Gaebolg_Manteau
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 100
+       - Index: 6
+         Item: Gaebolg_Muffler
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 100
+       - Index: 7
+         Item: Gaebolg_Boots
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 100
+       - Index: 8
+         Item: Gaebolg_Shoes
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 100
+             
+       - Index: 9
+         Item: Gaebolg_Ring
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 100
+       - Index: 10
+         Item: Gaebolg_Glove
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 100
+       - Index: 11
+         Item: Gaebolg_Earring
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 100
+       - Index: 12
+         Item: Gaebolg_Necklace
+         Stock: 0
+         Zeny: 0
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 100
+   - Name: Kaiwobolage_Exchange_Shop#Special_Items
+     Map: mbase_in
+     X: 1
+     Y: 1
+     Direction: SouthWest
+     Sprite: 2_F_MAGICMASTER
+     Items:
+       - Index: 1
+         Item: Snow_F_Stone1
+         Stock: 0
+         Zeny: 7500
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 2
+       - Index: 2
+         Item: Snow_F_Stone2
+         Stock: 0
+         Zeny: 25000
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 1
+       - Index: 3
+         Item: Snow_F_Stone3
+         Stock: 0
+         Zeny: 100000
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 3
+       - Index: 4
+         Item: EP20_D_P_Crystal
+         Stock: 0
+         Zeny: 25000
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 3
+       - Index: 5
+         Item: Ep21_Fatty_Shrimp
+         Stock: 0
+         Zeny: 5000
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 1
+       - Index: 6
+         Item: Gaebolg_A_Hammer_2
+         Stock: 0
+         Zeny: 4000000
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 100
+       - Index: 7
+         Item: Gaebolg_A_Hammer_3
+         Stock: 0
+         Zeny: 7000000
+         RequiredItems:
+           - Index: 1
+             Item: Ep21_Wigner_Ticket
+             Amount: 200
+
