@@ -176,7 +176,15 @@ int32 hom_class2mapid(int32 hom_class)
 		case 6051:				return MAPID_DIETER;
 		case 6052:				return MAPID_ELANOR;
 
-		default:				return -1;
+		default:
+			if (std::shared_ptr<s_homunculus_db> hom = homunculus_db.find(hom_class))
+			{
+				if (hom->evo_class != hom->base_class)
+					return MAPID_LIF;
+				else
+					return MAPID_LIF_E;
+			}
+			return -1;
 	}
 }
 
@@ -1514,19 +1522,15 @@ bool HomunculusDatabase::parseStatusNode(const std::string &nodeName, const std:
  */
 uint64 HomunculusDatabase::parseBodyNode(const ryml::NodeRef &node) {
 	std::string class_name;
+	int32 id;
+
+	if (!this->asInt32(node, "Id", id))
+		return 0;
 
 	if (!this->asString(node, "Class", class_name))
 		return 0;
 
-	std::string class_name_constant = "MER_" + class_name;
-	int64 class_tmp;
-
-	if (!script_get_constant(class_name_constant.c_str(), &class_tmp)) {
-		this->invalidWarning(node["Class"], "Invalid homunculus Class \"%s\", skipping.\n", class_name.c_str());
-		return 0;
-	}
-
-	int32 class_id = static_cast<int32>(class_tmp);
+	int32 class_id = static_cast<int32>(id);
 	std::shared_ptr<s_homunculus_db> hom = this->find(class_id);
 	bool exists = hom != nullptr;
 
@@ -1553,20 +1557,12 @@ uint64 HomunculusDatabase::parseBodyNode(const ryml::NodeRef &node) {
 	}
 
 	if (this->nodeExists(node, "EvolutionClass")) {
-		std::string evo_class_name;
+		int32 evo_class;
 
-		if (!this->asString(node, "EvolutionClass", evo_class_name))
+		if (!this->asInt32(node, "EvolutionClass", evo_class))
 			return 0;
 
-		std::string evo_class_name_constant = "MER_" + evo_class_name;
-		int64 constant;
-
-		if (!script_get_constant(evo_class_name_constant.c_str(), &constant)) {
-			this->invalidWarning(node["EvolutionClass"], "Invalid homunculus Evolution Class %s, skipping.\n", evo_class_name.c_str());
-			return 0;
-		}
-
-		hom->evo_class = static_cast<int32>(constant);
+		hom->evo_class = static_cast<int32>(evo_class);
 	} else {
 		if (!exists)
 			hom->evo_class = class_id;
