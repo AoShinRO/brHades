@@ -835,6 +835,9 @@ Body:
   - Command: snow
     Help: |
       Makes all maps to have the snow weather effect.
+  - Command: rain
+    Help: |
+      Makes all maps to have the rain weather effect.
   - Command: clouds
     Help: |
       Makes all maps to have the cloudy weather effect.

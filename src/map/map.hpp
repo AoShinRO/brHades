@@ -626,7 +626,7 @@ enum e_mapflag : int16 {
 	MF_FOG,
 	MF_SAKURA,
 	MF_LEAVES,
-	//MF_RAIN,	//20 - No longer available, keeping here just in case it's back someday. [Ind]
+	MF_RAIN,	//20 - No longer available, keeping here just in case it's back someday. [Ind]
 	// 21 free
 	MF_NOGO = 22,
 	MF_CLOUDS,

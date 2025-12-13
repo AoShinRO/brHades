@@ -477,7 +477,7 @@
 	export_constant(MF_SAKURA);
 	export_constant(MF_LEAVES);
 	// Intentionally disabled mf_rain because Ind removed it source side
-	//export_constant(MF_RAIN);
+	export_constant(MF_RAIN);
 	export_constant(MF_NOGO);
 	export_constant(MF_CLOUDS);
 	export_constant(MF_CLOUDS2);
