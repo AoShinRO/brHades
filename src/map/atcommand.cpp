@@ -1938,7 +1938,7 @@ ACMD_FUNC(bodystyle)
 
 	// Handle the 'off' alias to revert to the default bodystyle
 	if (!strcasecmp(message, "off") || body_style == 0) {
-		if (sd->vd.class_ != sd->status.class_) {
+		if (sd->vd.body_style != sd->status.class_) {
 			pc_changelook(sd, LOOK_BODY2, sd->status.class_);
 			clif_displaymessage(fd, msg_txt(sd, 1539)); // Appearance changed to default.
 		}
