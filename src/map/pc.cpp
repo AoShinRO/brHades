@@ -10931,9 +10931,7 @@ void pc_changelook(map_session_data *sd,int32 type,int32 val) {
 		sd->setlook_robe = val;
 		break;
 	case LOOK_BODY2:
-		if (!job_db.exists(val) && (val <= JOB_SECOND_JOB_START || val >= JOB_SECOND_JOB_END))
-			return;
-		sd->status.body = val;
+		sd->vd.body_style = sd->status.body = val;
 		break;
 	}
 	clif_changelook(&sd->bl, type, val);
