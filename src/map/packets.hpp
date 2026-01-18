@@ -1909,6 +1909,20 @@ struct PACKET_ZC_DRESSROOM_OPEN{
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(ZC_DRESSROOM_OPEN, 0xa02);
 
+#if PACKETVER_MAIN_NUM >= 20240502
+struct PACKET_CZ_GM_CHECKER{
+	int16 packetType;
+	char mapname[MAP_NAME_LENGTH_EXT];
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(CZ_GM_CHECKER, 0xc0b);
+
+struct PACKET_ZC_GM_CHECKER{
+	int16 packetType;
+	int16 result;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_GM_CHECKER, 0xc0c);
+#endif
+
 struct PACKET_ZC_ROOM_NEWENTRY {
 	int16 packetType;
 	uint16 packetSize;

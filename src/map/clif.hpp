@@ -1521,6 +1521,16 @@ void clif_macro_detector_status(map_session_data &sd, e_macro_detect_status styp
 void clif_macro_reporter_select(map_session_data &sd, const std::vector<uint32> &aid_list);
 void clif_macro_reporter_status(map_session_data &sd, e_macro_report_status stype);
 
+// Macro Checker (GM tool to trigger macro detection on a map)
+enum e_macro_checker_result : int16 {
+	MACROCHECKER_NOGM = 0,        // Not a GM
+	MACROCHECKER_MAPFLAG,         // Map doesn't support macro detection
+	MACROCHECKER_COOLDOWN,        // Cooldown not expired
+	MACROCHECKER_UNKNOWN_MAP,     // Unknown map
+	MACROCHECKER_SUCCESS          // Success
+};
+void clif_macro_checker( map_session_data& sd, e_macro_checker_result result );
+
 void clif_dynamicnpc_result( map_session_data& sd, e_dynamicnpc_result result );
 
 void clif_set_dialog_align(map_session_data& sd, int32 npcid, e_say_dialog_align align);
