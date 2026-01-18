@@ -11788,6 +11788,8 @@ static const struct _battle_data {
 	{ "homunculus_max_level",               &battle_config.hom_max_level,                   99,     0,      MAX_LEVEL,      },
 	{ "homunculus_S_max_level",             &battle_config.hom_S_max_level,                 150,    0,      MAX_LEVEL,      },
 	{ "mob_size_influence",                 &battle_config.mob_size_influence,              0,      0,      1,              },
+	{ "mvp_warp_distance_enable",           &battle_config.mvp_warp_distance_enable,        1,      0,      1,              },
+	{ "mvp_warp_distance",                  &battle_config.mvp_warp_distance,               5,      0,      100,            },
 	{ "skill_trap_type",                    &battle_config.skill_trap_type,                 0,      0,      3,              },
 	{ "allow_consume_restricted_item",      &battle_config.allow_consume_restricted_item,   1,      0,      1,              },
 	{ "allow_equip_restricted_item",        &battle_config.allow_equip_restricted_item,     1,      0,      1,              },

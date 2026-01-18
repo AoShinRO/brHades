@@ -568,6 +568,10 @@ void mvptomb_destroy(struct mob_data *md);
 
 void mob_setdropitem_option( item& itm, s_mob_drop& mobdrop );
 
+// MVP warp distance check
+int32 mob_warp_isnear_sub(block_list* bl, va_list args);
+bool mob_check_mvp_warp_distance(mob_data *md);
+
 #define CHK_MOBSIZE(size) ((size) >= SZ_SMALL && (size) < SZ_MAX) /// Check valid Monster Size
 
 #endif /* MOB_HPP */
