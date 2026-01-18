@@ -25549,6 +25549,101 @@ void clif_macro_reporter_status(map_session_data &sd, e_macro_report_status styp
 #endif
 }
 
+/**
+ * Send macro checker result to client (ZC_GM_CHECKER)
+ * @param sd: Player session data
+ * @param result: Result of the macro check request
+ */
+void clif_macro_checker( map_session_data& sd, e_macro_checker_result result ){
+#if PACKETVER_MAIN_NUM >= 20240502
+	PACKET_ZC_GM_CHECKER p = {};
+
+	p.packetType = HEADER_ZC_GM_CHECKER;
+	p.result = result;
+
+	clif_send( &p, sizeof( p ), &sd.bl, SELF );
+#endif
+}
+
+/**
+ * Helper function to apply macro detection to each player on the map
+ */
+static int32 clif_macro_checker_sub( struct block_list* bl, va_list ap ){
+	map_session_data* tsd = BL_CAST( BL_PC, bl );
+
+	if( tsd == nullptr ){
+		return 0;
+	}
+
+	// Skip if already in macro detection
+	if( tsd->macro_detect.retry != 0 ){
+		return 0;
+	}
+
+	// Skip GMs (they shouldn't be macro detected)
+	if( pc_has_permission( tsd, PC_PERM_MACRO_DETECT ) ){
+		return 0;
+	}
+
+	// Skip if no captcha data available
+	if( captcha_db.empty() ){
+		return 0;
+	}
+
+	// Process macro detection on this player
+	pc_macro_reporter_process( *tsd );
+
+	return 1;
+}
+
+/**
+ * Parse CZ_GM_CHECKER packet - GM triggers macro detection on all players in a map
+ * @param fd: Client socket
+ * @param sd: Player session data
+ */
+void clif_parse_macro_checker( int32 fd, map_session_data* sd ){
+#if PACKETVER_MAIN_NUM >= 20240502
+	nullpo_retv( sd );
+
+	// Check if the player has permission to use macro detection
+	if( !pc_has_permission( sd, PC_PERM_MACRO_DETECT ) ){
+		clif_macro_checker( *sd, MACROCHECKER_NOGM );
+		return;
+	}
+
+	const PACKET_CZ_GM_CHECKER* p = reinterpret_cast<PACKET_CZ_GM_CHECKER*>( RFIFOP( fd, 0 ) );
+
+	// Get mapname and convert to map id
+	char mapname[MAP_NAME_LENGTH_EXT];
+	safestrncpy( mapname, p->mapname, MAP_NAME_LENGTH_EXT );
+
+	int16 mapindex = mapindex_name2id( mapname );
+
+	if( mapindex == 0 ){
+		clif_macro_checker( *sd, MACROCHECKER_UNKNOWN_MAP );
+		return;
+	}
+
+	int16 m = map_mapindex2mapid( mapindex );
+
+	if( m < 0 ){
+		clif_macro_checker( *sd, MACROCHECKER_UNKNOWN_MAP );
+		return;
+	}
+
+	// Check if captcha database has entries
+	if( captcha_db.empty() ){
+		clif_macro_checker( *sd, MACROCHECKER_MAPFLAG );
+		return;
+	}
+
+	// Apply macro detection to all players on the map
+	map_foreachinmap( clif_macro_checker_sub, m, BL_PC );
+
+	clif_macro_checker( *sd, MACROCHECKER_SUCCESS );
+#endif
+}
+
 void clif_dynamicnpc_result( map_session_data& sd, e_dynamicnpc_result result ){
 #if PACKETVER_MAIN_NUM >= 20140430 || PACKETVER_RE_NUM >= 20140430 || defined(PACKETVER_ZERO)
 	PACKET_ZC_DYNAMICNPC_CREATE_RESULT p = {};
