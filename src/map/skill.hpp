@@ -191,12 +191,41 @@ enum e_skill_unit_flag : uint8 {
 const t_tick SECURITY_CASTTIME = 100;
 
 /// Flags passed to skill_attack/skill_area_sub
-enum e_skill_display {
+enum e_skill_display : uint32 {
 	SD_LEVEL     = 0x1000, // skill_attack will send -1 instead of skill level (affects display of some skills)
 	SD_ANIMATION = 0x2000, // skill_attack will use '5' instead of the skill's 'type' (this makes skills show an animation). Also being used in skill_attack for splash skill (NK_SPLASH) to check status_check_skilluse
 	SD_SPLASH    = 0x4000, // skill_area_sub will count targets in skill_area_temp[2]
 	SD_PREAMBLE  = 0x8000, // skill_area_sub will transmit a 'magic' damage packet (-30000 dmg) for the first target selected
 };
+
+/// Bitwise OR operator to combine e_battle_check_target and e_skill_display flags
+constexpr uint32 operator|(e_battle_check_target lhs, e_skill_display rhs) {
+	return static_cast<uint32>(lhs) | static_cast<uint32>(rhs);
+}
+
+constexpr uint32 operator|(e_skill_display lhs, e_battle_check_target rhs) {
+	return static_cast<uint32>(lhs) | static_cast<uint32>(rhs);
+}
+
+constexpr uint32 operator|(uint32 lhs, e_skill_display rhs) {
+	return lhs | static_cast<uint32>(rhs);
+}
+
+constexpr uint32 operator|(e_skill_display lhs, uint32 rhs) {
+	return static_cast<uint32>(lhs) | rhs;
+}
+
+constexpr uint32 operator|(e_skill_display lhs, e_skill_display rhs) {
+	return static_cast<uint32>(lhs) | static_cast<uint32>(rhs);
+}
+
+constexpr int32 operator|(int32 lhs, e_skill_display rhs) {
+	return lhs | static_cast<int32>(rhs);
+}
+
+constexpr int32 operator|(e_skill_display lhs, int32 rhs) {
+	return static_cast<int32>(lhs) | rhs;
+}
 
 #define MAX_SKILL_ITEM_REQUIRE	10 /// Maximum required items
 #define MAX_SKILL_STATUS_REQUIRE 3 /// Maximum required statuses
