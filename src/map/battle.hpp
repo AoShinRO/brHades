@@ -456,6 +456,9 @@ struct Battle_Config
 	int32 mob_active_time; //Duration through which mobs execute their Hard AI after players leave their area of sight.
 	int32 boss_active_time;
 
+	int32 mvp_warp_distance_enable; // Enable/disable MVP warp distance feature
+	int32 mvp_warp_distance; // Distance at which MVPs are teleported away from warp portals
+
 	int32 show_hp_sp_drain, show_hp_sp_gain;	//[Skotlex]
 
 	int32 mob_npc_event_type; //Determines on who the npc_event is executed. [Skotlex]

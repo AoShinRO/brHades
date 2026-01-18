@@ -40,6 +40,8 @@
 #include "pc.hpp"
 #include "pet.hpp"
 #include "quest.hpp"
+#include "skill.hpp"
+#include "unit.hpp"
 
 using namespace brhades;
 
@@ -2209,6 +2211,58 @@ void mob_setdropitem_option( item& item, s_mob_drop& mobdrop ){
 	if (group != nullptr) {
 		group->apply( item );
 	}
+}
+
+/*==========================================
+ * Checks if there's a fixed NPC warp nearby.
+ * Used for MVP warp distance check.
+ * Only checks map NPC warps, not player-created Warp Portals.
+ *------------------------------------------*/
+int32 mob_warp_isnear_sub(block_list* bl, va_list args) {
+	if (bl->type != BL_NPC)
+		return 0;
+
+	npc_data *nd = (npc_data*)bl;
+
+	if (nd->sc.option & (OPTION_HIDE|OPTION_INVISIBLE))
+		return 0;
+
+	// Check if it's a warp NPC
+	if (nd->subtype == NPCTYPE_WARP)
+		return 1;
+
+	return 0;
+}
+
+/**
+ * Check if an MVP is near a warp portal and teleport it if so.
+ * @param md: Mob data
+ * @return true if the mob was teleported, false otherwise
+ */
+bool mob_check_mvp_warp_distance(mob_data *md) {
+	nullpo_retr(false, md);
+
+	// Check if feature is disabled
+	if (!battle_config.mvp_warp_distance_enable || battle_config.mvp_warp_distance <= 0)
+		return false;
+
+	// Only apply to MVPs
+	if (md->get_bosstype() != BOSSTYPE_MVP)
+		return false;
+
+	// Check if there's a fixed NPC warp nearby
+	if (map_foreachinallrange(mob_warp_isnear_sub, &md->bl, battle_config.mvp_warp_distance, BL_NPC)) {
+		int16 x = 0, y = 0;
+
+		// Find a random free cell on the map
+		if (map_search_freecell(nullptr, md->bl.m, &x, &y, -1, -1, 1)) {
+			// Teleport the MVP to the random location
+			unit_warp(&md->bl, md->bl.m, x, y, CLR_TELEPORT);
+			return true;
+		}
+	}
+
+	return false;
 }
 
 /*==========================================

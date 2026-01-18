@@ -540,6 +540,9 @@ static TIMER_FUNC(unit_walktoxy_timer)
 					return 0; // Warped
 			} else
 				md->areanpc_id = 0;
+			// Check if MVP is near a warp portal and teleport if so
+			if (mob_check_mvp_warp_distance(md))
+				return 0; // Teleported
 			if (md->min_chase > md->db->range3)
 				md->min_chase--;
 			// Walk skills are triggered regardless of target due to the idle-walk mob state.
