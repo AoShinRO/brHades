@@ -592,6 +592,48 @@ Body:
       Map: 1@ep21b
       X: 73
       Y: 70
+  - Id: 102
+    Name: Gimli Infiltration
+    TimeLimit: 3600
+    IdleTimeOut: 600
+    Enter:
+      Map: 1@mdtem
+      X: 266
+      Y: 174
+    AdditionalMaps:
+      2@mdtem: true
+  - Id: 103
+    Name: Secret Altar
+    TimeLimit: 1800
+    IdleTimeOut: 600
+    Enter:
+      Map: 1@ep21a
+      X: 61
+      Y: 33
+  - Id: 104
+    Name: Silent Sanctuary
+    TimeLimit: 1800
+    IdleTimeOut: 600
+    Enter:
+      Map: 1@twbs2
+      X: 96
+      Y: 66
+  - Id: 105
+    Name: Final Battle(Normal)
+    TimeLimit: 3600
+    IdleTimeOut: 600
+    Enter:
+      Map: 1@ep21b
+      X: 73
+      Y: 70
+  - Id: 106
+    Name: Final Battle(Hard)
+    TimeLimit: 3600
+    IdleTimeOut: 600
+    Enter:
+      Map: 1@ep21b
+      X: 73
+      Y: 70
   - Id: 300
     Name: "Sticky Sea"
     TimeLimit: 1800
