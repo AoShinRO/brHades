@@ -800,15 +800,6 @@ void ClearScreen(void)
 	ShowMessage(CL_CLS);	// to prevent empty string passed messages
 #endif
 }
-static int32 _ShowMessage(enum msg_type flag, const std::string_view string, ...)
-{
-	int32 ret;
-	va_list ap;
-	va_start(ap, string);
-	ret = _vShowMessage(flag, string, ap);
-	va_end(ap);
-	return ret;
-}
 
 // direct printf replacement
 void ShowMessage(const std::string_view string, ...) {
