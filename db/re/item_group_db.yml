@@ -82272,23 +82272,23 @@ Body:
         Algorithm: Random
         List:
           - Index: 0
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 50
             Amount: 3
           - Index: 1
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 20
             Amount: 4
           - Index: 2
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 15
             Amount: 5
           - Index: 3
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 10
             Amount: 6
           - Index: 4
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 5
             Amount: 7
   - Group: BOOSTER_PACK_10
@@ -101414,19 +101414,19 @@ Body:
         Algorithm: Random
         List:
           - Index: 0
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 500
             Amount: 5
           - Index: 1
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 500
             Amount: 6
           - Index: 2
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 500
             Amount: 7
           - Index: 3
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 500
             Amount: 8
           - Index: 4
@@ -102468,19 +102468,19 @@ Body:
         Algorithm: Random
         List:
           - Index: 0
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 1000
             Amount: 5
           - Index: 1
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 1000
             Amount: 6
           - Index: 2
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 1000
             Amount: 7
           - Index: 3
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 1000
             Amount: 8
           - Index: 4
@@ -110471,15 +110471,15 @@ Body:
         Algorithm: Random
         List:
           - Index: 0
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 1000
             Amount: 3
           - Index: 1
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 1000
             Amount: 4
           - Index: 2
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 1000
             Amount: 5
           - Index: 3
@@ -110745,19 +110745,19 @@ Body:
         Algorithm: Random
         List:
           - Index: 0
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 500
             Amount: 4
           - Index: 1
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 500
             Amount: 5
           - Index: 2
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 500
             Amount: 6
           - Index: 3
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 500
             Amount: 7
           - Index: 4
@@ -111124,23 +111124,23 @@ Body:
         Algorithm: Random
         List:
           - Index: 0
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 500
             Amount: 7
           - Index: 1
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 500
             Amount: 8
           - Index: 2
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 500
             Amount: 9
           - Index: 3
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 500
             Amount: 10
           - Index: 4
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 500
             Amount: 11
           - Index: 5
@@ -111970,7 +111970,7 @@ Body:
         Algorithm: All
         List:
           - Index: 0
-            Item: aegis_1001480
+            Item: Brown_Dia
             Amount: 15
   - Group: COSTUMEMILEPACK_33_1
     SubGroups:
@@ -114914,19 +114914,19 @@ Body:
         Algorithm: Random
         List:
           - Index: 0
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 800
           - Index: 1
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 800
           - Index: 2
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 800
           - Index: 3
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 800
           - Index: 4
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 800
           - Index: 5
             Item: Gaebolg_Armor
@@ -115201,19 +115201,19 @@ Body:
         Algorithm: Random
         List:
           - Index: 0
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 800
           - Index: 1
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 800
           - Index: 2
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 800
           - Index: 3
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 800
           - Index: 4
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 800
           - Index: 5
             Item: Gaebolg_Armor
@@ -116823,7 +116823,7 @@ Body:
             Item: R_Ep17_Album
             Amount: 2
           - Index: 3
-            Item: aegis_1001480
+            Item: Brown_Dia
   - Group: RT_EP17_MUTANT_A
     SubGroups:
       - SubGroup: 0
@@ -116872,7 +116872,7 @@ Body:
             Item: R_Ep17_Album
             Amount: 3
           - Index: 3
-            Item: aegis_1001480
+            Item: Brown_Dia
   - Group: RT_EP17_MIGUEL_2
     SubGroups:
       - SubGroup: 0
@@ -116913,7 +116913,7 @@ Body:
             Item: R_Ep17_Album
             Amount: 2
           - Index: 3
-            Item: aegis_1001480
+            Item: Brown_Dia
   - Group: RT_EP17_OVERLOAD_3
     SubGroups:
       - SubGroup: 0
@@ -116976,7 +116976,7 @@ Body:
             Item: R_Ep17_Album
             Amount: 4
           - Index: 3
-            Item: aegis_1001480
+            Item: Brown_Dia
   - Group: RT_EP17_GARDEN_3
     SubGroups:
       - SubGroup: 0
@@ -117026,7 +117026,7 @@ Body:
             Item: R_Ep17_Album
             Amount: 2
           - Index: 3
-            Item: aegis_1001480
+            Item: Brown_Dia
   - Group: RT_EP17_GREEN_2
     SubGroups:
       - SubGroup: 0
@@ -117155,7 +117155,7 @@ Body:
             Item: Perfect_Rune
             Amount: 8
           - Index: 2
-            Item: aegis_1001480
+            Item: Brown_Dia
             Amount: 5
           - Index: 3
             Item: R_Ep178_boss
@@ -117175,7 +117175,7 @@ Body:
             Item: R_Ep17_Album
             Amount: 3
           - Index: 3
-            Item: aegis_1001480
+            Item: Brown_Dia
   - Group: RT_EP17_BOSS_5
     SubGroups:
       - SubGroup: 0
@@ -117191,7 +117191,7 @@ Body:
             Item: R_Ep17_Album
             Amount: 5
           - Index: 3
-            Item: aegis_1001480
+            Item: Brown_Dia
             Amount: 5
   - Group: RT_EP17_MALFUN_A
     SubGroups:
@@ -117219,7 +117219,7 @@ Body:
             Item: R_Ep17_Album
             Amount: 2
           - Index: 3
-            Item: aegis_1001480
+            Item: Brown_Dia
   - Group: RT_EP17_MALFUN_3
     SubGroups:
       - SubGroup: 0
@@ -117435,7 +117435,7 @@ Body:
           - Index: 1
             Item: Perfect_Rune
           - Index: 2
-            Item: aegis_1001480
+            Item: Brown_Dia
             Amount: 3
   - Group: RT_EP18_DEMI_A
     SubGroups:
@@ -117460,7 +117460,7 @@ Body:
             Item: Perfect_Rune
             Amount: 2
           - Index: 2
-            Item: aegis_1001480
+            Item: Brown_Dia
             Amount: 5
           - Index: 3
             Item: R_Ep178_boss
@@ -117568,23 +117568,23 @@ Body:
         Algorithm: Random
         List:
           - Index: 0
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 1000
             Amount: 12
           - Index: 1
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 1000
             Amount: 13
           - Index: 2
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 1000
             Amount: 14
           - Index: 3
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 1000
             Amount: 15
           - Index: 4
-            Item: aegis_1001480
+            Item: Brown_Dia
             Rate: 1000
             Amount: 16
           - Index: 5
