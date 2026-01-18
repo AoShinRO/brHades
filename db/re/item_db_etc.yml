@@ -54960,7 +54960,7 @@ Body:
     Script: |
       bonus2 bSubSkill,"NPC_RAYOFGENESIS",50;
   - Id: 300585
-    AegisName: aegis_300585
+    AegisName: Tris_Card
     Name: Tris Card    # !todo check english name
     Type: Card
     Weight: 10
@@ -54974,7 +54974,7 @@ Body:
       bonus2 bSkillAtk,"DK_HACKANDSLASHER",.@r;
       bonus2 bSkillAtk,"DK_STORMSLASH",.@r;
   - Id: 300586
-    AegisName: aegis_300586
+    AegisName: Tan_Card
     Name: Tan Cards    # !todo check english name
     Type: Card
     Weight: 10
@@ -54988,7 +54988,7 @@ Body:
       bonus2 bSkillAtk,"IG_IMPERIAL_CROSS",.@r;
       bonus2 bSkillAtk,"IG_OVERSLASH",.@r;
   - Id: 300587
-    AegisName: aegis_300587
+    AegisName: W_Lugenburg_Card
     Name: Wilhelm Roegenburg Card    # !todo check english name
     Type: Card
     Weight: 10
@@ -55002,7 +55002,7 @@ Body:
       bonus2 bSkillAtk,"IQ_EXPOSION_BLASTER",.@r;
       bonus2 bSkillAtk,"IQ_BLAZING_FLAME_BLAST",.@r;
   - Id: 300588
-    AegisName: aegis_300588
+    AegisName: R_Lugenburg_Card
     Name: Reinhard Roegenburg Card    # !todo check english name
     Type: Card
     Weight: 10
@@ -55017,7 +55017,7 @@ Body:
       bonus2 bSkillAtk,"CD_ARBITRIUM_ATK",.@r;
       bonus2 bSkillAtk,"CD_ARBITRIUM",.@r;
   - Id: 300589
-    AegisName: aegis_300589
+    AegisName: Ivan_Card
     Name: Ivan Wigner Card    # !todo check english name
     Type: Card
     Weight: 10
@@ -55031,7 +55031,7 @@ Body:
       bonus2 bSkillAtk,"MT_ENERGY_CANNONADE",.@r;
       bonus2 bSkillAtk,"MT_SPARK_BLASTER",.@r;
   - Id: 300590
-    AegisName: aegis_300590
+    AegisName: Lalaila_Card
     Name: Laraira Nazar Wigner Card    # !todo check english name
     Type: Card
     Weight: 10
@@ -55045,7 +55045,7 @@ Body:
       bonus2 bSkillAtk,"BO_DUST_EXPLOSION",.@r;
       bonus2 bSkillAtk,"BO_MYSTERY_POWDER",.@r;
   - Id: 300591
-    AegisName: aegis_300591
+    AegisName: Richard_Card
     Name: Richard Richard Card    # !todo check english name
     Type: Card
     Weight: 10
@@ -55059,7 +55059,7 @@ Body:
       bonus2 bSkillAtk,"SHC_ETERNAL_SLASH",.@r;
       bonus2 bSkillAtk,"SHC_CROSS_SLASH",.@r;
   - Id: 300592
-    AegisName: aegis_300592
+    AegisName: Valdaris_Card
     Name: Laura Baldaris Card    # !todo check english name
     Type: Card
     Weight: 10
@@ -55074,7 +55074,7 @@ Body:
       bonus2 bSkillAtk,"ABC_ABYSS_FLAME",.@r;
       bonus2 bSkillAtk,"ABC_ABYSS_FLAME_ATK",.@r;
   - Id: 300593
-    AegisName: aegis_300593
+    AegisName: Aurelie_Card
     Name: Aurelie Petit Card    # !todo check english name
     Type: Card
     Weight: 10
@@ -55090,7 +55090,7 @@ Body:
       bonus2 bSkillAtk,"AG_ALL_BLOOM_ATK",.@r;
       bonus2 bSkillAtk,"AG_ALL_BLOOM_ATK2",.@r;
   - Id: 300594
-    AegisName: aegis_300594
+    AegisName: Heine_Card
     Name: Ilje El Heine Card    # !todo check english name
     Type: Card
     Weight: 10
@@ -55104,7 +55104,7 @@ Body:
       bonus2 bSkillAtk,"EM_LIGHTNING_LAND",.@r;
       bonus2 bSkillAtk,"EM_TERRA_DRIVE",.@r;
   - Id: 300595
-    AegisName: aegis_300595
+    AegisName: Epesto_Card
     Name: Ephesto Walter Megas Card    # !todo check english name
     Type: Card
     Weight: 10
@@ -55118,7 +55118,7 @@ Body:
       bonus2 bSkillAtk,"WH_CRESCIVE_BOLT",.@r;
       bonus2 bSkillAtk,"WH_WILD_WALK",.@r;
   - Id: 300596
-    AegisName: aegis_300596
+    AegisName: Maristella_Card
     Name: Maristella Walter Card    # !todo check english name
     Type: Card
     Weight: 10
@@ -55133,7 +55133,7 @@ Body:
       bonus2 bSkillAtk,"TR_ROSEBLOSSOM_ATK",.@r;
       bonus2 bSkillAtk,"TR_RHYTHMSHOOTING",.@r;
   - Id: 300597
-    AegisName: aegis_300597
+    AegisName: Yohan_Card
     Name: Johan Card    # !todo check english name
     Type: Card
     Weight: 10
@@ -55147,7 +55147,7 @@ Body:
       bonus2 bSkillAtk,"SKE_NOON_BLAST",.@r;
       bonus2 bSkillAtk,"SKE_ALL_IN_THE_SKY",.@r;
   - Id: 300598
-    AegisName: aegis_300598
+    AegisName: Gunter_Card
     Name: Günther Card    # !todo check english name
     Type: Card
     Weight: 10
@@ -55161,7 +55161,7 @@ Body:
       bonus2 bSkillAtk,"NW_MAGAZINE_FOR_ONE",.@r;
       bonus2 bSkillAtk,"NW_WILD_SHOT",.@r;
   - Id: 300599
-    AegisName: aegis_300599
+    AegisName: Galaxia_Card
     Name: Galasia Nerius Card    # !todo check english name
     Type: Card
     Weight: 10
@@ -55175,7 +55175,7 @@ Body:
       bonus2 bSkillAtk,"SS_ANKOKURYUUAKUMU",.@r;
       bonus2 bSkillAtk,"SS_ANTENPOU",.@r;
   - Id: 300600
-    AegisName: aegis_300600
+    AegisName: Iana_Card
     Name: Iana Card    # !todo check english name
     Type: Card
     Weight: 10
@@ -55189,7 +55189,7 @@ Body:
       bonus2 bSkillAtk,"SOA_TALISMAN_OF_FOUR_BEARING_GOD",.@r;
       bonus2 bSkillAtk,"SOA_TALISMAN_OF_RED_PHOENIX",.@r;
   - Id: 300601
-    AegisName: aegis_300601
+    AegisName: Yol_Card
     Name: Lee Card    # !todo check english name
     Type: Card
     Weight: 10
@@ -91426,7 +91426,7 @@ Body:
     Flags:
       DropEffect: CLIENT
   - Id: 1001480
-    AegisName: aegis_1001480
+    AegisName: Brown_Dia
     Name: Golden Diamond
     Type: Etc
     Buy: 600000
