@@ -1960,6 +1960,7 @@
 	export_constant(SC_TEMPORARY_COMMUNION);
 	export_constant(SC_BLESSING_OF_M_CREATURES);
 	export_constant(SC_BLESSING_OF_M_C_DEBUFF);
+	export_constant(SC_GROGGY_ON);
 
 	export_constant(SC_BUCHEDENOEL);
 	export_constant(SC_EP16_DEF);
@@ -7206,6 +7207,8 @@
 	export_constant(IG_REGIA_HUNTING_SET);
 	export_constant(IG_MYSTERIOUS_FRUIT_BOX);
 	export_constant(IG_ZONDA_SUPPORT_PACKAGE);
+	export_constant(IG_YOR_CARD);
+	export_constant(IG_TAN_BOX);
 
 	/* unit stop walking */
 	export_constant(USW_NONE);

@@ -1385,6 +1385,7 @@ enum sc_type : int16 {
 	SC_TEMPORARY_COMMUNION,
 	SC_BLESSING_OF_M_CREATURES,
 	SC_BLESSING_OF_M_C_DEBUFF,
+	SC_GROGGY_ON,
 
 	SC_MAX, //Automatically updated max, used in for's to check we are within bounds.
 };
