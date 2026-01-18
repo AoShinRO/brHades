@@ -14540,3 +14540,489 @@ Body:
     Title: For Safe Work - Standby
     TimeLimit: 4h
 
+    Title: The cat at the end of the maze
+  - Id: 8882
+    Title: Ivan Wigner's Joyful Missionary Life
+  - Id: 8883
+    Title: Lehar's Fulfilling Relief Efforts (1)
+  - Id: 8884
+    Title: Lehar's Fulfilling Relief Efforts (2)
+  - Id: 8885
+    Title: The Cause of the Family's Ruin!
+  - Id: 8886
+    Title: Lehar's Fulfilling Relief Efforts (3)
+  - Id: 8887
+    Title: Ghostship Witness (1)
+  - Id: 8888
+    Title: Ghostship Witness (2)
+  - Id: 8889
+    Title: Ivan's Plan
+  - Id: 8890
+    Title: Errand for Ivan
+  - Id: 8891
+    Title: Ivan's Regret
+  - Id: 8892
+    Title: Ownerless Weapon
+  - Id: 8893
+    Title: Cult Infiltration
+  - Id: 8894
+    Title: The Receiver of the Letter
+  - Id: 12646
+    Title: Final Battle - Wait
+    TimeLimit: 4h
+  - Id: 12647
+    Title: Memory Repetition - Wait
+    TimeLimit: 4h
+  - Id: 12648
+    Title: Memory Chaos - Wait
+    TimeLimit: 3d 4h
+  - Id: 12649
+    Title: Final Battle(Easy)
+  - Id: 12650
+    Title: Final Battle(Normal)
+  - Id: 12651
+    Title: Final Battle(Hard)
+  - Id: 12652
+    Title: Final Battle
+  - Id: 12653
+    Title: Final Battle
+  - Id: 12654
+    Title: Final Battle
+  - Id: 12655
+    Title: Final Battle
+  - Id: 12656
+    Title: Final Battle
+  - Id: 16802
+    Title: Small Cargo Transportation
+  - Id: 16803
+    Title: Small Cargo Transportation
+  - Id: 16804
+    Title: Small Cargo Transportation
+  - Id: 16805
+    Title: Trivial Task Refusal
+  - Id: 16806
+    Title: Thorough Port Cleaning
+  - Id: 16807
+    Title: Thorough Port Cleaning
+  - Id: 16808
+    Title: Thorough Port Cleaning
+  - Id: 16809
+    Title: Thorough Port Cleaning
+  - Id: 16810
+    Title: Thorough Port Cleaning
+  - Id: 16811
+    Title: Walter Officer Visit
+  - Id: 16812
+    Title: Unexpected Letter Delivery
+  - Id: 16813
+    Title: Unexpected Letter Delivery
+  - Id: 16814
+    Title: Unexpected Letter Delivery
+  - Id: 16815
+    Title: News From Lunaforma
+  - Id: 16816
+    Title: Mysterious Ghost Ship
+  - Id: 16817
+    Title: Ghost Ship Identity
+  - Id: 16818
+    Title: Return to Lunaforma
+  - Id: 16819
+    Title: Message from a Wizard
+  - Id: 16820
+    Title: Diligent Worker of Alberta
+  - Id: 16821
+    Title: Remaining Questions
+  - Id: 16822
+    Title: Remaining Questions
+  - Id: 16823
+    Title: Old Walter Memory Fragments -Wait-
+    TimeLimit: 4h
+  - Id: 16824
+    Title: Old Walter Memory Fragments
+  - Id: 16825
+    Title: Remaining Questions
+  - Id: 16826
+    Title: Old Walter Memory Fragments
+  - Id: 17752
+    Title: Cult Infiltration
+  - Id: 17753
+    Title: Cult Infiltration
+  - Id: 17754
+    Title: Cult Infiltration   
+  - Id: 17755
+    Title: Cult Infiltration   
+  - Id: 17756
+    Title: Cult Infiltration   
+  - Id: 17757
+    Title: Cult Infiltration   
+  - Id: 17758
+    Title: Recruiting Talent for Success  
+  - Id: 17759
+    Title: Recruiting Talent for Success  
+  - Id: 17760
+    Title: Recruiting Talent for Success  
+  - Id: 17761
+    Title: 2nd Floor Cult Infiltration   
+  - Id: 17762
+    Title: 2nd Floor Cult Infiltration    
+  - Id: 17763
+    Title: 2nd Floor Cult Infiltration    
+  - Id: 17764
+    Title: 2nd Floor Cult Infiltration    
+  - Id: 17765
+    Title: 2nd Floor Cult Infiltration    
+  - Id: 17766
+    Title: 2nd Floor Cult Infiltration    
+  - Id: 17767
+    Title: 2nd Floor Cult Infiltration     
+  - Id: 17768
+    Title: 2nd Floor Cult Infiltration
+  - Id: 17769
+    Title: Ghost Ship Report
+  - Id: 17770
+    Title: Lugenburg Brothers 
+  - Id: 17771
+    Title: Lugenburg Brothers 
+  - Id: 17772
+    Title: Lugenburg Brothers 
+  - Id: 17773
+    Title: Lugenburg Brothers 
+  - Id: 17774
+    Title: Lugenburg Brothers 
+  - Id: 17775
+    Title: Lugenburg Brothers 
+  - Id: 17776
+    Title: Lugenburg Brothers
+  - Id: 17777
+    Title: Safe Escape Route 1
+    Targets:
+      - Id: 1
+        Count: 300
+        Location: jor_raise2
+        MapName: Northern Raised Land
+  - Id: 17778
+    Title: Safe Escape Route 2
+    Targets:
+      - Id: 1
+        Count: 300
+        Location: jor_raise1
+        MapName: Southern Raised Land
+  - Id: 17779
+    Title: Wait: Safe Escape Route 1
+    TimeLimit: 4h
+  - Id: 17780
+    Title: Wait: Safe Escape Route 2
+    TimeLimit: 4h
+  - Id: 17781
+    Title: Supply Procurement
+  - Id: 17782
+    Title: Gaebolg Supply Request
+  - Id: 17783
+    Title: Nerius Supply Request
+  - Id: 17784
+    Title: Nerius Supply Request
+  - Id: 17785
+    Title: Heine Supply Request
+  - Id: 17786
+    Title: Lugenburg Supply Request
+  - Id: 17787
+    Title: Walter Supply Request
+  - Id: 17788
+    Title: Richard Supply Request
+  - Id: 17789
+    Title: Wait: Supply Procurement
+    TimeLimit: 4h
+  - Id: 17790
+    Title: Supply Procurement
+  - Id: 18334
+    Title: Detected Rift on the North
+  - Id: 18335
+    Title: Rift on Scale Island
+  - Id: 18336
+    Title: First Meeting
+  - Id: 18337
+    Title: Lunaforma
+  - Id: 18338
+    Title: Gathering Eyewitness
+  - Id: 18339
+    Title: Eyewitness 1
+  - Id: 18340
+    Title: Eyewitness 2
+  - Id: 18341
+    Title: Eyewitness 3
+  - Id: 18342
+    Title: Gathering Eyewitness Complete!
+  - Id: 18343
+    Title: Find Tan and Nadoyo
+  - Id: 18344
+    Title: Suspicion Location in the Temple
+  - Id: 18345
+    Title: Serpent's Lair?
+  - Id: 18346
+    Title: Excluded from the Final Battle
+  - Id: 18347
+    Title: I can't miss it!
+  - Id: 18348
+    Title: Join the Final Battle
+  - Id: 18349
+    Title: Cat Led Adventures
+  - Id: 18350
+    Title: Suspicious Book of Gimli
+  - Id: 18351
+    Title: Shining Door
+  - Id: 18352
+    Title: Finally, A Real Mission!
+  - Id: 18353
+    Title: Successfully Blocked the Source
+  - Id: 18354
+    Title: Heine's Gift
+  - Id: 18355
+    Title: Return to Scale Island
+  - Id: 18356
+    Title: Time to Confirm Casualty
+  - Id: 18357
+    Title: Settling the Curse
+    TimeLimit: +10mn
+  - Id: 18358
+    Title: Lasgand?
+  - Id: 18359
+    Title: Butterfly Effect
+  - Id: 18360
+    Title: End of the Heroes Era
+  - Id: 18361
+    Title: Nyar's Primal Pouch
+  - Id: 19184
+    Title: Meeting with Counselor Wool
+  - Id: 19185
+    Title: -Wait- People Tormented by Nightmares
+    TimeLimit: 4h
+  - Id: 19186
+    Title: Counseling Request
+  - Id: 19187
+    Title: Counseling Request
+  - Id: 19188
+    Title: Counseling Request
+  - Id: 19189
+    Title: Counseling Request
+  - Id: 19190
+    Title: Counseling Completed
+  - Id: 19191
+    Title: Meeting with Yuctor Pupu
+  - Id: 19192
+    Title: Meeting with Totoro Amber
+  - Id: 19193
+    Title: Meeting with George Sansha
+  - Id: 19194
+    Title: Meeting with Fiery Shield
+  - Id: 19195
+    Title: Libra
+  - Id: 19196
+    Title: Message Delivered by Scent
+  - Id: 19197
+    Title: -Wait- Message Delivered by Scent
+    TimeLimit: 4h
+  - Id: 19198
+    Title: Vallen Wok    
+  - Id: 19199
+    Title: -Wait- Gather Insufficient Food 
+    TimeLimit: 4h
+  - Id: 19200
+    Title: Food Procurement(Fishing)
+  - Id: 19201
+    Title: Food Procurement(Herb Gathering)  
+  - Id: 19202
+    Title: Food Procurement(Natural Seasoning)   
+  - Id: 19203
+    Title: Food Procurement(Natural Seasoning)
+  - Id: 23240
+    Title: Gaebolg Resistance
+  - Id: 23241
+    Title: Gaebolg Resistance
+  - Id: 23242
+    Title: Gaebolg Resistance
+  - Id: 23243
+    Title: Gaebolg Resistance
+  - Id: 23244
+    Title: Calculating Profit and Loss 
+  - Id: 23245
+    Title: Calculating Profit and Loss 
+  - Id: 23246
+    Title: Calculating Profit and Loss 
+  - Id: 23247
+    Title: Calculating Profit and Loss 
+    Targets:
+      - Mob: EP21_SKIPSKIPPER
+        Count: 10
+  - Id: 23248
+    Title: Calculating Profit and Loss 
+  - Id: 23249
+    Title: Black-Haired Beast 
+  - Id: 23250
+    Title: Black-Haired Beast 
+  - Id: 23251
+    Title: Black-Haired Beast  
+  - Id: 23252
+    Title: Black-Haired Beast  
+  - Id: 23253
+    Title: Black-Haired Beast  
+  - Id: 23254
+    Title: Black-Haired Beast 
+  - Id: 23255
+    Title: Black-Haired Beast  
+  - Id: 23256
+    Title: Overlooked Efforts 
+  - Id: 23257
+    Title: Overlooked Efforts -Wait-
+    TimeLimit: 4h
+  - Id: 24000
+    Title: Richard Mercenaries
+  - Id: 24001
+    Title: Richard Mercenaries
+  - Id: 24002
+    Title: Richard Mercenaries
+  - Id: 24003
+    Title: Richard Mercenaries
+  - Id: 24004
+    Title: Richard Mercenaries
+  - Id: 24005
+    Title: Richard Mercenaries
+  - Id: 24006
+    Title: Richard Mercenaries
+  - Id: 24007
+    Title: Richard Mercenaries
+  - Id: 24008
+    Title: Richard Mercenaries
+  - Id: 24009
+    Title: Richard Mercenaries
+  - Id: 24010
+    Title: Richard Mercenaries
+  - Id: 24011
+    Title: Richard Mercenaries
+  - Id: 24012
+    Title: Richard Mercenaries
+  - Id: 24013
+    Title: Richard Mercenaries
+  - Id: 24014
+    Title: Richard Mercenaries
+  - Id: 24015
+    Title: Richard Mercenaries
+  - Id: 24016
+    Title: Richard Mercenaries
+  - Id: 24017
+    Title: Richard Mercenaries
+  - Id: 24018
+    Title: Richard Mercenaries
+  - Id: 24019
+    Title: We're the Mercenaries, but...
+  - Id: 24020
+    Title: We're the Mercenaries, but...
+  - Id: 24021
+    Title: We're the Mercenaries, but...
+  - Id: 24022
+    Title: We're the Mercenaries, but...
+  - Id: 24023
+    Title: We're the Mercenaries, but...
+  - Id: 24024
+    Title: Any Kind of Help!
+  - Id: 24025
+    Title: Any Kind of Help!
+  - Id: 24026
+    Title: Any Kind of Help!
+  - Id: 24027
+    Title: Any Kind of Help!
+  - Id: 24028
+    Title: Any Kind of Help!
+  - Id: 24029
+    Title: Any Kind of Help!
+  - Id: 24030
+    Title: Any Kind of Help!-Wait-
+    TimeLimit: 4h
+  - Id: 24031
+    Title: Fresh Food!
+  - Id: 24032
+    Title: Fresh Food!-Wait-
+    TimeLimit: 4h
+  - Id: 24033
+    Title: Clamshell for Injuries!
+    Targets:
+      - Mob: EP21_SCALLEG
+        Count: 50
+  - Id: 24034
+    Title: Clamshell for Injuries!-Wait-
+    TimeLimit: 4h
+  - Id: 24035
+    Title: For the Children.
+    Targets:
+      - Mob: EP21_VELELLING
+        Count: 50
+  - Id: 24036
+    Title: For the Children.-Wait-
+    TimeLimit: 4h
+  - Id: 24037
+    Title: Clean Finish(1)
+    Targets:
+      - Id: 1
+        Count: 300
+        Location: jor_tmple1
+        MapName: Jormungandr Temple Gimli 1st Floor
+  - Id: 24038
+    Title: Clean Finish(1)-Wait-
+    TimeLimit: 4h
+  - Id: 24039
+    Title: Clean Finish(2)
+    Targets:
+      - Id: 1
+        Count: 300
+        Location: jor_tmple2
+        MapName: Jormungandr Temple Gimli 2nd Floor
+  - Id: 24040
+    Title: Clean Finish(2)-Wait-
+    TimeLimit: 4h
+  - Id: 8914
+    Title: Unexpected Request
+  - Id: 8915
+    Title: Nazar's Eye
+  - Id: 8916
+    Title: A Place to Return
+  - Id: 24041
+    Title: Call from the mercenaries!
+  - Id: 24042
+    Title: Distract Members in Yorscalp's 1st Floor(Daily)
+    Targets:
+      - Id: 1
+        Count: 300
+        Location: jor_sklf1
+        MapName: Yorscalp 1st Floor
+  - Id: 24043
+    Title: Distract Members in Yorscalp's 1st Floor(Daily) -Wait-
+    TimeLimit: 4h
+  - Id: 24044
+    Title: Distract Members in Yorscalp's 1st Floor(Weekly)
+    Targets:
+      - Id: 1
+        Count: 1500
+        Location: jor_sklf1
+        MapName: Yorscalp 1st Floor
+  - Id: 24045
+    Title: Distract Members in Yorscalp's 1st Floor(Weekly) -Wait-
+    TimeLimit: Friday 4h
+  - Id: 24046
+    Title: Distract Members in Yorscalp's 2nd Floor(Daily)
+    Targets:
+      - Id: 1
+        Count: 300
+        Location: jor_sklf2
+        MapName: Yorscalp 2nd Floor
+  - Id: 24047
+    Title: Distract Members in Yorscalp's 2nd Floor(Daily) -Wait-
+    TimeLimit: 4h
+  - Id: 24048
+    Title: Distract Members in Yorscalp's 1st Floor(Weekly)
+    Targets:
+      - Id: 1
+        Count: 1500
+        Location: jor_sklf2
+        MapName: Yorscalp 2nd Floor
+  - Id: 24049
+    Title: Distract Members in Yorscalp's 2nd Floor(Weekly) -Wait-
+    TimeLimit: Friday 4h
