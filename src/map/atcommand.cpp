@@ -4598,6 +4598,8 @@ ACMD_FUNC(mapinfo) {
 	}
 
 	strcpy(atcmd_output,msg_txt(sd,1049)); // Weather Flags:
+	if (map_getmapflag(m_id, MF_RAIN))
+		strcat(atcmd_output, " Rain |");
 	if (map_getmapflag(m_id, MF_SNOW))
 		strcat(atcmd_output, " Snow |");
 	if (map_getmapflag(m_id, MF_FOG))
@@ -6976,20 +6978,20 @@ ACMD_FUNC(autoloottype)
  * It is made to rain.
  * No longer available, keeping here just in case it's back someday. [Ind]
  *------------------------------------------*/
-//ACMD_FUNC(rain)
-//{
-//	nullpo_retr(-1, sd);
-//	if (map_getmapflag(sd->bl.m, MF_RAIN)) {
-//		map_setmapflag(sd->bl.m, MF_RAIN, false);
-//		clif_weather(sd->bl.m);
-//		clif_displaymessage(fd, msg_txt(sd,1201)); // The rain has stopped.
-//	} else {
-//		map_setmapflag(sd->bl.m, MF_RAIN, true);
-//		clif_weather(sd->bl.m);
-//		clif_displaymessage(fd, msg_txt(sd,1202)); // It has started to rain.
-//	}
-//	return 0;
-//}
+ACMD_FUNC(rain)
+{
+	nullpo_retr(-1, sd);
+	if (map_getmapflag(sd->bl.m, MF_RAIN)) {
+		map_setmapflag(sd->bl.m, MF_RAIN, false);
+		clif_weather(sd->bl.m);
+		clif_displaymessage(fd, msg_txt(sd,1201)); // The rain has stopped.
+	} else {
+		map_setmapflag(sd->bl.m, MF_RAIN, true);
+		clif_weather(sd->bl.m);
+		clif_displaymessage(fd, msg_txt(sd,1202)); // It has started to rain.
+	}
+	return 0;
+}
 
 /*==========================================
  * It is made to snow.
@@ -7129,7 +7131,7 @@ ACMD_FUNC(clearweather)
 {
 	nullpo_retr(-1, sd);
 
-	//map_setmapflag(sd->bl.m, MF_RAIN, false); // No longer available, keeping here just in case it's back someday. [Ind]
+	map_setmapflag(sd->bl.m, MF_RAIN, false); // No longer available, keeping here just in case it's back someday. [Ind]
 	map_setmapflag(sd->bl.m, MF_SNOW, false);
 	map_setmapflag(sd->bl.m, MF_SAKURA, false);
 	map_setmapflag(sd->bl.m, MF_CLOUDS, false);
@@ -11289,6 +11291,7 @@ void atcommand_basecommands(void) {
 		ACMD_DEF(displayskill),
 		ACMD_DEF(displayskillcast),
 		ACMD_DEF(displayskillunit),
+		ACMD_DEF(rain),
 		ACMD_DEF(snow),
 		ACMD_DEF(sakura),
 		ACMD_DEF(clouds),
