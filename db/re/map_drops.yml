@@ -2632,3 +2632,138 @@ Body:
 
 
 
+
+# EP21 Map Drops
+  - Map: jor_raise1
+    GlobalDrops:
+      - Index: 0
+        Item: Shadowdecon_Ore
+        Rate: 1500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 200
+      - Index: 2
+        Item: Zelunium_Ore
+        Rate: 1500
+      - Index: 3
+        Item: Zelunium
+        Rate: 200
+      - Index: 4
+        Item: Etel_Dust
+        Rate: 875
+  - Map: jor_raise2
+    GlobalDrops:
+      - Index: 0
+        Item: Shadowdecon_Ore
+        Rate: 1500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 200
+      - Index: 2
+        Item: Zelunium_Ore
+        Rate: 1500
+      - Index: 3
+        Item: Zelunium
+        Rate: 200
+      - Index: 4
+        Item: Etel_Dust
+        Rate: 875
+  - Map: jor_tmple1
+    GlobalDrops:
+      - Index: 0
+        Item: Shadowdecon_Ore
+        Rate: 1500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 200
+      - Index: 2
+        Item: Zelunium_Ore
+        Rate: 1500
+      - Index: 3
+        Item: Zelunium
+        Rate: 200
+      - Index: 4
+        Item: Etel_Dust
+        Rate: 875
+  - Map: jor_tmple2
+    GlobalDrops:
+      - Index: 0
+        Item: Shadowdecon_Ore
+        Rate: 1500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 200
+      - Index: 2
+        Item: Zelunium_Ore
+        Rate: 1500
+      - Index: 3
+        Item: Zelunium
+        Rate: 200
+      - Index: 4
+        Item: Etel_Dust
+        Rate: 875
+  - Map: jor_base
+    GlobalDrops:
+      - Index: 0
+        Item: Shadowdecon_Ore
+        Rate: 1500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 200
+      - Index: 2
+        Item: Zelunium_Ore
+        Rate: 1500
+      - Index: 3
+        Item: Zelunium
+        Rate: 200
+      - Index: 4
+        Item: Etel_Dust
+        Rate: 875
+  - Map: 1@wtgs
+  - Map: 1@ep21b
+  - Map: jor_sklf1
+    GlobalDrops:
+      - Index: 0
+        Item: Shadowdecon_Ore
+        Rate: 1500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 200
+      - Index: 2
+        Item: Zelunium_Ore
+        Rate: 1500
+      - Index: 3
+        Item: Zelunium
+        Rate: 200
+      - Index: 4
+        Item: Etel_Dust
+        Rate: 875
+      - Index: 5
+        Item: Yorscalp_Symbol
+        Rate: 50
+      - Index: 6
+        Item: Yorscalp_Spirit
+        Rate: 100
+  - Map: jor_sklf2
+    GlobalDrops:
+      - Index: 0
+        Item: Shadowdecon_Ore
+        Rate: 1500
+      - Index: 1
+        Item: Shadowdecon
+        Rate: 200
+      - Index: 2
+        Item: Zelunium_Ore
+        Rate: 1500
+      - Index: 3
+        Item: Zelunium
+        Rate: 200
+      - Index: 4
+        Item: Etel_Dust
+        Rate: 875
+      - Index: 5
+        Item: Yorscalp_Symbol
+        Rate: 75
+      - Index: 6
+        Item: Yorscalp_Spirit
+        Rate: 125

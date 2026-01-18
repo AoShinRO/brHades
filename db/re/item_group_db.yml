@@ -118482,3 +118482,123 @@ Body:
           - Index: 99
             Item: Ice_F_Stone_A_Force
             Rate: 1
+
+# EP21 Item Groups
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Index: 0
+            Item: Tris_Card_Fragment
+            Rate: 55
+          - Index: 1
+            Item: Tan_Card_Fragment
+            Rate: 55
+          - Index: 2
+            Item: W_Lugenburg_Card_Fragment
+            Rate: 55
+          - Index: 3
+            Item: R_Lugenburg_Card_Fragment
+            Rate: 55
+          - Index: 4
+            Item: Ivan_Card_Fragment
+            Rate: 55
+          - Index: 5
+            Item: Lalaila_Card_Fragment
+            Rate: 55
+          - Index: 6
+            Item: Richard_Card_Fragment
+            Rate: 55
+          - Index: 7
+            Item: Valdaris_Card_Fragment
+            Rate: 55
+          - Index: 8
+            Item: Aurelie_Card_Fragment
+            Rate: 55
+          - Index: 9
+            Item: Heine_Card_Fragment
+            Rate: 55
+          - Index: 10
+            Item: Epesto_Card_Fragment
+            Rate: 55
+          - Index: 11
+            Item: Maristella_Card_Fragment
+            Rate: 55
+          - Index: 12
+            Item: Yohan_Card_Fragment
+            Rate: 55
+          - Index: 13
+            Item: Gunter_Card_Fragment
+            Rate: 55
+          - Index: 14
+            Item: Galaxia_Card_Fragment
+            Rate: 55
+          - Index: 15
+            Item: Iana_Card_Fragment
+            Rate: 55
+          - Index: 16
+            Item: Lee_Card_Fragment
+            Rate: 5
+          - Index: 17
+            Item: Nadoyo_Card_Fragment
+            Rate: 5
+  - Group: TAN_BOX
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Index: 0
+            Item: Corruped_Fruit
+            Rate: 12
+          - Index: 1
+            Item: Corruped_Fruit
+            Rate: 25
+          - Index: 2
+            Item: Corruped_Fruit
+            Rate: 51
+          - Index: 3
+            Item: Yorscalp_Serpent
+            Rate: 12
+          - Index: 4
+            Item: Yorscalp_Serpent
+            Rate: 15
+          - Index: 5
+            Item: Yorscalp_Serpent
+            Rate: 17
+          - Index: 6
+            Item: Yorscalp_Serpent
+            Rate: 20
+          - Index: 7
+            Item: Yorscalp_Serpent
+            Rate: 22
+          - Index: 8
+            Item: Yorscalp_Symbol
+            Rate: 40
+          - Index: 9
+            Item: Yorscalp_Symbol
+            Rate: 45
+          - Index: 10
+            Item: Yorscalp_Symbol
+            Rate: 51
+          - Index: 11
+            Item: Yorscalp_Spirit
+            Rate: 25
+          - Index: 12
+            Item: Yorscalp_Spirit
+            Rate: 40
+          - Index: 13
+            Item: Yorscalp_Spirit
+            Rate: 45
+          - Index: 14
+            Item: Yorscalp_Spirit
+            Rate: 51
+          - Index: 15
+            Item: EP21_Wigner_Ticket
+            Rate: 40
+          - Index: 16
+            Item: EP21_Wigner_Ticket
+            Rate: 45
+          - Index: 17
+            Item: EP21_Wigner_Ticket
+            Rate: 51
+          - Index: 18
+            Item: Brown_Dia
+            Rate: 250

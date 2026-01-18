@@ -18500,6 +18500,28 @@ Body:
     Cooldown: 3000
     Requires:
       SpCost: 1
+  - Id: 792
+    Name: NPC_GROGGY_ON
+    Description: Groggy
+    MaxLevel: 5
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+    Flags:
+      IsNpc: true
+    HitCount: 1
+    Duration1:
+      - Level: 1
+        Time: 1000
+      - Level: 2
+        Time: 2000
+      - Level: 3
+        Time: 3000
+      - Level: 4
+        Time: 4000
+      - Level: 5
+        Time: 5000
+    Status: Groggy_on
   - Id: 1001
     Name: KN_CHARGEATK
     Description: Charge Attack
