@@ -54,6 +54,42 @@ Body:
     Variable: RepPointsWhiteCatAlliance
     Minimum: -3000
     Maximum: 3000
+# EP21 Reputation Groups
+  - Id: 13
+    Name: Gaebolg Resistance
+    Variable: REP_EP21
+    Minimum: -1000
+    Maximum: 1000
+  - Id: 14
+    Name: Blackstar Nerius
+    Variable: REP_EP21_Nerius
+    Minimum: -1000
+    Maximum: 1000
+  - Id: 15
+    Name: Comodo Sage Heine
+    Variable: REP_EP21_Heine
+    Minimum: -1000
+    Maximum: 1000
+  - Id: 16
+    Name: Lugenburg Brothers
+    Variable: REP_EP21_Lugenburg
+    Minimum: -1000
+    Maximum: 1000
+  - Id: 17
+    Name: Walter Fleet
+    Variable: REP_EP21_Walter
+    Minimum: -1000
+    Maximum: 1000
+  - Id: 18
+    Name: Wigner Merchants
+    Variable: REP_EP21_Wigner
+    Minimum: -1000
+    Maximum: 1000
+  - Id: 19
+    Name: Richard Mercenaries
+    Variable: REP_EP21_Richard
+    Minimum: -1000
+    Maximum: 1000
 #  - Id: 4
 #    Name: Isgard
 #    Variable: RepPointsIsgard
