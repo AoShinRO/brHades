@@ -21777,9 +21777,9 @@ void clif_parse_sale_open( int32 fd, map_session_data* sd ){
 #if PACKETVER_SUPPORTS_SALES
 	nullpo_retv(sd);
 
+#if PACKETVER < 20190724
 	struct PACKET_CZ_OPEN_BARGAIN_SALE_TOOL* p = (struct PACKET_CZ_OPEN_BARGAIN_SALE_TOOL*)RFIFOP( fd, 0 );
 
-#if PACKETVER < 20190724
 	if( p->AID != sd->status.account_id ){
 		return;
 	}
@@ -21819,9 +21819,9 @@ void clif_parse_sale_close(int32 fd, map_session_data* sd) {
 #if PACKETVER_SUPPORTS_SALES
 	nullpo_retv(sd);
 
+#if PACKETVER < 20190724
 	struct PACKET_CZ_CLOSE_BARGAIN_SALE_TOOL* p = (struct PACKET_CZ_CLOSE_BARGAIN_SALE_TOOL*)RFIFOP( fd, 0 );
 
-#if PACKETVER < 20190724
 	if( p->AID != sd->status.account_id ){
 		return;
 	}
@@ -23432,7 +23432,7 @@ int clif_CashShopLimited_sub(map_session_data *sd,va_list ap)
 
 void clif_CashShopLimited( map_session_data* sd ){
 #if PACKETVER >= 20190724
-	int32 i, j;
+	int32 i;
 
 	int32 fd = sd->fd;
 

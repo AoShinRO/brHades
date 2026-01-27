@@ -418,7 +418,7 @@ void sale_notify_login( map_session_data* sd ){
 
 	for( i = 0; i < sale_items.count; i++ ){
 		if( sale_items.item[i]->timer_end != INVALID_TIMER ){
-			//clif_CashShopLimited(sd);
+			clif_CashShopLimited(sd);
 		}
 	}
 }
