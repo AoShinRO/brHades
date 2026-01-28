@@ -21929,8 +21929,10 @@ void clif_parse_sale_add( int32 fd, map_session_data* sd ){
 		return;
 	}
 
-#if PACKETVER >= 20190724
+#if PACKETVER_MAIN_NUM >= 20210818 || PACKETVER_RE_NUM >= 20211103 || PACKETVER_ZERO_NUM >= 20210818
 	clif_sale_add_reply( sd, sale_add_item( p->itemId, p->amount, p->startTime, p->endTime, p->rentalTime ) );
+#elif PACKETVER >= 20190724
+	clif_sale_add_reply( sd, sale_add_item( p->itemId, p->amount, p->startTime, p->endTime, 0 ) );
 #else
 	time_t endTime = p->startTime + p->hours * 60 * 60;
 	clif_sale_add_reply( sd, sale_add_item( p->itemId, p->amount, p->startTime, endTime, 0 ) );
