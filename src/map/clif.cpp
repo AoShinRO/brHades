@@ -21722,11 +21722,25 @@ void clif_parse_sale_refresh( int32 fd, map_session_data* sd ){
 
 	struct sale_item_data* sale;
 
+#if PACKETVER < 20190724
 	if( p->AID != sd->status.account_id ){
 		return;
 	}
+	
+	char item_name[ITEM_NAME_LENGTH];
+	safestrncpy( item_name, p->item_name, min( RFIFOW(fd, 2) - 7, ITEM_NAME_LENGTH ) );
+	std::shared_ptr<item_data> id = item_db.searchname( item_name );
+#else
+	char item_name[ITEM_NAME_LENGTH];
+	safestrncpy( item_name, p->item_name, ITEM_NAME_LENGTH );
+	std::shared_ptr<item_data> id = item_db.searchname( item_name );
+#endif
 
-	sale = sale_find_item( p->itemId, true );
+	if( !id ){
+		return;
+	}
+
+	sale = sale_find_item( id->nameid, true );
 
 	if( sale == nullptr ){
 		return;
@@ -21748,11 +21762,11 @@ void clif_sale_open( map_session_data* sd ){
 
 	sd->state.sale_open = true;
 
-	int32 fd = sd->fd;
+	struct PACKET_ZC_OPEN_BARGAIN_SALE_TOOL p;
 
-	WFIFOHEAD(fd, 2);
-	WFIFOW(fd, 0) = 0x9b5;
-	WFIFOSET(fd, 2);
+	p.packetType = HEADER_ZC_OPEN_BARGAIN_SALE_TOOL;
+
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
 #endif
 }
 
@@ -21763,9 +21777,13 @@ void clif_parse_sale_open( int32 fd, map_session_data* sd ){
 #if PACKETVER_SUPPORTS_SALES
 	nullpo_retv(sd);
 
-	if( RFIFOL(fd, 2) != sd->status.account_id ){
+#if PACKETVER < 20190724
+	struct PACKET_CZ_OPEN_BARGAIN_SALE_TOOL* p = (struct PACKET_CZ_OPEN_BARGAIN_SALE_TOOL*)RFIFOP( fd, 0 );
+
+	if( p->AID != sd->status.account_id ){
 		return;
 	}
+#endif
 
 	char command[CHAT_SIZE_MAX];
 
@@ -21787,11 +21805,11 @@ void clif_sale_close(map_session_data* sd) {
 
 	sd->state.sale_open = false;
 
-	int32 fd = sd->fd;
+	struct PACKET_ZC_CLOSE_BARGAIN_SALE_TOOL p;
 
-	WFIFOHEAD(fd, 2);
-	WFIFOW(fd, 0) = 0x9bd;
-	WFIFOSET(fd, 2);
+	p.packetType = HEADER_ZC_CLOSE_BARGAIN_SALE_TOOL;
+
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
 #endif
 }
 
@@ -21801,9 +21819,13 @@ void clif_parse_sale_close(int32 fd, map_session_data* sd) {
 #if PACKETVER_SUPPORTS_SALES
 	nullpo_retv(sd);
 
-	if( RFIFOL(fd, 2) != sd->status.account_id ){
+#if PACKETVER < 20190724
+	struct PACKET_CZ_CLOSE_BARGAIN_SALE_TOOL* p = (struct PACKET_CZ_CLOSE_BARGAIN_SALE_TOOL*)RFIFOP( fd, 0 );
+
+	if( p->AID != sd->status.account_id ){
 		return;
 	}
+#endif
 
 	clif_sale_close(sd);
 #endif
@@ -21820,11 +21842,15 @@ void clif_sale_search_reply( map_session_data* sd, std::shared_ptr<s_cash_item> 
 	if( item != nullptr ){
 		p.result = 0;
 		p.itemId = client_nameid( item->nameid );
+#if PACKETVER < 20190724
 		p.price = item->price;
+#endif
 	}else{
 		p.result = 1;
 		p.itemId = 0;
+#if PACKETVER < 20190724
 		p.price = 0;
+#endif
 	}
 
 	clif_send( &p, sizeof( p ), &sd->bl, SELF );
@@ -21835,29 +21861,40 @@ void clif_sale_search_reply( map_session_data* sd, std::shared_ptr<s_cash_item> 
 /// 09ac <length>.W <account id>.L <item name>.?B (CZ_REQ_CASH_BARGAIN_SALE_ITEM_INFO)
 void clif_parse_sale_search( int32 fd, map_session_data* sd ){
 #if PACKETVER_SUPPORTS_SALES
-	char item_name[ITEM_NAME_LENGTH];
-
 	nullpo_retv(sd);
 
-	if( RFIFOL(fd, 4) != sd->status.account_id ){
+	struct PACKET_CZ_REQ_CASH_BARGAIN_SALE_ITEM_INFO* p = (struct PACKET_CZ_REQ_CASH_BARGAIN_SALE_ITEM_INFO*)RFIFOP( fd, 0 );
+
+#if PACKETVER < 20190724
+	char item_name[ITEM_NAME_LENGTH];
+
+	if( p->AID != sd->status.account_id ){
 		return;
 	}
+#endif
 
 	if( !sd->state.sale_open ){
 		return;
 	}
 
-	safestrncpy( item_name, RFIFOCP(fd, 8), min(RFIFOW(fd, 2) - 7, ITEM_NAME_LENGTH) );
+#if PACKETVER >= 20190724
+	std::shared_ptr<item_data> id = item_db.searchname( p->item_name );
 
-	std::shared_ptr<item_data> id = item_db.searchname( item_name );
-
-	// not found
-	if( id == nullptr ){
-		clif_sale_search_reply( sd, nullptr );
+	if( id ){
+		clif_sale_search_reply( sd, cash_shop_db.findItemInTab( CASHSHOP_TAB_SALE, id->nameid ) );
 		return;
 	}
+#else
+	safestrncpy( item_name, p->item_name, min(p->packetLength, ITEM_NAME_LENGTH) );
+	std::shared_ptr<item_data> id = item_db.searchname( item_name );
+	if( id ){
+		clif_sale_search_reply( sd, cash_shop_db.findItemInTab( CASHSHOP_TAB_SALE, id->nameid ) );
+		return;
+	}
+#endif
 
-	clif_sale_search_reply( sd, cash_shop_db.findItemInTab( CASHSHOP_TAB_SALE, id->nameid ) );
+	// not found
+	clif_sale_search_reply( sd, nullptr );
 #endif
 }
 
@@ -21865,12 +21902,11 @@ void clif_parse_sale_search( int32 fd, map_session_data* sd ){
 /// 09af <result>.W (ZC_ACK_APPLY_BARGAIN_SALE_ITEM)
 void clif_sale_add_reply( map_session_data* sd, enum e_sale_add_result result ){
 #if PACKETVER_SUPPORTS_SALES
-	int32 fd = sd->fd;
+	struct PACKET_ZC_ACK_APPLY_BARGAIN_SALE_ITEM p;
 
-	WFIFOHEAD(fd, 4);
-	WFIFOW(fd, 0) = 0x9af;
-	WFIFOW(fd, 2) = (uint16)result;
-	WFIFOSET(fd, 4);
+	p.packetType = HEADER_ZC_ACK_APPLY_BARGAIN_SALE_ITEM;
+	p.result = result;
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
 #endif
 }
 
@@ -21883,17 +21919,24 @@ void clif_parse_sale_add( int32 fd, map_session_data* sd ){
 
 	const PACKET_CZ_REQ_APPLY_BARGAIN_SALE_ITEM* p = reinterpret_cast<PACKET_CZ_REQ_APPLY_BARGAIN_SALE_ITEM*>( RFIFOP( fd, 0 ) );
 
+#if PACKETVER < 20190724
 	if( p->AID != sd->status.account_id ){
 		return;
 	}
+#endif
 
 	if( !sd->state.sale_open ){
 		return;
 	}
-	
-	time_t endTime = p->startTime + p->hours * 60 * 60;
 
-	clif_sale_add_reply( sd, sale_add_item( p->itemId, p->amount, p->startTime, endTime ) );
+#if PACKETVER_MAIN_NUM >= 20210818 || PACKETVER_RE_NUM >= 20211103 || PACKETVER_ZERO_NUM >= 20210818
+	clif_sale_add_reply( sd, sale_add_item( p->itemId, p->amount, p->startTime, p->endTime, p->rentalTime ) );
+#elif PACKETVER >= 20190724
+	clif_sale_add_reply( sd, sale_add_item( p->itemId, p->amount, p->startTime, p->endTime, 0 ) );
+#else
+	time_t endTime = p->startTime + p->hours * 60 * 60;
+	clif_sale_add_reply( sd, sale_add_item( p->itemId, p->amount, p->startTime, endTime, 0 ) );
+#endif
 #endif
 }
 
@@ -21901,12 +21944,11 @@ void clif_parse_sale_add( int32 fd, map_session_data* sd ){
 /// 09b1 <result>.W (ZC_ACK_REMOVE_BARGAIN_SALE_ITEM)
 void clif_sale_remove_reply( map_session_data* sd, bool failed ){
 #if PACKETVER_SUPPORTS_SALES
-	int32 fd = sd->fd;
+	struct PACKET_ZC_ACK_REMOVE_BARGAIN_SALE_ITEM p;
 
-	WFIFOHEAD(fd, 4);
-	WFIFOW(fd, 0) = 0x9b1;
-	WFIFOW(fd, 2) = failed;
-	WFIFOSET(fd, 4);
+	p.packetType = HEADER_ZC_ACK_REMOVE_BARGAIN_SALE_ITEM;
+	p.result = failed;
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
 #endif
 }
 
@@ -21918,9 +21960,11 @@ void clif_parse_sale_remove( int32 fd, map_session_data* sd ){
 
 	const PACKET_CZ_REQ_REMOVE_BARGAIN_SALE_ITEM* p = reinterpret_cast<PACKET_CZ_REQ_REMOVE_BARGAIN_SALE_ITEM*>( RFIFOP( fd, 0 ) );
 
+#if PACKETVER < 20190724
 	if( p->AID != sd->status.account_id ){
 		return;
 	}
+#endif
 
 	if( !sd->state.sale_open ){
 		return;
@@ -23372,6 +23416,70 @@ void clif_parse_inventory_expansion_reject( int32 fd, map_session_data* sd ){
 #if PACKETVER_MAIN_NUM >= 20181219 || PACKETVER_RE_NUM >= 20181219 || PACKETVER_ZERO_NUM >= 20181212
 	sd->state.inventory_expansion_confirmation = 0;
 	sd->state.inventory_expansion_amount = 0;
+#endif
+}
+
+void clif_parse_CashShopLimited( int32 fd, map_session_data* sd ){
+#if PACKETVER >= 20190724
+	clif_CashShopLimited(sd);
+#endif
+}
+
+int clif_CashShopLimited_sub(map_session_data *sd,va_list ap)
+{
+	clif_CashShopLimited(sd);
+
+	return 1;
+}
+
+void clif_CashShopLimited( map_session_data* sd ){
+#if PACKETVER >= 20190724
+	nullpo_retv(sd);
+	
+	int32 fd = sd->fd;
+	time_t now = time(nullptr);
+
+	int32 max_len = sizeof( struct PACKET_ZC_SE_CASHSHOP_LIMITED_REQ ) + sale_items.count * sizeof(struct SE_CASHSHOP_LIMITED_REQ_sub);
+
+	WFIFOHEAD( fd, max_len );
+	struct PACKET_ZC_SE_CASHSHOP_LIMITED_REQ *p = (struct PACKET_ZC_SE_CASHSHOP_LIMITED_REQ *)WFIFOP( fd, 0 );
+
+	p->packetType = HEADER_ZC_SE_CASHSHOP_LIMITED_REQ;
+	p->unknow = 0;
+
+	int32 count = 0;
+	for( int32 i = 0; i < sale_items.count; i++ ){
+		struct sale_item_data* sale_item = sale_items.item[i];
+		
+		// Only include active sales
+		if( sale_item->start > now || sale_item->end <= now ){
+			continue;
+		}
+		
+		std::shared_ptr<s_cash_item> cash_item = cash_shop_db.findItemInTab( CASHSHOP_TAB_SALE, sale_item->nameid );
+		if( cash_item == nullptr ){
+			continue;
+		}
+
+		int32 player_amount = sale_get_player_amount( sd, sale_item );
+		
+		// Skip if player has exhausted their limit
+		if( player_amount <= 0 ){
+			continue;
+		}
+
+		p->list[count].nameid = sale_item->nameid;
+		p->list[count].amount = sale_item->amount;
+		p->list[count].amountLeft = player_amount;
+		p->list[count].price = cash_item->price;
+		p->list[count].startTime = static_cast<uint32>(sale_item->start);
+		p->list[count].endTime = static_cast<uint32>(sale_item->end);
+		count++;
+	}
+	
+	p->packetLength = sizeof(PACKET_ZC_SE_CASHSHOP_LIMITED_REQ) + count * sizeof(struct SE_CASHSHOP_LIMITED_REQ_sub);
+
+	WFIFOSET( fd, p->packetLength );
 #endif
 }
 

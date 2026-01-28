@@ -28,6 +28,7 @@
 #include "battle.hpp" // battle_config
 #include "battleground.hpp"
 #include "buyingstore.hpp"  // struct s_buyingstore
+#include "cashshop.hpp"
 #include "channel.hpp"
 #include "chat.hpp"
 #include "chrif.hpp"
@@ -2124,6 +2125,10 @@ bool pc_authok(map_session_data *sd, uint32 login_id2, time_t expiration_time, i
 
 #if PACKETVER_MAIN_NUM >= 20150507 || PACKETVER_RE_NUM >= 20150429 || defined(PACKETVER_ZERO)
 	sd->hatEffects = {};
+#endif
+
+#if PACKETVER_SUPPORTS_SALES
+	sale_load_pc(sd);
 #endif
 
 	// Check EXP overflow, since in previous revision EXP on Max Level can be more than 'official' Max EXP
