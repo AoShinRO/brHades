@@ -14022,20 +14022,20 @@ luna_sf2,254,162,3	script(CLOAKED)	Nadoyo#21pt1nadoyo04	4_EP21_NADOYO,{
 		close3;
 	}
 	end;
-	
+
 OnInit:
 	questinfo QTYPE_QUEST,QMARK_YELLOW,"isbegin_quest(18347) == 1";
-end;
+	end;
 }
 
 luna_sf2,252,164,3	script(CLOAKED)	Door#ep21_lastbattle	4_POINT_BLUE,{
 	if(isbegin_quest(18348) > 0)
 		warp "luna_sf2",260,34;
 	end;
-	
+
 OnInit:
 	npc_resize(Size_Medium);
-end;
+	end;
 }
 
 luna_sf2,254,150,3	script(CLOAKED)	Nyar#ep21nya04	4_EP20_NYAR,{
