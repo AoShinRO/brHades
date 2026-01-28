@@ -21726,14 +21726,14 @@ void clif_parse_sale_refresh( int32 fd, map_session_data* sd ){
 	if( p->AID != sd->status.account_id ){
 		return;
 	}
-#endif
-
-#if PACKETVER >= 20190724
+	
+	char item_name[ITEM_NAME_LENGTH];
+	safestrncpy( item_name, p->item_name, min( RFIFOW(fd, 2) - 7, ITEM_NAME_LENGTH ) );
+	std::shared_ptr<item_data> id = item_db.searchname( item_name );
+#else
 	char item_name[ITEM_NAME_LENGTH];
 	safestrncpy( item_name, p->item_name, ITEM_NAME_LENGTH );
 	std::shared_ptr<item_data> id = item_db.searchname( item_name );
-#else
-	std::shared_ptr<item_data> id = item_db.find(p->itemId);
 #endif
 
 	if( !id ){
