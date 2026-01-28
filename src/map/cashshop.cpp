@@ -257,8 +257,7 @@ static TIMER_FUNC(sale_start_timer){
 }
 
 enum e_sale_add_result sale_add_item( t_itemid nameid, int32 count, time_t from, time_t to, time_t rent ){
-	int32 id;
-	char* data;
+	int32 id = 0;
 	int32 rent_time_temp = 0;
 	
 	// Check if the item exists in the sales tab
@@ -286,27 +285,42 @@ enum e_sale_add_result sale_add_item( t_itemid nameid, int32 count, time_t from,
 		return SALE_ADD_DUPLICATE;
 	}
 	
+	// Calculate rental time in seconds
 	if( rent > 0 ){
 		struct tm *ltm = gmtime(&rent);
-		if(ltm->tm_mday >= 14 && ltm->tm_hour >= 0)
-			rent_time_temp = 0;
-		else
-			rent_time_temp = (ltm->tm_mday * 24 * 60 * 60) + (ltm->tm_hour * 60 * 60) + (ltm->tm_min * 60);
+		if( ltm != nullptr ){
+			// If rental period is 14 days or more, treat as permanent (0)
+			if( ltm->tm_mday >= 14 && ltm->tm_hour >= 0 ){
+				rent_time_temp = 0;
+			} else {
+				rent_time_temp = (ltm->tm_mday * 24 * 60 * 60) + (ltm->tm_hour * 60 * 60) + (ltm->tm_min * 60);
+			}
+		}
 	}
 	
-	if( SQL_ERROR == Sql_Query(mmysql_handle, "INSERT INTO `%s`(`nameid`,`start`,`end`,`amount`,`rentalTime`) VALUES ( '%u', FROM_UNIXTIME(%d), FROM_UNIXTIME(%d), '%d', '%d' )", sales_table, nameid, (uint32)from, (uint32)to, count, rent_time_temp) ){
+	// Insert sale into database
+	if( SQL_ERROR == Sql_Query(mmysql_handle, 
+		"INSERT INTO `%s`(`nameid`,`start`,`end`,`amount`,`rentalTime`) "
+		"VALUES ( '%u', FROM_UNIXTIME(%d), FROM_UNIXTIME(%d), '%d', '%d' )", 
+		sales_table, nameid, (uint32)from, (uint32)to, count, rent_time_temp) ){
 		Sql_ShowDebug(mmysql_handle);
 		return SALE_ADD_FAILED;
 	}
+	
+	// Get the auto-generated ID
 	if( SQL_ERROR == Sql_Query(mmysql_handle, "SELECT `id` FROM `%s` WHERE `nameid` = '%u'", sales_table, nameid) ){
 		Sql_ShowDebug(mmysql_handle);
 		return SALE_ADD_FAILED;
 	}
-	while( SQL_SUCCESS == Sql_NextRow( mmysql_handle ) )
-		Sql_GetData( mmysql_handle, 0, &data, nullptr ); id = atoi(data);
-
+	
+	if( SQL_SUCCESS == Sql_NextRow( mmysql_handle ) ){
+		char* data;
+		Sql_GetData( mmysql_handle, 0, &data, nullptr );
+		id = atoi(data);
+	}
 	Sql_FreeResult( mmysql_handle );
 
+	// Create sale item in memory
 	RECREATE(sale_items.item, struct sale_item_data *, ++sale_items.count);
 	CREATE(sale_items.item[sale_items.count - 1], struct sale_item_data, 1);
 	struct sale_item_data* sale_item = sale_items.item[sale_items.count - 1];
@@ -318,7 +332,7 @@ enum e_sale_add_result sale_add_item( t_itemid nameid, int32 count, time_t from,
 	sale_item->amount = count;
 	sale_item->timer_start = add_timer( gettick() + (uint32)(from - time(nullptr)) * 1000, sale_start_timer, 0, (intptr_t)sale_item );
 	sale_item->timer_end = INVALID_TIMER;
-	sale_item->rentalTime = static_cast<int32>(rent_time_temp);
+	sale_item->rentalTime = rent_time_temp;
 
 	return SALE_ADD_SUCCESS;
 }
@@ -432,11 +446,42 @@ void sale_load_pc( map_session_data* sd ){
 		return;
 	}
 	while( SQL_SUCCESS == Sql_NextRow( mmysql_handle ) ){
-		Sql_GetData( mmysql_handle, 0, &data, nullptr ); id = atoi(data);
-		Sql_GetData( mmysql_handle, 1, &data, nullptr ); amount = atoi(data);
-		sd->sales.push_back( std::make_pair(id,amount) );
+		Sql_GetData( mmysql_handle, 0, &data, nullptr );
+		id = atoi(data);
+		Sql_GetData( mmysql_handle, 1, &data, nullptr );
+		amount = atoi(data);
+		sd->limited_sales[id] = amount;
 	}
 	Sql_FreeResult(mmysql_handle);
+}
+
+int32 sale_get_player_amount( map_session_data* sd, struct sale_item_data* sale ){
+	if( sd == nullptr || sale == nullptr ){
+		return 0;
+	}
+	
+	auto it = sd->limited_sales.find(sale->id);
+	if( it != sd->limited_sales.end() ){
+		return it->second;
+	}
+	
+	// Player hasn't bought this item yet, return the full sale amount
+	return sale->amount;
+}
+
+void sale_update_player_amount( map_session_data* sd, int32 sale_id, int32 new_amount ){
+	if( sd == nullptr ){
+		return;
+	}
+	
+	sd->limited_sales[sale_id] = new_amount;
+	
+	if( SQL_ERROR == Sql_Query( mmysql_handle, 
+		"INSERT INTO `sales_limited_acc` (`sales_id`,`account_id`,`amount`) VALUES ('%d', '%d', '%d') "
+		"ON DUPLICATE KEY UPDATE `amount` = '%d'", 
+		sale_id, sd->status.account_id, new_amount, new_amount ) ){
+		Sql_ShowDebug(mmysql_handle);
+	}
 }
 #endif
 
@@ -535,15 +580,16 @@ bool cashshop_buylist( map_session_data* sd, uint32 kafrapoints, int32 n, const 
 				return false;
 			}
 
-			int32 temp_amount = sale->amount;
-			for(auto &it : sd->sales){
-				if(it.first == sale->id){
-					temp_amount = it.second;
-					break;
-				}
+			int32 player_amount = sale_get_player_amount( sd, sale );
+			
+			// Check if player has reached their purchase limit
+			if( player_amount <= 0 ){
+				clif_cashshop_result( sd, nameid, CASHSHOP_RESULT_ERROR_UNKNOWN );
+				clif_CashShopLimited(sd);
+				return false;
 			}
 
-			if( temp_amount < quantity ){
+			if( player_amount < (int32)quantity ){
 				// Client tried to buy a higher quantity than is available for his account
 				clif_cashshop_result( sd, nameid, CASHSHOP_RESULT_ERROR_UNKNOWN );
 				// Maybe he did not get refreshed in time -> do it now
@@ -614,14 +660,9 @@ bool cashshop_buylist( map_session_data* sd, uint32 kafrapoints, int32 n, const 
 				return false;
 			}
 
-			int32 temp_amount = sale->amount;
-			for(auto &it : sd->sales){
-				if(it.first == sale->id){
-					temp_amount = it.second;
-					break;
-				}
-			}
-			if( temp_amount < quantity ){
+			int32 player_amount = sale_get_player_amount( sd, sale );
+			
+			if( player_amount <= 0 || player_amount < (int32)quantity ){
 				// Client tried to buy a higher quantity than is available
 				clif_cashshop_result( sd, nameid, CASHSHOP_RESULT_ERROR_UNKNOWN );
 				// Maybe he did not get refreshed in time -> do it now
@@ -637,8 +678,12 @@ bool cashshop_buylist( map_session_data* sd, uint32 kafrapoints, int32 n, const 
 
 				item_tmp.nameid = nameid;
 				item_tmp.identify = 1;
-				if(tab == CASHSHOP_TAB_SALE && sale->rentalTime > 0 && id->type != IT_HEALING && id->type != IT_CARD)
+#if PACKETVER_SUPPORTS_SALES
+				if( tab == CASHSHOP_TAB_SALE && sale != nullptr && sale->rentalTime > 0 && 
+				    id->type != IT_HEALING && id->type != IT_CARD ){
 					item_tmp.expire_time = (unsigned int)(time(nullptr) + sale->rentalTime);
+				}
+#endif
 
 				switch( pc_additem( sd, &item_tmp, get_amt, LOG_TYPE_CASH ) ){
 					case ADDITEM_OVERWEIGHT:
@@ -659,25 +704,16 @@ bool cashshop_buylist( map_session_data* sd, uint32 kafrapoints, int32 n, const 
 			clif_cashshop_result( sd, nameid, CASHSHOP_RESULT_SUCCESS );
 
 #if PACKETVER_SUPPORTS_SALES
-			if( tab == CASHSHOP_TAB_SALE ){
-				int32 new_amount = sale->amount-get_amt;
-				new_amount = (new_amount == 0) ? -1 : new_amount;
-
-				for(auto &it : sd->sales){
-					if(it.first == sale->id){
-						new_amount = it.second-get_amt;
-						new_amount = (new_amount == 0) ? -1 : new_amount;
-						it.second = new_amount;
-						break;
-					}
+			if( tab == CASHSHOP_TAB_SALE && sale != nullptr ){
+				int32 current_amount = sale_get_player_amount( sd, sale );
+				int32 new_amount = current_amount - get_amt;
+				
+				// Mark as -1 if limit reached (0 remaining)
+				if( new_amount <= 0 ){
+					new_amount = -1;
 				}
-
-				if( SQL_ERROR == Sql_Query( mmysql_handle, "INSERT INTO `sales_limited_acc` (`sales_id`,`account_id`,`amount`) VALUES ('%d', '%d', '%d') ON DUPLICATE KEY UPDATE amount = '%d'", sale->id, sd->status.account_id, new_amount, new_amount ) ){
-					Sql_ShowDebug(mmysql_handle);
-				}
-
-				sd->sales.push_back( std::make_pair(sale->id,new_amount) );
-
+				
+				sale_update_player_amount( sd, sale->id, new_amount );
 				clif_CashShopLimited(sd);
 			}
 #endif

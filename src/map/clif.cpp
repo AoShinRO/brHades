@@ -23432,52 +23432,49 @@ int clif_CashShopLimited_sub(map_session_data *sd,va_list ap)
 
 void clif_CashShopLimited( map_session_data* sd ){
 #if PACKETVER >= 20190724
-	int32 i;
-
+	nullpo_retv(sd);
+	
 	int32 fd = sd->fd;
-
 	time_t now = time(nullptr);
-	struct sale_item_data* sale_item;
 
-	int32 len = sizeof( struct PACKET_ZC_SE_CASHSHOP_LIMITED_REQ ) + sale_items.count * sizeof(struct SE_CASHSHOP_LIMITED_REQ_sub);
+	int32 max_len = sizeof( struct PACKET_ZC_SE_CASHSHOP_LIMITED_REQ ) + sale_items.count * sizeof(struct SE_CASHSHOP_LIMITED_REQ_sub);
 
-	WFIFOHEAD( fd, len );
+	WFIFOHEAD( fd, max_len );
 	struct PACKET_ZC_SE_CASHSHOP_LIMITED_REQ *p = (struct PACKET_ZC_SE_CASHSHOP_LIMITED_REQ *)WFIFOP( fd, 0 );
 
 	p->packetType = HEADER_ZC_SE_CASHSHOP_LIMITED_REQ;
 	p->unknow = 0;
 
 	int32 count = 0;
-	for( i = 0; i < sale_items.count; i++ ){
-		sale_item = sale_items.item[i];
-		if( sale_item->start <= now && sale_item->end > now ){
-			std::shared_ptr<s_cash_item> cash_item = cash_shop_db.findItemInTab( CASHSHOP_TAB_SALE, sale_item->nameid );
-			
-			if( cash_item == nullptr ){
-				continue;
-			}
-
-			int32 sale_amount = 0;
-			for(auto &it : sd->sales){
-				if(it.first == sale_item->id){
-					sale_amount = it.second;
-					break;
-				}
-			}
-
-			if(sale_amount == -1)
-				continue;
-
-			int32 temp_amount = sale_amount ? sale_amount : sale_item->amount;
-			p->list[count].nameid = sale_item->nameid;
-			p->list[count].amount = sale_item->amount;
-			p->list[count].amountLeft = temp_amount;
-			p->list[count].price = cash_item->price;
-			p->list[count].startTime = static_cast<uint32>(sale_item->start);
-			p->list[count].endTime = static_cast<uint32>(sale_item->end);
-			count++;
+	for( int32 i = 0; i < sale_items.count; i++ ){
+		struct sale_item_data* sale_item = sale_items.item[i];
+		
+		// Only include active sales
+		if( sale_item->start > now || sale_item->end <= now ){
+			continue;
 		}
+		
+		std::shared_ptr<s_cash_item> cash_item = cash_shop_db.findItemInTab( CASHSHOP_TAB_SALE, sale_item->nameid );
+		if( cash_item == nullptr ){
+			continue;
+		}
+
+		int32 player_amount = sale_get_player_amount( sd, sale_item );
+		
+		// Skip if player has exhausted their limit
+		if( player_amount <= 0 ){
+			continue;
+		}
+
+		p->list[count].nameid = sale_item->nameid;
+		p->list[count].amount = sale_item->amount;
+		p->list[count].amountLeft = player_amount;
+		p->list[count].price = cash_item->price;
+		p->list[count].startTime = static_cast<uint32>(sale_item->start);
+		p->list[count].endTime = static_cast<uint32>(sale_item->end);
+		count++;
 	}
+	
 	p->packetLength = sizeof(PACKET_ZC_SE_CASHSHOP_LIMITED_REQ) + count * sizeof(struct SE_CASHSHOP_LIMITED_REQ_sub);
 
 	WFIFOSET( fd, p->packetLength );
