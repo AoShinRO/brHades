@@ -9724,20 +9724,3 @@ Body:
       bonus bVariableCastrate, -.@val1;
       bonus bMaxHPrate, .@val1;
       bonus bMaxSPrate, .@val1;
-  - Status: Groggy_on
-    DurationLookup: NPC_GROGGY_ON
-    Icon: EFST_GROGGY
-    States:
-      NoMove: true
-      NoCast: true
-      NoAttack: true
-    Flags:
-      NoDispell: true
-      NoBanishingBuster: true
-      NoClearance: true
-      BlEffect: true
-      DisplayPc: true
-      SetStand: true
-      StopWalking: true
-      StopAttacking: true
-      StopCasting: true
