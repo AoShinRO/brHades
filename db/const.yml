@@ -55,6 +55,69 @@ Body:
     Value: 1000
   - Name: IG_D_GW_EXTRACTOR
     Value: 1001
+  # Episode 21 NPC Sprite Aliases
+  - Name: EP21_NPC_SOLDIER_A
+    Value: 10564
+  - Name: EP21_NPC_SOLDIER_B
+    Value: 10565
+  - Name: EP21_NPC_M_WORKER_A
+    Value: 10566
+  - Name: EP21_NPC_M_WORKER_B
+    Value: 10567
+  - Name: EP21_NPC_F_WORKER_A
+    Value: 10568
+  - Name: EP21_NPC_F_WORKER_B
+    Value: 10569
+  - Name: EP21_NPC_WORKER_KID_A
+    Value: 10570
+  - Name: EP21_NPC_WORKER_KID_B
+    Value: 10571
+  - Name: EP21_NPC_TAN
+    Value: 10572
+  - Name: EP21_NPC_TRIS
+    Value: 10573
+  - Name: EP21_NPC_NADOYO
+    Value: 10574
+  - Name: EP21_NPC_REINHARDT
+    Value: 10575
+  - Name: EP21_NPC_WILHELM
+    Value: 10576
+  - Name: EP21_NPC_MARISTELLA
+    Value: 10577
+  - Name: EP21_NPC_YOHAN
+    Value: 10578
+  - Name: EP21_NPC_RICHARD
+    Value: 10579
+  - Name: EP21_NPC_VALDARIS
+    Value: 10580
+  - Name: EP21_NPC_GUNTER
+    Value: 10581
+  - Name: EP21_NPC_GALAXIA
+    Value: 10582
+  - Name: EP21_NPC_GALAXIA_B
+    Value: 10583
+  - Name: EP21_NPC_IVAN
+    Value: 10584
+  - Name: EP21_NPC_LALAILA
+    Value: 10585
+  - Name: EP21_NPC_ILSE
+    Value: 10586
+  - Name: EP21_NPC_HOWELL
+    Value: 10587
+  - Name: EP21_NPC_EPESTO
+    Value: 10588
+  - Name: EP21_NPC_HEINE_TAB
+    Value: 10589
+  - Name: EP21_NPC_IANA
+    Value: 10590
+  - Name: EP21_NPC_LEE
+    Value: 10591
+  - Name: EP21_NPC_AURELIE
+    Value: 10592
+  - Name: EP21_NPC_HOWELL_S
+    Value: 10593
+  - Name: EP21_NPC_TAN_S
+    Value: 10594
 
 Footer:
   Imports:
