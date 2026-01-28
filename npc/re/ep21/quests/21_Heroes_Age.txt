@@ -17499,10 +17499,10 @@ jor_raise2,100,26,3	script	Hidden Boat#ep21_raise2_t	4_POINT_BLUE,{
 		end;
 	warp "jor_mbase",161,338;
 	close;
-	
+
 OnInit:
 	npc_resize(Size_Small);
-end;
+	end;
 }
 
 jor_raise1,152,323,0	script	#ep21_raise1_to_tmple1	WARPNPC,1,1,{
