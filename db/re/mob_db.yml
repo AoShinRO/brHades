@@ -122044,7 +122044,7 @@ Body:
         Rate: 500
       - Item: Shining_Crystal
         Rate: 500
-      - Item: aegis_300528
+      - Item: Yortus_Bishop_Card
         Rate: 1
         StealProtected: true
   - Id: 22413
@@ -122088,7 +122088,7 @@ Body:
         Rate: 500
       - Item: Shining_Crystal
         Rate: 500
-      - Item: aegis_300529
+      - Item: Yortus_Warlock_Card
         Rate: 1
         StealProtected: true
   - Id: 22414
@@ -122132,6 +122132,9 @@ Body:
         Rate: 1000
       - Item: Ep21_Fanatic_Cap
         Rate: 1000
+      - Item: Yordos_Investigator_Card
+        Rate: 1
+        StealProtected: true
   - Id: 22415
     AegisName: EP21_YORDOS_B_H
     Name: Awakened Jordos Judge
@@ -122175,7 +122178,7 @@ Body:
         Rate: 1000
       - Item: Ep21_Jor_Dagger_Pcs
         Rate: 500
-      - Item: aegis_300531
+      - Item: Yordos_Judge_Card
         Rate: 1
         StealProtected: true
   - Id: 22416
@@ -122219,7 +122222,7 @@ Body:
         Rate: 1000
       - Item: Ep21_Jor_Dagger_Pcs
         Rate: 500
-      - Item: aegis_300523
+      - Item: Yordos_Executor_Card
         Rate: 1
         StealProtected: true
   - Id: 22417
@@ -122259,7 +122262,7 @@ Body:
         Rate: 800
       - Item: Ep21_Jor_Bible
         Rate: 800
-      - Item: aegis_300519
+      - Item: Yormi_Card
         Rate: 1
         StealProtected: true
   - Id: 22418
@@ -122299,7 +122302,7 @@ Body:
         Rate: 800
       - Item: Ep21_Jor_Dagger_Pcs
         Rate: 800
-      - Item: aegis_300520
+      - Item: Yormi_Missionary_Card
         Rate: 1
         StealProtected: true
   - Id: 22419
@@ -122339,7 +122342,7 @@ Body:
         Rate: 500
       - Item: Ep21_Jor_Stick
         Rate: 800
-      - Item: aegis_300524
+      - Item: Yoscopus_Guardian_Card
         Rate: 1
         StealProtected: true
   - Id: 22420
@@ -122379,7 +122382,7 @@ Body:
         Rate: 800
       - Item: Ep21_Jor_Wand_Acc
         Rate: 800
-      - Item: aegis_300525
+      - Item: Yoscopus_Warlock_Card
         Rate: 1
         StealProtected: true
   - Id: 22421
@@ -122436,7 +122439,7 @@ Body:
         Rate: 5000
       - Item: Ep21_Acc_E_Stone3
         Rate: 5000
-      - Item: aegis_300530
+      - Item: Yortus_Arbiter_Card
         Rate: 1
         StealProtected: true
   - Id: 22422
@@ -122493,7 +122496,7 @@ Body:
         Rate: 5000
       - Item: Ep21_Armor_E_Stone3
         Rate: 5000
-      - Item: aegis_300531
+      - Item: Yortus_Bailiff_Card
         Rate: 1
         StealProtected: true
 #    AegisName: EP21_B_YORTUS_B_H
