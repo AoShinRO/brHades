@@ -925,6 +925,9 @@ CREATE TABLE IF NOT EXISTS `mercenary_owner` (
 -- ----------------------------
 -- Table structure for `sales`
 -- ----------------------------
+-- Note: 'id' is a unique identifier for each sale period
+-- 'nameid' is the item ID - UNIQUE constraint ensures only one active sale per item
+-- This design allows tracking purchases per account via sales_limited_acc table
 
 CREATE TABLE IF NOT EXISTS `sales` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
