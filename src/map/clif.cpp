@@ -23461,16 +23461,17 @@ void clif_CashShopLimited( map_session_data* sd ){
 			continue;
 		}
 
-		int32 player_amount = sale_get_player_amount( sd, sale_item );
+		// Get player's remaining purchase limit for this sale
+		int32 player_remaining = sale_get_player_remaining( sd, sale_item );
 		
-		// Skip if player has exhausted their limit
-		if( player_amount <= 0 ){
+		// Skip if player has exhausted their limit (-1 or 0)
+		if( player_remaining <= 0 ){
 			continue;
 		}
 
 		p->list[count].nameid = sale_item->nameid;
 		p->list[count].amount = sale_item->amount;
-		p->list[count].amountLeft = player_amount;
+		p->list[count].amountLeft = player_remaining;
 		p->list[count].price = cash_item->price;
 		p->list[count].startTime = static_cast<uint32>(sale_item->start);
 		p->list[count].endTime = static_cast<uint32>(sale_item->end);

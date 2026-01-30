@@ -2128,7 +2128,8 @@ bool pc_authok(map_session_data *sd, uint32 login_id2, time_t expiration_time, i
 #endif
 
 #if PACKETVER_SUPPORTS_SALES
-	sale_load_pc(sd);
+	// Load player's limited sales purchase history
+	sale_load_account_limits(sd);
 #endif
 
 	// Check EXP overflow, since in previous revision EXP on Max Level can be more than 'official' Max EXP

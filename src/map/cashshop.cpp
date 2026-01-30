@@ -441,45 +441,83 @@ void sale_notify_login( map_session_data* sd ){
 	}
 }
 
-void sale_load_pc( map_session_data* sd ){
-	char* data;
-	int32 id, amount;
+/**
+ * Load account-specific purchase limits for limited sales
+ * This caches the data in memory to avoid repeated DB queries during session
+ * @param sd: Player session data
+ */
+void sale_load_account_limits( map_session_data* sd ){
+	if( !sd ){
+		return;
+	}
 
-	if( SQL_ERROR == Sql_Query(mmysql_handle, "SELECT `sales_id`, `amount` FROM `sales_limited_acc` WHERE `account_id` = '%d'", sd->status.account_id) ){
+	// Clear any existing data
+	sd->limited_sales.clear();
+
+	// Query all purchase records for this account
+	if( SQL_ERROR == Sql_Query(mmysql_handle, 
+		"SELECT `sales_id`, `amount` FROM `sales_limited_acc` WHERE `account_id` = '%d'", 
+		sd->status.account_id) ){
 		Sql_ShowDebug(mmysql_handle);
 		return;
 	}
+
+	// Parse results and cache in memory
+	char* data;
 	while( SQL_SUCCESS == Sql_NextRow( mmysql_handle ) ){
+		int32 sale_id, remaining;
+		
 		Sql_GetData( mmysql_handle, 0, &data, nullptr );
-		id = atoi(data);
+		sale_id = atoi(data);
+		
 		Sql_GetData( mmysql_handle, 1, &data, nullptr );
-		amount = atoi(data);
-		sd->limited_sales[id] = amount;
+		remaining = atoi(data);
+		
+		// Store in hash map for O(1) lookups
+		sd->limited_sales[sale_id] = remaining;
 	}
 	Sql_FreeResult(mmysql_handle);
 }
 
-int32 sale_get_player_amount( map_session_data* sd, struct sale_item_data* sale ){
+/**
+ * Get the remaining purchase amount for a player
+ * Checks player's cached limit data, falls back to global limit if not found
+ * @param sd: Player session data
+ * @param sale: Sale item data
+ * @return Remaining amount player can purchase (-1 if exhausted, global amount if unlimited for player)
+ */
+int32 sale_get_player_remaining( map_session_data* sd, struct sale_item_data* sale ){
 	if( sd == nullptr || sale == nullptr ){
 		return 0;
 	}
 	
+	// Check if player has purchase history for this sale
 	auto it = sd->limited_sales.find(sale->id);
 	if( it != sd->limited_sales.end() ){
+		// Return cached remaining amount (-1 means exhausted)
 		return it->second;
 	}
 	
-	// Player hasn't bought this item yet, return the full sale amount
+	// Player hasn't bought this item yet, return the global sale limit
 	return sale->amount;
 }
 
-void sale_update_player_amount( map_session_data* sd, int32 sale_id, int32 new_amount ){
+/**
+ * Update player's remaining purchase amount after a transaction
+ * Updates both in-memory cache and persistent database
+ * @param sd: Player session data
+ * @param sale_id: Sale ID to update
+ * @param new_amount: New remaining amount (-1 for exhausted)
+ */
+void sale_persist_player_purchase( map_session_data* sd, int32 sale_id, int32 new_amount ){
 	if( sd == nullptr ){
 		return;
 	}
 	
+	// Update in-memory cache
 	sd->limited_sales[sale_id] = new_amount;
 	
+	// Persist to database using UPSERT pattern
 	if( SQL_ERROR == Sql_Query( mmysql_handle, 
 		"INSERT INTO `sales_limited_acc` (`sales_id`,`account_id`,`amount`) VALUES ('%d', '%d', '%d') "
 		"ON DUPLICATE KEY UPDATE `amount` = '%d'", 
@@ -584,7 +622,7 @@ bool cashshop_buylist( map_session_data* sd, uint32 kafrapoints, int32 n, const 
 				return false;
 			}
 
-			int32 player_amount = sale_get_player_amount( sd, sale );
+			int32 player_amount = sale_get_player_remaining( sd, sale );
 			
 			// Check if player has reached their purchase limit
 			if( player_amount <= 0 ){
@@ -664,7 +702,7 @@ bool cashshop_buylist( map_session_data* sd, uint32 kafrapoints, int32 n, const 
 				return false;
 			}
 
-			int32 player_amount = sale_get_player_amount( sd, sale );
+			int32 player_amount = sale_get_player_remaining( sd, sale );
 			
 			if( player_amount <= 0 || player_amount < (int32)quantity ){
 				// Client tried to buy a higher quantity than is available
@@ -709,15 +747,19 @@ bool cashshop_buylist( map_session_data* sd, uint32 kafrapoints, int32 n, const 
 
 #if PACKETVER_SUPPORTS_SALES
 			if( tab == CASHSHOP_TAB_SALE && sale != nullptr ){
-				int32 current_amount = sale_get_player_amount( sd, sale );
-				int32 new_amount = current_amount - get_amt;
+				// Calculate new remaining amount for player
+				int32 current_remaining = sale_get_player_remaining( sd, sale );
+				int32 new_remaining = current_remaining - get_amt;
 				
-				// Mark as -1 if limit reached (0 remaining)
-				if( new_amount <= 0 ){
-					new_amount = -1;
+				// Mark as exhausted (-1) when limit reached
+				if( new_remaining <= 0 ){
+					new_remaining = -1;
 				}
 				
-				sale_update_player_amount( sd, sale->id, new_amount );
+				// Persist the purchase to database and update cache
+				sale_persist_player_purchase( sd, sale->id, new_remaining );
+				
+				// Refresh the client's cash shop limited list
 				clif_CashShopLimited(sd);
 			}
 #endif

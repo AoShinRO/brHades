@@ -112,7 +112,11 @@ struct sale_item_data* sale_find_item(t_itemid nameid, bool onsale);
 enum e_sale_add_result sale_add_item(t_itemid nameid, int32 count, time_t from, time_t to, time_t rent);
 bool sale_remove_item(t_itemid nameid);
 void sale_notify_login( map_session_data* sd );
-void sale_load_pc( map_session_data* sd );
+
+// Account-specific limited sales functions
+void sale_load_account_limits( map_session_data* sd );
+int32 sale_get_player_remaining( map_session_data* sd, struct sale_item_data* sale );
+void sale_persist_player_purchase( map_session_data* sd, int32 sale_id, int32 new_amount );
 
 /**
  * Get the remaining purchase limit for a player on a specific sale item.
