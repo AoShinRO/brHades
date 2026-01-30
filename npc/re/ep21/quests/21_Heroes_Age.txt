@@ -1924,11 +1924,11 @@ OnTouch:
 		mes "[Nillem]";
 		mes "Let's sit over there for a bit<FONT SIZE = 14>…Huh?</FONT>";
 		npctalk "Nillem : Huh?","Nillem#ep21_mercgroupent",bc_self;
-		cloaknpc("???#ep21_mercgroup",false,getcharid(0));
-		specialeffect EF_RG_COIN7,AREA,"???#ep21_mercgroup";
+		cloaknpc("#ep21_mercgroup",false,getcharid(0));
+		specialeffect EF_RG_COIN7,AREA,"#ep21_mercgroup";
 		next;
-		cloaknpc("???#ep21_mercgroup",true,getcharid(0));
-		removespecialeffect EF_RG_COIN7,AREA,"???#ep21_mercgroup";
+		cloaknpc("#ep21_mercgroup",true,getcharid(0));
+		removespecialeffect EF_RG_COIN7,AREA,"#ep21_mercgroup";
 		cutin "ep19_lehar01.png",2;
 		mes "[Lehar]";
 		mes "What's wrong?";
@@ -1946,11 +1946,11 @@ OnTouch:
 		cutin "ep172_nillem04.png",2;
 		mes "[Nillem]";
 		mes "<FONT SIZE = 14>Huh…?</FONT>";
-		cloaknpc("???#ep21_mercgroup",false,getcharid(0));
-		specialeffect EF_RG_COIN7,AREA,"???#ep21_mercgroup";
+		cloaknpc("#ep21_mercgroup",false,getcharid(0));
+		specialeffect EF_RG_COIN7,AREA,"#ep21_mercgroup";
 		next;
-		cloaknpc("???#ep21_mercgroup",true,getcharid(0));
-		removespecialeffect EF_RG_COIN7,AREA,"???#ep21_mercgroup";
+		cloaknpc("#ep21_mercgroup",true,getcharid(0));
+		removespecialeffect EF_RG_COIN7,AREA,"#ep21_mercgroup";
 		cutin "ep19_lehar01.png",2;
 		mes "[Lehar]";
 		mes "?";
@@ -1971,11 +1971,11 @@ OnTouch:
 		mes "Hm… there, look closely.";
 		mes "There's something strange.";
 		mes "It's something faint…";
-		cloaknpc("???#ep21_mercgroup",false,getcharid(0));
-		specialeffect EF_RG_COIN7,AREA,"???#ep21_mercgroup";
+		cloaknpc("#ep21_mercgroup",false,getcharid(0));
+		specialeffect EF_RG_COIN7,AREA,"#ep21_mercgroup";
 		next;
-		cloaknpc("???#ep21_mercgroup",true,getcharid(0));
-		removespecialeffect EF_RG_COIN7,AREA,"???#ep21_mercgroup";
+		cloaknpc("#ep21_mercgroup",true,getcharid(0));
+		removespecialeffect EF_RG_COIN7,AREA,"#ep21_mercgroup";
 		cutin "ep19_lehar02.png",2;
 		mes "[Lehar]";
 		mes "Heh~";
@@ -1998,7 +1998,7 @@ OnTouch:
 		npctalk "Lehar : Waaaah!!!","Lehar#ep21_mercgroupent",bc_self;
 		emotion ET_HUK,getnpcid(0,"Nillem#ep21_mercgroupent");
 		emotion ET_HUK,getnpcid(0,"Lehar#ep21_mercgroupent");
-		cloaknpc("???#ep21_mercgroup",false,getcharid(0));
+		cloaknpc("#ep21_mercgroup",false,getcharid(0));
 		next;
 		cutin "ep19_lehar05.png",2;
 		mes "[Lehar]";
@@ -2008,7 +2008,7 @@ OnTouch:
 		cutin "ep21_gunter01.png",2;
 		mes "[???]";
 		mes "…?";
-		emotion ET_QUESTION,getnpcid(0,"???#ep21_mercgroup");
+		emotion ET_QUESTION,getnpcid(0,"#ep21_mercgroup");
 		next;
 		mes "[???]";
 		mes "What…";
@@ -2027,10 +2027,10 @@ OnTouch:
 		cutin "ep19_lehar03.png",2;
 		mes "[Lehar]";
 		mes "<FONT SIZE = 14><B>^e5555e- Heal -^000000</B></FONT>";
-		specialeffect EF_HEAL2,AREA,"???#ep21_mercgroup";
-		emotion ET_SURPRISE,getnpcid(0,"???#ep21_mercgroup");
+		specialeffect EF_HEAL2,AREA,"#ep21_mercgroup";
+		emotion ET_SURPRISE,getnpcid(0,"#ep21_mercgroup");
 		next;
-		removespecialeffect EF_HEAL2,AREA,"???#ep21_mercgroup";
+		removespecialeffect EF_HEAL2,AREA,"#ep21_mercgroup";
 		cutin "ep21_gunter01.png",2;
 		mes "[???]";
 		mes "??";
@@ -2063,7 +2063,7 @@ OnTouch:
 	if(isbegin_quest(24001) == 1){
 		cloaknpc("Lehar#ep21_mercgroupent",false,getcharid(0));
 		cloaknpc("Nillem#ep21_mercgroupent",false,getcharid(0));
-		cloaknpc("???#ep21_mercgroup",false,getcharid(0));
+		cloaknpc("#ep21_mercgroup",false,getcharid(0));
 		cloaknpc("Valdaris#ep21_mercgroup",true,getcharid(0));
 		cloaknpc("Mercenary Member#ep21_mercgroup1",true,getcharid(0));
 		cloaknpc("Mercenary Member#ep21_mercgroup2",true,getcharid(0));
@@ -2087,7 +2087,7 @@ OnTouch:
 		cutin "ep21_gunter01.png",2;
 		mes "[???]";
 		mes "…?";
-		emotion ET_QUESTION,getnpcid(0,"???#ep21_mercgroup");
+		emotion ET_QUESTION,getnpcid(0,"#ep21_mercgroup");
 		next;
 		mes "[???]";
 		mes "What…";
@@ -2106,10 +2106,10 @@ OnTouch:
 		cutin "ep19_lehar03.png",2;
 		mes "[Lehar]";
 		mes "<FONT SIZE = 14><B>^e5555e- Heal -^000000</B></FONT>";
-		specialeffect EF_HEAL2,AREA,"???#ep21_mercgroup";
-		emotion ET_SURPRISE,getnpcid(0,"???#ep21_mercgroup");
+		specialeffect EF_HEAL2,AREA,"#ep21_mercgroup";
+		emotion ET_SURPRISE,getnpcid(0,"#ep21_mercgroup");
 		next;
-		removespecialeffect EF_HEAL2,AREA,"???#ep21_mercgroup";
+		removespecialeffect EF_HEAL2,AREA,"#ep21_mercgroup";
 		cutin "ep21_gunter01.png",2;
 		mes "[???]";
 		mes "??";
@@ -2144,7 +2144,7 @@ OnTouch:
 	}
 	if(isbegin_quest(24004) == 1){
 		cloaknpc("Valdaris#ep21_mercgroup",true,getcharid(0));
-		cloaknpc("???#ep21_Valdaris",false,getcharid(0));
+		cloaknpc("#ep21_Valdaris",false,getcharid(0));
 		cloaknpc("Lehar#ep21_mercgroupent",false,getcharid(0));
 		cloaknpc("Nillem#ep21_mercgroupent",false,getcharid(0));
 		cutin "ep21_valdaris01.png",2;
@@ -2165,7 +2165,7 @@ OnTouch:
 		cutin "ep21_valdaris03.png",2;
 		mes "[Valdaris]";
 		mes "<FONT SIZE = 14><B>Where in the world has that person gone this time!</B></FONT>";
-		emotion ET_FRET,getnpcid(0,"???#ep21_Valdaris");
+		emotion ET_FRET,getnpcid(0,"#ep21_Valdaris");
 		next;
 		mes "[Valdaris]";
 		mes "Then, has anyone seen Nerius?";
@@ -2177,7 +2177,7 @@ OnTouch:
 		cutin "ep21_valdaris03.png",2;
 		mes "[Valdaris]";
 		mes "Sigh…";
-		emotion ET_HNG,getnpcid(0,"???#ep21_Valdaris");
+		emotion ET_HNG,getnpcid(0,"#ep21_Valdaris");
 		next;
 		cutin "ep19_lehar03.png",2;
 		mes "[Lehar]";
@@ -2193,8 +2193,8 @@ OnTouch:
 		mes "[Valdaris]";
 		mes "If Tan sent you, you'll need go through the registration process.";
 		mes "Please fill out the ^e5555eform^000000 over there and hand it to me once you're done.";
-		npctalk "Valdaris : If you have any questions while filling out, feel free to ask.","???#ep21_Valdaris",bc_self;
-		cloaknpc("???#ep21_Valdaris",true,getcharid(0));
+		npctalk "Valdaris : If you have any questions while filling out, feel free to ask.","#ep21_Valdaris",bc_self;
+		cloaknpc("#ep21_Valdaris",true,getcharid(0));
 		cloaknpc("Valdaris#ep21_mercgroup",false,getcharid(0));
 		next;
 		cutin "ep21_valdaris02.png",2;
@@ -2224,7 +2224,7 @@ OnInit:
 end;
 }
 
-mbase_in,292,127,3	script(CLOAKED)	???#ep21_mercgroup	4_EP21_GUNTER,{
+mbase_in,292,127,3	script(CLOAKED)	#ep21_mercgroup	4_EP21_GUNTER,{
 	if(isbegin_quest(24001) == 1){
 		select("We came to see the Mercenary King Richard.");
 		cutin "ep21_gunter01.png",2;
@@ -2289,7 +2289,7 @@ mbase_in,292,127,3	script(CLOAKED)	???#ep21_mercgroup	4_EP21_GUNTER,{
 		setquest 24002;
 		close2;
 		cutin "",255;
-		cloaknpc("???#ep21_mercgroup",true,getcharid(0));
+		cloaknpc("#ep21_mercgroup",true,getcharid(0));
 		cloaknpc("Lehar#ep21_mercgroupent",true,getcharid(0));
 		cloaknpc("Nillem#ep21_mercgroupent",true,getcharid(0));
 		navigateto("mbase_in",113,120);
@@ -2382,7 +2382,7 @@ mbase_in,113,114,0	script	#in_galaxia	WARPNPC,2,2,{
 		mes "[Nillem]";
 		mes "Anyways, it says it's for authorized personnel only, so shouldn't we go get permission first to go in!?";
 		next;
-		cloaknpc("???#ep21_frontroom",false,getcharid(0));
+		cloaknpc("#ep21_frontroom",false,getcharid(0));
 		cutin "",255;
 		mes "- Knock Knock -";
 		next;
@@ -2446,7 +2446,7 @@ mbase_in,113,114,0	script	#in_galaxia	WARPNPC,2,2,{
 		close2;
 		cloaknpc("Lehar#ep21_frontroom",true,getcharid(0));
 		cloaknpc("Nillem#ep21_frontroom",true,getcharid(0));
-		cloaknpc("???#ep21_frontroom",true,getcharid(0));
+		cloaknpc("#ep21_frontroom",true,getcharid(0));
 		cutin "",255;
 		navigateto("mbase_in",289,124);
 		end;
@@ -2468,7 +2468,7 @@ OnInit:
 end;
 }
 
-mbase_in,111,116,3	duplicate(dummynpc)	???#ep21_frontroom	4_EP21_VALDARIS
+mbase_in,111,116,3	duplicate(dummynpc)	#ep21_frontroom	4_EP21_VALDARIS
 
 mbase_in,299,126,3	script	Pile of Documents#ep21	4_EP18_PAPERS,{
 	if(isbegin_quest(24005) == 1){
@@ -3380,14 +3380,14 @@ mbase_in,302,122,3	script(CLOAKED)	Tan#ep21_mercgroup	4_EP21_TAN,{
 		next;
 		mes "[Laura Valdaris]";
 		mes "Gunter, could you do it?";
-		cloaknpc("???#ep21_mercgroup",false,getcharid(0));
-		emotion ET_HUK,getnpcid(0,"???#ep21_mercgroup");
+		cloaknpc("#ep21_mercgroup",false,getcharid(0));
+		emotion ET_HUK,getnpcid(0,"#ep21_mercgroup");
 		next;
 		cutin "ep21_gunter01.png",2;
 		mes "[Gunter]";
 		mes "…";
 		mes "No.";
-		cloaknpc("???#ep21_mercgroup",true,getcharid(0));
+		cloaknpc("#ep21_mercgroup",true,getcharid(0));
 		next;
 		cutin "ep21_valdaris03.png",2;
 		mes "[Laura Valdaris]";
@@ -3453,7 +3453,7 @@ OnInit:
 end;	
 }
 
-mbase_in,289,124,3	duplicate(dummynpc)	???#ep21_valdaris	4_EP21_VALDARIS
+mbase_in,289,124,3	duplicate(dummynpc)	#ep21_valdaris	4_EP21_VALDARIS
 
 mbase_in,289,120,5	duplicate(dummynpc2)	Mercenary Member#ep21_mercgroup1	4_EP21_SOLDIER_A
 mbase_in,299,119,3	duplicate(dummynpc2)	Mercenary Member#ep21_mercgroup2	4_EP21_SOLDIER_A
@@ -3698,7 +3698,7 @@ OnTouch:
 				cloaknpc("Lehar#ep21_tour4",false,getcharid(0));
 				cloaknpc("Nillem#ep21_tour4",false,getcharid(0));
 				cloaknpc("Valdaris#ep21_tour4",false,getcharid(0));
-				cloaknpc("???#ep21_tour4_lee",false,getcharid(0));
+				cloaknpc("#ep21_tour4_lee",false,getcharid(0));
 				next;
 				mes "[Valdaris]";
 				mes "You're welcome to use it freely while you're with the mercenary group…";
@@ -3744,7 +3744,7 @@ OnTouch:
 				mes "[???]";
 				mes "His ribs is already broken, betting on that is too boring~";
 				mes "Besides that, the odds are too low even if you win, you might not get your Zeny back.";
-				emotion ET_OK,getnpcid(0,"???#ep21_tour4_lee");
+				emotion ET_OK,getnpcid(0,"#ep21_tour4_lee");
 				next;
 				cutin "ep21_valdaris05.png",2;
 				mes "[Laura Valdaris]";
@@ -3761,7 +3761,7 @@ OnTouch:
 				emotion ET_HUK,getnpcid(0,"Mercenary Member#ep21_tour4_5");
 				emotion ET_HUK,getnpcid(0,"Mercenary Member#ep21_tour4_6");
 				emotion ET_HUK,getnpcid(0,"Mercenary Member#ep21_tour4_7");
-				emotion ET_HUK,getnpcid(0,"???#ep21_tour4_lee");
+				emotion ET_HUK,getnpcid(0,"#ep21_tour4_lee");
 				next;
 				cutin "ep21_soldier_b.png",2;
 				mes "[???]";
@@ -3789,7 +3789,7 @@ OnTouch:
 				cloaknpc("Lehar#ep21_tour4",false,getcharid(0));
 				cloaknpc("Nillem#ep21_tour4",false,getcharid(0));
 				cloaknpc("Valdaris#ep21_tour4",false,getcharid(0));
-				cloaknpc("???#ep21_tour4_lee",false,getcharid(0));
+				cloaknpc("#ep21_tour4_lee",false,getcharid(0));
 				cutin "ep21_valdaris05.png",2;
 				mes "[Laura Valdaris]";
 				mes "<FONT SIZE = 16><B>What is going on here!!!</B></FONT>";
@@ -3805,7 +3805,7 @@ OnTouch:
 				emotion ET_HUK,getnpcid(0,"Mercenary Member#ep21_tour4_5");
 				emotion ET_HUK,getnpcid(0,"Mercenary Member#ep21_tour4_6");
 				emotion ET_HUK,getnpcid(0,"Mercenary Member#ep21_tour4_7");
-				emotion ET_HUK,getnpcid(0,"???#ep21_tour4_lee");
+				emotion ET_HUK,getnpcid(0,"#ep21_tour4_lee");
 				next;
 				cutin "ep21_soldier_b.png",2;
 				mes "[???]";
@@ -3838,50 +3838,50 @@ OnTouch:
 				cloaknpc("Lehar#ep21_tour5",false,getcharid(0));
 				cloaknpc("Nillem#ep21_tour5",false,getcharid(0));
 				cloaknpc("Valdaris#ep21_tour5",false,getcharid(0));
-				cloaknpc("???#ep21_tour5_richard",false,getcharid(0));
-				cloaknpc("???#ep21_tour5_nerius",false,getcharid(0));
+				cloaknpc("#ep21_tour5_richard",false,getcharid(0));
+				cloaknpc("#ep21_tour5_nerius",false,getcharid(0));
 				next;
 				mes "[???]";
 				mes "<FONT SIZE = 14><B>Ugh!</B></FONT>";
-				specialeffect EF_SPREADATTACK,AREA,"???#ep21_tour5_richard";
+				specialeffect EF_SPREADATTACK,AREA,"#ep21_tour5_richard";
 				next;
-				removespecialeffect EF_SPREADATTACK,AREA,"???#ep21_tour5_richard";
+				removespecialeffect EF_SPREADATTACK,AREA,"#ep21_tour5_richard";
 				mes "[???]";
 				mes "<FONT SIZE = 16><B>Hey, you crazy bastards!!</B></FONT>";
 				mes "<FONT SIZE = 16><B>Can't you see I'm casting!!!</B></FONT>";
 				mes "<FONT SIZE = 16><B>Stop betting and break them up!!!</B></FONT>";
-				specialeffect EF_ITEM_CURSE,AREA,"???#ep21_tour5_richard";
-				specialeffect EF_MAP_MAGICZONE2,AREA,"???#ep21_tour5_nerius";
-				specialeffect EF_WHITEBODY,AREA,"???#ep21_tour5_nerius";
-				emotion ET_HELP,getnpcid(0,"???#ep21_tour5_richard");
+				specialeffect EF_ITEM_CURSE,AREA,"#ep21_tour5_richard";
+				specialeffect EF_MAP_MAGICZONE2,AREA,"#ep21_tour5_nerius";
+				specialeffect EF_WHITEBODY,AREA,"#ep21_tour5_nerius";
+				emotion ET_HELP,getnpcid(0,"#ep21_tour5_richard");
 				next;
-				removespecialeffect EF_ITEM_CURSE,AREA,"???#ep21_tour5_richard";
+				removespecialeffect EF_ITEM_CURSE,AREA,"#ep21_tour5_richard";
 				mes "[???]";
 				mes "<FONT SIZE = 18><B>Tch!!!</B></FONT>";
-				specialeffect EF_SPINEDBODY2,AREA,"???#ep21_tour5_richard";
-				specialeffect EF_NPC_BURNT,AREA,"???#ep21_tour5_richard";
+				specialeffect EF_SPINEDBODY2,AREA,"#ep21_tour5_richard";
+				specialeffect EF_NPC_BURNT,AREA,"#ep21_tour5_richard";
 				next;
-				removespecialeffect EF_MAP_MAGICZONE2,AREA,"???#ep21_tour5_nerius";
-				specialeffect EF_BEGINSPELL_YB,AREA,"???#ep21_tour5_richard";
+				removespecialeffect EF_MAP_MAGICZONE2,AREA,"#ep21_tour5_nerius";
+				specialeffect EF_BEGINSPELL_YB,AREA,"#ep21_tour5_richard";
 				mes "[???]";
 				mes "<FONT SIZE = 16><B>Yah!!!</B></FONT>";
 				next;
-				removespecialeffect EF_SPINEDBODY2,AREA,"???#ep21_tour5_richard";
-				removespecialeffect EF_BEGINSPELL_YB,AREA,"???#ep21_tour5_richard";
+				removespecialeffect EF_SPINEDBODY2,AREA,"#ep21_tour5_richard";
+				removespecialeffect EF_BEGINSPELL_YB,AREA,"#ep21_tour5_richard";
 				mes "[???]";
 				mes "<FONT SIZE = 14><B>Graah!!!!!!</B></FONT>";
-				specialeffect EF_MANHOLE,AREA,"???#ep21_tour5_richard";
+				specialeffect EF_MANHOLE,AREA,"#ep21_tour5_richard";
 				next;
-				specialeffect EF_FIREWALL2,AREA,"???#ep21_tour5_richard";
-				specialeffect EF_DANCE_BLADE_ATK,AREA,"???#ep21_tour5_richard";
+				specialeffect EF_FIREWALL2,AREA,"#ep21_tour5_richard";
+				specialeffect EF_DANCE_BLADE_ATK,AREA,"#ep21_tour5_richard";
 				cutin "ep21_valdaris05.png",2;
 				mes "[Laura Valdaris]";
 				mes "<FONT SIZE = 16><B>Stop it!!!</B></FONT>";
 				mes "<FONT SIZE = 18><B>^e5555eNerius!!!^000000</B></FONT>";
 				emotion ET_HUK,getnpcid(0,"Valdaris#ep21_tour5");
 				next;
-				removespecialeffect EF_NPC_BURNT,AREA,"???#ep21_tour5_richard";
-				specialeffect EF_ERASER_CUTTER,AREA,"???#ep21_tour5_richard";
+				removespecialeffect EF_NPC_BURNT,AREA,"#ep21_tour5_richard";
+				specialeffect EF_ERASER_CUTTER,AREA,"#ep21_tour5_richard";
 				mes "[Laura Valdaris]";
 				mes "<FONT SIZE = 16><B>Lee!!!!</B></FONT>";
 				mes "<FONT SIZE = 16><B>What are you doing, why aren't you breaking them up!!</B></FONT>";
@@ -3889,13 +3889,13 @@ OnTouch:
 				cutin "ep21_lee03.png",2;
 				mes "[Lee]";
 				mes "Tsk! It was just getting interesting.";
-				emotion ET_HNG,getnpcid(0,"???#ep21_tour4_lee");
+				emotion ET_HNG,getnpcid(0,"#ep21_tour4_lee");
 				next;
-				removespecialeffect EF_WHITEBODY,AREA,"???#ep21_tour5_nerius";
-				removespecialeffect EF_MANHOLE,AREA,"???#ep21_tour5_richard";
-				removespecialeffect EF_FIREWALL2,AREA,"???#ep21_tour5_richard";
-				removespecialeffect EF_DANCE_BLADE_ATK,AREA,"???#ep21_tour5_richard";
-				removespecialeffect EF_ERASER_CUTTER,AREA,"???#ep21_tour5_richard";
+				removespecialeffect EF_WHITEBODY,AREA,"#ep21_tour5_nerius";
+				removespecialeffect EF_MANHOLE,AREA,"#ep21_tour5_richard";
+				removespecialeffect EF_FIREWALL2,AREA,"#ep21_tour5_richard";
+				removespecialeffect EF_DANCE_BLADE_ATK,AREA,"#ep21_tour5_richard";
+				removespecialeffect EF_ERASER_CUTTER,AREA,"#ep21_tour5_richard";
 				cutin "ep21_lee01.png",2;
 				mes "[Lee]";
 				mes "Gala~";
@@ -3914,7 +3914,7 @@ OnTouch:
 				next;
 				mes "[Richard]";
 				mes "I thought I was going to *cough*… die.";
-				emotion ET_KEK,getnpcid(0,"???#ep21_tour5_richard");
+				emotion ET_KEK,getnpcid(0,"#ep21_tour5_richard");
 				next;
 				cutin "ep21_richard02.png",0;
 				mes "[Richard]";
@@ -3970,7 +3970,7 @@ OnTouch:
 				mes "<FONT SIZE = 16><B>Ouch, ouch, ouch, ouch!!</B></FONT>";
 				mes "<FONT SIZE = 16><B>My ribs!!</B></FONT>";
 				mes "<FONT SIZE = 16><B>Don't pull my arms!</B></FONT>";
-				emotion ET_KEK,getnpcid(0,"???#ep21_tour5_richard");
+				emotion ET_KEK,getnpcid(0,"#ep21_tour5_richard");
 				next;
 				cutin "ep21_valdaris03.png",2;
 				mes "[Laura Valdaris]";
@@ -4002,9 +4002,9 @@ OnTouch:
 				cloaknpc("Lehar#ep21_tour5",true,getcharid(0));
 				cloaknpc("Nillem#ep21_tour5",true,getcharid(0));
 				cloaknpc("Valdaris#ep21_tour5",true,getcharid(0));
-				cloaknpc("???#ep21_tour5_richard",true,getcharid(0));
-				cloaknpc("???#ep21_tour5_nerius",true,getcharid(0));
-				cloaknpc("???#ep21_tour4_lee",true,getcharid(0));
+				cloaknpc("#ep21_tour5_richard",true,getcharid(0));
+				cloaknpc("#ep21_tour5_nerius",true,getcharid(0));
+				cloaknpc("#ep21_tour4_lee",true,getcharid(0));
 				navigateto("mbase_in",167,128);
 				end;
 			}
@@ -4012,9 +4012,9 @@ OnTouch:
 				cloaknpc("Lehar#ep21_tour5",false,getcharid(0));
 				cloaknpc("Nillem#ep21_tour5",false,getcharid(0));
 				cloaknpc("Valdaris#ep21_tour5",false,getcharid(0));
-				cloaknpc("???#ep21_tour5_richard",false,getcharid(0));
-				cloaknpc("???#ep21_tour5_nerius",false,getcharid(0));
-				cloaknpc("???#ep21_tour4_lee",false,getcharid(0));
+				cloaknpc("#ep21_tour5_richard",false,getcharid(0));
+				cloaknpc("#ep21_tour5_nerius",false,getcharid(0));
+				cloaknpc("#ep21_tour4_lee",false,getcharid(0));
 				cutin "ep21_valdaris03.png",2;
 				mes "[Laura Valdaris]";
 				mes "Captain, let's go to your room first.";
@@ -4029,7 +4029,7 @@ OnTouch:
 				mes "<FONT SIZE = 16><B>Ouch, ouch, ouch, ouch!!</B></FONT>";
 				mes "<FONT SIZE = 16><B>My ribs!!</B></FONT>";
 				mes "<FONT SIZE = 16><B>Don't pull my arms!</B></FONT>";
-				emotion ET_KEK,getnpcid(0,"???#ep21_tour5_richard");
+				emotion ET_KEK,getnpcid(0,"#ep21_tour5_richard");
 				next;
 				cutin "ep21_valdaris03.png",2;
 				mes "[Laura Valdaris]";
@@ -4059,9 +4059,9 @@ OnTouch:
 				cloaknpc("Lehar#ep21_tour5",true,getcharid(0));
 				cloaknpc("Nillem#ep21_tour5",true,getcharid(0));
 				cloaknpc("Valdaris#ep21_tour5",true,getcharid(0));
-				cloaknpc("???#ep21_tour5_richard",true,getcharid(0));
-				cloaknpc("???#ep21_tour5_nerius",true,getcharid(0));
-				cloaknpc("???#ep21_tour4_lee",true,getcharid(0));
+				cloaknpc("#ep21_tour5_richard",true,getcharid(0));
+				cloaknpc("#ep21_tour5_nerius",true,getcharid(0));
+				cloaknpc("#ep21_tour4_lee",true,getcharid(0));
 				navigateto("mbase_in",167,128);
 				end;
 			}
@@ -4102,7 +4102,7 @@ jor_mbase,245,116,7	duplicate(dummynpc)	Kid#ep21_tour3_6	4_EP21_WORKER_KID_B
 jor_mbase,145,105,3	duplicate(dummynpc)	Lehar#ep21_tour4	4_EP19_LEHAR
 jor_mbase,143,106,3	duplicate(dummynpc)	Nillem#ep21_tour4	4_M_NILLEM
 jor_mbase,143,110,3	duplicate(dummynpc)	Valdaris#ep21_tour4	4_EP21_VALDARIS
-jor_mbase,134,111,3	duplicate(dummynpc)	???#ep21_tour4_lee	4_EP21_LEE
+jor_mbase,134,111,3	duplicate(dummynpc)	#ep21_tour4_lee	4_EP21_LEE
 jor_mbase,136,106,2	duplicate(dummynpc2)	Mercenary Member#ep21_tour4_1	4_EP21_SOLDIER_A
 jor_mbase,134,107,2	duplicate(dummynpc2)	Mercenary Member#ep21_tour4_2	4_EP21_SOLDIER_B
 jor_mbase,139,112,3	duplicate(dummynpc2)	Mercenary Member#ep21_tour4_3	4_EP21_SOLDIER_A
@@ -4114,8 +4114,8 @@ jor_mbase,132,106,2	duplicate(dummynpc2)	Mercenary Member#ep21_tour4_7	4_EP21_SO
 jor_mbase,135,111,3	duplicate(dummynpc)	Lehar#ep21_tour5	4_EP19_LEHAR
 jor_mbase,138,110,3	duplicate(dummynpc)	Nillem#ep21_tour5	4_M_NILLEM
 jor_mbase,133,109,3	duplicate(dummynpc)	Valdaris#ep21_tour5	4_EP21_VALDARIS
-jor_mbase,131,110,5	duplicate(dummynpc)	???#ep21_tour5_richard	4_EP21_RICHARD
-jor_mbase,132,111,3	duplicate(dummynpc)	???#ep21_tour5_nerius	4_EP21_GALAXIA_A
+jor_mbase,131,110,5	duplicate(dummynpc)	#ep21_tour5_richard	4_EP21_RICHARD
+jor_mbase,132,111,3	duplicate(dummynpc)	#ep21_tour5_nerius	4_EP21_GALAXIA_A
 
 mbase_in,166,126,0	script	#ep21_richardroom	HIDDEN_WARP_NPC,1,1,{
 	end;
@@ -8722,7 +8722,7 @@ OnInit:
 end;
 }
 
-jor_raise1,321,71,3	duplicate(dummynpc)	Ivan#21ms00	EP21_NPC_IVAN
+jor_raise1,321,71,3	duplicate(dummynpc)	Ivan#21ms00	4_EP21_IVAN
 
 luna_sf1,35,267,0	script	#21ms01	HIDDEN_WARP_NPC,5,5,{
 	end;
@@ -8745,7 +8745,7 @@ OnTouch:
 end;
 }
 
-luna_sf1,49,268,3	script	Ivan#21ms01	EP21_NPC_IVAN,3,3,{
+luna_sf1,49,268,3	script	Ivan#21ms01	4_EP21_IVAN,3,3,{
 OnTouch:
 	if(isbegin_quest(8893) == 1){
 		cutin "ep21_ivan03.png",1;
@@ -8843,7 +8843,7 @@ OnInit:
 end;
 }
 
-luna_sf1,51,267,3	script	Tan#21ms00	EP21_NPC_TAN,{
+luna_sf1,51,267,3	script	Tan#21ms00	4_EP21_TAN,{
 	if(isbegin_quest(8893) == 1){
 		npctalk "It looks like Ivan has something to say.","",bc_self;
 		end;
@@ -8969,17 +8969,17 @@ OnInit:
 end;
 }
 
-luna_sf1,45,267,5	script	Yohan#21ms00	EP21_NPC_YOHAN,{
+luna_sf1,45,267,5	script	Yohan#21ms00	4_EP21_YOHAN,{
 	npctalk "This place should be safe... maybe...","",bc_self;
 	end;
 }
 
-luna_sf1,50,265,1	script(CLOAKED)	Wilhelm#21ms00	EP21_NPC_WILHELM,{
+luna_sf1,50,265,1	script(CLOAKED)	Wilhelm#21ms00	4_EP21_WILHELM,{
 	npctalk "Why is this happening to me...","",bc_self;
 	end;
 }
 
-luna_sf1,48,265,7	script(CLOAKED)	Nadoyo#21ms00	EP21_NPC_NADOYO,{
+luna_sf1,48,265,7	script(CLOAKED)	Nadoyo#21ms00	4_EP21_NADOYO,{
 	if(isbegin_quest(17761) == 1){
 		npctalk "*Whistling*.","",bc_self;
 		end;
@@ -9076,7 +9076,7 @@ OnInit:
 end;
 }
 
-luna_sf1,52,263,1	script(CLOAKED)	Carmigand#21ms00	EP21_NPC_REINHARDT,{
+luna_sf1,52,263,1	script(CLOAKED)	Carmigand#21ms00	4_EP21_REINHARDT,{
 	npctalk "We... made it out safely. Thanks to everyone's effort.","",bc_self;
 	end;
 }
@@ -9127,7 +9127,7 @@ OnInit:
 end;
 }
 
-jor_tmple1,186,72,3	duplicate(dummynpc)	Ivan#21ms10	EP21_NPC_IVAN
+jor_tmple1,186,72,3	duplicate(dummynpc)	Ivan#21ms10	4_EP21_IVAN
 
 luna_sf2,109,253,0	script	#21ms11	HIDDEN_WARP_NPC,2,2,{
 	if(isbegin_quest(17752) == 1  || isbegin_quest(17756) == 1){
@@ -9139,7 +9139,7 @@ luna_sf2,109,253,0	script	#21ms11	HIDDEN_WARP_NPC,2,2,{
 	end;
 }
 
-luna_sf2,113,257,5	script(CLOAKED)	Ivan#21ms11	EP21_NPC_IVAN,{
+luna_sf2,113,257,5	script(CLOAKED)	Ivan#21ms11	4_EP21_IVAN,{
 	if(isbegin_quest(17752) == 1){
 		cutin "ep21_ivan03.png",0;
 		mes "[Ivan]";
@@ -9306,12 +9306,12 @@ OnInit:
 end;
 }
 
-luna_sf2,116,256,3	script(CLOAKED)	Tan#21ms10	EP21_NPC_TAN,{
+luna_sf2,116,256,3	script(CLOAKED)	Tan#21ms10	4_EP21_TAN,{
 	npctalk "I'll watch you closely.","Tan#21ms10",bc_self;
 	end;
 }
 
-luna_sf2,116,253,1	script(CLOAKED)	Yohan#21ms10	EP21_NPC_YOHAN,{
+luna_sf2,116,253,1	script(CLOAKED)	Yohan#21ms10	4_EP21_YOHAN,{
 	npctalk "The shape of this temple... it looks familiar.","Yohan#21ms10",bc_self;
 	end;
 }
@@ -9407,7 +9407,7 @@ luna_sf2,43,152,5	script	Believer#21ms14	4_EP21_F_WORKER_B,{
 	end;
 }
 
-luna_sf2,41,150,5	script	Tan#21ms11	EP21_NPC_TAN,{
+luna_sf2,41,150,5	script	Tan#21ms11	4_EP21_TAN,{
 	npctalk "Let's hear what the believer has to say.","",bc_self;
 	end;
 }
@@ -9534,7 +9534,7 @@ luna_sf2,116,263,7	script(CLOAKED)	Believer#21ms12	4_EP21_F_WORKER_B,{
 	end;
 }
 
-luna_sf2,122,263,1	script(CLOAKED)	Tan#21ms12	EP21_NPC_TAN,{
+luna_sf2,122,263,1	script(CLOAKED)	Tan#21ms12	4_EP21_TAN,{
 	npctalk "Those believers over there seems like they might know something.","",bc_self;
 	end;
 }
@@ -9648,7 +9648,7 @@ OnInit:
 end;
 }
 
-luna_sf2,198,254,1	script(CLOAKED)	Tan#21ms15	EP21_NPC_TAN,{
+luna_sf2,198,254,1	script(CLOAKED)	Tan#21ms15	4_EP21_TAN,{
 	npctalk "This is the entry place for the 2nd floor.","",bc_self;
 	end;
 }
@@ -9668,7 +9668,7 @@ luna_sf2,193,256,7	script(CLOAKED)	Believer#21ms19	4_EP21_F_WORKER_B,{
 	end;
 }
 
-luna_sf2,187,254,5	script(CLOAKED)	Nadoyo#21ms13	EP21_NPC_NADOYO,{
+luna_sf2,187,254,5	script(CLOAKED)	Nadoyo#21ms13	4_EP21_NADOYO,{
 	if(isbegin_quest(17762) == 1){
 		cutin "ep21_nadoyo10.png",0;
 		mes "[Nadoyo]";
@@ -9775,22 +9775,22 @@ OnInit:
 end;
 }
 
-luna_sf2,193,252,3	script(CLOAKED)	Ivan#21ms13	EP21_NPC_IVAN,{
+luna_sf2,193,252,3	script(CLOAKED)	Ivan#21ms13	4_EP21_IVAN,{
 	npctalk "Ugh, I'm getting nervous.","",bc_self;
 	end;
 }
 
-luna_sf2,192,249,1	script(CLOAKED)	Tan#21ms13	EP21_NPC_TAN,{
+luna_sf2,192,249,1	script(CLOAKED)	Tan#21ms13	4_EP21_TAN,{
 	npctalk "......","",bc_self;
 	end;
 }
 
-luna_sf2,192,254,3	script(CLOAKED)	Yohan#21ms13	EP21_NPC_YOHAN,{
+luna_sf2,192,254,3	script(CLOAKED)	Yohan#21ms13	4_EP21_YOHAN,{
 	npctalk "Oh, huh... why does this place looks really familiar?","",bc_self;
 	end;
 }
 
-luna_sf2,190,254,3	script(CLOAKED)	Wilhelm#21ms13	EP21_NPC_WILHELM,{
+luna_sf2,190,254,3	script(CLOAKED)	Wilhelm#21ms13	4_EP21_WILHELM,{
 	npctalk "Why am I even here...","",bc_self;
 	end;
 }
@@ -9939,27 +9939,27 @@ luna_sf2,204,263,3	script	Guard#21ms11	EP21_YORDOS_C,{
 	end;
 }
 
-luna_sf2,202,261,1	script(CLOAKED)	Nadoyo#21ms14	EP21_NPC_NADOYO,{
+luna_sf2,202,261,1	script(CLOAKED)	Nadoyo#21ms14	4_EP21_NADOYO,{
 	npctalk "Act as natural as possible.","",bc_self;
 	end;
 }
 
-luna_sf2,198,258,7	script(CLOAKED)	Ivan#21ms14	EP21_NPC_IVAN,{
+luna_sf2,198,258,7	script(CLOAKED)	Ivan#21ms14	4_EP21_IVAN,{
 	npctalk "We're about to enter the heart of the Jormungandr cult.","",bc_self;
 	end;
 }
 
-luna_sf2,201,257,1	script(CLOAKED)	Tan#21ms14	EP21_NPC_TAN,{
+luna_sf2,201,257,1	script(CLOAKED)	Tan#21ms14	4_EP21_TAN,{
 	npctalk "Focus on the task.","",bc_self;
 	end;
 }
 
-luna_sf2,204,258,1	script(CLOAKED)	Yohan#21ms14	EP21_NPC_YOHAN,{
+luna_sf2,204,258,1	script(CLOAKED)	Yohan#21ms14	4_EP21_YOHAN,{
 	npctalk "Results... we need it this time...","",bc_self;
 	end;
 }
 
-luna_sf2,199,261,7	script(CLOAKED)	Wilhelm#21ms14	EP21_NPC_WILHELM,{
+luna_sf2,199,261,7	script(CLOAKED)	Wilhelm#21ms14	4_EP21_WILHELM,{
 	npctalk "Can we really just do nothing?","",bc_self;
 	end;
 }
@@ -9981,7 +9981,7 @@ OnTouch:
 end;
 }
 
-jor_mbase,143,272,5	script(CLOAKED)	Tris#21ms20	EP21_NPC_TRIS,{
+jor_mbase,143,272,5	script(CLOAKED)	Tris#21ms20	4_EP21_TRIS,{
 	if(isbegin_quest(17757) == 1){
 		cutin "ep21_tris08.png",0;
 		mes "[Tris]";
@@ -10295,7 +10295,7 @@ OnInit:
 end;	
 }
 
-jor_mbase,147,274,3	script(CLOAKED)	Ivan#21ms20	EP21_NPC_IVAN,{
+jor_mbase,147,274,3	script(CLOAKED)	Ivan#21ms20	4_EP21_IVAN,{
 	if(isbegin_quest(17757) == 1){
 		npctalk "Phew- that was tough. Right? It would be nice if we could rest.","",bc_self;
 		end;
@@ -10307,7 +10307,7 @@ jor_mbase,147,274,3	script(CLOAKED)	Ivan#21ms20	EP21_NPC_IVAN,{
 	end;
 }
 
-jor_mbase,149,273,3	script(CLOAKED)	Tan#21ms20	EP21_NPC_TAN,{
+jor_mbase,149,273,3	script(CLOAKED)	Tan#21ms20	4_EP21_TAN,{
 	if(isbegin_quest(17757) == 1){
 		npctalk "......","",bc_self;
 		end;
@@ -10319,7 +10319,7 @@ jor_mbase,149,273,3	script(CLOAKED)	Tan#21ms20	EP21_NPC_TAN,{
 	end;
 }
 
-jor_mbase,146,269,1	script(CLOAKED)	Yohan#21ms20	EP21_NPC_YOHAN,{
+jor_mbase,146,269,1	script(CLOAKED)	Yohan#21ms20	4_EP21_YOHAN,{
 	npctalk "Would you like some water?","",bc_self;
 	end;
 }
@@ -10329,12 +10329,12 @@ jor_mbase,143,269,5	script(CLOAKED)	Iana#21ms20	4_EP21_IANA,{
 	end;
 }
 
-jor_mbase,150,271,3	script(CLOAKED)	Carmigand#21ms20	EP21_NPC_REINHARDT,{
+jor_mbase,150,271,3	script(CLOAKED)	Carmigand#21ms20	4_EP21_REINHARDT,{
 	npctalk "This is where the other humans are...","",bc_self;
 	end;
 }
 
-jor_mbase,149,268,1	script(CLOAKED)	Wilhelm#21ms20	EP21_NPC_WILHELM,{
+jor_mbase,149,268,1	script(CLOAKED)	Wilhelm#21ms20	4_EP21_WILHELM,{
 	npctalk "Phew- I can finally catch my breath.","",bc_self;
 	end;
 }
@@ -10381,7 +10381,7 @@ OnTouch:
 end;
 }
 
-jor_crk_p,71,86,5	script(CLOAKED)	Tan#21ms30	EP21_NPC_TAN,{
+jor_crk_p,71,86,5	script(CLOAKED)	Tan#21ms30	4_EP21_TAN,{
 	if(isbegin_quest(17758) == 1){
 		cutin "ep21_tan01.png",1;
 		mes "[Tan]";
@@ -10525,7 +10525,7 @@ OnInit:
 end;	
 }
 
-jor_crk_p,69,85,5	script(CLOAKED)	Ivan#21ms30	EP21_NPC_IVAN,{
+jor_crk_p,69,85,5	script(CLOAKED)	Ivan#21ms30	4_EP21_IVAN,{
 	if(isbegin_quest(17758) == 1){
 		cutin "ep21_ivan02.png",0;
 		mes "[Ivan]";
@@ -10603,12 +10603,12 @@ OnInit:
 end;	
 }
 
-jor_crk_p,72,83,1	script(CLOAKED)	Yohan#21ms30	EP21_NPC_YOHAN,{
+jor_crk_p,72,83,1	script(CLOAKED)	Yohan#21ms30	4_EP21_YOHAN,{
 	npctalk "This place... I'd like to take a closer look sometime...","",bc_self;
 	end;
 }
 
-jor_crk_p,74,86,3	script(CLOAKED)	Nadoyo#21ms30	EP21_NPC_NADOYO,{
+jor_crk_p,74,86,3	script(CLOAKED)	Nadoyo#21ms30	4_EP21_NADOYO,{
 	npctalk "Aren't you well-trusted now?","",bc_self;
 	end;
 }
@@ -10625,7 +10625,7 @@ OnTouch:
 end;
 }
 
-jor_mbase,166,302,5	script(CLOAKED)	Ivan#21ms40	EP21_NPC_IVAN,{
+jor_mbase,166,302,5	script(CLOAKED)	Ivan#21ms40	4_EP21_IVAN,{
 	if(isbegin_quest(17760) == 1){
 		cutin "ep21_ivan03.png",1;
 		mes "[Ivan]";
@@ -10795,22 +10795,22 @@ OnInit:
 end;
 }
 
-jor_mbase,165,304,5	script(CLOAKED)	Tan#21ms40	EP21_NPC_TAN,{
+jor_mbase,165,304,5	script(CLOAKED)	Tan#21ms40	4_EP21_TAN,{
 	npctalk "Who are we looking for?","",bc_self;
 	end;
 }
 
-jor_mbase,163,302,5	script(CLOAKED)	Yohan#21ms40	EP21_NPC_YOHAN,{
+jor_mbase,163,302,5	script(CLOAKED)	Yohan#21ms40	4_EP21_YOHAN,{
 	npctalk "That conditions... do you really think there's someone who fits it?","",bc_self;
 	end;
 }
 
-jor_mbase,169,299,1	script(CLOAKED)	Wilhelm#21ms40	EP21_NPC_WILHELM,{
+jor_mbase,169,299,1	script(CLOAKED)	Wilhelm#21ms40	4_EP21_WILHELM,{
 	npctalk "I'm really busy. It's not like you'll do my job for me.","",bc_self;
 	end;
 }
 
-mbase_in,118,186,3	script	Reinhardt#21ms50	EP21_NPC_REINHARDT,5,5,{
+mbase_in,118,186,3	script	Reinhardt#21ms50	4_EP21_REINHARDT,5,5,{
 	if(isbegin_quest(17767) == 1){
 		cutin "ep21_reinhardt06.png",2;
 		mes "[Carmigand]";
@@ -11191,7 +11191,7 @@ end;
 mbase_in,115,182,7	duplicate(dummynpc)	Lunaforma Worker#21ms50	4_EP21_M_WORKER_A
 mbase_in,115,184,7	duplicate(dummynpc)	Lunaforma Worker#21ms51	4_EP21_F_WORKER_B
 
-mbase_in,116,186,5	script(CLOAKED)	Wilhelm#21ms50	EP21_NPC_WILHELM,{
+mbase_in,116,186,5	script(CLOAKED)	Wilhelm#21ms50	4_EP21_WILHELM,{
 	if(isbegin_quest(17767) == 1){
 		cutin "ep21_wilhelm02.png",0;
 		mes "[Wilhelm]";
@@ -11391,7 +11391,7 @@ OnTouch:
 end;
 }
 
-jor_mbase,140,201,3	script(CLOAKED)	Wilhelm#21ms70	EP21_NPC_WILHELM,{
+jor_mbase,140,201,3	script(CLOAKED)	Wilhelm#21ms70	4_EP21_WILHELM,{
 	if(isbegin_quest(17771) == 1){
 		cutin "ep21_wilhelm02.png",2;
 		mes "[Wilhelm]";
@@ -11583,9 +11583,9 @@ OnInit:
 end;
 }
 
-jor_mbase,142,200,3	duplicate(dummynpc)	Reinhardt#21ms70	EP21_NPC_REINHARDT
+jor_mbase,142,200,3	duplicate(dummynpc)	Reinhardt#21ms70	4_EP21_REINHARDT
 
-jor_mbase,194,279,7	script(CLOAKED)	Reinhardt#21ms60	EP21_NPC_REINHARDT,{
+jor_mbase,194,279,7	script(CLOAKED)	Reinhardt#21ms60	4_EP21_REINHARDT,{
 	if(isbegin_quest(17773) == 1){
 		mes "[Reinhardt]";
 		mes "This place...";
@@ -11675,7 +11675,7 @@ OnInit:
 end;
 }
 
-jor_mbase,197,277,7	script(CLOAKED)	Tris#21ms60	EP21_NPC_TRIS,{
+jor_mbase,197,277,7	script(CLOAKED)	Tris#21ms60	4_EP21_TRIS,{
 	if(isbegin_quest(17773) == 1){
 		cutin "ep21_tris09.png",2;
 		mes "[Tris]";
@@ -11802,7 +11802,7 @@ OnInit:
 end;
 }
 
-jor_mbase,196,280,3	script(CLOAKED)	Wilhelm#21ms61	EP21_NPC_WILHELM,{
+jor_mbase,196,280,3	script(CLOAKED)	Wilhelm#21ms61	4_EP21_WILHELM,{
 	if(isbegin_quest(17775) == 1){
 		cutin "ep21_wilhelm01.png",2;
 		mes "[Wilhelm]";
@@ -11965,7 +11965,7 @@ OnInit:
 end;
 }
 
-jor_mbase,200,285,7	duplicate(dummynpc)	Wilhelm#21ms60	EP21_NPC_WILHELM
+jor_mbase,200,285,7	duplicate(dummynpc)	Wilhelm#21ms60	4_EP21_WILHELM
 jor_mbase,201,288,3	duplicate(dummynpc)	Believer#21ms60	4_EP21_M_WORKER_A
 jor_mbase,202,286,3	duplicate(dummynpc)	Believer#21ms61	4_EP21_WORKER_KID_B
 jor_mbase,193,283,5	duplicate(dummynpc)	Believer#21ms62	4_EP21_M_WORKER_A
@@ -11976,14 +11976,14 @@ jor_mbase,199,279,3	duplicate(dummynpc)	Believer#21ms66	4_EP21_F_WORKER_A
 jor_mbase,195,284,3	duplicate(dummynpc)	Believer#21ms67	4_EP21_WORKER_KID_A
 jor_mbase,195,276,1	duplicate(dummynpc)	Believer#21ms68	4_EP21_WORKER_KID_B
 jor_mbase,196,278,1	duplicate(dummynpc)	Believer#21ms69	4_EP21_M_WORKER_A
-jor_mbase,138,201,5	duplicate(dummynpc)	Tris#21ms70	EP21_NPC_TRIS
+jor_mbase,138,201,5	duplicate(dummynpc)	Tris#21ms70	4_EP21_TRIS
 
-mbase_in,119,182,3	script(CLOAKED)	Tris#21ms50	EP21_NPC_TRIS,{
+mbase_in,119,182,3	script(CLOAKED)	Tris#21ms50	4_EP21_TRIS,{
 	npctalk "You've really done well. Let's focus on the topic.","",bc_self;
 	end;
 }
 
-mbase_in,115,184,7	script(CLOAKED)	Tan#21ms50	EP21_NPC_TAN,{
+mbase_in,115,184,7	script(CLOAKED)	Tan#21ms50	4_EP21_TAN,{
 	npctalk "......","",bc_self;
 	end;
 }
@@ -11993,7 +11993,7 @@ mbase_in,115,182,7	script(CLOAKED)	Iana#21ms50	4_EP21_IANA,{
 	end;
 }
 
-mbase_in,117,181,1	script(CLOAKED)	Yohan#21ms50	EP21_NPC_YOHAN,{
+mbase_in,117,181,1	script(CLOAKED)	Yohan#21ms50	4_EP21_YOHAN,{
 	npctalk "The two of them... really look alike...","",bc_self;
 	end;
 }
@@ -14313,35 +14313,35 @@ OnInit:
 end;
 }
 
-luna_sf2,265,46,1	script(CLOAKED)	Yohan#md	EP21_NPC_YOHAN,1,1,{
+luna_sf2,265,46,1	script(CLOAKED)	Yohan#md	4_EP21_YOHAN,1,1,{
 	cutin "ep21_yohan03.png",2;
 	mes "[Yohan]";
 	mes "Whew... I'm not sure if this is the right decision.";
 	close3;
 }
 
-luna_sf2,267,44,1	script(CLOAKED)	Nadoyo#md	EP21_NPC_NADOYO,1,1,{
+luna_sf2,267,44,1	script(CLOAKED)	Nadoyo#md	4_EP21_NADOYO,1,1,{
 	cutin "ep21_nadoyo01.png",2;
 	mes "[Nadoyo]";
 	mes "I-…I'm not scared. I can handle this much!";
 	close3;
 }
 
-luna_sf2,265,42,1	script(CLOAKED)	Richard#md	EP21_NPC_RICHARD,1,1,{
+luna_sf2,265,42,1	script(CLOAKED)	Richard#md	4_EP21_RICHARD,1,1,{
 	cutin "ep21_richard01.png",2;
 	mes "[Richard]";
 	mes "I'm not thinking of turning back.";
 	close3;
 }
 
-luna_sf2,262,44,1	script(CLOAKED)	Tris#md	EP21_NPC_TRIS,1,1,{
+luna_sf2,262,44,1	script(CLOAKED)	Tris#md	4_EP21_TRIS,1,1,{
 	cutin "ep21_tris04.png",2;
 	mes "[Tris]";
 	mes "We can't retreat now that we've come this far.";
 	close3;
 }
 
-luna_sf2,262,40,1	script(CLOAKED)	Ivan#md	EP21_NPC_IVAN,1,1,{
+luna_sf2,262,40,1	script(CLOAKED)	Ivan#md	4_EP21_IVAN,1,1,{
 	cutin "ep21_ivan02.png",2;
 	mes "[Ivan]";
 	mes "If Tan is going through with it, Then I'll lend a hand.";
@@ -14355,42 +14355,42 @@ luna_sf2,258,40,7	script(CLOAKED)	Aurelie#md	4_EP21_AURELIE,1,1,{
 	close3;
 }
 
-luna_sf2,258,44,7	script(CLOAKED)	Tan#md	EP21_NPC_TAN,1,1,{
+luna_sf2,258,44,7	script(CLOAKED)	Tan#md	4_EP21_TAN,1,1,{
 	cutin "ep21_tan04.png",2;
 	mes "[Tan]";
 	mes "I have a bad feeling about this.";
 	close3;
 }
 
-luna_sf2,256,42,7	script(CLOAKED)	Galaxia#md	EP21_NPC_GALAXIA,1,1,{
+luna_sf2,256,42,7	script(CLOAKED)	Galaxia#md	4_EP21_GALAXIA_A,1,1,{
 	cutin "ep21_galaxia_a.png",2;
 	mes "[Galaxia]";
 	mes "I can't feel anything. That means its very dangerous.";
 	close3;
 }
 
-luna_sf2,253,43,7	script(CLOAKED)	Wilhelm#md	EP21_NPC_WILHELM,1,1,{
+luna_sf2,253,43,7	script(CLOAKED)	Wilhelm#md	4_EP21_WILHELM,1,1,{
 	cutin "ep21_wilhelm01.png",2;
 	mes "[Wilhelm]";
 	mes "I'm against it. That's what my rational mind tells me, but…";
 	close3;
 }
 
-luna_sf2,255,45,7	script(CLOAKED)	Maristella#md	EP21_NPC_MARISTELLA,1,1,{
+luna_sf2,255,45,7	script(CLOAKED)	Maristella#md	4_EP21_MARISTELLA,1,1,{
 	cutin "ep21_maristella01.png",2;
 	mes "[Maristella]";
 	mes "We can't turn back now. But…";
 	close3;
 }
 
-luna_sf2,255,47,7	script(CLOAKED)	Reinhardt#md	EP21_NPC_REINHARDT,1,1,{
+luna_sf2,255,47,7	script(CLOAKED)	Reinhardt#md	4_EP21_REINHARDT,1,1,{
 	cutin "ep21_reinhardt07.png",2;
 	mes "[Reinhardt]";
 	mes "I think we should stop Tris.";
 	close3;
 }
 
-luna_sf2,251,46,7	script(CLOAKED)	Gunter#md	EP21_NPC_GUNTER,1,1,{
+luna_sf2,251,46,7	script(CLOAKED)	Gunter#md	4_EP21_GUNTER,1,1,{
 	cutin "ep21_gunter01.png",2;
 	mes "[Gunter]";
 	mes "Will we able to return?";
