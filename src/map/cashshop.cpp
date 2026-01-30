@@ -287,13 +287,17 @@ enum e_sale_add_result sale_add_item( t_itemid nameid, int32 count, time_t from,
 	
 	// Calculate rental time in seconds
 	if( rent > 0 ){
-		struct tm *ltm = gmtime(&rent);
-		if( ltm != nullptr ){
+		struct tm ltm;
+#ifdef _WIN32
+		if( gmtime_s(&ltm, &rent) == 0 ){
+#else
+		if( gmtime_r(&rent, &ltm) != nullptr ){
+#endif
 			// If rental period is 14 days or more, treat as permanent (0)
-			if( ltm->tm_mday >= 14 && ltm->tm_hour >= 0 ){
+			if( ltm.tm_mday >= 14 && ltm.tm_hour >= 0 ){
 				rent_time_temp = 0;
 			} else {
-				rent_time_temp = (ltm->tm_mday * 24 * 60 * 60) + (ltm->tm_hour * 60 * 60) + (ltm->tm_min * 60);
+				rent_time_temp = (ltm.tm_mday * 24 * 60 * 60) + (ltm.tm_hour * 60 * 60) + (ltm.tm_min * 60);
 			}
 		}
 	}
