@@ -120059,30 +120059,342 @@ Body:
     AttackMotion: 576
     DamageMotion: 528
     Ai: 21
-#  - Id: 22301
-#    AegisName: EP21_NPC_TRIS
-#  - Id: 22302
-#    AegisName: EP21_NPC_TAN
-#  - Id: 22303
-#    AegisName: EP21_NPC_NADOYO
-#  - Id: 22304
-#    AegisName: EP21_NPC_REINHARDT
-#  - Id: 22305
-#    AegisName: EP21_NPC_WILHELM
-#  - Id: 22306
-#    AegisName: EP21_NPC_MARISTELLA
-#  - Id: 22307
-#    AegisName: EP21_NPC_YOHAN
-#  - Id: 22308
-#    AegisName: EP21_NPC_RICHARD
-#  - Id: 22309
-#    AegisName: EP21_NPC_EIBA
-#  - Id: 22310
-#    AegisName: EP21_NPC_GUNTER
-#  - Id: 22311
-#    AegisName: EP21_NPC_IVAN
-#  - Id: 22312
-#    AegisName: EP21_NPC_GALAXIA
+  - Id: 22301
+    AegisName: EP21_NPC_TRIS
+    Name: Tris
+    Level: 200
+    Attack: 10
+    Attack2: 10
+    Defense: 10
+    MagicDefense: 10
+    Str: 200
+    Agi: 200
+    Vit: 200
+    Int: 200
+    Dex: 200
+    Luk: 200
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Ghost
+    ElementLevel: 4
+    WalkSpeed: 200
+    AttackDelay: 200
+    AttackMotion: 200
+    DamageMotion: 200
+    Ai: 10
+    Modes:
+      CanMove: true
+  - Id: 22302
+    AegisName: EP21_NPC_TAN
+    Name: Tan
+    Level: 200
+    Attack: 10
+    Attack2: 10
+    Defense: 10
+    MagicDefense: 10
+    Str: 200
+    Agi: 200
+    Vit: 200
+    Int: 200
+    Dex: 200
+    Luk: 200
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Ghost
+    ElementLevel: 4
+    WalkSpeed: 200
+    AttackDelay: 200
+    AttackMotion: 200
+    DamageMotion: 200
+    Ai: 10
+    Modes:
+      CanMove: true
+  - Id: 22303
+    AegisName: EP21_NPC_NADOYO
+    Name: Nadoyo
+    Level: 200
+    Attack: 10
+    Attack2: 10
+    Defense: 10
+    MagicDefense: 10
+    Str: 200
+    Agi: 200
+    Vit: 200
+    Int: 200
+    Dex: 200
+    Luk: 200
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Ghost
+    ElementLevel: 4
+    WalkSpeed: 200
+    AttackDelay: 200
+    AttackMotion: 200
+    DamageMotion: 200
+    Ai: 10
+    Modes:
+      CanMove: true
+  - Id: 22304
+    AegisName: EP21_NPC_REINHARDT
+    Name: Reinhardt
+    Level: 200
+    Attack: 10
+    Attack2: 10
+    Defense: 10
+    MagicDefense: 10
+    Str: 200
+    Agi: 200
+    Vit: 200
+    Int: 200
+    Dex: 200
+    Luk: 200
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Ghost
+    ElementLevel: 4
+    WalkSpeed: 200
+    AttackDelay: 200
+    AttackMotion: 200
+    DamageMotion: 200
+    Ai: 10
+    Modes:
+      CanMove: true
+  - Id: 22305
+    AegisName: EP21_NPC_WILHELM
+    Name: Wilhelm
+    Level: 200
+    Attack: 10
+    Attack2: 10
+    Defense: 10
+    MagicDefense: 10
+    Str: 200
+    Agi: 200
+    Vit: 200
+    Int: 200
+    Dex: 200
+    Luk: 200
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Ghost
+    ElementLevel: 4
+    WalkSpeed: 200
+    AttackDelay: 200
+    AttackMotion: 200
+    DamageMotion: 200
+    Ai: 10
+    Modes:
+      CanMove: true
+  - Id: 22306
+    AegisName: EP21_NPC_MARISTELLA
+    Name: Maristella
+    Level: 200
+    Attack: 10
+    Attack2: 10
+    Defense: 10
+    MagicDefense: 10
+    Str: 200
+    Agi: 200
+    Vit: 200
+    Int: 200
+    Dex: 200
+    Luk: 200
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Ghost
+    ElementLevel: 4
+    WalkSpeed: 200
+    AttackDelay: 200
+    AttackMotion: 200
+    DamageMotion: 200
+    Ai: 10
+    Modes:
+      CanMove: true
+  - Id: 22307
+    AegisName: EP21_NPC_YOHAN
+    Name: Yohan
+    Level: 200
+    Attack: 10
+    Attack2: 10
+    Defense: 10
+    MagicDefense: 10
+    Str: 200
+    Agi: 200
+    Vit: 200
+    Int: 200
+    Dex: 200
+    Luk: 200
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Ghost
+    ElementLevel: 4
+    WalkSpeed: 200
+    AttackDelay: 200
+    AttackMotion: 200
+    DamageMotion: 200
+    Ai: 10
+    Modes:
+      CanMove: true
+  - Id: 22308
+    AegisName: EP21_NPC_RICHARD
+    Name: Richard
+    Level: 200
+    Attack: 10
+    Attack2: 10
+    Defense: 10
+    MagicDefense: 10
+    Str: 200
+    Agi: 200
+    Vit: 200
+    Int: 200
+    Dex: 200
+    Luk: 200
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Ghost
+    ElementLevel: 4
+    WalkSpeed: 200
+    AttackDelay: 200
+    AttackMotion: 200
+    DamageMotion: 200
+    Ai: 10
+    Modes:
+      CanMove: true
+  - Id: 22309
+    AegisName: EP21_NPC_EIBA
+    Name: Laura
+    Level: 200
+    Attack: 10
+    Attack2: 10
+    Defense: 10
+    MagicDefense: 10
+    Str: 200
+    Agi: 200
+    Vit: 200
+    Int: 200
+    Dex: 200
+    Luk: 200
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Ghost
+    ElementLevel: 4
+    WalkSpeed: 200
+    AttackDelay: 200
+    AttackMotion: 200
+    DamageMotion: 200
+    Ai: 10
+    Modes:
+      CanMove: true
+  - Id: 22310
+    AegisName: EP21_NPC_GUNTER
+    Name: Gunter
+    Level: 200
+    Attack: 10
+    Attack2: 10
+    Defense: 10
+    MagicDefense: 10
+    Str: 200
+    Agi: 200
+    Vit: 200
+    Int: 200
+    Dex: 200
+    Luk: 200
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Ghost
+    ElementLevel: 4
+    WalkSpeed: 200
+    AttackDelay: 200
+    AttackMotion: 200
+    DamageMotion: 200
+    Ai: 10
+    Modes:
+      CanMove: true
+  - Id: 22311
+    AegisName: EP21_NPC_IVAN
+    Name: Ivan
+    Level: 200
+    Attack: 10
+    Attack2: 10
+    Defense: 10
+    MagicDefense: 10
+    Str: 200
+    Agi: 200
+    Vit: 200
+    Int: 200
+    Dex: 200
+    Luk: 200
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Ghost
+    ElementLevel: 4
+    WalkSpeed: 200
+    AttackDelay: 200
+    AttackMotion: 200
+    DamageMotion: 200
+    Ai: 10
+    Modes:
+      CanMove: true
+  - Id: 22312
+    AegisName: EP21_NPC_GALAXIA
+    Name: Galaxia
+    Level: 200
+    Attack: 10
+    Attack2: 10
+    Defense: 10
+    MagicDefense: 10
+    Str: 200
+    Agi: 200
+    Vit: 200
+    Int: 200
+    Dex: 200
+    Luk: 200
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Ghost
+    ElementLevel: 4
+    WalkSpeed: 200
+    AttackDelay: 200
+    AttackMotion: 200
+    DamageMotion: 200
+    Ai: 10
+    Modes:
+      CanMove: true
   - Id: 22313
     AegisName: EP21_SEAWIND
     Name: EP21_SEAWIND
@@ -121691,27 +122003,502 @@ Body:
 #    AegisName: EP21_YOR_TAN_H
 #  - Id: 22411
 #    AegisName: EP21_MD_BOX2
-#  - Id: 22412
-#    AegisName: EP21_YORTUS_A_H
-#  - Id: 22413
-#    AegisName: EP21_YORTUS_B_H
-#  - Id: 22414
-#    AegisName: EP21_YORDOS_C_H
-#  - Id: 22415
-#    AegisName: EP21_YORDOS_B_H
-#  - Id: 22416
-#    AegisName: EP21_YORDOS_A_H
-#  - Id: 22417
-#    AegisName: EP21_YORMI_A_H
-#  - Id: 22418
-#    AegisName: EP21_YORMI_B_H
-#  - Id: 22419
-#    AegisName: EP21_YOSCOPUS_A_H
-#  - Id: 22420
-#    AegisName: EP21_YOSCOPUS_B_H
-#  - Id: 22421
-#    AegisName: EP21_B_YORTUS_A_H
-#  - Id: 22422
+  - Id: 22412
+    AegisName: EP21_YORTUS_A_H
+    Name: Awakened Jortus Bishop
+    Level: 275
+    Hp: 45077880
+    Attack: 12440
+    Attack2: 14775
+    Defense: 284
+    MagicDefense: 324
+    Resistance: 302
+    MagicResistance: 312
+    Str: 164
+    Agi: 154
+    Vit: 185
+    Int: 275
+    Dex: 203
+    Luk: 177
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 869
+    AttackMotion: 386
+    DamageMotion: 386
+    DamageTaken: 10
+    Ai: 09
+    Drops:
+      - Item: Ep21_Jor_Wand_Acc
+        Rate: 500
+      - Item: Ep21_Jor_G_Rosary
+        Rate: 500
+      - Item: Ep21_Jor_Accessary
+        Rate: 500
+      - Item: Ep21_Jor_Stick
+        Rate: 500
+      - Item: Shining_Crystal
+        Rate: 500
+      - Item: Yortus_Bishop_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22413
+    AegisName: EP21_YORTUS_B_H
+    Name: Awakened Jortus Warlock
+    Level: 275
+    Hp: 43024000
+    Attack: 14887
+    Attack2: 16778
+    Defense: 246
+    MagicDefense: 302
+    Resistance: 302
+    MagicResistance: 312
+    Str: 224
+    Agi: 145
+    Vit: 186
+    Int: 232
+    Dex: 222
+    Luk: 176
+    AttackRange: 8
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Ghost
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 869
+    AttackMotion: 386
+    DamageMotion: 386
+    DamageTaken: 10
+    Ai: 09
+    Drops:
+      - Item: Ep21_Jor_Stick
+        Rate: 500
+      - Item: Ep21_Jor_Wand_Acc
+        Rate: 500
+      - Item: Ep21_Jor_G_Rosary
+        Rate: 500
+      - Item: Ep21_Jor_Accessary
+        Rate: 500
+      - Item: Shining_Crystal
+        Rate: 500
+      - Item: Yortus_Warlock_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22414
+    AegisName: EP21_YORDOS_A_H
+    Name: Awakened Yordos Exec
+    Level: 243
+    Hp: 36208440
+    Attack: 12337
+    Attack2: 16443
+    Defense: 294
+    MagicDefense: 294
+    Resistance: 288
+    MagicResistance: 288
+    Str: 185
+    Agi: 184
+    Vit: 158
+    Int: 247
+    Dex: 208
+    Luk: 144
+    AttackRange: 7
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 165
+    AttackDelay: 869
+    AttackMotion: 378
+    DamageMotion: 378
+    Ai: 09
+    DamageTaken: 10
+    Drops:
+      - Item: Evil_Black_Bid
+        Rate: 800
+      - Item: Evil_Minded_Ruby
+        Rate: 800
+      - Item: Ep21_Jor_Stick
+        Rate: 500
+      - Item: Ep21_Fanatic_Mask
+        Rate: 1000
+      - Item: Ep21_Fanatic_Cap
+        Rate: 1000
+      - Item: Yordos_Investigator_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22415
+    AegisName: EP21_YORDOS_B_H
+    Name: Awakened Jordos Judge
+    Level: 243
+    Hp: 35448998
+    Attack: 12844
+    Attack2: 15365
+    Defense: 285
+    MagicDefense: 299
+    Resistance: 288
+    MagicResistance: 288
+    Str: 156
+    Agi: 154
+    Vit: 240
+    Int: 224
+    Dex: 209
+    Luk: 176
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 165
+    AttackDelay: 869
+    AttackMotion: 386
+    DamageMotion: 386
+    Ai: 09
+    DamageTaken: 10
+    Modes:
+      Assist: true
+    Drops:
+      - Item: Evil_Black_Bid
+        Rate: 800
+      - Item: Evil_Minded_Ruby
+        Rate: 800
+      - Item: Ep21_Fanatic_Mask
+        Rate: 1000
+      - Item: Ep21_Fanatic_Cap
+        Rate: 1000
+      - Item: Ep21_Jor_Dagger_Pcs
+        Rate: 500
+      - Item: Yordos_Judge_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22416
+    AegisName: EP21_YORDOS_C_H
+    Name: Awakened Yordos Inq
+    Level: 243
+    Hp: 34849000
+    Attack: 11944
+    Attack2: 16199
+    Defense: 301
+    MagicDefense: 188
+    Resistance: 288
+    MagicResistance: 288
+    Str: 210
+    Agi: 185
+    Vit: 120
+    Int: 145
+    Dex: 223
+    Luk: 143
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 165
+    AttackDelay: 689
+    AttackMotion: 386
+    DamageMotion: 386
+    Ai: 09
+    DamageTaken: 10
+    Drops:
+      - Item: Evil_Black_Bid
+        Rate: 800
+      - Item: Evil_Minded_Ruby
+        Rate: 800
+      - Item: Ep21_Fanatic_Mask
+        Rate: 1000
+      - Item: Ep21_Fanatic_Cap
+        Rate: 1000
+      - Item: Ep21_Jor_Dagger_Pcs
+        Rate: 500
+      - Item: Yordos_Executor_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22417
+    AegisName: EP21_YORMI_A_H
+    Name: Awaked Jormi
+    Level: 245
+    Hp: 35777000
+    Attack: 12484
+    Attack2: 14844
+    Defense: 255
+    MagicDefense: 302
+    Resistance: 302
+    MagicResistance: 356
+    Str: 224
+    Agi: 184
+    Vit: 156
+    Int: 142
+    Dex: 230
+    Luk: 172
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 165
+    AttackDelay: 869
+    AttackMotion: 378
+    DamageMotion: 378
+    DamageTaken: 10
+    Ai: 09
+    Drops:
+      - Item: Ep21_Jor_Rosary
+        Rate: 800
+      - Item: Ep21_Jor_Dagger_Pcs
+        Rate: 800
+      - Item: Ep21_Jor_Bible
+        Rate: 800
+      - Item: Yormi_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22418
+    AegisName: EP21_YORMI_B_H
+    Name: Awaked Jormi Evangelist
+    Level: 245
+    Hp: 36774120
+    Attack: 12338
+    Attack2: 15438
+    Defense: 302
+    MagicDefense: 155
+    Resistance: 302
+    MagicResistance: 184
+    Str: 212
+    Agi: 156
+    Vit: 148
+    Int: 209
+    Dex: 212
+    Luk: 108
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 165
+    AttackDelay: 869
+    AttackMotion: 378
+    DamageMotion: 378
+    DamageTaken: 10
+    Ai: 09
+    Drops:
+      - Item: Ep21_Jor_Rosary
+        Rate: 800
+      - Item: Ep21_Jor_Bible
+        Rate: 800
+      - Item: Ep21_Jor_Dagger_Pcs
+        Rate: 800
+      - Item: Yormi_Missionary_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22419
+    AegisName: EP21_YOSCOPUS_A_H
+    Name: Awakened Yoscopus Guard
+    Level: 264
+    Hp: 41778900
+    Attack: 13447
+    Attack2: 15844
+    Defense: 326
+    MagicDefense: 284
+    Resistance: 302
+    MagicResistance: 312
+    Str: 185
+    Agi: 159
+    Vit: 148
+    Int: 246
+    Dex: 223
+    Luk: 123
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Wind
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 869
+    AttackMotion: 386
+    DamageMotion: 386
+    DamageTaken: 10
+    Ai: 09
+    Drops:
+      - Item: Ep21_Jor_Wand_Acc
+        Rate: 800
+      - Item: Congealed_Poison
+        Rate: 500
+      - Item: Ep21_Jor_Stick
+        Rate: 800
+      - Item: Yoscopus_Guardian_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22420
+    AegisName: EP21_YOSCOPUS_B_H
+    Name: Awakened Jorcopus Shaman
+    Level: 264
+    Hp: 41778900
+    Attack: 13447
+    Attack2: 14875
+    Defense: 287
+    MagicDefense: 304
+    Resistance: 302
+    MagicResistance: 312
+    Str: 185
+    Agi: 159
+    Vit: 148
+    Int: 246
+    Dex: 223
+    Luk: 123
+    AttackRange: 7
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Ghost
+    ElementLevel: 2
+    WalkSpeed: 200
+    AttackDelay: 869
+    AttackMotion: 386
+    DamageMotion: 386
+    DamageTaken: 10
+    Ai: 09
+    Drops:
+      - Item: Congealed_Poison
+        Rate: 500
+      - Item: Ep21_Jor_Stick
+        Rate: 800
+      - Item: Ep21_Jor_Wand_Acc
+        Rate: 800
+      - Item: Yoscopus_Warlock_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22421
+    AegisName: EP21_B_YORTUS_A_H
+    Name: Jortus Judge
+    Level: 265
+    Hp: 640886774
+    Attack: 25678
+    Attack2: 34888
+    Defense: 486
+    MagicDefense: 433
+    Resistance: 742
+    MagicResistance: 587
+    Str: 304
+    Agi: 286
+    Vit: 294
+    Int: 367
+    Dex: 344
+    Luk: 246
+    AttackRange: 8
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 469
+    AttackMotion: 386
+    DamageMotion: 386
+    Ai: 09
+    DamageTaken: 10
+    Class: Boss
+    Modes:
+      Looter: true
+      Mvp: true
+    MvpDrops:
+      - Item: Brown_Dia
+        Rate: 1000
+      - Item: Old_Card_Album
+        Rate: 5000
+    Drops:
+      - Item: Brown_Dia
+        Rate: 1000
+      - Item: Brown_Dia
+        Rate: 2000
+      - Item: Brown_Dia
+        Rate: 5000
+      - Item: Ep21_Armor_E_Stone3
+        Rate: 5000
+      - Item: Ep21_Robe_E_Stone3
+        Rate: 5000
+      - Item: Ep21_Shoes_E_Stone3
+        Rate: 5000
+      - Item: Ep21_Acc_E_Stone3
+        Rate: 5000
+      - Item: Yortus_Arbiter_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 22422
+    AegisName: EP21_B_YORTUS_B_H
+    Name: Jortus Executioner
+    Level: 265
+    Hp: 640886774
+    Attack: 25678
+    Attack2: 34888
+    Defense: 486
+    MagicDefense: 433
+    Resistance: 742
+    MagicResistance: 587
+    Str: 304
+    Agi: 286
+    Vit: 294
+    Int: 367
+    Dex: 344
+    Luk: 246
+    AttackRange: 8
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Ghost
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 469
+    AttackMotion: 386
+    DamageMotion: 386
+    DamageTaken: 10
+    Ai: 09
+    Class: Boss
+    Modes:
+      Looter: true
+      Mvp: true
+    MvpDrops:
+      - Item: Brown_Dia
+        Rate: 2000
+      - Item: Old_Card_Album
+        Rate: 5000
+    Drops:
+      - Item: Brown_Dia
+        Rate: 1000
+      - Item: Brown_Dia
+        Rate: 2000
+      - Item: Brown_Dia
+        Rate: 5000
+      - Item: Ep21_Acc_E_Stone3
+        Rate: 5000
+      - Item: Ep21_Shoes_E_Stone3
+        Rate: 5000
+      - Item: Ep21_Robe_E_Stone3
+        Rate: 5000
+      - Item: Ep21_Armor_E_Stone3
+        Rate: 5000
+      - Item: Yortus_Bailiff_Card
+        Rate: 1
+        StealProtected: true
 #    AegisName: EP21_B_YORTUS_B_H
 #  - Id: 22425
 #    AegisName: E_LEADER_SHEEP
