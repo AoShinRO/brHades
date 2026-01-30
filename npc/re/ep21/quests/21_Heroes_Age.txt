@@ -1924,11 +1924,11 @@ OnTouch:
 		mes "[Nillem]";
 		mes "Let's sit over there for a bit<FONT SIZE = 14>…Huh?</FONT>";
 		npctalk "Nillem : Huh?","Nillem#ep21_mercgroupent",bc_self;
-		cloaknpc("#ep21_mercgroup",false,getcharid(0));
-		specialeffect EF_RG_COIN7,AREA,"#ep21_mercgroup";
+		cloaknpc("???#ep21_mercgroup",false,getcharid(0));
+		specialeffect EF_RG_COIN7,AREA,"???#ep21_mercgroup";
 		next;
-		cloaknpc("#ep21_mercgroup",true,getcharid(0));
-		removespecialeffect EF_RG_COIN7,AREA,"#ep21_mercgroup";
+		cloaknpc("???#ep21_mercgroup",true,getcharid(0));
+		removespecialeffect EF_RG_COIN7,AREA,"???#ep21_mercgroup";
 		cutin "ep19_lehar01.png",2;
 		mes "[Lehar]";
 		mes "What's wrong?";
@@ -1946,11 +1946,11 @@ OnTouch:
 		cutin "ep172_nillem04.png",2;
 		mes "[Nillem]";
 		mes "<FONT SIZE = 14>Huh…?</FONT>";
-		cloaknpc("#ep21_mercgroup",false,getcharid(0));
-		specialeffect EF_RG_COIN7,AREA,"#ep21_mercgroup";
+		cloaknpc("???#ep21_mercgroup",false,getcharid(0));
+		specialeffect EF_RG_COIN7,AREA,"???#ep21_mercgroup";
 		next;
-		cloaknpc("#ep21_mercgroup",true,getcharid(0));
-		removespecialeffect EF_RG_COIN7,AREA,"#ep21_mercgroup";
+		cloaknpc("???#ep21_mercgroup",true,getcharid(0));
+		removespecialeffect EF_RG_COIN7,AREA,"???#ep21_mercgroup";
 		cutin "ep19_lehar01.png",2;
 		mes "[Lehar]";
 		mes "?";
@@ -1971,11 +1971,11 @@ OnTouch:
 		mes "Hm… there, look closely.";
 		mes "There's something strange.";
 		mes "It's something faint…";
-		cloaknpc("#ep21_mercgroup",false,getcharid(0));
-		specialeffect EF_RG_COIN7,AREA,"#ep21_mercgroup";
+		cloaknpc("???#ep21_mercgroup",false,getcharid(0));
+		specialeffect EF_RG_COIN7,AREA,"???#ep21_mercgroup";
 		next;
-		cloaknpc("#ep21_mercgroup",true,getcharid(0));
-		removespecialeffect EF_RG_COIN7,AREA,"#ep21_mercgroup";
+		cloaknpc("???#ep21_mercgroup",true,getcharid(0));
+		removespecialeffect EF_RG_COIN7,AREA,"???#ep21_mercgroup";
 		cutin "ep19_lehar02.png",2;
 		mes "[Lehar]";
 		mes "Heh~";
@@ -1998,7 +1998,7 @@ OnTouch:
 		npctalk "Lehar : Waaaah!!!","Lehar#ep21_mercgroupent",bc_self;
 		emotion ET_HUK,getnpcid(0,"Nillem#ep21_mercgroupent");
 		emotion ET_HUK,getnpcid(0,"Lehar#ep21_mercgroupent");
-		cloaknpc("#ep21_mercgroup",false,getcharid(0));
+		cloaknpc("???#ep21_mercgroup",false,getcharid(0));
 		next;
 		cutin "ep19_lehar05.png",2;
 		mes "[Lehar]";
@@ -2008,7 +2008,7 @@ OnTouch:
 		cutin "ep21_gunter01.png",2;
 		mes "[???]";
 		mes "…?";
-		emotion ET_QUESTION,getnpcid(0,"#ep21_mercgroup");
+		emotion ET_QUESTION,getnpcid(0,"???#ep21_mercgroup");
 		next;
 		mes "[???]";
 		mes "What…";
@@ -2027,10 +2027,10 @@ OnTouch:
 		cutin "ep19_lehar03.png",2;
 		mes "[Lehar]";
 		mes "<FONT SIZE = 14><B>^e5555e- Heal -^000000</B></FONT>";
-		specialeffect EF_HEAL2,AREA,"#ep21_mercgroup";
-		emotion ET_SURPRISE,getnpcid(0,"#ep21_mercgroup");
+		specialeffect EF_HEAL2,AREA,"???#ep21_mercgroup";
+		emotion ET_SURPRISE,getnpcid(0,"???#ep21_mercgroup");
 		next;
-		removespecialeffect EF_HEAL2,AREA,"#ep21_mercgroup";
+		removespecialeffect EF_HEAL2,AREA,"???#ep21_mercgroup";
 		cutin "ep21_gunter01.png",2;
 		mes "[???]";
 		mes "??";
@@ -2063,7 +2063,7 @@ OnTouch:
 	if(isbegin_quest(24001) == 1){
 		cloaknpc("Lehar#ep21_mercgroupent",false,getcharid(0));
 		cloaknpc("Nillem#ep21_mercgroupent",false,getcharid(0));
-		cloaknpc("#ep21_mercgroup",false,getcharid(0));
+		cloaknpc("???#ep21_mercgroup",false,getcharid(0));
 		cloaknpc("Valdaris#ep21_mercgroup",true,getcharid(0));
 		cloaknpc("Mercenary Member#ep21_mercgroup1",true,getcharid(0));
 		cloaknpc("Mercenary Member#ep21_mercgroup2",true,getcharid(0));
@@ -2087,7 +2087,7 @@ OnTouch:
 		cutin "ep21_gunter01.png",2;
 		mes "[???]";
 		mes "…?";
-		emotion ET_QUESTION,getnpcid(0,"#ep21_mercgroup");
+		emotion ET_QUESTION,getnpcid(0,"???#ep21_mercgroup");
 		next;
 		mes "[???]";
 		mes "What…";
@@ -2106,10 +2106,10 @@ OnTouch:
 		cutin "ep19_lehar03.png",2;
 		mes "[Lehar]";
 		mes "<FONT SIZE = 14><B>^e5555e- Heal -^000000</B></FONT>";
-		specialeffect EF_HEAL2,AREA,"#ep21_mercgroup";
-		emotion ET_SURPRISE,getnpcid(0,"#ep21_mercgroup");
+		specialeffect EF_HEAL2,AREA,"???#ep21_mercgroup";
+		emotion ET_SURPRISE,getnpcid(0,"???#ep21_mercgroup");
 		next;
-		removespecialeffect EF_HEAL2,AREA,"#ep21_mercgroup";
+		removespecialeffect EF_HEAL2,AREA,"???#ep21_mercgroup";
 		cutin "ep21_gunter01.png",2;
 		mes "[???]";
 		mes "??";
@@ -2144,7 +2144,7 @@ OnTouch:
 	}
 	if(isbegin_quest(24004) == 1){
 		cloaknpc("Valdaris#ep21_mercgroup",true,getcharid(0));
-		cloaknpc("#ep21_Valdaris",false,getcharid(0));
+		cloaknpc("???#ep21_Valdaris",false,getcharid(0));
 		cloaknpc("Lehar#ep21_mercgroupent",false,getcharid(0));
 		cloaknpc("Nillem#ep21_mercgroupent",false,getcharid(0));
 		cutin "ep21_valdaris01.png",2;
@@ -2165,7 +2165,7 @@ OnTouch:
 		cutin "ep21_valdaris03.png",2;
 		mes "[Valdaris]";
 		mes "<FONT SIZE = 14><B>Where in the world has that person gone this time!</B></FONT>";
-		emotion ET_FRET,getnpcid(0,"#ep21_Valdaris");
+		emotion ET_FRET,getnpcid(0,"???#ep21_Valdaris");
 		next;
 		mes "[Valdaris]";
 		mes "Then, has anyone seen Nerius?";
@@ -2177,7 +2177,7 @@ OnTouch:
 		cutin "ep21_valdaris03.png",2;
 		mes "[Valdaris]";
 		mes "Sigh…";
-		emotion ET_HNG,getnpcid(0,"#ep21_Valdaris");
+		emotion ET_HNG,getnpcid(0,"???#ep21_Valdaris");
 		next;
 		cutin "ep19_lehar03.png",2;
 		mes "[Lehar]";
@@ -2193,8 +2193,8 @@ OnTouch:
 		mes "[Valdaris]";
 		mes "If Tan sent you, you'll need go through the registration process.";
 		mes "Please fill out the ^e5555eform^000000 over there and hand it to me once you're done.";
-		npctalk "Valdaris : If you have any questions while filling out, feel free to ask.","#ep21_Valdaris",bc_self;
-		cloaknpc("#ep21_Valdaris",true,getcharid(0));
+		npctalk "Valdaris : If you have any questions while filling out, feel free to ask.","???#ep21_Valdaris",bc_self;
+		cloaknpc("???#ep21_Valdaris",true,getcharid(0));
 		cloaknpc("Valdaris#ep21_mercgroup",false,getcharid(0));
 		next;
 		cutin "ep21_valdaris02.png",2;
@@ -2224,7 +2224,7 @@ OnInit:
 end;
 }
 
-mbase_in,292,127,3	script(CLOAKED)	#ep21_mercgroup	4_EP21_GUNTER,{
+mbase_in,292,127,3	script(CLOAKED)	???#ep21_mercgroup	4_EP21_GUNTER,{
 	if(isbegin_quest(24001) == 1){
 		select("We came to see the Mercenary King Richard.");
 		cutin "ep21_gunter01.png",2;
@@ -2289,7 +2289,7 @@ mbase_in,292,127,3	script(CLOAKED)	#ep21_mercgroup	4_EP21_GUNTER,{
 		setquest 24002;
 		close2;
 		cutin "",255;
-		cloaknpc("#ep21_mercgroup",true,getcharid(0));
+		cloaknpc("???#ep21_mercgroup",true,getcharid(0));
 		cloaknpc("Lehar#ep21_mercgroupent",true,getcharid(0));
 		cloaknpc("Nillem#ep21_mercgroupent",true,getcharid(0));
 		navigateto("mbase_in",113,120);
@@ -2382,7 +2382,7 @@ mbase_in,113,114,0	script	#in_galaxia	WARPNPC,2,2,{
 		mes "[Nillem]";
 		mes "Anyways, it says it's for authorized personnel only, so shouldn't we go get permission first to go in!?";
 		next;
-		cloaknpc("#ep21_frontroom",false,getcharid(0));
+		cloaknpc("???#ep21_frontroom",false,getcharid(0));
 		cutin "",255;
 		mes "- Knock Knock -";
 		next;
@@ -2446,7 +2446,7 @@ mbase_in,113,114,0	script	#in_galaxia	WARPNPC,2,2,{
 		close2;
 		cloaknpc("Lehar#ep21_frontroom",true,getcharid(0));
 		cloaknpc("Nillem#ep21_frontroom",true,getcharid(0));
-		cloaknpc("#ep21_frontroom",true,getcharid(0));
+		cloaknpc("???#ep21_frontroom",true,getcharid(0));
 		cutin "",255;
 		navigateto("mbase_in",289,124);
 		end;
@@ -2468,7 +2468,7 @@ OnInit:
 end;
 }
 
-mbase_in,111,116,3	duplicate(dummynpc)	#ep21_frontroom	4_EP21_VALDARIS
+mbase_in,111,116,3	duplicate(dummynpc)	???#ep21_frontroom	4_EP21_VALDARIS
 
 mbase_in,299,126,3	script	Pile of Documents#ep21	4_EP18_PAPERS,{
 	if(isbegin_quest(24005) == 1){
@@ -3380,14 +3380,14 @@ mbase_in,302,122,3	script(CLOAKED)	Tan#ep21_mercgroup	4_EP21_TAN,{
 		next;
 		mes "[Laura Valdaris]";
 		mes "Gunter, could you do it?";
-		cloaknpc("#ep21_mercgroup",false,getcharid(0));
-		emotion ET_HUK,getnpcid(0,"#ep21_mercgroup");
+		cloaknpc("???#ep21_mercgroup",false,getcharid(0));
+		emotion ET_HUK,getnpcid(0,"???#ep21_mercgroup");
 		next;
 		cutin "ep21_gunter01.png",2;
 		mes "[Gunter]";
 		mes "…";
 		mes "No.";
-		cloaknpc("#ep21_mercgroup",true,getcharid(0));
+		cloaknpc("???#ep21_mercgroup",true,getcharid(0));
 		next;
 		cutin "ep21_valdaris03.png",2;
 		mes "[Laura Valdaris]";
@@ -3453,7 +3453,7 @@ OnInit:
 end;	
 }
 
-mbase_in,289,124,3	duplicate(dummynpc)	#ep21_valdaris	4_EP21_VALDARIS
+mbase_in,289,124,3	duplicate(dummynpc)	???#ep21_valdaris	4_EP21_VALDARIS
 
 mbase_in,289,120,5	duplicate(dummynpc2)	Mercenary Member#ep21_mercgroup1	4_EP21_SOLDIER_A
 mbase_in,299,119,3	duplicate(dummynpc2)	Mercenary Member#ep21_mercgroup2	4_EP21_SOLDIER_A
@@ -3698,7 +3698,7 @@ OnTouch:
 				cloaknpc("Lehar#ep21_tour4",false,getcharid(0));
 				cloaknpc("Nillem#ep21_tour4",false,getcharid(0));
 				cloaknpc("Valdaris#ep21_tour4",false,getcharid(0));
-				cloaknpc("#ep21_tour4_lee",false,getcharid(0));
+				cloaknpc("???#ep21_tour4_lee",false,getcharid(0));
 				next;
 				mes "[Valdaris]";
 				mes "You're welcome to use it freely while you're with the mercenary group…";
@@ -3744,7 +3744,7 @@ OnTouch:
 				mes "[???]";
 				mes "His ribs is already broken, betting on that is too boring~";
 				mes "Besides that, the odds are too low even if you win, you might not get your Zeny back.";
-				emotion ET_OK,getnpcid(0,"#ep21_tour4_lee");
+				emotion ET_OK,getnpcid(0,"???#ep21_tour4_lee");
 				next;
 				cutin "ep21_valdaris05.png",2;
 				mes "[Laura Valdaris]";
@@ -3761,7 +3761,7 @@ OnTouch:
 				emotion ET_HUK,getnpcid(0,"Mercenary Member#ep21_tour4_5");
 				emotion ET_HUK,getnpcid(0,"Mercenary Member#ep21_tour4_6");
 				emotion ET_HUK,getnpcid(0,"Mercenary Member#ep21_tour4_7");
-				emotion ET_HUK,getnpcid(0,"#ep21_tour4_lee");
+				emotion ET_HUK,getnpcid(0,"???#ep21_tour4_lee");
 				next;
 				cutin "ep21_soldier_b.png",2;
 				mes "[???]";
@@ -3789,7 +3789,7 @@ OnTouch:
 				cloaknpc("Lehar#ep21_tour4",false,getcharid(0));
 				cloaknpc("Nillem#ep21_tour4",false,getcharid(0));
 				cloaknpc("Valdaris#ep21_tour4",false,getcharid(0));
-				cloaknpc("#ep21_tour4_lee",false,getcharid(0));
+				cloaknpc("???#ep21_tour4_lee",false,getcharid(0));
 				cutin "ep21_valdaris05.png",2;
 				mes "[Laura Valdaris]";
 				mes "<FONT SIZE = 16><B>What is going on here!!!</B></FONT>";
@@ -3805,7 +3805,7 @@ OnTouch:
 				emotion ET_HUK,getnpcid(0,"Mercenary Member#ep21_tour4_5");
 				emotion ET_HUK,getnpcid(0,"Mercenary Member#ep21_tour4_6");
 				emotion ET_HUK,getnpcid(0,"Mercenary Member#ep21_tour4_7");
-				emotion ET_HUK,getnpcid(0,"#ep21_tour4_lee");
+				emotion ET_HUK,getnpcid(0,"???#ep21_tour4_lee");
 				next;
 				cutin "ep21_soldier_b.png",2;
 				mes "[???]";
@@ -3838,50 +3838,50 @@ OnTouch:
 				cloaknpc("Lehar#ep21_tour5",false,getcharid(0));
 				cloaknpc("Nillem#ep21_tour5",false,getcharid(0));
 				cloaknpc("Valdaris#ep21_tour5",false,getcharid(0));
-				cloaknpc("#ep21_tour5_richard",false,getcharid(0));
-				cloaknpc("#ep21_tour5_nerius",false,getcharid(0));
+				cloaknpc("???#ep21_tour5_richard",false,getcharid(0));
+				cloaknpc("???#ep21_tour5_nerius",false,getcharid(0));
 				next;
 				mes "[???]";
 				mes "<FONT SIZE = 14><B>Ugh!</B></FONT>";
-				specialeffect EF_SPREADATTACK,AREA,"#ep21_tour5_richard";
+				specialeffect EF_SPREADATTACK,AREA,"???#ep21_tour5_richard";
 				next;
-				removespecialeffect EF_SPREADATTACK,AREA,"#ep21_tour5_richard";
+				removespecialeffect EF_SPREADATTACK,AREA,"???#ep21_tour5_richard";
 				mes "[???]";
 				mes "<FONT SIZE = 16><B>Hey, you crazy bastards!!</B></FONT>";
 				mes "<FONT SIZE = 16><B>Can't you see I'm casting!!!</B></FONT>";
 				mes "<FONT SIZE = 16><B>Stop betting and break them up!!!</B></FONT>";
-				specialeffect EF_ITEM_CURSE,AREA,"#ep21_tour5_richard";
-				specialeffect EF_MAP_MAGICZONE2,AREA,"#ep21_tour5_nerius";
-				specialeffect EF_WHITEBODY,AREA,"#ep21_tour5_nerius";
-				emotion ET_HELP,getnpcid(0,"#ep21_tour5_richard");
+				specialeffect EF_ITEM_CURSE,AREA,"???#ep21_tour5_richard";
+				specialeffect EF_MAP_MAGICZONE2,AREA,"???#ep21_tour5_nerius";
+				specialeffect EF_WHITEBODY,AREA,"???#ep21_tour5_nerius";
+				emotion ET_HELP,getnpcid(0,"???#ep21_tour5_richard");
 				next;
-				removespecialeffect EF_ITEM_CURSE,AREA,"#ep21_tour5_richard";
+				removespecialeffect EF_ITEM_CURSE,AREA,"???#ep21_tour5_richard";
 				mes "[???]";
 				mes "<FONT SIZE = 18><B>Tch!!!</B></FONT>";
-				specialeffect EF_SPINEDBODY2,AREA,"#ep21_tour5_richard";
-				specialeffect EF_NPC_BURNT,AREA,"#ep21_tour5_richard";
+				specialeffect EF_SPINEDBODY2,AREA,"???#ep21_tour5_richard";
+				specialeffect EF_NPC_BURNT,AREA,"???#ep21_tour5_richard";
 				next;
-				removespecialeffect EF_MAP_MAGICZONE2,AREA,"#ep21_tour5_nerius";
-				specialeffect EF_BEGINSPELL_YB,AREA,"#ep21_tour5_richard";
+				removespecialeffect EF_MAP_MAGICZONE2,AREA,"???#ep21_tour5_nerius";
+				specialeffect EF_BEGINSPELL_YB,AREA,"???#ep21_tour5_richard";
 				mes "[???]";
 				mes "<FONT SIZE = 16><B>Yah!!!</B></FONT>";
 				next;
-				removespecialeffect EF_SPINEDBODY2,AREA,"#ep21_tour5_richard";
-				removespecialeffect EF_BEGINSPELL_YB,AREA,"#ep21_tour5_richard";
+				removespecialeffect EF_SPINEDBODY2,AREA,"???#ep21_tour5_richard";
+				removespecialeffect EF_BEGINSPELL_YB,AREA,"???#ep21_tour5_richard";
 				mes "[???]";
 				mes "<FONT SIZE = 14><B>Graah!!!!!!</B></FONT>";
-				specialeffect EF_MANHOLE,AREA,"#ep21_tour5_richard";
+				specialeffect EF_MANHOLE,AREA,"???#ep21_tour5_richard";
 				next;
-				specialeffect EF_FIREWALL2,AREA,"#ep21_tour5_richard";
-				specialeffect EF_DANCE_BLADE_ATK,AREA,"#ep21_tour5_richard";
+				specialeffect EF_FIREWALL2,AREA,"???#ep21_tour5_richard";
+				specialeffect EF_DANCE_BLADE_ATK,AREA,"???#ep21_tour5_richard";
 				cutin "ep21_valdaris05.png",2;
 				mes "[Laura Valdaris]";
 				mes "<FONT SIZE = 16><B>Stop it!!!</B></FONT>";
 				mes "<FONT SIZE = 18><B>^e5555eNerius!!!^000000</B></FONT>";
 				emotion ET_HUK,getnpcid(0,"Valdaris#ep21_tour5");
 				next;
-				removespecialeffect EF_NPC_BURNT,AREA,"#ep21_tour5_richard";
-				specialeffect EF_ERASER_CUTTER,AREA,"#ep21_tour5_richard";
+				removespecialeffect EF_NPC_BURNT,AREA,"???#ep21_tour5_richard";
+				specialeffect EF_ERASER_CUTTER,AREA,"???#ep21_tour5_richard";
 				mes "[Laura Valdaris]";
 				mes "<FONT SIZE = 16><B>Lee!!!!</B></FONT>";
 				mes "<FONT SIZE = 16><B>What are you doing, why aren't you breaking them up!!</B></FONT>";
@@ -3889,13 +3889,13 @@ OnTouch:
 				cutin "ep21_lee03.png",2;
 				mes "[Lee]";
 				mes "Tsk! It was just getting interesting.";
-				emotion ET_HNG,getnpcid(0,"#ep21_tour4_lee");
+				emotion ET_HNG,getnpcid(0,"???#ep21_tour4_lee");
 				next;
-				removespecialeffect EF_WHITEBODY,AREA,"#ep21_tour5_nerius";
-				removespecialeffect EF_MANHOLE,AREA,"#ep21_tour5_richard";
-				removespecialeffect EF_FIREWALL2,AREA,"#ep21_tour5_richard";
-				removespecialeffect EF_DANCE_BLADE_ATK,AREA,"#ep21_tour5_richard";
-				removespecialeffect EF_ERASER_CUTTER,AREA,"#ep21_tour5_richard";
+				removespecialeffect EF_WHITEBODY,AREA,"???#ep21_tour5_nerius";
+				removespecialeffect EF_MANHOLE,AREA,"???#ep21_tour5_richard";
+				removespecialeffect EF_FIREWALL2,AREA,"???#ep21_tour5_richard";
+				removespecialeffect EF_DANCE_BLADE_ATK,AREA,"???#ep21_tour5_richard";
+				removespecialeffect EF_ERASER_CUTTER,AREA,"???#ep21_tour5_richard";
 				cutin "ep21_lee01.png",2;
 				mes "[Lee]";
 				mes "Gala~";
@@ -3914,7 +3914,7 @@ OnTouch:
 				next;
 				mes "[Richard]";
 				mes "I thought I was going to *cough*… die.";
-				emotion ET_KEK,getnpcid(0,"#ep21_tour5_richard");
+				emotion ET_KEK,getnpcid(0,"???#ep21_tour5_richard");
 				next;
 				cutin "ep21_richard02.png",0;
 				mes "[Richard]";
@@ -3970,7 +3970,7 @@ OnTouch:
 				mes "<FONT SIZE = 16><B>Ouch, ouch, ouch, ouch!!</B></FONT>";
 				mes "<FONT SIZE = 16><B>My ribs!!</B></FONT>";
 				mes "<FONT SIZE = 16><B>Don't pull my arms!</B></FONT>";
-				emotion ET_KEK,getnpcid(0,"#ep21_tour5_richard");
+				emotion ET_KEK,getnpcid(0,"???#ep21_tour5_richard");
 				next;
 				cutin "ep21_valdaris03.png",2;
 				mes "[Laura Valdaris]";
@@ -4002,9 +4002,9 @@ OnTouch:
 				cloaknpc("Lehar#ep21_tour5",true,getcharid(0));
 				cloaknpc("Nillem#ep21_tour5",true,getcharid(0));
 				cloaknpc("Valdaris#ep21_tour5",true,getcharid(0));
-				cloaknpc("#ep21_tour5_richard",true,getcharid(0));
-				cloaknpc("#ep21_tour5_nerius",true,getcharid(0));
-				cloaknpc("#ep21_tour4_lee",true,getcharid(0));
+				cloaknpc("???#ep21_tour5_richard",true,getcharid(0));
+				cloaknpc("???#ep21_tour5_nerius",true,getcharid(0));
+				cloaknpc("???#ep21_tour4_lee",true,getcharid(0));
 				navigateto("mbase_in",167,128);
 				end;
 			}
@@ -4012,9 +4012,9 @@ OnTouch:
 				cloaknpc("Lehar#ep21_tour5",false,getcharid(0));
 				cloaknpc("Nillem#ep21_tour5",false,getcharid(0));
 				cloaknpc("Valdaris#ep21_tour5",false,getcharid(0));
-				cloaknpc("#ep21_tour5_richard",false,getcharid(0));
-				cloaknpc("#ep21_tour5_nerius",false,getcharid(0));
-				cloaknpc("#ep21_tour4_lee",false,getcharid(0));
+				cloaknpc("???#ep21_tour5_richard",false,getcharid(0));
+				cloaknpc("???#ep21_tour5_nerius",false,getcharid(0));
+				cloaknpc("???#ep21_tour4_lee",false,getcharid(0));
 				cutin "ep21_valdaris03.png",2;
 				mes "[Laura Valdaris]";
 				mes "Captain, let's go to your room first.";
@@ -4029,7 +4029,7 @@ OnTouch:
 				mes "<FONT SIZE = 16><B>Ouch, ouch, ouch, ouch!!</B></FONT>";
 				mes "<FONT SIZE = 16><B>My ribs!!</B></FONT>";
 				mes "<FONT SIZE = 16><B>Don't pull my arms!</B></FONT>";
-				emotion ET_KEK,getnpcid(0,"#ep21_tour5_richard");
+				emotion ET_KEK,getnpcid(0,"???#ep21_tour5_richard");
 				next;
 				cutin "ep21_valdaris03.png",2;
 				mes "[Laura Valdaris]";
@@ -4059,9 +4059,9 @@ OnTouch:
 				cloaknpc("Lehar#ep21_tour5",true,getcharid(0));
 				cloaknpc("Nillem#ep21_tour5",true,getcharid(0));
 				cloaknpc("Valdaris#ep21_tour5",true,getcharid(0));
-				cloaknpc("#ep21_tour5_richard",true,getcharid(0));
-				cloaknpc("#ep21_tour5_nerius",true,getcharid(0));
-				cloaknpc("#ep21_tour4_lee",true,getcharid(0));
+				cloaknpc("???#ep21_tour5_richard",true,getcharid(0));
+				cloaknpc("???#ep21_tour5_nerius",true,getcharid(0));
+				cloaknpc("???#ep21_tour4_lee",true,getcharid(0));
 				navigateto("mbase_in",167,128);
 				end;
 			}
@@ -4102,7 +4102,7 @@ jor_mbase,245,116,7	duplicate(dummynpc)	Kid#ep21_tour3_6	4_EP21_WORKER_KID_B
 jor_mbase,145,105,3	duplicate(dummynpc)	Lehar#ep21_tour4	4_EP19_LEHAR
 jor_mbase,143,106,3	duplicate(dummynpc)	Nillem#ep21_tour4	4_M_NILLEM
 jor_mbase,143,110,3	duplicate(dummynpc)	Valdaris#ep21_tour4	4_EP21_VALDARIS
-jor_mbase,134,111,3	duplicate(dummynpc)	#ep21_tour4_lee	4_EP21_LEE
+jor_mbase,134,111,3	duplicate(dummynpc)	???#ep21_tour4_lee	4_EP21_LEE
 jor_mbase,136,106,2	duplicate(dummynpc2)	Mercenary Member#ep21_tour4_1	4_EP21_SOLDIER_A
 jor_mbase,134,107,2	duplicate(dummynpc2)	Mercenary Member#ep21_tour4_2	4_EP21_SOLDIER_B
 jor_mbase,139,112,3	duplicate(dummynpc2)	Mercenary Member#ep21_tour4_3	4_EP21_SOLDIER_A
@@ -4114,8 +4114,8 @@ jor_mbase,132,106,2	duplicate(dummynpc2)	Mercenary Member#ep21_tour4_7	4_EP21_SO
 jor_mbase,135,111,3	duplicate(dummynpc)	Lehar#ep21_tour5	4_EP19_LEHAR
 jor_mbase,138,110,3	duplicate(dummynpc)	Nillem#ep21_tour5	4_M_NILLEM
 jor_mbase,133,109,3	duplicate(dummynpc)	Valdaris#ep21_tour5	4_EP21_VALDARIS
-jor_mbase,131,110,5	duplicate(dummynpc)	#ep21_tour5_richard	4_EP21_RICHARD
-jor_mbase,132,111,3	duplicate(dummynpc)	#ep21_tour5_nerius	4_EP21_GALAXIA_A
+jor_mbase,131,110,5	duplicate(dummynpc)	???#ep21_tour5_richard	4_EP21_RICHARD
+jor_mbase,132,111,3	duplicate(dummynpc)	???#ep21_tour5_nerius	4_EP21_GALAXIA_A
 
 mbase_in,166,126,0	script	#ep21_richardroom	HIDDEN_WARP_NPC,1,1,{
 	end;
