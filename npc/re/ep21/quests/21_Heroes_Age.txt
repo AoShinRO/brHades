@@ -8722,7 +8722,7 @@ OnInit:
 end;
 }
 
-jor_raise1,321,71,3	duplicate(dummynpc)	Ivan#21ms00	EP21_NPC_IVAN
+jor_raise1,321,71,3	duplicate(dummynpc)	Ivan#21ms00	4_EP21_IVAN
 
 luna_sf1,35,267,0	script	#21ms01	HIDDEN_WARP_NPC,5,5,{
 	end;
@@ -8745,7 +8745,7 @@ OnTouch:
 end;
 }
 
-luna_sf1,49,268,3	script	Ivan#21ms01	EP21_NPC_IVAN,3,3,{
+luna_sf1,49,268,3	script	Ivan#21ms01	4_EP21_IVAN,3,3,{
 OnTouch:
 	if(isbegin_quest(8893) == 1){
 		cutin "ep21_ivan03.png",1;
@@ -8843,7 +8843,7 @@ OnInit:
 end;
 }
 
-luna_sf1,51,267,3	script	Tan#21ms00	EP21_NPC_TAN,{
+luna_sf1,51,267,3	script	Tan#21ms00	4_EP21_TAN,{
 	if(isbegin_quest(8893) == 1){
 		npctalk "It looks like Ivan has something to say.","",bc_self;
 		end;
@@ -8969,17 +8969,17 @@ OnInit:
 end;
 }
 
-luna_sf1,45,267,5	script	Yohan#21ms00	EP21_NPC_YOHAN,{
+luna_sf1,45,267,5	script	Yohan#21ms00	4_EP21_YOHAN,{
 	npctalk "This place should be safe... maybe...","",bc_self;
 	end;
 }
 
-luna_sf1,50,265,1	script(CLOAKED)	Wilhelm#21ms00	EP21_NPC_WILHELM,{
+luna_sf1,50,265,1	script(CLOAKED)	Wilhelm#21ms00	4_EP21_WILHELM,{
 	npctalk "Why is this happening to me...","",bc_self;
 	end;
 }
 
-luna_sf1,48,265,7	script(CLOAKED)	Nadoyo#21ms00	EP21_NPC_NADOYO,{
+luna_sf1,48,265,7	script(CLOAKED)	Nadoyo#21ms00	4_EP21_NADOYO,{
 	if(isbegin_quest(17761) == 1){
 		npctalk "*Whistling*.","",bc_self;
 		end;
@@ -9076,7 +9076,7 @@ OnInit:
 end;
 }
 
-luna_sf1,52,263,1	script(CLOAKED)	Carmigand#21ms00	EP21_NPC_REINHARDT,{
+luna_sf1,52,263,1	script(CLOAKED)	Carmigand#21ms00	4_EP21_REINHARDT,{
 	npctalk "We... made it out safely. Thanks to everyone's effort.","",bc_self;
 	end;
 }
@@ -9127,7 +9127,7 @@ OnInit:
 end;
 }
 
-jor_tmple1,186,72,3	duplicate(dummynpc)	Ivan#21ms10	EP21_NPC_IVAN
+jor_tmple1,186,72,3	duplicate(dummynpc)	Ivan#21ms10	4_EP21_IVAN
 
 luna_sf2,109,253,0	script	#21ms11	HIDDEN_WARP_NPC,2,2,{
 	if(isbegin_quest(17752) == 1  || isbegin_quest(17756) == 1){
@@ -9139,7 +9139,7 @@ luna_sf2,109,253,0	script	#21ms11	HIDDEN_WARP_NPC,2,2,{
 	end;
 }
 
-luna_sf2,113,257,5	script(CLOAKED)	Ivan#21ms11	EP21_NPC_IVAN,{
+luna_sf2,113,257,5	script(CLOAKED)	Ivan#21ms11	4_EP21_IVAN,{
 	if(isbegin_quest(17752) == 1){
 		cutin "ep21_ivan03.png",0;
 		mes "[Ivan]";
@@ -9306,12 +9306,12 @@ OnInit:
 end;
 }
 
-luna_sf2,116,256,3	script(CLOAKED)	Tan#21ms10	EP21_NPC_TAN,{
+luna_sf2,116,256,3	script(CLOAKED)	Tan#21ms10	4_EP21_TAN,{
 	npctalk "I'll watch you closely.","Tan#21ms10",bc_self;
 	end;
 }
 
-luna_sf2,116,253,1	script(CLOAKED)	Yohan#21ms10	EP21_NPC_YOHAN,{
+luna_sf2,116,253,1	script(CLOAKED)	Yohan#21ms10	4_EP21_YOHAN,{
 	npctalk "The shape of this temple... it looks familiar.","Yohan#21ms10",bc_self;
 	end;
 }
@@ -9407,7 +9407,7 @@ luna_sf2,43,152,5	script	Believer#21ms14	4_EP21_F_WORKER_B,{
 	end;
 }
 
-luna_sf2,41,150,5	script	Tan#21ms11	EP21_NPC_TAN,{
+luna_sf2,41,150,5	script	Tan#21ms11	4_EP21_TAN,{
 	npctalk "Let's hear what the believer has to say.","",bc_self;
 	end;
 }
@@ -9534,7 +9534,7 @@ luna_sf2,116,263,7	script(CLOAKED)	Believer#21ms12	4_EP21_F_WORKER_B,{
 	end;
 }
 
-luna_sf2,122,263,1	script(CLOAKED)	Tan#21ms12	EP21_NPC_TAN,{
+luna_sf2,122,263,1	script(CLOAKED)	Tan#21ms12	4_EP21_TAN,{
 	npctalk "Those believers over there seems like they might know something.","",bc_self;
 	end;
 }
@@ -9648,7 +9648,7 @@ OnInit:
 end;
 }
 
-luna_sf2,198,254,1	script(CLOAKED)	Tan#21ms15	EP21_NPC_TAN,{
+luna_sf2,198,254,1	script(CLOAKED)	Tan#21ms15	4_EP21_TAN,{
 	npctalk "This is the entry place for the 2nd floor.","",bc_self;
 	end;
 }
@@ -9668,7 +9668,7 @@ luna_sf2,193,256,7	script(CLOAKED)	Believer#21ms19	4_EP21_F_WORKER_B,{
 	end;
 }
 
-luna_sf2,187,254,5	script(CLOAKED)	Nadoyo#21ms13	EP21_NPC_NADOYO,{
+luna_sf2,187,254,5	script(CLOAKED)	Nadoyo#21ms13	4_EP21_NADOYO,{
 	if(isbegin_quest(17762) == 1){
 		cutin "ep21_nadoyo10.png",0;
 		mes "[Nadoyo]";
@@ -9775,22 +9775,22 @@ OnInit:
 end;
 }
 
-luna_sf2,193,252,3	script(CLOAKED)	Ivan#21ms13	EP21_NPC_IVAN,{
+luna_sf2,193,252,3	script(CLOAKED)	Ivan#21ms13	4_EP21_IVAN,{
 	npctalk "Ugh, I'm getting nervous.","",bc_self;
 	end;
 }
 
-luna_sf2,192,249,1	script(CLOAKED)	Tan#21ms13	EP21_NPC_TAN,{
+luna_sf2,192,249,1	script(CLOAKED)	Tan#21ms13	4_EP21_TAN,{
 	npctalk "......","",bc_self;
 	end;
 }
 
-luna_sf2,192,254,3	script(CLOAKED)	Yohan#21ms13	EP21_NPC_YOHAN,{
+luna_sf2,192,254,3	script(CLOAKED)	Yohan#21ms13	4_EP21_YOHAN,{
 	npctalk "Oh, huh... why does this place looks really familiar?","",bc_self;
 	end;
 }
 
-luna_sf2,190,254,3	script(CLOAKED)	Wilhelm#21ms13	EP21_NPC_WILHELM,{
+luna_sf2,190,254,3	script(CLOAKED)	Wilhelm#21ms13	4_EP21_WILHELM,{
 	npctalk "Why am I even here...","",bc_self;
 	end;
 }
@@ -9939,27 +9939,27 @@ luna_sf2,204,263,3	script	Guard#21ms11	EP21_YORDOS_C,{
 	end;
 }
 
-luna_sf2,202,261,1	script(CLOAKED)	Nadoyo#21ms14	EP21_NPC_NADOYO,{
+luna_sf2,202,261,1	script(CLOAKED)	Nadoyo#21ms14	4_EP21_NADOYO,{
 	npctalk "Act as natural as possible.","",bc_self;
 	end;
 }
 
-luna_sf2,198,258,7	script(CLOAKED)	Ivan#21ms14	EP21_NPC_IVAN,{
+luna_sf2,198,258,7	script(CLOAKED)	Ivan#21ms14	4_EP21_IVAN,{
 	npctalk "We're about to enter the heart of the Jormungandr cult.","",bc_self;
 	end;
 }
 
-luna_sf2,201,257,1	script(CLOAKED)	Tan#21ms14	EP21_NPC_TAN,{
+luna_sf2,201,257,1	script(CLOAKED)	Tan#21ms14	4_EP21_TAN,{
 	npctalk "Focus on the task.","",bc_self;
 	end;
 }
 
-luna_sf2,204,258,1	script(CLOAKED)	Yohan#21ms14	EP21_NPC_YOHAN,{
+luna_sf2,204,258,1	script(CLOAKED)	Yohan#21ms14	4_EP21_YOHAN,{
 	npctalk "Results... we need it this time...","",bc_self;
 	end;
 }
 
-luna_sf2,199,261,7	script(CLOAKED)	Wilhelm#21ms14	EP21_NPC_WILHELM,{
+luna_sf2,199,261,7	script(CLOAKED)	Wilhelm#21ms14	4_EP21_WILHELM,{
 	npctalk "Can we really just do nothing?","",bc_self;
 	end;
 }
@@ -9981,7 +9981,7 @@ OnTouch:
 end;
 }
 
-jor_mbase,143,272,5	script(CLOAKED)	Tris#21ms20	EP21_NPC_TRIS,{
+jor_mbase,143,272,5	script(CLOAKED)	Tris#21ms20	4_EP21_TRIS,{
 	if(isbegin_quest(17757) == 1){
 		cutin "ep21_tris08.png",0;
 		mes "[Tris]";
@@ -10295,7 +10295,7 @@ OnInit:
 end;	
 }
 
-jor_mbase,147,274,3	script(CLOAKED)	Ivan#21ms20	EP21_NPC_IVAN,{
+jor_mbase,147,274,3	script(CLOAKED)	Ivan#21ms20	4_EP21_IVAN,{
 	if(isbegin_quest(17757) == 1){
 		npctalk "Phew- that was tough. Right? It would be nice if we could rest.","",bc_self;
 		end;
@@ -10307,7 +10307,7 @@ jor_mbase,147,274,3	script(CLOAKED)	Ivan#21ms20	EP21_NPC_IVAN,{
 	end;
 }
 
-jor_mbase,149,273,3	script(CLOAKED)	Tan#21ms20	EP21_NPC_TAN,{
+jor_mbase,149,273,3	script(CLOAKED)	Tan#21ms20	4_EP21_TAN,{
 	if(isbegin_quest(17757) == 1){
 		npctalk "......","",bc_self;
 		end;
@@ -10319,7 +10319,7 @@ jor_mbase,149,273,3	script(CLOAKED)	Tan#21ms20	EP21_NPC_TAN,{
 	end;
 }
 
-jor_mbase,146,269,1	script(CLOAKED)	Yohan#21ms20	EP21_NPC_YOHAN,{
+jor_mbase,146,269,1	script(CLOAKED)	Yohan#21ms20	4_EP21_YOHAN,{
 	npctalk "Would you like some water?","",bc_self;
 	end;
 }
@@ -10329,12 +10329,12 @@ jor_mbase,143,269,5	script(CLOAKED)	Iana#21ms20	4_EP21_IANA,{
 	end;
 }
 
-jor_mbase,150,271,3	script(CLOAKED)	Carmigand#21ms20	EP21_NPC_REINHARDT,{
+jor_mbase,150,271,3	script(CLOAKED)	Carmigand#21ms20	4_EP21_REINHARDT,{
 	npctalk "This is where the other humans are...","",bc_self;
 	end;
 }
 
-jor_mbase,149,268,1	script(CLOAKED)	Wilhelm#21ms20	EP21_NPC_WILHELM,{
+jor_mbase,149,268,1	script(CLOAKED)	Wilhelm#21ms20	4_EP21_WILHELM,{
 	npctalk "Phew- I can finally catch my breath.","",bc_self;
 	end;
 }
@@ -10381,7 +10381,7 @@ OnTouch:
 end;
 }
 
-jor_crk_p,71,86,5	script(CLOAKED)	Tan#21ms30	EP21_NPC_TAN,{
+jor_crk_p,71,86,5	script(CLOAKED)	Tan#21ms30	4_EP21_TAN,{
 	if(isbegin_quest(17758) == 1){
 		cutin "ep21_tan01.png",1;
 		mes "[Tan]";
@@ -10525,7 +10525,7 @@ OnInit:
 end;	
 }
 
-jor_crk_p,69,85,5	script(CLOAKED)	Ivan#21ms30	EP21_NPC_IVAN,{
+jor_crk_p,69,85,5	script(CLOAKED)	Ivan#21ms30	4_EP21_IVAN,{
 	if(isbegin_quest(17758) == 1){
 		cutin "ep21_ivan02.png",0;
 		mes "[Ivan]";
@@ -10603,12 +10603,12 @@ OnInit:
 end;	
 }
 
-jor_crk_p,72,83,1	script(CLOAKED)	Yohan#21ms30	EP21_NPC_YOHAN,{
+jor_crk_p,72,83,1	script(CLOAKED)	Yohan#21ms30	4_EP21_YOHAN,{
 	npctalk "This place... I'd like to take a closer look sometime...","",bc_self;
 	end;
 }
 
-jor_crk_p,74,86,3	script(CLOAKED)	Nadoyo#21ms30	EP21_NPC_NADOYO,{
+jor_crk_p,74,86,3	script(CLOAKED)	Nadoyo#21ms30	4_EP21_NADOYO,{
 	npctalk "Aren't you well-trusted now?","",bc_self;
 	end;
 }
@@ -10625,7 +10625,7 @@ OnTouch:
 end;
 }
 
-jor_mbase,166,302,5	script(CLOAKED)	Ivan#21ms40	EP21_NPC_IVAN,{
+jor_mbase,166,302,5	script(CLOAKED)	Ivan#21ms40	4_EP21_IVAN,{
 	if(isbegin_quest(17760) == 1){
 		cutin "ep21_ivan03.png",1;
 		mes "[Ivan]";
@@ -10795,22 +10795,22 @@ OnInit:
 end;
 }
 
-jor_mbase,165,304,5	script(CLOAKED)	Tan#21ms40	EP21_NPC_TAN,{
+jor_mbase,165,304,5	script(CLOAKED)	Tan#21ms40	4_EP21_TAN,{
 	npctalk "Who are we looking for?","",bc_self;
 	end;
 }
 
-jor_mbase,163,302,5	script(CLOAKED)	Yohan#21ms40	EP21_NPC_YOHAN,{
+jor_mbase,163,302,5	script(CLOAKED)	Yohan#21ms40	4_EP21_YOHAN,{
 	npctalk "That conditions... do you really think there's someone who fits it?","",bc_self;
 	end;
 }
 
-jor_mbase,169,299,1	script(CLOAKED)	Wilhelm#21ms40	EP21_NPC_WILHELM,{
+jor_mbase,169,299,1	script(CLOAKED)	Wilhelm#21ms40	4_EP21_WILHELM,{
 	npctalk "I'm really busy. It's not like you'll do my job for me.","",bc_self;
 	end;
 }
 
-mbase_in,118,186,3	script	Reinhardt#21ms50	EP21_NPC_REINHARDT,5,5,{
+mbase_in,118,186,3	script	Reinhardt#21ms50	4_EP21_REINHARDT,5,5,{
 	if(isbegin_quest(17767) == 1){
 		cutin "ep21_reinhardt06.png",2;
 		mes "[Carmigand]";
@@ -11191,7 +11191,7 @@ end;
 mbase_in,115,182,7	duplicate(dummynpc)	Lunaforma Worker#21ms50	4_EP21_M_WORKER_A
 mbase_in,115,184,7	duplicate(dummynpc)	Lunaforma Worker#21ms51	4_EP21_F_WORKER_B
 
-mbase_in,116,186,5	script(CLOAKED)	Wilhelm#21ms50	EP21_NPC_WILHELM,{
+mbase_in,116,186,5	script(CLOAKED)	Wilhelm#21ms50	4_EP21_WILHELM,{
 	if(isbegin_quest(17767) == 1){
 		cutin "ep21_wilhelm02.png",0;
 		mes "[Wilhelm]";
@@ -11391,7 +11391,7 @@ OnTouch:
 end;
 }
 
-jor_mbase,140,201,3	script(CLOAKED)	Wilhelm#21ms70	EP21_NPC_WILHELM,{
+jor_mbase,140,201,3	script(CLOAKED)	Wilhelm#21ms70	4_EP21_WILHELM,{
 	if(isbegin_quest(17771) == 1){
 		cutin "ep21_wilhelm02.png",2;
 		mes "[Wilhelm]";
@@ -11583,9 +11583,9 @@ OnInit:
 end;
 }
 
-jor_mbase,142,200,3	duplicate(dummynpc)	Reinhardt#21ms70	EP21_NPC_REINHARDT
+jor_mbase,142,200,3	duplicate(dummynpc)	Reinhardt#21ms70	4_EP21_REINHARDT
 
-jor_mbase,194,279,7	script(CLOAKED)	Reinhardt#21ms60	EP21_NPC_REINHARDT,{
+jor_mbase,194,279,7	script(CLOAKED)	Reinhardt#21ms60	4_EP21_REINHARDT,{
 	if(isbegin_quest(17773) == 1){
 		mes "[Reinhardt]";
 		mes "This place...";
@@ -11675,7 +11675,7 @@ OnInit:
 end;
 }
 
-jor_mbase,197,277,7	script(CLOAKED)	Tris#21ms60	EP21_NPC_TRIS,{
+jor_mbase,197,277,7	script(CLOAKED)	Tris#21ms60	4_EP21_TRIS,{
 	if(isbegin_quest(17773) == 1){
 		cutin "ep21_tris09.png",2;
 		mes "[Tris]";
@@ -11802,7 +11802,7 @@ OnInit:
 end;
 }
 
-jor_mbase,196,280,3	script(CLOAKED)	Wilhelm#21ms61	EP21_NPC_WILHELM,{
+jor_mbase,196,280,3	script(CLOAKED)	Wilhelm#21ms61	4_EP21_WILHELM,{
 	if(isbegin_quest(17775) == 1){
 		cutin "ep21_wilhelm01.png",2;
 		mes "[Wilhelm]";
@@ -11965,7 +11965,7 @@ OnInit:
 end;
 }
 
-jor_mbase,200,285,7	duplicate(dummynpc)	Wilhelm#21ms60	EP21_NPC_WILHELM
+jor_mbase,200,285,7	duplicate(dummynpc)	Wilhelm#21ms60	4_EP21_WILHELM
 jor_mbase,201,288,3	duplicate(dummynpc)	Believer#21ms60	4_EP21_M_WORKER_A
 jor_mbase,202,286,3	duplicate(dummynpc)	Believer#21ms61	4_EP21_WORKER_KID_B
 jor_mbase,193,283,5	duplicate(dummynpc)	Believer#21ms62	4_EP21_M_WORKER_A
@@ -11976,14 +11976,14 @@ jor_mbase,199,279,3	duplicate(dummynpc)	Believer#21ms66	4_EP21_F_WORKER_A
 jor_mbase,195,284,3	duplicate(dummynpc)	Believer#21ms67	4_EP21_WORKER_KID_A
 jor_mbase,195,276,1	duplicate(dummynpc)	Believer#21ms68	4_EP21_WORKER_KID_B
 jor_mbase,196,278,1	duplicate(dummynpc)	Believer#21ms69	4_EP21_M_WORKER_A
-jor_mbase,138,201,5	duplicate(dummynpc)	Tris#21ms70	EP21_NPC_TRIS
+jor_mbase,138,201,5	duplicate(dummynpc)	Tris#21ms70	4_EP21_TRIS
 
-mbase_in,119,182,3	script(CLOAKED)	Tris#21ms50	EP21_NPC_TRIS,{
+mbase_in,119,182,3	script(CLOAKED)	Tris#21ms50	4_EP21_TRIS,{
 	npctalk "You've really done well. Let's focus on the topic.","",bc_self;
 	end;
 }
 
-mbase_in,115,184,7	script(CLOAKED)	Tan#21ms50	EP21_NPC_TAN,{
+mbase_in,115,184,7	script(CLOAKED)	Tan#21ms50	4_EP21_TAN,{
 	npctalk "......","",bc_self;
 	end;
 }
@@ -11993,7 +11993,7 @@ mbase_in,115,182,7	script(CLOAKED)	Iana#21ms50	4_EP21_IANA,{
 	end;
 }
 
-mbase_in,117,181,1	script(CLOAKED)	Yohan#21ms50	EP21_NPC_YOHAN,{
+mbase_in,117,181,1	script(CLOAKED)	Yohan#21ms50	4_EP21_YOHAN,{
 	npctalk "The two of them... really look alike...","",bc_self;
 	end;
 }
@@ -14313,35 +14313,35 @@ OnInit:
 end;
 }
 
-luna_sf2,265,46,1	script(CLOAKED)	Yohan#md	EP21_NPC_YOHAN,1,1,{
+luna_sf2,265,46,1	script(CLOAKED)	Yohan#md	4_EP21_YOHAN,1,1,{
 	cutin "ep21_yohan03.png",2;
 	mes "[Yohan]";
 	mes "Whew... I'm not sure if this is the right decision.";
 	close3;
 }
 
-luna_sf2,267,44,1	script(CLOAKED)	Nadoyo#md	EP21_NPC_NADOYO,1,1,{
+luna_sf2,267,44,1	script(CLOAKED)	Nadoyo#md	4_EP21_NADOYO,1,1,{
 	cutin "ep21_nadoyo01.png",2;
 	mes "[Nadoyo]";
 	mes "I-…I'm not scared. I can handle this much!";
 	close3;
 }
 
-luna_sf2,265,42,1	script(CLOAKED)	Richard#md	EP21_NPC_RICHARD,1,1,{
+luna_sf2,265,42,1	script(CLOAKED)	Richard#md	4_EP21_RICHARD,1,1,{
 	cutin "ep21_richard01.png",2;
 	mes "[Richard]";
 	mes "I'm not thinking of turning back.";
 	close3;
 }
 
-luna_sf2,262,44,1	script(CLOAKED)	Tris#md	EP21_NPC_TRIS,1,1,{
+luna_sf2,262,44,1	script(CLOAKED)	Tris#md	4_EP21_TRIS,1,1,{
 	cutin "ep21_tris04.png",2;
 	mes "[Tris]";
 	mes "We can't retreat now that we've come this far.";
 	close3;
 }
 
-luna_sf2,262,40,1	script(CLOAKED)	Ivan#md	EP21_NPC_IVAN,1,1,{
+luna_sf2,262,40,1	script(CLOAKED)	Ivan#md	4_EP21_IVAN,1,1,{
 	cutin "ep21_ivan02.png",2;
 	mes "[Ivan]";
 	mes "If Tan is going through with it, Then I'll lend a hand.";
@@ -14355,42 +14355,42 @@ luna_sf2,258,40,7	script(CLOAKED)	Aurelie#md	4_EP21_AURELIE,1,1,{
 	close3;
 }
 
-luna_sf2,258,44,7	script(CLOAKED)	Tan#md	EP21_NPC_TAN,1,1,{
+luna_sf2,258,44,7	script(CLOAKED)	Tan#md	4_EP21_TAN,1,1,{
 	cutin "ep21_tan04.png",2;
 	mes "[Tan]";
 	mes "I have a bad feeling about this.";
 	close3;
 }
 
-luna_sf2,256,42,7	script(CLOAKED)	Galaxia#md	EP21_NPC_GALAXIA,1,1,{
+luna_sf2,256,42,7	script(CLOAKED)	Galaxia#md	4_EP21_GALAXIA_A,1,1,{
 	cutin "ep21_galaxia_a.png",2;
 	mes "[Galaxia]";
 	mes "I can't feel anything. That means its very dangerous.";
 	close3;
 }
 
-luna_sf2,253,43,7	script(CLOAKED)	Wilhelm#md	EP21_NPC_WILHELM,1,1,{
+luna_sf2,253,43,7	script(CLOAKED)	Wilhelm#md	4_EP21_WILHELM,1,1,{
 	cutin "ep21_wilhelm01.png",2;
 	mes "[Wilhelm]";
 	mes "I'm against it. That's what my rational mind tells me, but…";
 	close3;
 }
 
-luna_sf2,255,45,7	script(CLOAKED)	Maristella#md	EP21_NPC_MARISTELLA,1,1,{
+luna_sf2,255,45,7	script(CLOAKED)	Maristella#md	4_EP21_MARISTELLA,1,1,{
 	cutin "ep21_maristella01.png",2;
 	mes "[Maristella]";
 	mes "We can't turn back now. But…";
 	close3;
 }
 
-luna_sf2,255,47,7	script(CLOAKED)	Reinhardt#md	EP21_NPC_REINHARDT,1,1,{
+luna_sf2,255,47,7	script(CLOAKED)	Reinhardt#md	4_EP21_REINHARDT,1,1,{
 	cutin "ep21_reinhardt07.png",2;
 	mes "[Reinhardt]";
 	mes "I think we should stop Tris.";
 	close3;
 }
 
-luna_sf2,251,46,7	script(CLOAKED)	Gunter#md	EP21_NPC_GUNTER,1,1,{
+luna_sf2,251,46,7	script(CLOAKED)	Gunter#md	4_EP21_GUNTER,1,1,{
 	cutin "ep21_gunter01.png",2;
 	mes "[Gunter]";
 	mes "Will we able to return?";
