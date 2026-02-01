@@ -8186,7 +8186,10 @@ ACMD_FUNC(makehomun)
 	}
 
 	homunid = atoi(message);
-	if( homunid < HM_CLASS_BASE || homunid > HM_CLASS_BASE + MAX_HOMUNCULUS_CLASS - 1 )
+
+	std::shared_ptr<s_homunculus_db> hom = homunculus_db.find(homunid);
+
+	if( !hom )
 	{
 		clif_displaymessage(fd, msg_txt(sd,1257)); // Invalid Homunculus ID.
 		return -1;
