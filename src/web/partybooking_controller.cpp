@@ -258,7 +258,10 @@ HANDLER_FUNC(partybooking_delete){
 	sl.lock();
 	auto handle = sl.getHandle();
 
-	if( SQL_ERROR == Sql_Query( handle, "DELETE FROM `%s` WHERE `world_name` = '%s' AND `account_id` = '%d'", partybookings_table, world_name.c_str(), account_id ) ){
+	char sanitized_world_name[WORLD_NAME_LENGTH * 2 + 1];
+	Sql_EscapeString( nullptr, sanitized_world_name, world_name.c_str() );
+
+	if( SQL_ERROR == Sql_Query( handle, "DELETE FROM `%s` WHERE `world_name` = '%s' AND `account_id` = '%d'", partybookings_table, sanitized_world_name, account_id ) ){
 		Sql_ShowDebug( handle );
 
 		sl.unlock();
