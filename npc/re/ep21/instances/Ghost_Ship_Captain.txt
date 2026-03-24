@@ -124,30 +124,27 @@ OnInstanceInit:
 	disablenpc instance_npcname("GhostShipCaptainPortal#03");
 	disablenpc instance_npcname("GhostShipCaptainPortal#04");
 	end;
-
-OnCcdd1:
-	set 'Wtgs_Mob_01,'Wtgs_Mob_01-1;
-	if ('Wtgs_Mob_01>0) end;
+OnMyMobDead1:
+	set 'GSCap_Mob_01,'GSCap_Mob_01-1;
+	if ('GSCap_Mob_01>0) end;
 	enablenpc instance_npcname("GhostShipCaptainPortal#01");
-	set 'Wtgs_Mob_01,5;
-	areamonster 'map$,42,39,48,24,"--ja--",22369,5,instance_npcname("Ghost_Ship_Captain_Incident_1")+"::OnCcdd2";
+	set 'GSCap_Mob_01,5;
+	areamonster 'map$,42,39,48,24,"--ja--",22369,5,instance_npcname("Ghost_Ship_Captain_Incident_1")+"::OnMyMobDead2";
 	instance_announce instance_id(1),"Clean up and move to the next area",bc_all,0xD7BA98;
 	end;
-
-OnCcdd2:
-	set 'Wtgs_Mob_01,'Wtgs_Mob_01-1;
-	if ('Wtgs_Mob_01>0) end;
+OnMyMobDead2:
+	set 'GSCap_Mob_01,'GSCap_Mob_01-1;
+	if ('GSCap_Mob_01>0) end;
 	enablenpc instance_npcname("GhostShipCaptainPortal#02");
-	set 'Wtgs_Mob_01,14;
-	areamonster 'map$,183,100,185,98,"--ja--",22369,3,instance_npcname("Ghost_Ship_Captain_Incident_1")+"::OnCcdd3";
-	areamonster 'map$,147,102,151,95,"--ja--",22369,4,instance_npcname("Ghost_Ship_Captain_Incident_1")+"::OnCcdd3";
-	areamonster 'map$,105,121,110,102,"--ja--",22369,7,instance_npcname("Ghost_Ship_Captain_Incident_1")+"::OnCcdd3";
+	set 'GSCap_Mob_01,14;
+	areamonster 'map$,183,100,185,98,"--ja--",22369,3,instance_npcname("Ghost_Ship_Captain_Incident_1")+"::OnMyMobDead3";
+	areamonster 'map$,147,102,151,95,"--ja--",22369,4,instance_npcname("Ghost_Ship_Captain_Incident_1")+"::OnMyMobDead3";
+	areamonster 'map$,105,121,110,102,"--ja--",22369,7,instance_npcname("Ghost_Ship_Captain_Incident_1")+"::OnMyMobDead3";
 	instance_announce instance_id(1),"Clean up and move to the next area",bc_all,0xD7BA98;
 	end;
-
-OnCcdd3:
-	set 'Wtgs_Mob_01,'Wtgs_Mob_01-1;
-	if ('Wtgs_Mob_01>0) end;
+OnMyMobDead3:
+	set 'GSCap_Mob_01,'GSCap_Mob_01-1;
+	if ('GSCap_Mob_01>0) end;
 	enablenpc instance_npcname("Maristella#02");
 	end;
 
@@ -181,10 +178,10 @@ OnEnd:
 	specialeffect 16;
 	disablenpc instance_npcname(strnpcinfo(0));
 	enablenpc instance_npcname("GhostShipCaptainPortal#02");
-	set 'Wtgs_Mob_01,15;
-	areamonster 'map$,56,313,68,309,"--ja--",22369,6,instance_npcname("Ghost_Ship_Captain_Incident_1")+"::OnCcdd1";
-	areamonster 'map$,57,328,70,322,"--ja--",22369,4,instance_npcname("Ghost_Ship_Captain_Incident_1")+"::OnCcdd1";
-	areamonster 'map$,107,313,114,306,"--ja--",22369,5,instance_npcname("Ghost_Ship_Captain_Incident_1")+"::OnCcdd1";
+	set 'GSCap_Mob_01,15;
+	areamonster 'map$,56,313,68,309,"--ja--",22369,6,instance_npcname("Ghost_Ship_Captain_Incident_1")+"::OnMyMobDead1";
+	areamonster 'map$,57,328,70,322,"--ja--",22369,4,instance_npcname("Ghost_Ship_Captain_Incident_1")+"::OnMyMobDead1";
+	areamonster 'map$,107,313,114,306,"--ja--",22369,5,instance_npcname("Ghost_Ship_Captain_Incident_1")+"::OnMyMobDead1";
 	end;
 
 }

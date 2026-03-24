@@ -143,9 +143,9 @@ OnInstanceInit:
 		if(checkquest(12650) == -1) { setquest 12650; }
 		mapannounce 'map$,"[Final Battle] Start conquering the Final Battle in easy mode, damage reduction mode is 50%",bc_map,"0x00ff99";
 		hideonnpc instance_npcname(strnpcinfo(0));
-		monster 'map$,168,30,"Tan",22371,1,instance_npcname(strnpcinfo(0))+"::OnBOSSdie"; 
-		'TAN_boss = $@mobid[0];
-		setunitdata 'TAN_boss,UMOB_DAMAGETAKEN,1;
+		monster 'map$,168,30,"Tan",22371,1,instance_npcname(strnpcinfo(0))+"::OnFINALBTTLdie"; 
+		'FINALBTTL_boss = $@mobid[0];
+		setunitdata 'FINALBTTL_boss,UMOB_DAMAGETAKEN,1;
 		areamobuseskill 'map$,168,30,60,22371,771,1,0,360000,ET_KEK,0;
 		initnpctimer instance_npcname("#monster01_EP21");
 		mapwarp instance_mapname("1@ep21b"),instance_mapname("1@ep21b"),168,15;
@@ -157,9 +157,9 @@ OnInstanceInit:
 		if(checkquest(12651) == -1) { setquest 12651; }
 		mapannounce 'map$,"[Final Battle] Start to conquer the final battle in normal mode, damage reduction mode is 90%",bc_map,"0x00ff99";
 		hideonnpc instance_npcname(strnpcinfo(0));
-		monster 'map$,168,30,"Devouring Tan",22373,1,instance_npcname(strnpcinfo(0))+"::OnBOSSdie"; 
-		'TAN_boss = $@mobid[0];
-		setunitdata 'TAN_boss,UMOB_DAMAGETAKEN,1;
+		monster 'map$,168,30,"Devouring Tan",22373,1,instance_npcname(strnpcinfo(0))+"::OnFINALBTTLdie"; 
+		'FINALBTTL_boss = $@mobid[0];
+		setunitdata 'FINALBTTL_boss,UMOB_DAMAGETAKEN,1;
 		areamobuseskill 'map$,168,30,60,22373,771,5,0,360000,ET_KEK,0;
 		initnpctimer instance_npcname("#monster01_EP21");
 		mapwarp instance_mapname("1@ep21b"),instance_mapname("1@ep21b"),168,15;
@@ -168,7 +168,7 @@ OnInstanceInit:
 	}
 
 
-OnBOSSdie:
+OnFINALBTTLdie:
 	'win = 1;
 	stopnpctimer instance_npcname("#monster01_EP21");
 	stopnpctimer instance_npcname("#monster02_EP21");
@@ -183,47 +183,47 @@ OnBOSSdie:
 1@ep21b,0,0,0	script	#monster01_EP21	-1,{ end;
 
 OnTimer3000:
-	'TAN_mob = 30;
-	areamonster 'map$,162,35,178,22,"The Phantom of Jormungandr",22300,6,instance_npcname(strnpcinfo(0))+"::OnBOSSdie01";
+	'FINALBTTL_mob = 30;
+	areamonster 'map$,162,35,178,22,"The Phantom of Jormungandr",22300,6,instance_npcname(strnpcinfo(0))+"::OnFINALBTTLdie01";
 	end;
 OnTimer6000:
-	areamonster 'map$,162,35,178,22,"The Phantom of Jormungandr",22300,6,instance_npcname(strnpcinfo(0))+"::OnBOSSdie01";
+	areamonster 'map$,162,35,178,22,"The Phantom of Jormungandr",22300,6,instance_npcname(strnpcinfo(0))+"::OnFINALBTTLdie01";
 	end;
 OnTimer9000:
-	areamonster 'map$,162,35,178,22,"The Phantom of Jormungandr",22300,6,instance_npcname(strnpcinfo(0))+"::OnBOSSdie01";
+	areamonster 'map$,162,35,178,22,"The Phantom of Jormungandr",22300,6,instance_npcname(strnpcinfo(0))+"::OnFINALBTTLdie01";
 	end;
 OnTimer12000:
-	areamonster 'map$,162,35,178,22,"The Phantom of Jormungandr",22300,6,instance_npcname(strnpcinfo(0))+"::OnBOSSdie01";
+	areamonster 'map$,162,35,178,22,"The Phantom of Jormungandr",22300,6,instance_npcname(strnpcinfo(0))+"::OnFINALBTTLdie01";
 	end;
 OnTimer15000:
-	areamonster 'map$,162,35,178,22,"The Phantom of Jormungandr",22300,6,instance_npcname(strnpcinfo(0))+"::OnBOSSdie01";
+	areamonster 'map$,162,35,178,22,"The Phantom of Jormungandr",22300,6,instance_npcname(strnpcinfo(0))+"::OnFINALBTTLdie01";
 	stopnpctimer;
 	end;
 
-OnBOSSdie01:
-	set 'TAN_mob,'TAN_mob-1;
-	if ('TAN_mob>0) end;
+OnFINALBTTLdie01:
+	set 'FINALBTTL_mob,'FINALBTTL_mob-1;
+	if ('FINALBTTL_mob>0) end;
 
 	if('bossLv == 1){
-	killmonster 'map$,instance_npcname(strnpcinfo(0))+"::OnBOSSdie01";
+	killmonster 'map$,instance_npcname(strnpcinfo(0))+"::OnFINALBTTLdie01";
 	stopnpctimer;
-	unittalk 'TAN_boss, "Tan's consciousness is running low, the truth of the past ten years has been revealed, attack quickly!";	
-	setunitdata 'TAN_boss, UMOB_CLASS, 22375;
-	setunitdata 'TAN_boss,UMOB_AURA,2005;
-	setunitdata 'TAN_boss, UMOB_MODE, MD_NORANDOMWALK;
-	setunitdata 'TAN_boss,UMOB_DAMAGETAKEN,90;
+	unittalk 'FINALBTTL_boss, "Tan's consciousness is running low, the truth of the past ten years has been revealed, attack quickly!";	
+	setunitdata 'FINALBTTL_boss, UMOB_CLASS, 22375;
+	setunitdata 'FINALBTTL_boss,UMOB_AURA,2005;
+	setunitdata 'FINALBTTL_boss, UMOB_MODE, MD_NORANDOMWALK;
+	setunitdata 'FINALBTTL_boss,UMOB_DAMAGETAKEN,90;
 	initnpctimer instance_npcname("#monster02_EP21");
 	end;
 	}
 	
 	if('bossLv == 2){
-	killmonster 'map$,instance_npcname(strnpcinfo(0))+"::OnBOSSdie01";
+	killmonster 'map$,instance_npcname(strnpcinfo(0))+"::OnFINALBTTLdie01";
 	stopnpctimer;
-	unittalk 'TAN_boss, "Tan's consciousness is running low, the truth of the past ten years has been revealed, attack quickly!";	
-	setunitdata 'TAN_boss,UMOB_CLASS, 22375;
-	setunitdata 'TAN_boss,UMOB_AURA,2005;
-	setunitdata 'TAN_boss,UMOB_MODE, MD_NORANDOMWALK;
-	setunitdata 'TAN_boss,UMOB_DAMAGETAKEN,10;
+	unittalk 'FINALBTTL_boss, "Tan's consciousness is running low, the truth of the past ten years has been revealed, attack quickly!";	
+	setunitdata 'FINALBTTL_boss,UMOB_CLASS, 22375;
+	setunitdata 'FINALBTTL_boss,UMOB_AURA,2005;
+	setunitdata 'FINALBTTL_boss,UMOB_MODE, MD_NORANDOMWALK;
+	setunitdata 'FINALBTTL_boss,UMOB_DAMAGETAKEN,10;
 	initnpctimer instance_npcname("#monster02_EP21");
 	end;
 	}
@@ -235,11 +235,11 @@ OnBOSSdie01:
 1@ep21b,0,0,0	script	#monster02_EP21	-1,{ end;
 
 OnTimer8000:
-	unittalk 'TAN_boss, "You useless bastard, your body is already mine!";	
-	setunitdata 'TAN_boss, UMOB_CLASS, 22371;
-	setunitdata 'TAN_boss,UMOB_AURA,0;
-	setunitdata 'TAN_boss, UMOB_MODE, MD_CANMOVE|MD_AGGRESSIVE|MD_CASTSENSORIDLE|MD_CANATTACK|MD_KNOCKBACKIMMUNE|MD_DETECTOR|MD_CASTSENSORIDLE;
-	setunitdata 'TAN_boss,UMOB_DAMAGETAKEN,1;
+	unittalk 'FINALBTTL_boss, "You useless bastard, your body is already mine!";	
+	setunitdata 'FINALBTTL_boss, UMOB_CLASS, 22371;
+	setunitdata 'FINALBTTL_boss,UMOB_AURA,0;
+	setunitdata 'FINALBTTL_boss, UMOB_MODE, MD_CANMOVE|MD_AGGRESSIVE|MD_CASTSENSORIDLE|MD_CANATTACK|MD_KNOCKBACKIMMUNE|MD_DETECTOR|MD_CASTSENSORIDLE;
+	setunitdata 'FINALBTTL_boss,UMOB_DAMAGETAKEN,1;
 	initnpctimer instance_npcname("#monster01_EP21");
 	end;
 }

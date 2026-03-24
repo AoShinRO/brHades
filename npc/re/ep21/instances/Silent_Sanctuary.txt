@@ -4,22 +4,22 @@
 OnInstanceInit:
 	set_instance_var("map$", instance_mapname("1@twbs2"));
 	set_instance_var("control$",instance_npcname(strnpcinfo(0)));
-	set_instance_var("sanc", 0);
+	set_instance_var("SANCTUARY", 0);
 	set_instance_var("event_control", 0);
 end;
 
-OnEvent:
+OnSanctuaryEvt:
 	set_instance_var("event_control",get_instance_var("event_control") + 1);
-	instance_event(strnpcinfo(0),"OnEvent" + (get_instance_var("event_control") > 9 ? get_instance_var("event_control") : ("0" + get_instance_var("event_control"))),false);
+	instance_event(strnpcinfo(0),"OnSanctuaryEvt" + (get_instance_var("event_control") > 9 ? get_instance_var("event_control") : ("0" + get_instance_var("event_control"))),false);
 end;
 
-OnEvent01:
+OnSanctuaryEvt01:
 	instance_enable("Aurelie#aurelie01",false);
-	set_instance_var("sanc", 1);
+	set_instance_var("SANCTUARY", 1);
 end;
 
-OnEvent02:
-	set_instance_var("sanc", 2);
+OnSanctuaryEvt02:
+	set_instance_var("SANCTUARY", 2);
 	npctalk "..Ba..got... got ...caught?... Is... god's...love??..I ..don't..?",instance_npcname("Lasgand#lasgand01");
 	sleep 2000;
 	npctalk "Ah... pathe..tic.. a trick?..sealed..??. trapped..?? me??.. you..?are.. ?? watch..?",instance_npcname("Lasgand#lasgand01");
@@ -40,15 +40,15 @@ OnEvent02:
 	
 end;
 
-OnEvent03:
-	set_instance_var("sanc", 3);
+OnSanctuaryEvt03:
+	set_instance_var("SANCTUARY", 3);
 	instance_enable("Lasgand#lasgand01",true);
 	setnpcdisplay(instance_npcname("Lasgand#lasgand01"),4_EP20_LASGAND);
 	specialeffect EF_SELFSCROLL,AREA,instance_npcname("Lasgand#lasgand01");
 end;
 
-OnEvent04:
-	set_instance_var("sanc", 4);
+OnSanctuaryEvt04:
+	set_instance_var("SANCTUARY", 4);
 	npctalk "..Bagot... got ...caught?... Is this... god's love??..I'm don't..know..?",instance_npcname("Lasgand#lasgand01");
 	sleep 2000;
 	npctalk "Ah.. such a pathetic trick. You sealed... trapped... watch me.",instance_npcname("Lasgand#lasgand01");
@@ -68,15 +68,15 @@ OnEvent04:
 	instance_event(strnpcinfo(0),"OnSummon",false);
 end;
 
-OnEvent05:
-	set_instance_var("sanc", 5);
+OnSanctuaryEvt05:
+	set_instance_var("SANCTUARY", 5);
 	instance_enable("Lasgand#lasgand01",true);
 	setnpcdisplay(instance_npcname("Lasgand#lasgand01"),4_EP20_LASGAND);
 	specialeffect EF_SELFSCROLL,AREA,instance_npcname("Lasgand#lasgand01");
 end;
 
-OnEvent06:
-	set_instance_var("sanc", 6);
+OnSanctuaryEvt06:
+	set_instance_var("SANCTUARY", 6);
 	npctalk "Bagot got... caught? god's love... is too overwhelming .. I don't know where to run.",instance_npcname("Lasgand#lasgand01");
 	sleep 2000;
 	npctalk "What is this pathetic trick you're playing... If you were going to seal and trap me here... you shouldn't leisurely watch me.",instance_npcname("Lasgand#lasgand01");
@@ -96,8 +96,8 @@ OnEvent06:
 	instance_event(strnpcinfo(0),"OnSummon",false);
 end;
 
-OnEvent07:
-	set_instance_var("sanc", 7);
+OnSanctuaryEvt07:
+	set_instance_var("SANCTUARY", 7);
 	instance_enable("Lasgand#lasgand01",true);
 	setnpcdisplay(instance_npcname("Lasgand#lasgand01"),4_EP20_LASGAND);
 	specialeffect EF_SELFSCROLL,AREA,instance_npcname("Lasgand#lasgand01");
@@ -105,12 +105,12 @@ OnEvent07:
 end;
 
 OnSummon:
-	monster get_instance_var("map$"),96,80,"Lasgand??",21979,1,get_instance_var("control$") + "::OnEvent";
+	monster get_instance_var("map$"),96,80,"Lasgand??",21979,1,get_instance_var("control$") + "::OnSanctuaryEvt";
 end;
 }
 
 1@twbs2,99,77,4	script	Aurelie#aurelie01	4_EP19_AURELIE,3,3,{
-	if(is_party_leader() && get_instance_var("sanc") == 0){
+	if(is_party_leader() && get_instance_var("SANCTUARY") == 0){
 		cutin "ep19_aurelie01.png",2;
 		mes "[Aurelie]";
 		mes "Just like before, I'm here to act as a bridge. My form here is a mere projection.";
@@ -125,10 +125,10 @@ end;
 		npctalk "Shall we reveal the true identity of that thing who is using the body of Lasgand? Be cautious.",instance_npcname("Aurelie#aurelie01");
 		close2;
 		cutin "",255;
-		instance_event("#EP21_sanctuary_control","OnEvent",false);
+		instance_event("#EP21_sanctuary_control","OnSanctuaryEvt",false);
 		end;
 	}
-	if(get_instance_var("sanc") >= 7){
+	if(get_instance_var("SANCTUARY") >= 7){
 		cutin "ep19_aurelie01.png",2;
 		mes "[Aurelie]";
 		mes "It reminds me of the first time Lasgand was here, it's mimicking exactly what it did back then.";
@@ -153,19 +153,19 @@ end;
 }
 
 1@twbs2,94,84,3	script	Lasgand#lasgand01	21979,{
-	if(is_party_leader() && get_instance_var("sanc") == 1){
-		instance_event("#EP21_sanctuary_control","OnEvent",false);
+	if(is_party_leader() && get_instance_var("SANCTUARY") == 1){
+		instance_event("#EP21_sanctuary_control","OnSanctuaryEvt",false);
 		end;
 	}
-	if(is_party_leader() && get_instance_var("sanc") == 3){
-		instance_event("#EP21_sanctuary_control","OnEvent",false);
+	if(is_party_leader() && get_instance_var("SANCTUARY") == 3){
+		instance_event("#EP21_sanctuary_control","OnSanctuaryEvt",false);
 		end;
 	}
-	if(is_party_leader() && get_instance_var("sanc") == 5){
-		instance_event("#EP21_sanctuary_control","OnEvent",false);
+	if(is_party_leader() && get_instance_var("SANCTUARY") == 5){
+		instance_event("#EP21_sanctuary_control","OnSanctuaryEvt",false);
 		end;
 	}
-	if(get_instance_var("sanc") == 7)
+	if(get_instance_var("SANCTUARY") == 7)
 		npctalk "Adventurer! I think we've checked enough! Let's head back!",instance_npcname("Aurelie#aurelie01");
 	end;
 }

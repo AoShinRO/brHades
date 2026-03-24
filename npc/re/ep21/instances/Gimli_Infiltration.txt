@@ -11,12 +11,12 @@ OnInstanceInit:
 	instance_enable("#21ms30i", true);
 end;
 
-OnEvent:
+OnGimliEvent:
 	set_instance_var("event_control",get_instance_var("event_control") + 1);
-	instance_event(strnpcinfo(0),"OnEvent" + (get_instance_var("event_control") > 9 ? get_instance_var("event_control") : ("0" + get_instance_var("event_control"))),false);
+	instance_event(strnpcinfo(0),"OnGimliEvent" + (get_instance_var("event_control") > 9 ? get_instance_var("event_control") : ("0" + get_instance_var("event_control"))),false);
 end;
 
-OnEvent01:
+OnGimliEvent01:
 	set_instance_var("gc", 1);
 	instance_enable("Nadoyo#ms00",true);
 	instance_enable("Ivan#ms00",true);
@@ -25,7 +25,7 @@ OnEvent01:
 	instance_enable("Wilhelm#ms00",true);
 end;
 
-OnEvent02:
+OnGimliEvent02:
 	set_instance_var("gc", 2);
 	instance_enable("Nadoyo#ms00",false);
 	instance_enable("Ivan#ms00",false);
@@ -40,7 +40,7 @@ OnEvent02:
 	instance_enable("Believer#ms201",true);
 end;
 
-OnEvent03:
+OnGimliEvent03:
 	set_instance_var("gc", 3);
 	instance_enable("Wilhelm#ms200",false);
 	instance_enable("Tan#ms200",false);
@@ -48,7 +48,7 @@ OnEvent03:
 	instance_enable("Believer#ms201",false);
 end;
 
-OnEvent04:
+OnGimliEvent04:
 	set_instance_var("gc", 4);
 	instance_enable("Wilhelm#ms01",false);
 	instance_enable("Tan#ms01",false);
@@ -61,12 +61,12 @@ OnEvent04:
 	instance_enable("Believer#ms212",true);
 end;
 
-OnEvent05:
+OnGimliEvent05:
 	set_instance_var("gc", 6);
 	npctalk "Hey, don't you think something's a bit off?",instance_npcname("Believer#ms210");
 end;
 
-OnEvent06:
+OnGimliEvent06:
 	set_instance_var("gc", 7);
 	instance_enable("Tan#ms210",false);
 	instance_enable("Wilhelm#ms210",false);
@@ -75,7 +75,7 @@ OnEvent06:
 	instance_enable("Believer#ms212",false);
 end;
 
-OnEvent07:
+OnGimliEvent07:
 	set_instance_var("gc", 8);
 	instance_enable("Tan#ms10",false);
 	instance_enable("Wilhelm#ms10",false);
@@ -85,7 +85,7 @@ OnEvent07:
 	instance_enable("Wilhelm#ms20", true);
 end;
 
-OnEvent08:
+OnGimliEvent08:
 	set_instance_var("gc", 10);
 	npctalk "Phew- they'll stand out if we leave them here, let's drag them inside too.",instance_npcname("Wilhelm#ms20");
 	instance_enable("Believer#ms220", true);
@@ -96,7 +96,7 @@ OnEvent08:
 	instance_enable("#21ms20i",true);
 end;
 
-OnEvent09:
+OnGimliEvent09:
 	set_instance_var("gc", 12);
 	instance_enable("#21ms20i", false);
 	instance_enable("Believer#ms220", false);
@@ -106,7 +106,7 @@ OnEvent09:
 	instance_enable("Believer#ms222", false);
 end;
 
-OnEvent10:
+OnGimliEvent10:
 	set_instance_var("gc", 13);
 	instance_enable("Tan#ms20", false);
 	instance_enable("Wilhelm#ms20", false);
@@ -114,14 +114,14 @@ OnEvent10:
 	instance_enable("Wilhelm#ms30", true);
 end;
 
-OnEvent11:
+OnGimliEvent11:
 	set_instance_var("gc", 15);
 	instance_enable("Guard#ms30",true);
 	instance_enable("Guard#ms31",true);
 	npctalk "What's this?",instance_npcname("Guard#ms30");
 end;
 
-OnEvent12:
+OnGimliEvent12:
 	set_instance_var("gc", 16);
 	instance_enable("Tan#ms30",false);
 	instance_enable("Wilhelm#ms30",false);
@@ -138,7 +138,7 @@ OnEvent12:
 	instance_enable("Guard#ms231", true);
 end;
 
-OnEvent13:
+OnGimliEvent13:
 	set_instance_var("gc", 17);
 	instance_enable("Suspicious Place#ms230",true);
 	instance_enable("Suspicious Place#ms231",true);
@@ -147,7 +147,7 @@ OnEvent13:
 	instance_enable("Suspicious Place#ms234",true);
 end;
 
-OnEvent14:
+OnGimliEvent14:
 	set_instance_var("gc", 18);
 	instance_enable("Suspicious Place#ms230",false);
 	instance_enable("Suspicious Place#ms231",false);
@@ -159,7 +159,7 @@ OnEvent14:
 	instance_enable("#21ms40i", true);
 end;
 
-OnEvent15:
+OnGimliEvent15:
 	set_instance_var("gc", 19);
 	instance_enable("#21ms40i", false);
 	instance_enable("Tan#ms40",true);
@@ -167,18 +167,18 @@ OnEvent15:
 	instance_enable("Carmigand#ms40",true);
 end;
 
-OnEvent16:
+OnGimliEvent16:
 	set_instance_var("gc", 21);
 	npctalk "Seriously, I'm so sick of this",instance_npcname("Wilhelm#ms40");
 end;
 
-OnEvent17:
+OnGimliEvent17:
 	set_instance_var("gc", 22);
 	instance_enable("#21ms50i",true);
 	mapwarp get_instance_var("map$"),get_instance_var("map$"),38,206;
 end;
 
-OnEvent18:
+OnGimliEvent18:
 	set_instance_var("gc", 23);
 	instance_enable("Tan#ms50",true);
 	instance_enable("Wilhelm#ms50",true);
@@ -186,17 +186,17 @@ OnEvent18:
 	npctalk "Not yet.",instance_npcname("Tan#ms50");
 end;
 
-OnEvent19:
+OnGimliEvent19:
 	set_instance_var("gc", 25);
 	npctalk "It'll never end at this rate.",instance_npcname("Tan#ms50",true);
 end;
 
-OnEvent20:
+OnGimliEvent20:
 	set_instance_var("gc", 26);
 	instance_enable("#21ms70", true);
 end;
 
-OnEvent21:
+OnGimliEvent21:
 	set_instance_var("gc", 27);
 	instance_enable("Tan#ms60",true);
 	instance_enable("Wilhelm#ms60",true);
@@ -204,12 +204,12 @@ OnEvent21:
 	npctalk "Phew- escaping is tough.",instance_npcname("Wilhelm#ms60");
 end;
 
-OnEvent22:
+OnGimliEvent22:
 	set_instance_var("gc", 29);
 	npctalk "Did you see it?",instance_npcname("Wilhelm#ms60");
 end;
 
-OnEvent23:
+OnGimliEvent23:
 	set_instance_var("gc", 30);
 	instance_enable("Guard#ms60",false);
 	instance_enable("Guard#ms61",false);
@@ -226,12 +226,12 @@ OnEvent23:
 	instance_enable("Guard#ms70",false);
 end;
 
-OnEvent24:
+OnGimliEvent24:
 	set_instance_var("gc", 31);
 	npctalk "Are they still coming?",instance_npcname("Tan#ms60");
 end;
 
-OnEvent25:
+OnGimliEvent25:
 	set_instance_var("gc", 32);
 	instance_enable("#21ms60i",true);
 end;
@@ -328,14 +328,14 @@ OnMobKill:
 			break;
 	}
 	if(mobcount(.@map$,get_instance_var("control$") + "::OnMobKill")) end;
-	instance_event(strnpcinfo(0),"OnEvent",true);
+	instance_event(strnpcinfo(0),"OnGimliEvent",true);
 end;
 
 OnMobDead:
 	.@count = get_instance_var("c") - 1;
 	set_instance_var("c", .@count);
 	if(.@count != 0) end;
-	instance_event(strnpcinfo(0),"OnEvent",true);
+	instance_event(strnpcinfo(0),"OnGimliEvent",true);
 end;
 }
 
@@ -344,7 +344,7 @@ end;
 
 OnTouch:
 	if(!get_instance_var("gc") && is_party_leader()){
-		instance_event("#EP21_gimli_control","OnEvent",false);
+		instance_event("#EP21_gimli_control","OnGimliEvent",false);
 		end;
 	}
 	if(get_instance_var("gc") == 1 && is_party_leader())
@@ -451,7 +451,7 @@ end;
 		npctalk "Let's go!",instance_npcname("Ivan#ms00");
 		close2;
 		cutin "",255;
-		instance_event("#EP21_gimli_control","OnEvent",false);
+		instance_event("#EP21_gimli_control","OnGimliEvent",false);
 		navigateto("1@mdtem",260,259);
 	}
 	end;
@@ -489,7 +489,7 @@ end;
 		pcblock(true);
 		sleep2 1000;
 		pcblock(false);
-		instance_event("#EP21_gimli_control","OnEvent",false);
+		instance_event("#EP21_gimli_control","OnGimliEvent",false);
 		navigateto("1@mdtem",41,260);
 	}
 	end;
@@ -666,7 +666,7 @@ end;
 		npctalk "Argh, only if you weren't the commander, I wouldn't let this slide!";
 		close2;
 		cutin "",255;
-		instance_event("#EP21_gimli_control","OnEvent",false);
+		instance_event("#EP21_gimli_control","OnGimliEvent",false);
 		mapwarp get_instance_var("map2$"),get_instance_var("map$"),262,255;
 	}
 	end;
@@ -695,7 +695,7 @@ end;
 		npctalk "There's nothing special here. Let's search another prayer room.";
 		sleep2 1000;
 		pcblock(false);
-		instance_event("#EP21_gimli_control","OnEvent",false);
+		instance_event("#EP21_gimli_control","OnGimliEvent",false);
 		navigateto("1@mdtem",38,46);
 	}
 	end;
@@ -966,7 +966,7 @@ end;
 		npctalk "We don't have time, move quickly.",instance_npcname("Tan#ms210");
 		close2;
 		cutin "",255;
-		instance_event("#EP21_gimli_control","OnEvent",false);
+		instance_event("#EP21_gimli_control","OnGimliEvent",false);
 		mapwarp get_instance_var("map2$"),get_instance_var("map$"),36,253;
 	}
 	end;
@@ -1074,7 +1074,7 @@ end;
 		pcblock(true);
 		sleep2 1000;
 		pcblock(false);
-		instance_event("#EP21_gimli_control","OnEvent",false);
+		instance_event("#EP21_gimli_control","OnGimliEvent",false);
 	}
 	end;
 }
@@ -1089,7 +1089,7 @@ OnTouch:
 	if(get_instance_var("gc") == 10)
 		warp get_instance_var("map2$"),60,59;
 	if(get_instance_var("gc") == 11 && is_party_leader())
-		instance_event("#EP21_gimli_control","OnEvent",false);
+		instance_event("#EP21_gimli_control","OnGimliEvent",false);
 end;
 }
 
@@ -1431,7 +1431,7 @@ end;
 		npctalk "Yes!!",instance_npcname("Wilhelm#ms30");
 		close2;
 		cutin "",255;
-		instance_event("#EP21_gimli_control","OnEvent",false);
+		instance_event("#EP21_gimli_control","OnGimliEvent",false);
 		mapwarp get_instance_var("map$"),get_instance_var("map2$"),140,61;
 		end;
 	}
@@ -1635,7 +1635,7 @@ end;
 		mes "[Tan]";
 		mes "Enough. Let's start searching the room.";
 		npctalk "Enough. Let's start searching the room.",instance_npcname("Tan#ms230");
-		instance_event("#EP21_gimli_control","OnEvent",false);
+		instance_event("#EP21_gimli_control","OnGimliEvent",false);
 		close3;
 	}
 	end;
@@ -1700,7 +1700,7 @@ end;
 		npctalk "Where do you think this leads to?",instance_npcname("Wilhelm#ms230");
 		close2;
 		cutin "",255;
-		instance_event("#EP21_gimli_control","OnEvent",false);
+		instance_event("#EP21_gimli_control","OnGimliEvent",false);
 		mapwarp get_instance_var("map2$"),get_instance_var("map$"),266,106;
 		end;
 	}
@@ -1711,7 +1711,7 @@ end;
 	
 OnTouch:
 	if(get_instance_var("gc") == 18 && is_party_leader())
-		instance_event("#EP21_gimli_control","OnEvent",false);
+		instance_event("#EP21_gimli_control","OnGimliEvent",false);
 end;
 }
 
@@ -1778,7 +1778,7 @@ end;
 		npctalk "Let's get out quickly. I can't stand this place!",instance_npcname("Wilhelm#ms40");
 		close2;
 		cutin "",255;
-		instance_event("#EP21_gimli_control","OnEvent",false);
+		instance_event("#EP21_gimli_control","OnGimliEvent",false);
 		end;
 	}
 	end;
@@ -1803,7 +1803,7 @@ end;
 	
 OnTouch:
 	if(get_instance_var("gc") == 22 && is_party_leader())
-		instance_event("#EP21_gimli_control","OnEvent",false);
+		instance_event("#EP21_gimli_control","OnGimliEvent",false);
 end;
 }
 
@@ -1889,7 +1889,7 @@ end;
 		npctalk "What's the point of asking now? Let's just hurry up and find it.",instance_npcname("Wilhelm#ms50");
 		close2;
 		cutin "",255;
-		instance_event("#EP21_gimli_control","OnEvent",false);
+		instance_event("#EP21_gimli_control","OnGimliEvent",false);
 		mapwarp get_instance_var("map$"),get_instance_var("map$"),152,239;
 		end;
 	}
@@ -1916,7 +1916,7 @@ end;
 	end;
 OnTouch:
 	if(get_instance_var("gc") == 26 && is_party_leader())
-		instance_event("#EP21_gimli_control","OnEvent",false);
+		instance_event("#EP21_gimli_control","OnGimliEvent",false);
 end;
 }
 
@@ -2123,7 +2123,7 @@ end;
 		mes "When have we ever had a plan before charging in.";
 		mes "Let's go!!";
 		npctalk "When have we ever had a plan before charging in. Let's go!!",instance_npcname("Carmigand#ms60");
-		instance_event("#EP21_gimli_control","OnEvent",false);
+		instance_event("#EP21_gimli_control","OnGimliEvent",false);
 		close3;
 	}
 	end;
@@ -2358,7 +2358,7 @@ end;
 		mes "[Believer]";
 		mes "Woo, Haaa!! I'm getting out of here right now! Finally!!!!";
 		npctalk "Woo, Haaa!! I'm getting out of here right now! Finally!!!!",instance_npcname("Believer#ms61");
-		instance_event("#EP21_gimli_control","OnEvent",false);
+		instance_event("#EP21_gimli_control","OnGimliEvent",false);
 		close2;
 		cutin "",255;
 		navigateto("1@mdtem",150,244);
