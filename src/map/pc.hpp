@@ -6,6 +6,7 @@
 
 #include <bitset>
 #include <memory>
+#include <unordered_map>
 #include <vector>
 
 #include <common/cbasetypes.hpp>
@@ -495,6 +496,10 @@ public:
 
 	int32 langtype;
 	struct mmo_charstatus status;
+
+#if PACKETVER_SUPPORTS_SALES
+	std::unordered_map<int32, int32> limited_sales; // sales_id -> remaining_amount
+#endif
 
 	// Item Storages
 	struct s_storage storage, premiumStorage;

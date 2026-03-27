@@ -925,13 +925,30 @@ CREATE TABLE IF NOT EXISTS `mercenary_owner` (
 -- ----------------------------
 -- Table structure for `sales`
 -- ----------------------------
+-- Note: 'id' is a unique identifier for each sale period
+-- 'nameid' is the item ID - UNIQUE constraint ensures only one active sale per item
+-- This design allows tracking purchases per account via sales_limited_acc table
 
 CREATE TABLE IF NOT EXISTS `sales` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nameid` int(10) unsigned NOT NULL,
   `start` datetime NOT NULL,
   `end` datetime NOT NULL,
   `amount` int(11) NOT NULL,
-  PRIMARY KEY (`nameid`)
+  `rentalTime` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nameid` (`nameid`)
+) ENGINE=MyISAM;
+
+-- ----------------------------
+-- Table structure for `sales_limited_acc`
+-- ----------------------------
+
+CREATE TABLE IF NOT EXISTS `sales_limited_acc` (
+  `sales_id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `amount` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`sales_id`, `account_id`)
 ) ENGINE=MyISAM;
 
 --
