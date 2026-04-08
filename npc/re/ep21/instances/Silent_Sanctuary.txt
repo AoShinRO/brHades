@@ -1,0 +1,171 @@
+1@twbs2,1,1,0	script	#EP21_sanctuary_control	-1,{
+	end;
+
+OnInstanceInit:
+	set_instance_var("map$", instance_mapname("1@twbs2"));
+	set_instance_var("control$",instance_npcname(strnpcinfo(0)));
+	set_instance_var("sanc", 0);
+	set_instance_var("event_control", 0);
+end;
+
+OnEvent:
+	set_instance_var("event_control",get_instance_var("event_control") + 1);
+	instance_event(strnpcinfo(0),"OnEvent" + (get_instance_var("event_control") > 9 ? get_instance_var("event_control") : ("0" + get_instance_var("event_control"))),false);
+end;
+
+OnEvent01:
+	instance_enable("Aurelie#aurelie01",false);
+	set_instance_var("sanc", 1);
+end;
+
+OnEvent02:
+	set_instance_var("sanc", 2);
+	npctalk "..Ba..got... got ...caught?... Is... god's...love??..I ..don't..?",instance_npcname("Lasgand#lasgand01");
+	sleep 2000;
+	npctalk "Ah... pathe..tic.. a trick?..sealed..??. trapped..?? me??.. you..?are.. ?? watch..?",instance_npcname("Lasgand#lasgand01");
+	specialeffect EF_DQ9_CHARGE3,AREA,instance_npcname("Lasgand#lasgand01");
+	sleep 2000;
+	specialeffect EF_MAGICCRASHER,AREA,instance_npcname("Lasgand#lasgand01");
+	sleep 1000;
+	npctalk "... you... came... open...",instance_npcname("Lasgand#lasgand01");
+	sleep 1000;
+	specialeffect EF_DQ9_CHARGE4,AREA,instance_npcname("Lasgand#lasgand01");
+	npctalk "...release...me ...filthy..place...!!",instance_npcname("Lasgand#lasgand01");
+	sleep 1000;
+	specialeffect EF_MAGICCRASHER,AREA,instance_npcname("Lasgand#lasgand01");
+	instance_enable("Lasgand#lasgand01",false);
+	removespecialeffect EF_DQ9_CHARGE3,AREA,instance_npcname("Lasgand#lasgand01");
+	removespecialeffect EF_DQ9_CHARGE4,AREA,instance_npcname("Lasgand#lasgand01");
+	instance_event(strnpcinfo(0),"OnSummon",false);
+	
+end;
+
+OnEvent03:
+	set_instance_var("sanc", 3);
+	instance_enable("Lasgand#lasgand01",true);
+	setnpcdisplay(instance_npcname("Lasgand#lasgand01"),4_EP20_LASGAND);
+	specialeffect EF_SELFSCROLL,AREA,instance_npcname("Lasgand#lasgand01");
+end;
+
+OnEvent04:
+	set_instance_var("sanc", 4);
+	npctalk "..Bagot... got ...caught?... Is this... god's love??..I'm don't..know..?",instance_npcname("Lasgand#lasgand01");
+	sleep 2000;
+	npctalk "Ah.. such a pathetic trick. You sealed... trapped... watch me.",instance_npcname("Lasgand#lasgand01");
+	specialeffect EF_DQ9_CHARGE3,AREA,instance_npcname("Lasgand#lasgand01");
+	sleep 2000;
+	specialeffect EF_MAGICCRASHER,AREA,instance_npcname("Lasgand#lasgand01");
+	sleep 1000;
+	npctalk ".. Did you... come... to open the way...",instance_npcname("Lasgand#lasgand01");
+	sleep 1000;
+	specialeffect EF_DQ9_CHARGE4,AREA,instance_npcname("Lasgand#lasgand01");
+	npctalk "...release...me ...from.. filthy place...!!",instance_npcname("Lasgand#lasgand01");
+	sleep 1000;
+	specialeffect EF_MAGICCRASHER,AREA,instance_npcname("Lasgand#lasgand01");
+	instance_enable("Lasgand#lasgand01",false);
+	removespecialeffect EF_DQ9_CHARGE3,AREA,instance_npcname("Lasgand#lasgand01");
+	removespecialeffect EF_DQ9_CHARGE4,AREA,instance_npcname("Lasgand#lasgand01");
+	instance_event(strnpcinfo(0),"OnSummon",false);
+end;
+
+OnEvent05:
+	set_instance_var("sanc", 5);
+	instance_enable("Lasgand#lasgand01",true);
+	setnpcdisplay(instance_npcname("Lasgand#lasgand01"),4_EP20_LASGAND);
+	specialeffect EF_SELFSCROLL,AREA,instance_npcname("Lasgand#lasgand01");
+end;
+
+OnEvent06:
+	set_instance_var("sanc", 6);
+	npctalk "Bagot got... caught? god's love... is too overwhelming .. I don't know where to run.",instance_npcname("Lasgand#lasgand01");
+	sleep 2000;
+	npctalk "What is this pathetic trick you're playing... If you were going to seal and trap me here... you shouldn't leisurely watch me.",instance_npcname("Lasgand#lasgand01");
+	specialeffect EF_DQ9_CHARGE3,AREA,instance_npcname("Lasgand#lasgand01");
+	sleep 2000;
+	specialeffect EF_MAGICCRASHER,AREA,instance_npcname("Lasgand#lasgand01");
+	sleep 1000;
+	npctalk "..So you've come.. you're the one going to release me.",instance_npcname("Lasgand#lasgand01");
+	sleep 2000;
+	specialeffect EF_DQ9_CHARGE4,AREA,instance_npcname("Lasgand#lasgand01");
+	npctalk "Open the way!!",instance_npcname("Lasgand#lasgand01");
+	sleep 1000;
+	specialeffect EF_MAGICCRASHER,AREA,instance_npcname("Lasgand#lasgand01");
+	instance_enable("Lasgand#lasgand01",false);
+	removespecialeffect EF_DQ9_CHARGE3,AREA,instance_npcname("Lasgand#lasgand01");
+	removespecialeffect EF_DQ9_CHARGE4,AREA,instance_npcname("Lasgand#lasgand01");
+	instance_event(strnpcinfo(0),"OnSummon",false);
+end;
+
+OnEvent07:
+	set_instance_var("sanc", 7);
+	instance_enable("Lasgand#lasgand01",true);
+	setnpcdisplay(instance_npcname("Lasgand#lasgand01"),4_EP20_LASGAND);
+	specialeffect EF_SELFSCROLL,AREA,instance_npcname("Lasgand#lasgand01");
+	instance_enable("Aurelie#aurelie01",true);
+end;
+
+OnSummon:
+	monster get_instance_var("map$"),96,80,"Lasgand??",21979,1,get_instance_var("control$") + "::OnEvent";
+end;
+}
+
+1@twbs2,99,77,4	script	Aurelie#aurelie01	4_EP19_AURELIE,3,3,{
+	if(is_party_leader() && get_instance_var("sanc") == 0){
+		cutin "ep19_aurelie01.png",2;
+		mes "[Aurelie]";
+		mes "Just like before, I'm here to act as a bridge. My form here is a mere projection.";
+		npctalk "Just like before, I'm here to act as a bridge. My form here is a mere projection.",instance_npcname("Aurelie#aurelie01");
+		next;
+		mes "[Aurelie]";
+		mes "His overwhelming power is definitely gone. The mana that running wild around here must be the fragment of the heart of Ymir that failed to fuse with him, right?";
+		npctalk "His overwhelming power is definitely gone. The mana that running wild around here must be the fragment of the heart of Ymir that failed to fuse with him, right?",instance_npcname("Aurelie#aurelie01");
+		next;
+		mes "[Aurelie]";
+		mes "Shall we reveal the true identity of that thing who is using the body of Lasgand? Be cautious.";
+		npctalk "Shall we reveal the true identity of that thing who is using the body of Lasgand? Be cautious.",instance_npcname("Aurelie#aurelie01");
+		close2;
+		cutin "",255;
+		instance_event("#EP21_sanctuary_control","OnEvent",false);
+		end;
+	}
+	if(get_instance_var("sanc") >= 7){
+		cutin "ep19_aurelie01.png",2;
+		mes "[Aurelie]";
+		mes "It reminds me of the first time Lasgand was here, it's mimicking exactly what it did back then.";
+		next;
+		mes "[Aurelie]";
+		mes "This confirms it. It's evolving by splitting and imitating the original form.";
+		next;
+		mes "[Aurelie]";
+		mes "It's getting more sophisticated. The fragment of the heart of Ymir.. It's a dangerous thing.";
+		next;
+		mes "[Aurelie]";
+		mes "Let's head back now.";
+		if(isbegin_quest(18358) == 1){
+			completequest 18358;
+			setquest 18359;
+		}
+		close2;
+		cutin "",255;
+		warp "jor_twig",122,158;
+	}
+	end;
+}
+
+1@twbs2,94,84,3	script	Lasgand#lasgand01	21979,{
+	if(is_party_leader() && get_instance_var("sanc") == 1){
+		instance_event("#EP21_sanctuary_control","OnEvent",false);
+		end;
+	}
+	if(is_party_leader() && get_instance_var("sanc") == 3){
+		instance_event("#EP21_sanctuary_control","OnEvent",false);
+		end;
+	}
+	if(is_party_leader() && get_instance_var("sanc") == 5){
+		instance_event("#EP21_sanctuary_control","OnEvent",false);
+		end;
+	}
+	if(get_instance_var("sanc") == 7)
+		npctalk "Adventurer! I think we've checked enough! Let's head back!",instance_npcname("Aurelie#aurelie01");
+	end;
+}

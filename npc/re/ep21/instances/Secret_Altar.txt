@@ -1,0 +1,851 @@
+1@ep21a,1,1,0	script	#EP21_secret_altar	-1,{
+	end;
+
+OnInstanceInit:
+	set_instance_var("map$", instance_mapname("1@ep21a"));
+	set_instance_var("sec", 0);
+	set_instance_var("lh", 0);
+	set_instance_var("event_control", 0);
+	set_instance_var("summon", 0);
+	set_instance_var("control$",instance_npcname(strnpcinfo(0)));
+	instance_enable("#ep21a_evt01", true);
+end;
+
+OnEvent:
+	set_instance_var("event_control",get_instance_var("event_control") + 1);
+	instance_event(strnpcinfo(0),"OnEvent" + (get_instance_var("event_control") > 9 ? get_instance_var("event_control") : ("0" + get_instance_var("event_control"))),false);
+end;
+
+OnEvent01:
+	instance_enable("#ep21a_evt01", false);
+	set_instance_var("sec", 1);
+	instance_enable("Lehar#lehar01", true);
+	instance_enable("Nillem#nillem01", true);
+	instance_enable("Nyar#nyar01", true);
+	instance_event(strnpcinfo(0),"OnSummon",false);
+end;
+
+OnEvent02:
+	instance_enable("Lehar#lehar01",false);
+	instance_enable("Nillem#nillem01",false);
+	instance_enable("Nyar#nyar01",false);
+	set_instance_var("sec", get_instance_var("sec") + 1);
+	if(get_instance_var("sec") == 3)
+		instance_event(strnpcinfo(0),"OnEvent",false);
+end;
+
+OnEvent03:
+	set_instance_var("sec", 4);
+	instance_enable("Door#door01",true);
+	instance_enable("Lehar#lehar02",true);
+	instance_enable("Nyar#nyar02",true);
+	instance_enable("Nillem#nillem02",true);
+end;
+
+OnEvent04:
+	set_instance_var("sec", 5);
+	npctalk "This way! Hurry! I'll open the door!",instance_npcname("Lehar#lehar02");
+	npctalk "Nyaaaa!!!",instance_npcname("Nyar#nyar02");
+	setnpcdisplay(instance_npcname("Lower Cult Priest#a1"),22353);
+	setnpcdisplay(instance_npcname("Lower Cult Priest#a2"),22353);
+	setnpcdisplay(instance_npcname("Lower Cult Priest#a3"),22353);
+	instance_enable("Lower Cult Priest#a1",true);
+	instance_enable("Lower Cult Priest#a2",true);
+	instance_enable("Lower Cult Priest#a3",true);
+	sleep 400;
+	instance_enable("Lower Cult Priest#a4",true);
+	instance_enable("Lower Cult Priest#a5",true);
+	instance_enable("Lower Cult Priest#a6",true);
+	setnpcdisplay(instance_npcname("Lower Cult Priest#a4"),22353);
+	setnpcdisplay(instance_npcname("Lower Cult Priest#a5"),22353);
+	setnpcdisplay(instance_npcname("Lower Cult Priest#a6"),22353);
+	sleep 400;
+	instance_enable("Lower Cult Priest#a7",true);
+	instance_enable("Lower Cult Priest#a8",true);
+	instance_enable("Lower Cult Priest#a9",true);
+	setnpcdisplay(instance_npcname("Lower Cult Priest#a7"),22353);
+	setnpcdisplay(instance_npcname("Lower Cult Priest#a8"),22353);
+	setnpcdisplay(instance_npcname("Lower Cult Priest#a9"),22353);
+	sleep 900;
+	npctalk "Ugh! The enemies are swarming in! What should we do?!",instance_npcname("Lehar#lehar02");
+	sleep 2000;
+	npctalk "Finally, it's my time to shine! The capable court wizard Nillem will handle this, You two go ahead!",instance_npcname("Nillem#nillem02");
+	sleep 2000;
+	npctalk "Time to cast some flashy area magic~!",instance_npcname("Nillem#nillem02");
+	npctalk "There's a door here!",instance_npcname("Lehar#lehar02");
+	sleep 2000;
+	npctalk "Oh..Oh... There's no other choice! Hurry, adventurer!",instance_npcname("Lehar#lehar02");
+	instance_enable("Lehar#lehar03",true);
+	instance_enable("Nyar#nyar03",true);
+	instance_event(strnpcinfo(0),"OnSummon",false);
+	set_instance_var("sec", 6);
+end;
+
+OnEvent05:
+	instance_enable("Lehar#lehar03",false);
+	instance_enable("Nyar#nyar03",false);
+	set_instance_var("sec", get_instance_var("sec") + 1);
+	if(get_instance_var("sec") == 8)
+		instance_event(strnpcinfo(0),"OnEvent",false);
+end;
+
+OnEvent06:
+	set_instance_var("sec", 9);
+	instance_enable("Nyar#nyar04", true);
+	instance_enable("Lehar#lehar04", true);
+	instance_enable("Jormungandr Shaman", true);
+end;
+
+OnEvent07:
+	set_instance_var("sec", 10);
+	instance_enable("Jormungandr Shaman",false);
+	instance_event(strnpcinfo(0),"OnSummon",false);
+end;
+
+OnEvent08:
+	set_instance_var("sec", 11);
+	npctalk "Meoow!! Nya",instance_npcname("Nyar#nyar04");
+	npctalk "That guy is seriously insane. Right?",instance_npcname("Lehar#lehar04");
+	sleep 2000;
+	npctalk "Meow meow!",instance_npcname("Nyar#nyar04");
+	sleep 2000;
+	npctalk "Ah, what's that...!",instance_npcname("Lehar#lehar04");
+	for(.@i = 1; .@i < 4; .@i++){
+		setnpcdisplay(instance_npcname("Intermediate Cult Priest#f" + .@i),22357);
+		instance_enable("Intermediate Cult Priest#f" + .@i,true);
+		sleep 200;
+	}
+	sleep 400;
+	for(.@i = 4; .@i < 9; .@i++){
+		setnpcdisplay(instance_npcname("Intermediate Cult Priest#f" + .@i),22357);
+		instance_enable("Intermediate Cult Priest#f" + .@i,true);
+		sleep 200;
+	}
+	setnpcdisplay(instance_npcname("Intermediate Cult Priest#f9"),22356);
+	instance_enable("Intermediate Cult Priest#f9",true);
+	sleep 100;
+	setnpcdisplay(instance_npcname("Intermediate Cult Priest#f10"),22356);
+	instance_enable("Intermediate Cult Priest#f10",true);
+	npctalk "Enemies have appeared!",instance_npcname("Lehar#lehar04");
+	sleep 2000;
+	npctalk "We have no choice! Adventurer, I'll handle things here, so go ahead inside!",instance_npcname("Lehar#lehar04");
+	sleep 1000;
+	npctalk "Meow meow meow meow!",instance_npcname("Nyar#nyar04");
+	sleep 2000;
+	npctalk "Hurry and stop the ritual or whatever they are doing!",instance_npcname("Lehar#lehar04");
+	instance_enable("Door#door02",true);
+	sleep 1000;
+	npctalk "Leave this to me go quickly!",instance_npcname("Lehar#lehar04");
+	instance_enable("Cult Shaman#evtman", true);
+	instance_enable("Cult Shaman#rgan_l", true);
+	instance_enable("Cult Shaman#rgan_r", true);
+	instance_enable("Cult Shaman#rgan_c", true);
+	set_instance_var("sec", 12);
+end;
+
+OnEvent09:
+	set_instance_var("sec", 13);
+	instance_enable("Cult Shaman#evtman",false);
+	specialeffect EF_DQ9_CHARGE3,AREA,instance_npcname("Cult Shaman#rgan_c");
+	instance_event("Cult Shaman#rgan_l","OnSummon",false);
+	instance_event("Cult Shaman#rgan_r","OnSummon",false);
+	instance_event("Cult Shaman#rgan_c","OnSummon",false);
+	instance_event(strnpcinfo(0),"OnSummon",false);
+end;
+
+OnEvent10:
+	set_instance_var("sec", 14);
+	.@map$ = get_instance_var("map$");
+	instance_enable("Cult Shaman#rgan_l", false);
+	killmonster .@map$,instance_npcname("Cult Shaman#rgan_l") + "::OnSummon";
+	instance_enable("Cult Shaman#rgan_r", false);
+	killmonster .@map$,instance_npcname("Cult Shaman#rgan_r") + "::OnSummon";
+	instance_enable("Cult Shaman#rgan_c", false);
+	killmonster .@map$,instance_npcname("Cult Shaman#rgan_c") + "::OnSummon";
+	instance_enable("Serpent Form#endman", true);
+end;
+
+OnEvent11:
+	set_instance_var("sec", 15);
+	npctalk "The fallen eagle has arrived!!",instance_npcname("Serpent Form#endman");
+	instance_enable("Tris#tris01",true);
+	instance_enable("Aurelie#arr01",true);
+	sleep 2000;
+	npctalk "Fallen eagle, what are you talking about?",instance_npcname("Tris#tris01");
+	npctalk "Where are we...",instance_npcname("Aurelie#arr01");
+	sleep 2000;
+	instance_enable("Nillem#nillem03",true);
+	instance_enable("Lehar#lehar05",true);
+	npctalk "I managed to catch up! I ended up tagging along with them!",instance_npcname("Nillem#nillem03");
+	npctalk "The two of them suddenly showed up... What's the situation?",instance_npcname("Lehar#lehar05");
+	sleep 2000;
+	npctalk "There is an immense mana around here. Isn't the serpent we dealt with is not the last?!",instance_npcname("Aurelie#arr01");
+	sleep 2000;
+	npctalk "Foolish humans. This poison will act as my invisible spear.",instance_npcname("Serpent Form#endman");
+	sleep 2000;
+	npctalk "The curse has been activated! Those bearing the name of the Gaebolg will be plunged to eternal suffering!",instance_npcname("Serpent Form#endman");
+	sleep 2000;
+	npctalk "Until the Gaebolg vanish from this world, the curse will not be broken.",instance_npcname("Serpent Form#endman");
+	sleep 2000;
+	npctalk "Our fate will entwine as long as the Gaebolg exists!",instance_npcname("Serpent Form#endman");
+	sleep 2000;
+	instance_enable("Nyar#nyar05",true);
+	npctalk "Mreow?",instance_npcname("Nyar#nyar05");
+	sleep 500;
+	specialeffect EF_SELFSCROLL,AREA,instance_npcname("Nyar#nyar05");
+	sleep 2000;
+	npctalk "You.. yes you! The one who pierced the serpent's heart! The curse is on you!!!",instance_npcname("Serpent Form#endman");
+	sleep 1500;
+	npctalk "Meow?",instance_npcname("Nyar#nyar05");
+	specialeffect EF_DQ9_CHARGE3,AREA,instance_npcname("Nyar#nyar05");
+	npctalk "The one who pierced the... serpent's heart. Is it talking about me..",instance_npcname("Tris#tris01");
+	sleep 2000;
+	npctalk "This.. power.. this mana. Agh, remember this human. Rgans will remain forever...",instance_npcname("Serpent Form#endman");
+	sleep 1000;
+	npctalk "Nya~",instance_npcname("Nyar#nyar05");
+	sleep 1000;
+	specialeffect EF_SPR_LIGHTPRINT,AREA,instance_npcname("Serpent Form#endman");
+	specialeffect EF_HIT1,AREA,instance_npcname("Serpent Form#endman");
+	sleep 1000;
+	specialeffect EF_BEGINSPELL_YB,AREA,instance_npcname("Serpent Form#endman");
+	instance_enable("Serpent Form#endman",false);
+	sleep 2000;
+	npctalk "Meeeeeeeeeoooow....",instance_npcname("Nyar#nyar05");
+	instance_enable("Giant Egg#egg",true);
+	set_instance_var("sec", 16);
+end;
+
+OnSummon:
+	.@map$ = get_instance_var("map$");
+	.@var = get_instance_var("summon") + 1;
+	.@event$ = get_instance_var("control$") + "::OnMobKill";
+	set_instance_var("summon", .@var);
+	switch(.@var){
+		case 1:
+			setarray .@mob$,
+				82,33,22353,"Lower Cult Priest",
+				82,35,22353,"Lower Cult Priest",
+				82,37,22353,"Lower Cult Priest",
+				94,33,22354,"Lower Cult Priest",
+				94,35,22354,"Lower Cult Priest",
+				94,37,22354,"Lower Cult Priest",
+				107,33,22353,"Lower Cult Priest",
+				107,35,22353,"Lower Cult Priest",
+				107,37,22353,"Lower Cult Priest",
+				123,33,22354,"Lower Cult Priest",
+				123,35,22354,"Lower Cult Priest",
+				123,37,22354,"Lower Cult Priest",
+				139,33,22353,"Lower Cult Priest",
+				139,35,22353,"Lower Cult Priest",
+				139,37,22353,"Lower Cult Priest",
+				158,33,22354,"Lower Cult Priest",
+				158,35,22354,"Lower Cult Priest",
+				158,37,22354,"Lower Cult Priest",
+				193,33,22353,"Lower Cult Priest",
+				193,35,22353,"Lower Cult Priest",
+				193,37,22353,"Lower Cult Priest";
+			break;
+
+		case 2:
+			setarray .@mob$,
+				165,114,22356,"Lower Cult Priest",
+				165,114,22356,"Lower Cult Priest",
+				163,114,22357,"Lower Cult Priest",
+				163,110,22356,"Lower Cult Priest",
+				163,114,22357,"Lower Cult Priest",
+				163,110,22356,"Lower Cult Priest",
+				160,114,22357,"Lower Cult Priest",
+				160,114,22357,"Lower Cult Priest",
+				145,113,22356,"Lower Cult Priest",
+				145,113,22356,"Lower Cult Priest",
+				142,113,22357,"Lower Cult Priest",
+				142,113,22357,"Lower Cult Priest",
+				136,117,22357,"Lower Cult Priest",
+				136,117,22357,"Lower Cult Priest",
+				132,117,22356,"Lower Cult Priest",
+				132,117,22356,"Lower Cult Priest",
+				119,128,22357,"Lower Cult Priest",
+				115,126,22357,"Lower Cult Priest",
+				113,122,22356,"Lower Cult Priest",
+				110,130,22356,"Lower Cult Priest",
+				110,151,22357,"Lower Cult Priest",
+				115,151,22356,"Lower Cult Priest",
+				105,155,22357,"Lower Cult Priest",
+				110,155,22356,"Lower Cult Priest";
+			break;
+
+		case 3:
+			setarray .@mob$,
+				148,209,22361,"Jormungandr Shaman";
+			break;
+
+		case 4:
+			setarray .@mob$,
+				68,245,22360,"Hyasagand",
+				68,256,22300,"Materialized Mana",
+				89,252,22300,"Materialized Mana",
+				48,252,22300,"Materialized Mana";
+			break;
+	}
+	for(.@i = 0; .@i < getarraysize(.@mob$); .@i += 4)
+		monster .@map$,atoi(.@mob$[.@i]),atoi(.@mob$[.@i+1]),.@mob$[.@i+3],atoi(.@mob$[.@i+2]),1,.@event$;
+end;
+
+OnMobKill:
+	if(mobcount(get_instance_var("map$"),get_instance_var("control$") + "::OnMobKill")) end;
+	switch(get_instance_var("summon")){
+		case 1:
+			set_instance_var("sec", get_instance_var("sec") + 1);
+			if(get_instance_var("sec") == 3)
+				instance_event("#EP21_secret_altar","OnEvent",false);
+			end;
+
+		case 2:
+			set_instance_var("sec", get_instance_var("sec") + 1);
+			if(get_instance_var("sec") == 8)
+				instance_event("#EP21_secret_altar","OnEvent",false);
+			end;
+
+		default:
+			break;
+	}
+	instance_event("#EP21_secret_altar","OnEvent",false);
+end;
+}
+
+1@ep21a,64,35,0	script	#ep21a_evt01	HIDDEN_WARP_NPC,5,5,{
+	end;
+
+OnTouch:
+	if(is_party_leader() && !get_instance_var("sec"))
+		instance_event("#EP21_secret_altar","OnEvent",false);
+end;
+}
+
+1@ep21a,64,35,5	script(DISABLED)	Lehar#lehar01	4_EP19_LEHAR,{
+	if(is_party_leader() &&  get_instance_var("lh") == 0){
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "So there was a hidden place like this. Should we head further inside?";
+		npctalk "So there was a hidden place like this. Should we head further inside?",instance_npcname("Lehar#lehar01");
+		next;
+		cutin "ep172_nillem02.png",0;
+		mes "[Nillem]";
+		mes "The flow of mana is connected, we just need to follow it~!";
+		npctalk "The flow of mana is connected, we just need to follow it~!",instance_npcname("Nillem#nillem01");
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "I'm sensing another rough and immense power that's different from the one we are tracking, what could it be?";
+		npctalk "I'm sensing another rough and immense power that's different from the one we are tracking, what could it be?",instance_npcname("Lehar#lehar01");
+		next;
+		cutin "ep20_nyar02.png",1;
+		mes "[Nyar]";
+		mes "Meooow~~~";
+		npctalk "Meooow오~~~",instance_npcname("Nyar#nyar01");
+		next;
+		cutin "ep172_nillem01.png",0;
+		mes "[Nillem]";
+		mes "Oh? It might be the lingering power from the giant serpent that the adventurer fought.";
+		npctalk "Oh? It might be the lingering power from the giant serpent that the adventurer fought.",instance_npcname("Nillem#nillem01");
+		next;
+		cutin "ep172_nillem02.png",0;
+		mes "[Nillem]";
+		mes "The cult is trying to resurrect Jormungandr, right?";
+		mes "This power should have belonged to the giant serpent that they were attempting to mimic Jormungandr with.";
+		npctalk "This power should have belonged to the giant serpent that they were attempting to mimic Jormungandr with.",instance_npcname("Nillem#nillem01");
+		next;
+		cutin "ep20_nyar02.png",1;
+		mes "[Nyar]";
+		mes "Meow. Nya. Hiss. Mow?";
+		npctalk "Meow. Nya. Hiss. Mow?",instance_npcname("Nyar#nyar01");
+		next;
+		cutin "ep172_nillem01.png",0;
+		mes "[Nillem]";
+		mes "Exactly. This power is also from the true form of Jormungandr.";
+		mes "But the giant serpent was defeated by the twelve heroes before it could be completed...";
+		mes "And the leftover power is already being used for the next plan!";
+		npctalk "They tried to create a giant serpent using Jormungandr's power, but it was defeated. Now, the leftover power is being used for their next plan!",instance_npcname("Nillem#nillem01");
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "Their next plan?";
+		npctalk "Their next plan?",instance_npcname("Lehar#lehar01");
+		next;
+		cutin "ep20_nyar03.png",1;
+		mes "[Nyar]";
+		mes "Mya Mya Mya Mya? Mya Nyan!";
+		npctalk "Mya Mya Mya Mya? Mya Nyan!",instance_npcname("Nyar#nyar01");
+		next;
+		cutin "ep172_nillem02.png",0;
+		mes "[Nillem]";
+		mes "Perhaps Lasgand was their backup plan in case the giant serpent failed?";
+		mes "That's what I think.";
+		mes "What about you?";
+		npctalk "Perhaps Lasgand was their backup plan in case the giant serpent failed?",instance_npcname("Nillem#nillem01");
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "We need to stop it before they gather all the remaining power!";
+		mes "We need to stop the power from concentrating into Lasgand!";
+		npctalk "We need to stop the power from concentrating into Lasgand!",instance_npcname("Lehar#lehar01");
+		close2;
+		set_instance_var("lh", 1);
+		cutin "",255;
+		sleep 1000;
+		npctalk "Let's go.",instance_npcname("Lehar#lehar01");
+		sleep 1000;
+		npctalk "Lehar: We need to hurry before the power gathers in Lasgand!",instance_npcname("Lehar#lehar01");
+		sleep 1000;
+		instance_event("#EP21_secret_altar","OnEvent",false);
+	}
+	end;
+}
+
+1@ep21a,64,38,5	script(DISABLED)	Nillem#nillem01	4_M_NILLEM,{ end; }
+1@ep21a,64,32,5	script(DISABLED)	Nyar#nyar01	4_EP20_NYAR,{ end; }
+
+1@ep21a,190,48,3	script(DISABLED)	Door#door01	4_POINT_BLUE,{
+	if(is_party_leader() && get_instance_var("sec") == 4){
+		instance_event("#EP21_secret_altar","OnEvent",false);
+		end;
+	}
+	if(get_instance_var("sec") > 5)
+		warp get_instance_var("map$"),191,79;
+	end;
+}
+
+1@ep21a,192,46,1	script(DISABLED)	Lehar#lehar02	4_EP19_LEHAR,{
+	if(get_instance_var("sec") < 6){
+		npctalk "There's a door here!";
+		end;
+	}
+	cutin "ep19_lehar05.png",2;
+	mes "[Lehar]";
+	mes "Don't worry about that wizard! Let's hurry, open the door and go inside!";
+	close3;
+}
+
+1@ep21a,190,43,3	script(DISABLED)	Nillem#nillem02	4_M_NILLEM,{
+	if(get_instance_var("sec") > 5){
+		cutin "ep172_nillem05.png",1;
+		mes "[Nillem]";
+		mes "I'll finish this quickly and catch up with you soon, so don't worry~☆";
+		close3;
+	}
+	 end; 
+}
+
+1@ep21a,188,46,7	script(DISABLED)	Nyar#nyar02	4_EP20_NYAR,{ end; }
+1@ep21a,189,39,7	script(DISABLED)	Lower Cult Priest#a1	CLEAR_NPC,{ end; }
+1@ep21a,192,39,0	script(DISABLED)	Lower Cult Priest#a2	CLEAR_NPC,{ end; }
+1@ep21a,195,39,1	script(DISABLED)	Lower Cult Priest#a3	CLEAR_NPC,{ end; }
+1@ep21a,190,37,7	script(DISABLED)	Lower Cult Priest#a4	CLEAR_NPC,{ end; }
+1@ep21a,193,37,0	script(DISABLED)	Lower Cult Priest#a5	CLEAR_NPC,{ end; }
+1@ep21a,196,37,1	script(DISABLED)	Lower Cult Priest#a6	CLEAR_NPC,{ end; }
+1@ep21a,191,35,7	script(DISABLED)	Lower Cult Priest#a7	CLEAR_NPC,{ end; }
+1@ep21a,194,35,0	script(DISABLED)	Lower Cult Priest#a8	CLEAR_NPC,{ end; }
+1@ep21a,196,35,1	script(DISABLED)	Lower Cult Priest#a9	CLEAR_NPC,{ end; }
+
+1@ep21a,194,82,1	script(DISABLED)	Lehar#lehar03	4_EP19_LEHAR,{
+	if(is_party_leader() && get_instance_var("lh") == 1){
+		set_instance_var("lh", 2);
+		npctalk "Oh... doesn't this place look familiar?",instance_npcname("Lehar#lehar03");
+		sleep 2000;
+		npctalk "Doesn't it resemble where the Rgans live?",instance_npcname("Lehar#lehar03");
+		sleep 2000;
+		npctalk "Nya~ Meow~",instance_npcname("Nyar#nyar03");
+		sleep 2000;
+		npctalk "Well, it's most likely the the highest-ranking members of the cult are high-level rgans.",instance_npcname("Lehar#lehar03");
+		sleep 2000;
+		npctalk "Shall we move?",instance_npcname("Lehar#lehar03");
+		sleep 2000;
+		instance_enable("Lehar#lehar03",false);
+		instance_enable("Nyar#nyar03",false);
+		instance_event("#EP21_secret_altar","OnEvent",false);
+	}
+	end;
+}
+
+1@ep21a,190,82,7	script(DISABLED)	Nyar#nyar03	4_EP20_NYAR,{ end; }
+
+1@ep21a,148,209,3	script(DISABLED)	Jormungandr Shaman	EP21_YORTUS_B,{
+	if(is_party_leader() && get_instance_var("sec") == 9){
+		cutin "ep21_yortus_b.png",1;
+		mes "[Cult Shaman]";
+		mes "Foolish humans,  you've come here willingly to become sacrifices.";
+		mes "It would have been wise if you had embraced Jormungandr's arms...";
+		npctalk "Foolish humans,  you've come here willingly to become sacrifices.";
+		next;
+		mes "[Cult Shaman]";
+		mes "You must be celebrating right now, thinking that you've defeated the serpent god.";
+		mes "Those who holds the Gaebolg name, and those who were present there will perish.";
+		npctalk "Did you think it was over? Those who holds the Gaebolg name, and those who were present there will perish.";
+		next;
+		mes "[Cult Shaman]";
+		mes "For severing the serpent's spine, all of your descendants will die young.";
+		mes "You who witness the death, will be reminded endlessly.";
+		npctalk "For severing the serpent's spine, all of your descendants will die young. You who witness the death, will be reminded endlessly.";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "Can you explain that, with a little more detail?";
+		mes "A curse? Are you cursing us?";
+		npctalk "Can you explain that, A curse? Are you cursing us?",instance_npcname("Lehar#lehar04");
+		next;
+		cutin "ep21_yortus_b.png",1;
+		mes "[Cult Shaman]";
+		mes "The curse is already in effect. You fools!";
+		mes "The eagle that slayed the serpent shall fall to the ground in agony!";
+		mes "The hand that pierced the heart will be stained with blood, never to be cleansed!";
+		npctalk "The curse is already in effect. The eagle that slayed the serpent shall fall and the hand that pierced the heart will be stained with blood, never to be cleansed!";
+		next;
+		cutin "ep19_lehar03.png",2;
+		mes "[Lehar]";
+		mes "You maniac! Stop!";
+		npctalk "You maniac! Stop!",instance_npcname("Lehar#lehar04");
+		next;
+		cutin "ep21_yortus_b.png",1;
+		mes "[Cult Shaman]";
+		mes "It is you who should stop!";
+		mes "Die here! Become a fertilizer for eternal life!!";
+		mes "Bear witness the church's paradise and endure eternal suffering!";
+		npctalk "It is you who should stop! Die here! Become a fertilizer for eternal life!!";
+		close2;
+		cutin "",255;
+		instance_event("#EP21_secret_altar","OnEvent",false);
+	}
+	end;
+}
+
+1@ep21a,145,208,5	script(DISABLED)	Nyar#nyar04	4_EP20_NYAR,{
+	npctalk "Meow~meow~meow!";
+	end;
+}
+
+1@ep21a,150,208,1	script(DISABLED)	Lehar#lehar04	4_EP19_LEHAR,{
+	npctalk "Argh~ I can't think straight!";
+	end;
+}
+
+1@ep21a,148,210,3	script(DISABLED)	Door#door02	4_POINT_BLUE,{
+	if(get_instance_var("sec") > 11)
+		warp get_instance_var("map$"),68,229;
+	end;
+}
+
+1@ep21a,144,204,7	script(DISABLED)	Intermediate Cult Priest#f1	CLEAR_NPC,{ end; }
+1@ep21a,147,203,7	script(DISABLED)	Intermediate Cult Priest#f2	CLEAR_NPC,{ end; }
+1@ep21a,150,203,1	script(DISABLED)	Intermediate Cult Priest#f3	CLEAR_NPC,{ end; }
+1@ep21a,153,204,1	script(DISABLED)	Intermediate Cult Priest#f4	CLEAR_NPC,{ end; }
+1@ep21a,143,198,7	script(DISABLED)	Intermediate Cult Priest#f5	CLEAR_NPC,{ end; }
+1@ep21a,146,197,7	script(DISABLED)	Intermediate Cult Priest#f6	CLEAR_NPC,{ end; }
+1@ep21a,149,197,1	script(DISABLED)	Intermediate Cult Priest#f7	CLEAR_NPC,{ end; }
+1@ep21a,152,198,1	script(DISABLED)	Intermediate Cult Priest#f8	CLEAR_NPC,{ end; }
+1@ep21a,140,200,7	script(DISABLED)	Intermediate Cult Priest#f9	CLEAR_NPC,{ end; }
+1@ep21a,155,200,1	script(DISABLED)	Intermediate Cult Priest#f10	CLEAR_NPC,{ end; }
+
+1@ep21a,68,245,3	script(DISABLED)	Cult Shaman#evtman	22360,5,5,{
+OnTouch:
+	if(is_party_leader() && get_instance_var("sec") == 12){
+		cutin "ep21_yortus_a.png",1;
+		mes "[Hyasagand]";
+		mes "You, you're the one with that filthy apostate.";
+		npctalk "Hyasagand : You, you're the one with that filthy apostate.",instance_npcname("Cult Shaman#evtman");
+		next;
+		mes "[Hyasagand]";
+		mes "That apostates sin has already been recorded.";
+		mes "Jormungandr's punishment will befall on him.";
+		npctalk "Hyasagand : Jormungandr's punishment will befall on those who betrayed the church.",instance_npcname("Cult Shaman#evtman");
+		next;
+		mes "[Hyasagand]";
+		mes "How are you still standing? Did you falsify your name?";
+		npctalk "Hyasagand : How are you still standing? Did you falsify your name?",instance_npcname("Cult Shaman#evtman");
+		next;
+		mes "[Hyasagand]";
+		mes "No matter, that doesn't concern me now.";
+		mes "The one who pierced the serpent's heart is approaching.";
+		npctalk "Hyasagand : The one who pierced the serpent's heart is approaching.",instance_npcname("Cult Shaman#evtman");
+		next;
+		mes "[Hyasagand]";
+		mes "Gaebolg... Gaebolg... The cursed bound to that name has began.";
+		npctalk "Hyasagand : Gaebolg... Gaebolg... The cursed bound to that name has began.",instance_npcname("Cult Shaman#evtman");
+		next;
+		mes "[Hyasagand]";
+		mes "The church's will shall flow through strong bloodlines and spread throughout the world.";
+		mes "As long as the Gaebolg exists, it shall persist.";
+		npctalk "Hyasagand : The church's will shall flow through strong bloodlines and spread throughout the world. As long as the Gaebolg exists, it shall persist.",instance_npcname("Cult Shaman#evtman");
+		close2;
+		cutin "",255;
+		instance_event("#EP21_secret_altar","OnEvent",false);
+	}
+	end;
+}
+
+1@ep21a,53,252,3	script(DISABLED)	Cult Shaman#rgan_l	22359,{
+	end;
+	
+OnSummon:
+	if(get_instance_var("sec") > 13) end;
+	specialeffect EF_ENTRY;
+	monster get_instance_var("map$"),53,252,"Cult Shaman",22359,1,instance_npcname(strnpcinfo(0)) + "::OnSummon";
+end;
+}
+
+1@ep21a,84,252,7	script(DISABLED)	Cult Shaman#rgan_r	22359,{
+	end;
+
+OnSummon:
+	if(get_instance_var("sec") > 13) end;
+	specialeffect EF_ENTRY;
+	monster get_instance_var("map$"),84,252,"Cult Shaman",22359,1,instance_npcname(strnpcinfo(0)) + "::OnSummon";
+end;
+}
+
+1@ep21a,68,252,0	script(DISABLED)	Cult Shaman#rgan_c	22360,{
+	end;
+
+OnSummon:
+	if(get_instance_var("sec") > 13) end;
+	specialeffect EF_ENTRY;
+	monster get_instance_var("map$"),68,252,"Cult Shaman",22360,1,instance_npcname(strnpcinfo(0)) + "::OnSummon";
+end;
+}
+
+1@ep21a,68,254,3	script(DISABLED)	Serpent Form#endman	22300,{
+	if(is_party_leader() && get_instance_var("sec") == 14)
+		instance_event("#EP21_secret_altar","OnEvent",false);
+	end;
+}
+
+1@ep21a,68,250,1	script(DISABLED)	Tris#tris01	4_EP21_TRIS,{
+	npctalk "...The curse has began...";
+	end;
+}
+
+1@ep21a,70,248,1	script(DISABLED)	Aurelie#arr01	4_EP21_AURELIE,{
+	npctalk "..We need to hear what the cat has to say.";
+	end;
+}
+
+1@ep21a,65,248,6	script(DISABLED)	Nillem#nillem03	4_M_NILLEM,{
+	cutin "ep172_nillem03.png",0;
+	mes "[Nillem]";
+	mes "An egg! I can feel immense power from it! The must be the source!";
+	close3;
+}
+
+1@ep21a,64,246,7	script(DISABLED)	Lehar#lehar05	4_EP19_LEHAR,{
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "I don't know what's going on, but let's check that giant egg first!";
+	close3;
+}
+
+1@ep21a,71,253,3	script(DISABLED)	Nyar#nyar05	4_EP20_NYAR,{
+	mes "[Nyar]";
+	mes "Meow?";
+	cutin "ep20_nyar04.png",1;
+	close3;
+}
+
+1@ep21a,68,262,3	script(DISABLED)	Giant Egg#egg	4_POINT_BLUE,{
+	if(get_instance_var("sec") < 16) end;
+	if(isbegin_quest(18352) == 1){
+		cutin "ep172_nillem02.png",1;
+		mes "[Nillem]";
+		mes "Is this it? Is this really it?";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "Ha.. haha... so, what should we do now?";
+		mes "Where is Lasgand?";
+		next;
+		cutin "ep20_nyar02.png",1;
+		mes "[Nyar]";
+		mes "Mreow. Mow. Meoow.";
+		next;
+		cutin "ep172_nillem02.png",1;
+		mes "[Nillem]";
+		mes "Before Lasgand hatches...?";
+		mes "Are you saying that it already absorbed enough mana?";
+		mes "That seems to be the case...";
+		next;
+		cutin "ep20_nyar03.png",1;
+		mes "[Nyar]";
+		mes "Meow.";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "Oh.. really? That thing just now was absorbing mana?";
+		mes "It's a good thing Nyar managed to reclaim some of it.";
+		next;
+		cutin "ep21_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "Sorry, but could you explain us what's going on?";
+		next;
+		cutin "ep172_nillem02.png",0;
+		mes "[Nillem]";
+		mes "Oh, right! You were here!";
+		mes "Wait, how did you get here after the final battle's cleanup?";
+		next;
+		cutin "ep21_aurelie02.png",1;
+		mes "[Aurelie]";
+		mes "....Hm. We just followed the trail of the massive energy.";
+		mes "It seems that you were doing something in secret.";
+		mes "From the start, your objective. This is it, right?";
+		next;
+		cutin "ep21_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "Something doesn't add up.";
+		mes "That talk about the eternal suffering to those who holds the Gaebolg name... that was a curse, wasn't it?";
+		next;
+		mes "[Aurelie]";
+		mes "Those maniacs, they specialize in curses that are bounded to the names.";
+		mes "We were calling ourselves the Gaebolg, so did they curse the entire Gaebolg?";
+		next;
+		cutin "ep19_lehar03.png",2;
+		mes "[Lehar]";
+		mes "Ah... right. The curse.";
+		mes "As long as the Gaebolg exists, so will the Rgan.";
+		mes "This is probably about Lasgand.";
+		next;
+		cutin "ep172_nillem01.png",0;
+		mes "[Nillem]";
+		mes "It's that fresh, unhatched egg over there.";
+		mes "They said as long the Gaebolg exists on this land, Lasgand will never perish.";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "What if we just destroy that egg now...?";
+		mes "Wouldn't that solve the problem?!";
+		next;
+		cutin "ep20_nyar05.png",1;
+		mes "[Nyar]";
+		mes "Mreow....";
+		next;
+		cutin "ep21_aurelie02.png",1;
+		mes "[Aurelie]";
+		mes "That's impossible.";
+		mes "If we destroy this egg, everyone here could die.";
+		mes "Forcing it would trigger a massive mana explosion.";
+		next;
+		cutin "ep172_nillem02.png",0;
+		mes "[Nillem]";
+		mes "That's true.";
+		mes "Even the one we claimed, Jormungandr's power is pure mana.";
+		mes "The mutated mana condensed by the Rgan's remains.";
+		next;
+		mes "[Nillem]";
+		mes "Burying it in this land to be slowly consumed is the best option.";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "What about the curse?";
+		mes "Gaebolg includes everyone in the resistance against the cult!";
+		next;
+		cutin "ep21_tris04.png",2;
+		mes "[Tris]";
+		mes "Focus it on me. Target the curse on me.";
+		mes "That should fix it, right?";
+		mes "I'll stand in front and make sure the invisible spear hits the proper target.";
+		next;
+		cutin "ep21_aurelie01.png",0;
+		mes "[Aurelie]";
+		mes "Do you understand what you're saying?";
+		mes "You're the most important one, right now. We need another focal point.";
+		next;
+		cutin "ep21_tris11.png",2;
+		mes "[Tris]";
+		mes "I'm not an idiot, you know?";
+		mes "It sounds like it's for eternity and existence, that means it'll take time.";
+		mes "The curse is just a stall tactic.";
+		next;
+		cutin "ep21_tris03.png",2;
+		mes "[Tris]";
+		mes "So just target the curse on me, and see what happens when the egg hatches.";
+		mes "Narrowing it down to a fight between me and that thing is our best option now.";
+		next;
+		mes "[Tris]";
+		mes "Besides, I can't this curse anyway.";
+		mes "How many times have they said it? The one who pierced the serpent's heart. It's me...";
+		next;
+		cutin "ep21_tris02.png",2;
+		mes "[Tris]";
+		mes "I'm the one who triggered this curse.";
+		next;
+		cutin "ep172_nillem01.png",0;
+		mes "[Nillem]";
+		mes "(Is this really how it's supposed to go..? Did you know about this, Lehar?)";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "(It's the first for me too.)";
+		next;
+		cutin "ep21_aurelie01.png",0;
+		mes "[Aurelie]";
+		mes "Tris. What exactly is your plan?";
+		mes "Are you thinking of changing name?";
+		next;
+		cutin "ep21_tris01.png",2;
+		mes "[Tris]";
+		mes "Yes. Change it. A name. How about Tris Gaebolg?";
+		mes "Ah, I can't forget my lifelong friend.";
+		mes "Tristan Gaebolg. It's a pretty good name, right?";
+		next;
+		cutin "ep21_aurelie02.png",0;
+		mes "[Aurelie]";
+		mes "...I see that you're serious.";
+		mes "Sigh... Fine, I'll watch over this egg until whatever's inside wither away.";
+		next;
+		mes "[Aurelie]";
+		mes "Leon was right.";
+		mes "Let's seal this egg in Isgard, in the Land of Snow Flower.";
+		next;
+		cutin "ep20_nyar03.png",1;
+		mes "[Nyar]";
+		mes "Grrr. Purr....";
+		next;
+		cutin "ep172_nillem01.png",0;
+		mes "[Nillem]";
+		mes "Oh...Wow................";
+		next;
+		cutin "ep21_tris04.png",2;
+		mes "[Tris]";
+		mes "From now on, you're no longer a Gaebolg. Got it?";
+		mes "In this world, Gaebolg is only me.";
+		next;
+		cutin "ep21_tris03.png",2;
+		mes "[Tris]";
+		mes "I'll live as a Gaebolg until that thing fades away.";
+		mes "And when I die, my descendants or their descendants will wait for the time to strike back.";
+		next;
+		cutin "ep21_tris09.png",2;
+		mes "[Tris]";
+		mes "All of you, go back where you came from.";
+		mes "Aurelie and I will handle things.";
+		next;
+		cutin "ep21_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "Thank you for everything. Even if it was brief.";
+		mes "I won't see you off. Farewell, friends from afar.";
+		next;
+		cutin "ep19_lehar05.png",2;
+		mes "[Lehar]";
+		mes "Wait, what? Just like that?";
+		mes "Hold on a second?";
+		completequest 18352;
+		setquest 18353;
+		getitem "EP21_Wigner_Ticket",60;
+		getexp 224735905,55709690;
+		add_reputation_points(13,50);
+		close2;
+		cutin "",255;
+		warp "jor_crk_p",108,105;
+	}
+	end;
+
+OnInstanceInit:
+	questinfo QTYPE_QUEST,QMARK_YELLOW,"isbegin_quest(18352) == 1";
+end;
+}
