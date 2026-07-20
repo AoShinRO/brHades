@@ -450,71 +450,57 @@ namespace brhades {
 		public:
 			std::vector<path_node*> g_openset;
 
-			int calc_index_walkpath(uint16 x,uint16 y) const {
-				return (((x)+(y)*MAX_WALKPATH) & (MAX_WALKPATH*MAX_WALKPATH-1));
+			int calc_index_walkpath(uint16 x, uint16 y) const {
+				return (((x)+(y)*MAX_WALKPATH) & (MAX_WALKPATH * MAX_WALKPATH - 1));
 			}
 
-			int calc_index_naviwalkpath(uint16 x,uint16 y) const {
-				return (((x)+(y)*MAX_WALKPATH_NAVI) & (MAX_WALKPATH_NAVI*MAX_WALKPATH_NAVI-1));
+			int calc_index_naviwalkpath(uint16 x, uint16 y) const {
+				return (((x)+(y)*MAX_WALKPATH_NAVI) & (MAX_WALKPATH_NAVI * MAX_WALKPATH_NAVI - 1));
 			}
 
-			// Returns the length of the heap
-			size_t length() const {
-				return g_openset.size();
-			}
-			
-			// Returns the capacity of the heap
-			size_t capacity() const {
-				return g_openset.capacity();
-			}
-		
+			size_t length() const { return g_openset.size(); }
+			size_t capacity() const { return g_openset.capacity(); }
+
 			void ensure(size_t n) {
 				if (capacity() < n) {
-					g_openset.reserve(n); // Reservar espaço adicional, como especificado por 'step'
+					g_openset.reserve(n);
 				}
 			}
-		
-			// Returns the top value of the heap
+
 			path_node* peek() const {
 				return g_openset.front();
 			}
-			
-			// Inserts a value in the heap and restores the heap property
-			void push(path_node& val) {
-				g_openset.push_back(&val);
-				size_t i = g_openset.size() - 1;
-				siftDown(0, i);
+
+			void push(path_node* val) {
+				g_openset.push_back(val);
+				siftUp(g_openset.size() - 1);
 			}
-			
-			// Removes the top value of the heap and restores the heap property
+
 			void pop() {
+				if (g_openset.empty()) return;
 				g_openset.front() = g_openset.back();
 				g_openset.pop_back();
-				if (g_openset.empty()) return;  // Se não restar nenhum elemento, não há mais nada a fazer
-				siftUp(0);
+				if (!g_openset.empty()) {
+					siftDown(0);
+				}
 			}
-			
-			// Updates the heap after modifying an element
+
 			void update(size_t idx) {
-				siftDown(0, idx);
+				// No A*, o f_cost do nó apenas DIMINUI quando achamos um caminho melhor.
+				// Logo, só precisamos subir o nó no Heap (siftUp).
 				siftUp(idx);
 			}
-			
-			// Clears the heap
+
 			void clear() {
-				if(g_openset.empty()) return; // Se não tiver nenhum elemento, não há nada a fazer
 				g_openset.clear();
 			}
-		
-			/// Pushes path_node to the binary node_heap.
-			/// Ensures there is enough space in array to store new element.
+
 			void push_node(path_node* node) {
-				push(*node); 
+				push(node);
 			}
-		
-			/// Updates path_node in the binary node_heap.
-			int update_node(path_node& node)
-			{
+
+			int update_node(path_node& node) {
+				// Procura o ponteiro e atualiza (Min-Heap ajustado)
 				auto it = std::find(g_openset.begin(), g_openset.end(), &node);
 				if (it == g_openset.end()) {
 					return 1;
@@ -523,31 +509,42 @@ namespace brhades {
 				update(i);
 				return 0;
 			}
-		
-			std::function<int(const path_node*, const path_node*)> node_min_to_comp = [](const path_node* i, const path_node* j) {
-				return i->f_cost - j->f_cost;
-			};
-		
-			// Helper function to sift down
-			void siftDown(size_t startIdx, size_t idx) {
-				while (idx > startIdx) {
+
+		private:
+			// Comparador rápido inline (evita Overhead de std::function)
+			static inline bool isLess(const path_node* a, const path_node* b) {
+				return a->f_cost < b->f_cost;
+			}
+
+			// SiftUp real: Sobe o elemento na árvore (usado após push ou redução de custo)
+			void siftUp(size_t idx) {
+				while (idx > 0) {
 					size_t parent = (idx - 1) / 2;
-					if (node_min_to_comp(g_openset[parent], g_openset[idx]) <= 0) break;
+					if (!isLess(g_openset[idx], g_openset[parent])) break;
 					std::swap(g_openset[parent], g_openset[idx]);
 					idx = parent;
 				}
 			}
-		
-			// Helper function to sift up
-			void siftUp(size_t idx) {
-				size_t leftChild = idx * 2 + 1;
-				while (leftChild < g_openset.size()) {
+
+			// SiftDown real: Desce o elemento na árvore (usado após pop)
+			void siftDown(size_t idx) {
+				size_t size = g_openset.size();
+				while (true) {
+					size_t leftChild = idx * 2 + 1;
 					size_t rightChild = idx * 2 + 2;
-					size_t swapChild = (rightChild < g_openset.size() && node_min_to_comp(g_openset[leftChild], g_openset[rightChild]) > 0) ? rightChild : leftChild;
-					if (node_min_to_comp(g_openset[idx], g_openset[swapChild]) <= 0) break;
-					std::swap(g_openset[idx], g_openset[swapChild]);
-					idx = swapChild;
-					leftChild = idx * 2 + 1;
+					size_t smallest = idx;
+
+					if (leftChild < size && isLess(g_openset[leftChild], g_openset[smallest])) {
+						smallest = leftChild;
+					}
+					if (rightChild < size && isLess(g_openset[rightChild], g_openset[smallest])) {
+						smallest = rightChild;
+					}
+
+					if (smallest == idx) break;
+
+					std::swap(g_openset[idx], g_openset[smallest]);
+					idx = smallest;
 				}
 			}
 		};
