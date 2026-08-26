@@ -7,7 +7,7 @@
 
 #### Repo info:
 
-![GitHub](https://img.shields.io/github/license/AoShinRo/brHades.svg) | ![commit activity](https://img.shields.io/github/commit-activity/w/AoShinRo/brHades) | ![GitHub repo size](https://img.shields.io/github/repo-size/AoShinRo/brHades.svg) | [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/AoShinRO/brHades)
+![GitHub](https://img.shields.io/github/license/AoShinRO/brHades.svg) | ![commit activity](https://img.shields.io/github/commit-activity/w/AoShinRo/brHades) | ![GitHub repo size](https://img.shields.io/github/repo-size/AoShinRo/brHades.svg) | [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/AoShinRO/brHades)
 --------|--------|--------|--------
 
 # 
