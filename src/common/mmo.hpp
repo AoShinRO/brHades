@@ -188,8 +188,8 @@ const t_itemid WEDDING_RING_F = 2635;
 #define MAX_GUILDMES2 120
 
 //Base Homun skill.
-#define HM_SKILLBASE 8001
-#define MAX_HOMUNSKILL 59
+#define HM_SKILLBASE 1
+#define MAX_HOMUNSKILL 9999
 #define MAX_HOMUNCULUS_CLASS	52	//[orn], Increased to 60 from 16 to allow new Homun-S.
 #define HM_CLASS_BASE 6001
 #define HM_CLASS_MAX (HM_CLASS_BASE+MAX_HOMUNCULUS_CLASS-1)
